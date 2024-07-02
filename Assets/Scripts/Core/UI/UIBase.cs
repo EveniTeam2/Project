@@ -1,79 +1,85 @@
 using System;
 using TMPro;
 using UnityEngine;
-namespace UI {
+
+namespace Core.UI
+{
     /// <summary>
-    /// Absract class for all UI
+    /// UIBase 클래스: 모든 UI의 기본 추상 클래스입니다.
     /// </summary>
-    public abstract class UIBase : MonoBehaviour {
+    public abstract class UIBase : MonoBehaviour
+    {
         public Vector3 originScale = Vector3.one;
+
         /// <summary>
-        /// Method to set the font scale
+        /// 폰트 크기를 설정하는 메서드
         /// </summary>
-        /// <param name="fontScale">Scale that multiply to font size</param>
+        /// <param name="fontScale">폰트 크기에 곱해질 크기</param>
         public abstract void SetFontScale(float fontScale);
-        /// <summary>
-        /// Events to handle UI actions on close
-        /// </summary>
+
         public event Action ActOnClose;
-        /// <summary>
-        /// Events to handle UI actions on draw
-        /// </summary>
         public event Action ActOnDraw;
-        [Header("Stores the canvas settings for this UI element")][SerializeField] CanvasOption canvasOption;
+
+        [Header("이 UI 요소의 캔버스 설정을 저장합니다.")]
+        [SerializeField] private CanvasOption canvasOption;
+
         /// <summary>
-        /// Returns the current CanvasOption
+        /// 현재 CanvasOption을 반환합니다.
         /// </summary>
-        /// <returns>Current CanvasOption</returns>
-        public virtual CanvasOption GetCanvasOption() {
+        /// <returns>현재 CanvasOption</returns>
+        public virtual CanvasOption GetCanvasOption()
+        {
             return canvasOption;
         }
+
         /// <summary>
-        /// Sets the scale of the UI element
+        /// UI 요소의 크기를 설정합니다.
         /// </summary>
-        /// <param name="scale">Scale that multiply to origin scale</param>
-        public virtual void SetScale(float scale) {
+        /// <param name="scale">원래 크기에 곱해질 크기</param>
+        public virtual void SetScale(float scale)
+        {
             transform.localScale = originScale * scale;
         }
+
         /// <summary>
-        /// Closes the UI element and triggers the OnClose event
+        /// UI 요소를 닫고 OnClose 이벤트를 트리거합니다.
         /// </summary>
-        /// <returns>this UI</returns>
-        public virtual UIBase CloseUI() {
+        /// <returns>이 UI</returns>
+        public virtual UIBase CloseUI()
+        {
             ActOnClose?.Invoke();
             return this;
         }
+
         /// <summary>
-        /// Methods to update the UI
+        /// UI를 업데이트하는 메서드
         /// </summary>
-        /// <returns>this UI</returns>
+        /// <returns>이 UI</returns>
         public abstract UIBase UpdateUI();
+
         /// <summary>
-        /// Methods to draw the UI
+        /// UI를 그리는 메서드
         /// </summary>
-        /// <returns>this UI</returns>
-        public virtual UIBase DrawUI() {
+        /// <returns>이 UI</returns>
+        public virtual UIBase DrawUI()
+        {
             ActOnDraw?.Invoke();
             return this;
         }
+
         /// <summary>
-        /// Methods to initialize the UI
+        /// UI를 초기화하는 메서드
         /// </summary>
-        /// <returns>this UI</returns>
+        /// <returns>이 UI</returns>
         public abstract UIBase InitUI();
     }
-}
 
-/// <summary>
-/// Struct to control font size
-/// </summary>
-public struct TextPair {
     /// <summary>
-    /// Reference to the text component
+    /// 텍스트의 폰트 크기를 제어하는 구조체
     /// </summary>
-    public TMP_Text text;
-    /// <summary>
-    /// Font size for the text
-    /// </summary>
-    public float fontSize;
+    public struct TextPair
+    {
+        public TMP_Text text;
+        public float fontSize;
+    }
 }

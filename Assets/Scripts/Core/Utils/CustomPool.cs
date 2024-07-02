@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utils {
+namespace Core.Utils {
     public class CustomPool<T> where T : MonoBehaviour {
         private T obj;
         private Transform root;

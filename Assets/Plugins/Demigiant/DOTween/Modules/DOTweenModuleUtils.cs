@@ -1,15 +1,16 @@
-// Author: Daniele Giardini - http://www.demigiant.com
+﻿// Author: Daniele Giardini - http://www.demigiant.com
 // Created: 2018/07/13
 
 using System;
 using System.Reflection;
-using UnityEngine;
+using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Core.PathCore;
 using DG.Tweening.Plugins.Options;
+using UnityEngine;
 
 #pragma warning disable 1591
-namespace DG.Tweening
+namespace Plugins.Demigiant.DOTween.Modules
 {
     /// <summary>
     /// Utility functions that deal with available Modules.
@@ -73,8 +74,8 @@ namespace DG.Tweening
         static void PlaymodeStateChanged(UnityEditor.PlayModeStateChange state)
 #endif
         {
-            if (DOTween.instance == null) return;
-            DOTween.instance.OnApplicationPause(UnityEditor.EditorApplication.isPaused);
+            if (DG.Tweening.DOTween.instance == null) return;
+            DG.Tweening.DOTween.instance.OnApplicationPause(UnityEditor.EditorApplication.isPaused);
         }
 #endif
 
@@ -87,7 +88,7 @@ namespace DG.Tweening
             // Called via DOTweenExternalCommand callback
             public static void SetOrientationOnPath(PathOptions options, Tween t, Quaternion newRot, Transform trans)
             {
-#if false // PHYSICS_MARKER
+#if true // PHYSICS_MARKER
                 if (options.isRigidbody) ((Rigidbody)t.target).rotation = newRot;
                 else trans.rotation = newRot;
 #else
@@ -98,7 +99,7 @@ namespace DG.Tweening
             // Returns FALSE if the DOTween's Physics2D Module is disabled, or if there's no Rigidbody2D attached
             public static bool HasRigidbody2D(Component target)
             {
-#if false // PHYSICS2D_MARKER
+#if true // PHYSICS2D_MARKER
                 return target.GetComponent<Rigidbody2D>() != null;
 #else
                 return false;
@@ -115,7 +116,7 @@ namespace DG.Tweening
 #endif
             public static bool HasRigidbody(Component target)
             {
-#if false // PHYSICS_MARKER
+#if true // PHYSICS_MARKER
                 return target.GetComponent<Rigidbody>() != null;
 #else
                 return false;
@@ -131,7 +132,7 @@ namespace DG.Tweening
             ){
                 TweenerCore<Vector3, Path, PathOptions> t = null;
                 bool rBodyFoundAndTweened = false;
-#if false // PHYSICS_MARKER
+#if true // PHYSICS_MARKER
                 if (tweenRigidbody) {
                     Rigidbody rBody = target.GetComponent<Rigidbody>();
                     if (rBody != null) {
@@ -142,7 +143,7 @@ namespace DG.Tweening
                     }
                 }
 #endif
-#if false // PHYSICS2D_MARKER
+#if true // PHYSICS2D_MARKER
                 if (!rBodyFoundAndTweened && tweenRigidbody) {
                     Rigidbody2D rBody2D = target.GetComponent<Rigidbody2D>();
                     if (rBody2D != null) {
