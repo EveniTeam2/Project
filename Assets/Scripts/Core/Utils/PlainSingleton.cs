@@ -1,4 +1,4 @@
-namespace Utils {
+namespace Core.Utils {
     /// <summary>
     /// Call anytime when you want
     /// </summary>
