@@ -9,12 +9,12 @@ namespace Core.Utils {
         private static T _instance;
         public static T Instance {
             get {
-                if (_instance == null) {
-                    var obj = GameObject.Instantiate(new GameObject()).AddComponent<T>();
-                    DontDestroyOnLoad(obj);
-                    obj.Initialize();
-                    _instance = obj;
-                }
+                if (_instance != null) return _instance;
+                
+                var obj = Instantiate(new GameObject()).AddComponent<T>();
+                DontDestroyOnLoad(obj);
+                obj.Initialize();
+                _instance = obj;
                 return _instance;
             }
         }
@@ -22,7 +22,6 @@ namespace Core.Utils {
             if (_instance != null) {
                 if (!ReferenceEquals(_instance, this))
                     Destroy(this);
-                return;
             }
             else {
                 _instance = (T)this;
