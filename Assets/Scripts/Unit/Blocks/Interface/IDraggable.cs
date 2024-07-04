@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Unit.Blocks.Interface
 {
-    public class IClickable : MonoBehaviour
+    public interface IDraggable
     {
         
     }

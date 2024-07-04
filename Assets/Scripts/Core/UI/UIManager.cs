@@ -38,12 +38,12 @@ namespace Core.UI
 
         void LoadUI<T>(Action<T> onComplete = null)
         {
-            for (int i = 0; i < uiAssetRef.Count; ++i)
+            for (var i = 0; i < uiAssetRef.Count; ++i)
             {
-                int index = i;
+                var index = i;
                 AddressableLoader.LoadAsset<GameObject>(uiAssetRef[i], obj =>
                 {
-                    if (obj.TryGetComponent<T>(out T ui))
+                    if (obj.TryGetComponent<T>(out var ui))
                     {
                         typeToAssetRefIndex.Add(ui.GetType().Name, index);
                         onComplete?.Invoke(ui);
@@ -56,7 +56,7 @@ namespace Core.UI
         {
             AddressableLoader.DeployAsset(assetRef, Vector3.zero, Quaternion.identity, null, obj =>
             {
-                if (obj.TryGetComponent<T>(out T ui))
+                if (obj.TryGetComponent<T>(out var ui))
                 {
                     if (openedUiList == null)
                     {
@@ -96,7 +96,7 @@ namespace Core.UI
                 return ui as T;
             }
 
-            if (typeToAssetRefIndex != null && typeToAssetRefIndex.TryGetValue(typeName, out int index))
+            if (typeToAssetRefIndex != null && typeToAssetRefIndex.TryGetValue(typeName, out var index))
             {
                 DeployUI<T>(uiAssetRef[index], onLoadComplete);
             }
@@ -134,7 +134,7 @@ namespace Core.UI
         {
             if (openedUiList != null)
             {
-                foreach (UIBase ui in openedUiList)
+                foreach (var ui in openedUiList)
                 {
                     ui.SetFontScale(fontScale);
                     ui.SetScale(sizeScale);

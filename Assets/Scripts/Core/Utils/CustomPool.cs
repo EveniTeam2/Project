@@ -33,7 +33,7 @@ namespace Core.Utils {
             flexible = isFlexible;
             usedObjs = new LinkedList<T>();
 
-            for (int i = 0; i < size; ++i) {
+            for (var i = 0; i < size; ++i) {
                 Create();
             }
         }
