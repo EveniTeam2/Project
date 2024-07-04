@@ -6,7 +6,7 @@ namespace Match2D {
     public class BlockPlacerTile : TileBase {
         public Sprite PreviewEditorSprite;
         [Tooltip("If null this will be a random gem")]
-        //public Tile PlacedGem = null;
+        public Unit.Blocks.Block PlacedBlock = null;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData) {
             tileData.sprite = !Application.isPlaying ? PreviewEditorSprite : null;
@@ -17,7 +17,7 @@ namespace Match2D {
             if (!Application.isPlaying)
                 return false;
 #endif
-            //Board.RegisterCell(position, PlacedGem);
+            //Board.RegisterCell(position, PlacedBlock);
             return base.StartUp(position, tilemap, go);
         }
     }
