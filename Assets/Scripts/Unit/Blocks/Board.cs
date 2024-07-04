@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Manager;
+using ScriptableObjects.Scripts.Blocks;
 using UnityEngine;
 
 namespace Unit.Blocks
@@ -11,10 +14,11 @@ namespace Unit.Blocks
         private int _width;
         private int _height;
         
-        private Block[,] _tiles;
+        private List<NewBlock> _blockInfos;
         private BlockGenerator _blockGenerator;
-
-        [SerializeField] private GameObject blockPrefab;
+        private GameObject _blockPrefab;
+        
+        private Dictionary<Tuple<float, float>, GameObject> _tiles;
 
         private void Awake()
         {
@@ -25,11 +29,15 @@ namespace Unit.Blocks
         {
             _width = GameManager.Instance.boardWidth;
             _height = GameManager.Instance.boardHeight;
+            _blockInfos = GameManager.Instance.blockInfos;
+            _blockPrefab = GameManager.Instance.tilePrefab;
             
-            _tiles = new Block[_width, _height];
-            _blockGenerator = new BlockGenerator(_width, _height);
+            _tiles = new Dictionary<Tuple<float, float>, GameObject>();
             
-            _tiles = _blockGenerator.GenerateBlocks(blockPrefab, true);
+            _blockGenerator = GetComponent<BlockGenerator>();
+            _blockGenerator.Initialize(_width, _height);
+            
+            _tiles = _blockGenerator.GenerateBlocks(_blockPrefab, _blockInfos, true);
         }
     }
 }
