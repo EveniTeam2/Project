@@ -1,6 +1,6 @@
 namespace Unit.Blocks
 {
-    public class DebuffBlock : Block
+    public class BlockDebuff : Block
     {
         
     }
