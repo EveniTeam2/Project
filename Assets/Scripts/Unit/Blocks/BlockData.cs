@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Unit.Blocks
 {
+    [Serializable]
     public struct BlockData
     {
-        public Tuple<int, int> TilePosition;
-        public Sprite TileSprite;
+        public Tuple<int, int> Index;
+        
     }
 }
