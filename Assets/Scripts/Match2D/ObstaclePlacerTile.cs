@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Match2D {
-    [CreateAssetMenu(fileName = "ObstaclePlacer", menuName = "2D Match/Tile/Obstacle Placer")]
+    [CreateAssetMenu(fileName = "ObstaclePlacerTile", menuName = "Tile/Obstacle Placer Tile")]
     public class ObstaclePlacerTile : TileBase {
         public Sprite PreviewEditorSprite;
         //public Obstacle ObstaclePrefab;
@@ -16,11 +16,8 @@ namespace Match2D {
             if (!Application.isPlaying)
                 return false;
 #endif
-
-
             //var newObstacle = Instantiate(ObstaclePrefab);
             //newObstacle.Init(position);
-
             return true;
         }
     }
