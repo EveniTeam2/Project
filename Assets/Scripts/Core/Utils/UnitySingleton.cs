@@ -6,27 +6,27 @@ namespace Core.Utils {
     /// </summary>
     /// <typeparam name="T">type that you want to make singleton</typeparam>
     public abstract class UnitySingleton<T> : MonoBehaviour where T : UnitySingleton<T> {
-        private static T instance;
+        private static T _instance;
         public static T Instance {
             get {
-                if (instance == null) {
+                if (_instance == null) {
                     var obj = GameObject.Instantiate(new GameObject()).AddComponent<T>();
                     DontDestroyOnLoad(obj);
                     obj.Initialize();
-                    instance = obj;
+                    _instance = obj;
                 }
-                return instance;
+                return _instance;
             }
         }
         protected virtual void Awake() {
-            if (instance != null) {
-                if (!ReferenceEquals(instance, this))
+            if (_instance != null) {
+                if (!ReferenceEquals(_instance, this))
                     Destroy(this);
                 return;
             }
             else {
-                instance = (T)this;
-                DontDestroyOnLoad(instance);
+                _instance = (T)this;
+                DontDestroyOnLoad(_instance);
                 Initialize();
             }
         }

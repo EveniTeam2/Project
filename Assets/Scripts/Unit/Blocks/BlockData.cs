@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Unit.Tile
+namespace Unit.Blocks
 {
-    public struct TileData
+    public struct BlockData
     {
         public Tuple<int, int> TilePosition;
         public Sprite TileSprite;

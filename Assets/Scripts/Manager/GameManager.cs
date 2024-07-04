@@ -1,18 +1,22 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using Core.Utils;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Manager
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameManager : UnitySingleton<GameManager>
     {
+        [Header("보드 가로 세로 길이")]
+        public int boardWidth;
+        public int boardHeight;
         
-    }
+        [Header("타일 정보")]
+        public List<ScriptableObject> tileInfos;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected override GameManager Initialize()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
