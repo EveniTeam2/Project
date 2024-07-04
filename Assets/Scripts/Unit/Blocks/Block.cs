@@ -1,8 +1,7 @@
 using ScriptableObjects.Scripts.Blocks;
+using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Unit.Blocks
 {
@@ -10,12 +9,19 @@ namespace Unit.Blocks
     {
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private TextMeshPro text;
-        private BlockData _blockData;
 
-        public void Initialize(NewBlock newBlockInfo)
+        // public Tuple<int, int> Index => _blockData.Index;
+        // private BlockData _blockData;
+
+        public BlockType Type { get; private set; }
+
+        public void Initialize(NewBlock info)
         {
-            text.text = newBlockInfo.text;
-            sprite.color = newBlockInfo.color;
+            text.text = info.text;
+            sprite.color = info.color;
+            Type = info.type;
+
+            // _blockData.Index = new Tuple<int, int>(x, y);
         }
 
         protected void RegisterBlock()
