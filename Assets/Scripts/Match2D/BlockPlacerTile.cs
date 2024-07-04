@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 namespace Match2D {
     [CreateAssetMenu(fileName = "GemPlacerTile", menuName = "Tile/Gem Placer")]
-    public class GemPlacerTile : TileBase {
+    public class BlockPlacerTile : TileBase {
         public Sprite PreviewEditorSprite;
         [Tooltip("If null this will be a random gem")]
         //public Tile PlacedGem = null;
