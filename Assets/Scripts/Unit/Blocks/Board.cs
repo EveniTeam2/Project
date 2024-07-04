@@ -37,7 +37,7 @@ namespace Unit.Blocks
             _blockGenerator = GetComponent<BlockGenerator>();
             _blockGenerator.Initialize(_width, _height);
             
-            _tiles = _blockGenerator.GenerateBlocks(_blockPrefab, _blockInfos, true);
+            _tiles = _blockGenerator.GenerateAllBlocks(_blockPrefab, _blockInfos, true);
         }
     }
 }

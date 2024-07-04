@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.Blocks;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,71 +12,102 @@ namespace Unit
         private int _width;
         private int _height;
 
+        private readonly List<Tuple<float, float>> _blockPositions = new();
+
+        private const float BlockOffset = 0.5f;
+
         public void Initialize(int width, int height)
         {
             _width = width;
             _height = height;
+            
+            CalculateBlockPositions();
         }
 
-        /// <summary>
-        /// 랜덤한 타일을 생성합니다.
-        /// </summary>
-        /// <param name="blockPrefab">blockPrefab 게임 오브젝트</param>
-        /// <param name="blockInfos">blockInfo 스크립터블 오브젝트</param>
-        /// <param name="mergeLock">true - 초반 머지가 불가능하도록 생성합니다. / false - 초반 머지가 가능하도록 생성합니다.</param>
-        public Dictionary<Tuple<float, float>, GameObject> GenerateBlocks(GameObject blockPrefab, List<NewBlock> blockInfos, bool mergeLock)
+        private void CalculateBlockPositions()
         {
-            var blocksPositions = CalculateEachBlockPosition();
+            float adjustWidth = _width % 2 == 0 ? BlockOffset : 0;
+            float adjustHeight = _height % 2 == 0 ? BlockOffset : 0;
 
-            return GenerateRandomBlocks(blockPrefab, blockInfos, blocksPositions);
-        }
+            float halfWidth = _width / 2f - adjustWidth;
+            float halfHeight = _height / 2f - adjustHeight;
 
-        private IEnumerable<Tuple<float, float>> CalculateEachBlockPosition()
-        {
-            //TODO: 이후 로직 다시 수정
-            
-            Debug.Log($"가로 {_width} / 세로 {_height}");
-            
-            var positions = new List<Tuple<float, float>>();
-
-            for (var i = 1; i <= _width / 2 ; i++)
+            for (float x = -halfHeight; x <= halfHeight; x++)
             {
-                for (var j = 1; j <= _height / 2 ; j++)
+                for (float y = -halfWidth; y <= halfWidth; y++)
                 {
-                    var x = 0.5f + 1 * (i - 1);
-                    var y = 0.5f + 1 * (j - 1);
-                    
-                    positions.Add(new Tuple<float, float>(x, y));
-                    positions.Add(new Tuple<float, float>(-x, -y));
-                    positions.Add(new Tuple<float, float>(-x, y));
-                    positions.Add(new Tuple<float, float>(x, -y));
+                    _blockPositions.Add(new Tuple<float, float>(x, y));
                 }
             }
-            
-            Debug.Log($"우웅 우리 안한 게 모가 이찌? positions 몇 개인지 확인하기? 우웅 마쟈 죵답 >-< {positions.Count}");
-            
-            // var isWidthEvenNum = _width % 2 == 0 ? true : false;
-            // var isHeightEvenNum = _height % 2 == 0 ? true : false;
-
-            return positions;
         }
-        
-        private Dictionary<Tuple<float, float>, GameObject> GenerateRandomBlocks(GameObject blockPrefab, IReadOnlyList<NewBlock> blockInfos, IEnumerable<Tuple<float, float>> blockPositions)
-        {
-            var blockDic = new Dictionary<Tuple<float, float>, GameObject>();
 
-            foreach (var blockPosition in blockPositions)
+        public Dictionary<Tuple<float, float>, GameObject> GenerateAllBlocks(GameObject blockPrefab, IReadOnlyList<NewBlock> blockInfos, bool mergeLock)
+        {
+            Dictionary<Tuple<float, float>, GameObject> blockDic = new();
+
+            foreach (var blockPosition in _blockPositions)
             {
-                var position = new Vector3(blockPosition.Item1, blockPosition.Item2, 0);
+                NewBlock selectedBlockInfo = GetRandomValidBlock(blockDic, blockPosition, blockInfos);
                 
-                var block = Instantiate(blockPrefab, position, transform.rotation);
-                
-                block.GetComponent<Block>().Initialize(blockInfos[Random.Range(0, blockInfos.Count)]);
-                
-                blockDic.Add(new Tuple<float, float>(blockPosition.Item1, blockPosition.Item2), block);
+                InstantiateAndAddBlock(blockDic, blockPrefab, blockPosition, selectedBlockInfo);
             }
 
             return blockDic;
+        }
+
+        private void InstantiateAndAddBlock(Dictionary<Tuple<float, float>, GameObject> blockDic, GameObject blockPrefab, Tuple<float, float> blockPosition, NewBlock blockInfo)
+        {
+            Vector3 position = new(blockPosition.Item1, blockPosition.Item2, 0);
+            
+            var block = Instantiate(blockPrefab, position, Quaternion.identity);
+            
+            block.GetComponent<Block>().Initialize(blockInfo);
+            blockDic.Add(blockPosition, block);
+        }
+
+        private NewBlock GetRandomValidBlock(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, IReadOnlyList<NewBlock> blockInfos)
+        {
+            List<NewBlock> validBlocks = new();
+
+            foreach (var blockInfo in blockInfos)
+            {
+                if (IsValidPosition(blockDic, position, blockInfo))
+                {
+                    validBlocks.Add(blockInfo);
+                }
+            }
+
+            if (validBlocks.Count == 0)
+            {
+                return blockInfos[Random.Range(0, blockInfos.Count)];
+            }
+
+            return validBlocks[Random.Range(0, validBlocks.Count)];
+        }
+
+        private bool IsValidPosition(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo)
+        {
+            return !(IsMatchingInDirection(blockDic, position, blockInfo, Vector2.up, Vector2.down) ||
+                     IsMatchingInDirection(blockDic, position, blockInfo, Vector2.left, Vector2.right));
+        }
+
+        private bool IsMatchingInDirection(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo, Vector2 dir1, Vector2 dir2)
+        {
+            return CheckDirection(blockDic, position, blockInfo, dir1) + CheckDirection(blockDic, position, blockInfo, dir2) >= 2;
+        }
+
+        private int CheckDirection(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo, Vector2 direction)
+        {
+            int matchCount = 0;
+            Tuple<float, float> currentPos = new(position.Item1 + direction.x, position.Item2 + direction.y);
+
+            while (blockDic.ContainsKey(currentPos) && blockDic[currentPos].GetComponent<Block>().Type == blockInfo.type)
+            {
+                matchCount++;
+                currentPos = new Tuple<float, float>(currentPos.Item1 + direction.x, currentPos.Item2 + direction.y);
+            }
+
+            return matchCount;
         }
     }
 }
