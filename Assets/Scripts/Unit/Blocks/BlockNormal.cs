@@ -1,6 +1,6 @@
 namespace Unit.Blocks
 {
-    public class NormalBlock : Block
+    public class BlockNormal : Block
     {
         
     }

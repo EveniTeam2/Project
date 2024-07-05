@@ -15,26 +15,30 @@ namespace Unit
         private readonly List<Tuple<float, float>> _blockPositions = new();
 
         private const float BlockOffset = 0.5f;
+        private const int MatchingBlockCount = 3;
 
-        public void Initialize(int width, int height)
+        private Action<Vector3> _matchCheckHandler;
+
+        public void Initialize(int width, int height, Action<Vector3> matchCheckHandler)
         {
             _width = width;
             _height = height;
+            _matchCheckHandler = matchCheckHandler;
             
             CalculateBlockPositions();
         }
 
         private void CalculateBlockPositions()
         {
-            float adjustWidth = _width % 2 == 0 ? BlockOffset : 0;
-            float adjustHeight = _height % 2 == 0 ? BlockOffset : 0;
+            var adjustWidth = _width % 2 == 0 ? BlockOffset : 0;
+            var adjustHeight = _height % 2 == 0 ? BlockOffset : 0;
 
-            float halfWidth = _width / 2f - adjustWidth;
-            float halfHeight = _height / 2f - adjustHeight;
+            var halfWidth = _width / 2f - adjustWidth;
+            var halfHeight = _height / 2f - adjustHeight;
 
-            for (float x = -halfHeight; x <= halfHeight; x++)
+            for (var x = -halfHeight; x <= halfHeight; x++)
             {
-                for (float y = -halfWidth; y <= halfWidth; y++)
+                for (var y = -halfWidth; y <= halfWidth; y++)
                 {
                     _blockPositions.Add(new Tuple<float, float>(x, y));
                 }
@@ -47,7 +51,7 @@ namespace Unit
 
             foreach (var blockPosition in _blockPositions)
             {
-                NewBlock selectedBlockInfo = GetRandomValidBlock(blockDic, blockPosition, blockInfos);
+                var selectedBlockInfo = GetRandomValidBlock(blockDic, blockPosition, blockInfos);
                 
                 InstantiateAndAddBlock(blockDic, blockPrefab, blockPosition, selectedBlockInfo);
             }
@@ -61,7 +65,8 @@ namespace Unit
             
             var block = Instantiate(blockPrefab, position, Quaternion.identity);
             
-            block.GetComponent<Block>().Initialize(blockInfo);
+            block.GetComponent<Block>().Initialize(blockInfo, _matchCheckHandler);
+            
             blockDic.Add(blockPosition, block);
         }
 
@@ -87,18 +92,22 @@ namespace Unit
 
         private bool IsValidPosition(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo)
         {
-            return !(IsMatchingInDirection(blockDic, position, blockInfo, Vector2.up, Vector2.down) ||
-                     IsMatchingInDirection(blockDic, position, blockInfo, Vector2.left, Vector2.right));
-        }
+            var directions = new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+            
+            foreach (var direction in directions)
+            {
+                if (CheckDirection(blockDic, position, blockInfo, direction) >= MatchingBlockCount - 1)
+                {
+                    return false;
+                }
+            }
 
-        private bool IsMatchingInDirection(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo, Vector2 dir1, Vector2 dir2)
-        {
-            return CheckDirection(blockDic, position, blockInfo, dir1) + CheckDirection(blockDic, position, blockInfo, dir2) >= 2;
+            return true;
         }
 
         private int CheckDirection(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo, Vector2 direction)
         {
-            int matchCount = 0;
+            var matchCount = 0;
             Tuple<float, float> currentPos = new(position.Item1 + direction.x, position.Item2 + direction.y);
 
             while (blockDic.ContainsKey(currentPos) && blockDic[currentPos].GetComponent<Block>().Type == blockInfo.type)

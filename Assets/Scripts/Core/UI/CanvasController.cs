@@ -17,7 +17,7 @@ namespace Core.UI
             gameObject.TryGetComponent(out cvsComp);
             gameObject.TryGetComponent(out canvasScaler);
 
-            bool isRaycast = gameObject.TryGetComponent(out graphicRaycaster);
+            var isRaycast = gameObject.TryGetComponent(out graphicRaycaster);
             UIManager.Instance.RegisterCanvas(this, new CanvasOption(cvsComp.renderMode, isRaycast));
         }
 
