@@ -17,11 +17,11 @@ namespace Unit.Character {
     }
 
     public class InstanceStat<T> where T : struct {
-        public T origin;
-        public T current;
+        public T Origin;
+        public T Current;
         public InstanceStat(T origin) {
-            this.origin = origin;
-            this.current = origin;
+            Origin = origin;
+            Current = origin;
         }
     }
 

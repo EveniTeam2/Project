@@ -2,17 +2,16 @@ using System;
 
 namespace Unit.Character {
     public class PlayerCharacter : BaseCharacter, IDamageable {
-        public int Health => _health.current;
-        public override float Speed => _speed.current;
-
+        public int Health => _health.Current;
+        public override float Speed => _speed.Current;
         public event Action<BaseCharacter> OnDeath;
         public InstanceStat<int> _health;
         public InstanceStat<float> _speed;
 
         public void Damage(int dmg) {
-            _health.current -= dmg;
-            if (_health.current <= 0) {
-                _health.current = 0;
+            _health.Current -= dmg;
+            if (_health.Current <= 0) {
+                _health.Current = 0;
                 OnDeath?.Invoke(this);
             }
         }
