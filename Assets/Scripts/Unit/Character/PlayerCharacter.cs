@@ -3,11 +3,11 @@ using System;
 namespace Unit.Character {
     public class PlayerCharacter : BaseCharacter, IDamageable {
         public int Health => _health.Current;
-        public override float Speed => _speed.Current;
+        public override int Speed => _speed.Current;
         public event Action<BaseCharacter> OnDeath;
         public InstanceStat<int> _health;
-        public InstanceStat<float> _speed;
-
+        public InstanceStat<int> _speed;
+        private bool _run;
         public void Damage(int dmg) {
             _health.Current -= dmg;
             if (_health.Current <= 0) {
@@ -24,8 +24,35 @@ namespace Unit.Character {
             _health = new InstanceStat<int>(health);
         }
 
-        public override void SetSpeed(float spd) {
-            _speed = new InstanceStat<float>(spd);
+        public override void SetRun(bool isRun) {
+            _run = isRun;
+        }
+
+        protected override void RecalculateSpeed() {
+            if (_run) {
+                _speed.Current = _speed.Origin;
+                foreach (var spd in spdModifier) {
+                    _speed.Current += spd;
+                }
+            }
+        }
+
+        private void Awake() {
+            _zeroPosition = transform.position;
+        }
+
+        private void Update() {
+            if (_run) {
+
+            }
+            else {
+
+            }
+        }
+
+        internal void Initialize(PlayerStat stat) {
+            _speed.Origin = stat.Speed;
+            _health.Origin = stat.Health;
         }
     }
 }

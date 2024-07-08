@@ -9,27 +9,43 @@ public interface IRaceable {
     event Action<List<Block>> OnSuccess;
 }
 
-public interface IShowable {
-    void Move(float spd);
-    void Stop();
-}
+namespace Unit.Character {
+    public interface IShowable {
+        void Move(float spd);
+        void Stop();
+    }
 
-public class Race : MonoBehaviour {
-    BaseCharacter player;
-    BaseCharacter monster;
-    IShowable background;
-    public void AttachBoard(IRaceable data) {
-        data.OnSuccess += OnSuccessMatch;
-        data.OnFailed += OnFailedMatch;
+    public struct PlayerStat {
+        public int Health;
+        public int Speed;
     }
-    private void OnFailedMatch() {
-        background.Stop();
-        // TODO
+
+    public struct MonsterStat {
+        public int Speed;
     }
-    private void OnSuccessMatch(List<Block> list) {
-        background.Move(player.Speed);
-        foreach (var block in list) {
+
+    public class Race : MonoBehaviour {
+        [SerializeField] PlayerCharacter player;
+        [SerializeField] MonsterCharacter monster = null;
+        [SerializeField] BackgroundDisplay background;
+        public void AttachBoard(IRaceable data) {
+            data.OnSuccess += OnSuccessMatch;
+            data.OnFailed += OnFailedMatch;
+        }
+        private void OnFailedMatch() {
+            background.Stop();
+            
             // TODO
+        }
+        private void OnSuccessMatch(List<Block> list) {
+            background.Move(player.Speed);
+            foreach (var block in list) {
+                // TODO
+            }
+        }
+        public void Initialize(PlayerStat pStat, MonsterStat mStat) {
+            player.Initialize(pStat);
+            monster.Initialize(mStat);
         }
     }
 }
