@@ -5,27 +5,33 @@ using Unit.Blocks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Unit
+namespace Unit.Boards
 {
-    public class BlockGenerator : MonoBehaviour
+    public class BlockGenerator
     {
-        private int _width;
-        private int _height;
-
-        private readonly List<Tuple<float, float>> _blockPositions = new();
-
+        private readonly int _width;
+        private readonly int _height;
+        
+        private readonly List<Tuple<float, float>> _blockPositions;
+        private readonly List<NewBlock> _blockInfos;
+        
+        private readonly Action<Vector3, Vector3> _matchCheckHandler;
+        
         private const float BlockOffset = 0.5f;
-        private const int MatchingBlockCount = 3;
 
-        private Action<Vector3> _matchCheckHandler;
-
-        public void Initialize(int width, int height, Action<Vector3> matchCheckHandler)
+        public BlockGenerator(int width, int height, List<NewBlock> blockInfos,
+            Action<Vector3, Vector3> matchCheckHandler, out Dictionary<Tuple<float, float>, GameObject> tiles,
+            GameObject blockPrefab)
         {
             _width = width;
             _height = height;
+            _blockPositions = new List<Tuple<float, float>>();
+            _blockInfos = blockInfos;
             _matchCheckHandler = matchCheckHandler;
-            
+
             CalculateBlockPositions();
+            
+            tiles = GenerateAllBlocks(blockPrefab, true);
         }
 
         private void CalculateBlockPositions()
@@ -45,14 +51,14 @@ namespace Unit
             }
         }
 
-        public Dictionary<Tuple<float, float>, GameObject> GenerateAllBlocks(GameObject blockPrefab, IReadOnlyList<NewBlock> blockInfos, bool mergeLock)
+        public Dictionary<Tuple<float, float>, GameObject> GenerateAllBlocks(GameObject blockPrefab, bool mergeLock)
         {
-            Dictionary<Tuple<float, float>, GameObject> blockDic = new();
+            var blockDic = new Dictionary<Tuple<float, float>, GameObject>();
 
             foreach (var blockPosition in _blockPositions)
             {
-                var selectedBlockInfo = GetRandomValidBlock(blockDic, blockPosition, blockInfos);
-                
+                var selectedBlockInfo = GetRandomValidBlock(blockDic, blockPosition);
+
                 InstantiateAndAddBlock(blockDic, blockPrefab, blockPosition, selectedBlockInfo);
             }
 
@@ -62,19 +68,17 @@ namespace Unit
         private void InstantiateAndAddBlock(Dictionary<Tuple<float, float>, GameObject> blockDic, GameObject blockPrefab, Tuple<float, float> blockPosition, NewBlock blockInfo)
         {
             Vector3 position = new(blockPosition.Item1, blockPosition.Item2, 0);
-            
-            var block = Instantiate(blockPrefab, position, Quaternion.identity);
-            
+            var block = UnityEngine.Object.Instantiate(blockPrefab, position, Quaternion.identity);
+
             block.GetComponent<Block>().Initialize(blockInfo, _matchCheckHandler);
-            
             blockDic.Add(blockPosition, block);
         }
 
-        private NewBlock GetRandomValidBlock(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, IReadOnlyList<NewBlock> blockInfos)
+        private NewBlock GetRandomValidBlock(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position)
         {
             List<NewBlock> validBlocks = new();
-
-            foreach (var blockInfo in blockInfos)
+            
+            foreach (var blockInfo in _blockInfos)
             {
                 if (IsValidPosition(blockDic, position, blockInfo))
                 {
@@ -84,7 +88,7 @@ namespace Unit
 
             if (validBlocks.Count == 0)
             {
-                return blockInfos[Random.Range(0, blockInfos.Count)];
+                return _blockInfos[Random.Range(0, _blockInfos.Count)];
             }
 
             return validBlocks[Random.Range(0, validBlocks.Count)];
@@ -93,10 +97,10 @@ namespace Unit
         private bool IsValidPosition(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo)
         {
             var directions = new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
-            
+
             foreach (var direction in directions)
             {
-                if (CheckDirection(blockDic, position, blockInfo, direction) >= MatchingBlockCount - 1)
+                if (CheckDirection(blockDic, position, blockInfo, direction) >= 3 - 1)
                 {
                     return false;
                 }
