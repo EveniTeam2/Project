@@ -4,70 +4,56 @@ using TMPro;
 using Unit.Blocks.Interface;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 namespace Unit.Blocks
 {
-    public abstract class Block : MonoBehaviour, IDraggable
+    public class Block : MonoBehaviour, IDraggable
     {
-        public event Action<Vector3> OnMatchCheck;
+        public event Action<Vector3, Vector3> OnMatchCheck;
 
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private TextMeshPro text;
 
         public BlockType Type { get; private set; }
 
-        private Vector3 startPosition;
-        private Vector3 offset;
-
-        private Camera mainCamera;
-        private InputAction clickAction;
-        private InputAction dragAction;
+        private Vector3 _startPosition;
+        private Camera _mainCamera;
 
         private void Awake()
         {
-            mainCamera = Camera.main;
-
-            var inputActions = new InputActionMap("BlockActions");
-            clickAction = inputActions.AddAction("Click", binding: "<Pointer>/press");
-            dragAction = inputActions.AddAction("Drag", binding: "<Pointer>/position");
-            
-            clickAction.started += OnBeginDrag;
-            clickAction.canceled += OnEndDrag;
-            dragAction.performed += OnDrag;
-
-            inputActions.Enable();
+            _mainCamera = Camera.main;
         }
 
-        public void Initialize(NewBlock info, Action<Vector3> matchCheckHandler)
+        public void Initialize(NewBlock info, Action<Vector3, Vector3> matchCheckHandler)
         {
             text.text = info.text;
             sprite.color = info.color;
             Type = info.type;
-            OnMatchCheck += matchCheckHandler;
+
+            OnMatchCheck = matchCheckHandler;
         }
 
-        public void OnBeginDrag(InputAction.CallbackContext context)
+        public void OnPointerDown(PointerEventData eventData)
         {
-            if (mainCamera == null) return;
-
-            startPosition = transform.position;
-            offset = startPosition - mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            _startPosition = transform.position;
+            Debug.Log($"블록 클릭 {_startPosition}");
         }
 
-        public void OnDrag(InputAction.CallbackContext context)
-        {
-            if (mainCamera == null) return;
+        public void OnBeginDrag(PointerEventData eventData) { }
 
-            var newPos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) + offset;
-            transform.position = new Vector3(newPos.x, newPos.y, startPosition.z);
-        }
+        public void OnDrag(PointerEventData eventData) { }
 
-        public void OnEndDrag(InputAction.CallbackContext context)
+        public void OnEndDrag(PointerEventData eventData)
         {
-            var endPosition = transform.position;
-            transform.position = startPosition;
-            OnMatchCheck?.Invoke(endPosition);
+            var endPosition = _mainCamera.ScreenToWorldPoint(eventData.position);
+            endPosition.z = 0;
+
+            var direction = (endPosition - _startPosition).normalized;
+            direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? new Vector3(Mathf.Sign(direction.x), 0, 0) : new Vector3(0, Mathf.Sign(direction.y), 0);
+
+            OnMatchCheck?.Invoke(_startPosition, direction);
+
+            Debug.Log($"블록 {_startPosition} 클릭 이후 {direction} 방향으로 드래그");
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Unit.Blocks.Interface
 {
-    public interface IDraggable
+    public interface IDraggable : IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         
     }
