@@ -9,17 +9,19 @@ namespace Unit.Boards
 {
     public class BlockGenerator
     {
-        private int _width;
-        private int _height;
+        private readonly int _width;
+        private readonly int _height;
         
-        private List<Tuple<float, float>> _blockPositions;
-        private List<NewBlock> _blockInfos;
+        private readonly List<Tuple<float, float>> _blockPositions;
+        private readonly List<NewBlock> _blockInfos;
         
-        private Action<Vector3, Vector3> _matchCheckHandler;
+        private readonly Action<Vector3, Vector3> _matchCheckHandler;
         
         private const float BlockOffset = 0.5f;
 
-        public void Initialize(int width, int height, List<NewBlock> blockInfos, Action<Vector3, Vector3> matchCheckHandler)
+        public BlockGenerator(int width, int height, List<NewBlock> blockInfos,
+            Action<Vector3, Vector3> matchCheckHandler, out Dictionary<Tuple<float, float>, GameObject> tiles,
+            GameObject blockPrefab)
         {
             _width = width;
             _height = height;
@@ -28,6 +30,8 @@ namespace Unit.Boards
             _matchCheckHandler = matchCheckHandler;
 
             CalculateBlockPositions();
+            
+            tiles = GenerateAllBlocks(blockPrefab, true);
         }
 
         private void CalculateBlockPositions()

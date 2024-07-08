@@ -22,14 +22,14 @@ namespace Unit.Boards
 
             while (elapsedTime < _duration)
             {
-                currentBlock.transform.position = Vector3.Lerp(currentBlockStartPos, new Vector3(targetPos.Item1, targetPos.Item2, 0), elapsedTime / _duration);
-                targetBlock.transform.position = Vector3.Lerp(targetBlockStartPos, new Vector3(currentPos.Item1, currentPos.Item2, 0), elapsedTime / _duration);
+                currentBlock.transform.position = Vector3.Lerp(currentBlockStartPos, new Vector3(currentPos.Item1, currentPos.Item2, 0), elapsedTime / _duration);
+                targetBlock.transform.position = Vector3.Lerp(targetBlockStartPos, new Vector3(targetPos.Item1, targetPos.Item2, 0), elapsedTime / _duration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
-            currentBlock.transform.position = new Vector3(targetPos.Item1, targetPos.Item2, 0);
-            targetBlock.transform.position = new Vector3(currentPos.Item1, currentPos.Item2, 0);
+            currentBlock.transform.position = new Vector3(currentPos.Item1, currentPos.Item2, 0);
+            targetBlock.transform.position = new Vector3(targetPos.Item1, targetPos.Item2, 0);
         }
     }
 }

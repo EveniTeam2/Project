@@ -34,14 +34,9 @@ namespace Unit.Boards
             _blockInfos = GameManager.Instance.blockInfos;
             _blockPrefab = GameManager.Instance.tilePrefab;
 
-            _tiles = new Dictionary<Tuple<float, float>, GameObject>();
-
-            _blockGenerator = new BlockGenerator();
+            _blockGenerator = new BlockGenerator(_width, _height, _blockInfos, CheckForMatch, out _tiles, _blockPrefab);
             _blockMatcher = new BlockMatcher(_tiles);
             _blockMover = new BlockMover(duration);
-
-            _blockGenerator.Initialize(_width, _height, _blockInfos, CheckForMatch);
-            _tiles = _blockGenerator.GenerateAllBlocks(_blockPrefab, true);
         }
 
         private void CheckForMatch(Vector3 startPosition, Vector3 direction)
