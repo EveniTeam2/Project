@@ -33,13 +33,10 @@ namespace Unit.Blocks
             OnMatchCheck = matchCheckHandler;
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnBeginDrag(PointerEventData eventData)
         {
             _startPosition = transform.position;
-            Debug.Log($"블록 클릭 {_startPosition}");
         }
-
-        public void OnBeginDrag(PointerEventData eventData) { }
 
         public void OnDrag(PointerEventData eventData) { }
 
@@ -52,8 +49,6 @@ namespace Unit.Blocks
             direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? new Vector3(Mathf.Sign(direction.x), 0, 0) : new Vector3(0, Mathf.Sign(direction.y), 0);
 
             OnMatchCheck?.Invoke(_startPosition, direction);
-
-            Debug.Log($"블록 {_startPosition} 클릭 이후 {direction} 방향으로 드래그");
         }
     }
-}
+} 

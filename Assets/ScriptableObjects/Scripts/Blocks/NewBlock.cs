@@ -5,7 +5,8 @@ namespace ScriptableObjects.Scripts.Blocks
     public enum BlockType
     {
         Normal,
-        Buff,
+        BuffHealth,
+        BuffSpeed,
         Debuff
     }
     

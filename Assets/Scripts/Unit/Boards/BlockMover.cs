@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unit.Blocks;
 using UnityEngine;
 
 namespace Unit.Boards
 {
     public class BlockMover
     {
+        private readonly WaitForSeconds _moveDelay = new(0.2f);
         private readonly float _duration;
 
         public BlockMover(float duration)
@@ -14,7 +15,7 @@ namespace Unit.Boards
             _duration = duration;
         }
 
-        public IEnumerator MoveBlock(GameObject currentBlock, GameObject targetBlock, Tuple<float, float> currentPos, Tuple<float, float> targetPos)
+        public IEnumerator MoveBlock(Block currentBlock, Block targetBlock, Tuple<float, float> currentPos, Tuple<float, float> targetPos, Action onComplete)
         {
             var currentBlockStartPos = currentBlock.transform.position;
             var targetBlockStartPos = targetBlock.transform.position;
@@ -30,6 +31,10 @@ namespace Unit.Boards
 
             currentBlock.transform.position = new Vector3(currentPos.Item1, currentPos.Item2, 0);
             targetBlock.transform.position = new Vector3(targetPos.Item1, targetPos.Item2, 0);
+
+            yield return _moveDelay;
+
+            onComplete?.Invoke();
         }
     }
 }

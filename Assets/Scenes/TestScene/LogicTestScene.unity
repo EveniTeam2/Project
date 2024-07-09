@@ -158,7 +158,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 125ec2552c17c4d789874f5610867d52, type: 2}
   - {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
   - {fileID: 11400000, guid: c2500c38dd46047efa9a1bba807458a3, type: 2}
-  tilePrefab: {fileID: 2318004690288196937, guid: ac1d9e4df06b344c182f2f7f526385a7, type: 3}
 --- !u!4 &9128592
 Transform:
   m_ObjectHideFlags: 0
@@ -371,7 +370,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1813097284}
   - component: {fileID: 1813097285}
-  - component: {fileID: 1813097286}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -407,15 +405,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.2
---- !u!114 &1813097286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813097283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f36b26e378214031a329a7e042b3b07d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  blockPrefab: {fileID: 4914153491292411587, guid: ac1d9e4df06b344c182f2f7f526385a7, type: 3}
+  poolSize: 40
