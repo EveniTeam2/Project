@@ -11,8 +11,8 @@ namespace Unit.Blocks
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
 
-        [SerializeField] private SpriteRenderer sprite;
-        [SerializeField] private TextMeshPro text;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private TextMeshPro textMeshPro;
 
         public BlockType Type { get; private set; }
 
@@ -26,10 +26,9 @@ namespace Unit.Blocks
 
         public void Initialize(NewBlock info, Action<Vector3, Vector3> matchCheckHandler)
         {
-            text.text = info.text;
-            sprite.color = info.color;
+            textMeshPro.text = info.text;
+            spriteRenderer.color = info.color;
             Type = info.type;
-
             OnMatchCheck = matchCheckHandler;
         }
 

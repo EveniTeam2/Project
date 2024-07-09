@@ -65,7 +65,6 @@ namespace Unit.Boards
                     Debug.Log($"{block.transform.position}의 {block.Type} 블록 삭제 예정");
                 }
                 
-                // matchedBlocks = GetAdjacentMatches(matchedBlocks);
                 return true;
             }
 

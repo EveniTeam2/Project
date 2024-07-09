@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Manager;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.Blocks;
@@ -12,7 +10,7 @@ namespace Unit.Boards
     public class Board : MonoBehaviour
     {
         [Header("블록 이동 완료까지 걸리는 시간 (단위 : 초)")]
-        [SerializeField] private float duration = 0.5f;
+        [SerializeField] private float moveDuration;
 
         [Header("블록 풀링 관련 설정")]
         [SerializeField] private Block blockPrefab;
@@ -42,7 +40,7 @@ namespace Unit.Boards
             _blockGenerator = new BlockGenerator(_width, _height, GameManager.Instance.blockInfos, CheckForMatch, _blockPool);
             _tiles = _blockGenerator.GenerateAllBlocks();
             _blockMatcher = new BlockMatcher(_tiles);
-            _blockMover = new BlockMover(duration);
+            _blockMover = new BlockMover(moveDuration);
         }
 
         private void CheckForMatch(Vector3 startPosition, Vector3 direction)
