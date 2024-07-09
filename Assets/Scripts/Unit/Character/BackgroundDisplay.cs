@@ -5,13 +5,15 @@ namespace Unit.Character {
         [SerializeField] List<SpriteRenderer> _backgrounds;
         List<Material> _backMat;
         [SerializeField] List<float> _spdCoef;
-        private float _currentSpd = 0;
+        private float _targetSpd;
         private bool _move;
         private float[] _dist;
-        public void Move(float spd) {
+
+        public void Move(IRunnable target) {
             _move = true;
-            _currentSpd = spd;
+            _targetSpd = target.Speed;
         }
+
         public void Stop() {
             _move = false;
         }
@@ -25,9 +27,10 @@ namespace Unit.Character {
         void LateUpdate() {
             if (_move) {
                 for (int i = 0; i < _backgrounds.Count; ++i) {
-                    _dist[i] += _currentSpd * Time.deltaTime;
+                    _dist[i] += _targetSpd * _spdCoef[i];
                     _backMat[i].SetTextureOffset("_MainTex", new Vector2(_dist[i], 0));
                 }
+                _move = false;
             }
         }
     }

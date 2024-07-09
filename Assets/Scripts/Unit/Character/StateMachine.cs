@@ -6,6 +6,7 @@ namespace Unit.Character {
         public void Exit();
         public void Update();
         public void FixedUpdate();
+        public bool CanTransition();
     }
     public class StateMachine {
         protected Dictionary<string, IState> _states = new Dictionary<string, IState>();
@@ -43,6 +44,9 @@ namespace Unit.Character {
         }
         public virtual void FixedUpdate() {
             _current.FixedUpdate();
+        }
+        public virtual bool CanTransition() {
+            return _current.CanTransition();
         }
     }
 }

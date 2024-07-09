@@ -4,16 +4,19 @@ namespace Unit.Character {
     public class PlayerCharacter : BaseCharacter, IDamageable {
         public int Health => _health.Current;
         public override int Speed => _speed.Current;
+        public bool IsDead => _health.Current <= 0;
         public event Action<BaseCharacter> OnDeath;
+        public event Action<IDamageable> OnDamage;
         public InstanceStat<int> _health;
         public InstanceStat<int> _speed;
-        private bool _run;
+
         public void Damage(int dmg) {
             _health.Current -= dmg;
             if (_health.Current <= 0) {
                 _health.Current = 0;
                 OnDeath?.Invoke(this);
             }
+            OnDamage?.Invoke(this);
         }
 
         public override float GetCurrentPosition() {
@@ -25,11 +28,11 @@ namespace Unit.Character {
         }
 
         public override void SetRun(bool isRun) {
-            _run = isRun;
+            IsRun = isRun;
         }
 
         protected override void RecalculateSpeed() {
-            if (_run) {
+            if (IsRun) {
                 _speed.Current = _speed.Origin;
                 foreach (var spd in spdModifier) {
                     _speed.Current += spd;
@@ -41,18 +44,11 @@ namespace Unit.Character {
             _zeroPosition = transform.position;
         }
 
-        private void Update() {
-            if (_run) {
-
-            }
-            else {
-
-            }
-        }
-
-        internal void Initialize(PlayerStat stat) {
+        public void Initialize(PlayerStat stat, IShowable background) {
             _speed.Origin = stat.Speed;
             _health.Origin = stat.Health;
+            // TODO HFSM에 IState 추가해야 한다.
+            OnRun += background.Move;
         }
     }
 }
