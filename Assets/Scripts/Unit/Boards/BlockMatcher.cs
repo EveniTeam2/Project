@@ -40,6 +40,8 @@ namespace Unit.Boards
 
         public bool CheckMatchesForBlock(Tuple<float, float> position, out List<Block> matchedBlocks)
         {
+            Debug.Log($"{position}에 {_tiles[position].Type} 블록이 이동했을 때, 매치 검증 시행");
+            
             matchedBlocks = new List<Block>();
 
             if (CheckDirection(position, Vector2.up, Vector2.down, out var verticalMatches))
@@ -54,8 +56,16 @@ namespace Unit.Boards
 
             if (matchedBlocks.Count > 0)
             {
+                Debug.Log($"{_tiles[position].Type} 블록이 {position}로 이동했을 때");
+                
                 matchedBlocks.Add(_tiles[position]);
-                matchedBlocks = GetAdjacentMatches(matchedBlocks);
+                
+                foreach (var block in matchedBlocks)
+                {
+                    Debug.Log($"{block.transform.position}의 {block.Type} 블록 삭제 예정");
+                }
+                
+                // matchedBlocks = GetAdjacentMatches(matchedBlocks);
                 return true;
             }
 
@@ -94,7 +104,7 @@ namespace Unit.Boards
             return matches;
         }
 
-        private List<Block> GetAdjacentMatches(List<Block> initialMatches)
+        public List<Block> GetAdjacentMatches(List<Block> initialMatches)
         {
             var allMatches = new HashSet<Block>(initialMatches);
             var toCheck = new Queue<Block>(initialMatches);
@@ -102,14 +112,16 @@ namespace Unit.Boards
             while (toCheck.Count > 0)
             {
                 var block = toCheck.Dequeue();
-                var pos = new Tuple<float, float>(block.transform.position.x, block.transform.position.y);
+
+                var blockPos = block.transform.position;
+                var newPos = new Tuple<float, float>(blockPos.x, blockPos.y);
 
                 foreach (var dir in new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right })
                 {
-                    var adjacentPos = new Tuple<float, float>(pos.Item1 + dir.x, pos.Item2 + dir.y);
-                    if (_tiles.ContainsKey(adjacentPos) && _tiles[adjacentPos].Type == block.Type && !allMatches.Contains(_tiles[adjacentPos]))
+                    var adjacentPos = new Tuple<float, float>(newPos.Item1 + dir.x, newPos.Item2 + dir.y);
+                    
+                    if (_tiles.ContainsKey(adjacentPos) && _tiles[adjacentPos].Type == block.Type && allMatches.Add(_tiles[adjacentPos]))
                     {
-                        allMatches.Add(_tiles[adjacentPos]);
                         toCheck.Enqueue(_tiles[adjacentPos]);
                     }
                 }

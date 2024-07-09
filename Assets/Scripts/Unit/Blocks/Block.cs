@@ -36,6 +36,7 @@ namespace Unit.Blocks
         public void OnBeginDrag(PointerEventData eventData)
         {
             _startPosition = transform.position;
+            Debug.Log($"{_startPosition}에서 드래그 시작");
         }
 
         public void OnDrag(PointerEventData eventData) { }
@@ -48,7 +49,8 @@ namespace Unit.Blocks
             var direction = (endPosition - _startPosition).normalized;
             direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? new Vector3(Mathf.Sign(direction.x), 0, 0) : new Vector3(0, Mathf.Sign(direction.y), 0);
 
+            Debug.Log($"{_startPosition}에서 {endPosition}으로 드래그, 드래그 방향 {direction}");
             OnMatchCheck?.Invoke(_startPosition, direction);
         }
     }
-} 
+}

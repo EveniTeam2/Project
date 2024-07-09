@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Manager;
+using ScriptableObjects.Scripts.Blocks;
 using Unit.Blocks;
 using UnityEngine;
 
@@ -47,7 +50,7 @@ namespace Unit.Boards
             var currentBlockIndex = new Tuple<float, float>(startPosition.x, startPosition.y);
             var targetBlockIndex = _blockMatcher.GetTargetIndex(startPosition, direction);
 
-            Debug.Log($"블록 {startPosition} 이 {targetBlockIndex} 위치로 이동했을 때, 매치 검증");
+            Debug.Log($"{startPosition} 블록 {direction} 이동 가능 여부 매치 검증");
 
             if (_blockMatcher.IsValidPosition(targetBlockIndex))
             {
@@ -59,12 +62,12 @@ namespace Unit.Boards
                 _tiles[currentBlockIndex] = targetBlock;
                 _tiles[targetBlockIndex] = currentBlock;
 
-                var targetHasMatches = _blockMatcher.CheckMatchesForBlock(targetBlockIndex, out var targetMatchedBlocks);
-                var currentHasMatches = _blockMatcher.CheckMatchesForBlock(currentBlockIndex, out var currentMatchedBlocks);
+                var currentBlockNewPositionHasMatches = _blockMatcher.CheckMatchesForBlock(targetBlockIndex, out var currentMatchedBlocks);
+                var targetBlockNewPositionHasMatches = _blockMatcher.CheckMatchesForBlock(currentBlockIndex, out var targetMatchedBlocks);
 
-                if (targetHasMatches || currentHasMatches)
+                if (currentBlockNewPositionHasMatches || targetBlockNewPositionHasMatches)
                 {
-                    Debug.Log("매치되는 블록 확인, 타일 이동 코루틴 실행");
+                    Debug.Log("매치 가능 확인, 블록 이동 코루틴 실행");
 
                     StartCoroutine(_blockMover.MoveBlock(currentBlock, targetBlock, targetBlockIndex, currentBlockIndex, () =>
                     {
@@ -73,7 +76,7 @@ namespace Unit.Boards
                 }
                 else
                 {
-                    Debug.Log("매치되는 블록 없음");
+                    Debug.Log("매치 불가능, 블록 원위치");
 
                     _tiles[currentBlockIndex] = currentBlock;
                     _tiles[targetBlockIndex] = targetBlock;
@@ -89,12 +92,12 @@ namespace Unit.Boards
         {
             if (targetMatchedBlocks.Count > 0)
             {
-                RemoveMatchedBlocks(targetMatchedBlocks);
+                RemoveMatchedBlocks(_blockMatcher.GetAdjacentMatches(targetMatchedBlocks));
             }
-
+            
             if (currentMatchedBlocks.Count > 0)
             {
-                RemoveMatchedBlocks(currentMatchedBlocks);
+                RemoveMatchedBlocks(_blockMatcher.GetAdjacentMatches(currentMatchedBlocks));
             }
         }
 
