@@ -2692,8 +2692,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDuration: 0.2
+  logicProgressTime: 0.2
   blockPrefab: {fileID: 4914153491292411587, guid: ac1d9e4df06b344c182f2f7f526385a7, type: 3}
   poolSize: 40
+  _tiles:
+    values: []
 --- !u!1 &1974905011
 GameObject:
   m_ObjectHideFlags: 0

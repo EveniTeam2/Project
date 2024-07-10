@@ -40,8 +40,6 @@ namespace Unit.Boards
 
         public bool CheckMatchesForBlock(Tuple<float, float> position, out List<Block> matchedBlocks)
         {
-            Debug.Log($"{position}에 {_tiles[position].Type} 블록이 이동했을 때, 매치 검증 시행");
-            
             matchedBlocks = new List<Block>();
 
             if (CheckDirection(position, Vector2.up, Vector2.down, out var verticalMatches))
@@ -56,15 +54,7 @@ namespace Unit.Boards
 
             if (matchedBlocks.Count > 0)
             {
-                Debug.Log($"{_tiles[position].Type} 블록이 {position}로 이동했을 때");
-                
                 matchedBlocks.Add(_tiles[position]);
-                
-                foreach (var block in matchedBlocks)
-                {
-                    Debug.Log($"{block.transform.position}의 {block.Type} 블록 삭제 예정");
-                }
-                
                 return true;
             }
 
@@ -127,6 +117,22 @@ namespace Unit.Boards
             }
 
             return new List<Block>(allMatches);
+        }
+
+        public List<Block> FindAllMatches(Dictionary<Tuple<float, float>, Block> tiles)
+        {
+            var matchedBlocks = new List<Block>();
+
+            foreach (var tile in tiles)
+            {
+                var position = tile.Key;
+                if (CheckMatchesForBlock(position, out var matches))
+                {
+                    matchedBlocks.AddRange(matches);
+                }
+            }
+
+            return matchedBlocks;
         }
     }
 }
