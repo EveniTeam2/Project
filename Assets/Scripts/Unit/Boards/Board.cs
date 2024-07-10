@@ -6,7 +6,6 @@ using Core.Utils;
 using Manager;
 using Unit.Blocks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Unit.Boards
 {
@@ -15,15 +14,21 @@ namespace Unit.Boards
     /// </summary>
     public class Board : MonoBehaviour
     {
-        [Header("블록 스왑 완료까지 걸리는 시간 (단위 : 초)")]
-        [SerializeField] [Range(0, 1)] private float moveDuration;
-        
-        [Header("블록 낙하 속도 (단위 : 초 / 1칸)")]
-        [SerializeField] [Range(0, 1)] private float dropDurationPerUnit;
-        
-        [Header("각각의 로직 간의 텀 (단위 : 초)")]
-        [SerializeField] [Range(0, 1)] private float logicProgressTime;
+        [Header("각각의 로직 사이의 대기 시간 (단위 : Second)")]
+        [SerializeField] [Range(0, 0.5f)] private float logicProgressTime;
         private WaitForSeconds _progressTime;
+        
+        [Header("블록 스왑 완료까지 걸리는 시간 (단위 : Second)")]
+        [SerializeField] [Range(0, 0.5f)] private float moveDuration;
+        
+        [Header("블록 낙하 속도 (단위 : Unit / Second)")]
+        [SerializeField] [Range(0, 0.2f)] private float dropDurationPerUnit;
+        
+        [Header("블록 낙하 이후 바운스 높이 (단위 : Unit)")]
+        [SerializeField] [Range(0, 0.5f)] private float bounceHeight;
+        
+        [Header("블록 낙하 이후 바운스 대기 시간 (단위 : Second)")]
+        [SerializeField] [Range(0, 0.5f)] private float bounceDuration;
 
         [Header("블록 풀링 관련 설정")]
         [SerializeField] private Block blockPrefab;
@@ -35,6 +40,8 @@ namespace Unit.Boards
         private float _spawnPositionHeight;
 
         private const float BlockOffset = 0.5f;
+
+        private bool isLogicUpdating;
 
         private BlockGenerator _blockGenerator;
         private BlockMatcher _blockMatcher;
@@ -64,6 +71,7 @@ namespace Unit.Boards
         /// </summary>
         private void InitializeValues()
         {
+            isLogicUpdating = false;
             _progressTime = new WaitForSeconds(logicProgressTime);
         }
 
@@ -90,7 +98,7 @@ namespace Unit.Boards
             _blockPool = new BlockPool(blockPrefab, transform, poolSize, true);
             _blockGenerator = new BlockGenerator(_spawnPositionWidth, _spawnPositionHeight, GameManager.Instance.blockInfos, CheckForMatch, _blockPool, out tiles);
             _blockMatcher = new BlockMatcher(tiles);
-            _blockMover = new BlockMover(moveDuration, dropDurationPerUnit, _progressTime); // 수정된 부분
+            _blockMover = new BlockMover(moveDuration, dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, this);
         }
 
         /// <summary>
@@ -100,6 +108,9 @@ namespace Unit.Boards
         /// <param name="direction">드래그 방향</param>
         private void CheckForMatch(Vector3 startPosition, Vector3 direction)
         {
+            if (isLogicUpdating) return;
+            isLogicUpdating = true;
+            
             var currentBlockIndex = new Tuple<float, float>(startPosition.x, startPosition.y);
             var targetBlockIndex = _blockMatcher.GetTargetIndex(startPosition, direction);
 
@@ -155,6 +166,8 @@ namespace Unit.Boards
                 yield return FillNewBlocks();
                 yield return _progressTime;
             }
+
+            isLogicUpdating = false;
         }
 
         /// <summary>
