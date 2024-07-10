@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9b8e797a984a88a6a0171b4a4c9e70, type: 3}
   m_Name: SpeedBuffTile
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   color: {r: 1, g: 0.7936026, b: 0.61960787, a: 1}
   text: "\uC774\uC18D \uBC84\uD504"
