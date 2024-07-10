@@ -18,5 +18,7 @@ namespace Unit.Character {
             _stats.Origin.Health = health;
             _stats.Current.Health = health;
         }
+        public override Animator Animator => animator;
+        [SerializeField] Animator animator;
     }
 }

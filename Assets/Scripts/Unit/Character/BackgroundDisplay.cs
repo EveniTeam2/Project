@@ -10,7 +10,7 @@ namespace Unit.Character {
         private float[] _dist;
 
         public void Move(IRunnable target) {
-            _move = true;
+            _move = target.IsRun;
             _targetSpd = target.Speed;
         }
 
@@ -24,10 +24,10 @@ namespace Unit.Character {
                 _backMat.Add(background.material);
             }
         }
-        void LateUpdate() {
+        private void LateUpdate() {
             if (_move) {
                 for (int i = 0; i < _backgrounds.Count; ++i) {
-                    _dist[i] += _targetSpd * _spdCoef[i];
+                    _dist[i] += _targetSpd * _spdCoef[i] * Time.deltaTime;
                     _backMat[i].SetTextureOffset("_MainTex", new Vector2(_dist[i], 0));
                 }
                 _move = false;

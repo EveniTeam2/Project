@@ -1,21 +1,29 @@
+using System;
 using System.Collections.Generic;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Unit.Character {
     public interface IState {
-        public void Enter();
-        public void Exit();
-        public void Update();
-        public void FixedUpdate();
-        public bool CanTransition();
+        public void Enter(BaseCharacter target);
+        public void Exit(BaseCharacter target);
+        public void Update(BaseCharacter target);
+        public void FixedUpdate(BaseCharacter target);
+        public bool CanTransitionToThis(BaseCharacter target);
     }
     public class StateMachine {
         protected Dictionary<string, IState> _states = new Dictionary<string, IState>();
         protected IState _current;
-        public StateMachine(string name, IState defaultState) {
-            TryAddState(name, defaultState);
-            _current = defaultState;
+        public BaseCharacter Target { get; protected set; }
+        public StateMachine(BaseCharacter character, string name = null, IState defaultState = null) {
+            Target = character;
+            if (name != null) {
+                TryAddState(name, defaultState);
+                _current = defaultState;
+            }
         }
         public virtual bool TryAddState(string name, IState state) {
+            if (_current == null) _current = state;
+
             if (_states.ContainsKey(name)) {
                 return false;
             }
@@ -30,23 +38,32 @@ namespace Unit.Character {
                     return true;
                 }
                 else {
-                    _current.Exit();
+                    _current.Exit(Target);
                     _current = state;
-                    _current.Enter();
+                    _current.Enter(Target);
                 }
                 return true;
             }
             else
                 return false;
         }
-        public virtual void Update() {
-            _current.Update();
+        public virtual void Update(BaseCharacter target) {
+            _current.Update(Target);
         }
-        public virtual void FixedUpdate() {
-            _current.FixedUpdate();
+        public virtual void FixedUpdate(BaseCharacter target) {
+            _current.FixedUpdate(Target);
         }
         public virtual bool CanTransition() {
-            return _current.CanTransition();
+            return _current.CanTransitionToThis(Target);
+        }
+
+        public virtual void Clear() {
+            _current = null;
+            _states.Clear();
+        }
+
+        public void SetBoolAnimator(int parameterHash, bool onoff) {
+            Target.Animator.SetBool(parameterHash, onoff);
         }
     }
 }

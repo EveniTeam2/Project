@@ -33,7 +33,6 @@ namespace Unit.Character {
     public abstract class BaseCharacter : MonoBehaviour, IDamageable {
         public abstract int Health { get; protected set; }
         public StateMachine HFSM { get; protected set; }
-        public List<string> AnimationParameter;
 
         public bool IsDead => Health <= 0;
         
@@ -49,5 +48,6 @@ namespace Unit.Character {
             OnDamage?.Invoke(this);
         }
         public abstract void SetHealth(int health);
+        public abstract Animator Animator { get; }
     }
 }

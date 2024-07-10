@@ -38,6 +38,9 @@ namespace Unit.Character {
         public bool IsRun { get; protected set; }
         public override int Health { get => _stats.Current.Health; protected set => _stats.Current.Health = value; }
 
+        public override Animator Animator => animator;
+        [SerializeField] Animator animator;
+
         protected static int spdUnit = 1000;
         public int ModifySpeed(int spd, float duration) {
             if (duration > 0) {
