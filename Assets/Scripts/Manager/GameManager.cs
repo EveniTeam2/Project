@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Core.Utils;
 using ScriptableObjects.Scripts.Blocks;
@@ -14,9 +13,6 @@ namespace Manager
 
         [Header("타일 정보")]
         public List<NewBlock> blockInfos;
-        
-        [Header("타일 프리팹")]
-        public GameObject tilePrefab;
 
         protected override GameManager Initialize()
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core.Utils;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.Blocks;
 using UnityEngine;
@@ -9,75 +10,70 @@ namespace Unit.Boards
 {
     public class BlockGenerator
     {
-        private readonly int _width;
-        private readonly int _height;
-        
+        private readonly float _spawnPositionWidth;
+        private readonly float _spawnPositionHeight;
+
         private readonly List<Tuple<float, float>> _blockPositions;
         private readonly List<NewBlock> _blockInfos;
-        
-        private readonly Action<Vector3, Vector3> _matchCheckHandler;
-        
-        private const float BlockOffset = 0.5f;
 
-        public BlockGenerator(int width, int height, List<NewBlock> blockInfos,
-            Action<Vector3, Vector3> matchCheckHandler, out Dictionary<Tuple<float, float>, GameObject> tiles,
-            GameObject blockPrefab)
+        private readonly Action<Vector3, Vector3> _matchCheckHandler;
+        private readonly BlockPool _blockPool;
+
+        public BlockGenerator(float spawnPositionWidth, float spawnPositionHeight, List<NewBlock> blockInfos,
+            Action<Vector3, Vector3> matchCheckHandler, BlockPool blockPool,
+            out SerializableDictionary<Tuple<float, float>, Block> tiles)
         {
-            _width = width;
-            _height = height;
+            _spawnPositionWidth = spawnPositionWidth;
+            _spawnPositionHeight = spawnPositionHeight;
             _blockPositions = new List<Tuple<float, float>>();
             _blockInfos = blockInfos;
             _matchCheckHandler = matchCheckHandler;
+            _blockPool = blockPool;
 
             CalculateBlockPositions();
             
-            tiles = GenerateAllBlocks(blockPrefab, true);
+            tiles = GenerateAllBlocks();
         }
 
         private void CalculateBlockPositions()
         {
-            var adjustWidth = _width % 2 == 0 ? BlockOffset : 0;
-            var adjustHeight = _height % 2 == 0 ? BlockOffset : 0;
-
-            var halfWidth = _width / 2f - adjustWidth;
-            var halfHeight = _height / 2f - adjustHeight;
-
-            for (var x = -halfHeight; x <= halfHeight; x++)
+            for (var x = -_spawnPositionHeight; x <= _spawnPositionHeight; x++)
             {
-                for (var y = -halfWidth; y <= halfWidth; y++)
+                for (var y = -_spawnPositionWidth; y <= _spawnPositionWidth; y++)
                 {
                     _blockPositions.Add(new Tuple<float, float>(x, y));
                 }
             }
         }
 
-        public Dictionary<Tuple<float, float>, GameObject> GenerateAllBlocks(GameObject blockPrefab, bool mergeLock)
+        private SerializableDictionary<Tuple<float, float>, Block> GenerateAllBlocks()
         {
-            var blockDic = new Dictionary<Tuple<float, float>, GameObject>();
+            var blockDic = new SerializableDictionary<Tuple<float, float>, Block>();
 
             foreach (var blockPosition in _blockPositions)
             {
                 var selectedBlockInfo = GetRandomValidBlock(blockDic, blockPosition);
 
-                InstantiateAndAddBlock(blockDic, blockPrefab, blockPosition, selectedBlockInfo);
+                InstantiateAndAddBlock(blockDic, blockPosition, selectedBlockInfo);
             }
 
             return blockDic;
         }
 
-        private void InstantiateAndAddBlock(Dictionary<Tuple<float, float>, GameObject> blockDic, GameObject blockPrefab, Tuple<float, float> blockPosition, NewBlock blockInfo)
+        private void InstantiateAndAddBlock(SerializableDictionary<Tuple<float, float>, Block> blockDic,
+            Tuple<float, float> blockPosition, NewBlock blockInfo)
         {
             Vector3 position = new(blockPosition.Item1, blockPosition.Item2, 0);
-            var block = UnityEngine.Object.Instantiate(blockPrefab, position, Quaternion.identity);
-
-            block.GetComponent<Block>().Initialize(blockInfo, _matchCheckHandler);
+            var block = _blockPool.Get();
+            block.transform.position = position;
+            block.Initialize(blockInfo, _matchCheckHandler);
             blockDic.Add(blockPosition, block);
         }
 
-        private NewBlock GetRandomValidBlock(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position)
+        public NewBlock GetRandomValidBlock(SerializableDictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> position)
         {
             List<NewBlock> validBlocks = new();
-            
+
             foreach (var blockInfo in _blockInfos)
             {
                 if (IsValidPosition(blockDic, position, blockInfo))
@@ -94,7 +90,7 @@ namespace Unit.Boards
             return validBlocks[Random.Range(0, validBlocks.Count)];
         }
 
-        private bool IsValidPosition(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo)
+        private bool IsValidPosition(SerializableDictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> position, NewBlock blockInfo)
         {
             var directions = new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
@@ -109,12 +105,12 @@ namespace Unit.Boards
             return true;
         }
 
-        private int CheckDirection(Dictionary<Tuple<float, float>, GameObject> blockDic, Tuple<float, float> position, NewBlock blockInfo, Vector2 direction)
+        private int CheckDirection(SerializableDictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> position, NewBlock blockInfo, Vector2 direction)
         {
             var matchCount = 0;
             Tuple<float, float> currentPos = new(position.Item1 + direction.x, position.Item2 + direction.y);
 
-            while (blockDic.ContainsKey(currentPos) && blockDic[currentPos].GetComponent<Block>().Type == blockInfo.type)
+            while (blockDic.ContainsKey(currentPos) && blockDic[currentPos].Type == blockInfo.type)
             {
                 matchCount++;
                 currentPos = new Tuple<float, float>(currentPos.Item1 + direction.x, currentPos.Item2 + direction.y);

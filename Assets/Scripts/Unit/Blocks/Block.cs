@@ -11,8 +11,8 @@ namespace Unit.Blocks
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
 
-        [SerializeField] private SpriteRenderer sprite;
-        [SerializeField] private TextMeshPro text;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private TextMeshPro textMeshPro;
 
         public BlockType Type { get; private set; }
 
@@ -26,20 +26,16 @@ namespace Unit.Blocks
 
         public void Initialize(NewBlock info, Action<Vector3, Vector3> matchCheckHandler)
         {
-            text.text = info.text;
-            sprite.color = info.color;
+            textMeshPro.text = info.text;
+            spriteRenderer.color = info.color;
             Type = info.type;
-
             OnMatchCheck = matchCheckHandler;
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnBeginDrag(PointerEventData eventData)
         {
             _startPosition = transform.position;
-            Debug.Log($"블록 클릭 {_startPosition}");
         }
-
-        public void OnBeginDrag(PointerEventData eventData) { }
 
         public void OnDrag(PointerEventData eventData) { }
 
@@ -52,8 +48,6 @@ namespace Unit.Blocks
             direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? new Vector3(Mathf.Sign(direction.x), 0, 0) : new Vector3(0, Mathf.Sign(direction.y), 0);
 
             OnMatchCheck?.Invoke(_startPosition, direction);
-
-            Debug.Log($"블록 {_startPosition} 클릭 이후 {direction} 방향으로 드래그");
         }
     }
 }

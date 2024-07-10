@@ -7,12 +7,30 @@ namespace Unit.Boards
 {
     public class BlockMatcher
     {
-        private readonly Dictionary<Tuple<float, float>, GameObject> _tiles;
-        private readonly Tuple<float, float> _adjustValue = new(1.0f, 1.0f);
+        private readonly Dictionary<Tuple<float, float>, Block> _tiles;
 
-        public BlockMatcher(Dictionary<Tuple<float, float>, GameObject> tiles)
+        public BlockMatcher(Dictionary<Tuple<float, float>, Block> tiles)
         {
             _tiles = tiles;
+        }
+
+        public Tuple<float, float> GetTargetIndex(Vector3 startPosition, Vector3 direction)
+        {
+            var targetX = direction.x switch
+            {
+                > 0 => startPosition.x + 1,
+                < 0 => startPosition.x - 1,
+                _ => startPosition.x
+            };
+
+            var targetY = direction.y switch
+            {
+                > 0 => startPosition.y + 1,
+                < 0 => startPosition.y - 1,
+                _ => startPosition.y
+            };
+
+            return new Tuple<float, float>(targetX, targetY);
         }
 
         public bool IsValidPosition(Tuple<float, float> position)
@@ -20,38 +38,41 @@ namespace Unit.Boards
             return _tiles.ContainsKey(position);
         }
 
-        public Tuple<float, float> GetTargetIndex(Vector3 startPosition, Vector3 direction)
+        public bool CheckMatchesForBlock(Tuple<float, float> position, out List<Block> matchedBlocks)
         {
-            var targetX = direction.x switch
-            {
-                > 0 => startPosition.x + _adjustValue.Item1,
-                < 0 => startPosition.x - _adjustValue.Item1,
-                _ => startPosition.x
-            };
+            matchedBlocks = new List<Block>();
 
-            var targetY = direction.y switch
+            if (CheckDirection(position, Vector2.up, Vector2.down, out var verticalMatches))
             {
-                > 0 => startPosition.y + _adjustValue.Item2,
-                < 0 => startPosition.y - _adjustValue.Item2,
-                _ => startPosition.y
-            };
+                matchedBlocks.AddRange(verticalMatches);
+            }
 
-            return new Tuple<float, float>(targetX, targetY);
+            if (CheckDirection(position, Vector2.left, Vector2.right, out var horizontalMatches))
+            {
+                matchedBlocks.AddRange(horizontalMatches);
+            }
+
+            if (matchedBlocks.Count > 0)
+            {
+                matchedBlocks.Add(_tiles[position]);
+                return true;
+            }
+
+            return false;
         }
 
-        public bool CheckDirection(Tuple<float, float> start, Vector2 dir1, Vector2 dir2)
+        private bool CheckDirection(Tuple<float, float> start, Vector2 dir1, Vector2 dir2, out List<Block> matches)
         {
-            var matchCount = 1; // 자신 포함
+            matches = new List<Block>();
+            matches.AddRange(CountMatchesInDirection(start, dir1));
+            matches.AddRange(CountMatchesInDirection(start, dir2));
 
-            matchCount += CountMatchesInDirection(start, dir1);
-            matchCount += CountMatchesInDirection(start, dir2);
-
-            return matchCount >= 3;
+            return matches.Count >= 2; // 자신 포함 3개 이상 매칭
         }
 
-        private int CountMatchesInDirection(Tuple<float, float> start, Vector2 direction)
+        private List<Block> CountMatchesInDirection(Tuple<float, float> start, Vector2 direction)
         {
-            var matchCount = 0;
+            var matches = new List<Block>();
             var x = start.Item1;
             var y = start.Item2;
 
@@ -60,17 +81,58 @@ namespace Unit.Boards
                 x += (int)direction.x;
                 y += (int)direction.y;
 
-                if (!_tiles.ContainsKey(new Tuple<float, float>(x, y)) ||
-                    _tiles[new Tuple<float, float>(x, y)].GetComponent<Block>().Type !=
-                    _tiles[new Tuple<float, float>(start.Item1, start.Item2)].GetComponent<Block>().Type)
+                var pos = new Tuple<float, float>(x, y);
+                if (!_tiles.ContainsKey(pos) || _tiles[pos].Type != _tiles[start].Type)
                 {
                     break;
                 }
 
-                matchCount++;
+                matches.Add(_tiles[pos]);
             }
 
-            return matchCount;
+            return matches;
+        }
+
+        public List<Block> GetAdjacentMatches(List<Block> initialMatches)
+        {
+            var allMatches = new HashSet<Block>(initialMatches);
+            var toCheck = new Queue<Block>(initialMatches);
+
+            while (toCheck.Count > 0)
+            {
+                var block = toCheck.Dequeue();
+
+                var blockPos = block.transform.position;
+                var newPos = new Tuple<float, float>(blockPos.x, blockPos.y);
+
+                foreach (var dir in new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right })
+                {
+                    var adjacentPos = new Tuple<float, float>(newPos.Item1 + dir.x, newPos.Item2 + dir.y);
+                    
+                    if (_tiles.ContainsKey(adjacentPos) && _tiles[adjacentPos].Type == block.Type && allMatches.Add(_tiles[adjacentPos]))
+                    {
+                        toCheck.Enqueue(_tiles[adjacentPos]);
+                    }
+                }
+            }
+
+            return new List<Block>(allMatches);
+        }
+
+        public List<Block> FindAllMatches(Dictionary<Tuple<float, float>, Block> tiles)
+        {
+            var matchedBlocks = new List<Block>();
+
+            foreach (var tile in tiles)
+            {
+                var position = tile.Key;
+                if (CheckMatchesForBlock(position, out var matches))
+                {
+                    matchedBlocks.AddRange(matches);
+                }
+            }
+
+            return matchedBlocks;
         }
     }
 }
