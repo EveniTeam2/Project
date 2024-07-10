@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 namespace Unit.Blocks
 {
+    /// <summary>
+    /// 게임 내 블록을 나타내며, 드래그하여 다른 블록과 위치를 교환할 수 있습니다.
+    /// </summary>
     public class Block : MonoBehaviour, IDraggable
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
@@ -24,6 +27,11 @@ namespace Unit.Blocks
             _mainCamera = Camera.main;
         }
 
+        /// <summary>
+        /// 블록을 지정된 정보로 초기화합니다.
+        /// </summary>
+        /// <param name="info">초기화할 블록 정보입니다.</param>
+        /// <param name="matchCheckHandler">매치 검사를 처리할 핸들러입니다.</param>
         public void Initialize(NewBlock info, Action<Vector3, Vector3> matchCheckHandler)
         {
             textMeshPro.text = info.text;
