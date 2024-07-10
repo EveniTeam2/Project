@@ -1,54 +1,70 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Unit.Character {
-    public class PlayerCharacter : BaseCharacter, IDamageable {
-        public int Health => _health.Current;
-        public override int Speed => _speed.Current;
-        public bool IsDead => _health.Current <= 0;
-        public event Action<BaseCharacter> OnDeath;
-        public event Action<IDamageable> OnDamage;
-        public InstanceStat<int> _health;
-        public InstanceStat<int> _speed;
+    public class PlayerCharacter : BaseCharacter, IRunnable {
+        InstanceStat<PlayerStat> _stats;
+        public int Speed => _stats.Current.Speed;
+        public int Attack => _stats.Current.Attack;
+        [SerializeField] CharacterStateData characterStateData;
 
-        public void Damage(int dmg) {
-            _health.Current -= dmg;
-            if (_health.Current <= 0) {
-                _health.Current = 0;
-                OnDeath?.Invoke(this);
-            }
-            OnDamage?.Invoke(this);
-        }
-
-        public override float GetCurrentPosition() {
+        public virtual float GetCurrentPosition() {
             return 0;
         }
 
-        public void SetHealth(int health) {
-            _health = new InstanceStat<int>(health);
-        }
-
-        public override void SetRun(bool isRun) {
+        public virtual void SetRun(bool isRun) {
             IsRun = isRun;
         }
 
-        protected override void RecalculateSpeed() {
+        protected virtual void RecalculateSpeed() {
             if (IsRun) {
-                _speed.Current = _speed.Origin;
+                _stats.Current.Speed = _stats.Origin.Speed;
                 foreach (var spd in spdModifier) {
-                    _speed.Current += spd;
+                    _stats.Current.Speed += spd;
                 }
             }
         }
 
-        private void Awake() {
-            _zeroPosition = transform.position;
+        public void Initialize(PlayerStat stat, IShowable background) {
+            _stats = new InstanceStat<PlayerStat>(stat);
+            OnRun += background.Move;
+            StateBuilder.BuildState(HFSM, characterStateData);
         }
 
-        public void Initialize(PlayerStat stat, IShowable background) {
-            _speed.Origin = stat.Speed;
-            _health.Origin = stat.Health;
-            // TODO HFSM에 IState 추가해야 한다.
-            OnRun += background.Move;
+        public event Action<IRunnable> OnRun;
+        public LinkedList<int> spdModifier = new LinkedList<int>();
+        public bool IsRun { get; protected set; }
+        public override int Health { get => _stats.Current.Health; protected set => _stats.Current.Health = value; }
+
+        protected static int spdUnit = 1000;
+        public int ModifySpeed(int spd, float duration) {
+            if (duration > 0) {
+                StartCoroutine(ModifierSpeed(spd, duration));
+            }
+            else {
+                spdModifier.AddLast(spd);
+                RecalculateSpeed();
+            }
+            return Speed;
+        }
+        protected IEnumerator ModifierSpeed(int spd, float duration) {
+            spdModifier.AddLast(spd);
+            RecalculateSpeed();
+            yield return new WaitForSeconds(duration);
+            spdModifier.Remove(spd);
+            RecalculateSpeed();
+        }
+        protected virtual void Update() {
+            if (IsRun) {
+                OnRun?.Invoke(this);
+            }
+        }
+
+        public override void SetHealth(int health) {
+            _stats.Origin.Health = health;
+            _stats.Current.Health = health;
         }
     }
 }

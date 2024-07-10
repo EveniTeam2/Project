@@ -30,41 +30,24 @@ namespace Unit.Character {
         }
     }
 
-    public abstract class BaseCharacter : MonoBehaviour, IRunnable {
-        public LinkedList<int> spdModifier = new LinkedList<int>();
-        public abstract int Speed { get; }
-        protected static Vector3 _zeroPosition;
-        protected static int spdUnit = 1000;
-        public bool IsRun { get; protected set; }
+    public abstract class BaseCharacter : MonoBehaviour, IDamageable {
+        public abstract int Health { get; protected set; }
         public StateMachine HFSM { get; protected set; }
         public List<string> AnimationParameter;
-        public event Action<IRunnable> OnRun;
 
-        public abstract float GetCurrentPosition();
-        public abstract void SetRun(bool isRun);
-        protected abstract void RecalculateSpeed();
+        public bool IsDead => Health <= 0;
+        
+        public event Action<BaseCharacter> OnDeath;
+        public event Action<IDamageable> OnDamage;
 
-        public int ModifySpeed(int spd, float duration) {
-            if (duration > 0) {
-                StartCoroutine(ModifierSpeed(spd, duration));
+        public virtual void Damage(int dmg) {
+            Health -= dmg;
+            if (Health <= 0) {
+                Health = 0;
+                OnDeath?.Invoke(this);
             }
-            else {
-                spdModifier.AddLast(spd);
-                RecalculateSpeed();
-            }
-            return Speed;
+            OnDamage?.Invoke(this);
         }
-        protected IEnumerator ModifierSpeed(int spd, float duration) {
-            spdModifier.AddLast(spd);
-            RecalculateSpeed();
-            yield return new WaitForSeconds(duration);
-            spdModifier.Remove(spd);
-            RecalculateSpeed();
-        }
-        protected virtual void Update() {
-            if (IsRun) {
-                OnRun?.Invoke(this);
-            }
-        }
+        public abstract void SetHealth(int health);
     }
 }
