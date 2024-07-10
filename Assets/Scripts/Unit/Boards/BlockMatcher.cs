@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Unit.Boards
 {
+    /// <summary>
+    /// 블록의 매칭을 검사하는 클래스입니다.
+    /// </summary>
     public class BlockMatcher
     {
         private readonly Dictionary<Tuple<float, float>, Block> _tiles;
@@ -14,6 +17,12 @@ namespace Unit.Boards
             _tiles = tiles;
         }
 
+        /// <summary>
+        /// 블록이 이동할 목표 위치를 계산합니다.
+        /// </summary>
+        /// <param name="startPosition">블록의 시작 위치</param>
+        /// <param name="direction">블록이 이동할 방향</param>
+        /// <returns>블록이 이동할 목표 위치</returns>
         public Tuple<float, float> GetTargetIndex(Vector3 startPosition, Vector3 direction)
         {
             var targetX = direction.x switch
@@ -33,25 +42,39 @@ namespace Unit.Boards
             return new Tuple<float, float>(targetX, targetY);
         }
 
+        /// <summary>
+        /// 주어진 위치가 유효한 위치인지 검사합니다.
+        /// </summary>
+        /// <param name="position">검사할 위치</param>
+        /// <returns>유효한 위치 여부</returns>
         public bool IsValidPosition(Tuple<float, float> position)
         {
             return _tiles.ContainsKey(position);
         }
 
+        /// <summary>
+        /// 블록이 주어진 위치로 이동했을 때 매칭을 검사합니다.
+        /// </summary>
+        /// <param name="position">블록의 위치</param>
+        /// <param name="matchedBlocks">매칭된 블록 목록</param>
+        /// <returns>매칭이 있는지 여부</returns>
         public bool CheckMatchesForBlock(Tuple<float, float> position, out List<Block> matchedBlocks)
         {
             matchedBlocks = new List<Block>();
 
+            // 세로 방향으로 매칭 확인
             if (CheckDirection(position, Vector2.up, Vector2.down, out var verticalMatches))
             {
                 matchedBlocks.AddRange(verticalMatches);
             }
 
+            // 가로 방향으로 매칭 확인
             if (CheckDirection(position, Vector2.left, Vector2.right, out var horizontalMatches))
             {
                 matchedBlocks.AddRange(horizontalMatches);
             }
 
+            // 매칭된 블록이 있을 경우
             if (matchedBlocks.Count > 0)
             {
                 matchedBlocks.Add(_tiles[position]);
@@ -61,15 +84,30 @@ namespace Unit.Boards
             return false;
         }
 
+        /// <summary>
+        /// 주어진 방향으로 매칭을 검사합니다.
+        /// </summary>
+        /// <param name="start">시작 위치</param>
+        /// <param name="dir1">첫 번째 방향</param>
+        /// <param name="dir2">두 번째 방향</param>
+        /// <param name="matches">매칭된 블록 목록</param>
+        /// <returns>매칭이 있는지 여부</returns>
         private bool CheckDirection(Tuple<float, float> start, Vector2 dir1, Vector2 dir2, out List<Block> matches)
         {
             matches = new List<Block>();
             matches.AddRange(CountMatchesInDirection(start, dir1));
             matches.AddRange(CountMatchesInDirection(start, dir2));
 
-            return matches.Count >= 2; // 자신 포함 3개 이상 매칭
+            // 자신 포함 3개 이상 매칭될 경우
+            return matches.Count >= 2;
         }
 
+        /// <summary>
+        /// 주어진 방향으로 몇 개의 블록이 매칭되는지 셉니다.
+        /// </summary>
+        /// <param name="start">시작 위치</param>
+        /// <param name="direction">매칭을 확인할 방향</param>
+        /// <returns>매칭된 블록 목록</returns>
         private List<Block> CountMatchesInDirection(Tuple<float, float> start, Vector2 direction)
         {
             var matches = new List<Block>();
@@ -93,6 +131,11 @@ namespace Unit.Boards
             return matches;
         }
 
+        /// <summary>
+        /// 초기 매칭된 블록들의 인접 블록도 매칭된 블록으로 추가합니다.
+        /// </summary>
+        /// <param name="initialMatches">초기 매칭된 블록 목록</param>
+        /// <returns>인접한 매칭된 블록 목록</returns>
         public List<Block> GetAdjacentMatches(List<Block> initialMatches)
         {
             var allMatches = new HashSet<Block>(initialMatches);
@@ -119,6 +162,11 @@ namespace Unit.Boards
             return new List<Block>(allMatches);
         }
 
+        /// <summary>
+        /// 모든 블록에 대해 매칭을 검사합니다.
+        /// </summary>
+        /// <param name="tiles">검사할 블록 딕셔너리</param>
+        /// <returns>매칭된 블록 목록</returns>
         public List<Block> FindAllMatches(Dictionary<Tuple<float, float>, Block> tiles)
         {
             var matchedBlocks = new List<Block>();
