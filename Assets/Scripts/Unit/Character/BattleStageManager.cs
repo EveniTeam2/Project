@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-// TODO 이름 IStageable로 바꿔야됨.
-public interface IRaceable {
-    event Action<ICommand<IRace>> OnSendCommand;
+public interface IStageable {
+    event Action<ICommand<IBattleStageTarget>> OnSendCommand;
 }
 
 public interface ICommand<T> {
@@ -17,8 +16,7 @@ public interface ICommandReceiver<T> {
     void UpdateCommand(T target);
 }
 
-// TODO 이름 IStage로 바꿔야됨.
-public interface IRace {
+public interface IBattleStageTarget {
     Unit.Character.PlayerCharacter Player { get; }
     List<Unit.Character.MonsterCharacter> Monsters { get; }
 }
@@ -52,14 +50,14 @@ namespace Unit.Character {
         public Vector3 MonsterSpawnOffset { get; }
     }
 
-    public class BattleStageManager : MonoBehaviour, IRace, ICommandReceiver<IRace> {
+    public class BattleStageManager : MonoBehaviour, IBattleStageTarget, ICommandReceiver<IBattleStageTarget> {
         PlayerCharacter player;
         List<MonsterCharacter> monsters;
         BackgroundDisplay backgroundDisplay;
         public PlayerCharacter Player => player;
         public List<MonsterCharacter> Monsters => monsters;
-        Queue<ICommand<IRace>> commands = new Queue<ICommand<IRace>>();
-        public void AttachBoard(IRaceable data) {
+        Queue<ICommand<IBattleStageTarget>> commands = new Queue<ICommand<IBattleStageTarget>>();
+        public void AttachBoard(IStageable data) {
             data.OnSendCommand += Received;
         }
 
@@ -82,20 +80,20 @@ namespace Unit.Character {
             }
 
             if (commands == null)
-                commands = new Queue<ICommand<IRace>>();
+                commands = new Queue<ICommand<IBattleStageTarget>>();
             else
                 commands.Clear();
         }
 
         private void Update() {
-            (this as ICommandReceiver<IRace>).UpdateCommand(this);
+            (this as ICommandReceiver<IBattleStageTarget>).UpdateCommand(this);
         }
 
-        public void Received(ICommand<IRace> command) {
+        public void Received(ICommand<IBattleStageTarget> command) {
             commands.Enqueue(command);
         }
 
-        void ICommandReceiver<IRace>.UpdateCommand(IRace target) {
+        void ICommandReceiver<IBattleStageTarget>.UpdateCommand(IBattleStageTarget target) {
             if (commands.Count > 0) {
                 if (commands.Peek().IsExecutable(target))
                     commands.Dequeue().Execute(target);
