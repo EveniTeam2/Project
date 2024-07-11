@@ -26,15 +26,15 @@ namespace Unit.Character {
         }
         public void Enter(BaseCharacter target) {
             _onEnter?.Invoke(this);
-            if (_parameterHash != 0) {
-                _sm.SetBoolAnimator(_parameterHash, true);
-            }
+            //if (_parameterHash != 0) {
+            //    _sm.SetBoolAnimator(_parameterHash, true);
+            //}
         }
         public void Exit(BaseCharacter target) {
             _onExit?.Invoke(this);
-            if (_parameterHash != 0) {
-                _sm.SetBoolAnimator(_parameterHash, false);
-            }
+            //if (_parameterHash != 0) {
+            //    _sm.SetBoolAnimator(_parameterHash, false);
+            //}
         }
         public void FixedUpdate(BaseCharacter target) {
             _onFixedUpdate?.Invoke(this);
