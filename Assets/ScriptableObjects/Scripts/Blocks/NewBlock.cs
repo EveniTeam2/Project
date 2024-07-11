@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Blocks
 {
+    [Serializable]
     public enum BlockType
     {
         Idle,
+        Walk,
         Run,
-        FastRun,
         Hit
     }
     
