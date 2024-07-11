@@ -1,7 +1,9 @@
+using ScriptableObjects.Scripts.Blocks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Unit.Character {
     public class PlayerCharacter : BaseCharacter, IRunnable {
@@ -9,6 +11,13 @@ namespace Unit.Character {
         public int Speed => _stats.Current.Speed;
         public int Attack => _stats.Current.Attack;
         [SerializeField] CharacterStateData characterStateData;
+        UserInput _input;
+        public virtual void Input(NewBlock block, int count) {
+            _input.Input(block, count);
+            // Idle run walk hit
+            // 체력 회복 블록, 스킬 1번 실행 블론, 스킬 2번 ~ 4번
+
+        }
 
         public virtual float GetCurrentPosition() {
             return 0;
@@ -31,6 +40,7 @@ namespace Unit.Character {
             _stats = new InstanceStat<PlayerStat>(stat);
             OnRun += background.Move;
             StateBuilder.BuildState(HFSM, characterStateData);
+            animator = transform.GetChild(0).GetComponent<Animator>();
         }
 
         public event Action<IRunnable> OnRun;

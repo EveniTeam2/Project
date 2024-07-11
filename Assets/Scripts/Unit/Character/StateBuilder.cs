@@ -11,7 +11,7 @@ namespace Unit.Character {
 
     // TODO Action 상속해서 각각 동작 만들기
     public abstract class ActionData : ScriptableObject {
-        public abstract void OnAct();
+        public abstract void OnAct(BaseState state);
     }
 
     public static class StateBuilder {

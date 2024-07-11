@@ -57,6 +57,11 @@ namespace Unit.Character {
             return _current.CanTransitionToThis(Target);
         }
 
+        public virtual float GetCurrentAnimationNormalizedTime() {
+            var info = Target.Animator.GetCurrentAnimatorStateInfo(0);
+            return info.normalizedTime;
+        }
+
         public virtual void Clear() {
             _current = null;
             _states.Clear();

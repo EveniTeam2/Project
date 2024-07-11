@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: Attack3
   animParameter: Attack3
-  onEnter: {fileID: 0}
-  onExit: {fileID: 0}
+  onEnter: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
+  onExit: {fileID: 11400000, guid: 0f1335d2f4f7293449d7fbce0f9929c6, type: 2}
   onUpdate: {fileID: 0}
   onFixedUpdate: {fileID: 0}
-  canTransitionToThis: {fileID: 0}
+  canTransitionToThis: {fileID: 11400000, guid: 8790df2ca704f7a4db2e3a0f8d5bc133, type: 2}
   states: []

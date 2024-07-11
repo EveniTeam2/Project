@@ -12,6 +12,7 @@ namespace Unit.Character {
         public void Initialize(MonsterStat stat) {
             _stats = new InstanceStat<MonsterStat>(stat);
             StateBuilder.BuildState(HFSM, characterStateData);
+            animator = transform.GetChild(0).GetComponent<Animator>();
         }
 
         public override void SetHealth(int health) {

@@ -38,7 +38,7 @@ namespace Unit.Character {
         
         public event Action<BaseCharacter> OnDeath;
         public event Action<IDamageable> OnDamage;
-
+        
         public virtual void Damage(int dmg) {
             Health -= dmg;
             if (Health <= 0) {

@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Unit.Character {
     [CreateAssetMenu(fileName = nameof(CompositeCondition), menuName = "State/" + nameof(CompositeCondition))]
     public class CompositeCondition : Condition {
         [SerializeField] Condition condition;
-        [SerializeField] CompositeCondition compositeCondition;
+        [SerializeField] Condition compositeCondition;
 
         public override bool CheckCondition(BaseCharacter target) {
             var ret = condition.CheckCondition(target);
