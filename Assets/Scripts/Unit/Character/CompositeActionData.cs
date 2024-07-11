@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Unit.Character {
     [CreateAssetMenu(fileName = nameof(CompositeActionData), menuName = "State/" + nameof(CompositeActionData))]
     public class CompositeActionData : ActionData {
         [SerializeField] ActionData actionData;
-        [SerializeField] CompositeActionData compositeActionData;
+        [SerializeField] ActionData compositeActionData;
 
-        public override void OnAct() {
+        public override void OnAct(IState state) {
             if (compositeActionData != null)
-                compositeActionData.actionData.OnAct();
-            actionData.OnAct();
+                compositeActionData.OnAct(state);
+            actionData.OnAct(state);
         }
     }
 }

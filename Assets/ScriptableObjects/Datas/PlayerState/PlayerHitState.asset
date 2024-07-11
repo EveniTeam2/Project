@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d848ee9a96ad0af4e9305a4fc7f61c18, type: 3}
-  m_Name: PlayerAirState
+  m_Name: PlayerHitState
   m_EditorClassIdentifier: 
-  stateName: Air
-  animParameter: '@Air'
-  onEnter: {fileID: 0}
-  onExit: {fileID: 0}
+  stateName: Hit
+  animParameter: Hit
+  onEnter: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
+  onExit: {fileID: 11400000, guid: 0f1335d2f4f7293449d7fbce0f9929c6, type: 2}
   onUpdate: {fileID: 0}
   onFixedUpdate: {fileID: 0}
-  canTransitionToThis: {fileID: 0}
-  states:
-  - {fileID: 11400000, guid: 63a8a9ba1a5739a4386c773171ee6cc0, type: 2}
+  canTransitionToThis: {fileID: 11400000, guid: 8790df2ca704f7a4db2e3a0f8d5bc133, type: 2}
+  states: []

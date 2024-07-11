@@ -8,17 +8,17 @@ namespace Unit.Character {
         private InstanceStat<MonsterStat> _stats;
         [SerializeField] CharacterStateData characterStateData;
         public override int Health { get => _stats.Current.Health; protected set => _stats.Current.Health = value; }
+        public override Animator Animator => animator;
+        [SerializeField] Animator animator;
 
         public void Initialize(MonsterStat stat) {
             _stats = new InstanceStat<MonsterStat>(stat);
-            StateBuilder.BuildState(HFSM, characterStateData);
+            HFSM = StateBuilder.BuildState(this, characterStateData);
         }
 
         public override void SetHealth(int health) {
             _stats.Origin.Health = health;
             _stats.Current.Health = health;
         }
-        public override Animator Animator => animator;
-        [SerializeField] Animator animator;
     }
 }

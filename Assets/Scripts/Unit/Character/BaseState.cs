@@ -2,18 +2,19 @@ using System;
 
 namespace Unit.Character {
     public class BaseState : IState {
-        protected Action _onEnter;
-        protected Action _onExit;
-        protected Action _onUpdate;
-        protected Action _onFixedUpdate;
+        protected Action<IState> _onEnter;
+        protected Action<IState> _onExit;
+        protected Action<IState> _onUpdate;
+        protected Action<IState> _onFixedUpdate;
         protected Func<BaseCharacter, bool> _transitionCondition;
         protected StateMachine _sm;
         protected string _name;
         protected int _parameterHash;
 
         public string StateName => _name;
-
-        public BaseState(string name, int aniHash, StateMachine sm, Action onEnter, Action onExit, Action onUpdate, Action onFixedUpdate, Func<BaseCharacter, bool> transitionCondition) {
+        public int ParameterHash => _parameterHash;
+        public StateMachine StateMachine => _sm;
+        public BaseState(string name, int aniHash, StateMachine sm, Action<IState> onEnter = null, Action<IState> onExit = null, Action<IState> onUpdate = null, Action<IState> onFixedUpdate = null, Func<BaseCharacter, bool> transitionCondition = null) {
             _name = name;
             _parameterHash = aniHash;
             _sm = sm;
@@ -24,22 +25,22 @@ namespace Unit.Character {
             _transitionCondition = transitionCondition;
         }
         public void Enter(BaseCharacter target) {
-            _onEnter?.Invoke();
-            if (_parameterHash != 0) {
-                _sm.SetBoolAnimator(_parameterHash, true);
-            }
+            _onEnter?.Invoke(this);
+            //if (_parameterHash != 0) {
+            //    _sm.SetBoolAnimator(_parameterHash, true);
+            //}
         }
         public void Exit(BaseCharacter target) {
-            _onExit?.Invoke();
-            if (_parameterHash != 0) {
-                _sm.SetBoolAnimator(_parameterHash, false);
-            }
+            _onExit?.Invoke(this);
+            //if (_parameterHash != 0) {
+            //    _sm.SetBoolAnimator(_parameterHash, false);
+            //}
         }
         public void FixedUpdate(BaseCharacter target) {
-            _onFixedUpdate?.Invoke();
+            _onFixedUpdate?.Invoke(this);
         }
         public void Update(BaseCharacter target) {
-            _onUpdate?.Invoke();
+            _onUpdate?.Invoke(this);
         }
         public bool CanTransitionToThis(BaseCharacter target) {
             if (_transitionCondition == null)

@@ -13,7 +13,7 @@ public interface ICommand<T> {
 
 public interface ICommandReceiver<T> {
     public void Received(ICommand<T> command);
-    void UpdateCommand(T target);
+    void UpdateCommand();
 }
 
 public interface IBattleStageTarget {
@@ -27,27 +27,29 @@ namespace Unit.Character {
         void Stop();
     }
 
+    [Serializable]
     public struct PlayerStat {
         public int Attack;
         public int Health;
         public int Speed;
     }
-
+    [Serializable]
     public struct MonsterStat {
         public int Attack;
         public int Health;
     }
 
     // TODO factory pattern을 사용하여 battle stage setting을 생성하여 넘겨줘야 한다.
-    public interface IBattleStageSetting {
-        public AssetReference PlayerRef { get; }
-        public PlayerStat PlayerStat { get; }
-        public AssetReference[] MonstersRef { get; }
-        public MonsterStat[] MonsterStats { get; }
-        public AssetReference[] Background { get; }
-        public int[] BackgroundCoef { get; }
-        public Vector3 PlayerPosition { get; }
-        public Vector3 MonsterSpawnOffset { get; }
+    [Serializable]
+    public struct BattleStageSetting {
+        public AssetReference PlayerRef;
+        public PlayerStat PlayerStat;
+        public AssetReference[] MonstersRef;
+        public MonsterStat[] MonsterStats;
+        public BackgroundDisplay Background;
+        //public int[] BackgroundCoef;
+        public Vector3 PlayerPosition;
+        public Vector3 MonsterSpawnOffset;
     }
 
     public class BattleStageManager : MonoBehaviour, IBattleStageTarget, ICommandReceiver<IBattleStageTarget> {
@@ -61,20 +63,22 @@ namespace Unit.Character {
             data.OnSendCommand += Received;
         }
 
-        public void Initialize(IBattleStageSetting setting) {
-            // TODO 모든 deploy가 끝났는지 확인하고 전부 끝났으면 게임 준비가 되었음을 알려야 한다.
-            Core.Utils.AddressableLoader.DeployAsset(setting.PlayerRef, setting.PlayerPosition, Quaternion.identity, null, (obj) => {
+        // TODO 인호님! 이거 불러야 시작 가능함
+        public void Initialize(BattleStageSetting settings) {
+            backgroundDisplay = settings.Background;
+
+            Core.Utils.AddressableLoader.DeployAsset(settings.PlayerRef, settings.PlayerPosition, Quaternion.identity, null, (obj) => {
                 if (obj.TryGetComponent(out player))
-                    player.Initialize(setting.PlayerStat, backgroundDisplay);
+                    player.Initialize(settings.PlayerStat, backgroundDisplay);
             });
 
             monsters = new List<MonsterCharacter>();
-            for (int i = 0; i < setting.MonsterStats.Length; ++i) {
+            for (int i = 0; i < settings.MonsterStats.Length; ++i) {
                 int index = i;
-                Core.Utils.AddressableLoader.DeployAsset(setting.MonstersRef[i], setting.MonsterSpawnOffset, Quaternion.identity, null, (obj) => {
+                Core.Utils.AddressableLoader.DeployAsset(settings.MonstersRef[i], settings.MonsterSpawnOffset, Quaternion.identity, null, (obj) => {
                     if (obj.TryGetComponent(out MonsterCharacter mon)) {
                         monsters.Add(mon);
-                        mon.Initialize(setting.MonsterStats[index]);
+                        mon.Initialize(settings.MonsterStats[index]);
                     }
                 });
             }
@@ -86,17 +90,17 @@ namespace Unit.Character {
         }
 
         private void Update() {
-            (this as ICommandReceiver<IBattleStageTarget>).UpdateCommand(this);
+            (this as ICommandReceiver<IBattleStageTarget>).UpdateCommand();
         }
 
         public void Received(ICommand<IBattleStageTarget> command) {
             commands.Enqueue(command);
         }
 
-        void ICommandReceiver<IBattleStageTarget>.UpdateCommand(IBattleStageTarget target) {
+        void ICommandReceiver<IBattleStageTarget>.UpdateCommand() {
             if (commands.Count > 0) {
-                if (commands.Peek().IsExecutable(target))
-                    commands.Dequeue().Execute(target);
+                if (commands.Peek().IsExecutable(this))
+                    commands.Dequeue().Execute(this);
             }
         }
     }

@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d848ee9a96ad0af4e9305a4fc7f61c18, type: 3}
-  m_Name: PlayerGroundState
+  m_Name: PlayerAttack2State
   m_EditorClassIdentifier: 
-  stateName: Ground
-  animParameter: '@Ground'
-  onEnter: {fileID: 0}
-  onExit: {fileID: 0}
+  stateName: Attack2
+  animParameter: Attack2
+  onEnter: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
+  onExit: {fileID: 11400000, guid: 0f1335d2f4f7293449d7fbce0f9929c6, type: 2}
   onUpdate: {fileID: 0}
   onFixedUpdate: {fileID: 0}
-  canTransitionToThis: {fileID: 0}
-  states:
-  - {fileID: 11400000, guid: 5d15800aedcd8e043adb3773a791b077, type: 2}
-  - {fileID: 11400000, guid: d841fd182e5ae3341888bda3f557bc8e, type: 2}
+  canTransitionToThis: {fileID: 11400000, guid: 8790df2ca704f7a4db2e3a0f8d5bc133, type: 2}
+  states: []

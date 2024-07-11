@@ -11,11 +11,11 @@ namespace Core.UI
     /// </summary>
     public class UIManager : UnitySingleton<UIManager>
     {
-        private List<AssetReference> uiAssetRef;
-        private Dictionary<string, int> typeToAssetRefIndex;
-        private LinkedList<UIBase> openedUiList;
-        private Dictionary<string, UIBase> uiDict;
-        private Dictionary<CanvasOption, CanvasController> canvas;
+        private List<AssetReference> uiAssetRef = new List<AssetReference>();
+        private Dictionary<string, int> typeToAssetRefIndex = new Dictionary<string, int>();
+        private LinkedList<UIBase> openedUiList = new LinkedList<UIBase>();
+        private Dictionary<string, UIBase> uiDict = new Dictionary<string, UIBase>();
+        private Dictionary<CanvasOption, CanvasController> canvas = new Dictionary<CanvasOption, CanvasController>();
 
         protected override UIManager Initialize()
         {
