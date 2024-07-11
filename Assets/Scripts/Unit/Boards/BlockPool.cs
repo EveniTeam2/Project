@@ -1,10 +1,14 @@
 using Core.Utils;
 using Unit.Blocks;
+using Unit.Boards.Interfaces;
 using UnityEngine;
 
 namespace Unit.Boards
 {
-    public class BlockPool : CustomPool<Block>
+    /// <summary>
+    /// 블록 풀링을 관리하는 클래스입니다.
+    /// </summary>
+    public class BlockPool : CustomPool<Block>, IBlockPool
     {
         public BlockPool(Block prefab, Transform root, int size, bool isFlexible)
             : base(prefab, root, OnCreate, OnGet, OnRelease, OnDestroy, size, isFlexible) { }
