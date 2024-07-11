@@ -6,7 +6,7 @@ namespace Unit.Blocks.Interfaces
 {
     public interface IBlock
     {
-        BlockType Type { get; }
+        // BlockType Type { get; }
         void Initialize(NewBlock info, Action<Vector3, Vector3> matchCheckHandler);
     }
 }

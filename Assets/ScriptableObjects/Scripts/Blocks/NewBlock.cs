@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Blocks
 {
+    [Serializable]
     public enum BlockType
     {
-        Normal,
-        BuffHealth,
-        BuffSpeed,
-        Debuff
+        Idle,
+        Walk,
+        Run,
+        Hit
     }
     
     public class NewBlock : ScriptableObject

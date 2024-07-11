@@ -140,6 +140,7 @@ namespace Unit.Boards
         /// <returns>인접한 매칭된 블록 목록</returns>
         public List<Block> GetAdjacentMatches(List<Block> initialMatches)
         {
+            Debug.Log($"인접한 동일 타입 블록 체크, 현재 {initialMatches.Count}");
             var allMatches = new HashSet<Block>(initialMatches);
             var toCheck = new Queue<Block>(initialMatches);
 
@@ -147,19 +148,23 @@ namespace Unit.Boards
             {
                 var block = toCheck.Dequeue();
 
-                var blockPos = block.transform.position;
+                var blockPos = block.transform.localPosition;
                 var newPos = new Tuple<float, float>(blockPos.x, blockPos.y);
 
                 foreach (var dir in new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right })
                 {
                     var adjacentPos = new Tuple<float, float>(newPos.Item1 + dir.x, newPos.Item2 + dir.y);
                     
+                    Debug.Log($"{adjacentPos} 위치 블록 검증");
                     if (_tiles.ContainsKey(adjacentPos) && _tiles[adjacentPos].Type == block.Type && allMatches.Add(_tiles[adjacentPos]))
                     {
+                        Debug.Log($"조건 충족, 좌표 {adjacentPos} / 타입 {block.Type} / 삽입 가능 {allMatches.Add(_tiles[adjacentPos])}");
                         toCheck.Enqueue(_tiles[adjacentPos]);
                     }
                 }
             }
+            
+            Debug.Log($"인접한 동일 타입 블록 체크 종료, 현재 {allMatches.Count}");
 
             return new List<Block>(allMatches);
         }

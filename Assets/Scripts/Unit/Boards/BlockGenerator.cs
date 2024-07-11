@@ -52,6 +52,7 @@ namespace Unit.Boards
             {
                 for (var y = -_spawnPositionWidth; y <= _spawnPositionWidth; y++)
                 {
+                    Debug.Log($"_blockPositions {x} {y}");
                     _blockPositions.Add(new Tuple<float, float>(x, y));
                 }
             }
@@ -80,7 +81,7 @@ namespace Unit.Boards
         {
             Vector3 position = new(blockPosition.Item1, blockPosition.Item2, 0);
             var block = _blockPool.Get();
-            block.transform.position = position;
+            block.transform.localPosition = position;
             block.Initialize(blockInfo, _matchCheckHandler);
             _tiles.Add(blockPosition, block);
         }

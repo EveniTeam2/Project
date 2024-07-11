@@ -152,12 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b945e932195514027a364ad4d97f29a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardWidth: 6
-  boardHeight: 6
   blockInfos:
-  - {fileID: 11400000, guid: 125ec2552c17c4d789874f5610867d52, type: 2}
+  - {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
   - {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
-  - {fileID: 11400000, guid: c2500c38dd46047efa9a1bba807458a3, type: 2}
+  - {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
+  - {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
 --- !u!4 &9128592
 Transform:
   m_ObjectHideFlags: 0
@@ -2658,7 +2657,7 @@ GameObject:
   - component: {fileID: 1813097284}
   - component: {fileID: 1813097285}
   m_Layer: 0
-  m_Name: Board
+  m_Name: BoardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2691,6 +2690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648dc6cd25334cd4936faf22e171d73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 6
+  height: 6
   logicProgressTime: 0.1
   moveDuration: 0.1
   dropDurationPerUnit: 0.04

@@ -7,6 +7,7 @@ using Manager;
 using Unit.Blocks;
 using Unit.Boards.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unit.Boards
 {
@@ -15,6 +16,14 @@ namespace Unit.Boards
     /// </summary>
     public class BoardManager : MonoBehaviour
     {
+        [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")]
+        [SerializeField] private int width;
+        [SerializeField] private int height;
+        private float _spawnPositionWidth;
+        private float _spawnPositionHeight;
+        
+        private const float BlockOffset = 0.5f;
+        
         [Header("각각의 로직 사이의 대기 시간 (단위 : Second)")]
         [SerializeField] [Range(0, 0.5f)] private float logicProgressTime;
         private WaitForSeconds _progressTime;
@@ -34,13 +43,7 @@ namespace Unit.Boards
         [Header("블록 풀링 관련 설정")]
         [SerializeField] private Block blockPrefab;
         private int _poolSize;
-
-        private int _width;
-        private int _height;
-        private float _spawnPositionWidth;
-        private float _spawnPositionHeight;
-
-        private const float BlockOffset = 0.5f;
+        
         private bool _isLogicUpdating;
 
         private IBlockGenerator _blockGenerator;
@@ -76,11 +79,8 @@ namespace Unit.Boards
         /// </summary>
         private void InitializeValues()
         {
-            _width = GameManager.Instance.boardWidth;
-            _height = GameManager.Instance.boardHeight;
-
             _isLogicUpdating = false;
-            _poolSize = _width * _height;
+            _poolSize = width * height;
 
             _tiles = new Dictionary<Tuple<float, float>, Block>();
             _progressTime = new WaitForSeconds(logicProgressTime);
@@ -91,11 +91,13 @@ namespace Unit.Boards
         /// </summary>
         private void CalculateBlockSpawnPositions()
         {
-            var adjustWidth = _width % 2 == 0 ? BlockOffset : 0;
-            var adjustHeight = _height % 2 == 0 ? BlockOffset : 0;
+            var adjustWidth = width % 2 == 0 ? BlockOffset : 0;
+            var adjustHeight = height % 2 == 0 ? BlockOffset : 0;
 
-            _spawnPositionWidth = _width / 2f - adjustWidth;
-            _spawnPositionHeight = _height / 2f - adjustHeight;
+            _spawnPositionWidth = width / 2f - adjustWidth;
+            _spawnPositionHeight = height / 2f - adjustHeight;
+            
+            Debug.Log($"adjustWidth {adjustWidth} / adjustHeight {adjustHeight} / _spawnPositionWidth {_spawnPositionWidth} / _spawnPositionHeight {_spawnPositionHeight}");
         }
 
         /// <summary>
@@ -114,12 +116,15 @@ namespace Unit.Boards
         /// </summary>
         private void GenerateAllRandomBlocks()
         {
-            while (true)
-            {
-                _blockGenerator.GenerateAllRandomBlocks();
-
-                if (IsAnyPossibleMatches()) break;
-            }
+            _blockGenerator.GenerateAllRandomBlocks();
+            
+            // TODO : while문에 갇힌 것 같음..!
+            // while (true)
+            // {
+            //     _blockGenerator.GenerateAllRandomBlocks();
+            //
+            //     if (IsAnyPossibleMatches()) break;
+            // }
         }
 
         /// <summary>
@@ -337,6 +342,16 @@ namespace Unit.Boards
         }
 
         /// <summary>
+        /// 모든 블록을 제거합니다.
+        /// </summary>
+        private void RemoveAllBlocks()
+        {
+            var allBlocks = _tiles.Select(tile => tile.Value).ToList();
+
+            RemoveBlocks(allBlocks);
+        }
+
+        /// <summary>
         /// 매칭된 모든 블록을 제거합니다.
         /// </summary>
         /// <param name="currentMatchedBlocks">현재 매칭된 블록 목록</param>
@@ -345,7 +360,7 @@ namespace Unit.Boards
         {
             Debug.Log("블록 제거 시작");
 
-            Debug.Log($"currentMatchedBlocks : {currentMatchedBlocks.Count} / targetMatchedBlocks : {targetMatchedBlocks.Count} / 블록 제거 시작");
+            Debug.Log($"currentMatchedBlocks : {currentMatchedBlocks.Count} / targetMatchedBlocks : {targetMatchedBlocks.Count}");
 
             var allMatchedBlocks = new HashSet<Block>();
 
