@@ -4,10 +4,10 @@ namespace ScriptableObjects.Scripts.Blocks
 {
     public enum BlockType
     {
-        Normal,
-        BuffHealth,
-        BuffSpeed,
-        Debuff
+        Idle,
+        Run,
+        FastRun,
+        Hit
     }
     
     public class NewBlock : ScriptableObject
