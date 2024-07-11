@@ -34,8 +34,8 @@ namespace Unit.Character {
             player.HFSM.TryChangeState("Run");
         }
         private void BuffSpeedAct(int count) {
-            // Walk
-            player.HFSM.TryChangeState("Walk");
+            // Attack
+            player.HFSM.TryChangeState("Attack");
         }
         private void DebuffAct(int count) {
             // Hit

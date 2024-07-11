@@ -22,7 +22,6 @@ namespace Unit.Character {
             _input.Input(block, count);
             // Idle run walk hit
             // 체력 회복 블록, 스킬 1번 실행 블론, 스킬 2번 ~ 4번
-
         }
         public virtual float GetCurrentPosition() {
             return 0;
@@ -41,7 +40,8 @@ namespace Unit.Character {
         public void Initialize(PlayerStat stat, IShowable background) {
             _stats = new InstanceStat<PlayerStat>(stat);
             OnRun += background.Move;
-            StateBuilder.BuildState(HFSM, characterStateData);
+            HFSM = StateBuilder.BuildState(this, characterStateData);
+            _input = new UserInput(this);
         }
         protected static int spdUnit = 1000;
         public int ModifySpeed(int spd, float duration) {
@@ -65,10 +65,15 @@ namespace Unit.Character {
             if (IsRun) {
                 OnRun?.Invoke(this);
             }
+            if (HFSM != null) HFSM.Update(this);
         }
         public override void SetHealth(int health) {
             _stats.Origin.Health = health;
             _stats.Current.Health = health;
+        }
+        private void FixedUpdate() {
+            if (HFSM != null) HFSM.FixedUpdate(this);
+
         }
     }
 }

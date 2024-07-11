@@ -13,7 +13,7 @@ namespace Unit.Character {
 
         public void Initialize(MonsterStat stat) {
             _stats = new InstanceStat<MonsterStat>(stat);
-            StateBuilder.BuildState(HFSM, characterStateData);
+            HFSM = StateBuilder.BuildState(this, characterStateData);
         }
 
         public override void SetHealth(int health) {

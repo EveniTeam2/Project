@@ -6,7 +6,7 @@ namespace Unit.Character {
         [SerializeField] ActionData actionData;
         [SerializeField] ActionData compositeActionData;
 
-        public override void OnAct(BaseState state) {
+        public override void OnAct(IState state) {
             if (compositeActionData != null)
                 compositeActionData.OnAct(state);
             actionData.OnAct(state);
