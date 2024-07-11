@@ -1,7 +1,7 @@
 using ScriptableObjects.Scripts.Blocks;
 using System;
 using TMPro;
-using Unit.Blocks.Interface;
+using Unit.Blocks.Interfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,7 +10,7 @@ namespace Unit.Blocks
     /// <summary>
     /// 게임 내 블록을 나타내며, 드래그하여 다른 블록과 위치를 교환할 수 있습니다.
     /// </summary>
-    public class Block : MonoBehaviour, IDraggable
+    public class Block : MonoBehaviour, IDraggable, IBlock
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
 
@@ -53,9 +53,11 @@ namespace Unit.Blocks
             endPosition.z = 0;
 
             var direction = (endPosition - _startPosition).normalized;
-            direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? new Vector3(Mathf.Sign(direction.x), 0, 0) : new Vector3(0, Mathf.Sign(direction.y), 0);
+            direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y)
+                ? new Vector3(Mathf.Sign(direction.x), 0, 0)
+                : new Vector3(0, Mathf.Sign(direction.y), 0);
 
-            OnMatchCheck?.Invoke(_startPosition, direction);
+            OnMatchCheck?.Invoke(transform.localPosition, direction);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unit.Blocks;
+using Unit.Boards.Interfaces;
 using UnityEngine;
 
 namespace Unit.Boards
@@ -8,7 +9,7 @@ namespace Unit.Boards
     /// <summary>
     /// 블록의 매칭을 검사하는 클래스입니다.
     /// </summary>
-    public class BlockMatcher
+    public class BlockMatcher : IBlockMatcher
     {
         private readonly Dictionary<Tuple<float, float>, Block> _tiles;
 
@@ -42,6 +43,11 @@ namespace Unit.Boards
             return new Tuple<float, float>(targetX, targetY);
         }
 
+        public Tuple<float, float> GetTargetIndex(System.Numerics.Vector3 startPosition, System.Numerics.Vector3 direction)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 주어진 위치가 유효한 위치인지 검사합니다.
         /// </summary>
@@ -62,19 +68,16 @@ namespace Unit.Boards
         {
             matchedBlocks = new List<Block>();
 
-            // 세로 방향으로 매칭 확인
             if (CheckDirection(position, Vector2.up, Vector2.down, out var verticalMatches))
             {
                 matchedBlocks.AddRange(verticalMatches);
             }
 
-            // 가로 방향으로 매칭 확인
             if (CheckDirection(position, Vector2.left, Vector2.right, out var horizontalMatches))
             {
                 matchedBlocks.AddRange(horizontalMatches);
             }
 
-            // 매칭된 블록이 있을 경우
             if (matchedBlocks.Count > 0)
             {
                 matchedBlocks.Add(_tiles[position]);
@@ -98,7 +101,6 @@ namespace Unit.Boards
             matches.AddRange(CountMatchesInDirection(start, dir1));
             matches.AddRange(CountMatchesInDirection(start, dir2));
 
-            // 자신 포함 3개 이상 매칭될 경우
             return matches.Count >= 2;
         }
 
