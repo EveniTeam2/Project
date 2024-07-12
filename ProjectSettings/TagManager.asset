@@ -41,3 +41,27 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background_Back
+    uniqueID: 3260239843
+    locked: 0
+  - name: UI_Back
+    uniqueID: 286488927
+    locked: 0
+  - name: Creature
+    uniqueID: 3092323727
+    locked: 0
+  - name: Background_Front
+    uniqueID: 301143167
+    locked: 0
+  - name: Block
+    uniqueID: 1956668677
+    locked: 0
+  - name: UI_Front
+    uniqueID: 1778558241
+    locked: 0
+  - name: Effect
+    uniqueID: 2542673353
+    locked: 0
+  - name: Camera
+    uniqueID: 809363919
+    locked: 0

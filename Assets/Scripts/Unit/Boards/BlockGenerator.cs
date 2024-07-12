@@ -12,8 +12,9 @@ namespace Unit.Boards
     /// </summary>
     public class BlockGenerator : IBlockGenerator
     {
-        private readonly float _spawnPositionWidth;
-        private readonly float _spawnPositionHeight;
+        private readonly Tuple<float, float> _spawnPositionWidth;
+        private readonly Tuple<float, float> _spawnPositionHeight;
+        private float _blockOffset;
         private readonly List<Tuple<float, float>> _blockPositions;
         private readonly List<NewBlock> _blockInfos;
         private readonly Action<Vector3, Vector3> _matchCheckHandler;
@@ -29,11 +30,12 @@ namespace Unit.Boards
         /// <param name="matchCheckHandler">매치 확인 핸들러</param>
         /// <param name="blockPool">블록 풀</param>
         /// <param name="tiles">블록 딕셔너리</param>
-        public BlockGenerator(float spawnPositionWidth, float spawnPositionHeight, List<NewBlock> blockInfos,
+        public BlockGenerator(Tuple<float, float> spawnPositionWidth, Tuple<float, float> spawnPositionHeight, float blockOffset, List<NewBlock> blockInfos,
             Action<Vector3, Vector3> matchCheckHandler, IBlockPool blockPool, Dictionary<Tuple<float, float>, Block> tiles)
         {
             _spawnPositionWidth = spawnPositionWidth;
             _spawnPositionHeight = spawnPositionHeight;
+            _blockOffset = blockOffset;
             _blockPositions = new List<Tuple<float, float>>();
             _blockInfos = blockInfos;
             _matchCheckHandler = matchCheckHandler;
@@ -48,9 +50,9 @@ namespace Unit.Boards
         /// </summary>
         private void CalculateBlockPositions()
         {
-            for (var x = -_spawnPositionHeight; x <= _spawnPositionHeight; x++)
+            for (var x = _spawnPositionWidth.Item1; x <= _spawnPositionWidth.Item2; x += _blockOffset)
             {
-                for (var y = -_spawnPositionWidth; y <= _spawnPositionWidth; y++)
+                for (var y = _spawnPositionHeight.Item1 ; y <= _spawnPositionHeight.Item2; y += _blockOffset)
                 {
                     Debug.Log($"_blockPositions {x} {y}");
                     _blockPositions.Add(new Tuple<float, float>(x, y));

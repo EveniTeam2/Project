@@ -14,6 +14,7 @@ namespace Unit.Blocks
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
 
+        [SerializeField] private NewBlock blockInfo;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private TextMeshPro textMeshPro;
 
@@ -34,9 +35,10 @@ namespace Unit.Blocks
         /// <param name="matchCheckHandler">매치 검사를 처리할 핸들러입니다.</param>
         public void Initialize(NewBlock info, Action<Vector3, Vector3> matchCheckHandler)
         {
-            textMeshPro.text = info.text;
-            spriteRenderer.color = info.color;
-            Type = info.type;
+            blockInfo = info;
+            textMeshPro.text = blockInfo.text;
+            spriteRenderer.color = blockInfo.color;
+            Type = blockInfo.type;
             OnMatchCheck = matchCheckHandler;
         }
 
