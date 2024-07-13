@@ -1,19 +1,29 @@
 using System;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.Stages.Creatures.Characters;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Unit.Stages.Creatures
-{
+namespace Unit.Stages.Creatures {
     /// <summary>
     /// 사용자 입력을 처리하는 클래스입니다.
     /// </summary>
     public class UserInput
     {
         private readonly Character _character;
-
-        public UserInput(Character target)
+        Dictionary<BlockType, ActOnInput> actDic;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="target">입력이 처리되기를 바라는 타겟입니다.</param>
+        /// <param name="acts">타겟이 입력에 따라 행동하기를 원하는 행동입니다.</param>
+        public UserInput(Character target, params ActOnInput[] acts)
         {
             _character = target;
+            actDic = new Dictionary<BlockType, ActOnInput>();
+            foreach (var act in acts.ToArray()) {
+                actDic.Add(act.InputType, act);
+            }
         }
 
         /// <summary>
@@ -21,60 +31,7 @@ namespace Unit.Stages.Creatures
         /// </summary>
         public void Input(NewBlock block, int count)
         {
-            GetAction(block).Invoke(count);
-        }
-
-        /// <summary>
-        /// 블록에 따른 동작을 반환합니다.
-        /// </summary>
-        private Action<int> GetAction(NewBlock block)
-        {
-            // TODO 인호님!!! 바꿔야되는 거 여기랑 요 아래!
-            switch (block.type)
-            {
-                case BlockType.Idle:
-                    return NormalAct;
-                case BlockType.Walk:
-                    return BuffHealthAct;
-                case BlockType.Run:
-                    return BuffSpeedAct;
-                case BlockType.Hit:
-                    return DebuffAct;
-                default:
-                    return null;
-            }
-        }
-
-        /// <summary>
-        /// 기본 동작을 수행합니다.
-        /// </summary>
-        private void NormalAct(int count)
-        {
-            _character.HFSM.TryChangeState("Idle");
-        }
-
-        /// <summary>
-        /// 체력 버프 동작을 수행합니다.
-        /// </summary>
-        private void BuffHealthAct(int count)
-        {
-            _character.HFSM.TryChangeState("Run");
-        }
-
-        /// <summary>
-        /// 속도 버프 동작을 수행합니다.
-        /// </summary>
-        private void BuffSpeedAct(int count)
-        {
-            _character.HFSM.TryChangeState("Attack1");
-        }
-
-        /// <summary>
-        /// 디버프 동작을 수행합니다.
-        /// </summary>
-        private void DebuffAct(int count)
-        {
-            _character.HFSM.TryChangeState("Hit");
+            actDic[block.type].Act.Act(_character, count);
         }
     }
 }
