@@ -16,6 +16,6 @@ MonoBehaviour:
   animParameter: Attack1
   onEnter: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
   onExit: {fileID: 11400000, guid: 0f1335d2f4f7293449d7fbce0f9929c6, type: 2}
-  onUpdate: {fileID: 11400000, guid: b6c648a1aa8951c4db4a1021316f993d, type: 2}
+  onUpdate: {fileID: 11400000, guid: 595a6a1865395bc42ba9bb242d40075b, type: 2}
   onFixedUpdate: {fileID: 0}
   canTransitionToThis: {fileID: 0}

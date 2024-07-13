@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1081108743891100633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ce1f116eebedef42a1c6326b9501f67, type: 3}
+  m_Script: {fileID: 11500000, guid: 8afe47d50ec784c46b523ba2e0096aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatureStateData: {fileID: 11400000, guid: 9849db3bed64e6a4e81b6698737b7e36, type: 2}
+  stateData: {fileID: 11400000, guid: 9849db3bed64e6a4e81b6698737b7e36, type: 2}

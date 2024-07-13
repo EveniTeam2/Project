@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1036fe06b88e363489725bbd83439215, type: 3}
-  m_Name: CheckAnimTimeAndTransIdle
+  m_Script: {fileID: 11500000, guid: e60b987fe0c494c8288865f9dc0ef760, type: 3}
+  m_Name: Attack2AndIdle
   m_EditorClassIdentifier: 
-  _condition: {fileID: 11400000, guid: 8790df2ca704f7a4db2e3a0f8d5bc133, type: 2}
-  _targetStateName: Idle
+  decoratorActionData: {fileID: 11400000, guid: 78bb733f9807f7347a6ecce86da66f25, type: 2}
+  actionData: {fileID: 11400000, guid: b6c648a1aa8951c4db4a1021316f993d, type: 2}

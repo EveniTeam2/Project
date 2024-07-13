@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 340a52ef5992496ba0ad0ed48bf0e841, type: 3}
-  m_Name: PlayerAttack2State
+  m_Name: PlayerJumpState
   m_EditorClassIdentifier: 
-  stateName: Attack2
-  animParameter: Attack2
+  stateName: Jump
+  animParameter: Jump
   onEnter: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
   onExit: {fileID: 11400000, guid: 0f1335d2f4f7293449d7fbce0f9929c6, type: 2}
-  onUpdate: {fileID: 11400000, guid: 40f493bf447031a46bd438b5d7a63cf7, type: 2}
+  onUpdate: {fileID: 11400000, guid: b6c648a1aa8951c4db4a1021316f993d, type: 2}
   onFixedUpdate: {fileID: 0}
   canTransitionToThis: {fileID: 0}
