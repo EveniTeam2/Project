@@ -10,7 +10,10 @@ namespace Unit.Stages.Creatures.FSM
     {
         protected Dictionary<string, IState> _states = new Dictionary<string, IState>();
         protected IState _current;
+        protected IState _prev;
         public BaseCreature Target { get; protected set; }
+        public IState CurrentState => _current;
+        public IState PrevState => _prev;
 
         public StateMachine(BaseCreature creature)
         {
@@ -47,20 +50,21 @@ namespace Unit.Stages.Creatures.FSM
             if (_states.TryGetValue(name, out var state))
             {
                 _current.Exit(Target);
+                _prev = _current;
                 _current = state;
                 _current.Enter(Target);
                 return true;
             }
-            else
-            {
-                foreach (var item in _states.Values)
-                {
-                    if (item is StateMachine sub && sub.TryChangeState(name))
-                    {
-                        return true;
-                    }
-                }
-            }
+            //else
+            //{
+            //    foreach (var item in _states.Values)
+            //    {
+            //        if (item is StateMachine sub && sub.TryChangeState(name))
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //}
             return false;
         }
 
