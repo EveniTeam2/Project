@@ -14,53 +14,39 @@ namespace Unit.Boards
     {
         private readonly Action<Vector3, Vector3> _matchCheckHandler;
         
-        private readonly float _blockOffset;
-        private readonly Tuple<float, float> _spawnPositionWidth;
-        private readonly Tuple<float, float> _spawnPositionHeight;
-        
         private readonly List<NewBlock> _blockInfos;
         private readonly List<Tuple<float, float>> _blockPositions;
         private readonly Dictionary<Tuple<float, float>, Block> _tiles;
+        
         private readonly IBlockPool _blockPool;
+        private readonly Canvas _canvas;
+        
+        private readonly RectTransform _blockPanel;
+        private readonly Vector2 _blockSize;
+        private readonly float _blockGap;
 
         /// <summary>
         /// BlockGenerator 생성자입니다.
-        /// </summary>
-        /// <param name="spawnPositionWidth">블록 스폰 위치의 너비</param>
-        /// <param name="spawnPositionHeight">블록 스폰 위치의 높이</param>
-        /// <param name="blockOffset"></param>
+        /// </summary>높이
         /// <param name="blockInfos">블록 정보 목록</param>
-        /// <param name="matchCheckHandler">매치 확인 핸들러</param>
         /// <param name="blockPool">블록 풀</param>
         /// <param name="tiles">블록 딕셔너리</param>
-        public BlockGenerator(Tuple<float, float> spawnPositionWidth, Tuple<float, float> spawnPositionHeight, float blockOffset, List<NewBlock> blockInfos,
-            Action<Vector3, Vector3> matchCheckHandler, IBlockPool blockPool, Dictionary<Tuple<float, float>, Block> tiles)
+        /// <param name="canvas">캔버스</param>
+        /// <param name="blockPanel"></param>
+        /// <param name="blockSize"></param>
+        /// <param name="blockPositions"></param>
+        public BlockGenerator(List<NewBlock> blockInfos, IBlockPool blockPool, Dictionary<Tuple<float, float>, Block> tiles, Canvas canvas, RectTransform blockPanel, Vector2 blockSize, List<Tuple<float, float>> blockPositions, Action<Vector3, Vector3> checkForMatch, float blockGap)
         {
-            _spawnPositionWidth = spawnPositionWidth;
-            _spawnPositionHeight = spawnPositionHeight;
-            _blockOffset = blockOffset;
-            _blockPositions = new List<Tuple<float, float>>();
             _blockInfos = blockInfos;
-            _matchCheckHandler = matchCheckHandler;
             _blockPool = blockPool;
             _tiles = tiles;
+            _canvas = canvas;
+            _blockPanel = blockPanel;
+            _blockSize = blockSize;
+            _blockPositions = blockPositions;
+            _blockGap = blockGap;
 
-            CalculateBlockPositions();
-        }
-
-        /// <summary>
-        /// 블록 위치를 계산합니다.
-        /// </summary>
-        private void CalculateBlockPositions()
-        {
-            for (var x = _spawnPositionWidth.Item1; x <= _spawnPositionWidth.Item2; x += _blockOffset)
-            {
-                for (var y = _spawnPositionHeight.Item1 ; y <= _spawnPositionHeight.Item2; y += _blockOffset)
-                {
-                    Debug.Log($"_blockPositions {x} {y}");
-                    _blockPositions.Add(new Tuple<float, float>(x, y));
-                }
-            }
+            _matchCheckHandler = checkForMatch;
         }
 
         /// <summary>
@@ -70,10 +56,19 @@ namespace Unit.Boards
         {
             _tiles.Clear();
 
-            foreach (var blockPosition in _blockPositions)
+            foreach (var (x, y) in _blockPositions)
             {
-                var selectedBlockInfo = GetRandomValidBlock(_tiles, blockPosition);
-                InstantiateAndAddBlock(blockPosition, selectedBlockInfo);
+                var block = _blockPool.Get();
+                var blockInfo = GetRandomValidBlock(_tiles, new Tuple<float, float>(x, y));
+                var position = new Vector3(x, y, 0);
+                var rectTransform = block.GetComponent<RectTransform>();
+                
+                rectTransform.SetParent(_blockPanel);
+                rectTransform.sizeDelta = _blockSize;
+                rectTransform.anchoredPosition = position;
+                
+                block.Initialize(blockInfo, _matchCheckHandler, _canvas);
+                _tiles.Add(new Tuple<float, float>(x, y), block);
             }
         }
 
@@ -82,12 +77,16 @@ namespace Unit.Boards
         /// </summary>
         /// <param name="blockPosition">블록의 위치</param>
         /// <param name="blockInfo">블록 정보</param>
-        private void InstantiateAndAddBlock(Tuple<float, float> blockPosition, NewBlock blockInfo)
+        /// /// <param name="blockPanel">블록 생성 위치</param>
+        private void InstantiateAndAddBlock(Tuple<float, float> blockPosition, NewBlock blockInfo, RectTransform blockPanel)
         {
             Vector3 position = new(blockPosition.Item1, blockPosition.Item2, 0);
+            
+            Debug.Log($"블록 생성 앵커 포지션 : {position.x} {position.y}");
             var block = _blockPool.Get();
-            block.transform.localPosition = position;
-            block.Initialize(blockInfo, _matchCheckHandler);
+            block.transform.SetParent(blockPanel, false);
+            block.GetComponent<RectTransform>().anchoredPosition = position;
+            block.Initialize(blockInfo, _matchCheckHandler, _canvas);
             _tiles.Add(blockPosition, block);
         }
 
@@ -126,7 +125,7 @@ namespace Unit.Boards
         /// <returns>유효한 위치 여부</returns>
         private bool IsValidPosition(Dictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> position, NewBlock blockInfo)
         {
-            var directions = new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+            var directions = new[] { Vector2.up * _blockGap, Vector2.down * _blockGap, Vector2.left * _blockGap, Vector2.right * _blockGap };
 
             foreach (var direction in directions)
             {

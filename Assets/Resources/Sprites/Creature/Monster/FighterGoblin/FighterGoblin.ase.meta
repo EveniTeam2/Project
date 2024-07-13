@@ -1,0 +1,2880 @@
+fileFormatVersion: 2
+guid: b20083996d8b449fdb40a29985fd44a3
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: FighterGoblin_Frame_1
+    originalName: 
+    pivot: {x: 0.48648652, y: -0.37499997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 587
+      width: 37
+      height: 48
+    spriteID: 252513a3f27ed4c9787da04b03ab230f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 587}
+  - name: FighterGoblin_Frame_2
+    originalName: 
+    pivot: {x: 0.4857143, y: -0.36734694}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 695
+      width: 35
+      height: 49
+    spriteID: 45cdb21b859084913a503b86ad1fa165
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 695}
+  - name: FighterGoblin_Frame_3
+    originalName: 
+    pivot: {x: 0.4857143, y: -0.36734694}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 752
+      width: 35
+      height: 49
+    spriteID: 0bf86a50b718b44fdae7dd6048107697
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 752}
+  - name: FighterGoblin_Frame_4
+    originalName: 
+    pivot: {x: 0.4857143, y: -0.37499997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 897
+      width: 35
+      height: 48
+    spriteID: f12d6a37d1a6d40c0a5bfda33d4919a4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 897}
+  - name: FighterGoblin_Frame_5
+    originalName: 
+    pivot: {x: 0.47222224, y: -0.3913043}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 953
+      width: 36
+      height: 46
+    spriteID: 51ff33ef49cad44869c85711b53e09cd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 953}
+  - name: FighterGoblin_Frame_6
+    originalName: 
+    pivot: {x: 0.47368425, y: -0.3829787}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 532
+      width: 38
+      height: 47
+    spriteID: 721b2928e029f4fb98bb88dcf4aa1573
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 532}
+  - name: FighterGoblin_Frame_7
+    originalName: 
+    pivot: {x: 0.45238099, y: -0.3913043}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 868
+      width: 42
+      height: 46
+    spriteID: 1ea0ec2bc789b414c97949539ee2a004
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 868}
+  - name: FighterGoblin_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 659
+      width: 44
+      height: 44
+    spriteID: a24bc1f1d60d140c194839ed2d3bd451
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 659}
+  - name: FighterGoblin_Frame_9
+    originalName: 
+    pivot: {x: 0.5227273, y: -0.45454547}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 711
+      width: 44
+      height: 44
+    spriteID: b8589b3c254bc4dfc9b13fc657c10383
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 711}
+  - name: FighterGoblin_Frame_10
+    originalName: 
+    pivot: {x: 0.5, y: -0.47727272}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 763
+      width: 44
+      height: 44
+    spriteID: 979dcab2daf2940c186b18e8d3383214
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 763}
+  - name: FighterGoblin_Frame_11
+    originalName: 
+    pivot: {x: 0.43902442, y: -0.42222223}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 212
+      width: 41
+      height: 45
+    spriteID: 7dbadac0748064cd08002fe33738a201
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 212}
+  - name: FighterGoblin_Frame_12
+    originalName: 
+    pivot: {x: 0.40540537, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 238
+      width: 37
+      height: 42
+    spriteID: 9cccb93efe2c44830906772d25c9f137
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 238}
+  - name: FighterGoblin_Frame_13
+    originalName: 
+    pivot: {x: 0.42857137, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 288
+      width: 35
+      height: 44
+    spriteID: 29590ee8b35b245ff9f4718bf4728612
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 288}
+  - name: FighterGoblin_Frame_14
+    originalName: 
+    pivot: {x: 0.45000002, y: -0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 425
+      width: 40
+      height: 45
+    spriteID: c623aa104862f446c86a6d22810686c9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 425}
+  - name: FighterGoblin_Frame_15
+    originalName: 
+    pivot: {x: 0.39999998, y: -0.4090909}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 643
+      width: 40
+      height: 44
+    spriteID: a028ecea80c5441cc8457918acea7087
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 643}
+  - name: FighterGoblin_Frame_16
+    originalName: 
+    pivot: {x: 0.41666663, y: -0.3913043}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 184
+      width: 36
+      height: 46
+    spriteID: c63e6706deb2f46eca548886f0e41c12
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 184}
+  - name: FighterGoblin_Frame_18
+    originalName: 
+    pivot: {x: 0.4634147, y: -0.3829787}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 108
+      width: 41
+      height: 47
+    spriteID: e789119bed13b4519b79aa7e1302b354
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 108}
+  - name: FighterGoblin_Frame_19
+    originalName: 
+    pivot: {x: 0.45652172, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 922
+      width: 46
+      height: 42
+    spriteID: 5eb4ab0f5e5b944ceaa44004a6df0dea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 922}
+  - name: FighterGoblin_Frame_20
+    originalName: 
+    pivot: {x: 0.44680852, y: -0.5277778}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 809
+      width: 47
+      height: 36
+    spriteID: eb1d0bd314cda4bcf87e315610bc48c3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 809}
+  - name: FighterGoblin_Frame_21
+    originalName: 
+    pivot: {x: 0.46938777, y: -0.51282054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 52
+      width: 49
+      height: 39
+    spriteID: 900e356ba84ca471f94001b6c78be09b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 52}
+  - name: FighterGoblin_Frame_22
+    originalName: 
+    pivot: {x: 0.4791667, y: -0.5365854}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 522
+      width: 48
+      height: 41
+    spriteID: 0aae51a494bec4105b30924ab587f778
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 522}
+  - name: FighterGoblin_Frame_23
+    originalName: 
+    pivot: {x: 0.48979595, y: -0.5365854}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 371
+      width: 49
+      height: 41
+    spriteID: 538d80180bee74beb8728a9550120506
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 371}
+  - name: FighterGoblin_Frame_24
+    originalName: 
+    pivot: {x: 0.4791667, y: -0.5365854}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 571
+      width: 48
+      height: 41
+    spriteID: 16d7b21280bda4880ab44ad1a34e5056
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 571}
+  - name: FighterGoblin_Frame_25
+    originalName: 
+    pivot: {x: 0.5714286, y: -0.46666664}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 741
+      width: 56
+      height: 45
+    spriteID: 917c42f93af1e41188f76be10e601f51
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 741}
+  - name: FighterGoblin_Frame_26
+    originalName: 
+    pivot: {x: 0.5483871, y: -0.46666664}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 358
+      width: 62
+      height: 45
+    spriteID: 8dcb270feb1d4476aa7a7e0b25729453
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 358}
+  - name: FighterGoblin_Frame_27
+    originalName: 
+    pivot: {x: 0.5333333, y: -0.46666664}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 474
+      width: 60
+      height: 45
+    spriteID: 8a16c95e5a8564359938c9f8ac9f76a7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 474}
+  - name: FighterGoblin_Frame_28
+    originalName: 
+    pivot: {x: 0.5555556, y: -0.475}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 794
+      width: 63
+      height: 40
+    spriteID: 45795773003724113b2795ab616bb84c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 794}
+  - name: FighterGoblin_Frame_29
+    originalName: 
+    pivot: {x: 0.5098039, y: -0.475}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 184
+      width: 51
+      height: 40
+    spriteID: 755850190b8db4b028c25c6b33a2d396
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 184}
+  - name: FighterGoblin_Frame_30
+    originalName: 
+    pivot: {x: 0.5, y: -0.475}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 4
+      width: 54
+      height: 40
+    spriteID: 42483ed8105e94ee689b4eb7fc1f4b07
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 4}
+  - name: FighterGoblin_Frame_31
+    originalName: 
+    pivot: {x: 0.5344827, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 689
+      width: 58
+      height: 44
+    spriteID: 50059ed50e6614b559c30a7728a1e141
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 689}
+  - name: FighterGoblin_Frame_32
+    originalName: 
+    pivot: {x: 0.5555556, y: -0.37499997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 583
+      width: 54
+      height: 48
+    spriteID: fb36136bba9a64eb2b950660865518e8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 583}
+  - name: FighterGoblin_Frame_34
+    originalName: 
+    pivot: {x: 0.46808514, y: -0.41304347}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 4
+      width: 47
+      height: 46
+    spriteID: 352e1391fe7e342099947987837dedfc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 4}
+  - name: FighterGoblin_Frame_35
+    originalName: 
+    pivot: {x: 0.41304353, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 269
+      width: 46
+      height: 44
+    spriteID: 1ba5aa273ce304c4a92439ef96f83bb8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 269}
+  - name: FighterGoblin_Frame_36
+    originalName: 
+    pivot: {x: 0.4042554, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 472
+      width: 47
+      height: 42
+    spriteID: 85364d0d9ec87411aa4475d79094c84b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 472}
+  - name: FighterGoblin_Frame_37
+    originalName: 
+    pivot: {x: 0.4583333, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 321
+      width: 48
+      height: 42
+    spriteID: 6cd6e9c4bbaf6473ab9e37a15af0b7a9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 321}
+  - name: FighterGoblin_Frame_38
+    originalName: 
+    pivot: {x: 0.2962963, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 900
+      width: 54
+      height: 44
+    spriteID: 0b8c69667164f42b29d32fd1d9f5e5f6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 900}
+  - name: FighterGoblin_Frame_39
+    originalName: 
+    pivot: {x: 0.21818183, y: -0.44186047}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 952
+      width: 55
+      height: 43
+    spriteID: a13fcd312b08b4a35a62606eda29c219
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 952}
+  - name: FighterGoblin_Frame_40
+    originalName: 
+    pivot: {x: 0.2622951, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 639
+      width: 61
+      height: 42
+    spriteID: 65283b4bdaaf84df89d75c27a41b0e81
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 639}
+  - name: FighterGoblin_Frame_41
+    originalName: 
+    pivot: {x: 0.28358212, y: -0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 302
+      width: 67
+      height: 48
+    spriteID: 5f769f7e18ae44f238a736172ce0b7c9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 302}
+  - name: FighterGoblin_Frame_42
+    originalName: 
+    pivot: {x: 0.30303028, y: -0.13207547}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 184
+      width: 66
+      height: 53
+    spriteID: afaebaa0d16c046b5b7c9d570d47a3b3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 184}
+  - name: FighterGoblin_Frame_43
+    originalName: 
+    pivot: {x: 0.34246573, y: -0.094339624}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 862
+      width: 73
+      height: 53
+    spriteID: ca36336afbc3249bf87cd2970b23a9dc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 862}
+  - name: FighterGoblin_Frame_45
+    originalName: 
+    pivot: {x: 0.2727273, y: -0.10204082}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 245
+      width: 66
+      height: 49
+    spriteID: 64816be747a3e405da50d60bcb67eeb1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 245}
+  - name: FighterGoblin_Frame_46
+    originalName: 
+    pivot: {x: 0.29629633, y: -0.23913044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 72
+      width: 81
+      height: 46
+    spriteID: 95df309707ab04fa38acf349eeaaa3af
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 72}
+  - name: FighterGoblin_Frame_49
+    originalName: 
+    pivot: {x: 0.3, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 69
+      width: 100
+      height: 56
+    spriteID: 01a093b1d42d1403185ad93713d7a5e1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 69}
+  - name: FighterGoblin_Frame_50
+    originalName: 
+    pivot: {x: 0.29702973, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 4
+      width: 101
+      height: 57
+    spriteID: b9b17e306423f40bd9a3740411ffec4e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 4}
+  - name: FighterGoblin_Frame_51
+    originalName: 
+    pivot: {x: 0.42, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 134
+      width: 50
+      height: 42
+    spriteID: ae91a2a8ab67e45d38f44c004442b661
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 134}
+  - name: FighterGoblin_Frame_52
+    originalName: 
+    pivot: {x: 0.45652172, y: -0.41304347}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 80
+      width: 46
+      height: 46
+    spriteID: 9eb96dd9a68f54297a975e7620a50269
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 80}
+  - name: FighterGoblin_Frame_53
+    originalName: 
+    pivot: {x: 0.45652172, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 972
+      width: 46
+      height: 42
+    spriteID: a5e7c7e7510d040ca8d5709502d2a68c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 972}
+  - name: FighterGoblin_Frame_54
+    originalName: 
+    pivot: {x: 0.44680852, y: -0.5277778}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 853
+      width: 47
+      height: 36
+    spriteID: 6de1b3ec79ac94fc99401d6ba8330b33
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 853}
+  - name: FighterGoblin_Frame_55
+    originalName: 
+    pivot: {x: 0.4423077, y: -0.57575756}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 143
+      width: 52
+      height: 33
+    spriteID: 9b245fe50c2d749ab8454a8054852cd1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 143}
+  - name: FighterGoblin_Frame_56
+    originalName: 
+    pivot: {x: 0.46938777, y: -0.5555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 99
+      width: 49
+      height: 36
+    spriteID: b7b0bf1311d5146cf8a4c42c9452a702
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 99}
+  - name: FighterGoblin_Frame_57
+    originalName: 
+    pivot: {x: 0.47826087, y: -0.52380955}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 58
+      width: 46
+      height: 42
+    spriteID: 482fe541725b14745a3e9d78dda7499a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 58}
+  - name: FighterGoblin_Frame_58
+    originalName: 
+    pivot: {x: 0.5090909, y: -0.43749997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 527
+      width: 55
+      height: 48
+    spriteID: 8ad86c0b6e1024ee0ad8e6294176f086
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 527}
+  - name: FighterGoblin_Frame_59
+    originalName: 
+    pivot: {x: 0.53999996, y: -0.42}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 842
+      width: 50
+      height: 50
+    spriteID: 4d7f5693b2ab749e5a4034c7ba253796
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 842}
+  - name: FighterGoblin_Frame_60
+    originalName: 
+    pivot: {x: 0.65999997, y: -0.38181818}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 411
+      width: 50
+      height: 55
+    spriteID: 7c3b7c639895948e2bc0a123a9083a3a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 411}
+  - name: FighterGoblin_Frame_61
+    originalName: 
+    pivot: {x: 0.1756757, y: -0.35999998}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 126
+      width: 74
+      height: 50
+    spriteID: 357109e087a6846a28e9e02705cea6be
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 126}
+  - name: FighterGoblin_Frame_62
+    originalName: 
+    pivot: {x: 0.18749999, y: -0.23404257}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 923
+      width: 80
+      height: 47
+    spriteID: 0620fccc0a8d54f91bd75c62a4ef3f5a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 923}
+  - name: FighterGoblin_Frame_63
+    originalName: 
+    pivot: {x: 0.20238096, y: -0.22916667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 806
+      width: 84
+      height: 48
+    spriteID: 8b0c6a2a349004114800d5b7b071b746
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 806}
+  - name: FighterGoblin_Frame_64
+    originalName: 
+    pivot: {x: 0.2, y: -0.22448981}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 749
+      width: 85
+      height: 49
+    spriteID: 632545d23c91f44d68d45363e0b98a40
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 749}
+  - name: FighterGoblin_Frame_65
+    originalName: 
+    pivot: {x: 0.2758621, y: -0.22448981}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 692
+      width: 87
+      height: 49
+    spriteID: 870a6e87fcc734f018bc3ffce3633ee5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 692}
+  - name: FighterGoblin_Frame_66
+    originalName: 
+    pivot: {x: 0.26744187, y: -0.21153846}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 324
+      width: 86
+      height: 52
+    spriteID: 9df0e4018dc22493faefcbde45b91072
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 324}
+  - name: FighterGoblin_Frame_68
+    originalName: 
+    pivot: {x: 0.21951221, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 261
+      width: 82
+      height: 55
+    spriteID: b50f244b5922b4daea10e1232a46e945
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 261}
+  - name: FighterGoblin_Frame_69
+    originalName: 
+    pivot: {x: 0.20987655, y: -0.19642858}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 133
+      width: 81
+      height: 56
+    spriteID: 07231a90b61bb4bb99284072486f1ad6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 133}
+  - name: FighterGoblin_Frame_70
+    originalName: 
+    pivot: {x: 0.20987655, y: -0.19642858}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 197
+      width: 81
+      height: 56
+    spriteID: 48df9bdccf592421786a5a8806bd4b69
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 197}
+  - name: FighterGoblin_Frame_71
+    originalName: 
+    pivot: {x: 0.20987655, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 384
+      width: 81
+      height: 55
+    spriteID: 5478075ce25da46fd95e7defb157a1a7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 384}
+  - name: FighterGoblin_Frame_72
+    originalName: 
+    pivot: {x: 0.20987655, y: -0.20754717}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 631
+      width: 81
+      height: 53
+    spriteID: a81bfd2f916a24cac9ed5ceba29f5423
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 631}
+  - name: FighterGoblin_Frame_73
+    originalName: 
+    pivot: {x: 0.21951221, y: -0.2037037}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 510
+      width: 82
+      height: 54
+    spriteID: 874b611e8909f461d83dd60c649833b7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 510}
+  - name: FighterGoblin_Frame_74
+    originalName: 
+    pivot: {x: 0.41463417, y: -0.42222223}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 265
+      width: 41
+      height: 45
+    spriteID: 82204e55f53ba4322ae14e2593e363bd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 265}
+  - name: FighterGoblin_Frame_75
+    originalName: 
+    pivot: {x: 0.4444444, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 420
+      width: 45
+      height: 44
+    spriteID: 616bcb540fa394c4a830654160512e64
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 420}
+  - name: FighterGoblin_Frame_76
+    originalName: 
+    pivot: {x: 0.48837206, y: -0.42222223}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 815
+      width: 43
+      height: 45
+    spriteID: 4609acc8ae1ad45d9a3643745ebb975f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 815}
+  - name: FighterGoblin_Frame_77
+    originalName: 
+    pivot: {x: 0.48717952, y: -0.41304347}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 478
+      width: 39
+      height: 46
+    spriteID: 82a7e2017881642b79b99dbb9842888e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 478}
+  - name: FighterGoblin_Frame_78
+    originalName: 
+    pivot: {x: 0.45238099, y: -0.44186047}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 374
+      width: 42
+      height: 43
+    spriteID: a2fc4095f1a3f4e52bd835751ccb7511
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 374}
+  - name: FighterGoblin_Frame_79
+    originalName: 
+    pivot: {x: 0.51063836, y: -0.46341464}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 163
+      width: 47
+      height: 41
+    spriteID: 3dda3135e34ca4b64ae08ef83dd70e4a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 163}
+  - name: FighterGoblin_Frame_80
+    originalName: 
+    pivot: {x: 0.50000006, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 66
+      y: 900
+      width: 34
+      height: 44
+    spriteID: 5ad723aa8a1024582a06c6eccda7f1dd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 66, y: 900}
+  - name: FighterGoblin_Frame_81
+    originalName: 
+    pivot: {x: 0.6666667, y: -0.4318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 72
+      y: 474
+      width: 27
+      height: 44
+    spriteID: ce2265d850204475f8411a90e1cbfcff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 72, y: 474}
+  - name: FighterGoblin_Frame_82
+    originalName: 
+    pivot: {x: 0.65625, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 741
+      width: 32
+      height: 42
+    spriteID: c1e0a7317cf1d47bc98dadd76a5ccc0c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 68, y: 741}
+  - name: FighterGoblin_Frame_83
+    originalName: 
+    pivot: {x: 0.6666667, y: -0.45238096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 67
+      y: 527
+      width: 33
+      height: 42
+    spriteID: 745aca507c209420a9f0b4417031fca0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 67, y: 527}
+  - name: FighterGoblin_Frame_84
+    originalName: 
+    pivot: {x: 0.6875, y: -0.46341464}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 66
+      y: 583
+      width: 32
+      height: 41
+    spriteID: 1f83e1e3cf2654f73872376898a26554
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 66, y: 583}
+  - name: FighterGoblin_Frame_85
+    originalName: 
+    pivot: {x: 0.5945946, y: -0.46341464}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 340
+      width: 37
+      height: 41
+    spriteID: f55224309843145439dc69ef1ce61398
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 340}
+  - name: FighterGoblin_Frame_86
+    originalName: 
+    pivot: {x: 0.5555555, y: -0.48717952}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 73
+      y: 639
+      width: 27
+      height: 39
+    spriteID: b28d9a3d156ff430aa76e70864b79687
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 73, y: 639}
+  - name: FighterGoblin_Frame_87
+    originalName: 
+    pivot: {x: 0.51724136, y: -0.5135135}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 689
+      width: 29
+      height: 37
+    spriteID: 14629033f72f54304a2b93fb1b245267
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 689}
+  - name: FighterGoblin_Frame_88
+    originalName: 
+    pivot: {x: 0.46666658, y: -0.5135135}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 179
+      y: 978
+      width: 30
+      height: 37
+    spriteID: c7d227fb988054f31a6e09a8ae50399e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 179, y: 978}
+  - name: FighterGoblin_Frame_89
+    originalName: 
+    pivot: {x: 0.3333333, y: -0.59375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 426
+      width: 45
+      height: 32
+    spriteID: 90f9afc902ac54657b3ec6d429dd2d68
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 426}
+  - name: FighterGoblin_Frame_90
+    originalName: 
+    pivot: {x: 0.24000001, y: -0.6551724}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 389
+      width: 50
+      height: 29
+    spriteID: ae785cbb07afc4186a00a5ff561a612d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 272, y: 389}
+  - name: FighterGoblin_Frame_91
+    originalName: 
+    pivot: {x: 0.20634922, y: -0.3548387}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 620
+      width: 63
+      height: 31
+    spriteID: 272a1988fe2f8492e95c785a622abce4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 620}
+  - name: FighterGoblin_Frame_92
+    originalName: 
+    pivot: {x: 0.19402987, y: -0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 413
+      y: 4
+      width: 67
+      height: 27
+    spriteID: 32c8fa10e037248b8844d7e46143ed7f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 413, y: 4}
+  - name: FighterGoblin_Frame_93
+    originalName: 
+    pivot: {x: 0.1857143, y: -0.37931037}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 232
+      width: 70
+      height: 29
+    spriteID: 52e53aac29c0140d39454ea2a0d1b671
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 232}
+  - name: FighterGoblin_Frame_94
+    originalName: 
+    pivot: {x: 0.18309861, y: -0.36666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 4
+      width: 71
+      height: 30
+    spriteID: 7155e934ab732496fac840c52a2bb156
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 4}
+  - name: FighterGoblin_Frame_96
+    originalName: 
+    pivot: {x: 0.18840581, y: -0.52380955}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 413
+      y: 39
+      width: 69
+      height: 21
+    spriteID: a96ebe6bcc0a74eb1af081b36afe9c61
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 413, y: 39}
+  - name: FighterGoblin_Frame_97
+    originalName: 
+    pivot: {x: 0.2280702, y: -0.52380955}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 413
+      y: 68
+      width: 57
+      height: 21
+    spriteID: 722176c67d20f478dacd2cee64ed833b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 413, y: 68}
+  - name: FighterGoblin_Frame_44
+    originalName: 
+    pivot: {x: 0.26984128, y: -0.46341464}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 978
+      width: 63
+      height: 41
+    spriteID: 7044d14b0cf804528a77d8a919af9869
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 978}
+  - name: FighterGoblin_Frame_47
+    originalName: 
+    pivot: {x: 0.30232555, y: -0.15686275}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 572
+      width: 86
+      height: 51
+    spriteID: a54490c4ab84d4ab08aed837dcf59412
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 572}
+  - name: FighterGoblin_Frame_48
+    originalName: 
+    pivot: {x: 0.30208334, y: -0.016666668}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 96
+      height: 60
+    spriteID: a8c85942e21f2431080053e72214bc44
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: FighterGoblin_Frame_0
+    originalName: 
+    pivot: {x: 0.47368425, y: -0.37499997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 62
+      y: 842
+      width: 38
+      height: 48
+    spriteID: 5b6b69cd8cb6b448c990e8a771f67a11
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 62, y: 842}
+  - name: FighterGoblin_Frame_17
+    originalName: 
+    pivot: {x: 0.47368425, y: -0.37499997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 62
+      y: 411
+      width: 38
+      height: 48
+    spriteID: 3d138aeb326444f8d8a7f6b09f2f0872
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 62, y: 411}
+  - name: FighterGoblin_Frame_33
+    originalName: 
+    pivot: {x: 0.47368425, y: -0.37499997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 217
+      y: 318
+      width: 38
+      height: 48
+    spriteID: b304a535f4d994907b61f148d5efc533
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 217, y: 318}
+  - name: FighterGoblin_Frame_67
+    originalName: 
+    pivot: {x: 0.22222224, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 447
+      width: 81
+      height: 55
+    spriteID: 82efedf7e1b2f4df69bc480c47f3f48a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 447}
+  - name: FighterGoblin_Frame_95
+    originalName: 
+    pivot: {x: 0.18309861, y: -0.36666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 42
+      width: 71
+      height: 30
+    spriteID: 75aa21abffcf24f1c9a5f0b5a89cce93
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 334, y: 42}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 632070480
+    name: FighterGoblin
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: FighterGoblin_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 53
+        y: 18
+        width: 37
+        height: 48
+      spriteId: 252513a3f27ed4c9787da04b03ab230f
+    - name: FighterGoblin_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 54
+        y: 18
+        width: 35
+        height: 49
+      spriteId: 45cdb21b859084913a503b86ad1fa165
+    - name: FighterGoblin_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 54
+        y: 18
+        width: 35
+        height: 49
+      spriteId: 0bf86a50b718b44fdae7dd6048107697
+    - name: FighterGoblin_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 54
+        y: 18
+        width: 35
+        height: 48
+      spriteId: f12d6a37d1a6d40c0a5bfda33d4919a4
+    - name: FighterGoblin_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 54
+        y: 18
+        width: 36
+        height: 46
+      spriteId: 51ff33ef49cad44869c85711b53e09cd
+    - name: FighterGoblin_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 53
+        y: 18
+        width: 38
+        height: 47
+      spriteId: 721b2928e029f4fb98bb88dcf4aa1573
+    - name: FighterGoblin_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 52
+        y: 18
+        width: 42
+        height: 46
+      spriteId: 1ea0ec2bc789b414c97949539ee2a004
+    - name: FighterGoblin_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 49
+        y: 19
+        width: 44
+        height: 44
+      spriteId: a24bc1f1d60d140c194839ed2d3bd451
+    - name: FighterGoblin_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 48
+        y: 20
+        width: 44
+        height: 44
+      spriteId: b8589b3c254bc4dfc9b13fc657c10383
+    - name: FighterGoblin_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 49
+        y: 21
+        width: 44
+        height: 44
+      spriteId: 979dcab2daf2940c186b18e8d3383214
+    - name: FighterGoblin_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 53
+        y: 19
+        width: 41
+        height: 45
+      spriteId: 7dbadac0748064cd08002fe33738a201
+    - name: FighterGoblin_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 56
+        y: 19
+        width: 37
+        height: 42
+      spriteId: 9cccb93efe2c44830906772d25c9f137
+    - name: FighterGoblin_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 56
+        y: 19
+        width: 35
+        height: 44
+      spriteId: 29590ee8b35b245ff9f4718bf4728612
+    - name: FighterGoblin_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 53
+        y: 20
+        width: 40
+        height: 45
+      spriteId: c623aa104862f446c86a6d22810686c9
+    - name: FighterGoblin_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 55
+        y: 18
+        width: 40
+        height: 44
+      spriteId: a028ecea80c5441cc8457918acea7087
+    - name: FighterGoblin_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 56
+        y: 18
+        width: 36
+        height: 46
+      spriteId: c63e6706deb2f46eca548886f0e41c12
+    - name: FighterGoblin_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 52
+        y: 18
+        width: 41
+        height: 47
+      spriteId: e789119bed13b4519b79aa7e1302b354
+    - name: FighterGoblin_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 50
+        y: 19
+        width: 46
+        height: 42
+      spriteId: 5eb4ab0f5e5b944ceaa44004a6df0dea
+    - name: FighterGoblin_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 50
+        y: 19
+        width: 47
+        height: 36
+      spriteId: eb1d0bd314cda4bcf87e315610bc48c3
+    - name: FighterGoblin_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 48
+        y: 20
+        width: 49
+        height: 39
+      spriteId: 900e356ba84ca471f94001b6c78be09b
+    - name: FighterGoblin_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 48
+        y: 22
+        width: 48
+        height: 41
+      spriteId: 0aae51a494bec4105b30924ab587f778
+    - name: FighterGoblin_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 47
+        y: 22
+        width: 49
+        height: 41
+      spriteId: 538d80180bee74beb8728a9550120506
+    - name: FighterGoblin_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 48
+        y: 22
+        width: 48
+        height: 41
+      spriteId: 16d7b21280bda4880ab44ad1a34e5056
+    - name: FighterGoblin_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 39
+        y: 21
+        width: 56
+        height: 45
+      spriteId: 917c42f93af1e41188f76be10e601f51
+    - name: FighterGoblin_Frame_26
+      frameIndex: 26
+      cellRect:
+        x: 37
+        y: 21
+        width: 62
+        height: 45
+      spriteId: 8dcb270feb1d4476aa7a7e0b25729453
+    - name: FighterGoblin_Frame_27
+      frameIndex: 27
+      cellRect:
+        x: 39
+        y: 21
+        width: 60
+        height: 45
+      spriteId: 8a16c95e5a8564359938c9f8ac9f76a7
+    - name: FighterGoblin_Frame_28
+      frameIndex: 28
+      cellRect:
+        x: 36
+        y: 19
+        width: 63
+        height: 40
+      spriteId: 45795773003724113b2795ab616bb84c
+    - name: FighterGoblin_Frame_29
+      frameIndex: 29
+      cellRect:
+        x: 45
+        y: 19
+        width: 51
+        height: 40
+      spriteId: 755850190b8db4b028c25c6b33a2d396
+    - name: FighterGoblin_Frame_30
+      frameIndex: 30
+      cellRect:
+        x: 44
+        y: 19
+        width: 54
+        height: 40
+      spriteId: 42483ed8105e94ee689b4eb7fc1f4b07
+    - name: FighterGoblin_Frame_31
+      frameIndex: 31
+      cellRect:
+        x: 40
+        y: 19
+        width: 58
+        height: 44
+      spriteId: 50059ed50e6614b559c30a7728a1e141
+    - name: FighterGoblin_Frame_32
+      frameIndex: 32
+      cellRect:
+        x: 41
+        y: 18
+        width: 54
+        height: 48
+      spriteId: fb36136bba9a64eb2b950660865518e8
+    - name: FighterGoblin_Frame_34
+      frameIndex: 34
+      cellRect:
+        x: 49
+        y: 19
+        width: 47
+        height: 46
+      spriteId: 352e1391fe7e342099947987837dedfc
+    - name: FighterGoblin_Frame_35
+      frameIndex: 35
+      cellRect:
+        x: 52
+        y: 19
+        width: 46
+        height: 44
+      spriteId: 1ba5aa273ce304c4a92439ef96f83bb8
+    - name: FighterGoblin_Frame_36
+      frameIndex: 36
+      cellRect:
+        x: 52
+        y: 19
+        width: 47
+        height: 42
+      spriteId: 85364d0d9ec87411aa4475d79094c84b
+    - name: FighterGoblin_Frame_37
+      frameIndex: 37
+      cellRect:
+        x: 49
+        y: 19
+        width: 48
+        height: 42
+      spriteId: 6cd6e9c4bbaf6473ab9e37a15af0b7a9
+    - name: FighterGoblin_Frame_38
+      frameIndex: 38
+      cellRect:
+        x: 55
+        y: 19
+        width: 54
+        height: 44
+      spriteId: 0b8c69667164f42b29d32fd1d9f5e5f6
+    - name: FighterGoblin_Frame_39
+      frameIndex: 39
+      cellRect:
+        x: 59
+        y: 19
+        width: 55
+        height: 43
+      spriteId: a13fcd312b08b4a35a62606eda29c219
+    - name: FighterGoblin_Frame_40
+      frameIndex: 40
+      cellRect:
+        x: 55
+        y: 19
+        width: 61
+        height: 42
+      spriteId: 65283b4bdaaf84df89d75c27a41b0e81
+    - name: FighterGoblin_Frame_41
+      frameIndex: 41
+      cellRect:
+        x: 52
+        y: 12
+        width: 67
+        height: 48
+      spriteId: 5f769f7e18ae44f238a736172ce0b7c9
+    - name: FighterGoblin_Frame_42
+      frameIndex: 42
+      cellRect:
+        x: 51
+        y: 7
+        width: 66
+        height: 53
+      spriteId: afaebaa0d16c046b5b7c9d570d47a3b3
+    - name: FighterGoblin_Frame_43
+      frameIndex: 43
+      cellRect:
+        x: 46
+        y: 5
+        width: 73
+        height: 53
+      spriteId: ca36336afbc3249bf87cd2970b23a9dc
+    - name: FighterGoblin_Frame_45
+      frameIndex: 45
+      cellRect:
+        x: 53
+        y: 5
+        width: 66
+        height: 49
+      spriteId: 64816be747a3e405da50d60bcb67eeb1
+    - name: FighterGoblin_Frame_46
+      frameIndex: 46
+      cellRect:
+        x: 47
+        y: 11
+        width: 81
+        height: 46
+      spriteId: 95df309707ab04fa38acf349eeaaa3af
+    - name: FighterGoblin_Frame_49
+      frameIndex: 49
+      cellRect:
+        x: 41
+        y: 0
+        width: 100
+        height: 56
+      spriteId: 01a093b1d42d1403185ad93713d7a5e1
+    - name: FighterGoblin_Frame_50
+      frameIndex: 50
+      cellRect:
+        x: 41
+        y: 0
+        width: 101
+        height: 57
+      spriteId: b9b17e306423f40bd9a3740411ffec4e
+    - name: FighterGoblin_Frame_51
+      frameIndex: 51
+      cellRect:
+        x: 50
+        y: 19
+        width: 50
+        height: 42
+      spriteId: ae91a2a8ab67e45d38f44c004442b661
+    - name: FighterGoblin_Frame_52
+      frameIndex: 52
+      cellRect:
+        x: 50
+        y: 19
+        width: 46
+        height: 46
+      spriteId: 9eb96dd9a68f54297a975e7620a50269
+    - name: FighterGoblin_Frame_53
+      frameIndex: 53
+      cellRect:
+        x: 50
+        y: 19
+        width: 46
+        height: 42
+      spriteId: a5e7c7e7510d040ca8d5709502d2a68c
+    - name: FighterGoblin_Frame_54
+      frameIndex: 54
+      cellRect:
+        x: 50
+        y: 19
+        width: 47
+        height: 36
+      spriteId: 6de1b3ec79ac94fc99401d6ba8330b33
+    - name: FighterGoblin_Frame_55
+      frameIndex: 55
+      cellRect:
+        x: 48
+        y: 19
+        width: 52
+        height: 33
+      spriteId: 9b245fe50c2d749ab8454a8054852cd1
+    - name: FighterGoblin_Frame_56
+      frameIndex: 56
+      cellRect:
+        x: 48
+        y: 20
+        width: 49
+        height: 36
+      spriteId: b7b0bf1311d5146cf8a4c42c9452a702
+    - name: FighterGoblin_Frame_57
+      frameIndex: 57
+      cellRect:
+        x: 49
+        y: 22
+        width: 46
+        height: 42
+      spriteId: 482fe541725b14745a3e9d78dda7499a
+    - name: FighterGoblin_Frame_58
+      frameIndex: 58
+      cellRect:
+        x: 43
+        y: 21
+        width: 55
+        height: 48
+      spriteId: 8ad86c0b6e1024ee0ad8e6294176f086
+    - name: FighterGoblin_Frame_59
+      frameIndex: 59
+      cellRect:
+        x: 44
+        y: 21
+        width: 50
+        height: 50
+      spriteId: 4d7f5693b2ab749e5a4034c7ba253796
+    - name: FighterGoblin_Frame_60
+      frameIndex: 60
+      cellRect:
+        x: 38
+        y: 21
+        width: 50
+        height: 55
+      spriteId: 7c3b7c639895948e2bc0a123a9083a3a
+    - name: FighterGoblin_Frame_61
+      frameIndex: 61
+      cellRect:
+        x: 58
+        y: 18
+        width: 74
+        height: 50
+      spriteId: 357109e087a6846a28e9e02705cea6be
+    - name: FighterGoblin_Frame_62
+      frameIndex: 62
+      cellRect:
+        x: 56
+        y: 11
+        width: 80
+        height: 47
+      spriteId: 0620fccc0a8d54f91bd75c62a4ef3f5a
+    - name: FighterGoblin_Frame_63
+      frameIndex: 63
+      cellRect:
+        x: 54
+        y: 11
+        width: 84
+        height: 48
+      spriteId: 8b0c6a2a349004114800d5b7b071b746
+    - name: FighterGoblin_Frame_64
+      frameIndex: 64
+      cellRect:
+        x: 54
+        y: 11
+        width: 85
+        height: 49
+      spriteId: 632545d23c91f44d68d45363e0b98a40
+    - name: FighterGoblin_Frame_65
+      frameIndex: 65
+      cellRect:
+        x: 47
+        y: 11
+        width: 87
+        height: 49
+      spriteId: 870a6e87fcc734f018bc3ffce3633ee5
+    - name: FighterGoblin_Frame_66
+      frameIndex: 66
+      cellRect:
+        x: 48
+        y: 11
+        width: 86
+        height: 52
+      spriteId: 9df0e4018dc22493faefcbde45b91072
+    - name: FighterGoblin_Frame_68
+      frameIndex: 68
+      cellRect:
+        x: 53
+        y: 11
+        width: 82
+        height: 55
+      spriteId: b50f244b5922b4daea10e1232a46e945
+    - name: FighterGoblin_Frame_69
+      frameIndex: 69
+      cellRect:
+        x: 54
+        y: 11
+        width: 81
+        height: 56
+      spriteId: 07231a90b61bb4bb99284072486f1ad6
+    - name: FighterGoblin_Frame_70
+      frameIndex: 70
+      cellRect:
+        x: 54
+        y: 11
+        width: 81
+        height: 56
+      spriteId: 48df9bdccf592421786a5a8806bd4b69
+    - name: FighterGoblin_Frame_71
+      frameIndex: 71
+      cellRect:
+        x: 54
+        y: 11
+        width: 81
+        height: 55
+      spriteId: 5478075ce25da46fd95e7defb157a1a7
+    - name: FighterGoblin_Frame_72
+      frameIndex: 72
+      cellRect:
+        x: 54
+        y: 11
+        width: 81
+        height: 53
+      spriteId: a81bfd2f916a24cac9ed5ceba29f5423
+    - name: FighterGoblin_Frame_73
+      frameIndex: 73
+      cellRect:
+        x: 53
+        y: 11
+        width: 82
+        height: 54
+      spriteId: 874b611e8909f461d83dd60c649833b7
+    - name: FighterGoblin_Frame_74
+      frameIndex: 74
+      cellRect:
+        x: 54
+        y: 19
+        width: 41
+        height: 45
+      spriteId: 82204e55f53ba4322ae14e2593e363bd
+    - name: FighterGoblin_Frame_75
+      frameIndex: 75
+      cellRect:
+        x: 51
+        y: 19
+        width: 45
+        height: 44
+      spriteId: 616bcb540fa394c4a830654160512e64
+    - name: FighterGoblin_Frame_76
+      frameIndex: 76
+      cellRect:
+        x: 50
+        y: 19
+        width: 43
+        height: 45
+      spriteId: 4609acc8ae1ad45d9a3643745ebb975f
+    - name: FighterGoblin_Frame_77
+      frameIndex: 77
+      cellRect:
+        x: 52
+        y: 19
+        width: 39
+        height: 46
+      spriteId: 82a7e2017881642b79b99dbb9842888e
+    - name: FighterGoblin_Frame_78
+      frameIndex: 78
+      cellRect:
+        x: 52
+        y: 19
+        width: 42
+        height: 43
+      spriteId: a2fc4095f1a3f4e52bd835751ccb7511
+    - name: FighterGoblin_Frame_79
+      frameIndex: 79
+      cellRect:
+        x: 47
+        y: 19
+        width: 47
+        height: 41
+      spriteId: 3dda3135e34ca4b64ae08ef83dd70e4a
+    - name: FighterGoblin_Frame_80
+      frameIndex: 80
+      cellRect:
+        x: 54
+        y: 19
+        width: 34
+        height: 44
+      spriteId: 5ad723aa8a1024582a06c6eccda7f1dd
+    - name: FighterGoblin_Frame_81
+      frameIndex: 81
+      cellRect:
+        x: 53
+        y: 19
+        width: 27
+        height: 44
+      spriteId: ce2265d850204475f8411a90e1cbfcff
+    - name: FighterGoblin_Frame_82
+      frameIndex: 82
+      cellRect:
+        x: 50
+        y: 19
+        width: 32
+        height: 42
+      spriteId: c1e0a7317cf1d47bc98dadd76a5ccc0c
+    - name: FighterGoblin_Frame_83
+      frameIndex: 83
+      cellRect:
+        x: 49
+        y: 19
+        width: 33
+        height: 42
+      spriteId: 745aca507c209420a9f0b4417031fca0
+    - name: FighterGoblin_Frame_84
+      frameIndex: 84
+      cellRect:
+        x: 49
+        y: 19
+        width: 32
+        height: 41
+      spriteId: 1f83e1e3cf2654f73872376898a26554
+    - name: FighterGoblin_Frame_85
+      frameIndex: 85
+      cellRect:
+        x: 49
+        y: 19
+        width: 37
+        height: 41
+      spriteId: f55224309843145439dc69ef1ce61398
+    - name: FighterGoblin_Frame_86
+      frameIndex: 86
+      cellRect:
+        x: 56
+        y: 19
+        width: 27
+        height: 39
+      spriteId: b28d9a3d156ff430aa76e70864b79687
+    - name: FighterGoblin_Frame_87
+      frameIndex: 87
+      cellRect:
+        x: 56
+        y: 19
+        width: 29
+        height: 37
+      spriteId: 14629033f72f54304a2b93fb1b245267
+    - name: FighterGoblin_Frame_88
+      frameIndex: 88
+      cellRect:
+        x: 57
+        y: 19
+        width: 30
+        height: 37
+      spriteId: c7d227fb988054f31a6e09a8ae50399e
+    - name: FighterGoblin_Frame_89
+      frameIndex: 89
+      cellRect:
+        x: 56
+        y: 19
+        width: 45
+        height: 32
+      spriteId: 90f9afc902ac54657b3ec6d429dd2d68
+    - name: FighterGoblin_Frame_90
+      frameIndex: 90
+      cellRect:
+        x: 59
+        y: 19
+        width: 50
+        height: 29
+      spriteId: ae785cbb07afc4186a00a5ff561a612d
+    - name: FighterGoblin_Frame_91
+      frameIndex: 91
+      cellRect:
+        x: 58
+        y: 11
+        width: 63
+        height: 31
+      spriteId: 272a1988fe2f8492e95c785a622abce4
+    - name: FighterGoblin_Frame_92
+      frameIndex: 92
+      cellRect:
+        x: 58
+        y: 12
+        width: 67
+        height: 27
+      spriteId: 32c8fa10e037248b8844d7e46143ed7f
+    - name: FighterGoblin_Frame_93
+      frameIndex: 93
+      cellRect:
+        x: 58
+        y: 11
+        width: 70
+        height: 29
+      spriteId: 52e53aac29c0140d39454ea2a0d1b671
+    - name: FighterGoblin_Frame_94
+      frameIndex: 94
+      cellRect:
+        x: 58
+        y: 11
+        width: 71
+        height: 30
+      spriteId: 7155e934ab732496fac840c52a2bb156
+    - name: FighterGoblin_Frame_96
+      frameIndex: 96
+      cellRect:
+        x: 58
+        y: 11
+        width: 69
+        height: 21
+      spriteId: a96ebe6bcc0a74eb1af081b36afe9c61
+    - name: FighterGoblin_Frame_97
+      frameIndex: 97
+      cellRect:
+        x: 58
+        y: 11
+        width: 57
+        height: 21
+      spriteId: 722176c67d20f478dacd2cee64ed833b
+    - name: FighterGoblin_Frame_44
+      frameIndex: 44
+      cellRect:
+        x: 54
+        y: 19
+        width: 63
+        height: 41
+      spriteId: 7044d14b0cf804528a77d8a919af9869
+    - name: FighterGoblin_Frame_47
+      frameIndex: 47
+      cellRect:
+        x: 45
+        y: 8
+        width: 86
+        height: 51
+      spriteId: a54490c4ab84d4ab08aed837dcf59412
+    - name: FighterGoblin_Frame_48
+      frameIndex: 48
+      cellRect:
+        x: 42
+        y: 1
+        width: 96
+        height: 60
+      spriteId: a8c85942e21f2431080053e72214bc44
+    - name: FighterGoblin_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 53
+        y: 18
+        width: 38
+        height: 48
+      spriteId: 5b6b69cd8cb6b448c990e8a771f67a11
+    - name: FighterGoblin_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 53
+        y: 18
+        width: 38
+        height: 48
+      spriteId: 3d138aeb326444f8d8a7f6b09f2f0872
+    - name: FighterGoblin_Frame_33
+      frameIndex: 33
+      cellRect:
+        x: 53
+        y: 18
+        width: 38
+        height: 48
+      spriteId: b304a535f4d994907b61f148d5efc533
+    - name: FighterGoblin_Frame_67
+      frameIndex: 67
+      cellRect:
+        x: 53
+        y: 11
+        width: 81
+        height: 55
+      spriteId: 82efedf7e1b2f4df69bc480c47f3f48a
+    - name: FighterGoblin_Frame_95
+      frameIndex: 95
+      cellRect:
+        x: 58
+        y: 11
+        width: 71
+        height: 30
+      spriteId: 75aa21abffcf24f1c9a5f0b5a89cce93
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 142, y: 80}
