@@ -7,9 +7,6 @@ namespace Manager
 {
     public class GameManager : UnitySingleton<GameManager>
     {
-        [Header("타일 정보")]
-        public List<NewBlock> blockInfos;
-
         protected override GameManager Initialize()
         {
             return this;

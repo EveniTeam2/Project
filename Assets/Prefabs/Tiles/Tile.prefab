@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2284718548587177506}
   - component: {fileID: -4618543666238928253}
   - component: {fileID: 4914153491292411587}
+  - component: {fileID: 8802559507828502668}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -92,8 +93,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c67a8186bf0425a9e1cb47eba3aadb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockInfo: {fileID: 0}
   spriteRenderer: {fileID: 2073646459855473589}
   textMeshPro: {fileID: 9213169227156138198}
+--- !u!210 &8802559507828502668
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318004690288196937}
+  m_Enabled: 1
+  m_SortingLayerID: 1956668677
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &3006368647726029440
 GameObject:
   m_ObjectHideFlags: 0

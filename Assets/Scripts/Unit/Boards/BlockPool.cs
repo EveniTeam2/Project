@@ -1,6 +1,7 @@
 using Core.Utils;
-using Unit.Blocks;
+using Unit.Boards.Blocks;
 using Unit.Boards.Interfaces;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Unit.Boards
@@ -11,7 +12,7 @@ namespace Unit.Boards
     public class BlockPool : CustomPool<Block>, IBlockPool
     {
         public BlockPool(Block prefab, Transform root, int size, bool isFlexible)
-            : base(prefab, root, OnCreate, OnGet, OnRelease, OnDestroy, size, isFlexible) { }
+            : base(prefab, root, OnCreate, OnGet, OnRelease, OnDestroy, size, isFlexible){ }
 
         private static void OnCreate(Block block, CustomPool<Block> blockPool)
         {
