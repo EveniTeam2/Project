@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 591a6ce272149de4794d54f374957093, type: 3}
+  m_Script: {fileID: 11500000, guid: 1382a658892c4c9db78cb4d541f2b3e3, type: 3}
   m_Name: PlayerStateData
   m_EditorClassIdentifier: Assembly-CSharp:Unit.Character:CharacterStateData
   states:
-  - {fileID: 11400000, guid: 5d15800aedcd8e043adb3773a791b077, type: 2}
-  - {fileID: 11400000, guid: 63a8a9ba1a5739a4386c773171ee6cc0, type: 2}
-  - {fileID: 11400000, guid: d841fd182e5ae3341888bda3f557bc8e, type: 2}
-  - {fileID: 11400000, guid: 6535b95b4f4c58a44b405fa93dab01ba, type: 2}
-  - {fileID: 11400000, guid: 0f6f6468a656ec040866e9d51e0435c2, type: 2}
-  - {fileID: 11400000, guid: d43a6c8283d8623438c53ce6f9495c29, type: 2}
+  - {fileID: 11400000, guid: 02c54262e63df4c369db6c04a3898296, type: 2}
+  - {fileID: 11400000, guid: a39898424db354c6fa3b26b72a35742c, type: 2}
+  - {fileID: 11400000, guid: 146cb5c29511d4f1e880d721685070c7, type: 2}
+  - {fileID: 11400000, guid: aa02a5302905f43c0a2267b464739038, type: 2}

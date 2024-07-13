@@ -7,7 +7,7 @@ namespace Core.Utils
     public class CustomPool<T> where T : MonoBehaviour
     {
         private T obj;
-        private Transform root;
+        protected Transform root;
         private Action<T, CustomPool<T>> create;
         private Action<T> get;
         private Action<T> release;

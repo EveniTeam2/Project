@@ -2,13 +2,16 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
-using Unit.Character;
+using Unit.Stages;
+using Unit.Stages.Creatures.Interfaces;
+using Unit.Stages.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TestScripts {
     public class TestSceneManager : MonoBehaviour {
-        [SerializeField] BattleStageSetting settings;
-        [SerializeField] private BattleStageManager stageManager;
+        [SerializeField] StageSetting settings;
+        [SerializeField] private StageManager stageManager;
         [SerializeField] private List<CommandToStage> testCommand;
         [SerializeField] private KeyCode testKey;
         private void Start() {
@@ -25,15 +28,15 @@ namespace TestScripts {
         }
     }
     [Serializable]
-    public class CommandToStage : ICommand<IBattleStageTarget> {
+    public class CommandToStage : ICommand<IStageCreature> {
         [SerializeField] NewBlock block;
         [SerializeField] int count;
         [SerializeField] float targetNormalTime;
-        void ICommand<IBattleStageTarget>.Execute(IBattleStageTarget target) {
-            target.Player.Input(block, count);
+        void ICommand<IStageCreature>.Execute(IStageCreature creature) {
+            creature.Character.Input(block, count);
         }
-        bool ICommand<IBattleStageTarget>.IsExecutable(IBattleStageTarget target) {
-            return (target.Player.HFSM.GetCurrentAnimationNormalizedTime() > targetNormalTime);
+        bool ICommand<IStageCreature>.IsExecutable(IStageCreature creature) {
+            return (creature.Character.HFSM.GetCurrentAnimationNormalizedTime() > targetNormalTime);
         }
     }
 }

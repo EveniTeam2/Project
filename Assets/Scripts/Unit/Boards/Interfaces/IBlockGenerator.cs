@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
-using Unit.Blocks;
+using Unit.Boards.Blocks;
 
 namespace Unit.Boards.Interfaces
 {
