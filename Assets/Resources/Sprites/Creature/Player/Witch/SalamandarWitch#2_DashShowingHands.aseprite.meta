@@ -1,0 +1,584 @@
+fileFormatVersion: 2
+guid: 226f6e6c7f7e545b6b8a2a9e910f244e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: SalamandarWitch#2_DashShowingHands_Frame_0
+    originalName: 
+    pivot: {x: 0.5, y: -0.8703704}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 177
+      y: 4
+      width: 64
+      height: 54
+    spriteID: bfa479e66023f4b59853201dc7094d1f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 177, y: 4}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: -0.77049184}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 181
+      y: 320
+      width: 64
+      height: 61
+    spriteID: 4aaf40745d6cd450e8b84020ebd77cfb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 181, y: 320}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -0.7580645}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 181
+      y: 250
+      width: 64
+      height: 62
+    spriteID: a6853e4fcb23d4fe5ab6681a254bba91
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 181, y: 250}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_3
+    originalName: 
+    pivot: {x: 0.52238804, y: -0.7580645}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 439
+      width: 67
+      height: 62
+    spriteID: 7e53680484a9e4f53b364197dda0443f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 439}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_4
+    originalName: 
+    pivot: {x: 0.5362319, y: -0.7580645}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 309
+      width: 69
+      height: 62
+    spriteID: 3f274d5a8033c48e3acca0f1e0cbd9f1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 309}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_5
+    originalName: 
+    pivot: {x: 0.58441556, y: -0.78333336}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 77
+      height: 60
+    spriteID: 0936aeed45d97408893dd066a1c7ff2e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_6
+    originalName: 
+    pivot: {x: 0.5949367, y: -0.8363636}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 128
+      width: 79
+      height: 55
+    spriteID: 8a120df14d33246b091296698377b4f4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 128}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_7
+    originalName: 
+    pivot: {x: 0.6, y: -0.8035714}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 4
+      width: 80
+      height: 56
+    spriteID: c1d11dd91a70b4c98aa1e862e21f9c1f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 4}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_8
+    originalName: 
+    pivot: {x: 0.60975605, y: -0.9038462}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 379
+      width: 82
+      height: 52
+    spriteID: 84896ceae2d2d4bf4abf5f05e277642a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 379}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_9
+    originalName: 
+    pivot: {x: 0.627907, y: -0.8846154}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 68
+      width: 86
+      height: 52
+    spriteID: ab6c0345629e0412dbe781127ac64319
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 68}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_10
+    originalName: 
+    pivot: {x: 0.61904764, y: -0.8627451}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 250
+      width: 84
+      height: 51
+    spriteID: a4fb67f7df8ea4b3f9418640b705afbb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 250}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_11
+    originalName: 
+    pivot: {x: 0.6117647, y: -0.88235295}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 89
+      y: 191
+      width: 85
+      height: 51
+    spriteID: 2410010c5d0a54c2f9791c6dbda9cf05
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 89, y: 191}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_12
+    originalName: 
+    pivot: {x: 0.4848485, y: -0.90000004}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 183
+      y: 68
+      width: 66
+      height: 50
+    spriteID: efa4167565c894993863f4c3e169ce6a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 183, y: 68}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_13
+    originalName: 
+    pivot: {x: 0.5, y: -0.9183674}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 182
+      y: 191
+      width: 64
+      height: 49
+    spriteID: f1c83b6328c534fa394adcd38e69203c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 182, y: 191}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_14
+    originalName: 
+    pivot: {x: 0.5, y: -0.9791667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 181
+      y: 389
+      width: 64
+      height: 48
+    spriteID: e33f79afddf5441b3bf05817dc52d00b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 181, y: 389}
+  - name: SalamandarWitch#2_DashShowingHands_Frame_15
+    originalName: 
+    pivot: {x: 0.5, y: -0.8867925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 176
+      y: 128
+      width: 64
+      height: 53
+    spriteID: 79a4acb103d014d26aa1f5c7bd4ebeb3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 176, y: 128}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -1072362826
+    name: SalamandarWitch#2_DashShowingHands
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: SalamandarWitch#2_DashShowingHands_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 96
+        y: 47
+        width: 64
+        height: 54
+      spriteId: bfa479e66023f4b59853201dc7094d1f
+    - name: SalamandarWitch#2_DashShowingHands_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 96
+        y: 47
+        width: 64
+        height: 61
+      spriteId: 4aaf40745d6cd450e8b84020ebd77cfb
+    - name: SalamandarWitch#2_DashShowingHands_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 96
+        y: 47
+        width: 64
+        height: 62
+      spriteId: a6853e4fcb23d4fe5ab6681a254bba91
+    - name: SalamandarWitch#2_DashShowingHands_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 93
+        y: 47
+        width: 67
+        height: 62
+      spriteId: 7e53680484a9e4f53b364197dda0443f
+    - name: SalamandarWitch#2_DashShowingHands_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 91
+        y: 47
+        width: 69
+        height: 62
+      spriteId: 3f274d5a8033c48e3acca0f1e0cbd9f1
+    - name: SalamandarWitch#2_DashShowingHands_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 83
+        y: 47
+        width: 77
+        height: 60
+      spriteId: 0936aeed45d97408893dd066a1c7ff2e
+    - name: SalamandarWitch#2_DashShowingHands_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 81
+        y: 46
+        width: 79
+        height: 55
+      spriteId: 8a120df14d33246b091296698377b4f4
+    - name: SalamandarWitch#2_DashShowingHands_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 80
+        y: 45
+        width: 80
+        height: 56
+      spriteId: c1d11dd91a70b4c98aa1e862e21f9c1f
+    - name: SalamandarWitch#2_DashShowingHands_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 78
+        y: 47
+        width: 82
+        height: 52
+      spriteId: 84896ceae2d2d4bf4abf5f05e277642a
+    - name: SalamandarWitch#2_DashShowingHands_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 74
+        y: 46
+        width: 86
+        height: 52
+      spriteId: ab6c0345629e0412dbe781127ac64319
+    - name: SalamandarWitch#2_DashShowingHands_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 76
+        y: 44
+        width: 84
+        height: 51
+      spriteId: a4fb67f7df8ea4b3f9418640b705afbb
+    - name: SalamandarWitch#2_DashShowingHands_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 76
+        y: 45
+        width: 85
+        height: 51
+      spriteId: 2410010c5d0a54c2f9791c6dbda9cf05
+    - name: SalamandarWitch#2_DashShowingHands_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 96
+        y: 45
+        width: 66
+        height: 50
+      spriteId: efa4167565c894993863f4c3e169ce6a
+    - name: SalamandarWitch#2_DashShowingHands_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 96
+        y: 45
+        width: 64
+        height: 49
+      spriteId: f1c83b6328c534fa394adcd38e69203c
+    - name: SalamandarWitch#2_DashShowingHands_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 96
+        y: 47
+        width: 64
+        height: 48
+      spriteId: e33f79afddf5441b3bf05817dc52d00b
+    - name: SalamandarWitch#2_DashShowingHands_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 96
+        y: 47
+        width: 64
+        height: 53
+      spriteId: 79a4acb103d014d26aa1f5c7bd4ebeb3
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 256, y: 144}

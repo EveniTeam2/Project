@@ -12,10 +12,12 @@ namespace Unit.Boards
     public class BlockMatcher : IBlockMatcher
     {
         private readonly Dictionary<Tuple<float, float>, Block> _tiles;
+        private readonly float _blockGap;
 
-        public BlockMatcher(Dictionary<Tuple<float, float>, Block> tiles)
+        public BlockMatcher(Dictionary<Tuple<float, float>, Block> tiles, float blockGap)
         {
             _tiles = tiles;
+            _blockGap = blockGap;
         }
 
         /// <summary>
@@ -24,28 +26,23 @@ namespace Unit.Boards
         /// <param name="startPosition">블록의 시작 위치</param>
         /// <param name="direction">블록이 이동할 방향</param>
         /// <returns>블록이 이동할 목표 위치</returns>
-        public Tuple<float, float> GetTargetIndex(Vector3 startPosition, Vector3 direction)
+        public Tuple<float, float> GetTargetIndex(Vector2 startPosition, Vector2 direction)
         {
             var targetX = direction.x switch
             {
-                > 0 => startPosition.x + 1,
-                < 0 => startPosition.x - 1,
+                > 0 => startPosition.x + _blockGap,
+                < 0 => startPosition.x - _blockGap,
                 _ => startPosition.x
             };
 
             var targetY = direction.y switch
             {
-                > 0 => startPosition.y + 1,
-                < 0 => startPosition.y - 1,
+                > 0 => startPosition.y + _blockGap,
+                < 0 => startPosition.y - _blockGap,
                 _ => startPosition.y
             };
 
             return new Tuple<float, float>(targetX, targetY);
-        }
-
-        public Tuple<float, float> GetTargetIndex(System.Numerics.Vector3 startPosition, System.Numerics.Vector3 direction)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -68,12 +65,12 @@ namespace Unit.Boards
         {
             matchedBlocks = new List<Block>();
 
-            if (CheckDirection(position, Vector2.up, Vector2.down, out var verticalMatches))
+            if (CheckDirection(position, Vector2.up * _blockGap, Vector2.down * _blockGap, out var verticalMatches))
             {
                 matchedBlocks.AddRange(verticalMatches);
             }
 
-            if (CheckDirection(position, Vector2.left, Vector2.right, out var horizontalMatches))
+            if (CheckDirection(position, Vector2.left * _blockGap, Vector2.right * _blockGap, out var horizontalMatches))
             {
                 matchedBlocks.AddRange(horizontalMatches);
             }
@@ -147,11 +144,10 @@ namespace Unit.Boards
             while (toCheck.Count > 0)
             {
                 var block = toCheck.Dequeue();
-
-                var blockPos = block.transform.localPosition;
+                var blockPos = block.GetComponent<RectTransform>().anchoredPosition;
                 var newPos = new Tuple<float, float>(blockPos.x, blockPos.y);
 
-                foreach (var dir in new[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right })
+                foreach (var dir in new[] { Vector2.up * _blockGap, Vector2.down * _blockGap, Vector2.left * _blockGap, Vector2.right * _blockGap })
                 {
                     var adjacentPos = new Tuple<float, float>(newPos.Item1 + dir.x, newPos.Item2 + dir.y);
                     
