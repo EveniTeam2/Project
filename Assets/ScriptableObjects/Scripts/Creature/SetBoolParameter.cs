@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature
 {
-    [CreateAssetMenu(fileName = nameof(SetBoolParameter), menuName = "State/" + nameof(SetBoolParameter))]
+    [CreateAssetMenu(fileName = nameof(SetBoolParameter), menuName = "State/Act/" + nameof(SetBoolParameter))]
     public class SetBoolParameter : ActionData
     {
         [SerializeField] protected bool _value;

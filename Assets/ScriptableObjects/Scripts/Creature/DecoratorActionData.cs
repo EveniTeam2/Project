@@ -2,7 +2,7 @@ using Unit.Stages.Creatures.Interfaces;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature {
-    [CreateAssetMenu(fileName = nameof(DecoratorActionData), menuName = "State/" + nameof(DecoratorActionData))]
+    [CreateAssetMenu(fileName = nameof(DecoratorActionData), menuName = "State/Act/" + nameof(DecoratorActionData))]
     public class DecoratorActionData : ActionData {
         [SerializeField] ActionData decoratorActionData;
         [SerializeField] ActionData actionData;
