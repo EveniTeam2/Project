@@ -13,8 +13,8 @@ namespace Unit.Stages.Creatures.Characters {
 
         public override Animator Animator => _animator;
         public override BattleSystem Battle => _battleSystem;
-        public override IDamageable Health => _healthSystem as IDamageable;
-        public override IRunnable Movement => _movementSystem as IRunnable;
+        public override HealthSystem Health => _healthSystem;
+        public override MovementSystem Movement => _movementSystem;
 
         public override LinkedList<ModifyStatData> ModifiedStatData => _mods;
 
@@ -27,13 +27,14 @@ namespace Unit.Stages.Creatures.Characters {
         private Stat<CharacterStat> _stats;
         private UserInput _input;
 
-        public void Initialize(CharacterStat stat) {
+        public void Initialize(CharacterStat stat, float groundYPosition) {
             _animator = GetComponent<Animator>();
             _stats = new Stat<CharacterStat>(stat);
 
             _battleSystem = new BattleSystem(this, _stats);
             _healthSystem = new HealthSystem(this, _stats);
             _movementSystem = new MovementSystem(this, _stats);
+            _movementSystem.SetGroundPosition(groundYPosition);
 
             HFSM = StateBuilder.BuildState(this, stateData);
             _input = new UserInput(this);

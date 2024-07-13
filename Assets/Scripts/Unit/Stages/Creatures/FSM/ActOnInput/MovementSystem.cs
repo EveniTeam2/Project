@@ -3,12 +3,15 @@ using Unit.Stages.Creatures.Characters.Unit.Character;
 using Unit.Stages.Creatures.Monsters;
 using System;
 using Unit.Stages.Creatures.Interfaces;
+using Manager;
 
 namespace Unit.Stages.Creatures {
     public class MovementSystem : IRunnable {
 
-        int IRunnable.Speed => _speed;
-        bool IRunnable.IsRun => _currentSpd > 0;
+        public int Speed => _speed;
+        public bool IsRun => _currentSpd > 0;
+        public bool IsJump => _character.transform.position.y > GroundYPosition;
+        public float GroundYPosition { get; protected set; }
 
         private int _speed => GetSpeed.Invoke();
         Func<int> GetSpeed;
@@ -22,7 +25,9 @@ namespace Unit.Stages.Creatures {
         private float _dampTime = 0.3f;
         private float _dampVel;
 
-        private float _currentJmp;
+        private float _currentYSpd;
+        private const float _gravity = -1;
+        private float _fixedTimes;
 
         public MovementSystem(BaseCreature character, Stat<CharacterStat> stats) {
             _character = character;
@@ -34,12 +39,17 @@ namespace Unit.Stages.Creatures {
             GetSpeed = () => stats.Current.Speed;
         }
 
-        void IRunnable.SetRun(bool isRun) {
+        public void SetRun(bool isRun) {
             _isRun = isRun;
             if (isRun)
                 _targetSpd = _speed;
             else
                 _targetSpd = 0;
+        }
+
+        public void SetJump(float power) {
+            _isJump = true;
+            _currentYSpd = power;
         }
 
         private float CalculateSpeed(float currentSpd, float targetSpd) {
@@ -53,22 +63,44 @@ namespace Unit.Stages.Creatures {
             return currentSpd;
         }
 
-        void IRunnable.Update() {
-            if ((this as IRunnable).IsRun || _isRun) {
-                _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
-
-                float dist = _currentSpd * Time.deltaTime;
-                Vector2 pos = _character.transform.position;
-
-                // TODO rigidbody 쓸거면 바꿔야 됨
-                _character.transform.position = new Vector2(pos.x + dist, pos.y);
+        private float JumpUpdate(float current) {
+            _currentYSpd += _gravity * (Time.deltaTime - _fixedTimes);
+            current += _currentYSpd * Time.deltaTime;
+            if (current <= GroundYPosition) {
+                current = GroundYPosition;
+                _isJump = false;
             }
+            _fixedTimes = 0f;
+            return current;
         }
 
-        void IRunnable.FixedUpdate() {
+        public void Update() {
+            Vector2 pos = _character.transform.position;
+            Vector2 dist = Vector2.zero;
+            if ((this as IRunnable).IsRun || _isRun) {
+                _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
+                dist.x += _currentSpd * Time.deltaTime;
+            }
+            if (IsJump || _isJump) {
+                dist.y = JumpUpdate(dist.y);
+            }
+            _character.transform.position = pos + dist;
+        }
+
+        public void FixedUpdate() {
             if ((this as IRunnable).IsRun || _isRun) {
                 _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
             }
+            JumpFixedUpdate();
+        }
+
+        private void JumpFixedUpdate() {
+            _currentYSpd += _gravity * _fixedTimes;
+            _fixedTimes += Time.fixedDeltaTime;
+        }
+
+        public void SetGroundPosition(float groundYPosition) {
+            GroundYPosition = groundYPosition;
         }
     }
 }

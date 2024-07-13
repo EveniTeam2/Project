@@ -17,7 +17,8 @@ namespace Unit.Stages
         private BackgroundDisplay _backgroundDisplay;
         
         private Queue<ICommand<IStageCreature>> _commands = new();
-        
+
+        [SerializeField] float groundYPosition;
         public void AttachBoard(IStageable data)
         {
             data.OnSendCommand += Received;
@@ -51,7 +52,7 @@ namespace Unit.Stages
             
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(settings.characterStat);
+                _character.Initialize(settings.characterStat, groundYPosition);
             }
         }
         
@@ -66,7 +67,7 @@ namespace Unit.Stages
                     if (obj.TryGetComponent(out MonsterCreature mon))
                     {
                         _monsters.Add(mon);
-                        mon.Initialize(settings.monsterStats[index]);
+                        mon.Initialize(settings.monsterStats[index], groundYPosition);
                     }
                 });
             }

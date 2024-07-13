@@ -17,11 +17,11 @@ namespace Unit.Stages.Creatures {
         /// <summary>
         /// 이동에 관한 시스템을 반환합니다.
         /// </summary>
-        public abstract IRunnable Movement { get; }
+        public abstract MovementSystem Movement { get; }
         /// <summary>
         /// 방어에 관한 시스템을 반환합니다.
         /// </summary>
-        public abstract IDamageable Health { get; }
+        public abstract HealthSystem Health { get; }
         /// <summary>
         /// 애니메이터를 반환합니다.
         /// </summary>
@@ -45,22 +45,49 @@ namespace Unit.Stages.Creatures {
         public abstract LinkedList<ModifyStatData> ModifiedStatData { get; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class ModifyStatData {
+        /// <summary>
+        /// 
+        /// </summary>
         public EStatType StatType { get; protected set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int Value { get; protected set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statType"></param>
+        /// <param name="value"></param>
         public ModifyStatData(EStatType statType, int value) {
             StatType = statType;
             Value = value;
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public class TempModifyStatData : ModifyStatData {
+        /// <summary>
+        /// 
+        /// </summary>
         public float Duration { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statType"></param>
+        /// <param name="value"></param>
+        /// <param name="duration"></param>
         public TempModifyStatData(EStatType statType, int value, float duration) : base(statType, value) {
             Duration = duration;
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public enum EStatType {
         None = 0,
         Health = 1,
