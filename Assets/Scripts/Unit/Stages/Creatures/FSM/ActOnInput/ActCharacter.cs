@@ -6,6 +6,6 @@ namespace Unit.Stages.Creatures {
     /// 행동을 똑같이 다루기 위한 추상 클래스입니다.
     /// </summary>
     public abstract class ActCharacter : ScriptableObject {
-        public abstract void Act(ActOnInput inputData, Character character, int count);
+        public abstract void Act(ActOnInput inputData, PlayerCreature character, int count);
     }
 }

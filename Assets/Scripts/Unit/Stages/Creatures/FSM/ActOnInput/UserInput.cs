@@ -9,14 +9,14 @@ namespace Unit.Stages.Creatures {
     /// 사용자 입력을 처리하는 클래스입니다.
     /// </summary>
     public class UserInput {
-        private readonly Character _character;
+        private readonly PlayerCreature _character;
         Dictionary<BlockType, ActOnInput> actDic;
         /// <summary>
         /// 입력을 처리하는 클래스입니다.
         /// </summary>
         /// <param name="target">입력이 처리되기를 바라는 타겟입니다.</param>
         /// <param name="acts">타겟이 입력에 따라 행동하기를 원하는 행동입니다.</param>
-        public UserInput(Character target, params ActOnInput[] acts) {
+        public UserInput(PlayerCreature target, params ActOnInput[] acts) {
             _character = target;
             actDic = new Dictionary<BlockType, ActOnInput>();
             foreach (var act in acts.ToArray()) {

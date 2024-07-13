@@ -10,10 +10,10 @@ namespace Unit.Stages
 {
     public class StageManager : MonoBehaviour, IStageCreature, ICommandReceiver<IStageCreature>
     {
-        public Character Character => _character;
-        private Character _character;
-        public List<Monster> Monsters => _monsters;
-        private List<Monster> _monsters;
+        public PlayerCreature Character => _character;
+        private PlayerCreature _character;
+        public List<MonsterCreature> Monsters => _monsters;
+        private List<MonsterCreature> _monsters;
         private BackgroundDisplay _backgroundDisplay;
         
         private Queue<ICommand<IStageCreature>> _commands = new();
@@ -51,19 +51,19 @@ namespace Unit.Stages
             
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(settings.characterStat, _backgroundDisplay);
+                _character.Initialize(settings.characterStat);
             }
         }
         
         private void InitializeMonster(StageSetting settings)
         {
             
-            _monsters = new List<Monster>();
+            _monsters = new List<MonsterCreature>();
             for (int i = 0; i < settings.monsterStats.Length; ++i)
             {
                 int index = i;
                 Core.Utils.AddressableLoader.DeployAsset(settings.monstersRef[i], settings.monsterSpawnOffset, Quaternion.identity, null, (obj) => {
-                    if (obj.TryGetComponent(out Monster mon))
+                    if (obj.TryGetComponent(out MonsterCreature mon))
                     {
                         _monsters.Add(mon);
                         mon.Initialize(settings.monsterStats[index]);

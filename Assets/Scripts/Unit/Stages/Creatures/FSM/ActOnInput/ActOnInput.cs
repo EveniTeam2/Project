@@ -14,7 +14,7 @@ namespace Unit.Stages.Creatures {
 
         public string StateName { get => _stateName; }
         public BlockType BlockType { get => blockType; }
-        public void Act(Character character, int count) {
+        public void Act(PlayerCreature character, int count) {
             act.Act(this, character, count);
         }
     }
