@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c242b01f0b6ba9d4da4468d8bbbd76d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e5a60fbba60a4758a68295e75834fa4, type: 3}
   m_Name: CheckAnimationTimeIsHalf
   m_EditorClassIdentifier: 
   _percentage: 0.5

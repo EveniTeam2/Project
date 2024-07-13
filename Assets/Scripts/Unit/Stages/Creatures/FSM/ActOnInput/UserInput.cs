@@ -20,12 +20,12 @@ namespace Unit.Stages.Creatures {
             _character = target;
             actDic = new Dictionary<BlockType, ActOnInput>();
             foreach (var act in acts.ToArray()) {
-                actDic.Add(act.InputType, act);
+                actDic.Add(act.BlockType, act);
             }
         }
 
         public bool AddInput(ActOnInput act) {
-            return actDic.TryAdd(act.InputType, act);
+            return actDic.TryAdd(act.BlockType, act);
         }
 
         public void AddInput(ActOnInput[] acts) {
