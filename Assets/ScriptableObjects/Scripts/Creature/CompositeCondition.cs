@@ -4,14 +4,14 @@ using UnityEngine;
 namespace ScriptableObjects.Scripts.Creature {
     [CreateAssetMenu(fileName = nameof(CompositeCondition), menuName = "State/" + nameof(CompositeCondition))]
     public class CompositeCondition : Condition {
-        [SerializeField] Condition condition;
-        [SerializeField] Condition compositeCondition;
+        [SerializeField] Condition[] conditions;
 
         public override bool CheckCondition(BaseCreature target) {
-            var ret = condition.CheckCondition(target);
-            if (compositeCondition != null)
-                ret = ret && compositeCondition.CheckCondition(target);
-            return ret;
+            for (int i = 0; i < conditions.Length; ++i) {
+                if (!conditions[i].CheckCondition(target))
+                    return false;
+            }
+            return true;
         }
     }
 }

@@ -12,9 +12,10 @@ namespace ScriptableObjects.Scripts.Creature
         /// 상태 동작을 수행합니다.
         /// </summary>
 
-        public override void OnAct(IState state)
+        public override IState OnAct(IState state)
         {
             state.StateMachine.SetBoolAnimator(state.ParameterHash, _value);
+            return state;
         }
     }
 }

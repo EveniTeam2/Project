@@ -8,6 +8,6 @@ namespace ScriptableObjects.Scripts.Creature
         /// <summary>
         /// 동작을 수행합니다.
         /// </summary>
-        public abstract void OnAct(IState state);
+        public abstract IState OnAct(IState state);
     }
 }

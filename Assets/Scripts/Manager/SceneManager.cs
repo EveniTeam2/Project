@@ -28,7 +28,7 @@ namespace Manager
         public List<NewBlock> blockInfos; // TODO : 이전 씬의 게임 매니저에서 값을 전달해주는 것으로 수정
         
         [Header("Test")]
-        [SerializeField] private List<CommandToStage> testCommand;
+        [SerializeField] private List<CommandToStagePlayer> testCommand;
         [SerializeField] private KeyCode testKey;
 
         private void Awake()
@@ -101,7 +101,7 @@ namespace Manager
     }
     
     [Serializable]
-    public class CommandToStage : ICommand<IStageCreature> {
+    public class CommandToStagePlayer : ICommand<IStageCreature> {
         [SerializeField] NewBlock block;
         [SerializeField] int count;
         [SerializeField] float targetNormalTime;
