@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using Manager;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.Boards.Blocks;
 using Unit.Boards.Interfaces;
-using Unit.Stages.Creatures.Interfaces;
 using Unit.Stages.Interfaces;
 using UnityEngine;
 
@@ -23,27 +21,26 @@ namespace Unit.Boards
         [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")]
         [SerializeField] private int width;
         [SerializeField] private int height;
-
-        private Tuple<float, float> _spawnPositionWidth;
-        private Tuple<float, float> _spawnPositionHeight;
-        private float _blockOffset;
+        private float _halfPanelWidth;
+        private float _blockGap;
+        
         private RectTransform _blockSpawnPos;
         
         [Header("각각의 로직 사이의 대기 시간 (단위 : Second)")]
-        [SerializeField] [Range(0, 0.5f)] private float logicProgressTime;
+        [SerializeField] [Range(0, 1f)] private float logicProgressTime;
         private WaitForSeconds _progressTime;
 
         [Header("블록 스왑 완료까지 걸리는 시간 (단위 : Second)")]
-        [SerializeField] [Range(0, 0.5f)] private float moveDuration;
+        [SerializeField] [Range(0, 1f)] private float moveDuration;
 
         [Header("블록 낙하 속도 (단위 : Unit / Second)")]
-        [SerializeField] [Range(0, 0.2f)] private float dropDurationPerUnit;
+        [SerializeField] [Range(0, 100f)] private float dropDurationPerUnit;
 
         [Header("블록 낙하 이후 바운스 높이 (단위 : Unit)")]
-        [SerializeField] [Range(0, 0.5f)] private float bounceHeight;
+        [SerializeField] [Range(0, 1f)] private float bounceHeight;
 
         [Header("블록 낙하 이후 바운스 대기 시간 (단위 : Second)")]
-        [SerializeField] [Range(0, 0.5f)] private float bounceDuration;
+        [SerializeField] [Range(0, 1f)] private float bounceDuration;
 
         [Header("블록 풀링 관련 설정")]
         [SerializeField] private Block blockPrefab;
@@ -51,14 +48,19 @@ namespace Unit.Boards
         
         [Header("로직 동작 여부")]
         [SerializeField] private bool isLogicUpdating;
+
+        private Canvas _canvas;
         
         private IBlockGenerator _blockGenerator;
         private IBlockMatcher _blockMatcher;
         private IBlockMover _blockMover;
         private IBlockPool _blockPool;
         
+        private Vector2 _blockSize;
+        private RectTransform _blockPanel;
         private List<NewBlock> _blockInfos;
         private Dictionary<Tuple<float, float>, Block> _tiles;
+        private List<Tuple<float, float>> _blockPositions;
         private OrderedDictionary _currentMatchBlock;
 
         #region #### 보드 초기화 ####
@@ -67,19 +69,23 @@ namespace Unit.Boards
         /// 보드를 초기화하고, 블록을 생성합니다.
         /// </summary>
         /// <param name="blockInfos">생성할 블록 정보</param>
-        public void Initialize(List<NewBlock> blockInfos)
+        /// <param name="blockPanel">블록 생성 위치</param>
+        /// /// <param name="canvas">캔버스</param>
+        public void Initialize(List<NewBlock> blockInfos, RectTransform blockPanel, Canvas canvas)
         {
-            InitializeBoard(blockInfos);
+            InitializeBoard(blockInfos, blockPanel, canvas);
             GenerateAllRandomBlocks();
         }
-
+        
         /// <summary>
         /// 보드를 초기화합니다. 값 설정, 스폰 위치 계산 및 의존성 등록을 수행합니다.
         /// </summary>
         /// <param name="blockInfos">생성할 블록 정보</param>
-        private void InitializeBoard(List<NewBlock> blockInfos)
+        /// <param name="blockPanel">블록 생성 위치</param>
+        /// <param name="canvas">캔버스</param>
+        private void InitializeBoard(List<NewBlock> blockInfos, RectTransform blockPanel, Canvas canvas)
         {
-            InitializeValues(blockInfos);
+            InitializeValues(blockInfos, blockPanel, canvas);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
         }
@@ -88,12 +94,16 @@ namespace Unit.Boards
         /// 보드 값을 초기화합니다.
         /// </summary>
         /// <param name="blockInfos">생성할 블록 정보</param>
-        private void InitializeValues(List<NewBlock> blockInfos)
+        /// <param name="blockPanel">블록 생성 위치</param>
+        /// /// <param name="canvas">캔버스</param>
+        private void InitializeValues(List<NewBlock> blockInfos, RectTransform blockPanel, Canvas canvas)
         {
             isLogicUpdating = false;
             _poolSize = width * height;
             _blockInfos = blockInfos;
-            
+            _blockPanel = blockPanel;
+            _canvas = canvas;
+    
             _tiles = new Dictionary<Tuple<float, float>, Block>();
             _currentMatchBlock = new OrderedDictionary(); // NewBlock, int
             _progressTime = new WaitForSeconds(logicProgressTime);
@@ -104,17 +114,39 @@ namespace Unit.Boards
         /// </summary>
         private void CalculateBlockSpawnPositions()
         {
-            _blockOffset = blockPrefab.transform.localScale.x;
+            // blockPanel 크기 기반으로 블록 크기와 간격 계산
+            var rect = _blockPanel.rect;
+            var panelWidth = rect.width;
             
-            var adjustWidth = width % 2 == 0 ? _blockOffset / 2 : 0;
-            var adjustHeight = height % 2 == 0 ? _blockOffset / 2 : 0;
+            _halfPanelWidth = panelWidth / 2;
+            _blockGap = panelWidth / (width - 1);
+            _blockSize = new Vector2(panelWidth / width, panelWidth / width);
+            _blockPositions = new List<Tuple<float, float>>();
 
-            var newWidth = (width / 2f - adjustWidth);
+            Debug.Log($"패널 크기 : {panelWidth} / 블록 간격 : {_blockGap}");
 
-            _spawnPositionWidth = new Tuple<float, float>(-newWidth, newWidth);
-            _spawnPositionHeight = new Tuple<float, float>(0 + adjustHeight, height + adjustHeight);
+            for (var x = -_halfPanelWidth; x <= _halfPanelWidth; x += _blockGap)
+            {
+                for (var y = -_halfPanelWidth; y <= _halfPanelWidth; y += _blockGap)
+                {
+                    _blockPositions.Add(new Tuple<float, float>(x, y));
+                    
+                    Debug.Log($"블록 배치 좌표 : {x}, {y}");
+                }
+            }
             
-            Debug.Log($"가로 시작 {_spawnPositionWidth.Item1} 가로 끝 {_spawnPositionWidth.Item2} 세로 시작 {_spawnPositionHeight.Item1} 세로 끝 {_spawnPositionHeight.Item2} 오프셋 {_blockOffset}");
+            // // 블록 스폰 위치 계산
+            // for (var x = 0; x < width; x++)
+            // {
+            //     for (var y = 0; y < height; y++)
+            //     {
+            //         var posX = -panelWidth / 2 + _blockSize.x * (x + 0.5f);
+            //         var posY = -panelHeight / 2 + _blockSize.y * (y + 0.5f);
+            //         
+            //
+            //
+            //     }
+            // }
         }
 
         /// <summary>
@@ -122,10 +154,10 @@ namespace Unit.Boards
         /// </summary>
         private void RegisterDependencies()
         {
-            _blockPool = new BlockPool(blockPrefab, _blockSpawnPos, _poolSize, true);
-            _blockGenerator = new BlockGenerator(_spawnPositionWidth, _spawnPositionHeight, _blockOffset, _blockInfos, CheckForMatch, _blockPool, _tiles);
-            _blockMatcher = new BlockMatcher(_tiles);
-            _blockMover = new BlockMover(moveDuration, dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, this);
+            _blockPool = new BlockPool(blockPrefab, _blockPanel, _poolSize, true);
+            _blockGenerator = new BlockGenerator(_blockInfos, _blockPool, _tiles, _canvas, _blockPanel, _blockSize, _blockPositions, CheckForMatch, _blockGap);
+            _blockMatcher = new BlockMatcher(_tiles, _blockGap);
+            _blockMover = new BlockMover(moveDuration, 1 / dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, _blockGap,this);
         }
 
         #endregion
@@ -140,9 +172,9 @@ namespace Unit.Boards
             while (true)
             {
                 _blockGenerator.GenerateAllRandomBlocks();
-
+            
                 if (IsAnyPossibleMatches()) break;
-                
+            
                 RemoveAllBlocks();
             }
         }
@@ -155,19 +187,19 @@ namespace Unit.Boards
         /// <param name="pos">새 블록의 위치</param>
         private void GenerateBlockAndSetDestination(HashSet<Tuple<float, float>> spawnHash, Dictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> pos)
         {
-            var adjustY = 0;
+            var adjustY = 0f;
 
             while (true)
             {
-                adjustY++;
-                var dropPosition = new Tuple<float, float>(pos.Item1, _spawnPositionHeight.Item2 + adjustY);
+                adjustY += _blockGap;
+                var dropPosition = new Tuple<float, float>(pos.Item1, _halfPanelWidth + adjustY);
 
                 if (spawnHash.Contains(dropPosition)) continue;
 
                 var newBlockInfo = _blockGenerator.GetRandomValidBlock(_tiles, pos);
                 var block = _blockPool.Get();
-                block.transform.localPosition = new Vector3(dropPosition.Item1, dropPosition.Item2, 0);
-                block.Initialize(newBlockInfo, CheckForMatch);
+                block.GetComponent<RectTransform>().anchoredPosition = new Vector3(dropPosition.Item1, dropPosition.Item2, 0);
+                block.Initialize(newBlockInfo, CheckForMatch, _canvas);
                 _tiles[pos] = block;
 
                 spawnHash.Add(dropPosition);
@@ -188,7 +220,7 @@ namespace Unit.Boards
         /// <param name="blockDic">이동할 블록 딕셔너리</param>
         private void SetDestination(float x, float y, Dictionary<Tuple<float, float>, Block> blockDic)
         {
-            for (var aboveY = y + _blockOffset; aboveY <= _spawnPositionHeight.Item2; aboveY++)
+            for (var aboveY = y + _blockGap; aboveY <= _halfPanelWidth; aboveY += _blockGap)
             {
                 var abovePos = new Tuple<float, float>(x, aboveY);
                 if (!_tiles.ContainsKey(abovePos)) continue;
@@ -211,6 +243,8 @@ namespace Unit.Boards
         /// <param name="blocks">제거 대상 블록 목록</param>
         private void RemoveBlocks(List<Block> blocks)
         {
+            Debug.Log("블록 제거");
+            
             foreach (var block in blocks)
             {
                 RemoveBlock(block);
@@ -223,7 +257,9 @@ namespace Unit.Boards
         /// <param name="block"></param>
         private void RemoveBlock(Block block)
         {
-            var blockPos = block.transform.localPosition;
+            var blockPos = block.GetComponent<RectTransform>().anchoredPosition;
+            
+            Debug.Log($"{blockPos} 블록 제거 ");
             _tiles.Remove(new Tuple<float, float>(blockPos.x, blockPos.y));
             _blockPool.Release(block);
         }
@@ -282,10 +318,15 @@ namespace Unit.Boards
             var allMatchedBlocks = new HashSet<Block>(currentMatchedBlocks);
             allMatchedBlocks.UnionWith(targetMatchedBlocks);
 
+            Debug.Log($"삭제될 블록 수 {allMatchedBlocks.Count}");
             RemoveMatchedBlocks(allMatchedBlocks.ToList());
+            Debug.Log($"남은 블록 수 {_tiles.Count}");
 
             yield return FillEmptySpaces();
             yield return _progressTime;
+            
+            // Debug.Log($"남은 블록 수 {_tiles.Count}");
+            // yield break;
 
             yield return FillNewBlocks();
             yield return _progressTime;
@@ -296,8 +337,12 @@ namespace Unit.Boards
                 if (matchedBlocks.Count == 0) break;
 
                 matchedBlocks = _blockMatcher.GetAdjacentMatches(matchedBlocks);
+                
+                Debug.Log($"삭제될 블록 수 {matchedBlocks.Count}");
 
                 RemoveBlocks(matchedBlocks);
+                
+                Debug.Log($"남은 블록 수 {_tiles.Count}");
 
                 yield return FillEmptySpaces();
                 yield return _progressTime;
@@ -321,14 +366,18 @@ namespace Unit.Boards
         /// </summary>
         private IEnumerator FillEmptySpaces()
         {
+            Debug.Log("빈 공간으로 블록 이동");
+            
             var blockDic = new Dictionary<Tuple<float, float>, Block>();
 
-            for (var x = _spawnPositionWidth.Item1; x <= _spawnPositionWidth.Item2; x += _blockOffset)
+            for (var x = -_halfPanelWidth; x <= _halfPanelWidth; x += _blockGap)
             {
-                for (var y = _spawnPositionHeight.Item1; y <= _spawnPositionHeight.Item2; y += _blockOffset)
+                for (var y = -_halfPanelWidth; y <= _halfPanelWidth; y += _blockGap)
                 {
                     var pos = new Tuple<float, float>(x, y);
                     if (_tiles.ContainsKey(pos)) continue;
+                    
+                    Debug.Log($"{pos} 블록 이동");
 
                     SetDestination(x, y, blockDic);
                 }
@@ -342,12 +391,14 @@ namespace Unit.Boards
         /// </summary>
         private IEnumerator FillNewBlocks()
         {
+            Debug.Log("새 블록 생성");
+            
             var spawnHash = new HashSet<Tuple<float, float>>();
             var blockDic = new Dictionary<Tuple<float, float>, Block>();
 
-            for (var x = _spawnPositionWidth.Item1; x <= _spawnPositionWidth.Item2; x += _blockOffset)
+            for (var x = -_halfPanelWidth; x <= _halfPanelWidth; x += _blockGap)
             {
-                for (var y = _spawnPositionHeight.Item1; y <= _spawnPositionHeight.Item2; y += _blockOffset)
+                for (var y = -_halfPanelWidth; y <= _halfPanelWidth; y += _blockGap)
                 {
                     var pos = new Tuple<float, float>(x, y);
                     if (_tiles.ContainsKey(pos)) continue;
@@ -393,10 +444,10 @@ namespace Unit.Boards
             if (isLogicUpdating) return;
             isLogicUpdating = true;
 
-            Debug.Log("스왑 검증");
-
             var currentBlockIndex = new Tuple<float, float>(startPosition.x, startPosition.y);
             var targetBlockIndex = _blockMatcher.GetTargetIndex(startPosition, direction);
+            
+            Debug.Log($"{startPosition} 블록 스왑 검증, 타겟 {targetBlockIndex}");
 
             if (!_blockMatcher.IsValidPosition(targetBlockIndex))
             {

@@ -10,7 +10,7 @@ namespace Unit.Boards.Interfaces
         bool CheckMatchesForBlock(Tuple<float, float> position, out List<Block> matchedBlocks);
         List<Block> GetAdjacentMatches(List<Block> initialMatches);
         List<Block> FindAllMatches(Dictionary<Tuple<float, float>, Block> tiles);
-        Tuple<float, float> GetTargetIndex(Vector3 startPosition, Vector3 direction);
+        Tuple<float, float> GetTargetIndex(Vector2 startPosition, Vector2 direction);
         bool IsValidPosition(Tuple<float, float> position);
     }
 }
