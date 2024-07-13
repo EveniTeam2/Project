@@ -1,15 +1,18 @@
 using ScriptableObjects.Scripts.Creature;
+using Unit.Stages.Creatures;
 using Unit.Stages.Creatures.Interfaces;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.ScriptableObjects.Scripts.Creature {
     [CreateAssetMenu(fileName = nameof(CheckConditionAndTransition), menuName = "State/Act/" + nameof(CheckConditionAndTransition))]
     public class CheckConditionAndTransition : ActionData {
-        [SerializeField] Condition condition;
-        [SerializeField] string targetStateName;
+        [SerializeField] Condition _condition;
+        [SerializeField] string _targetStateName;
         public override IState OnAct(IState state) {
-            if (condition.CheckCondition(state.StateMachine.Target))
-            state.StateMachine.TryChangeState(targetStateName);
+            if (_condition.CheckCondition(state.StateMachine.Target))
+                state.StateMachine.TryChangeState(_targetStateName);
             return state;
         }
     }
