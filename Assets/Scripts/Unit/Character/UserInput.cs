@@ -14,13 +14,13 @@ namespace Unit.Character {
         private Action<int> GetAction(NewBlock block) {
             // TODO 인호님!!! 바꿔야되는 거 여기랑 요 아래!
             switch (block.type) {
-                case BlockType.Normal:
+                case BlockType.Idle:
                     return NormalAct;
-                case BlockType.BuffHealth:
+                case BlockType.Run:
                     return BuffHealthAct;
-                case BlockType.BuffSpeed:
+                case BlockType.Walk:
                     return BuffSpeedAct;
-                case BlockType.Debuff:
+                case BlockType.Hit:
                     return DebuffAct;
             }
             return null;
