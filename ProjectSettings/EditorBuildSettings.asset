@@ -10,4 +10,4 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: d5d8acdf9af1c354c9d8a9b74294b04a, type: 2}
-    com.unity.addressableassets: {fileID: 11400000, guid: 0a1b1c4438f5a314287421f6cc86c47f, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 12cfd1e1bacd5400f834d811973ccebb, type: 2}

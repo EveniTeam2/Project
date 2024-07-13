@@ -2,7 +2,7 @@ using Unit.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature {
-    [CreateAssetMenu(fileName = nameof(CheckAnimationTime), menuName = "State/" + nameof(CheckAnimationTime))]
+    [CreateAssetMenu(fileName = nameof(CheckAnimationTime), menuName = "State/Condition/" + nameof(CheckAnimationTime))]
     public class CheckAnimationTime : Condition {
         [SerializeField] protected float _percentage;
         public override bool CheckCondition(BaseCreature target) {

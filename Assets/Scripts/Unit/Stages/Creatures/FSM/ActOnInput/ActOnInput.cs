@@ -6,7 +6,7 @@ namespace Unit.Stages.Creatures {
     /// <summary>
     /// 입력과 행동을 연결하는 클래스입니다.
     /// </summary>
-    [CreateAssetMenu(fileName = nameof(ActOnInput), menuName = "SO/" + nameof(ActOnInput))]
+    [CreateAssetMenu(fileName = nameof(ActOnInput), menuName = "Input/" + nameof(ActOnInput))]
     public class ActOnInput : ScriptableObject {
         [SerializeField] BlockType inputType;
         [SerializeField] private string _stateName;

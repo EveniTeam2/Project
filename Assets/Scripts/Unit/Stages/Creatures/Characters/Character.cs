@@ -17,7 +17,7 @@ namespace Unit.Stages.Creatures.Characters
         public event Action<IRunnable> OnRun;
         public LinkedList<int> SpdModifier = new LinkedList<int>();
         
-        [SerializeField] private CreatureStateData creatureStateData;
+        [SerializeField] private StateDataDTO creatureStateData;
         
         public bool IsRun { get; protected set; }
         public int Speed => _stats.Current.Speed;

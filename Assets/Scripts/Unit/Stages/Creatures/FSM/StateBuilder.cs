@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Unit.Stages.Creatures.FSM {
     public static class StateBuilder {
-        public static StateMachine BuildState(BaseCreature target, CreatureStateData data) {
+        public static StateMachine BuildState(BaseCreature target, StateDataDTO data) {
             var sm = new StateMachine(target);
 
             foreach (var stateData in data.StateDatas) {

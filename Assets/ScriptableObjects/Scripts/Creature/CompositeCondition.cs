@@ -2,7 +2,7 @@ using Unit.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature {
-    [CreateAssetMenu(fileName = nameof(CompositeCondition), menuName = "State/" + nameof(CompositeCondition))]
+    [CreateAssetMenu(fileName = nameof(CompositeCondition), menuName = "State/Condition/" + nameof(CompositeCondition))]
     public class CompositeCondition : Condition {
         [SerializeField] Condition[] conditions;
 
