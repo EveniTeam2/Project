@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using Manager;
-using Unit.Blocks;
+using ScriptableObjects.Scripts.Blocks;
+using Unit.Boards.Blocks;
 using Unit.Boards.Interfaces;
+using Unit.Stages.Creatures.Interfaces;
+using Unit.Stages.Interfaces;
 using UnityEngine;
 
 namespace Unit.Boards
@@ -15,6 +18,8 @@ namespace Unit.Boards
     /// </summary>
     public class BoardManager : MonoBehaviour, IStageable
     {
+        public event Action<ICommand<IStageCreature>> OnSendCommand;
+        
         [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")]
         [SerializeField] private int width;
         [SerializeField] private int height;
@@ -22,6 +27,7 @@ namespace Unit.Boards
         private Tuple<float, float> _spawnPositionWidth;
         private Tuple<float, float> _spawnPositionHeight;
         private float _blockOffset;
+        private RectTransform _blockSpawnPos;
         
         [Header("각각의 로직 사이의 대기 시간 (단위 : Second)")]
         [SerializeField] [Range(0, 0.5f)] private float logicProgressTime;
@@ -51,42 +57,45 @@ namespace Unit.Boards
         private IBlockMover _blockMover;
         private IBlockPool _blockPool;
         
+        private List<NewBlock> _blockInfos;
         private Dictionary<Tuple<float, float>, Block> _tiles;
         private OrderedDictionary _currentMatchBlock;
 
-        private void Awake()
-        {
-            InitializeBoard();
-        }
+        #region #### 보드 초기화 ####
 
-        private void Start()
+        /// <summary>
+        /// 보드를 초기화하고, 블록을 생성합니다.
+        /// </summary>
+        /// <param name="blockInfos">생성할 블록 정보</param>
+        public void Initialize(List<NewBlock> blockInfos)
         {
+            InitializeBoard(blockInfos);
             GenerateAllRandomBlocks();
         }
 
-        #region #### 보드 초기화 ####
-        
         /// <summary>
         /// 보드를 초기화합니다. 값 설정, 스폰 위치 계산 및 의존성 등록을 수행합니다.
         /// </summary>
-        private void InitializeBoard()
+        /// <param name="blockInfos">생성할 블록 정보</param>
+        private void InitializeBoard(List<NewBlock> blockInfos)
         {
-            InitializeValues();
+            InitializeValues(blockInfos);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
         }
-        
+
         /// <summary>
         /// 보드 값을 초기화합니다.
         /// </summary>
-        private void InitializeValues()
+        /// <param name="blockInfos">생성할 블록 정보</param>
+        private void InitializeValues(List<NewBlock> blockInfos)
         {
             isLogicUpdating = false;
             _poolSize = width * height;
-
+            _blockInfos = blockInfos;
+            
             _tiles = new Dictionary<Tuple<float, float>, Block>();
             _currentMatchBlock = new OrderedDictionary(); // NewBlock, int
-            
             _progressTime = new WaitForSeconds(logicProgressTime);
         }
 
@@ -113,8 +122,8 @@ namespace Unit.Boards
         /// </summary>
         private void RegisterDependencies()
         {
-            _blockPool = new BlockPool(blockPrefab, transform, _poolSize, true);
-            _blockGenerator = new BlockGenerator(_spawnPositionWidth, _spawnPositionHeight, _blockOffset, GameManager.Instance.blockInfos, CheckForMatch, _blockPool, _tiles);
+            _blockPool = new BlockPool(blockPrefab, _blockSpawnPos, _poolSize, true);
+            _blockGenerator = new BlockGenerator(_spawnPositionWidth, _spawnPositionHeight, _blockOffset, _blockInfos, CheckForMatch, _blockPool, _tiles);
             _blockMatcher = new BlockMatcher(_tiles);
             _blockMover = new BlockMover(moveDuration, dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, this);
         }
@@ -460,7 +469,5 @@ namespace Unit.Boards
         }
 
         #endregion
-
-        public event Action<ICommand<IBattleStageTarget>> OnSendCommand;
     }
 }

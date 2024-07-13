@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
-using Unit.Blocks;
+using Unit.Boards.Blocks;
 using Unit.Boards.Interfaces;
 using UnityEngine;
 
@@ -12,20 +12,23 @@ namespace Unit.Boards
     /// </summary>
     public class BlockGenerator : IBlockGenerator
     {
+        private readonly Action<Vector3, Vector3> _matchCheckHandler;
+        
+        private readonly float _blockOffset;
         private readonly Tuple<float, float> _spawnPositionWidth;
         private readonly Tuple<float, float> _spawnPositionHeight;
-        private float _blockOffset;
-        private readonly List<Tuple<float, float>> _blockPositions;
+        
         private readonly List<NewBlock> _blockInfos;
-        private readonly Action<Vector3, Vector3> _matchCheckHandler;
-        private readonly IBlockPool _blockPool;
+        private readonly List<Tuple<float, float>> _blockPositions;
         private readonly Dictionary<Tuple<float, float>, Block> _tiles;
+        private readonly IBlockPool _blockPool;
 
         /// <summary>
         /// BlockGenerator 생성자입니다.
         /// </summary>
         /// <param name="spawnPositionWidth">블록 스폰 위치의 너비</param>
         /// <param name="spawnPositionHeight">블록 스폰 위치의 높이</param>
+        /// <param name="blockOffset"></param>
         /// <param name="blockInfos">블록 정보 목록</param>
         /// <param name="matchCheckHandler">매치 확인 핸들러</param>
         /// <param name="blockPool">블록 풀</param>

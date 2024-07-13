@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Unit.Blocks;
+using Unit.Boards.Blocks;
 using UnityEngine;
 
 namespace Unit.Boards.Interfaces

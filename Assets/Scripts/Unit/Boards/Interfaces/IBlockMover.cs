@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Unit.Blocks;
+using Unit.Boards.Blocks;
 
 namespace Unit.Boards.Interfaces
 {

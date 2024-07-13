@@ -1,3 +1,4 @@
+using Unit.Boards.Blocks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,7 +7,7 @@ namespace Match2D {
     public class BlockPlacerTile : TileBase {
         public Sprite PreviewEditorSprite;
         [Tooltip("If null this will be a random gem")]
-        public Unit.Blocks.Block PlacedBlock = null;
+        public Block PlacedBlock = null;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData) {
             tileData.sprite = !Application.isPlaying ? PreviewEditorSprite : null;
