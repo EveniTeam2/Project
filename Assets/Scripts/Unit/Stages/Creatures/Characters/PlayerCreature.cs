@@ -93,5 +93,10 @@ namespace Unit.Stages.Creatures.Characters {
             _mods.Remove(node);
             ModifyStat(statType, -value);
         }
+
+        public override void ClearStat() {
+            _mods.Clear();
+            _stats.SetCurrent(_stats.Origin);
+        }
     }
 }

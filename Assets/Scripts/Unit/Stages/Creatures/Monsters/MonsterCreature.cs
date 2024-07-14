@@ -71,6 +71,11 @@ namespace Unit.Stages.Creatures.Monsters {
             StartCoroutine(TempModifyStatCoroutine(statType, value, duration));
         }
 
+        public override void ClearStat() {
+            _mods.Clear();
+            _stats.SetCurrent(_stats.Origin);
+        }
+
         IEnumerator TempModifyStatCoroutine(EStatType statType, int value, float duration) {
             var data = new TempModifyStatData(statType, value, duration);
             var node = _mods.AddLast(data);

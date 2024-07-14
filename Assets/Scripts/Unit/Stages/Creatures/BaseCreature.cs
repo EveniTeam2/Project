@@ -40,6 +40,10 @@ namespace Unit.Stages.Creatures {
         /// <param name="duration">지속 시간</param>
         public abstract void TempModifyStat(EStatType statType, int value, float duration);
         /// <summary>
+        /// 변경된 스텟을 전부 지웁니다.
+        /// </summary>
+        public abstract void ClearStat();
+        /// <summary>
         /// 변경된 스탯 리스트입니다.
         /// </summary>
         public abstract LinkedList<ModifyStatData> ModifiedStatData { get; }
