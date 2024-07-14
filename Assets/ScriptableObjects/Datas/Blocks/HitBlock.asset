@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   color: {r: 1, g: 0.9882353, b: 0.64705884, a: 1}
-  text: 1
+  text: Hit

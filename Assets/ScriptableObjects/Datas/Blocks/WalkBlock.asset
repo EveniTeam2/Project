@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   color: {r: 0.57254905, g: 0.9843137, b: 1, a: 1}
-  text: 4
+  text: Walk

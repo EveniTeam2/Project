@@ -961,16 +961,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
   - {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
   testCommand:
-  - blockSo: {fileID: 0}
+  - blockSo: {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
     count: 1
     targetNormalTime: 0.9
-  - blockSo: {fileID: 0}
+  - blockSo: {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
     count: 1
     targetNormalTime: 0.9
-  - blockSo: {fileID: 0}
+  - blockSo: {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
     count: 1
     targetNormalTime: 0.9
-  - blockSo: {fileID: 0}
+  - blockSo: {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
     count: 1
     targetNormalTime: 0.9
   testKey: 32
