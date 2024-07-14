@@ -11,12 +11,11 @@ using UnityEngine;
 namespace Unit.GameScene.Stages.Creatures.Characters {
     public class PlayerCreature : BaseCreature {
         [SerializeField] private StateDataDTO stateData;
-
+        public override StageManager StageManager => _stageManager;
         public override Animator Animator => _animator;
         public override BattleSystem Battle => _battleSystem;
         public override HealthSystem Health => _healthSystem;
         public override MovementSystem Movement => _movementSystem;
-
         public override LinkedList<ModifyStatData> ModifiedStatData => _mods;
 
         private BattleSystem _battleSystem;
@@ -27,12 +26,12 @@ namespace Unit.GameScene.Stages.Creatures.Characters {
 
         private Stat<CharacterStat> _stats;
         private UserInput _input;
-
-        public void Initialize(CharacterStat stat, float groundYPosition, params ActOnInput[] acts) {
+        private StageManager _stageManager;
+        public void Initialize(StageManager manager, CharacterStat stat, float groundYPosition, params ActOnInput[] acts) {
             _animator = GetComponent<Animator>();
             _stats = new Stat<CharacterStat>(stat);
-
-            _battleSystem = new BattleSystem(this, _stats);
+            _stageManager = manager;
+            _battleSystem = new BattleSystem(manager, this, _stats);
             _healthSystem = new HealthSystem(this, _stats);
             _movementSystem = new MovementSystem(this, _stats);
             _movementSystem.SetGroundPosition(groundYPosition);
