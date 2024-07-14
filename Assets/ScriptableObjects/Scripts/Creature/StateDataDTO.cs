@@ -8,6 +8,6 @@ namespace ScriptableObjects.Scripts.Creature
     {
         [Header("첫번째 state가 캐릭터의 처음 상태")]
         [SerializeField] private List<StateData> states;
-        public List<StateData> StateDatas => states;
+        public StateData[] StateDatas => states.ToArray();
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1036fe06b88e363489725bbd83439215, type: 3}
   m_Name: CheckAnimTimeAndTransIdle
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: 8790df2ca704f7a4db2e3a0f8d5bc133, type: 2}
-  targetStateName: Idle
+  _condition: {fileID: 11400000, guid: 8790df2ca704f7a4db2e3a0f8d5bc133, type: 2}
+  _targetStateName: Idle

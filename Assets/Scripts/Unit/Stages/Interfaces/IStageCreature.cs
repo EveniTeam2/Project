@@ -6,7 +6,7 @@ namespace Unit.Stages.Interfaces
 {
     public interface IStageCreature
     {
-        Character Character { get; }
-        List<Monster> Monsters { get; }
+        PlayerCreature Character { get; }
+        List<MonsterCreature> Monsters { get; }
     }
 }

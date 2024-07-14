@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f1a262529ee524da60c209a25e543e, type: 3}
   m_Name: HitInput
   m_EditorClassIdentifier: 
-  inputType: 3
+  blockType: 3
   _stateName: Hit
   act: {fileID: 11400000, guid: afe7341b137cfdd48a5cb575a5097d25, type: 2}

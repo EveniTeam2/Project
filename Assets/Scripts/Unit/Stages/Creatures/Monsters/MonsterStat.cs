@@ -7,5 +7,6 @@ namespace Unit.Stages.Creatures.Monsters
     {
         public int Attack;
         public int Health;
+        public int Speed;
     }
 }

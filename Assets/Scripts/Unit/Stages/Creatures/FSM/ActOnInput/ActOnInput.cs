@@ -8,13 +8,13 @@ namespace Unit.Stages.Creatures {
     /// </summary>
     [CreateAssetMenu(fileName = nameof(ActOnInput), menuName = "Input/" + nameof(ActOnInput))]
     public class ActOnInput : ScriptableObject {
-        [SerializeField] BlockType inputType;
+        [SerializeField] BlockType blockType;
         [SerializeField] private string _stateName;
         [SerializeField] private ActCharacter act;
 
         public string StateName { get => _stateName; }
-        public BlockType InputType { get => inputType; }
-        public void Act(Character character, int count) {
+        public BlockType BlockType { get => blockType; }
+        public void Act(PlayerCreature character, int count) {
             act.Act(this, character, count);
         }
     }
