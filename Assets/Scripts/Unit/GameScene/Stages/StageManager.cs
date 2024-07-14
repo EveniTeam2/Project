@@ -9,7 +9,7 @@ namespace Unit.GameScene.Stages {
     public class StageManager : MonoBehaviour, IStageCreature, ICommandReceiver<IStageCreature> {
         public PlayerCreature Character => _character;
         private PlayerCreature _character;
-        public List<MonsterCreature> Monsters => _monsterManager.Monsters;
+        public LinkedList<MonsterCreature> Monsters => _monsterManager.Monsters;
 
         private Queue<ICommand<IStageCreature>> _commands = new();
         private MonsterSpawnManager _monsterManager;
@@ -17,6 +17,7 @@ namespace Unit.GameScene.Stages {
         private float _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
         private Vector3 _zeroPosition;
+
         public void AttachBoard(ISendCommand data) {
             
             Debug.Log("Attach Clear");
@@ -43,7 +44,7 @@ namespace Unit.GameScene.Stages {
             _startTime = Time.time;
 
             if (character.TryGetComponent(out _character)) {
-                _character.Initialize(settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());
+                _character.Initialize(this, settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());
             }
         }
 

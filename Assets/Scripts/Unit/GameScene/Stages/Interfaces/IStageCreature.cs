@@ -7,6 +7,6 @@ namespace Unit.GameScene.Stages.Interfaces
     public interface IStageCreature
     {
         PlayerCreature Character { get; }
-        List<MonsterCreature> Monsters { get; }
+        LinkedList<MonsterCreature> Monsters { get; }
     }
 }

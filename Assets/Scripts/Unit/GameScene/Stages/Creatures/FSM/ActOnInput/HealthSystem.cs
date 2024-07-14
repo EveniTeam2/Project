@@ -30,12 +30,25 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
             _character = monster;
             GetHeatlh = () => stats.Current.Health;
         }
-        void IDamageable.Damage(int dmg) {
+        public void Damage(int dmg) {
+            // TODO 방어력 있으면 적용해야되는 곳
             SetHealth.Invoke(_health - dmg);
             if (_health < 0) {
                 SetHealth.Invoke(0);
                 _onDeath?.Invoke(_character);
             }
+        }
+    }
+
+    public class HealthStat {
+        // TODO 방어력 있으면 적용해야되는 곳
+        public int Health => GetHealth.Invoke();
+        Func<int> GetHealth;
+        public HealthStat(Stat<CharacterStat> stat) {
+            GetHealth = () => stat.Current.Health;
+        }
+        public HealthStat(Stat<MonsterStat> stat) {
+            GetHealth = () => stat.Current.Health;
         }
     }
 }

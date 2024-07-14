@@ -20,4 +20,11 @@ namespace ScriptableObjects.Scripts.Creature {
             return state;
         }
     }
+
+    public class CheckCollider : ActionData {
+
+        public override IState OnAct(IState state) {
+            return state;
+        }
+    }
 }
