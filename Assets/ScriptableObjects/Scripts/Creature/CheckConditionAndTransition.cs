@@ -1,6 +1,5 @@
 using ScriptableObjects.Scripts.Creature;
-using Unit.Stages.Creatures;
-using Unit.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Interfaces;
 using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using static UnityEngine.GraphicsBuffer;

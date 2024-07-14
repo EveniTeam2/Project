@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306162675935173629}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 109}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -183,7 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &447608023284635577
 GameObject:
@@ -295,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658778114304434146}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -368,7 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &768312327397311961
 GameObject:
@@ -564,7 +562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047855051043000935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7}
+  m_LocalPosition: {x: 0, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -637,7 +635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &1084438495533808259
 GameObject:
@@ -665,7 +662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084438495533808259}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -738,7 +735,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &1584420021598850351
 GameObject:
@@ -1018,7 +1014,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2178505152085012159}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 8}
+  m_LocalPosition: {x: 0, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1091,7 +1087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &2424033259841059873
 GameObject:
@@ -1119,7 +1114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2424033259841059873}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1192,7 +1187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &2670853504050698328
 GameObject:
@@ -1218,8 +1212,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2670853504050698328}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 8, z: 2.7}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1236,7 +1230,7 @@ Transform:
   - {fileID: 5637911833122293702}
   - {fileID: 8329678005549215674}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7504739390665949075
 MonoBehaviour:
@@ -1250,6 +1244,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a4180a9ba24a00a0029e2ec42d8291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parallaxBackgrounds:
+  - {fileID: 7915961837654849855}
+  - {fileID: 302482627448462854}
+  - {fileID: 7138161753560726484}
+  - {fileID: 573482340765843248}
+  - {fileID: 1954247995590696990}
+  - {fileID: 14358410467707628}
+  - {fileID: 2275700731909818686}
+  - {fileID: 3758467623713971936}
+  - {fileID: 4838311530253700816}
+  - {fileID: 4304093551627116494}
+  - {fileID: 1338143991333999122}
+  - {fileID: 2413318885159745721}
 --- !u!1 &2765207565097812541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,7 +1871,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4701220258322408315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1937,7 +1944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &4848288153161622994
 GameObject:
@@ -1965,7 +1971,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4848288153161622994}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9}
+  m_LocalPosition: {x: 0, y: 0, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2038,7 +2044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &4919322368355983497
 GameObject:
@@ -2150,7 +2155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6200918966580350634}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2223,7 +2228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &6262436912458965320
 GameObject:
@@ -2335,7 +2339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6287928725565188344}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2408,7 +2412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &6292523794455654594
 GameObject:
@@ -2436,7 +2439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6292523794455654594}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2509,7 +2512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &7209870288862670353
 GameObject:
@@ -2621,7 +2623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8067640330273924922}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2694,7 +2696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8786cbaee674c64b5ce0aee70bba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   parallaxEffectMultiplier: 0
 --- !u!1 &8196116437225426620
 GameObject:
