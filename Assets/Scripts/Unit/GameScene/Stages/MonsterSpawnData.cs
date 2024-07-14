@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unit.GameScene.Stages.Creatures.Monsters;
 using UnityEngine;
-using static Unit.GameScene.Stages.MonsterSpawnManager;
 
 namespace Unit.GameScene.Stages {
 
@@ -16,9 +17,40 @@ namespace Unit.GameScene.Stages {
         public Vector3 monsterSpawnOffset;
         [Header("몬스터 스폰 타입 오프셋")]
         public float monsterSpawnTimeOffset;
-        [Header("랜덤 몬스터")]
-        public RandomMonsterGroup[] monsterRandomGroup;
-        [Header("확정 몬스터")]
-        public StaticMonsterGroup monsterStaticGroup;
+        [Header("몬스터 스폰에 대한 데이터")]
+        public MonsterGroup[] monsterGroup;
+    }
+    /// <summary>
+    /// 해당 거리에서 확정 소환 그룹 모음
+    /// </summary>
+    [Serializable]
+    public struct MonsterGroup {
+        public SpawnDecider spawnDecider;
+        public List<SpawnGroup> monsterSpawnGroups;
+        public int TotalWeight {
+            get {
+                if (_totalWeight < 1)
+                    _totalWeight = monsterSpawnGroups.Sum(obj => obj.weight);
+                return _totalWeight;
+            } }
+        private int _totalWeight;
+    }
+    /// <summary>
+    /// 같이 소환되는 몬스터 그룹
+    /// </summary>
+    [Serializable]
+    public struct SpawnGroup {
+        /// <summary>
+        /// 해당 그룹이 선택될 가중치
+        /// </summary>
+        public int weight;
+        /// <summary>
+        /// mosnter reference에서 사용할 에셋 인덱스
+        /// </summary>
+        public int[] monsterIndex;
+        /// <summary>
+        /// monster Stats에서 사용할 스텟 인덱스
+        /// </summary>
+        public int[] monsterStatIndex;
     }
 }
