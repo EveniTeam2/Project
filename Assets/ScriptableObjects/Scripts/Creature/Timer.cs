@@ -7,8 +7,8 @@ namespace ScriptableObjects.Scripts.Creature {
     [CreateAssetMenu(fileName = nameof(Timer), menuName = "State/" + nameof(Condition) + "/" + nameof(Timer))]
     public class Timer : Condition {
         [SerializeField] private float intervalTime = 1.0f;
-        private bool _timer;
-        private bool _timerRunning;
+        private bool _timer = true;
+        private bool _timerRunning = false;
         public override bool CheckCondition(BaseCreature target) {
             return _timer;
         }

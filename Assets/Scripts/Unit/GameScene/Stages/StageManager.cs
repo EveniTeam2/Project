@@ -31,6 +31,8 @@ namespace Unit.GameScene.Stages {
             InitializeMonster(settings);
 
             InitializeCommand();
+
+            _monsterManager.Start();
         }
 
         private void InitializeCharacter(SceneExtraSetting settings) {
@@ -61,6 +63,7 @@ namespace Unit.GameScene.Stages {
 
         private void Update() {
             (this as ICommandReceiver<IStageCreature>).UpdateCommand();
+            _monsterManager.Update();
         }
 
         public void Received(ICommand<IStageCreature> command) {
