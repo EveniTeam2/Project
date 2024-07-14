@@ -10,9 +10,12 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
         bool IDamageable.IsDead => _isDead;
         event Action<BaseCreature> IDamageable.OnDeath { add { _onDeath += value; } remove { _onDeath -= value; } }
 
+        event Action<BaseCreature> IDamageable.OnDamage { add { _onDamage += value; } remove { _onDamage -= value; } }
+
         private bool _isDead => _health <= 0;
         private int _health => GetHeatlh.Invoke();
         private event Action<BaseCreature> _onDeath;
+        private event Action<BaseCreature> _onDamage;
         private Func<int> GetHeatlh;
         private Action<int> SetHealth;
 
@@ -37,6 +40,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
                 SetHealth.Invoke(0);
                 _onDeath?.Invoke(_character);
             }
+            _onDamage?.Invoke(_character);
         }
     }
 

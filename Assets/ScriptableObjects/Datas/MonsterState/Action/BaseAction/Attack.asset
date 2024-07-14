@@ -15,5 +15,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1
+  direction: {x: -1, y: 0}
   _distance: 1
   _attackMultiplier: 1
