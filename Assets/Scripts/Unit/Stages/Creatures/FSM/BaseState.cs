@@ -6,8 +6,8 @@ namespace Unit.Stages.Creatures.FSM {
     /// 상태를 나타내는 기본 클래스입니다.
     /// </summary>
     public class BaseState : IState {
-        protected Func<IState, IState> _onEnter;
-        protected Func<IState, IState> _onExit;
+        public event Func<IState, IState> OnEnter;
+        public event Func<IState, IState> OnExit;
         protected Func<IState, IState> _onUpdate;
         protected Func<IState, IState> _onFixedUpdate;
         protected Func<BaseCreature, bool> _transitionCondition;
@@ -23,8 +23,8 @@ namespace Unit.Stages.Creatures.FSM {
             _name = name;
             _parameterHash = aniHash;
             _sm = sm;
-            _onEnter = onEnter;
-            _onExit = onExit;
+            OnEnter = onEnter;
+            OnExit = onExit;
             _onUpdate = onUpdate;
             _onFixedUpdate = onFixedUpdate;
             _transitionCondition = transitionCondition;
@@ -34,14 +34,14 @@ namespace Unit.Stages.Creatures.FSM {
         /// 상태에 진입합니다.
         /// </summary>
         public void Enter(BaseCreature target) {
-            _onEnter?.Invoke(this);
+            OnEnter?.Invoke(this);
         }
 
         /// <summary>
         /// 상태에서 나옵니다.
         /// </summary>
         public void Exit(BaseCreature target) {
-            _onExit?.Invoke(this);
+            OnExit?.Invoke(this);
         }
 
         /// <summary>

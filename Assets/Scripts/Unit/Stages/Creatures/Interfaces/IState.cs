@@ -1,9 +1,12 @@
+using System;
 using Unit.Stages.Creatures.FSM;
 
 namespace Unit.Stages.Creatures.Interfaces
 {
     public interface IState
     {
+        event Func<IState, IState> OnEnter;
+        event Func<IState, IState> OnExit;
         void Enter(BaseCreature target);
         void Exit(BaseCreature target);
         void Update(BaseCreature target);
