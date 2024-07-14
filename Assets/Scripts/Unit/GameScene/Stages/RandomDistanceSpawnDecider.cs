@@ -31,12 +31,14 @@ namespace Unit.GameScene.Stages {
     public class RandomTimeSpawnDecider : SpawnDecider {
         [SerializeField] private float minTime;
         [SerializeField] private float maxTime;
-        public override bool CanExecute(MonsterSpawnManager manager) {
-            
+        public override bool CanExecute(MonsterSpawnManager manager)
+        {
+            return false;
         }
 
-        public override bool Execute(MonsterSpawnManager manager, MonsterGroup group) {
-            
+        public override bool Execute(MonsterSpawnManager manager, MonsterGroup group)
+        {
+            return false;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Unit.GameScene.Stages {
         }
 
         // TODO 인호님! 이거 불러야 시작 가능함
-        public void Initialize(StageSetting settings) {
+        public void Initialize(SceneExtraSetting settings) {
             InitializeCharacter(settings);
 
             InitializeMonster(settings);
@@ -29,7 +29,7 @@ namespace Unit.GameScene.Stages {
             InitializeCommand();
         }
 
-        private void InitializeCharacter(StageSetting settings) {
+        private void InitializeCharacter(SceneExtraSetting settings) {
             // Core.Utils.AddressableLoader.DeployAsset(settings.characterRef, settings.playerPosition, Quaternion.identity, null, (obj) => {
             //     if (obj.TryGetComponent(out _character))
             //         _character.Initialize(settings.characterStat, _backgroundDisplay);
@@ -41,7 +41,7 @@ namespace Unit.GameScene.Stages {
             }
         }
 
-        private void InitializeMonster(StageSetting settings) {
+        private void InitializeMonster(SceneExtraSetting settings) {
             _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, settings.groundYPosition);
         }
 
