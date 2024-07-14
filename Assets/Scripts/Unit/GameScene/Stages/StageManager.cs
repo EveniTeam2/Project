@@ -9,10 +9,14 @@ namespace Unit.GameScene.Stages {
     public class StageManager : MonoBehaviour, IStageCreature, ICommandReceiver<IStageCreature> {
         public PlayerCreature Character => _character;
         private PlayerCreature _character;
-        public List<MonsterCreature> Monsters => _monsterManager.Monsters;
+        public LinkedList<MonsterCreature> Monsters => _monsterManager.Monsters;
 
         private Queue<ICommand<IStageCreature>> _commands = new();
         private MonsterSpawnManager _monsterManager;
+        public float PlayTime => Time.time - _startTime;
+        private float _startTime;
+        public float Distance => _character.transform.position.x - _zeroPosition.x;
+        private Vector3 _zeroPosition;
 
         public void AttachBoard(ISendCommand data) {
             
@@ -35,9 +39,12 @@ namespace Unit.GameScene.Stages {
             //         _character.Initialize(settings.characterStat, _backgroundDisplay);
             // });
             var character = Instantiate(settings.characterRef, settings.playerPosition, Quaternion.identity);
+            // TODO 인호님 여기가 첫 시작에 대한 기준점입니다.
+            _zeroPosition = settings.playerPosition;
+            _startTime = Time.time;
 
             if (character.TryGetComponent(out _character)) {
-                _character.Initialize(settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());
+                _character.Initialize(this, settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());
             }
         }
 

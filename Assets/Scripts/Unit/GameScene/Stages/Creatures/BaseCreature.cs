@@ -46,6 +46,7 @@ namespace Unit.GameScene.Stages.Creatures {
         /// 변경된 스탯 리스트입니다.
         /// </summary>
         public abstract LinkedList<ModifyStatData> ModifiedStatData { get; }
+        public abstract StageManager StageManager { get; }
     }
 
     /// <summary>

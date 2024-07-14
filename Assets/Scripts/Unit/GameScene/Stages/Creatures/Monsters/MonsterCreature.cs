@@ -13,22 +13,22 @@ namespace Unit.GameScene.Stages.Creatures.Monsters {
         public override BattleSystem Battle => _battleSystem;
         public override HealthSystem Health => _healthSystem;
         public override MovementSystem Movement => _movementSystem;
-
         public override LinkedList<ModifyStatData> ModifiedStatData => _mods;
+        public override StageManager StageManager => _stageManager;
 
         private BattleSystem _battleSystem;
         private HealthSystem _healthSystem;
         private MovementSystem _movementSystem;
         private Animator _animator;
         private LinkedList<ModifyStatData> _mods = new LinkedList<ModifyStatData>();
-
+        private StageManager _stageManager;
         private Stat<MonsterStat> _stats;
 
-        public void Initialize(MonsterStat stat, float groundYPosition) {
+        public void Initialize(StageManager manager, MonsterStat stat, float groundYPosition) {
             _animator = gameObject.GetComponent<Animator>();
             _stats = new Stat<MonsterStat>(stat);
-
-            _battleSystem = new BattleSystem(this, _stats);
+            _stageManager = manager;
+            _battleSystem = new BattleSystem(manager, this, _stats);
             _healthSystem = new HealthSystem(this, _stats);
             _movementSystem = new MovementSystem(this, _stats);
             _movementSystem.SetGroundPosition(groundYPosition);

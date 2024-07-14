@@ -8,15 +8,17 @@ namespace Unit.GameScene.Stages {
 
     public partial class MonsterSpawnManager {
         private Dictionary<int, CustomPool<MonsterCreature>> _monsterPool;
-        public List<MonsterCreature> Monsters {
+        public LinkedList<MonsterCreature> Monsters {
             get {
-                List<MonsterCreature> monsters = new List<MonsterCreature>();
+                _spawnedMonsters.Clear();
                 foreach (var (key, pool) in _monsterPool) {
-                    monsters.AddRange(pool.UsedList);
+                    foreach (var creature in pool.UsedList)
+                        _spawnedMonsters.AddLast(creature);
                 }
-                return monsters;
+                return _spawnedMonsters;
             }
         }
+        private LinkedList<MonsterCreature> _spawnedMonsters = new LinkedList<MonsterCreature>();
         public StageManager StageManager => _stageManager;
         protected StageManager _stageManager;
         protected MonsterSpawnData _data;
@@ -35,7 +37,7 @@ namespace Unit.GameScene.Stages {
                 int index = i;
                 _monsterPool.Add(index, new CustomPool<MonsterCreature>(data.monstersRef[index], null,
                     (monCreate, pool) => {
-                        monCreate.Initialize(_data.monsterStats[index], ground);
+                        monCreate.Initialize(stageManager, _data.monsterStats[index], ground);
                         monCreate.gameObject.SetActive(false);
                     },
                     monGet => {
@@ -71,8 +73,7 @@ namespace Unit.GameScene.Stages {
             CheckWaitList();
             var group = _spawnGroup.First;
             while (group != null) {
-                if (group.Value.spawnDecider.CanExecute(this)) {
-                    group.Value.spawnDecider.Execute(this, group.Value);
+                if (group.Value.spawnDecider.Execute(this, group.Value)) {
                     group = group.Next;
                 }
                 else {
@@ -97,7 +98,7 @@ namespace Unit.GameScene.Stages {
                 if (_monsterPool.TryGetValue(group.monsterIndex[i], out var pool)) {
                     Debug.Assert(_data.monsterStats.Length <= group.monsterStatIndex[i], "문제 발생!!");
                     var monster = pool.Get();
-                    monster.Initialize(_data.monsterStats[group.monsterStatIndex[i]], _ground);
+                    monster.Initialize(_stageManager, _data.monsterStats[group.monsterStatIndex[i]], _ground);
                     monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position + new Vector3(Random.Range(-1f, 1f),0f);
                     monster.gameObject.SetActive(true);
                 }
