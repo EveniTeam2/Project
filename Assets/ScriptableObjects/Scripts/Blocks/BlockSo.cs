@@ -1,5 +1,5 @@
 using System;
-using Unit.Boards.Blocks.Enums;
+using Unit.GameScene.Boards.Blocks.Enums;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Blocks
