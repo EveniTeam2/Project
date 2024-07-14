@@ -16,6 +16,8 @@ namespace Unit.GameScene.Stages {
 
         [SerializeField] float groundYPosition = 1.8f;
         public void AttachBoard(ISendCommand data) {
+            
+            Debug.Log("Attach Clear");
             data.OnSendCommand += Received;
         }
 

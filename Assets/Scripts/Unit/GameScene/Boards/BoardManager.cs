@@ -307,15 +307,15 @@ namespace Unit.GameScene.Boards
 
             foreach (DictionaryEntry combo in _currentMatchBlock)
             {
-                var key = (Tuple<Blocks.Enums.BlockType, int>)combo.Key;
+                var key = (Tuple<BlockType, int>)combo.Key;
                 var value = (int)combo.Value;
 
                 Debug.Log($"Key: ({key.Item1}, {key.Item2}), Value: {value}");
                 
-                // OnSendCommand?.Invoke(new CommandToStagePlayer(combo));
-                
-                
+                OnSendCommand?.Invoke(new CommandToStagePlayer(key.Item1, value, 0.5f));
             }
+            
+            _currentMatchBlock.Clear();
         }
 
         /// <summary>
@@ -348,9 +348,9 @@ namespace Unit.GameScene.Boards
             yield return null;
         }
 
-        private void CheckBlockCombo(Blocks.Enums.BlockType type)
+        private void CheckBlockCombo(BlockType type)
         {
-            var key = new Tuple<Blocks.Enums.BlockType, int>(type, _dragCount);
+            var key = new Tuple<BlockType, int>(type, _dragCount);
             
             if (_currentMatchBlock.Contains(key))
             {
