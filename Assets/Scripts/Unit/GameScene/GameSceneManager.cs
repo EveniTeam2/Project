@@ -1,27 +1,39 @@
+using System;
+using System.Collections;
 using Unit.GameScene.Boards;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages;
 using Unit.GameScene.Stages.Backgrounds;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Unit.GameScene
 {
+    /// <summary>
+    /// 게임 씬을 관리하며, 보드와 스테이지 초기화, 드래그 횟수 관리, 게임 종료 등을 처리합니다.
+    /// </summary>
     public class GameSceneManager : MonoBehaviour
     {
-        [Header("Scene 추가 세팅")]
+        // TODO : 이후에 BoardManager와 StageManager 내부의 CharacterManager와 MonsterManager가 해당 액션을 구독하도록 수정
+        private event Action<bool> OnGameOver;
+        
+        [Header("==== Scene 추가 세팅 ====")]
         [SerializeField] private SceneExtraSetting extraSetting;
         
-        [Header("Scene 기본 세팅")]
+        [Header("==== Scene 기본 세팅 ====")]
         [SerializeField] private SceneDefaultSetting defaultSetting;
         
         [Header("드래그 횟수")]
         [SerializeField] private int dragCount;
+        [SerializeField] private bool isGameOver;
+        [SerializeField] private float currentTime;
         
         private BoardManager _boardManager;
         private StageManager _stageManager;
         private BackgroundController _backgroundController;
 
+        /// <summary>
+        /// 게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
+        /// </summary>
         private void Awake()
         {
             InstantiateAndInitializeMap();
@@ -29,6 +41,17 @@ namespace Unit.GameScene
             InstantiateAndInitializeStage();
         }
 
+        /// <summary>
+        /// 게임 시작 시 타이머를 시작합니다.
+        /// </summary>
+        private void Start()
+        {
+            StartCoroutine(Timer(extraSetting.limitTime));
+        }
+
+        /// <summary>
+        /// 맵을 인스턴스화하고 초기화합니다.
+        /// </summary>
         private void InstantiateAndInitializeMap()
         {
             _backgroundController = Instantiate(defaultSetting.mapPrefab).GetComponent<BackgroundController>();
@@ -36,6 +59,9 @@ namespace Unit.GameScene
             _backgroundController.Initialize(defaultSetting.mainCamera);
         }
 
+        /// <summary>
+        /// 보드를 인스턴스화하고 초기화합니다.
+        /// </summary>
         private void InstantiateAndInitializeBoard()
         {
             _boardManager = Instantiate(defaultSetting.boardManagerPrefab).GetComponent<BoardManager>();
@@ -44,6 +70,9 @@ namespace Unit.GameScene
             AttachBoard(_boardManager);
         }
         
+        /// <summary>
+        /// 스테이지를 인스턴스화하고 초기화합니다.
+        /// </summary>
         private void InstantiateAndInitializeStage()
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
@@ -52,14 +81,41 @@ namespace Unit.GameScene
             _stageManager.AttachBoard(_boardManager);
         }
 
+        /// <summary>
+        /// 드래그 횟수 증가 이벤트를 보드에 연결합니다.
+        /// </summary>
         private void AttachBoard(IIncreaseDragCount data)
         {
             data.OnIncreaseDragCount += IncreaseDragCount;
         }
 
+        /// <summary>
+        /// 드래그 횟수를 증가시킵니다.
+        /// </summary>
+        /// <param name="count">드래그 횟수</param>
         private void IncreaseDragCount(int count)
         {
             dragCount = count;
+        }
+        
+        /// <summary>
+        /// 제한 시간 타이머 코루틴입니다.
+        /// </summary>
+        /// <param name="limitTime">제한 시간</param>
+        private IEnumerator Timer(float limitTime)
+        {
+            isGameOver = false;
+            
+            currentTime = 0f;
+
+            while (currentTime < limitTime)
+            {
+                currentTime += Time.deltaTime;
+                
+                yield return null;
+            }
+            
+            isGameOver = true;
         }
     }
 }
