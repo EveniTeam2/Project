@@ -74,6 +74,7 @@ namespace Unit.GameScene.Stages.Creatures.Monsters {
         public override void ClearStat() {
             _mods.Clear();
             _stats.SetCurrent(_stats.Origin);
+            StopAllCoroutines();
         }
 
         IEnumerator TempModifyStatCoroutine(EStatType statType, int value, float duration) {
