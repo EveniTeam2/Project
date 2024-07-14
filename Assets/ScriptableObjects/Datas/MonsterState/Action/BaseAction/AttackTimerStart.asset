@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e60b987fe0c494c8288865f9dc0ef760, type: 3}
-  m_Name: RunStop
+  m_Script: {fileID: 11500000, guid: 54023e4507ad5294397e4659f531e389, type: 3}
+  m_Name: AttackTimerStart
   m_EditorClassIdentifier: 
-  decoratorActionData: {fileID: 11400000, guid: 6fce0c49a6cb9414b927c90b16ff0459, type: 2}
-  actionData: {fileID: 11400000, guid: 0f1335d2f4f7293449d7fbce0f9929c6, type: 2}
+  targetTimer: {fileID: 11400000, guid: b8299b60317b6e24398f3fff5ce46d6e, type: 2}

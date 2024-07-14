@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: Run
   animParameter: Run
-  onEnter: {fileID: 11400000, guid: 183ba11d01f11804d8f5b3a0dbfdad3a, type: 2}
-  onExit: {fileID: 11400000, guid: fe7f079812cbb894e80f6876544b7506, type: 2}
+  onEnter: {fileID: 11400000, guid: 64b36d1e29e6ffd4b89ceb64e05a63aa, type: 2}
+  onExit: {fileID: 11400000, guid: b7e550a10781f544d8cd92e9742a429f, type: 2}
   onUpdate: {fileID: 0}
   onFixedUpdate: {fileID: 11400000, guid: d93c397829ed9e646a45dec9c3cabec3, type: 2}
   canTransitionToThis: {fileID: 0}

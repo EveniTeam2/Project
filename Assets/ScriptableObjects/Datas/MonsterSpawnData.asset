@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01371642ffa5d344492f9bb29f7f779a, type: 3}
   m_Name: MonsterSpawnData
   m_EditorClassIdentifier: 
-  monstersRef: []
-  monsterStats: []
-  monsterSpawnOffset: {x: 0, y: 0, z: 0}
+  monstersRef:
+  - {fileID: 1672940475951353492, guid: 7de578e0ebe8de445887e9a3fda449aa, type: 3}
+  monsterStats:
+  - Attack: 1
+    Health: 1
+    Speed: 1
+  monsterSpawnOffset: {x: 1, y: 0, z: 0}
   monsterSpawnTimeOffset: 0
-  monsterRandomGroup: []
-  monsterStaticGroup:
-    minDistance: 0
-    monsterSpawnGroups: []
+  monsterGroup:
+  - spawnDecider: {fileID: 11400000, guid: 7722e2688ef47684b9e0483cea55742e, type: 2}
+    monsterSpawnGroups:
+    - weight: 1
+      monsterIndex: 00000000
+      monsterStatIndex: 00000000

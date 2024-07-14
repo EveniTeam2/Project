@@ -4,7 +4,7 @@ using Unit.GameScene.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature {
-    [CreateAssetMenu(fileName = nameof(Timer), menuName = "State" + nameof(Condition) + nameof(Timer))]
+    [CreateAssetMenu(fileName = nameof(Timer), menuName = "State/" + nameof(Condition) + "/" + nameof(Timer))]
     public class Timer : Condition {
         [SerializeField] private float intervalTime = 1.0f;
         private bool _timer;
