@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f7e5d55617fd44aad49d256dff2b98, type: 3}
-  m_Name: MonsterStateDataDTO
+  m_Script: {fileID: 11500000, guid: 06889cefeba1c4d4a95a15ef6ff43acf, type: 3}
+  m_Name: CheckMonsterCollider
   m_EditorClassIdentifier: 
-  states: []
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  distance: 0

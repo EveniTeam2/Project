@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340a52ef5992496ba0ad0ed48bf0e841, type: 3}
   m_Name: MonsterHitState
   m_EditorClassIdentifier: 
-  stateName: 
-  animParameter: 
-  onEnter: {fileID: 0}
-  onExit: {fileID: 0}
-  onUpdate: {fileID: 0}
+  stateName: Hit
+  animParameter: Hit
+  onEnter: {fileID: 11400000, guid: 183ba11d01f11804d8f5b3a0dbfdad3a, type: 2}
+  onExit: {fileID: 11400000, guid: fe7f079812cbb894e80f6876544b7506, type: 2}
+  onUpdate: {fileID: 11400000, guid: 1e0c9bbcd11a183438f4a70ed4b70891, type: 2}
   onFixedUpdate: {fileID: 0}
   canTransitionToThis: {fileID: 0}

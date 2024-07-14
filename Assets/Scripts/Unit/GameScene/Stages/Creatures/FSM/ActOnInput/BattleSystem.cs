@@ -19,8 +19,8 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
             _stat = new BattleStat(stat);
             _stageManager = manager;
         }
-        public bool CheckCollider(LayerMask targetLayer, float distance, out RaycastHit2D[] collidee) {
-            var hits = Physics2D.RaycastAll(_character.transform.position, new Vector2(1, 0), distance, targetLayer);
+        public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee) {
+            var hits = Physics2D.RaycastAll(_character.transform.position, direction, distance, targetLayer);
             collidee = hits;
             return false;
         }

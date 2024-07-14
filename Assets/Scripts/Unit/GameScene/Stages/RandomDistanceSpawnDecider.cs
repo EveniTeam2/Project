@@ -5,8 +5,8 @@ namespace Unit.GameScene.Stages {
     public class RandomDistanceSpawnDecider : SpawnDecider {
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
-        //[SerializeField] private float intervalDistance = 1f;
-        //private float _distance = 0f;
+        [SerializeField] private float intervalDistance = 1f;
+        private int count = 0;
 
         public override bool CanExecute(MonsterSpawnManager manager) {
             var decision = manager.StageManager.Character.transform.position.x;
@@ -18,8 +18,10 @@ namespace Unit.GameScene.Stages {
 
         public override bool Execute(MonsterSpawnManager manager, MonsterGroup group) {
             if (CanExecute(manager)) {
-                //if (_distance < intervalDistance)
-                //    return true;
+                if ((manager.StageManager.Distance - minDistance) / intervalDistance < count) {
+                    return true;
+                }
+                ++count;
 
                 var select = Random.Range(0, group.TotalWeight + 1);
                 int weight = 0;

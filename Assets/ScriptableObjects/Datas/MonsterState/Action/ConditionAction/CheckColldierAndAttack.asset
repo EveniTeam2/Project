@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f7e5d55617fd44aad49d256dff2b98, type: 3}
-  m_Name: MonsterStateDataDTO
+  m_Script: {fileID: 11500000, guid: 8824388ae113f654bac6a8efd9858f91, type: 3}
+  m_Name: CheckColldierAndAttack
   m_EditorClassIdentifier: 
-  states: []
+  _condition: {fileID: 0}
+  _action: {fileID: 0}
