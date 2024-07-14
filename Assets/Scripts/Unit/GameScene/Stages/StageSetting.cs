@@ -24,6 +24,6 @@ namespace Unit.GameScene.Stages {
         //public AssetReference[] monstersRef;
 
         [Header("몬스터 스폰 정보")]
-        public MonsterSpawnManager.MonsterSpawnData monsterSpawnData;
+        public MonsterSpawnData monsterSpawnData;
     }
 }

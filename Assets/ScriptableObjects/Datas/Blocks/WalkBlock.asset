@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ecc731ec674b5bbf81f2b9c6882458, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e8dc80ede8a4e1aa0ae9f319a93d12f, type: 3}
   m_Name: WalkBlock
   m_EditorClassIdentifier: 
   type: 1
-  color: {r: 1, g: 0.8469014, b: 0.41176474, a: 1}
-  text: "\uAC77\uAE30"
+  color: {r: 0.57254905, g: 0.9843137, b: 1, a: 1}
+  text: 4

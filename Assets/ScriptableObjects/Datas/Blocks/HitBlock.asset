@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ecc731ec674b5bbf81f2b9c6882458, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e8dc80ede8a4e1aa0ae9f319a93d12f, type: 3}
   m_Name: HitBlock
   m_EditorClassIdentifier: 
   type: 3
-  color: {r: 1, g: 0.5457178, b: 0.41176474, a: 1}
-  text: "\uB9DE\uAE30"
+  color: {r: 1, g: 0.9882353, b: 0.64705884, a: 1}
+  text: 1
