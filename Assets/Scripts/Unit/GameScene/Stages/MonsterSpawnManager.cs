@@ -71,8 +71,7 @@ namespace Unit.GameScene.Stages {
             CheckWaitList();
             var group = _spawnGroup.First;
             while (group != null) {
-                if (group.Value.spawnDecider.CanExecute(this)) {
-                    group.Value.spawnDecider.Execute(this, group.Value);
+                if (group.Value.spawnDecider.Execute(this, group.Value)) {
                     group = group.Next;
                 }
                 else {
