@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages.Creatures.Characters;
 using Unit.GameScene.Stages.Creatures.Monsters;
 using Unit.GameScene.Stages.Interfaces;
@@ -14,6 +15,8 @@ namespace Unit.GameScene.Stages {
         private MonsterSpawnManager _monsterManager;
 
         public void AttachBoard(ISendCommand data) {
+            
+            Debug.Log("Attach Clear");
             data.OnSendCommand += Received;
         }
 

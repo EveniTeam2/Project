@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Boards;
+using Unit.GameScene.Boards.Blocks.Enums;
+using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages;
 using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Interfaces;
@@ -72,26 +74,26 @@ namespace Unit.GameScene
         {
             _boardManager = Instantiate(boardManagerPrefab).GetComponent<BoardManager>();
             _boardManager.Initialize(blockInfos, blockPanel, canvas);
+            
+            AttachBoard(_boardManager);
         }
         
         private void InstantiateAndInitializeStage()
         {
             _stageManager = Instantiate(stageManagerPrefab).GetComponent<StageManager>();
             _stageManager.Initialize(settings);
+            
             _stageManager.AttachBoard(_boardManager);
         }
-    }
-    
-    [Serializable]
-    public class CommandToStagePlayer : ICommand<IStageCreature> {
-        [SerializeField] BlockSo blockSo;
-        [SerializeField] int count;
-        [SerializeField] float targetNormalTime;
-        void ICommand<IStageCreature>.Execute(IStageCreature creature) {
-            creature.Character.Input(blockSo, count);
+        
+        public void AttachBoard(IIncreaseDragCount data)
+        {
+            data.OnIncreaseDragCount += IncreaseDragCount;
         }
-        bool ICommand<IStageCreature>.IsExecutable(IStageCreature creature) {
-            return (creature.Character.HFSM.GetCurrentAnimationNormalizedTime() > targetNormalTime);
+
+        private void IncreaseDragCount(int dragCount)
+        {
+            _dragCount = dragCount;
         }
     }
 }
