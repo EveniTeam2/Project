@@ -11,7 +11,6 @@ namespace Unit.Stages.Creatures {
         public BattleSystem(PlayerCreature self, Stat<CharacterStat> stat) {
             _character = self;
             _stat = new BattleStat(stat);
-
         }
         public BattleSystem(MonsterCreature target, Stat<MonsterStat> stat) {
             _character = target;
