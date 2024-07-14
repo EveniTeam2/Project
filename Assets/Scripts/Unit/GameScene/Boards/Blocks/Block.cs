@@ -17,9 +17,10 @@ namespace Unit.GameScene.Boards.Blocks
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
 
-        [SerializeField] private BlockSo blockSo;
-        [SerializeField] private Image blockImage;
-        [SerializeField] private TextMeshProUGUI textMeshPro;
+        private BlockSo _blockSo;
+        [SerializeField] private Image blockBackground;
+        [SerializeField] private Image blockIcon; // TODO : 스킬 아이콘 넣을 곳
+        [SerializeField] private TextMeshProUGUI temp;
 
         private RectTransform _rectTransform;
         private Canvas _canvas;
@@ -29,12 +30,13 @@ namespace Unit.GameScene.Boards.Blocks
 
         public void Initialize(BlockSo info, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas)
         {
-            blockSo = info;
-            textMeshPro.text = blockSo.text;
-            blockImage.color = blockSo.color;
-            Type = blockSo.type;
             OnMatchCheck = matchCheckHandler;
             _canvas = canvas;
+            
+            _blockSo = info;
+            temp.text = info.text;
+            blockBackground.sprite = _blockSo.background;
+            Type = _blockSo.type;
 
             _rectTransform = GetComponent<RectTransform>();
         }

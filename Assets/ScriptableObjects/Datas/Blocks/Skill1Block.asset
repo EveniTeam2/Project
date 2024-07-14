@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 123aa03f40c934d44b7ecc195d5fe8a7, type: 3}
-  m_Name: WalkBlock
+  m_Name: Skill1Block
   m_EditorClassIdentifier: 
   type: 1
-  color: {r: 0.57254905, g: 0.9843137, b: 1, a: 1}
-  text: Walk
+  background: {fileID: 21300000, guid: c2f38c4522c6cb2418e1e818cede3cdb, type: 3}
+  text: "\uC2A4\uD0AC1"
