@@ -16,7 +16,6 @@ namespace Unit.Stages {
         private Queue<ICommand<IStageCreature>> _commands = new();
         private MonsterSpawnManager _monsterManager;
 
-        [SerializeField] float groundYPosition = 1.8f;
         public void AttachBoard(IStageable data) {
             data.OnSendCommand += Received;
         }
@@ -38,12 +37,12 @@ namespace Unit.Stages {
             var character = Instantiate(settings.characterRef, settings.playerPosition, Quaternion.identity);
 
             if (character.TryGetComponent(out _character)) {
-                _character.Initialize(settings.characterStat, groundYPosition, settings.actOnInputs.ToArray());
+                _character.Initialize(settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());
             }
         }
 
         private void InitializeMonster(StageSetting settings) {
-            _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, groundYPosition);
+            _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, settings.groundYPosition);
         }
 
         private void InitializeCommand() {

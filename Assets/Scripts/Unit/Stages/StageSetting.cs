@@ -12,6 +12,8 @@ namespace Unit.Stages {
     [Serializable]
     public struct StageSetting {
         // public AssetReference characterRef;
+        [Header("땅이라고 생각하는 y 포지션")]
+        public float groundYPosition;
         [Header("플레이어 오브젝트")]
         public PlayerCreature characterRef;
         [Header("플레이어 스텟")]

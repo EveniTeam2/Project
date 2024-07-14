@@ -1,0 +1,11 @@
+﻿using Unit.Stages.Creatures;
+using UnityEngine;
+
+namespace ScriptableObjects.Scripts.Creature {
+    [CreateAssetMenu(fileName = nameof(IsGrounded), menuName = "State/Condition/" + nameof(IsGrounded))]
+    public class IsGrounded : Condition {
+        public override bool CheckCondition(BaseCreature target) {
+            return target.Movement.IsJump;
+        }
+    }
+}
