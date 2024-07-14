@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Boards.Blocks;
@@ -14,17 +15,16 @@ namespace Unit.GameScene.Boards
     /// <summary>
     /// 보드 상태를 관리하며, 블록 교환, 매칭 및 보드 갱신을 처리합니다.
     /// </summary>
-    public class BoardManager : MonoBehaviour, ISendCommand
+    public class BoardManager : MonoBehaviour, ISendCommand, IIncreaseDragCount
     {
         public event Action<ICommand<IStageCreature>> OnSendCommand;
+        public event Action<int> OnIncreaseDragCount;
         
         [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")]
         [SerializeField] private int width;
         [SerializeField] private int height;
         private float _halfPanelWidth;
         private float _blockGap;
-        
-        private RectTransform _blockSpawnPos;
         
         [Header("각각의 로직 사이의 대기 시간 (단위 : Second)")]
         [SerializeField] [Range(0, 1f)] private float logicProgressTime;
@@ -51,6 +51,8 @@ namespace Unit.GameScene.Boards
 
         private Canvas _canvas;
         
+        private int _dragCount;
+        
         private IBlockGenerator _blockGenerator;
         private IBlockMatcher _blockMatcher;
         private IBlockMover _blockMover;
@@ -59,11 +61,12 @@ namespace Unit.GameScene.Boards
         private Vector2 _blockSize;
         private RectTransform _blockPanel;
         private List<BlockSo> _blockInfos;
+        private RectTransform _blockSpawnPos;
         private Dictionary<Tuple<float, float>, Block> _tiles;
         private List<Tuple<float, float>> _blockPositions;
         
         [Header("명령 대기 리스트")]
-        private List<KeyValuePair<int, Tuple<BlockType, int>>> _currentMatchBlock;
+        private OrderedDictionary _currentMatchBlock;
 
         #region #### 보드 초기화 ####
 
@@ -100,6 +103,7 @@ namespace Unit.GameScene.Boards
         /// /// <param name="canvas">캔버스</param>
         private void InitializeValues(List<BlockSo> blockInfos, RectTransform blockPanel, Canvas canvas)
         {
+            _dragCount = 0;
             isLogicUpdating = false;
             _poolSize = width * height;
             _blockInfos = blockInfos;
@@ -107,7 +111,7 @@ namespace Unit.GameScene.Boards
             _canvas = canvas;
     
             _tiles = new Dictionary<Tuple<float, float>, Block>();
-            _currentMatchBlock = new List<KeyValuePair<int, Tuple<BlockType, int>>>();
+            _currentMatchBlock = new OrderedDictionary();
             _progressTime = new WaitForSeconds(logicProgressTime);
         }
 
@@ -230,12 +234,14 @@ namespace Unit.GameScene.Boards
         /// 여러 블록들을 제거합니다.
         /// </summary>
         /// <param name="blocks">제거 대상 블록 목록</param>
-        private void RemoveBlocks(List<Block> blocks)
+        /// /// <param name="isMatched">매치에 의한 삭제인지 여부</param>
+        private void RemoveBlocks(List<Block> blocks, bool isMatched)
         {
             Debug.Log("블록 제거");
             
             foreach (var block in blocks)
             {
+                Debug.Log($"드래그 카운트 {_dragCount} / 삭제 블록 타입 : {block.Type}");
                 RemoveBlock(block);
             }
         }
@@ -249,6 +255,7 @@ namespace Unit.GameScene.Boards
             var blockPos = block.GetComponent<RectTransform>().anchoredPosition;
             
             Debug.Log($"{blockPos} 블록 제거 ");
+                
             _tiles.Remove(new Tuple<float, float>(blockPos.x, blockPos.y));
             _blockPool.Release(block);
         }
@@ -260,29 +267,7 @@ namespace Unit.GameScene.Boards
         {
             var allBlocks = _tiles.Select(tile => tile.Value).ToList();
 
-            RemoveBlocks(allBlocks);
-        }
-
-        /// <summary>
-        /// 매칭된 모든 블록을 제거합니다.
-        /// </summary>
-        /// <param name="matchedBlocks">매칭된 블록 목록</param>
-        private void RemoveMatchedBlocks(List<Block> matchedBlocks)
-        {
-            Debug.Log("제거 대상 블록 검증 시작");
-            
-            var allMatchedBlocks = new HashSet<Block>();
-
-            if (matchedBlocks.Count > 0)
-            {
-                Debug.Log("제거 대상 블록과 인접한 블록 검증 시작");
-                var currentMatches = _blockMatcher.GetAdjacentMatches(matchedBlocks);
-                allMatchedBlocks.UnionWith(currentMatches);
-            }
-            
-            Debug.Log("조건에 부합하는 모든 블록 제거 시작");
-
-            RemoveBlocks(allMatchedBlocks.ToList());
+            RemoveBlocks(allBlocks, false);
         }
 
         #endregion
@@ -297,40 +282,92 @@ namespace Unit.GameScene.Boards
             yield return StartCoroutine(_blockMover.SwapBlock(currentBlock, targetBlock, targetBlockIndex, currentBlockIndex));
 
             // 교환 후에 딕셔너리에서 블록 위치 업데이트
-            _tiles[currentBlockIndex] = targetBlock;
-            _tiles[targetBlockIndex] = currentBlock;
+            UpdateBlockPositions(currentBlockIndex, targetBlockIndex, currentBlock, targetBlock);
 
-            _blockMatcher.CheckMatchesForBlock(targetBlockIndex, out var currentMatchedBlocks);
-            _blockMatcher.CheckMatchesForBlock(currentBlockIndex, out var targetMatchedBlocks);
+            // 초기 매칭된 블록 제거
+            yield return ProcessMatchedBlocks(currentBlockIndex, targetBlockIndex);
 
-            // 두 리스트를 합쳐서 중복을 제거하고 유일성을 유지
-            var allMatchedBlocks = new HashSet<Block>(currentMatchedBlocks);
-            allMatchedBlocks.UnionWith(targetMatchedBlocks);
-
-            Debug.Log($"삭제될 블록 수 {allMatchedBlocks.Count}");
-            RemoveMatchedBlocks(allMatchedBlocks.ToList());
-            Debug.Log($"남은 블록 수 {_tiles.Count}");
-
+            // 빈 공간 채우기
             yield return FillEmptySpaces();
             yield return _progressTime;
-            
-            // Debug.Log($"남은 블록 수 {_tiles.Count}");
-            // yield break;
 
+            // 새로운 블록 채우기
             yield return FillNewBlocks();
             yield return _progressTime;
 
+            // 추가 매칭된 블록 제거 반복
+            yield return ProcessAdditionalMatches();
+
+            // 더 이상 매칭 가능한 블록이 없으면 모든 블록을 재생성
+            while (!IsAnyPossibleMatches())
+            {
+                RemoveAllBlocks();
+                _blockGenerator.GenerateAllRandomBlocks();
+            }
+
+            isLogicUpdating = false;
+        }
+
+        /// <summary>
+        /// 블록 위치를 업데이트합니다.
+        /// </summary>
+        private void UpdateBlockPositions(Tuple<float, float> currentBlockIndex, Tuple<float, float> targetBlockIndex, Block currentBlock, Block targetBlock)
+        {
+            _tiles[currentBlockIndex] = targetBlock;
+            _tiles[targetBlockIndex] = currentBlock;
+        }
+
+        /// <summary>
+        /// 매칭된 블록들을 처리합니다.
+        /// </summary>
+        private IEnumerator ProcessMatchedBlocks(Tuple<float, float> currentBlockIndex, Tuple<float, float> targetBlockIndex)
+        {
+            _blockMatcher.CheckMatchesForBlock(targetBlockIndex, out var currentMatchedBlocks);
+            _blockMatcher.CheckMatchesForBlock(currentBlockIndex, out var targetMatchedBlocks);
+
+            if (currentMatchedBlocks.Count > 0) if (currentMatchedBlocks.Count > 0) CheckBlockCombo(currentMatchedBlocks[0].Type);;
+            if (targetMatchedBlocks.Count > 0) CheckBlockCombo(targetMatchedBlocks[0].Type);
+
+            var allMatchedBlocks = new HashSet<Block>(_blockMatcher.GetAdjacentMatches(currentMatchedBlocks));
+            allMatchedBlocks.UnionWith(_blockMatcher.GetAdjacentMatches(targetMatchedBlocks));
+
+            Debug.Log($"삭제될 블록 수 {allMatchedBlocks.Count}");
+            RemoveBlocks(allMatchedBlocks.ToList(), true);
+            Debug.Log($"남은 블록 수 {_tiles.Count}");
+
+            yield return null;
+        }
+
+        private void CheckBlockCombo(BlockType type)
+        {
+            var key = new Tuple<BlockType, int>(type, _dragCount);
+            
+            if (_currentMatchBlock.Contains(key))
+            {
+                _currentMatchBlock[key] = (int)_currentMatchBlock[key] + 1;
+            }
+            else
+            {
+                _currentMatchBlock.Add(key, 1);
+            }
+        }
+
+        /// <summary>
+        /// 추가 매칭된 블록들을 처리합니다.
+        /// </summary>
+        private IEnumerator ProcessAdditionalMatches()
+        {
             while (true)
             {
                 var matchedBlocks = _blockMatcher.FindAllMatches(_tiles);
                 if (matchedBlocks.Count == 0) break;
 
                 matchedBlocks = _blockMatcher.GetAdjacentMatches(matchedBlocks);
-                
+
                 Debug.Log($"삭제될 블록 수 {matchedBlocks.Count}");
 
-                RemoveBlocks(matchedBlocks);
-                
+                RemoveBlocks(matchedBlocks, true);
+
                 Debug.Log($"남은 블록 수 {_tiles.Count}");
 
                 yield return FillEmptySpaces();
@@ -339,15 +376,6 @@ namespace Unit.GameScene.Boards
                 yield return FillNewBlocks();
                 yield return _progressTime;
             }
-
-            while (true)
-            {
-                if (IsAnyPossibleMatches()) break;
-                
-                _blockGenerator.GenerateAllRandomBlocks();
-            }
-
-            isLogicUpdating = false;
         }
 
         /// <summary>
@@ -448,6 +476,9 @@ namespace Unit.GameScene.Boards
             if (CheckSwapForMatch(currentBlockIndex, targetBlockIndex))
             {
                 Debug.Log("스왑 시작");
+                
+                OnIncreaseDragCount?.Invoke(++_dragCount);
+                
                 var currentBlock = _tiles[currentBlockIndex];
                 var targetBlock = _tiles[targetBlockIndex];
                 StartCoroutine(ProcessBlockSwapAndFall(currentBlock, targetBlock, currentBlockIndex, targetBlockIndex));

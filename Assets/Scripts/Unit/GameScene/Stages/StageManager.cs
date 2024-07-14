@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages.Creatures.Characters;
 using Unit.GameScene.Stages.Creatures.Monsters;
 using Unit.GameScene.Stages.Interfaces;
