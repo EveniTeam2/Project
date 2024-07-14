@@ -1,4 +1,4 @@
-﻿using Unit.Stages.Creatures;
+using Unit.GameScene.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature {

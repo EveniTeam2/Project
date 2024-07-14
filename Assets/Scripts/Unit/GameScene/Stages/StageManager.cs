@@ -13,7 +13,7 @@ namespace Unit.GameScene.Stages {
         private Queue<ICommand<IStageCreature>> _commands = new();
         private MonsterSpawnManager _monsterManager;
 
-        public void AttachBoard(IStageable data) {
+        public void AttachBoard(ISendCommand data) {
             data.OnSendCommand += Received;
         }
 

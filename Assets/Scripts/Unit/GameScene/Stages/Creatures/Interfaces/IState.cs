@@ -1,5 +1,5 @@
 using System;
-using Unit.Stages.Creatures.FSM;
+using Unit.GameScene.Stages.Creatures.FSM;
 
 namespace Unit.GameScene.Stages.Creatures.Interfaces
 {

@@ -1,5 +1,5 @@
 using ScriptableObjects.Scripts.Creature;
-using Unit.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Interfaces;
 using UnityEngine;
 
 namespace Assets.ScriptableObjects.Scripts.Creature {
