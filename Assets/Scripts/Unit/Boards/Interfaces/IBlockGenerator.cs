@@ -6,9 +6,12 @@ using UnityEngine;
 
 namespace Unit.Boards.Interfaces
 {
+    /// <summary>
+    /// 블록 생성기 인터페이스
+    /// </summary>
     public interface IBlockGenerator
     {
         void GenerateAllRandomBlocks();
-        NewBlock GetRandomValidBlock(Dictionary<Tuple<float, float>, Block> tiles, Tuple<float, float> pos);
+        BlockSo GetRandomValidBlock(Dictionary<Tuple<float, float>, Block> tiles, Tuple<float, float> pos);
     }
 }

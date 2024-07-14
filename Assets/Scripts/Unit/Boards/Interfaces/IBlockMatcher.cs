@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Unit.Boards.Interfaces
 {
+    /// <summary>
+    /// 블록 매치 검사 인터페이스
+    /// </summary>
     public interface IBlockMatcher
     {
         bool CheckMatchesForBlock(Tuple<float, float> position, out List<Block> matchedBlocks);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.Boards;
 using Unit.Stages;
+using Unit.Stages.Backgrounds;
 using Unit.Stages.Interfaces;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -23,6 +24,10 @@ namespace Manager
         [Header("StageManager")]
         [SerializeField] private GameObject stageManagerPrefab;
         private StageManager _stageManager;
+        
+        [Header("맵 정보")]
+        public GameObject mapPrefab; // TODO : 이것도 나중에 바꿔줘야 함
+        private BackgroundController _backgroundController;
 
         [Header("블록 스폰 위치")]
         [SerializeField] private RectTransform blockPanel;
@@ -31,7 +36,9 @@ namespace Manager
         [SerializeField] private Canvas canvas;
         
         [Header("타일 정보")]
-        public List<NewBlock> blockInfos; // TODO : 이전 씬의 게임 매니저에서 값을 전달해주는 것으로 수정
+        public List<BlockSo> blockInfos; // TODO : 이전 씬의 게임 매니저에서 값을 전달해주는 것으로 수정
+
+
         
         [Header("Test")]
         [SerializeField] private List<CommandToStagePlayer> testCommand;
@@ -39,47 +46,12 @@ namespace Manager
 
         private void Awake()
         {
-            // CalculateScreenSize();
+            InstantiateAndInitializeMap();
             InstantiateAndInitializeBoard();
             InstantiateAndInitializeStage();
         }
 
-        private void CalculateScreenSize()
-        {
-            // float screenWidth = Screen.width;
-            // float screenHeight = Screen.height;
-            //
-            // Debug.Log(nameof(screenWidth) + $" : {screenWidth}");
-            // Debug.Log(nameof(screenHeight) + $" : {screenHeight}");
-            //
-            // // 화면의 절반 높이 계산
-            // var halfScreenHeight = screenHeight / 2f;
-            //
-            // Debug.Log(nameof(halfScreenHeight) + $" : {halfScreenHeight}");
-            //
-            // // 카메라를 기준으로 월드 좌표 계산
-            // var topBoxPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenWidth / 2f, screenHeight - halfScreenHeight / 2f, 0));
-            // var bottomBoxPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenWidth / 2f, halfScreenHeight / 2f, 0));
-            //
-            // Debug.Log(nameof(bottomBoxPosition) + $" : {bottomBoxPosition}");
-            //
-            // // 위치 설정
-            // topBox.transform.position = new Vector3(topBoxPosition.x, topBoxPosition.y, 0);
-            // bottomBox.transform.position = new Vector3(bottomBoxPosition.x, bottomBoxPosition.y, 0);
-            //
-            // Debug.Log(nameof(bottomBox.transform.position) + $" : {bottomBox.transform.position}");
-            //
-            // // 크기 설정
-            // var boxScale = mainCamera.ScreenToWorldPoint(new Vector3(screenWidth, halfScreenHeight, mainCamera.nearClipPlane)) - mainCamera.ScreenToWorldPoint(new Vector3(0, 0, 0));
-            //
-            // Debug.Log(nameof(boxScale) + $" : {boxScale}");
-            // bottomBox.transform.localScale = new Vector3(boxScale.x, boxScale.y, 1);
-            //
-            // Debug.Log(nameof(topBox.transform.localScale) + $" : {topBox.transform.localScale}");
-            // Debug.Log(nameof(bottomBox.transform.localScale) + $" : {bottomBox.transform.localScale}");
-
-        }
-
+        //TODO : 테스트용 스크립트
         private void Update() {
             if (Input.GetKeyDown(testKey)) {
                 foreach (var command in testCommand) {
@@ -88,21 +60,18 @@ namespace Manager
                 Debug.Log("Test Command execute");
             }
         }
+        
+        private void InstantiateAndInitializeMap()
+        {
+            _backgroundController = Instantiate(mapPrefab).GetComponent<BackgroundController>();
+            _backgroundController.transform.SetParent(mainCamera.transform);
+            _backgroundController.Initialize(mainCamera);
+        }
 
         private void InstantiateAndInitializeBoard()
         {
             _boardManager = Instantiate(boardManagerPrefab).GetComponent<BoardManager>();
             _boardManager.Initialize(blockInfos, blockPanel, canvas);
-            
-            // 인스턴스화된 게임 오브젝트가 활성화되어 있는지 확인
-            if (_boardManager.gameObject.activeSelf)
-            {
-                Debug.Log("인스턴스화된 게임 오브젝트는 활성화 상태입니다.");
-            }
-            else
-            {
-                Debug.Log("인스턴스화된 게임 오브젝트는 비활성화 상태입니다.");
-            }
         }
         
         private void InstantiateAndInitializeStage()
@@ -115,11 +84,11 @@ namespace Manager
     
     [Serializable]
     public class CommandToStagePlayer : ICommand<IStageCreature> {
-        [SerializeField] NewBlock block;
+        [FormerlySerializedAs("block")] [SerializeField] BlockSo blockSo;
         [SerializeField] int count;
         [SerializeField] float targetNormalTime;
         void ICommand<IStageCreature>.Execute(IStageCreature creature) {
-            creature.Character.Input(block, count);
+            creature.Character.Input(blockSo, count);
         }
         bool ICommand<IStageCreature>.IsExecutable(IStageCreature creature) {
             return (creature.Character.HFSM.GetCurrentAnimationNormalizedTime() > targetNormalTime);

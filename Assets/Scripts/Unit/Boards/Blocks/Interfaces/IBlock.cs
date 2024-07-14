@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Unit.Boards.Blocks.Interfaces
 {
+    /// <summary>
+    /// 블록 인터페이스
+    /// </summary>
     public interface IBlock
     {
-        void Initialize(NewBlock info, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas);
+        void Initialize(BlockSo info, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas);
     }
 }

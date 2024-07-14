@@ -1,8 +1,8 @@
-using UnityEngine;
-using ScriptableObjects.Scripts.Blocks;
+using Unit.Boards.Blocks.Enums;
 using Unit.Stages.Creatures.Characters;
+using UnityEngine;
 
-namespace Unit.Stages.Creatures {
+namespace Unit.Stages.Creatures.FSM.ActOnInput {
     /// <summary>
     /// 입력과 행동을 연결하는 클래스입니다.
     /// </summary>

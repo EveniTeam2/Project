@@ -1,10 +1,11 @@
-using System.Linq;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using ScriptableObjects.Scripts.Blocks;
+using Unit.Boards.Blocks.Enums;
 using Unit.Stages.Creatures.Characters;
+using UnityEngine;
 
-namespace Unit.Stages.Creatures {
+namespace Unit.Stages.Creatures.FSM.ActOnInput {
     /// <summary>
     /// 사용자 입력을 처리하는 클래스입니다.
     /// </summary>
@@ -47,8 +48,8 @@ namespace Unit.Stages.Creatures {
         /// <summary>
         /// 입력을 처리합니다.
         /// </summary>
-        public void Input(NewBlock block, int count) {
-            actDic[block.type].Act(_character, count);
+        public void Input(BlockSo blockSo, int count) {
+            actDic[blockSo.type].Act(_character, count);
         }
     }
 }

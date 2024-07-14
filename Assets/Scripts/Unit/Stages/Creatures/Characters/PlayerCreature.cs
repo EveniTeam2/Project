@@ -4,6 +4,7 @@ using ScriptableObjects.Scripts.Blocks;
 using ScriptableObjects.Scripts.Creature;
 using Unit.Stages.Creatures.Characters.Unit.Character;
 using Unit.Stages.Creatures.FSM;
+using Unit.Stages.Creatures.FSM.ActOnInput;
 using Unit.Stages.Creatures.Interfaces;
 using UnityEngine;
 
@@ -40,8 +41,8 @@ namespace Unit.Stages.Creatures.Characters {
             _input = new UserInput(this, acts);
         }
 
-        public void Input(NewBlock block, int count) {
-            _input.Input(block, count);
+        public void Input(BlockSo blockSo, int count) {
+            _input.Input(blockSo, count);
         }
 
         private void Update() {

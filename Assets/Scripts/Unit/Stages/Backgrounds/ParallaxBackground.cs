@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unit.Stages.Backgrounds
 {
@@ -8,25 +9,19 @@ namespace Unit.Stages.Backgrounds
     /// </summary>
     public class ParallaxBackground : MonoBehaviour
     {
+        [SerializeField] private float parallaxEffectMultiplier;
+        
         private float _spriteLength, _startPosition;
-        public GameObject mainCamera;
-        public float parallaxEffectMultiplier;
-
-        private void Awake()
-        {
-            InitializeBackground();
-        }
+        private Camera _mainCamera;
 
         /// <summary>
         /// 배경의 초기 위치와 길이를 초기화합니다.
         /// </summary>
-        public void InitializeBackground()
+        public void InitializeBackground(Camera mainCamera)
         {
             _startPosition = transform.position.x;
             _spriteLength = GetComponent<SpriteRenderer>().bounds.size.x;
-
-            // z 위치를 기반으로 패럴럭스 효과를 조정합니다.
-            parallaxEffectMultiplier = (transform.position.z + 2) * 0.1f;
+            _mainCamera = mainCamera;
         }
 
         private void FixedUpdate()
@@ -40,7 +35,7 @@ namespace Unit.Stages.Backgrounds
         /// </summary>
         private void ApplyParallaxEffect()
         {
-            var cameraDisplacement = mainCamera.transform.position.x * parallaxEffectMultiplier;
+            var cameraDisplacement = _mainCamera.transform.position.x * parallaxEffectMultiplier;
             transform.position = new Vector3(_startPosition + cameraDisplacement, transform.position.y, transform.position.z);
         }
 
@@ -49,7 +44,7 @@ namespace Unit.Stages.Backgrounds
         /// </summary>
         private void AdjustStartPosition()
         {
-            var cameraMovement = mainCamera.transform.position.x * (1 - parallaxEffectMultiplier);
+            var cameraMovement = _mainCamera.transform.position.x * (1 - parallaxEffectMultiplier);
 
             if (cameraMovement > _startPosition + _spriteLength)
             {

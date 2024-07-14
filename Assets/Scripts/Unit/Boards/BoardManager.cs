@@ -58,9 +58,10 @@ namespace Unit.Boards
         
         private Vector2 _blockSize;
         private RectTransform _blockPanel;
-        private List<NewBlock> _blockInfos;
+        private List<BlockSo> _blockInfos;
         private Dictionary<Tuple<float, float>, Block> _tiles;
         private List<Tuple<float, float>> _blockPositions;
+        
         private OrderedDictionary _currentMatchBlock;
 
         #region #### 보드 초기화 ####
@@ -71,7 +72,7 @@ namespace Unit.Boards
         /// <param name="blockInfos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
         /// /// <param name="canvas">캔버스</param>
-        public void Initialize(List<NewBlock> blockInfos, RectTransform blockPanel, Canvas canvas)
+        public void Initialize(List<BlockSo> blockInfos, RectTransform blockPanel, Canvas canvas)
         {
             InitializeBoard(blockInfos, blockPanel, canvas);
             GenerateAllRandomBlocks();
@@ -83,7 +84,7 @@ namespace Unit.Boards
         /// <param name="blockInfos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
-        private void InitializeBoard(List<NewBlock> blockInfos, RectTransform blockPanel, Canvas canvas)
+        private void InitializeBoard(List<BlockSo> blockInfos, RectTransform blockPanel, Canvas canvas)
         {
             InitializeValues(blockInfos, blockPanel, canvas);
             CalculateBlockSpawnPositions();
@@ -96,7 +97,7 @@ namespace Unit.Boards
         /// <param name="blockInfos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
         /// /// <param name="canvas">캔버스</param>
-        private void InitializeValues(List<NewBlock> blockInfos, RectTransform blockPanel, Canvas canvas)
+        private void InitializeValues(List<BlockSo> blockInfos, RectTransform blockPanel, Canvas canvas)
         {
             isLogicUpdating = false;
             _poolSize = width * height;
@@ -134,19 +135,6 @@ namespace Unit.Boards
                     Debug.Log($"블록 배치 좌표 : {x}, {y}");
                 }
             }
-            
-            // // 블록 스폰 위치 계산
-            // for (var x = 0; x < width; x++)
-            // {
-            //     for (var y = 0; y < height; y++)
-            //     {
-            //         var posX = -panelWidth / 2 + _blockSize.x * (x + 0.5f);
-            //         var posY = -panelHeight / 2 + _blockSize.y * (y + 0.5f);
-            //         
-            //
-            //
-            //     }
-            // }
         }
 
         /// <summary>
@@ -157,7 +145,7 @@ namespace Unit.Boards
             _blockPool = new BlockPool(blockPrefab, _blockPanel, _poolSize, true);
             _blockGenerator = new BlockGenerator(_blockInfos, _blockPool, _tiles, _canvas, _blockPanel, _blockSize, _blockPositions, CheckForMatch, _blockGap);
             _blockMatcher = new BlockMatcher(_tiles, _blockGap);
-            _blockMover = new BlockMover(moveDuration, 1 / dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, _blockGap,this);
+            _blockMover = new BlockMover(moveDuration, 1 / dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, _blockGap, this);
         }
 
         #endregion
@@ -254,7 +242,7 @@ namespace Unit.Boards
         /// <summary>
         /// 블록을 제거합니다.
         /// </summary>
-        /// <param name="block"></param>
+        /// <param name="block">제거할 블록</param>
         private void RemoveBlock(Block block)
         {
             var blockPos = block.GetComponent<RectTransform>().anchoredPosition;

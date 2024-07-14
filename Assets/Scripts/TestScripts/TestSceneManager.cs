@@ -29,11 +29,11 @@ namespace TestScripts {
     }
     [Serializable]
     public class CommandToStage : ICommand<IStageCreature> {
-        [SerializeField] NewBlock block;
+        [FormerlySerializedAs("block")] [SerializeField] BlockSo blockSo;
         [SerializeField] int count;
         [SerializeField] float targetNormalTime;
         void ICommand<IStageCreature>.Execute(IStageCreature creature) {
-            creature.Character.Input(block, count);
+            creature.Character.Input(blockSo, count);
         }
         bool ICommand<IStageCreature>.IsExecutable(IStageCreature creature) {
             return (creature.Character.HFSM.GetCurrentAnimationNormalizedTime() > targetNormalTime);
