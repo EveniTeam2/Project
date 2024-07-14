@@ -10,6 +10,8 @@ namespace Unit.GameScene.Stages {
     [Serializable]
     public struct StageSetting {
         // public AssetReference characterRef;
+        [Header("땅이라고 생각하는 y 포지션")]
+        public float groundYPosition;
         [Header("플레이어 오브젝트")]
         public PlayerCreature characterRef;
         [Header("플레이어 스텟")]
@@ -22,6 +24,6 @@ namespace Unit.GameScene.Stages {
         //public AssetReference[] monstersRef;
 
         [Header("몬스터 스폰 정보")]
-        public MonsterSpawnManager.MonsterSpawnData monsterSpawnData;
+        public MonsterSpawnData monsterSpawnData;
     }
 }

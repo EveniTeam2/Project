@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ecc731ec674b5bbf81f2b9c6882458, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e8dc80ede8a4e1aa0ae9f319a93d12f, type: 3}
   m_Name: IdleBlock
   m_EditorClassIdentifier: 
   type: 0
-  color: {r: 0.41037738, g: 0.7930617, b: 1, a: 1}
-  text: "\uC11C\uC788\uAE30"
+  color: {r: 0.5058824, g: 1, b: 0.54901963, a: 1}
+  text: Idle

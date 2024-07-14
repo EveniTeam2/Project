@@ -937,17 +937,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 131105805}
   settings:
+    groundYPosition: 1.8
     characterRef: {fileID: 5778422145645619138, guid: 9e8d30e2cd45d49e2b5b840dfc2a2b27, type: 3}
     characterStat:
       Attack: 1
       Health: 1
       Speed: 1
-    actOnInputs: []
+    actOnInputs:
+    - {fileID: 11400000, guid: e2a5940fe915e264e949077319d8708e, type: 2}
+    - {fileID: 11400000, guid: f239ac2e22c4e4840ae01afb304d7ac6, type: 2}
+    - {fileID: 11400000, guid: 7a629db3cf2598940a897454e0df3088, type: 2}
+    - {fileID: 11400000, guid: a75603e0d52a0f74dbfb9c5de2b42a22, type: 2}
     playerPosition: {x: 0, y: 1.8, z: 0}
-    monsterSpawnData: {fileID: 0}
+    monsterSpawnData: {fileID: 11400000, guid: 70cf15452822e884889fa283c49507f0, type: 2}
   boardManagerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
   stageManagerPrefab: {fileID: 3768410994747056990, guid: a9ef38b8df63343d4bdf7f5312703ecc, type: 3}
-  mapPrefab: {fileID: 0}
+  mapPrefab: {fileID: 2670853504050698328, guid: 5636eb3c08b9a4be19e21009b910de70, type: 3}
   blockPanel: {fileID: 1066668980}
   canvas: {fileID: 1995763498}
   blockInfos:
@@ -956,19 +961,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
   - {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
   testCommand:
-  - block: {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
+  - blockSo: {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
     count: 1
     targetNormalTime: 0.9
-  - block: {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
+  - blockSo: {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
     count: 1
     targetNormalTime: 0.9
-  - block: {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
+  - blockSo: {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
     count: 1
     targetNormalTime: 0.9
-  - block: {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
+  - blockSo: {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
     count: 1
     targetNormalTime: 0.9
   testKey: 32
+  _dragCount: 0
 --- !u!1 &836144432
 GameObject:
   m_ObjectHideFlags: 0
