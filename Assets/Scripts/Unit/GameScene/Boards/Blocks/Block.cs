@@ -17,7 +17,7 @@ namespace Unit.GameScene.Boards.Blocks
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
 
-        [FormerlySerializedAs("blockInfo")] [SerializeField] private BlockSo blockSoInfo;
+        [SerializeField] private BlockSo blockSo;
         [SerializeField] private Image blockImage;
         [SerializeField] private TextMeshProUGUI textMeshPro;
 
@@ -29,10 +29,10 @@ namespace Unit.GameScene.Boards.Blocks
 
         public void Initialize(BlockSo info, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas)
         {
-            blockSoInfo = info;
-            textMeshPro.text = blockSoInfo.text;
-            blockImage.color = blockSoInfo.color;
-            Type = blockSoInfo.type;
+            blockSo = info;
+            textMeshPro.text = blockSo.text;
+            blockImage.color = blockSo.color;
+            Type = blockSo.type;
             OnMatchCheck = matchCheckHandler;
             _canvas = canvas;
 

@@ -10,10 +10,10 @@ namespace Unit.GameScene.Boards.Interfaces
     /// </summary>
     public interface IBlockMatcher
     {
+        Tuple<float, float> GetTargetIndex(Vector2 startPosition, Vector2 direction);
+        bool IsValidPosition(Tuple<float, float> position);
         bool CheckMatchesForBlock(Tuple<float, float> position, out List<Block> matchedBlocks);
         List<Block> GetAdjacentMatches(List<Block> initialMatches);
         List<Block> FindAllMatches(Dictionary<Tuple<float, float>, Block> tiles);
-        Tuple<float, float> GetTargetIndex(Vector2 startPosition, Vector2 direction);
-        bool IsValidPosition(Tuple<float, float> position);
     }
 }

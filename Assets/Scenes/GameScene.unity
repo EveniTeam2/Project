@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 131105806}
   - component: {fileID: 131105805}
   - component: {fileID: 131105804}
-  - component: {fileID: 131105807}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -322,24 +321,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &131105807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131105803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_MaxRayIntersections: 0
 --- !u!1 &200613487
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,7 +904,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &745679373
 MonoBehaviour:
@@ -935,41 +918,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f52031430046eabff03e83195384ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 131105805}
-  settings:
+  extraSetting:
     characterRef: {fileID: 5778422145645619138, guid: 9e8d30e2cd45d49e2b5b840dfc2a2b27, type: 3}
     characterStat:
       Attack: 0
       Health: 0
       Speed: 0
-    actOnInputs: []
-    playerPosition: {x: 0, y: 0, z: 0}
-    monsterSpawnData: {fileID: 0}
-  boardManagerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
-  stageManagerPrefab: {fileID: 3768410994747056990, guid: a9ef38b8df63343d4bdf7f5312703ecc, type: 3}
-  mapPrefab: {fileID: 2670853504050698328, guid: 5636eb3c08b9a4be19e21009b910de70, type: 3}
-  blockPanel: {fileID: 1066668980}
-  canvas: {fileID: 1995763498}
-  blockInfos:
-  - {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
-  - {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
-  - {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
-  - {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
-  testCommand:
-  - blockSo: {fileID: 0}
-    count: 1
-    targetNormalTime: 1
-  - blockSo: {fileID: 0}
-    count: 1
-    targetNormalTime: 1
-  - blockSo: {fileID: 0}
-    count: 1
-    targetNormalTime: 1
-  - blockSo: {fileID: 0}
-    count: 1
-    targetNormalTime: 1
-  testKey: 32
-  _dragCount: 0
+    actOnInputs:
+    - {fileID: 11400000, guid: e2a5940fe915e264e949077319d8708e, type: 2}
+    - {fileID: 11400000, guid: f239ac2e22c4e4840ae01afb304d7ac6, type: 2}
+    - {fileID: 11400000, guid: 0788da49970ff0a4c8a931a0dbe614da, type: 2}
+    - {fileID: 11400000, guid: a75603e0d52a0f74dbfb9c5de2b42a22, type: 2}
+    playerPosition: {x: 0, y: 1.8, z: 0}
+    monsterSpawnData: {fileID: 11400000, guid: 70cf15452822e884889fa283c49507f0, type: 2}
+    groundYPosition: 1.8
+    blockInfos:
+    - {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
+    - {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
+    - {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
+    - {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
+  defaultSetting:
+    mainCamera: {fileID: 131105805}
+    boardManagerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
+    stageManagerPrefab: {fileID: 3768410994747056990, guid: a9ef38b8df63343d4bdf7f5312703ecc, type: 3}
+    mapPrefab: {fileID: 2670853504050698328, guid: 5636eb3c08b9a4be19e21009b910de70, type: 3}
+    canvas: {fileID: 1995763498}
+    blockSpawnPos: {fileID: 1066668980}
+  dragCount: 0
 --- !u!1 &836144432
 GameObject:
   m_ObjectHideFlags: 0

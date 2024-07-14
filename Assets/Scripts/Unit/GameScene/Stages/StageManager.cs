@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages.Creatures.Characters;
 using Unit.GameScene.Stages.Creatures.Monsters;
 using Unit.GameScene.Stages.Interfaces;
@@ -17,11 +18,13 @@ namespace Unit.GameScene.Stages {
         public float Distance => _character.transform.position.x - _zeroPosition.x;
         private Vector3 _zeroPosition;
         public void AttachBoard(ISendCommand data) {
+            
+            Debug.Log("Attach Clear");
             data.OnSendCommand += Received;
         }
 
         // TODO 인호님! 이거 불러야 시작 가능함
-        public void Initialize(StageSetting settings) {
+        public void Initialize(SceneExtraSetting settings) {
             InitializeCharacter(settings);
 
             InitializeMonster(settings);
@@ -29,7 +32,7 @@ namespace Unit.GameScene.Stages {
             InitializeCommand();
         }
 
-        private void InitializeCharacter(StageSetting settings) {
+        private void InitializeCharacter(SceneExtraSetting settings) {
             // Core.Utils.AddressableLoader.DeployAsset(settings.characterRef, settings.playerPosition, Quaternion.identity, null, (obj) => {
             //     if (obj.TryGetComponent(out _character))
             //         _character.Initialize(settings.characterStat, _backgroundDisplay);
@@ -44,7 +47,7 @@ namespace Unit.GameScene.Stages {
             }
         }
 
-        private void InitializeMonster(StageSetting settings) {
+        private void InitializeMonster(SceneExtraSetting settings) {
             _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, settings.groundYPosition);
         }
 
