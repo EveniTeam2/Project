@@ -6,9 +6,9 @@ namespace Unit.GameScene.Boards.Blocks.Enums
     public enum BlockType
     {
         Null = -1,
-        Idle,
-        Walk,
-        Run,
-        Hit
+        Default,
+        Skill1,
+        Skill2,
+        Skill3
     }
 }

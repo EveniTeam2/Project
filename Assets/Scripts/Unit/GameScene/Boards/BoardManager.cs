@@ -23,6 +23,7 @@ namespace Unit.GameScene.Boards
         [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")]
         [SerializeField] private int width;
         [SerializeField] private int height;
+        
         private float _halfPanelWidth;
         private float _blockGap;
         
