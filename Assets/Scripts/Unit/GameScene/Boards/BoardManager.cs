@@ -9,7 +9,6 @@ using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages.Interfaces;
 using UnityEngine;
-using BlockType = ScriptableObjects.Scripts.Blocks.BlockType;
 
 namespace Unit.GameScene.Boards
 {
@@ -313,7 +312,7 @@ namespace Unit.GameScene.Boards
 
                 Debug.Log($"Key: ({key.Item1}, {key.Item2}), Value: {value}");
                 
-                OnSendCommand?.Invoke(new CommandToStagePlayer(combo));
+                // OnSendCommand?.Invoke(new CommandToStagePlayer(combo));
                 
                 
             }

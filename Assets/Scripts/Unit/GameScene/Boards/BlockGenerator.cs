@@ -57,7 +57,7 @@ namespace Unit.GameScene.Boards
             foreach (var (x, y) in _blockPositions)
             {
                 var block = _blockPool.Get();
-                var blockInfo = GetRandomValidBlock(_tiles, new Tuple<float, float>(x, y));
+                var newBlock = GetRandomValidBlock(_tiles, new Tuple<float, float>(x, y));
                 var position = new Vector3(x, y, 0);
                 var rectTransform = block.GetComponent<RectTransform>();
 
@@ -65,7 +65,7 @@ namespace Unit.GameScene.Boards
                 rectTransform.sizeDelta = _blockSize;
                 rectTransform.anchoredPosition = position;
 
-                block.Initialize(blockInfo, _matchCheckHandler, _canvas);
+                block.Initialize(newBlock, _matchCheckHandler, _canvas);
                 _tiles.Add(new Tuple<float, float>(x, y), block);
             }
         }
@@ -76,7 +76,7 @@ namespace Unit.GameScene.Boards
         /// <param name="blockDic">블록 딕셔너리</param>
         /// <param name="position">블록의 위치</param>
         /// <returns>유효한 랜덤 블록</returns>
-        public Block GetRandomValidBlock(Dictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> position)
+        public BlockSo GetRandomValidBlock(Dictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> position)
         {
             List<BlockSo> validBlocks = new();
 
