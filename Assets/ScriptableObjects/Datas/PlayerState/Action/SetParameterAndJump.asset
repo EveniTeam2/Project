@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60b987fe0c494c8288865f9dc0ef760, type: 3}
   m_Name: SetParameterAndJump
   m_EditorClassIdentifier: 
-  decoratorActionData: {fileID: 0}
-  actionData: {fileID: 0}
+  decoratorActionData: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
+  actionData: {fileID: 11400000, guid: 00c73bc2a6394ba48b752a61bb923bcc, type: 2}

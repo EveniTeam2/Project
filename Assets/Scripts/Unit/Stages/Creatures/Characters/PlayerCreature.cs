@@ -27,7 +27,7 @@ namespace Unit.Stages.Creatures.Characters {
         private Stat<CharacterStat> _stats;
         private UserInput _input;
 
-        public void Initialize(CharacterStat stat, float groundYPosition) {
+        public void Initialize(CharacterStat stat, float groundYPosition, params ActOnInput[] acts) {
             _animator = GetComponent<Animator>();
             _stats = new Stat<CharacterStat>(stat);
 
@@ -37,7 +37,7 @@ namespace Unit.Stages.Creatures.Characters {
             _movementSystem.SetGroundPosition(groundYPosition);
 
             HFSM = StateBuilder.BuildState(this, stateData);
-            _input = new UserInput(this);
+            _input = new UserInput(this, acts);
         }
 
         public void Input(NewBlock block, int count) {

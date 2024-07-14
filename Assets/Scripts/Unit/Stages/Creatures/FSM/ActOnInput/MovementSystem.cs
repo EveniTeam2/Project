@@ -26,8 +26,7 @@ namespace Unit.Stages.Creatures {
         private float _dampVel;
 
         private float _currentYSpd;
-        private const float _gravity = -1;
-        private float _fixedTimes;
+        private const float _gravity = -20f;
 
         public MovementSystem(BaseCreature character, Stat<CharacterStat> stats) {
             _character = character;
@@ -63,28 +62,19 @@ namespace Unit.Stages.Creatures {
             return currentSpd;
         }
 
-        private float JumpUpdate(float current) {
-            _currentYSpd += _gravity * (Time.deltaTime - _fixedTimes);
-            current += _currentYSpd * Time.deltaTime;
-            if (current <= GroundYPosition) {
-                current = GroundYPosition;
-                _isJump = false;
-            }
-            _fixedTimes = 0f;
-            return current;
-        }
-
         public void Update() {
             Vector2 pos = _character.transform.position;
-            Vector2 dist = Vector2.zero;
             if ((this as IRunnable).IsRun || _isRun) {
                 _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
-                dist.x += _currentSpd * Time.deltaTime;
+                pos.x += _currentSpd * Time.deltaTime;
             }
             if (IsJump || _isJump) {
-                dist.y = JumpUpdate(dist.y);
+                pos.y += _currentYSpd * Time.deltaTime;
+                if (pos.y < GroundYPosition)
+                    pos.y = GroundYPosition;
+                _isJump = false;
             }
-            _character.transform.position = pos + dist;
+            _character.transform.position = pos;
         }
 
         public void FixedUpdate() {
@@ -95,8 +85,7 @@ namespace Unit.Stages.Creatures {
         }
 
         private void JumpFixedUpdate() {
-            _currentYSpd += _gravity * _fixedTimes;
-            _fixedTimes += Time.fixedDeltaTime;
+            _currentYSpd += _gravity * Time.fixedDeltaTime;
         }
 
         public void SetGroundPosition(float groundYPosition) {
