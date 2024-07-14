@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Boards;
+using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages;
 using Unit.GameScene.Stages.Backgrounds;

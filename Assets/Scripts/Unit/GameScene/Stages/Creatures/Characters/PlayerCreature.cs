@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using ScriptableObjects.Scripts.Creature;
+using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Stages.Creatures.Characters.Unit.Character;
 using Unit.GameScene.Stages.Creatures.FSM;
 using Unit.GameScene.Stages.Creatures.FSM.ActOnInput;
@@ -40,8 +41,8 @@ namespace Unit.GameScene.Stages.Creatures.Characters {
             _input = new UserInput(this, acts);
         }
 
-        public void Input(BlockSo blockSo, int count) {
-            _input.Input(blockSo, count);
+        public void Input(BlockType blockType, int count) {
+            _input.Input(blockType, count);
         }
 
         private void Update() {

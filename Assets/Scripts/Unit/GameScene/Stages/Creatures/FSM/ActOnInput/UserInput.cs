@@ -11,7 +11,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
     /// </summary>
     public class UserInput {
         private readonly PlayerCreature _character;
-        Dictionary<BlockType, ActOnInput> actDic;
+        Dictionary<Boards.Blocks.Enums.BlockType, ActOnInput> actDic;
         /// <summary>
         /// 입력을 처리하는 클래스입니다.
         /// </summary>
@@ -19,7 +19,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
         /// <param name="acts">타겟이 입력에 따라 행동하기를 원하는 행동입니다.</param>
         public UserInput(PlayerCreature target, params ActOnInput[] acts) {
             _character = target;
-            actDic = new Dictionary<BlockType, ActOnInput>();
+            actDic = new Dictionary<Boards.Blocks.Enums.BlockType, ActOnInput>();
             foreach (var act in acts.ToArray()) {
                 actDic.Add(act.BlockType, act);
             }
@@ -48,8 +48,8 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
         /// <summary>
         /// 입력을 처리합니다.
         /// </summary>
-        public void Input(BlockSo blockSo, int count) {
-            actDic[blockSo.type].Act(_character, count);
+        public void Input(BlockType blockType, int count) {
+            actDic[blockType].Act(_character, count);
         }
     }
 }

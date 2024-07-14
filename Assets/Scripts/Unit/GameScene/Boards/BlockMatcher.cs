@@ -135,12 +135,12 @@ namespace Unit.GameScene.Boards
                 var blockPos = block.GetComponent<RectTransform>().anchoredPosition;
                 var newPos = new Tuple<float, float>(blockPos.x, blockPos.y);
 
-                foreach (var dir in new[] { Vector2.up * _blockGap, Vector2.down * _blockGap, Vector2.left * _blockGap, Vector2.right * _blockGap })
+                foreach (var neighbor in GetAllNeighbors(block))
                 {
-                    var adjacentPos = new Tuple<float, float>(newPos.Item1 + dir.x, newPos.Item2 + dir.y);
-                    if (_tiles.ContainsKey(adjacentPos) && _tiles[adjacentPos].Type == block.Type && allMatches.Add(_tiles[adjacentPos]))
+                    if (!allMatches.Contains(neighbor) && neighbor.Type == block.Type)
                     {
-                        toCheck.Enqueue(_tiles[adjacentPos]);
+                        allMatches.Add(neighbor);
+                        toCheck.Enqueue(neighbor);
                     }
                 }
             }
@@ -166,7 +166,48 @@ namespace Unit.GameScene.Boards
                 }
             }
 
-            return matchedBlocks;
+            var allMatchedBlocks = new HashSet<Block>(matchedBlocks);
+            var toCheck = new Queue<Block>(matchedBlocks);
+
+            while (toCheck.Count > 0)
+            {
+                var block = toCheck.Dequeue();
+                var blockPos = block.GetComponent<RectTransform>().anchoredPosition;
+
+                foreach (var neighbor in GetAllNeighbors(block))
+                {
+                    if (!allMatchedBlocks.Contains(neighbor) && neighbor.Type == block.Type)
+                    {
+                        allMatchedBlocks.Add(neighbor);
+                        toCheck.Enqueue(neighbor);
+                    }
+                }
+            }
+
+            return new List<Block>(allMatchedBlocks);
+        }
+
+        /// <summary>
+        /// 주어진 블록의 모든 이웃 블록을 가져옵니다.
+        /// </summary>
+        /// <param name="block">블록</param>
+        /// <returns>이웃 블록 목록</returns>
+        private List<Block> GetAllNeighbors(Block block)
+        {
+            var neighbors = new List<Block>();
+            var directions = new List<Vector2> { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+            var blockPos = block.GetComponent<RectTransform>().anchoredPosition;
+
+            foreach (var direction in directions)
+            {
+                var neighborPos = new Tuple<float, float>(blockPos.x + direction.x * _blockGap, blockPos.y + direction.y * _blockGap);
+                if (_tiles.ContainsKey(neighborPos))
+                {
+                    neighbors.Add(_tiles[neighborPos]);
+                }
+            }
+
+            return neighbors;
         }
     }
 }

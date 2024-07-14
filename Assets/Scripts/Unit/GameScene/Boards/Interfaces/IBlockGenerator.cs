@@ -11,6 +11,6 @@ namespace Unit.GameScene.Boards.Interfaces
     public interface IBlockGenerator
     {
         void GenerateAllRandomBlocks();
-        BlockSo GetRandomValidBlock(Dictionary<Tuple<float, float>, Block> tiles, Tuple<float, float> pos);
+        BlockType GetRandomValidBlock(Dictionary<Tuple<float, float>, Block> tiles, Tuple<float, float> pos);
     }
 }

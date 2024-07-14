@@ -9,6 +9,7 @@ using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Stages.Interfaces;
 using UnityEngine;
+using BlockType = ScriptableObjects.Scripts.Blocks.BlockType;
 
 namespace Unit.GameScene.Boards
 {
@@ -50,7 +51,6 @@ namespace Unit.GameScene.Boards
         [SerializeField] private bool isLogicUpdating;
 
         private Canvas _canvas;
-        
         private int _dragCount;
         
         private IBlockGenerator _blockGenerator;
@@ -73,24 +73,24 @@ namespace Unit.GameScene.Boards
         /// <summary>
         /// 보드를 초기화하고, 블록을 생성합니다.
         /// </summary>
-        /// <param name="blockInfos">생성할 블록 정보</param>
+        /// <param name="blockSos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
-        /// /// <param name="canvas">캔버스</param>
-        public void Initialize(List<BlockSo> blockInfos, RectTransform blockPanel, Canvas canvas)
+        /// <param name="canvas">캔버스</param>
+        public void Initialize(List<BlockSo> blockSos, RectTransform blockPanel, Canvas canvas)
         {
-            InitializeBoard(blockInfos, blockPanel, canvas);
+            InitializeBoard(blockSos, blockPanel, canvas);
             GenerateAllRandomBlocks();
         }
         
         /// <summary>
         /// 보드를 초기화합니다. 값 설정, 스폰 위치 계산 및 의존성 등록을 수행합니다.
         /// </summary>
-        /// <param name="blockInfos">생성할 블록 정보</param>
+        /// <param name="blockSos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
-        private void InitializeBoard(List<BlockSo> blockInfos, RectTransform blockPanel, Canvas canvas)
+        private void InitializeBoard(List<BlockSo> blockSos, RectTransform blockPanel, Canvas canvas)
         {
-            InitializeValues(blockInfos, blockPanel, canvas);
+            InitializeValues(blockSos, blockPanel, canvas);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
         }
@@ -98,15 +98,15 @@ namespace Unit.GameScene.Boards
         /// <summary>
         /// 보드 값을 초기화합니다.
         /// </summary>
-        /// <param name="blockInfos">생성할 블록 정보</param>
+        /// <param name="blockSos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
-        /// /// <param name="canvas">캔버스</param>
-        private void InitializeValues(List<BlockSo> blockInfos, RectTransform blockPanel, Canvas canvas)
+        /// <param name="canvas">캔버스</param>
+        private void InitializeValues(List<BlockSo> blockSos, RectTransform blockPanel, Canvas canvas)
         {
             _dragCount = 0;
             isLogicUpdating = false;
             _poolSize = width * height;
-            _blockInfos = blockInfos;
+            _blockInfos = blockSos;
             _blockPanel = blockPanel;
             _canvas = canvas;
     
@@ -234,8 +234,7 @@ namespace Unit.GameScene.Boards
         /// 여러 블록들을 제거합니다.
         /// </summary>
         /// <param name="blocks">제거 대상 블록 목록</param>
-        /// /// <param name="isMatched">매치에 의한 삭제인지 여부</param>
-        private void RemoveBlocks(List<Block> blocks, bool isMatched)
+        private void RemoveBlocks(List<Block> blocks)
         {
             Debug.Log("블록 제거");
             
@@ -267,7 +266,7 @@ namespace Unit.GameScene.Boards
         {
             var allBlocks = _tiles.Select(tile => tile.Value).ToList();
 
-            RemoveBlocks(allBlocks, false);
+            RemoveBlocks(allBlocks);
         }
 
         #endregion
@@ -306,6 +305,18 @@ namespace Unit.GameScene.Boards
             }
 
             isLogicUpdating = false;
+
+            foreach (DictionaryEntry combo in _currentMatchBlock)
+            {
+                var key = (Tuple<Blocks.Enums.BlockType, int>)combo.Key;
+                var value = (int)combo.Value;
+
+                Debug.Log($"Key: ({key.Item1}, {key.Item2}), Value: {value}");
+                
+                OnSendCommand?.Invoke(new CommandToStagePlayer(combo));
+                
+                
+            }
         }
 
         /// <summary>
@@ -325,22 +336,22 @@ namespace Unit.GameScene.Boards
             _blockMatcher.CheckMatchesForBlock(targetBlockIndex, out var currentMatchedBlocks);
             _blockMatcher.CheckMatchesForBlock(currentBlockIndex, out var targetMatchedBlocks);
 
-            if (currentMatchedBlocks.Count > 0) if (currentMatchedBlocks.Count > 0) CheckBlockCombo(currentMatchedBlocks[0].Type);;
+            if (currentMatchedBlocks.Count > 0) CheckBlockCombo(currentMatchedBlocks[0].Type);
             if (targetMatchedBlocks.Count > 0) CheckBlockCombo(targetMatchedBlocks[0].Type);
 
             var allMatchedBlocks = new HashSet<Block>(_blockMatcher.GetAdjacentMatches(currentMatchedBlocks));
             allMatchedBlocks.UnionWith(_blockMatcher.GetAdjacentMatches(targetMatchedBlocks));
 
             Debug.Log($"삭제될 블록 수 {allMatchedBlocks.Count}");
-            RemoveBlocks(allMatchedBlocks.ToList(), true);
+            RemoveBlocks(allMatchedBlocks.ToList());
             Debug.Log($"남은 블록 수 {_tiles.Count}");
 
             yield return null;
         }
 
-        private void CheckBlockCombo(BlockType type)
+        private void CheckBlockCombo(Blocks.Enums.BlockType type)
         {
-            var key = new Tuple<BlockType, int>(type, _dragCount);
+            var key = new Tuple<Blocks.Enums.BlockType, int>(type, _dragCount);
             
             if (_currentMatchBlock.Contains(key))
             {
@@ -353,6 +364,51 @@ namespace Unit.GameScene.Boards
         }
 
         /// <summary>
+        /// 인접한 매칭된 블록들을 그룹으로 나눕니다.
+        /// </summary>
+        /// <param name="blocks">매칭된 블록 목록</param>
+        /// <returns>블록 그룹 목록</returns>
+        private List<List<Block>> GroupAdjacentMatches(List<Block> blocks)
+        {
+            var visited = new HashSet<Block>();
+            var groups = new List<List<Block>>();
+
+            foreach (var block in blocks)
+            {
+                if (visited.Contains(block)) continue;
+
+                var group = new List<Block>();
+                var toVisit = new Queue<Block>();
+                toVisit.Enqueue(block);
+
+                while (toVisit.Count > 0)
+                {
+                    var current = toVisit.Dequeue();
+                    if (visited.Contains(current)) continue;
+
+                    visited.Add(current);
+                    group.Add(current);
+
+                    var neighbors = _blockMatcher.GetAdjacentMatches(new List<Block> { current });
+                    foreach (var neighbor in neighbors)
+                    {
+                        if (!visited.Contains(neighbor) && blocks.Contains(neighbor))
+                        {
+                            toVisit.Enqueue(neighbor);
+                        }
+                    }
+                }
+
+                if (group.Count > 0)
+                {
+                    groups.Add(group);
+                }
+            }
+
+            return groups;
+        }
+
+        /// <summary>
         /// 추가 매칭된 블록들을 처리합니다.
         /// </summary>
         private IEnumerator ProcessAdditionalMatches()
@@ -362,11 +418,19 @@ namespace Unit.GameScene.Boards
                 var matchedBlocks = _blockMatcher.FindAllMatches(_tiles);
                 if (matchedBlocks.Count == 0) break;
 
-                matchedBlocks = _blockMatcher.GetAdjacentMatches(matchedBlocks);
+                var groupedMatches = GroupAdjacentMatches(matchedBlocks);
 
-                Debug.Log($"삭제될 블록 수 {matchedBlocks.Count}");
+                foreach (var group in groupedMatches)
+                {
+                    // 콤보를 계산합니다.
+                    if (group.Count >= 3)
+                    {
+                        CheckBlockCombo(group[0].Type);
+                    }
 
-                RemoveBlocks(matchedBlocks, true);
+                    Debug.Log($"삭제될 블록 그룹 수 {groupedMatches.Count}");
+                    RemoveBlocks(group);
+                }
 
                 Debug.Log($"남은 블록 수 {_tiles.Count}");
 
