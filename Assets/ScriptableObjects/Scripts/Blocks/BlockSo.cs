@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Blocks
 {
+    [CreateAssetMenu(fileName = nameof(BlockSo), menuName = "Block/" + nameof(BlockSo))]
     public class BlockSo : ScriptableObject
     {
         public BlockType type;
