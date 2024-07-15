@@ -8,8 +8,9 @@ namespace Unit.GameScene.Stages {
         [SerializeField] private float intervalDistance = 1f;
         private int count = 0;
 
+
         public override bool CanExecute(MonsterSpawnManager manager) {
-            var decision = manager.StageManager.Character.transform.position.x;
+            var decision = manager.StageManager.Distance;
             if (decision > minDistance && decision < maxDistance) {
                 return true;
             }
@@ -29,11 +30,17 @@ namespace Unit.GameScene.Stages {
                     if (weight > select) {
                         manager.SpawnMonster(item);
                         ++count;
-                        return true;
+                        Debug.Log($"{item.monsterIndex[0]}/{item.monsterStatIndex[0]} => {count}");
                     }
                 }
+                return true;
             }
-            return false;
+            else
+                return false;
+        }
+
+        public override void Initialize() {
+            count = 0;
         }
     }
 }

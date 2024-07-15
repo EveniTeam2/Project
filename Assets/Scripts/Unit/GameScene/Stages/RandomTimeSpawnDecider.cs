@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace Unit.GameScene.Stages {
     [CreateAssetMenu(fileName = nameof(RandomTimeSpawnDecider), menuName = "SO/" + nameof(RandomTimeSpawnDecider))]
@@ -6,7 +7,7 @@ namespace Unit.GameScene.Stages {
         [SerializeField] private float minTime;
         [SerializeField] private float maxTime;
         [SerializeField] private float intervalTime = 1f;
-        private int count;
+        private int count = 0;
         public override bool CanExecute(MonsterSpawnManager manager) {
             var decision = manager.StageManager.PlayTime;
             if (decision > minTime && decision < maxTime)
@@ -18,7 +19,6 @@ namespace Unit.GameScene.Stages {
             if (CanExecute(manager)) {
                 if ((manager.StageManager.PlayTime - minTime) / intervalTime < count)
                     return true;
-                ++count;
 
                 var select = Random.Range(0, group.TotalWeight + 1);
                 int weight = 0;
@@ -26,11 +26,19 @@ namespace Unit.GameScene.Stages {
                     weight += item.weight;
                     if (weight > select) {
                         manager.SpawnMonster(item);
-                        return true;
+                        ++count;
+                        Debug.Log($"{item.monsterIndex[0]}/{item.monsterStatIndex[0]} Count => {count}");
                     }
                 }
+                return true;
             }
-            return false;
+            else
+                return false;
+        }
+
+        public override void Initialize() {
+            count = 0;
+            Debug.Log($"Count => {count}");
         }
     }
 }

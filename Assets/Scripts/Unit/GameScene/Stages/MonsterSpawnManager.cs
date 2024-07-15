@@ -28,11 +28,15 @@ namespace Unit.GameScene.Stages {
         private bool _onSpawn;
 
         public MonsterSpawnManager(StageManager stageManager, MonsterSpawnData data, float ground) {
-            _data = data;
             _stageManager = stageManager;
+            _data = data;
             _ground = ground;
             _monsterPool = new Dictionary<int, CustomPool<MonsterCreature>>();
+            _waitGroup = new Queue<MonsterGroup>();
+            CreateMonsterPool(stageManager, data, ground);
+        }
 
+        private void CreateMonsterPool(StageManager stageManager, MonsterSpawnData data, float ground) {
             for (int i = 0; i < data.monstersRef.Length; ++i) {
                 int index = i;
                 _monsterPool.Add(index, new CustomPool<MonsterCreature>(data.monstersRef[index], null,
@@ -54,19 +58,26 @@ namespace Unit.GameScene.Stages {
                 //    }
                 //});
             }
-            _waitGroup = new Queue<MonsterGroup>();
-            foreach (var group in data.monsterGroup) {
-                _waitGroup.Enqueue(group);
-            }
         }
 
         public void Start() {
             _onSpawn = true;
+            InitializeDecider();
+            _waitGroup.Clear();
+            foreach (var group in _data.monsterGroup) {
+                _waitGroup.Enqueue(group);
+            }
         }
 
         public void Update() {
             if (_onSpawn)
                 CheckConditionAndSpawn();
+        }
+
+        private void InitializeDecider() {
+            foreach (var group in _data.monsterGroup) {
+                group.spawnDecider.Initialize();
+            }
         }
 
         private void CheckConditionAndSpawn() {
@@ -101,6 +112,7 @@ namespace Unit.GameScene.Stages {
                     monster.Initialize(_stageManager, _data.monsterStats[group.monsterStatIndex[i]], _ground);
                     monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position + new Vector3(Random.Range(-1f, 1f),0f);
                     monster.gameObject.SetActive(true);
+                    monster.HFSM.TryChangeState("Run");
                 }
             }
         }

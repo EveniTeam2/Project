@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
+using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Characters;
+using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Monsters;
 using Unit.GameScene.Stages.Interfaces;
 using UnityEngine;
@@ -18,6 +21,7 @@ namespace Unit.GameScene.Stages {
         public float Distance => _character.transform.position.x - _zeroPosition.x;
         private Vector3 _zeroPosition;
 
+        public event Action<BaseCreature> OnPlayerDeath;
         public void AttachBoard(ISendCommand data) {
             
             Debug.Log("Attach Clear");
@@ -32,7 +36,6 @@ namespace Unit.GameScene.Stages {
 
             InitializeCommand();
 
-            _monsterManager.Start();
         }
 
         private void InitializeCharacter(SceneExtraSetting settings) {
@@ -48,10 +51,12 @@ namespace Unit.GameScene.Stages {
             if (character.TryGetComponent(out _character)) {
                 _character.Initialize(this, settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());
             }
+            (_character.Health as IDamageable).OnDeath += PlayerIsDead;
         }
 
         private void InitializeMonster(SceneExtraSetting settings) {
             _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, settings.groundYPosition);
+            _monsterManager.Start();
         }
 
         private void InitializeCommand() {
@@ -59,6 +64,10 @@ namespace Unit.GameScene.Stages {
                 _commands = new Queue<ICommand<IStageCreature>>();
             else
                 _commands.Clear();
+        }
+
+        private void PlayerIsDead(BaseCreature player) {
+            OnPlayerDeath?.Invoke(player);
         }
 
         private void Update() {
