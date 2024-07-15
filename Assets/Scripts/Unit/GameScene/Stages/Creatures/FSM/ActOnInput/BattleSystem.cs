@@ -22,7 +22,10 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
         public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee) {
             var hits = Physics2D.RaycastAll(_character.transform.position, direction, distance, targetLayer);
             collidee = hits;
-            return false;
+            if (collidee.Length > 0)
+                return true;
+            else
+                return false;
         }
         internal void Attack(RaycastHit2D col) {
             // TODO col.collider.GetInstanceID()를 다 들고 이를 통해 BaseCreature로 접근할 수 있게 미리 캐싱해두어 Dictionary<string, BaseCreature> spawnCreature가 있으면 좋겠습니다.
