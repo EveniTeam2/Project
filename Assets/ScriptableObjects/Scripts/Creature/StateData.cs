@@ -21,5 +21,17 @@ namespace ScriptableObjects.Scripts.Creature
         public ActionData OnUpdate => onUpdate;
         public ActionData OnFixedUpdate => onFixedUpdate;
         public string AnimParameter => animParameter;
+
+        public StateData GetCopy() {
+            var obj = CreateInstance<StateData>();
+            obj.stateName = stateName;
+            obj.animParameter = animParameter;
+            obj.onEnter = onEnter.GetCopy();
+            obj.onExit = onExit.GetCopy();
+            obj.onUpdate = onUpdate.GetCopy();
+            obj.onFixedUpdate = onFixedUpdate.GetCopy();
+            obj.canTransitionToThis = canTransitionToThis.GetCopy();
+            return obj;
+        }
     }
 }

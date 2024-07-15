@@ -36,6 +36,14 @@ namespace Unit.GameScene.Stages {
                 return false;
         }
 
+        public override SpawnDecider GetCopy() {
+            var obj = CreateInstance<RandomTimeSpawnDecider>();
+            obj.minTime = minTime;
+            obj.maxTime = maxTime;
+            obj.intervalTime = intervalTime;
+            return obj;
+        }
+
         public override void Initialize() {
             count = 0;
             Debug.Log($"Count => {count}");

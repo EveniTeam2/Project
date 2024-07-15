@@ -9,7 +9,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM {
             var sm = new StateMachine(target);
 
             foreach (var stateData in data.StateDatas) {
-                var state = BuildState(sm, stateData);
+                var state = BuildState(sm, stateData.GetCopy());
                 sm.TryAddState(stateData.StateName, state);
             }
             return sm;

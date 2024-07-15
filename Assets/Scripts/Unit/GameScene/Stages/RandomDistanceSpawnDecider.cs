@@ -39,6 +39,14 @@ namespace Unit.GameScene.Stages {
                 return false;
         }
 
+        public override SpawnDecider GetCopy() {
+            var obj = CreateInstance<RandomDistanceSpawnDecider>();
+            obj.minDistance = minDistance;
+            obj.maxDistance = maxDistance;
+            obj.intervalDistance = intervalDistance;
+            return obj;
+        }
+
         public override void Initialize() {
             count = 0;
         }

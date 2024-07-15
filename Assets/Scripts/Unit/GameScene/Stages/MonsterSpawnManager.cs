@@ -58,6 +58,9 @@ namespace Unit.GameScene.Stages {
                 //    }
                 //});
             }
+            for (int i = 0; i < _data.monsterGroup.Length; ++i) {
+                _data.monsterGroup[i].spawnDecider = _data.monsterGroup[i].spawnDecider.GetCopy();
+            }
         }
 
         public void Start() {
@@ -75,8 +78,8 @@ namespace Unit.GameScene.Stages {
         }
 
         private void InitializeDecider() {
-            foreach (var group in _data.monsterGroup) {
-                group.spawnDecider.Initialize();
+            for (int i = 0; i < _data.monsterGroup.Length; ++i) {
+                _data.monsterGroup[i].spawnDecider.Initialize();
             }
         }
 
@@ -110,7 +113,7 @@ namespace Unit.GameScene.Stages {
                     Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i], $"{_data.monsterStats.Length}|{group.monsterStatIndex[i]} 문제 발생!!");
                     var monster = pool.Get();
                     monster.Initialize(_stageManager, _data.monsterStats[group.monsterStatIndex[i]], _ground);
-                    monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position + new Vector3(Random.Range(-1f, 1f),0f);
+                    monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position + new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
                     monster.HFSM.TryChangeState("Run");
                 }
