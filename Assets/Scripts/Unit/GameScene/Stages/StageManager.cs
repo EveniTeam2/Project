@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
+using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures.Characters;
 using Unit.GameScene.Stages.Creatures.Monsters;
 using Unit.GameScene.Stages.Interfaces;
@@ -25,11 +26,10 @@ namespace Unit.GameScene.Stages {
         }
 
         // TODO 인호님! 이거 불러야 시작 가능함
-        public void Initialize(SceneExtraSetting settings) {
+        public void Initialize(SceneExtraSetting settings, Camera camera) {
             InitializeCharacter(settings);
-
             InitializeMonster(settings);
-
+            InitializeCamera(camera);
             InitializeCommand();
 
             _monsterManager.Start();
@@ -52,6 +52,11 @@ namespace Unit.GameScene.Stages {
 
         private void InitializeMonster(SceneExtraSetting settings) {
             _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, settings.groundYPosition);
+        }
+        
+        private void InitializeCamera(Component c)
+        {
+            c.GetComponent<CameraController>().Initialize(_character.transform);
         }
 
         private void InitializeCommand() {

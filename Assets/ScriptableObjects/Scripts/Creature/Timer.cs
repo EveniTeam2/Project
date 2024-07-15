@@ -1,5 +1,4 @@
 using System.Collections;
-using Unit.GameScene.Interfaces;
 using Unit.GameScene.Stages.Creatures;
 using UnityEngine;
 

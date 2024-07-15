@@ -6,7 +6,7 @@ using Unit.GameScene.Stages;
 using Unit.GameScene.Stages.Backgrounds;
 using UnityEngine;
 
-namespace Unit.GameScene
+namespace Unit.GameScene.Manager
 {
     /// <summary>
     /// 게임 씬을 관리하며, 보드와 스테이지 초기화, 드래그 횟수 관리, 게임 종료 등을 처리합니다.
@@ -54,7 +54,7 @@ namespace Unit.GameScene
         /// </summary>
         private void InstantiateAndInitializeMap()
         {
-            _backgroundController = Instantiate(defaultSetting.mapPrefab).GetComponent<BackgroundController>();
+            _backgroundController = Instantiate(extraSetting.mapPrefab).GetComponent<BackgroundController>();
             _backgroundController.transform.SetParent(defaultSetting.mainCamera.transform);
             _backgroundController.Initialize(defaultSetting.mainCamera);
         }
@@ -76,7 +76,7 @@ namespace Unit.GameScene
         private void InstantiateAndInitializeStage()
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
-            _stageManager.Initialize(extraSetting);
+            _stageManager.Initialize(extraSetting, defaultSetting.mainCamera);
             
             _stageManager.AttachBoard(_boardManager);
         }
