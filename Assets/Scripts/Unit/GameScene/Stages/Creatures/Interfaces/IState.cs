@@ -1,4 +1,5 @@
 using System;
+using Unit.GameScene.Stages.Creatures.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.FSM;
 
 namespace Unit.GameScene.Stages.Creatures.Interfaces
@@ -12,7 +13,7 @@ namespace Unit.GameScene.Stages.Creatures.Interfaces
         void Update(BaseCreature target);
         void FixedUpdate(BaseCreature target);
         bool CanTransitionToThis(BaseCreature target);
-        string StateName { get; }
+        StateEnums StateName { get; }
         int ParameterHash { get; }
         StateMachine StateMachine { get; }
     }
