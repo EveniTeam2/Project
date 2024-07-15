@@ -11,10 +11,8 @@ namespace Unit.GameScene.Stages.Creatures.FSM
         public static StateMachine BuildState(BaseCreature target, StateDataDTO data)
         {
             var sm = new StateMachine(target);
-
-            data = new StateDataDTO();
-
-            foreach (var stateData in data.StateDatas)
+            
+            foreach (var stateData in ScriptableObject.CreateInstance<StateDataDTO>().StateDatas)
             {
                 var state = BuildState(sm, stateData);
                 sm.TryAddState(stateData.StateEnums, state);
