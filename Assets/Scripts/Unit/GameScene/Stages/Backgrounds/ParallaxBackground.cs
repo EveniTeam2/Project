@@ -7,8 +7,9 @@ namespace Unit.GameScene.Stages.Backgrounds
     /// </summary>
     public class ParallaxBackground : MonoBehaviour
     {
-        [SerializeField] private float parallaxEffectMultiplier;
-        
+        [SerializeField, Range(0f, 10f), Tooltip("배율이 높을수록 카메라보다 빠르게 움직입니다. 배율이 낮을수록 카메라보다 느리게 움직입니다.")]
+        private float parallaxEffectMultiplier;
+
         private float _spriteLength, _startPosition;
         private Camera _mainCamera;
 
@@ -17,6 +18,7 @@ namespace Unit.GameScene.Stages.Backgrounds
         /// </summary>
         public void InitializeBackground(Camera mainCamera)
         {
+            parallaxEffectMultiplier *= -1;
             _startPosition = transform.position.x;
             _spriteLength = GetComponent<SpriteRenderer>().bounds.size.x;
             _mainCamera = mainCamera;
@@ -33,8 +35,9 @@ namespace Unit.GameScene.Stages.Backgrounds
         /// </summary>
         private void ApplyParallaxEffect()
         {
-            var cameraDisplacement = _mainCamera.transform.position.x * parallaxEffectMultiplier;
-            transform.position = new Vector3(_startPosition + cameraDisplacement, transform.position.y, transform.position.z);
+            var cameraDisplacement = _mainCamera.transform.position.x * (1 + parallaxEffectMultiplier);
+            transform.position = new Vector3(_startPosition + cameraDisplacement, transform.position.y,
+                transform.position.z);
         }
 
         /// <summary>

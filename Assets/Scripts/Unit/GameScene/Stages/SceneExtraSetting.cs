@@ -13,11 +13,11 @@ namespace Unit.GameScene.Stages
     [Serializable]
     public struct SceneExtraSetting
     {
-        [Header("---- Limit Time ----")]
-        [Header("제한 시간")] public float limitTime;
+        [Header("---- Limit Time Setting ----")]
+        public float limitTime;
         
         [Space(5)]
-        [Header("---- Player Settings ----")]
+        [Header("---- Player Setting ----")]
         // public AssetReference characterRef;
         [Header("플레이어 오브젝트")] public PlayerCreature characterRef;
         [Header("플레이어 스텟")] public CharacterStat characterStat;
@@ -25,15 +25,19 @@ namespace Unit.GameScene.Stages
         [Header("플레이어 스폰 위치")] public Vector3 playerPosition;
         
         [Space(5)]
-        [Header("---- Monster Settings ----")]
+        [Header("---- Monster Setting ----")]
         [Header("몬스터 스폰 정보")] public MonsterSpawnData monsterSpawnData;
         //public AssetReference[] monstersRef;
         
         [Space(5)]
-        [Header("Ground Position")] public float groundYPosition;
+        [Header("---- Ground Setting ----")]
+        public float groundYPosition;
 
         [Space(5)]
         [Header("---- Block Settings ----")]
-        [Header("블록 정보")] public List<BlockSo> blockInfos;
+        public List<BlockSo> blockInfos;
+        
+        [Header("---- Map Settings ----")]
+        public GameObject mapPrefab;
     }
 }
