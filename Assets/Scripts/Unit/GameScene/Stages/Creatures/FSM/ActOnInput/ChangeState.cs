@@ -1,4 +1,6 @@
+using System;
 using Unit.GameScene.Stages.Creatures.Characters;
+using Unit.GameScene.Stages.Creatures.Characters.Enums;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
@@ -8,7 +10,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
     [CreateAssetMenu(fileName = nameof(ChangeState), menuName = "Input/" + nameof(ChangeState))]
     public class ChangeState : ActCharacter {
         public override void Act(ActOnInput inputData, PlayerCreature character, int count) {
-            character.HFSM.TryChangeState(inputData.StateName);
+            character.HFSM.TryChangeState(Enum.Parse<StateEnums>(inputData.StateName));
         }
     }
 }

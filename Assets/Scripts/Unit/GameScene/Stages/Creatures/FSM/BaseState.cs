@@ -1,4 +1,5 @@
 using System;
+using Unit.GameScene.Stages.Creatures.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 
 namespace Unit.GameScene.Stages.Creatures.FSM {
@@ -12,15 +13,15 @@ namespace Unit.GameScene.Stages.Creatures.FSM {
         protected Func<IState, IState> _onFixedUpdate;
         protected Func<BaseCreature, bool> _transitionCondition;
         protected StateMachine _sm;
-        protected string _name;
+        protected StateEnums _name;
         protected int _parameterHash;
 
-        public string StateName => _name;
+        public StateEnums StateName => _name;
         public int ParameterHash => _parameterHash;
         public StateMachine StateMachine => _sm;
 
-        public BaseState(string name, int aniHash, StateMachine sm, Func<IState, IState> onEnter = null, Func<IState, IState> onExit = null, Func<IState, IState> onUpdate = null, Func<IState, IState> onFixedUpdate = null, Func<BaseCreature, bool> transitionCondition = null) {
-            _name = name;
+        public BaseState(StateEnums stateEnums, int aniHash, StateMachine sm, Func<IState, IState> onEnter = null, Func<IState, IState> onExit = null, Func<IState, IState> onUpdate = null, Func<IState, IState> onFixedUpdate = null, Func<BaseCreature, bool> transitionCondition = null) {
+            _name = stateEnums;
             _parameterHash = aniHash;
             _sm = sm;
             OnEnter = onEnter;

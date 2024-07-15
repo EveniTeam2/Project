@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unit.GameScene.Stages.Creatures.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 
 namespace Unit.GameScene.Stages.Creatures.FSM
@@ -8,7 +9,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM
     /// </summary>
     public class StateMachine
     {
-        protected Dictionary<string, IState> _states = new Dictionary<string, IState>();
+        protected Dictionary<StateEnums, IState> _states = new();
         protected IState _current;
         protected IState _prev;
         public BaseCreature Target { get; protected set; }
@@ -23,7 +24,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM
         /// <summary>
         /// 상태를 추가합니다.
         /// </summary>
-        public bool TryAddState(string name, IState state)
+        public bool TryAddState(StateEnums name, IState state)
         {
             if (_current == null)
             {
@@ -31,23 +32,15 @@ namespace Unit.GameScene.Stages.Creatures.FSM
                 _current.Enter(Target);
             }
 
-            if (_states.ContainsKey(name))
-            {
-                return false;
-            }
-            else
-            {
-                _states.Add(name, state);
-                return true;
-            }
+            return _states.TryAdd(name, state);
         }
 
         /// <summary>
         /// 상태를 변경합니다.
         /// </summary>
-        public bool TryChangeState(string name)
+        public bool TryChangeState(StateEnums stateEnums)
         {
-            if (_states.TryGetValue(name, out var state))
+            if (_states.TryGetValue(stateEnums, out var state))
             {
                 _current.Exit(Target);
                 _prev = _current;
@@ -103,13 +96,13 @@ namespace Unit.GameScene.Stages.Creatures.FSM
         /// <summary>
         /// 특정 태그의 애니메이션 정규화된 시간을 반환합니다.
         /// </summary>
-        public float GetAnimationNormalizedTime(string tag)
+        public float GetAnimationNormalizedTime(StateEnums tag)
         {
             var current = Target.Animator.GetCurrentAnimatorStateInfo(0);
             var next = Target.Animator.GetNextAnimatorStateInfo(0);
-            if (current.IsTag(tag) || current.IsName(tag))
+            if (current.IsTag($"{tag}") || current.IsName($"{tag}"))
                 return current.normalizedTime;
-            else if (next.IsTag(tag) || next.IsName(tag))
+            else if (next.IsTag($"{tag}") || next.IsName($"{tag}"))
                 return next.normalizedTime;
             return 0f;
         }

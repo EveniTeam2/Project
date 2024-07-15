@@ -1,36 +1,37 @@
 using System;
 using ScriptableObjects.Scripts.Creature;
+using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.FSM {
-    public static class StateBuilder {
-        public static StateMachine BuildState(BaseCreature target, StateDataDTO data) {
+namespace Unit.GameScene.Stages.Creatures.FSM
+{
+    public static class StateBuilder
+    {
+        public static StateMachine BuildState(BaseCreature target, StateDataDTO data)
+        {
             var sm = new StateMachine(target);
-
-            foreach (var stateData in data.StateDatas) {
+            
+            foreach (var stateData in ScriptableObject.CreateInstance<StateDataDTO>().StateDatas)
+            {
                 var state = BuildState(sm, stateData);
-                sm.TryAddState(stateData.StateName, state);
+                sm.TryAddState(stateData.StateEnums, state);
             }
+            
             return sm;
         }
 
-        private static BaseState BuildState(StateMachine sm, StateData data) {
-            Func<IState, IState> enter = data.OnEnter != null ? new Func<IState, IState>(data.OnEnter.OnAct) : null;
-            Func<IState, IState> exit = data.OnExit != null ? new Func<IState, IState>(data.OnExit.OnAct) : null;
-            Func<IState, IState> update = data.OnUpdate != null ? new Func<IState, IState>(data.OnUpdate.OnAct) : null;
-            Func<IState, IState> fixedUpdate =
-                data.OnFixedUpdate != null ? new Func<IState, IState>(data.OnFixedUpdate.OnAct) : null;
-            Func<BaseCreature, bool> condition = data.Condition != null
-                ? new Func<BaseCreature, bool>(data.Condition.CheckCondition)
-                : null;
+        private static BaseState BuildState(StateMachine sm, StateData data)
+        {
+            var enter = data.OnEnter != null ? new Func<IState, IState>(data.OnEnter.OnAct) : null;
+            var exit = data.OnExit != null ? new Func<IState, IState>(data.OnExit.OnAct) : null;
+            var update = data.OnUpdate != null ? new Func<IState, IState>(data.OnUpdate.OnAct) : null;
+            var fixedUpdate = data.OnFixedUpdate != null ? new Func<IState, IState>(data.OnFixedUpdate.OnAct) : null;
+            var condition = data.Condition != null ? new Func<BaseCreature, bool>(data.Condition.CheckCondition) : null;
 
-            if (data.AnimParameter.Length > 0) {
-                int hash = Animator.StringToHash(data.AnimParameter);
-                return new BaseState(data.StateName, hash, sm, enter, exit, update, fixedUpdate, condition);
-            }
-
-            return new BaseState(data.StateName, 0, sm, enter, exit, update, fixedUpdate, condition);
+            var hash = Animator.StringToHash($"{data.AnimParameterEnums}");
+            
+            return new BaseState(data.StateEnums, hash, sm, enter, exit, update, fixedUpdate, condition);
         }
 
         //private static SubState BuildSubState(StateMachine sm, StateData data) {

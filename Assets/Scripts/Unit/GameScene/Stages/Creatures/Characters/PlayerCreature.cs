@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using ScriptableObjects.Scripts.Creature;
+using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Stages.Creatures.Characters.Unit.Character;
 using Unit.GameScene.Stages.Creatures.FSM;
