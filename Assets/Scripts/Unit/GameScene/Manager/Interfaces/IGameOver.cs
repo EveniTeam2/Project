@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Interfaces
+namespace Unit.GameScene.Manager.Interfaces
 {
     public interface IGameOver
     {

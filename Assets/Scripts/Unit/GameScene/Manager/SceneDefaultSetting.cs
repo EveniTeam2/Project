@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Unit.GameScene
+namespace Unit.GameScene.Manager
 {
     [Serializable]
     public struct SceneDefaultSetting
@@ -14,9 +14,6 @@ namespace Unit.GameScene
 
         [Header("StageManager Prefabs")]
         public GameObject stageManagerPrefab;
-        
-        [Header("Map Prefabs")]
-        public GameObject mapPrefab;
         
         [Header("Canvas")]
         public Canvas canvas;
