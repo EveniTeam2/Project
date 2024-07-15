@@ -19,7 +19,7 @@ MonoBehaviour:
     Health: 1
     Speed: 1
   monsterSpawnOffset: {x: 1, y: 0, z: 0}
-  monsterSpawnTimeOffset: 0
+  monsterSpawnTimeOffset: 3
   monsterGroup:
   - spawnDecider: {fileID: 11400000, guid: 7722e2688ef47684b9e0483cea55742e, type: 2}
     monsterSpawnGroups:

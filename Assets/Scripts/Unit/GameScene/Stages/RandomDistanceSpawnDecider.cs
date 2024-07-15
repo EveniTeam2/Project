@@ -21,7 +21,6 @@ namespace Unit.GameScene.Stages {
                 if ((manager.StageManager.Distance - minDistance) / intervalDistance < count) {
                     return true;
                 }
-                ++count;
 
                 var select = Random.Range(0, group.TotalWeight + 1);
                 int weight = 0;
@@ -29,6 +28,7 @@ namespace Unit.GameScene.Stages {
                     weight += item.weight;
                     if (weight > select) {
                         manager.SpawnMonster(item);
+                        ++count;
                         return true;
                     }
                 }

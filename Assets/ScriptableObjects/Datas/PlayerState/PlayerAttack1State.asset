@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340a52ef5992496ba0ad0ed48bf0e841, type: 3}
   m_Name: PlayerAttack1State
   m_EditorClassIdentifier: 
-  stateName: Attack1
-  animParameter: Attack1
+  stateName: Attack
+  animParameter: Attack
   onEnter: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
   onExit: {fileID: 11400000, guid: 0f1335d2f4f7293449d7fbce0f9929c6, type: 2}
   onUpdate: {fileID: 11400000, guid: 595a6a1865395bc42ba9bb242d40075b, type: 2}

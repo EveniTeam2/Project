@@ -3,6 +3,7 @@ using Unit.GameScene.Stages.Creatures.Characters;
 using Unit.GameScene.Stages.Creatures.Characters.Unit.Character;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Monsters;
+using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
     public class HealthSystem : IDamageable {
@@ -35,6 +36,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput {
         }
         public void Damage(int dmg) {
             // TODO 방어력 있으면 적용해야되는 곳
+            Debug.Log($"{_character.name} {dmg} 데미지 적용");
             SetHealth.Invoke(_health - dmg);
             if (_health < 0) {
                 SetHealth.Invoke(0);

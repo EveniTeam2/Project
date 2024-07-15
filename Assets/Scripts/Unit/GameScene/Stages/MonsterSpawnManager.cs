@@ -23,7 +23,7 @@ namespace Unit.GameScene.Stages {
         protected StageManager _stageManager;
         protected MonsterSpawnData _data;
         private float _ground;
-        private LinkedList<MonsterGroup> _spawnGroup;
+        private LinkedList<MonsterGroup> _spawnGroup = new LinkedList<MonsterGroup>();
         private Queue<MonsterGroup> _waitGroup;
         private bool _onSpawn;
 
@@ -96,7 +96,7 @@ namespace Unit.GameScene.Stages {
         public void SpawnMonster(SpawnGroup group) {
             for (int i = 0; i < group.monsterIndex.Length; ++i) {
                 if (_monsterPool.TryGetValue(group.monsterIndex[i], out var pool)) {
-                    Debug.Assert(_data.monsterStats.Length <= group.monsterStatIndex[i], "문제 발생!!");
+                    Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i], $"{_data.monsterStats.Length}|{group.monsterStatIndex[i]} 문제 발생!!");
                     var monster = pool.Get();
                     monster.Initialize(_stageManager, _data.monsterStats[group.monsterStatIndex[i]], _ground);
                     monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position + new Vector3(Random.Range(-1f, 1f),0f);
