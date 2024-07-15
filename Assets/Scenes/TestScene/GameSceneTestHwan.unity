@@ -935,9 +935,9 @@ MonoBehaviour:
     limitTime: 10
     characterRef: {fileID: 5778422145645619138, guid: 9e8d30e2cd45d49e2b5b840dfc2a2b27, type: 3}
     characterStat:
-      Attack: 0
-      Health: 0
-      Speed: 0
+      Attack: 1
+      Health: 100
+      Speed: 1
     actOnInputs:
     - {fileID: 11400000, guid: e2a5940fe915e264e949077319d8708e, type: 2}
     - {fileID: 11400000, guid: f239ac2e22c4e4840ae01afb304d7ac6, type: 2}

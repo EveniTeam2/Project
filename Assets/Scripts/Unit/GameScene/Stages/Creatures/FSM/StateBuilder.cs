@@ -1,6 +1,7 @@
 using System;
 using ScriptableObjects.Scripts.Creature;
 using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Stages.Creatures.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM {
 
             foreach (var stateData in data.StateDatas) {
                 var state = BuildState(sm, stateData.GetCopy());
-                sm.TryAddState(stateData.StateName, state);
+                sm.TryAddState(stateData.StateEnums, state);
             }
             return sm;
         }
@@ -26,12 +27,12 @@ namespace Unit.GameScene.Stages.Creatures.FSM {
                 ? new Func<BaseCreature, bool>(data.Condition.CheckCondition)
                 : null;
 
-            if (data.AnimParameter.Length > 0) {
-                int hash = Animator.StringToHash(data.AnimParameter);
-                return new BaseState(data.StateName, hash, sm, enter, exit, update, fixedUpdate, condition);
+            if ((int)data.AnimParameterEnums >= Enum.GetValues(typeof(AnimationParameterEnums)).Length) {
+                int hash = Animator.StringToHash(data.AnimParameterEnums.ToString());
+                return new BaseState(data.StateEnums, hash, sm, enter, exit, update, fixedUpdate, condition);
             }
 
-            return new BaseState(data.StateName, 0, sm, enter, exit, update, fixedUpdate, condition);
+            return new BaseState(data.StateEnums, 0, sm, enter, exit, update, fixedUpdate, condition);
         }
 
         //private static SubState BuildSubState(StateMachine sm, StateData data) {

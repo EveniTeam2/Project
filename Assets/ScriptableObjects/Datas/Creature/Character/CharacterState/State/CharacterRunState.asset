@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340a52ef5992496ba0ad0ed48bf0e841, type: 3}
   m_Name: CharacterRunState
   m_EditorClassIdentifier: 
-  stateName: Run
-  animParameter: Run
+  stateEnums: 1
+  animParameterEnums: 1
   onEnter: {fileID: 11400000, guid: 34b25a07b27cd674eae38b7517f7a712, type: 2}
   onExit: {fileID: 11400000, guid: 6d864db4e9a177c459acad2cb69bde9a, type: 2}
   onUpdate: {fileID: 0}

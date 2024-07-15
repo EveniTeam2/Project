@@ -115,7 +115,7 @@ namespace Unit.GameScene.Stages {
                     monster.Initialize(_stageManager, _data.monsterStats[group.monsterStatIndex[i]], _ground);
                     monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position + new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
-                    monster.HFSM.TryChangeState("Run");
+                    monster.HFSM.TryChangeState(Creatures.Characters.Enums.StateEnums.Run);
                 }
             }
         }

@@ -27,13 +27,13 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 
         public StateData GetCopy() {
             var obj = CreateInstance<StateData>();
-            obj.stateName = stateName;
-            obj.animParameter = animParameter;
-            obj.onEnter = onEnter.GetCopy();
-            obj.onExit = onExit.GetCopy();
-            obj.onUpdate = onUpdate.GetCopy();
-            obj.onFixedUpdate = onFixedUpdate.GetCopy();
-            obj.canTransitionToThis = canTransitionToThis.GetCopy();
+            obj.stateEnums = stateEnums;
+            obj.animParameterEnums = animParameterEnums;
+            obj.onEnter = onEnter?.GetCopy();
+            obj.onExit = onExit?.GetCopy();
+            obj.onUpdate = onUpdate?.GetCopy();
+            obj.onFixedUpdate = onFixedUpdate?.GetCopy();
+            obj.canTransitionToThis = canTransitionToThis?.GetCopy();
             return obj;
         }
     }

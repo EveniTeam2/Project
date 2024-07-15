@@ -17,8 +17,8 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         public override ActionData GetCopy()
         {
             var copy = CreateInstance<DecoratorActionData>();
-            copy.decoratorActionData = decoratorActionData.GetCopy();
-            copy.actionData = actionData.GetCopy();
+            copy.decoratorActionData = decoratorActionData?.GetCopy();
+            copy.actionData = actionData?.GetCopy();
             return copy;
         }
     }
