@@ -1,5 +1,6 @@
 using System;
 using ScriptableObjects.Scripts.Creature;
+using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using UnityEngine;
 
