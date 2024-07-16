@@ -24,5 +24,17 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         public ActionData OnUpdate => onUpdate;
         public ActionData OnFixedUpdate => onFixedUpdate;
         public AnimationParameterEnums AnimParameterEnums => animParameterEnums;
+
+        public StateData GetCopy() {
+            var obj = CreateInstance<StateData>();
+            obj.stateEnums = stateEnums;
+            obj.animParameterEnums = animParameterEnums;
+            obj.onEnter = onEnter?.GetCopy();
+            obj.onExit = onExit?.GetCopy();
+            obj.onUpdate = onUpdate?.GetCopy();
+            obj.onFixedUpdate = onFixedUpdate?.GetCopy();
+            obj.canTransitionToThis = canTransitionToThis?.GetCopy();
+            return obj;
+        }
     }
 }

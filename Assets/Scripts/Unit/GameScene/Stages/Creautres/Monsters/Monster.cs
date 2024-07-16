@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Stages.Creatures.FSM;
 using Unit.GameScene.Stages.Creautres.FSM;
 using Unit.GameScene.Stages.Creautres.FSM.ActOnInput;
 using UnityEngine;

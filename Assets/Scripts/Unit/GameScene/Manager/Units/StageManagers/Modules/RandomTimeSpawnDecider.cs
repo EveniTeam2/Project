@@ -1,3 +1,4 @@
+using Unit.GameScene.Stages;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers.Modules
@@ -8,10 +9,8 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules
         [SerializeField] private float minTime;
         [SerializeField] private float maxTime;
         [SerializeField] private float intervalTime = 1f;
-        private int count;
-
-        public override bool CanExecute(MonsterSpawnManager manager)
-        {
+        private int count = 0;
+        public override bool CanExecute(MonsterSpawnManager manager) {
             var decision = manager.StageManager.PlayTime;
             if (decision > minTime && decision < maxTime)
                 return true;
@@ -24,7 +23,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules
             {
                 if ((manager.StageManager.PlayTime - minTime) / intervalTime < count)
                     return true;
-                ++count;
 
                 var select = Random.Range(0, group.TotalWeight + 1);
                 var weight = 0;
@@ -34,12 +32,27 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules
                     if (weight > select)
                     {
                         manager.SpawnMonster(item);
-                        return true;
+                        ++count;
+                        Debug.Log($"{item.monsterIndex[0]}/{item.monsterStatIndex[0]} Count => {count}");
                     }
                 }
+                return true;
             }
+            else
+                return false;
+        }
 
-            return false;
+        public override SpawnDecider GetCopy() {
+            var obj = CreateInstance<RandomTimeSpawnDecider>();
+            obj.minTime = minTime;
+            obj.maxTime = maxTime;
+            obj.intervalTime = intervalTime;
+            return obj;
+        }
+
+        public override void Initialize() {
+            count = 0;
+            Debug.Log($"Count => {count}");
         }
     }
 }

@@ -1,3 +1,4 @@
+using Unit.GameScene.Stages;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers.Modules
@@ -11,10 +12,12 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules
         [SerializeField] private float intervalDistance = 1f;
         private int count;
 
-        public override bool CanExecute(MonsterSpawnManager manager)
-        {
-            var decision = manager.StageManager.Character.transform.position.x;
-            if (decision > minDistance && decision < maxDistance) return true;
+
+        public override bool CanExecute(MonsterSpawnManager manager) {
+            var decision = manager.StageManager.Distance;
+            if (decision > minDistance && decision < maxDistance) {
+                return true;
+            }
             return false;
         }
 
@@ -33,12 +36,25 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules
                     {
                         manager.SpawnMonster(item);
                         ++count;
-                        return true;
+                        Debug.Log($"{item.monsterIndex[0]}/{item.monsterStatIndex[0]} => {count}");
                     }
                 }
+                return true;
             }
+            else
+                return false;
+        }
 
-            return false;
+        public override SpawnDecider GetCopy() {
+            var obj = CreateInstance<RandomDistanceSpawnDecider>();
+            obj.minDistance = minDistance;
+            obj.maxDistance = maxDistance;
+            obj.intervalDistance = intervalDistance;
+            return obj;
+        }
+
+        public override void Initialize() {
+            count = 0;
         }
     }
 }

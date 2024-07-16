@@ -22,7 +22,7 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         public override ActionData GetCopy()
         {
             var copy = CreateInstance<CheckConditionAndTransition>();
-            copy.condition = condition.GetCopy();
+            copy.condition = condition?.GetCopy();
             copy.targetStateName = targetStateName;
             return copy;
         }

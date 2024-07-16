@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1036fe06b88e363489725bbd83439215, type: 3}
   m_Name: CheckTimerColliderAndTransAttack
   m_EditorClassIdentifier: 
-  _condition: {fileID: 11400000, guid: 0740402719dcf094ba8b8d72ac0521ac, type: 2}
-  _targetStateName: Attack
+  condition: {fileID: 11400000, guid: 0740402719dcf094ba8b8d72ac0521ac, type: 2}
+  targetStateName: 2

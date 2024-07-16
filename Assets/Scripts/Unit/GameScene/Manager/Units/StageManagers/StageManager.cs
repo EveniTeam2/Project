@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Stages.Backgrounds;
+using Unit.GameScene.Stages.Creautres;
 using Unit.GameScene.Stages.Creautres.Characters;
+using Unit.GameScene.Stages.Creautres.Interfaces;
 using Unit.GameScene.Stages.Creautres.Monsters;
 using UnityEngine;
 
@@ -16,7 +19,9 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         
         public Character Character => _character;
         public LinkedList<Monster> Monsters => _monsterManager.Monsters;
-        
+
+        public event Action<BaseCreature> OnPlayerDeath;
+
         private Queue<ICommand<IStageCreature>> _commands = new();
         
         private Character _character;
@@ -35,13 +40,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         public void Received(ICommand<IStageCreature> command)
         {
             _commands.Enqueue(command);
-        }
-
-        void ICommandReceiver<IStageCreature>.UpdateCommand()
-        {
-            if (_commands.Count > 0)
-                if (_commands.Peek().IsExecutable(this))
-                    _commands.Dequeue().Execute(this);
         }
 
         public void AttachBoard(ISendCommand data)
@@ -77,6 +75,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             {
                 _character.Initialize(this, settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());   
             }
+            (_character.Health as IDamageable).OnDeath += PlayerIsDead;
         }
 
         private void InitializeMonster(SceneExtraSetting settings)
@@ -95,6 +94,17 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 _commands = new Queue<ICommand<IStageCreature>>();
             else
                 _commands.Clear();
+        }
+
+        private void PlayerIsDead(BaseCreature player) {
+            OnPlayerDeath?.Invoke(player);
+        }
+
+        void ICommandReceiver<IStageCreature>.UpdateCommand() {
+            if (_commands.Count > 0) {
+                if (_commands.Peek().IsExecutable(this))
+                    _commands.Dequeue().Execute(this);
+            }
         }
     }
 }
