@@ -9,10 +9,7 @@ namespace Unit.GameScene.Stages.Backgrounds
 
         public void Initialize(Camera mainCamera)
         {
-            foreach (var parallaxBackground in parallaxBackgrounds)
-            {
-                parallaxBackground.InitializeBackground(mainCamera);
-            }
+            foreach (var parallaxBackground in parallaxBackgrounds) parallaxBackground.InitializeBackground(mainCamera);
         }
     }
 }

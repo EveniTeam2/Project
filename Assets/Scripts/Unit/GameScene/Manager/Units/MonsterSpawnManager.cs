@@ -1,0 +1,124 @@
+using System.Collections.Generic;
+using Core.Utils;
+using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Manager.Units.StageManagers.Modules;
+using Unit.GameScene.Stages.Creautres.Monsters;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+namespace Unit.GameScene.Manager.Units
+{
+    public class MonsterSpawnManager
+    {
+        protected MonsterSpawnData _data;
+        private readonly float _ground;
+        private readonly Dictionary<int, CustomPool<Monster>> _monsterPool;
+        private bool _onSpawn;
+        private readonly LinkedList<Monster> _spawnedMonsters = new();
+        private readonly LinkedList<MonsterGroup> _spawnGroup = new();
+        protected StageManager _stageManager;
+        private readonly Queue<MonsterGroup> _waitGroup;
+
+        public MonsterSpawnManager(StageManager stageManager, MonsterSpawnData data, float ground)
+        {
+            _data = data;
+            _stageManager = stageManager;
+            _ground = ground;
+            
+            _waitGroup = new Queue<MonsterGroup>();
+            CreateMonsterPool(stageManager, data, ground);
+        }
+
+        private void CreateMonsterPool(StageManager stageManager, MonsterSpawnData data, float ground) {
+            _monsterPool = new Dictionary<int, CustomPool<MonsterCreature>>();
+            for (int i = 0; i < data.monstersRef.Length; ++i) {
+                int index = i;
+                _monsterPool.Add(index, new CustomPool<MonsterCreature>(data.monstersRef[index], null,
+                    (monCreate, pool) => {
+                        monCreate.Initialize(stageManager, _data.monsterStats[index], ground);
+                        monCreate.gameObject.SetActive(false);
+                    },
+                    monGet => { monGet.ClearStat(); },
+                    monRelease => { },
+                    monDestroy => { },
+                    5, true));
+                //Core.Utils.AddressableLoader.DeployAsset(settings.monstersRef[i], settings.monsterSpawnOffset, Quaternion.identity, null, (obj) => {
+                //    if (obj.TryGetComponent(out MonsterCreature mon))
+                //    {
+                //        _monsters.Add(mon);
+                //        mon.Initialize(settings.monsterStats[index], groundYPosition);
+                //    }
+                //});
+            }
+            for (int i = 0; i < _data.monsterGroup.Length; ++i) {
+                _data.monsterGroup[i].spawnDecider = _data.monsterGroup[i].spawnDecider.GetCopy();
+            }
+        }
+
+        public StageManager StageManager => _stageManager;
+
+        public void Start()
+        {
+            _onSpawn = true;
+            InitializeDecider();
+            _waitGroup.Clear();
+            foreach (var group in _data.monsterGroup) {
+                _waitGroup.Enqueue(group);
+            }
+        }
+
+        public void Update()
+        {
+            if (_onSpawn)
+                CheckConditionAndSpawn();
+        }
+
+        private void InitializeDecider() {
+            for (int i = 0; i < _data.monsterGroup.Length; ++i) {
+                _data.monsterGroup[i].spawnDecider.Initialize();
+            }
+        }
+
+        private void CheckConditionAndSpawn() {
+            CheckWaitList();
+            var group = _spawnGroup.First;
+            while (group != null)
+                if (group.Value.spawnDecider.Execute(this, group.Value))
+                {
+                    group = group.Next;
+                }
+                else
+                {
+                    var deleteGroup = group;
+                    group = group.Next;
+                    _spawnGroup.Remove(deleteGroup);
+                }
+        }
+
+        private void CheckWaitList()
+        {
+            if (_waitGroup.Count > 0)
+                if (_waitGroup.Peek().spawnDecider.CanExecute(this))
+                {
+                    var group = _waitGroup.Dequeue();
+                    _spawnGroup.AddLast(group);
+                }
+        }
+
+        public void SpawnMonster(SpawnGroup group)
+        {
+            for (var i = 0; i < group.monsterIndex.Length; ++i)
+                if (_monsterPool.TryGetValue(group.monsterIndex[i], out var pool))
+                {
+                    Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i],
+                        $"{_data.monsterStats.Length}|{group.monsterStatIndex[i]} 문제 발생!!");
+                    var monster = pool.Get();
+                    monster.Initialize(_stageManager, _data.monsterStats[group.monsterStatIndex[i]], _ground);
+                    monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position +
+                                                 new Vector3(Random.Range(-1f, 1f), 0f);
+                    monster.gameObject.SetActive(true);
+                    monster.HFSM.TryChangeState(Creatures.Characters.Enums.StateEnums.Run);
+                }
+        }
+    }
+}

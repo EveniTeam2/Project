@@ -1,5 +1,5 @@
 using System.Collections;
-using Unit.GameScene.Stages.Creatures;
+using Unit.GameScene.Stages.Creautres;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
