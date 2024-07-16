@@ -44,7 +44,7 @@ namespace Unit.GameScene.Manager.Units
             InstantiateAndInitializeCanvas();
             InstantiateAndInitializeMap();
             InstantiateAndInitializeBoard();
-            // InstantiateAndInitializeStage();
+            InstantiateAndInitializeStage();
         }
         
         private void InstantiateAndInitializeCamera()
