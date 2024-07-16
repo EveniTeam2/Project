@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Unit.GameScene.Boards.Blocks.Interfaces
 {
     /// <summary>
-    /// 블록 인터페이스
+    ///     블록 인터페이스
     /// </summary>
     public interface IBlock
     {
