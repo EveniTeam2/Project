@@ -21,7 +21,7 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
         public StateConditionCompositeCondition(Condition[] conditions) {
             this.conditions = new IStateCondition[conditions.Length];
             for (int i = 0; i < conditions.Length; ++i) {
-                this.conditions[i] = conditions[i].GetStateCondition();
+                this.conditions[i] = conditions[i]?.GetStateCondition();
             }
         }
 

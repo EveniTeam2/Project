@@ -687,7 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extraSetting:
     limitTime: 10
-    characterRef: {fileID: 6545279256263045281, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
+    characterRef: {fileID: 1214194880391127291, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
     characterStat:
       Attack: 0
       Health: 0
