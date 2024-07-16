@@ -6,7 +6,7 @@ using BlockType = Unit.GameScene.Boards.Blocks.Enums.BlockType;
 namespace Unit.GameScene.Manager.Modules
 {
     [Serializable]
-    public class CommandPacket : ICommand<IStageCreature>
+    public class CommandPacket : ICommand<IStage>
     {
         [SerializeField] private BlockType _blockType;
         [SerializeField] private int _count;
@@ -19,14 +19,14 @@ namespace Unit.GameScene.Manager.Modules
             _targetNormalTime = targetNormalTime;
         }
 
-        void ICommand<IStageCreature>.Execute(IStageCreature creature)
+        void ICommand<IStage>.Execute(IStage creature)
         {
             creature.Character.Input(_blockType, _count);
         }
 
-        bool ICommand<IStageCreature>.IsExecutable(IStageCreature creature)
+        bool ICommand<IStage>.IsExecutable(IStage stage)
         {
-            return creature.Character.HFSM.GetCurrentAnimationNormalizedTime() > _targetNormalTime;
+            return stage.Character.HFSM.GetCurrentAnimationNormalizedTime() > _targetNormalTime;
         }
     }
 }

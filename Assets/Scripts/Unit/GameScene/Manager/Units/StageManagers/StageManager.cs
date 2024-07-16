@@ -13,7 +13,9 @@ using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
-    public class StageManager : MonoBehaviour, IStageCreature, ICommandReceiver<IStageCreature>
+    // 채이환 숙제 : Ref 타입과 Value 타입에 대해서 다시 공부하기!
+    
+    public class StageManager : MonoBehaviour, IStage, ICommandReceiver<IStage>
     {
         public float PlayTime => Time.time - _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
@@ -23,7 +25,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         public event Action<BaseCreature> OnPlayerDeath;
 
-        private Queue<ICommand<IStageCreature>> _commands = new();
+        private Queue<ICommand<IStage>> _commands = new();
         
         private Character _character;
         private MonsterSpawnManager _monsterManager;
@@ -32,12 +34,12 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         
         private void Update()
         {
-            (this as ICommandReceiver<IStageCreature>).UpdateCommand();
+            UpdateCommand();
             //TODO : _monsterManager null이라 잠깐 막아놨습니다.
             // _monsterManager.Update();
         }
 
-        public void Received(ICommand<IStageCreature> command)
+        public void Received(ICommand<IStage> command)
         {
             _commands.Enqueue(command);
         }
@@ -91,7 +93,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         private void InitializeCommand()
         {
             if (_commands == null)
-                _commands = new Queue<ICommand<IStageCreature>>();
+                _commands = new Queue<ICommand<IStage>>();
             else
                 _commands.Clear();
         }
@@ -100,7 +102,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             OnPlayerDeath?.Invoke(player);
         }
 
-        void ICommandReceiver<IStageCreature>.UpdateCommand() {
+        public void UpdateCommand() {
             if (_commands.Count > 0) {
                 if (_commands.Peek().IsExecutable(this))
                     _commands.Dequeue().Execute(this);

@@ -54,7 +54,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void InstantiateAndInitializeCanvas()
         {
-            _canvas = Instantiate(defaultSetting.canvas);
+            _canvas = Instantiate(defaultSetting.canvasController.Canvas);
 
             if (_canvas.renderMode != RenderMode.ScreenSpaceCamera)
             {

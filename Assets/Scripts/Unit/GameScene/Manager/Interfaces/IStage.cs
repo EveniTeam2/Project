@@ -4,7 +4,7 @@ using Unit.GameScene.Stages.Creatures.Monsters;
 
 namespace Unit.GameScene.Manager.Interfaces
 {
-    public interface IStageCreature
+    public interface IStage
     {
         Character Character { get; }
         LinkedList<Monster> Monsters { get; }

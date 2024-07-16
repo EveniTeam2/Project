@@ -5,6 +5,6 @@ namespace Unit.GameScene.Boards.Interfaces
 {
     public interface ISendCommand
     {
-        event Action<ICommand<IStageCreature>> OnSendCommand;
+        event Action<ICommand<IStage>> OnSendCommand;
     }
 }

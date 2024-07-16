@@ -12,6 +12,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM.ActOnInput
     public class UserInput
     {
         private readonly Character _character;
+        // TODO : 
         private readonly Dictionary<BlockType, ActOnInput> actDic;
 
         /// <summary>

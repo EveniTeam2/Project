@@ -44,6 +44,8 @@ namespace Unit.GameScene.Manager.Units
         private Block blockPrefab;
 
         [Header("로직 동작 여부")] [SerializeField] private bool isLogicUpdating;
+        
+        // 하나의 클래스는 하나의 기능을 가진다.
 
         private IBlockGenerator _blockGenerator;
         private IBlockMatcher _blockMatcher;
@@ -70,7 +72,7 @@ namespace Unit.GameScene.Manager.Units
         private WaitForSeconds _progressTime;
         private Dictionary<Tuple<float, float>, Block> _tiles;
         public event Action<int> OnIncreaseDragCount;
-        public event Action<ICommand<IStageCreature>> OnSendCommand;
+        public event Action<ICommand<IStage>> OnSendCommand;
 
         #region #### 보드 초기화 ####
 
@@ -188,8 +190,7 @@ namespace Unit.GameScene.Manager.Units
         /// <param name="spawnHash">스폰된 블록의 위치 해시셋</param>
         /// <param name="blockDic">이동할 블록 딕셔너리</param>
         /// <param name="pos">새 블록의 위치</param>
-        private void GenerateBlockAndSetDestination(HashSet<Tuple<float, float>> spawnHash,
-            Dictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> pos)
+        private void GenerateBlockAndSetDestination(HashSet<Tuple<float, float>> spawnHash, Dictionary<Tuple<float, float>, Block> blockDic, Tuple<float, float> pos)
         {
             var adjustY = 0f;
 
