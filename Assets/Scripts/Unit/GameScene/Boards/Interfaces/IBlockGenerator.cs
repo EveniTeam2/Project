@@ -6,7 +6,7 @@ using Unit.GameScene.Boards.Blocks;
 namespace Unit.GameScene.Boards.Interfaces
 {
     /// <summary>
-    /// 블록 생성기 인터페이스
+    ///     블록 생성기 인터페이스
     /// </summary>
     public interface IBlockGenerator
     {

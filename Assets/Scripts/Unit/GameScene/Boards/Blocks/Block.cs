@@ -5,25 +5,23 @@ using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Blocks.Interfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Unit.GameScene.Boards.Blocks
 {
     /// <summary>
-    /// 게임 내 블록을 나타내며, 드래그하여 다른 블록과 위치를 교환할 수 있습니다.
+    ///     게임 내 블록을 나타내며, 드래그하여 다른 블록과 위치를 교환할 수 있습니다.
     /// </summary>
     public class Block : MonoBehaviour, IDraggable, IBlock
     {
-        public event Action<Vector3, Vector3> OnMatchCheck;
-
-        private BlockSo _blockSo;
         [SerializeField] private Image blockBackground;
         [SerializeField] private Image blockIcon; // TODO : 스킬 아이콘 넣을 곳
         [SerializeField] private TextMeshProUGUI temp;
 
-        private RectTransform _rectTransform;
+        private BlockSo _blockSo;
         private Canvas _canvas;
+
+        private RectTransform _rectTransform;
         private Vector2 _startPosition;
 
         public BlockType Type { get; private set; }
@@ -32,7 +30,7 @@ namespace Unit.GameScene.Boards.Blocks
         {
             OnMatchCheck = matchCheckHandler;
             _canvas = canvas;
-            
+
             _blockSo = info;
             temp.text = info.text;
             blockBackground.sprite = _blockSo.background;
@@ -43,21 +41,29 @@ namespace Unit.GameScene.Boards.Blocks
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform, eventData.position, _canvas.worldCamera, out _startPosition);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform,
+                eventData.position, _canvas.worldCamera, out _startPosition);
             Debug.Log("드래그 시작");
         }
 
-        public void OnDrag(PointerEventData eventData) { }
+        public void OnDrag(PointerEventData eventData)
+        {
+        }
 
         public void OnEndDrag(PointerEventData eventData)
         {
             Debug.Log("드래그 종료");
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform, eventData.position, _canvas.worldCamera, out var localPoint);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform,
+                eventData.position, _canvas.worldCamera, out var localPoint);
             var direction = (localPoint - _startPosition).normalized;
-            direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? new Vector3(Mathf.Sign(direction.x), 0, 0) : new Vector3(0, Mathf.Sign(direction.y), 0);
+            direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y)
+                ? new Vector3(Mathf.Sign(direction.x), 0, 0)
+                : new Vector3(0, Mathf.Sign(direction.y), 0);
 
             Debug.Log($"타겟 블록 좌표 {_rectTransform.anchoredPosition} / 드래그 방향 : {direction}");
             OnMatchCheck?.Invoke(_rectTransform.anchoredPosition, direction);
         }
+
+        public event Action<Vector3, Vector3> OnMatchCheck;
     }
 }

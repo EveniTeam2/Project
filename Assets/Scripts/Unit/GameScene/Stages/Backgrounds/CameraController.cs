@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Backgrounds
@@ -6,11 +5,6 @@ namespace Unit.GameScene.Stages.Backgrounds
     public class CameraController : MonoBehaviour
     {
         private Transform _target;
-        
-        public void Initialize(Transform target)
-        {
-            _target = target;
-        }
 
         private void LateUpdate()
         {
@@ -18,6 +12,11 @@ namespace Unit.GameScene.Stages.Backgrounds
 
             var newPos = _target.transform.position;
             transform.position = new Vector3(newPos.x, transform.position.y, transform.position.z);
+        }
+
+        public void Initialize(Transform target)
+        {
+            _target = target;
         }
     }
 }

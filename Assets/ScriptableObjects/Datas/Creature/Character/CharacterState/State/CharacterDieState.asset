@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340a52ef5992496ba0ad0ed48bf0e841, type: 3}
   m_Name: CharacterDieState
   m_EditorClassIdentifier: 
-  stateEnums: 0
-  animParameterEnums: 0
+  stateEnums: 3
+  animParameterEnums: 4
   onEnter: {fileID: 0}
   onExit: {fileID: 0}
   onUpdate: {fileID: 0}
