@@ -1,10 +1,6 @@
 using UnityEngine;
 
-namespace Unit.GameScene.Manager.Units.StageManagers.Modules
-{
-    public abstract class SpawnDecider : ScriptableObject
-    {
-namespace Unit.GameScene.Stages {
+namespace Unit.GameScene.Manager.Units.StageManagers.Modules {
     public abstract class SpawnDecider : ScriptableObject {
         public abstract void Initialize();
         public abstract bool CanExecute(MonsterSpawnManager manager);

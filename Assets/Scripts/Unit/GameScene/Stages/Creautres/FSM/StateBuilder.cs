@@ -1,5 +1,8 @@
 using System;
 using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Stages.Creautres;
+using Unit.GameScene.Stages.Creautres.Characters.Enums;
+using Unit.GameScene.Stages.Creautres.FSM;
 using Unit.GameScene.Stages.Creautres.Interfaces;
 using UnityEngine;
 
