@@ -18,23 +18,11 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         [SerializeField] private Condition canTransitionToThis;
 
         public StateEnums StateEnums => stateEnums;
-        public Condition Condition => canTransitionToThis;
+        public AnimationParameterEnums AnimParameterEnums => animParameterEnums;
         public ActionData OnEnter => onEnter;
         public ActionData OnExit => onExit;
         public ActionData OnUpdate => onUpdate;
         public ActionData OnFixedUpdate => onFixedUpdate;
-        public AnimationParameterEnums AnimParameterEnums => animParameterEnums;
-
-        public StateData GetCopy() {
-            var obj = CreateInstance<StateData>();
-            obj.stateEnums = stateEnums;
-            obj.animParameterEnums = animParameterEnums;
-            obj.onEnter = onEnter?.GetCopy();
-            obj.onExit = onExit?.GetCopy();
-            obj.onUpdate = onUpdate?.GetCopy();
-            obj.onFixedUpdate = onFixedUpdate?.GetCopy();
-            obj.canTransitionToThis = canTransitionToThis?.GetCopy();
-            return obj;
-        }
+        public Condition Condition => canTransitionToThis;
     }
 }

@@ -12,7 +12,7 @@ namespace Unit.GameScene.Stages.Creatures.FSM {
             var sm = new StateMachine(target);
 
             foreach (var stateData in data.StateDatas) {
-                var state = BuildState(sm, stateData.GetCopy());
+                var state = BuildState(sm, stateData);
                 sm.TryAddState(stateData.StateEnums, state);
             }
 
@@ -20,14 +20,13 @@ namespace Unit.GameScene.Stages.Creatures.FSM {
         }
 
         private static BaseState BuildState(StateMachine sm, StateData data) {
-            Func<IState, IState> enter = data.OnEnter != null ? new Func<IState, IState>(data.OnEnter.OnAct) : null;
-            Func<IState, IState> exit = data.OnExit != null ? new Func<IState, IState>(data.OnExit.OnAct) : null;
-            Func<IState, IState> update = data.OnUpdate != null ? new Func<IState, IState>(data.OnUpdate.OnAct) : null;
-            Func<IState, IState> fixedUpdate =
-                data.OnFixedUpdate != null ? new Func<IState, IState>(data.OnFixedUpdate.OnAct) : null;
+            Func<IState, IState> enter = data.OnEnter != null ? data.OnEnter.GetStateAction().OnAct : null;
+            Func<IState, IState> exit = data.OnExit != null ? data.OnExit.GetStateAction().OnAct : null;
+            Func<IState, IState> update = data.OnUpdate != null ? data.OnUpdate.GetStateAction().OnAct : null;
+            Func<IState, IState> fixedUpdate = data.OnFixedUpdate != null
+                ? data.OnFixedUpdate.GetStateAction().OnAct : null;
             Func<BaseCreature, bool> condition = data.Condition != null
-                ? new Func<BaseCreature, bool>(data.Condition.CheckCondition)
-                : null;
+                ? data.Condition.GetStateCondition().CheckCondition : null;
 
             if ((int)data.AnimParameterEnums >= Enum.GetValues(typeof(AnimationParameterEnums)).Length) {
                 int hash = Animator.StringToHash(data.AnimParameterEnums.ToString());
