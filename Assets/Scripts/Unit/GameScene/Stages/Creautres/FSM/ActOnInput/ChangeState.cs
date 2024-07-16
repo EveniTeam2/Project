@@ -11,7 +11,7 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
     [CreateAssetMenu(fileName = nameof(ChangeState), menuName = "Input/" + nameof(ChangeState))]
     public class ChangeState : ActCharacter
     {
-        public override void Act(ActOnInput inputData, PlayerCreature character, int count)
+        public override void Act(ActOnInput inputData, Character character, int count)
         {
             character.HFSM.TryChangeState(Enum.Parse<StateEnums>(inputData.StateName));
         }

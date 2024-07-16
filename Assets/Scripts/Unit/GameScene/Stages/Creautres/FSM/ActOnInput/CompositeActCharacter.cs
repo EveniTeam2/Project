@@ -13,7 +13,7 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
     {
         [SerializeField] private ActCharacter[] compositeActs;
 
-        public override void Act(ActOnInput inputData, PlayerCreature character, int count)
+        public override void Act(ActOnInput inputData, Character character, int count)
         {
             foreach (var act in compositeActs) act.Act(inputData, character, count);
         }

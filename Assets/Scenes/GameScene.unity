@@ -697,9 +697,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f239ac2e22c4e4840ae01afb304d7ac6, type: 2}
     - {fileID: 11400000, guid: 0788da49970ff0a4c8a931a0dbe614da, type: 2}
     - {fileID: 11400000, guid: a75603e0d52a0f74dbfb9c5de2b42a22, type: 2}
-    playerPosition: {x: 0, y: 1.8, z: 0}
+    playerPosition: {x: 0, y: 3.5, z: 0}
     monsterSpawnData: {fileID: 11400000, guid: 70cf15452822e884889fa283c49507f0, type: 2}
-    groundYPosition: 1.8
+    groundYPosition: 3.5
     blockInfos:
     - {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
     - {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}

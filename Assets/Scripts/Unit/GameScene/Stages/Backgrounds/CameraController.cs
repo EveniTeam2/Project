@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Stages.Backgrounds
 {
     public class CameraController : MonoBehaviour
     {
-        private Transform _target;
+        [SerializeField] private Transform _target;
 
         private void LateUpdate()
         {

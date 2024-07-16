@@ -10,7 +10,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules
     [CreateAssetMenu(fileName = nameof(MonsterSpawnData), menuName = "SO/" + nameof(MonsterSpawnData))]
     public class MonsterSpawnData : ScriptableObject
     {
-        [Header("몬스터 오브젝트")] public MonsterCreature[] monstersRef;
+        [Header("몬스터 오브젝트")] public Monster[] monstersRef;
 
         [Header("몬스터 스텟")] public MonsterStat[] monsterStats;
 

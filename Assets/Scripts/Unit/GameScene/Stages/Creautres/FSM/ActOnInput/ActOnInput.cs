@@ -17,7 +17,7 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
         public string StateName => _stateName;
         public BlockType BlockType => blockType;
 
-        public void Act(PlayerCreature character, int count)
+        public void Act(Character character, int count)
         {
             act.Act(this, character, count);
         }

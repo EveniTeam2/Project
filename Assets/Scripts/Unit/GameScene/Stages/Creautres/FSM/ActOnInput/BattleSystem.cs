@@ -13,14 +13,14 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
         protected StageManager _stageManager;
         protected BattleStat _stat;
 
-        public BattleSystem(StageManager manager, PlayerCreature self, Stat<CharacterStat> stat)
+        public BattleSystem(StageManager manager, Character self, Stat<CharacterStat> stat)
         {
             _character = self;
             _stat = new BattleStat(stat);
             _stageManager = manager;
         }
 
-        public BattleSystem(StageManager manager, MonsterCreature target, Stat<MonsterStat> stat)
+        public BattleSystem(StageManager manager, Monster target, Stat<MonsterStat> stat)
         {
             _character = target;
             _stat = new BattleStat(stat);

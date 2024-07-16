@@ -14,12 +14,12 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         public float PlayTime => Time.time - _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
         
-        public PlayerCreature Character => _character;
-        public LinkedList<MonsterCreature> Monsters => _monsterManager.Monsters;
+        public Character Character => _character;
+        public LinkedList<Monster> Monsters => _monsterManager.Monsters;
         
         private Queue<ICommand<IStageCreature>> _commands = new();
         
-        private PlayerCreature _character;
+        private Character _character;
         private MonsterSpawnManager _monsterManager;
         private float _startTime;
         private Vector3 _zeroPosition;
@@ -51,11 +51,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         }
 
         // TODO 인호님! 이거 불러야 시작 가능함
-        public void Initialize(SceneExtraSetting settings, Camera camera)
+        public void Initialize(SceneExtraSetting settings, Camera cam)
         {
             InitializeCharacter(settings);
             InitializeMonster(settings);
-            InitializeCamera(camera);
+            InitializeCamera(cam);
             InitializeCommand();
 
             _monsterManager.Start();
@@ -67,14 +67,16 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             //     if (obj.TryGetComponent(out _character))
             //         _character.Initialize(settings.characterStat, _backgroundDisplay);
             // });
+            
             var character = Instantiate(settings.characterRef, settings.playerPosition, Quaternion.identity);
             // TODO 인호님 여기가 첫 시작에 대한 기준점입니다.
             _zeroPosition = settings.playerPosition;
             _startTime = Time.time;
 
             if (character.TryGetComponent(out _character))
-                _character.Initialize(this, settings.characterStat, settings.groundYPosition,
-                    settings.actOnInputs.ToArray());
+            {
+                _character.Initialize(this, settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());   
+            }
         }
 
         private void InitializeMonster(SceneExtraSetting settings)
@@ -82,9 +84,9 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, settings.groundYPosition);
         }
 
-        private void InitializeCamera(Component c)
+        private void InitializeCamera(Camera cam)
         {
-            c.GetComponent<CameraController>().Initialize(_character.transform);
+            cam.GetComponent<CameraController>().Initialize(_character.transform);
         }
 
         private void InitializeCommand()

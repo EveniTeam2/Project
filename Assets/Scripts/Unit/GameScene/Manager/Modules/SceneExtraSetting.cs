@@ -21,7 +21,7 @@ namespace Unit.GameScene.Manager.Modules
         [Header("---- Player Setting ----")]
         // public AssetReference characterRef;
         [Header("플레이어 오브젝트")]
-        public PlayerCreature characterRef;
+        public Character characterRef;
 
         [Header("플레이어 스텟")] public CharacterStat characterStat;
         [Header("플레이어 입력 처리")] public List<ActOnInput> actOnInputs;

@@ -12,9 +12,9 @@ namespace Unit.GameScene.Manager.Units
     {
         protected MonsterSpawnData _data;
         private readonly float _ground;
-        private readonly Dictionary<int, CustomPool<MonsterCreature>> _monsterPool;
+        private readonly Dictionary<int, CustomPool<Monster>> _monsterPool;
         private bool _onSpawn;
-        private readonly LinkedList<MonsterCreature> _spawnedMonsters = new();
+        private readonly LinkedList<Monster> _spawnedMonsters = new();
         private readonly LinkedList<MonsterGroup> _spawnGroup = new();
         protected StageManager _stageManager;
         private readonly Queue<MonsterGroup> _waitGroup;
@@ -24,12 +24,12 @@ namespace Unit.GameScene.Manager.Units
             _data = data;
             _stageManager = stageManager;
             _ground = ground;
-            _monsterPool = new Dictionary<int, CustomPool<MonsterCreature>>();
+            _monsterPool = new Dictionary<int, CustomPool<Monster>>();
 
             for (var i = 0; i < data.monstersRef.Length; ++i)
             {
                 var index = i;
-                _monsterPool.Add(index, new CustomPool<MonsterCreature>(data.monstersRef[index], null,
+                _monsterPool.Add(index, new CustomPool<Monster>(data.monstersRef[index], null,
                     (monCreate, pool) =>
                     {
                         monCreate.Initialize(stageManager, _data.monsterStats[index], ground);
@@ -52,7 +52,7 @@ namespace Unit.GameScene.Manager.Units
             foreach (var group in data.monsterGroup) _waitGroup.Enqueue(group);
         }
 
-        public LinkedList<MonsterCreature> Monsters
+        public LinkedList<Monster> Monsters
         {
             get
             {

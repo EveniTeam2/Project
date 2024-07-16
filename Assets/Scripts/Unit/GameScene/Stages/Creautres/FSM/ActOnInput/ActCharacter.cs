@@ -8,6 +8,6 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
     /// </summary>
     public abstract class ActCharacter : ScriptableObject
     {
-        public abstract void Act(ActOnInput inputData, PlayerCreature character, int count);
+        public abstract void Act(ActOnInput inputData, Character character, int count);
     }
 }

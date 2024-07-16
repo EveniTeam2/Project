@@ -11,7 +11,7 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
     /// </summary>
     public class UserInput
     {
-        private readonly PlayerCreature _character;
+        private readonly Character _character;
         private readonly Dictionary<BlockType, ActOnInput> actDic;
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
         /// </summary>
         /// <param name="target">입력이 처리되기를 바라는 타겟입니다.</param>
         /// <param name="acts">타겟이 입력에 따라 행동하기를 원하는 행동입니다.</param>
-        public UserInput(PlayerCreature target, params ActOnInput[] acts)
+        public UserInput(Character target, params ActOnInput[] acts)
         {
             _character = target;
             actDic = new Dictionary<BlockType, ActOnInput>();

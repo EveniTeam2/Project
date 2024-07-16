@@ -1,31 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Stages.Creautres.Characters.Unit.Character;
 using Unit.GameScene.Stages.Creautres.FSM;
 using Unit.GameScene.Stages.Creautres.FSM.ActOnInput;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creautres.Monsters
+namespace Unit.GameScene.Stages.Creautres.Characters
 {
-    public class MonsterCreature : BaseCreature
+    public class Character : BaseCreature
     {
         [SerializeField] private StateDataDTO stateData;
         private Animator _animator;
 
         private BattleSystem _battleSystem;
         private HealthSystem _healthSystem;
+        private UserInput _input;
         private readonly LinkedList<ModifyStatData> _mods = new();
         private MovementSystem _movementSystem;
         private StageManager _stageManager;
-        private Stat<MonsterStat> _stats;
 
+        private Stat<CharacterStat> _stats;
+        public override StageManager StageManager => _stageManager;
         public override Animator Animator => _animator;
         public override BattleSystem Battle => _battleSystem;
         public override HealthSystem Health => _healthSystem;
         public override MovementSystem Movement => _movementSystem;
         public override LinkedList<ModifyStatData> ModifiedStatData => _mods;
-        public override StageManager StageManager => _stageManager;
 
         private void Update()
         {
@@ -39,10 +42,10 @@ namespace Unit.GameScene.Stages.Creautres.Monsters
             Movement?.FixedUpdate();
         }
 
-        public void Initialize(StageManager manager, MonsterStat stat, float groundYPosition)
+        public void Initialize(StageManager manager, CharacterStat stat, float groundYPosition, params ActOnInput[] acts)
         {
-            _animator = gameObject.GetComponent<Animator>();
-            _stats = new Stat<MonsterStat>(stat);
+            _animator = GetComponent<Animator>();
+            _stats = new Stat<CharacterStat>(stat);
             _stageManager = manager;
             _battleSystem = new BattleSystem(manager, this, _stats);
             _healthSystem = new HealthSystem(this, _stats);
@@ -50,6 +53,12 @@ namespace Unit.GameScene.Stages.Creautres.Monsters
             _movementSystem.SetGroundPosition(groundYPosition);
 
             HFSM = StateBuilder.BuildState(this, stateData);
+            _input = new UserInput(this, acts);
+        }
+
+        public void Input(BlockType blockType, int count)
+        {
+            _input.Input(blockType, count);
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
@@ -84,13 +93,6 @@ namespace Unit.GameScene.Stages.Creautres.Monsters
             StartCoroutine(TempModifyStatCoroutine(statType, value, duration));
         }
 
-        public override void ClearStat()
-        {
-            _mods.Clear();
-            _stats.SetCurrent(_stats.Origin);
-            StopAllCoroutines();
-        }
-
         private IEnumerator TempModifyStatCoroutine(EStatType statType, int value, float duration)
         {
             var data = new TempModifyStatData(statType, value, duration);
@@ -105,6 +107,12 @@ namespace Unit.GameScene.Stages.Creautres.Monsters
 
             _mods.Remove(node);
             ModifyStat(statType, -value);
+        }
+
+        public override void ClearStat()
+        {
+            _mods.Clear();
+            _stats.SetCurrent(_stats.Origin);
         }
     }
 }

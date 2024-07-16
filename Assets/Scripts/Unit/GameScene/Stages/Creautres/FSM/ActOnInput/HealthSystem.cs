@@ -13,7 +13,7 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
         private readonly Func<int> GetHeatlh;
         private readonly Action<int> SetHealth;
 
-        public HealthSystem(PlayerCreature character, Stat<CharacterStat> stats)
+        public HealthSystem(Character character, Stat<CharacterStat> stats)
         {
             _character = character;
             GetHeatlh = () => stats.Current.Health;
@@ -25,7 +25,7 @@ namespace Unit.GameScene.Stages.Creautres.FSM.ActOnInput
             };
         }
 
-        public HealthSystem(MonsterCreature monster, Stat<MonsterStat> stats)
+        public HealthSystem(Monster monster, Stat<MonsterStat> stats)
         {
             _character = monster;
             GetHeatlh = () => stats.Current.Health;
