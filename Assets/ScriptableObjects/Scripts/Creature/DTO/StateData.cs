@@ -1,6 +1,6 @@
 using ScriptableObjects.Scripts.Creature.Actions;
 using ScriptableObjects.Scripts.Creature.Conditions;
-using Unit.GameScene.Stages.Creautres.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Characters.Enums;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO

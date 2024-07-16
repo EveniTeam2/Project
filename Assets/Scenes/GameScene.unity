@@ -687,19 +687,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extraSetting:
     limitTime: 10
-    characterRef: {fileID: 6545279256263045281, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
+    characterRef: {fileID: 1214194880391127291, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
     characterStat:
       Attack: 0
       Health: 0
       Speed: 0
-    actOnInputs:
-    - {fileID: 11400000, guid: e2a5940fe915e264e949077319d8708e, type: 2}
-    - {fileID: 11400000, guid: f239ac2e22c4e4840ae01afb304d7ac6, type: 2}
-    - {fileID: 11400000, guid: 0788da49970ff0a4c8a931a0dbe614da, type: 2}
-    - {fileID: 11400000, guid: a75603e0d52a0f74dbfb9c5de2b42a22, type: 2}
-    playerPosition: {x: 0, y: 3.5, z: 0}
     monsterSpawnData: {fileID: 11400000, guid: 70cf15452822e884889fa283c49507f0, type: 2}
-    groundYPosition: 3.5
     blockInfos:
     - {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
     - {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
@@ -711,6 +704,8 @@ MonoBehaviour:
     mainCamera: {fileID: 4410951986249962975, guid: ed8e71a5f40f9424991a5f325af8ea83, type: 3}
     boardManagerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
     stageManagerPrefab: {fileID: 3768410994747056990, guid: a9ef38b8df63343d4bdf7f5312703ecc, type: 3}
+    actOnInputs: []
+    playerPosition: {x: 0, y: 3, z: 0}
   dragCount: 0
   isGameOver: 0
   currentTime: 0

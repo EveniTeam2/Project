@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
+using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Stages.Backgrounds;
-using Unit.GameScene.Stages.Creautres.Characters;
-using Unit.GameScene.Stages.Creautres.Monsters;
+using Unit.GameScene.Stages.Creatures.Characters;
+using Unit.GameScene.Stages.Creatures.Monsters;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
@@ -23,8 +24,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         private MonsterSpawnManager _monsterManager;
         private float _startTime;
         private Vector3 _zeroPosition;
-
-
+        
         private void Update()
         {
             (this as ICommandReceiver<IStageCreature>).UpdateCommand();
@@ -51,37 +51,37 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         }
 
         // TODO 인호님! 이거 불러야 시작 가능함
-        public void Initialize(SceneExtraSetting settings, Camera cam)
+        public void Initialize(SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam)
         {
-            InitializeCharacter(settings);
-            InitializeMonster(settings);
+            InitializeCharacter(extraSetting, defaultSetting);
+            InitializeMonster(extraSetting, defaultSetting);
             InitializeCamera(cam);
             InitializeCommand();
 
             _monsterManager.Start();
         }
 
-        private void InitializeCharacter(SceneExtraSetting settings)
+        private void InitializeCharacter(SceneExtraSetting extraSettings, SceneDefaultSetting defaultSetting)
         {
             // Core.Utils.AddressableLoader.DeployAsset(settings.characterRef, settings.playerPosition, Quaternion.identity, null, (obj) => {
             //     if (obj.TryGetComponent(out _character))
             //         _character.Initialize(settings.characterStat, _backgroundDisplay);
             // });
             
-            var character = Instantiate(settings.characterRef, settings.playerPosition, Quaternion.identity);
+            var character = Instantiate(extraSettings.characterRef, defaultSetting.playerPosition, Quaternion.identity);
             // TODO 인호님 여기가 첫 시작에 대한 기준점입니다.
-            _zeroPosition = settings.playerPosition;
+            _zeroPosition = defaultSetting.playerPosition;
             _startTime = Time.time;
 
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(this, settings.characterStat, settings.groundYPosition, settings.actOnInputs.ToArray());   
+                _character.Initialize(this, extraSettings.characterStat, defaultSetting.playerPosition.y, defaultSetting.actOnInputs.ToArray());   
             }
         }
 
-        private void InitializeMonster(SceneExtraSetting settings)
+        private void InitializeMonster(SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting)
         {
-            _monsterManager = new MonsterSpawnManager(this, settings.monsterSpawnData, settings.groundYPosition);
+            _monsterManager = new MonsterSpawnManager(this, extraSetting.monsterSpawnData, defaultSetting.playerPosition.y);
         }
 
         private void InitializeCamera(Camera cam)

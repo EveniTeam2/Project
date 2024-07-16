@@ -1,4 +1,4 @@
-using Unit.GameScene.Stages.Creautres.Interfaces;
+using Unit.GameScene.Stages.Creatures.Interfaces;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Actions
