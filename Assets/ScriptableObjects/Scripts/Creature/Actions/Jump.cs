@@ -8,17 +8,23 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     {
         [SerializeField] private float _jumpPower;
 
-        public override IState OnAct(IState state)
+        public override IStateAction GetStateAction()
         {
-            state.StateMachine.Target.Movement.SetJump(_jumpPower);
-            return state;
+            var result = new StateActionJump(_jumpPower);
+            return result;
+        }
+    }
+
+    public class StateActionJump : IStateAction {
+        private float _jumpPower;
+
+        public StateActionJump(float jumpPower) {
+            _jumpPower = jumpPower;
         }
 
-        public override ActionData GetCopy()
-        {
-            var copy = CreateInstance<Jump>();
-            copy._jumpPower = _jumpPower;
-            return copy;
+        public IState OnAct(IState state) {
+            state.StateMachine.Target.Movement.SetJump(_jumpPower);
+            return state;
         }
     }
 }

@@ -5,11 +5,10 @@ namespace ScriptableObjects.Scripts.Creature.Actions
 {
     public abstract class ActionData : ScriptableObject
     {
-        /// <summary>
-        /// 동작을 수행합니다.
-        /// </summary>
-        public abstract IState OnAct(IState state);
+        public abstract IStateAction GetStateAction();
+    }
 
-        public abstract ActionData GetCopy();
+    public interface IStateAction {
+        IState OnAct(IState state);
     }
 }

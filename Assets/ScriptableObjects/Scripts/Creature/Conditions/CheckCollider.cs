@@ -11,21 +11,29 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
         [SerializeField] private Vector2 direction;
         [SerializeField] private float distance;
 
-        public override bool CheckCondition(BaseCreature target)
+        public override IStateCondition GetStateCondition()
         {
+            var ret = new StateConditionCheckCollider(targetLayer, direction, distance);
+            return ret;
+        }
+    }
+
+    public class StateConditionCheckCollider : IStateCondition {
+        private LayerMask targetLayer;
+        private Vector2 direction;
+        private float distance;
+
+        public StateConditionCheckCollider(LayerMask targetLayer, Vector2 direction, float distance) {
+            this.targetLayer = targetLayer;
+            this.direction = direction;
+            this.distance = distance;
+        }
+
+        public bool CheckCondition(BaseCreature target) {
             if (target.Battle.CheckCollider(targetLayer, direction, distance, out var collider))
                 return collider.Length > 0;
 
             return false;
-        }
-
-        public override Condition GetCopy()
-        {
-            var copy = CreateInstance<CheckCollider>();
-            copy.targetLayer = targetLayer;
-            copy.direction = direction;
-            copy.distance = distance;
-            return copy;
         }
     }
 }

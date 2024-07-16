@@ -8,38 +8,40 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
     public class Timer : Condition
     {
         [SerializeField] private float intervalTime = 1.0f;
-        private bool _timer = true;
-        private bool _timerRunning;
 
-        public override bool CheckCondition(BaseCreature target)
+        public override IStateCondition GetStateCondition()
         {
+            var ret = new StateConditionTimer(intervalTime);
+            return ret;
+        }
+    }
+
+    public class StateConditionTimer : IStateCondition {
+        private float intervalTime;
+        private bool _timer;
+
+        public StateConditionTimer(float intervalTime) {
+            this.intervalTime = intervalTime;
+            _timer = true;
+        }
+
+        public bool CheckCondition(BaseCreature target) {
             return _timer;
         }
 
-        public void StartTimer(BaseCreature target)
-        {
-            if (!_timerRunning)
+        public void StartTimer(BaseCreature target) {
+            if (_timer)
                 target.StartCoroutine(CheckTime(intervalTime));
         }
 
-        private IEnumerator CheckTime(float time)
-        {
-            _timerRunning = true;
+        private IEnumerator CheckTime(float time) {
             _timer = false;
             var currentTime = 0f;
-            while (currentTime < time)
-            {
+            while (currentTime < time) {
                 currentTime += Time.deltaTime;
                 yield return null;
             }
-
             _timer = true;
-            _timerRunning = false;
-        }
-
-        public override Condition GetCopy()
-        {
-            return this;
         }
     }
 }

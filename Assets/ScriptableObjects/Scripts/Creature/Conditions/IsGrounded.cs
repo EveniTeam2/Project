@@ -6,16 +6,18 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
     [CreateAssetMenu(fileName = nameof(IsGrounded), menuName = "State/Condition/" + nameof(IsGrounded))]
     public class IsGrounded : Condition
     {
-        public override bool CheckCondition(BaseCreature target)
+        public override IStateCondition GetStateCondition()
         {
-            return target.Movement.IsJump;
+            var ret = new StateConditionIsGrounded();
+            return ret;
         }
+    }
 
-        public override Condition GetCopy()
-        {
-            var copy = CreateInstance<IsGrounded>();
-
-            return copy;
+    public class StateConditionIsGrounded : IStateCondition {
+        public StateConditionIsGrounded() {
+        }
+        public bool CheckCondition(BaseCreature target) {
+            return target.Movement.IsJump;
         }
     }
 }

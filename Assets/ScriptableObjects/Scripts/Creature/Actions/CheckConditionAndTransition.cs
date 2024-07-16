@@ -12,19 +12,27 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         [SerializeField] private Condition condition;
         [SerializeField] private StateEnums targetStateName;
 
-        public override IState OnAct(IState state)
+        public override IStateAction GetStateAction()
         {
-            if (condition.CheckCondition(state.StateMachine.Target)) state.StateMachine.TryChangeState(targetStateName);
+            var result = new StateActionCheckConditionAndTransition(condition, targetStateName);
+            return result;
+        }
+    }
 
-            return state;
+    public class StateActionCheckConditionAndTransition : IStateAction {
+        private IStateCondition condition;
+        private StateEnums targetStateName;
+
+        public StateActionCheckConditionAndTransition(Condition condition, StateEnums targetStateName) {
+            this.condition = condition.GetStateCondition();
+            this.targetStateName = targetStateName;
         }
 
-        public override ActionData GetCopy()
-        {
-            var copy = CreateInstance<CheckConditionAndTransition>();
-            copy.condition = condition?.GetCopy();
-            copy.targetStateName = targetStateName;
-            return copy;
+        public IState OnAct(IState state) {
+            if (condition.CheckCondition(state.StateMachine.Target))
+                state.StateMachine.TryChangeState(targetStateName);
+
+            return state;
         }
     }
 }

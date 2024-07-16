@@ -8,17 +8,23 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     {
         [SerializeField] private bool isRun;
 
-        public override IState OnAct(IState state)
+        public override IStateAction GetStateAction()
         {
-            state.StateMachine.Target.Movement.SetRun(isRun);
-            return state;
+            var ret = new StateActionSetRun(isRun);
+            return ret;
+        }
+    }
+
+    public class StateActionSetRun : IStateAction {
+        private bool isRun;
+
+        public StateActionSetRun(bool isRun) {
+            this.isRun = isRun;
         }
 
-        public override ActionData GetCopy()
-        {
-            var copy = CreateInstance<SetRun>();
-            copy.isRun = isRun;
-            return copy;
+        public IState OnAct(IState state) {
+            state.StateMachine.Target.Movement.SetRun(isRun);
+            return state;
         }
     }
 }
