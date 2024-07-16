@@ -36,8 +36,8 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         public override ActionData GetCopy()
         {
             var copy = CreateInstance<CheckConditionAndActOnce>();
-            copy._condition = _condition.GetCopy();
-            copy._action = _action.GetCopy();
+            copy._condition = _condition?.GetCopy();
+            copy._action = _action?.GetCopy();
             return copy;
         }
     }
