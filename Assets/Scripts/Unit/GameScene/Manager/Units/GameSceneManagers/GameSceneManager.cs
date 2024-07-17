@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Stages.Backgrounds;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
@@ -17,17 +21,22 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         // TODO : 이후에 BoardManager와 StageManager 내부의 CharacterManager와 MonsterManager가 해당 액션을 구독하도록 수정
         private event Action<bool> OnGameOver;
         
-        [Header("==== Scene 추가 세팅 ====")] [SerializeField]
-        private SceneExtraSetting extraSetting;
+        [Header("==== Scene 추가 세팅 ====")]
+        [SerializeField] private SceneExtraSetting extraSetting;
 
-        [Header("==== Scene 기본 세팅 ====")] [SerializeField]
-        private SceneDefaultSetting defaultSetting;
+        [Header("==== Scene 기본 세팅 ====")]
+        [SerializeField] private SceneDefaultSetting defaultSetting;
 
-        [Header("드래그 횟수")] [SerializeField] private int dragCount;
-
+        [Header("드래그 횟수")]
+        [SerializeField] private int dragCount;
+        
+        [Header("게임 오버")]
         [SerializeField] private bool isGameOver;
+        
+        [Header("현재 진행 시간")]
         [SerializeField] private float currentTime;
 
+        private CharacterSetting _characterSetting;
         private RectTransform _blockPanel;
         private BackgroundController _backgroundController;
         private BoardManager _boardManager;
@@ -40,13 +49,19 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// </summary>
         private void Awake()
         {
+            InstantiateAndInitializeCharacterSetting();
             InstantiateAndInitializeCamera();
             InstantiateAndInitializeCanvas();
             InstantiateAndInitializeMap();
             InstantiateAndInitializeBoard();
             InstantiateAndInitializeStage();
         }
-        
+
+        private void InstantiateAndInitializeCharacterSetting()
+        {
+            _characterSetting = new CharacterSetting(extraSetting.characterDefaultSetting, extraSetting.characterExtraSetting);
+        }
+
         private void InstantiateAndInitializeCamera()
         {
             _camera = Instantiate(defaultSetting.mainCamera).GetComponent<Camera>();
@@ -66,7 +81,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                 _canvas.worldCamera = _camera;
             }
 
-            _blockPanel = _canvas.GetComponent<CanvasController>().BlockPanel;
+            _blockPanel = defaultSetting.canvasController.BlockPanel;
         }
 
         /// <summary>
@@ -104,9 +119,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateAndInitializeStage()
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
-            _stageManager.Initialize(extraSetting, defaultSetting, _camera);
+            _stageManager.Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, _camera);
 
-            _stageManager.AttachBoard(_boardManager);
+            _stageManager.RegisterEventHandler(_boardManager);
         }
 
         /// <summary>

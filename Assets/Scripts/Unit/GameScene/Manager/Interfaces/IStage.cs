@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Characters;
-using Unit.GameScene.Stages.Creatures.Monsters;
+using Unit.GameScene.Stages.Creatures.Units.Characters;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 
 namespace Unit.GameScene.Manager.Interfaces
 {

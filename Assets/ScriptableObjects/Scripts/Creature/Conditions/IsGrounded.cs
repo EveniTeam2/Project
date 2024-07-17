@@ -1,4 +1,3 @@
-using Unit.GameScene.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
@@ -16,7 +15,7 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
     public class StateConditionIsGrounded : IStateCondition {
         public StateConditionIsGrounded() {
         }
-        public bool CheckCondition(BaseCreature target) {
+        public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
             return target.Movement.IsJump;
         }
     }

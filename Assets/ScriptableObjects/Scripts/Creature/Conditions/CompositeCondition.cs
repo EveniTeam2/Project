@@ -1,4 +1,3 @@
-using Unit.GameScene.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
@@ -25,7 +24,7 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
             }
         }
 
-        public bool CheckCondition(BaseCreature target) {
+        public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
             for (var i = 0; i < conditions.Length; ++i)
                 if (!conditions[i].CheckCondition(target))
                     return false;

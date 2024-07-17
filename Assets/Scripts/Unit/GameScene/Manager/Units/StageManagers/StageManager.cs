@@ -6,9 +6,12 @@ using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures;
-using Unit.GameScene.Stages.Creatures.Characters;
 using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Monsters;
+using Unit.GameScene.Stages.Creatures.Units.Characters;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
@@ -17,72 +20,71 @@ namespace Unit.GameScene.Manager.Units.StageManagers
     
     public class StageManager : MonoBehaviour, IStage, ICommandReceiver<IStage>
     {
-        public float PlayTime => Time.time - _startTime;
-        public float Distance => _character.transform.position.x - _zeroPosition.x;
+        public event Action<Creature> OnPlayerDeath;
         
         public Character Character => _character;
         public LinkedList<Monster> Monsters => _monsterManager.Monsters;
-
-        public event Action<BaseCreature> OnPlayerDeath;
-
-        private Queue<ICommand<IStage>> _commands = new();
+        public float PlayTime => Time.time - _startTime;
+        public float Distance => _character.transform.position.x - _zeroPosition.x;
         
         private Character _character;
         private MonsterSpawnManager _monsterManager;
         private float _startTime;
         private Vector3 _zeroPosition;
         
-        private void Update()
+        private Queue<ICommand<IStage>> _commands = new();
+        
+        public void Initialize(CharacterSetting characterSetting, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam)
         {
-            UpdateCommand();
-            //TODO : _monsterManager null이라 잠깐 막아놨습니다.
-            // _monsterManager.Update();
-        }
-
-        public void Received(ICommand<IStage> command)
-        {
-            _commands.Enqueue(command);
-        }
-
-        public void AttachBoard(ISendCommand data)
-        {
-            Debug.Log("Attach Clear");
-            data.OnSendCommand += Received;
-        }
-
-        // TODO 인호님! 이거 불러야 시작 가능함
-        public void Initialize(SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam)
-        {
-            InitializeCharacter(extraSetting, defaultSetting);
-            InitializeMonster(extraSetting, defaultSetting);
+            InitializeCharacter(characterSetting, playerSpawnPosition);
+            InitializeMonster(extraSetting, playerSpawnPosition);
             InitializeCamera(cam);
             InitializeCommand();
 
             _monsterManager.Start();
         }
+        
+        private void Update()
+        {
+            UpdateCommand();
+            
+            //TODO : _monsterManager null이라 잠깐 막아놨습니다.
+            // _monsterManager.Update();
+        }
 
-        private void InitializeCharacter(SceneExtraSetting extraSettings, SceneDefaultSetting defaultSetting)
+        public void RegisterEventHandler(ISendCommand data)
+        {
+            Debug.Log("Attach Clear");
+            data.OnSendCommand += ReceiveCommand;
+        }
+        
+        public void ReceiveCommand(ICommand<IStage> command)
+        {
+            _commands.Enqueue(command);
+        }
+        
+        private void InitializeCharacter(CharacterSetting characterSetting, Vector3 playerSpawnPosition)
         {
             // Core.Utils.AddressableLoader.DeployAsset(settings.characterRef, settings.playerPosition, Quaternion.identity, null, (obj) => {
             //     if (obj.TryGetComponent(out _character))
             //         _character.Initialize(settings.characterStat, _backgroundDisplay);
             // });
             
-            var character = Instantiate(extraSettings.characterRef, defaultSetting.playerPosition, Quaternion.identity);
-            // TODO 인호님 여기가 첫 시작에 대한 기준점입니다.
-            _zeroPosition = defaultSetting.playerPosition;
+            var character = Instantiate(characterSetting.Prefab, playerSpawnPosition, Quaternion.identity);
+            
+            _zeroPosition = playerSpawnPosition;
             _startTime = Time.time;
-
+            
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(this, extraSettings.characterStat, defaultSetting.playerPosition.y, defaultSetting.actOnInputs.ToArray());   
+                _character.Initialize(this, characterSetting, playerSpawnPosition.y);
             }
             (_character.Health as IDamageable).OnDeath += PlayerIsDead;
         }
 
-        private void InitializeMonster(SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting)
+        private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition)
         {
-            _monsterManager = new MonsterSpawnManager(this, extraSetting.monsterSpawnData, defaultSetting.playerPosition.y);
+            _monsterManager = new MonsterSpawnManager(this, extraSetting.monsterSpawnData, playerSpawnPosition.y);
         }
 
         private void InitializeCamera(Camera cam)
@@ -97,16 +99,16 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             else
                 _commands.Clear();
         }
-
-        private void PlayerIsDead(BaseCreature player) {
-            OnPlayerDeath?.Invoke(player);
+        
+        
+        public void UpdateCommand()
+        {
+            if (_commands.Count > 0 && _commands.Peek().IsExecutable(this))
+                _commands.Dequeue().Execute(this);
         }
 
-        public void UpdateCommand() {
-            if (_commands.Count > 0) {
-                if (_commands.Peek().IsExecutable(this))
-                    _commands.Dequeue().Execute(this);
-            }
+        private void PlayerIsDead(Creature player) {
+            OnPlayerDeath?.Invoke(player);
         }
     }
 }

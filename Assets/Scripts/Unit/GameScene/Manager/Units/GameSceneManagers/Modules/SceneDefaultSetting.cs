@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Module;
-using Unit.GameScene.Stages.Creatures.FSM.ActOnInput;
+using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
@@ -14,6 +14,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
         [Header("BoardManager Prefabs")] public GameObject boardManagerPrefab;
         [Header("StageManager Prefabs")] public GameObject stageManagerPrefab;
         [Header("Player Input Actions")] public List<ActOnInput> actOnInputs;
-        [Header("Player Spawn Position")] public Vector3 playerPosition;
+        [Header("Player Spawn Position")] public Vector3 playerSpawnPosition;
     }
 }

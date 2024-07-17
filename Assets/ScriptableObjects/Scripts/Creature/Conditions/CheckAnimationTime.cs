@@ -1,4 +1,3 @@
-using Unit.GameScene.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions {
@@ -19,7 +18,7 @@ namespace ScriptableObjects.Scripts.Creature.Conditions {
             _percentage = percentage;
         }
 
-        public bool CheckCondition(BaseCreature target) {
+        public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
             var normalTime = target.HFSM.GetCurrentAnimationNormalizedTime();
             if (_percentage < normalTime)
                 return true;

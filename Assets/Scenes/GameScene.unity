@@ -609,11 +609,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extraSetting:
     limitTime: 10
-    characterRef: {fileID: 1214194880391127291, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
-    characterStat:
-      Attack: 0
-      Health: 0
-      Speed: 0
+    characterDefaultSetting: {fileID: 11400000, guid: d5e97713bc5ea4bcfb6b65eefc7bf92d, type: 2}
+    characterExtraSetting:
+      characterSkillPresets:
+      - LightAttack
+      - HolyHeal
+      - HolySlash
     monsterSpawnData: {fileID: 11400000, guid: 70cf15452822e884889fa283c49507f0, type: 2}
     blockInfos:
     - {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
@@ -631,7 +632,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a2137b94699df41a2bed528bbc0e7bff, type: 2}
     - {fileID: 11400000, guid: 8f2f6cc67a89b4be990047a27889a6ba, type: 2}
     - {fileID: 11400000, guid: a0dcd8fab4e9f4f9d949733250af0fb6, type: 2}
-    playerPosition: {x: 0, y: 3, z: 0}
+    playerSpawnPosition: {x: 0, y: 0, z: 0}
   dragCount: 0
   isGameOver: 0
   currentTime: 0

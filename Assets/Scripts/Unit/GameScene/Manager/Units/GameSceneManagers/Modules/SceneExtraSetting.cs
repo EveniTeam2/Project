@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
+using ScriptableObjects.Scripts.Creature.Settings;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
-using Unit.GameScene.Stages.Creatures.Characters;
-using Unit.GameScene.Stages.Creatures.Characters.Unit.Character;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
 {
@@ -18,9 +19,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
 
         [Space(5)]
         [Header("---- Player Setting ----")]
+        // TODO : 임시로 잡아둔 세팅입니다, 이전 씬에서 해당 값들을 보내줘야 함
+        [Header("캐릭터 기본 정보")] public CharacterDefaultSetting characterDefaultSetting;
+        [Header("캐릭터 추가 정보")] public CharacterExtraSetting characterExtraSetting;
         // public AssetReference characterRef;
-        [Header("플레이어 오브젝트")] public Character characterRef;
-        [Header("플레이어 스텟")] public CharacterStat characterStat;
 
         [Space(5)] [Header("---- Monster Setting ----")]
         [Header("몬스터 스폰 정보")] public MonsterSpawnData monsterSpawnData;

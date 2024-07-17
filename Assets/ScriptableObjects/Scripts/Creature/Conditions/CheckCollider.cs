@@ -1,4 +1,3 @@
-using Unit.GameScene.Stages.Creatures;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
@@ -29,7 +28,7 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
             this.distance = distance;
         }
 
-        public bool CheckCondition(BaseCreature target) {
+        public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
             if (target.Battle.CheckCollider(targetLayer, direction, distance, out var collider))
                 return collider.Length > 0;
 

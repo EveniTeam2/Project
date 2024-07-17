@@ -20,10 +20,14 @@ namespace Unit.GameScene.Manager.Units
     /// </summary>
     public class BoardManager : MonoBehaviour, ISendCommand, IIncreaseDragCount
     {
+        public event Action<int> OnIncreaseDragCount;
+        public event Action<ICommand<IStage>> OnSendCommand;
+        
         [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")] [SerializeField]
         private int width;
 
-        [SerializeField] private int height;
+        [SerializeField]
+        private int height;
 
         [Header("각각의 로직 사이의 대기 시간 (단위 : Second)")] [SerializeField] [Range(0, 1f)]
         private float logicProgressTime;
@@ -42,8 +46,9 @@ namespace Unit.GameScene.Manager.Units
 
         [Header("블록 풀링 관련 설정")] [SerializeField]
         private Block blockPrefab;
-
-        [Header("로직 동작 여부")] [SerializeField] private bool isLogicUpdating;
+        
+        [Header("로직 동작 여부")] [SerializeField]
+        private bool isLogicUpdating;
         
         // 하나의 클래스는 하나의 기능을 가진다.
 
@@ -61,18 +66,17 @@ namespace Unit.GameScene.Manager.Units
 
         private Canvas _canvas;
 
-        [Header("명령 대기 리스트")] private OrderedDictionary _currentMatchBlock;
+        [Header("명령 대기 리스트")]
+        private OrderedDictionary _currentMatchBlock;
 
         private int _dragCount;
         
         private float _blockGap;
         private float _halfPanelWidth;
-        
         private int _poolSize;
+        
         private WaitForSeconds _progressTime;
         private Dictionary<Tuple<float, float>, Block> _tiles;
-        public event Action<int> OnIncreaseDragCount;
-        public event Action<ICommand<IStage>> OnSendCommand;
 
         #region #### 보드 초기화 ####
 
