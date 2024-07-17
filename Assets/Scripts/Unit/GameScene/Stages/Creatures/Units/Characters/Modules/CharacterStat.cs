@@ -10,6 +10,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             public int Attack;
             public int Health;
             public int Speed;
+            public float CoolTime;
         }
     }
 }

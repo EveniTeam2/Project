@@ -1,3 +1,4 @@
+using ScriptableObjects.Scripts.Creature.DTO;
 using System;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
@@ -25,6 +26,13 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             _onUpdate = onUpdate;
             _onFixedUpdate = onFixedUpdate;
             _transitionCondition = transitionCondition;
+        }
+
+        public void SetFullState(FullState state) {
+            OnEnter += state.Enter;
+            OnExit += state.Exit;
+            _onUpdate += state.Update;
+            _onFixedUpdate += state.FixedUpdate;
         }
 
         /// <summary>

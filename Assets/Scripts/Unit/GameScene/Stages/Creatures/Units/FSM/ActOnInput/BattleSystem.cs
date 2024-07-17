@@ -6,6 +6,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
     public abstract class BattleSystem {
         protected Transform _targetTransform;
         protected IBattleStat _stat;
+        protected bool _canAttackCool = true;
+
+        protected bool CanAttackCool { get => _canAttackCool;  }
 
         public BattleSystem(Transform targetTransform, IBattleStat stat) {
             _targetTransform = targetTransform;
@@ -21,9 +24,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
         }
 
         public abstract void Attack(RaycastHit2D col);
+        public abstract void Update();
     }
 
     public interface IBattleStat {
+        float GetCoolTime();
         int GetAttack();
     }
 }
