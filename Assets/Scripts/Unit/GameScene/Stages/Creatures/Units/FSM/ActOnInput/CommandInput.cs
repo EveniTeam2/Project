@@ -14,7 +14,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
     /// <summary>
     ///     사용자 입력을 처리하는 클래스입니다.
     /// </summary>
-    public class UserInput
+    public class CommandInput
     {
         private readonly Character _character;
         private readonly Dictionary<BlockType, Skill> _skillDictionary;
@@ -22,7 +22,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
         /// <summary>
         ///     입력을 처리하는 클래스입니다.
         /// </summary>
-        public UserInput(Character target, CharacterType type, IReadOnlyList<Skill> skillPresets)
+        public CommandInput(Character target, CharacterType type, IReadOnlyList<Skill> skillPresets)
         {
             _character = target;
             _skillDictionary = new Dictionary<BlockType, Skill>();

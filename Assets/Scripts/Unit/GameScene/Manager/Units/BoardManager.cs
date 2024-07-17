@@ -132,8 +132,10 @@ namespace Unit.GameScene.Manager.Units
         {
             // panelWidth 구하기
             var localScale = _blockPanel.localScale;
-            var panelWidth = _blockPanel.parent.GetComponent<RectTransform>().localPosition.x * localScale.x * -2;
-
+            var panelWidth = (float)(int)Math.Round(_canvas.GetComponent<RectTransform>().rect.width);
+            
+            if (panelWidth <= 0) return;
+            
             // 블록 간격 계산
             _blockGap = (float) Math.Truncate(panelWidth / (width - 1));
             _blockPositions = new List<Tuple<float, float>>();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using ScriptableObjects.Scripts.Creature.Settings;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
@@ -12,18 +13,24 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
 {
     public class CharacterSetting
     {
-        [Header("캐릭터 프리팹"), Space(5)] public readonly Creature Prefab;
-        [Header("캐릭터 기본 타입"), Space(5)] public readonly CharacterType Type;
-        [Header("캐릭터 기본 스탯"), Space(5)] public CharacterStat Stat;
-        [Header("캐릭터 스킬 프리셋"), Space(5)] public readonly List<CharacterSkill> CharacterSkills;
+        public Creature Prefab { get; }
+        public CharacterType Type { get; }
+        public CharacterStat Stat { get; }
+        public List<CharacterSkill> CharacterSkills { get; }
+        public Dictionary<AnimationParameterEnums, int> CharacterAnimationParameter { get; private set; }
+
+        private readonly AnimationParameterEnums[] _animationParameterEnums;
         
         public CharacterSetting(CharacterDefaultSetting characterDefaultSetting, CharacterExtraSetting characterExtraSetting)
         {
             Prefab = characterDefaultSetting.baseCreature;
             Type = characterDefaultSetting.characterType;
             Stat = characterDefaultSetting.characterStat;
-
+            _animationParameterEnums = characterDefaultSetting.creatureAnimationParameter;
+            
             CharacterSkills = new CharacterSkillFactory(Type, characterExtraSetting.characterSkillPresets).CreateSkill();
+
+            ChangeAnimationParameterToHash();
         }
 
         public void RegisterCharacterReference(Character character)
@@ -31,6 +38,16 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             foreach (var characterSkill in CharacterSkills)
             {
                 characterSkill.RegisterCharacterReference(character);
+            }
+        }
+
+        private void ChangeAnimationParameterToHash()
+        {
+            CharacterAnimationParameter = new Dictionary<AnimationParameterEnums, int>();
+            
+            foreach (var animationParameter in _animationParameterEnums)
+            {
+                CharacterAnimationParameter.Add(animationParameter, Animator.StringToHash($"{animationParameter}"));
             }
         }
     }

@@ -15,6 +15,18 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
     {
         [SerializeField] protected CharacterType characterType;
         [SerializeField] private StateDataDTO stateData;
+        
+        private readonly LinkedList<ModifyStatData> _mods = new();
+        
+        private Animator _animator;
+        private BattleSystem _battleSystem;
+        private HealthSystem _healthSystem;
+        private CommandInput _commandInput;
+        private MovementSystem _movementSystem;
+        private Stat<CharacterStat> _stats;
+        private Dictionary<AnimationParameterEnums, int> _characterAnimationParameter;
+
+        private void Update()
 
         protected UserInput _input;
         protected Stat<CharacterStat> _stats;
@@ -46,12 +58,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator);
             _characterServiceProvider = new CharacterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm);
             // TODO : After
-            _input = new UserInput(this, characterSetting.Type, characterSetting.CharacterSkills);
+            // _input = new UserInput(this, characterSetting.Type, characterSetting.CharacterSkillPresets);
         }
 
         public void Input(BlockType blockType, int count)
         {
-            _input.Input(blockType, count);
+            _commandInput.Input(blockType, count);
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
