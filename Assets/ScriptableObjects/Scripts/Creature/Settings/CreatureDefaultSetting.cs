@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using UnityEngine;
 using UnityEngine.Serialization;
 
