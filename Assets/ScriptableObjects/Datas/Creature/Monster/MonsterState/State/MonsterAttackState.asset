@@ -17,5 +17,6 @@ MonoBehaviour:
   onEnter: {fileID: 11400000, guid: 183ba11d01f11804d8f5b3a0dbfdad3a, type: 2}
   onExit: {fileID: 11400000, guid: fe7f079812cbb894e80f6876544b7506, type: 2}
   onUpdate: {fileID: 11400000, guid: 1e0c9bbcd11a183438f4a70ed4b70891, type: 2}
-  onFixedUpdate: {fileID: 11400000, guid: f032560587de3124c9ce0bce4bd56fc4, type: 2}
+  onFixedUpdate: {fileID: 0}
   canTransitionToThis: {fileID: 0}
+  onEveryAction: {fileID: 11400000, guid: e7eb1fe8ac478c34fba2a2eb1365d0f0, type: 2}
