@@ -1,5 +1,6 @@
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace ScriptableObjects.Scripts.Creature.Actions
 {
@@ -8,20 +9,26 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     {
         [SerializeField] protected bool _value;
 
+        public override IStateAction GetStateAction()
+        {
+            var ret = new StateActionSetBoolParameter(_value);
+            return ret;
+        }
+    }
+
+    public class StateActionSetBoolParameter : IStateAction {
+        protected bool _value;
+
+        public StateActionSetBoolParameter(bool value) {
+            _value = value;
+        }
+
         /// <summary>
         ///     상태 동작을 수행합니다.
         /// </summary>
-        public override IState OnAct(IState state)
-        {
+        public IState OnAct(IState state) {
             state.StateMachine.SetBoolAnimator(state.ParameterHash, _value);
             return state;
-        }
-
-        public override ActionData GetCopy()
-        {
-            var copy = CreateInstance<SetBoolParameter>();
-            copy._value = _value;
-            return copy;
         }
     }
 }

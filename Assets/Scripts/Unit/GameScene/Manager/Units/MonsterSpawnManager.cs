@@ -10,13 +10,15 @@ using Random = UnityEngine.Random;
 namespace Unit.GameScene.Manager.Units {
     public class MonsterSpawnManager {
         protected readonly StageManager _stageManager;
-        protected readonly MonsterSpawnData _data;
+        protected readonly StageMonsterSpawnData _data;
         private readonly float _ground;
         private Dictionary<int, CustomPool<Monster>> _monsterPool;
         private LinkedList<Monster> _spawnedMonsters;
-        private LinkedList<MonsterGroup> _spawnGroup;
-        private Queue<MonsterGroup> _waitGroup;
+        private LinkedList<StageMonsterGroup> _spawnGroup;
+        private Queue<StageMonsterGroup> _waitGroup;
         private bool _onSpawn;
+
+
         public LinkedList<Monster> Monsters {
             get {
                 _spawnedMonsters.Clear();
@@ -30,15 +32,15 @@ namespace Unit.GameScene.Manager.Units {
         }
 
         public MonsterSpawnManager(StageManager stageManager, MonsterSpawnData data, float ground) {
-            _data = data;
+            _data = data.GetStageData();
             _stageManager = stageManager;
             _ground = ground;
-            _spawnGroup = new LinkedList<MonsterGroup>();
-            _waitGroup = new Queue<MonsterGroup>();
-            CreateMonsterPool(stageManager, data, ground);
+            _spawnGroup = new LinkedList<StageMonsterGroup>();
+            _waitGroup = new Queue<StageMonsterGroup>();
+            CreateMonsterPool(stageManager, _data, ground);
         }
 
-        private void CreateMonsterPool(StageManager stageManager, MonsterSpawnData data, float ground) {
+        private void CreateMonsterPool(StageManager stageManager, StageMonsterSpawnData data, float ground) {
             _monsterPool = new Dictionary<int, CustomPool<Monster>>();
             for (int i = 0; i < data.monstersRef.Length; ++i) {
                 int index = i;
@@ -58,9 +60,6 @@ namespace Unit.GameScene.Manager.Units {
                 //        mon.Initialize(settings.monsterStats[index], groundYPosition);
                 //    }
                 //});
-            }
-            for (int i = 0; i < _data.monsterGroup.Length; ++i) {
-                _data.monsterGroup[i].spawnDecider = _data.monsterGroup[i].spawnDecider.GetCopy();
             }
         }
 

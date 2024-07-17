@@ -50,7 +50,7 @@ namespace Unit.GameScene.Stages.Creatures.Characters
             _stageManager = manager;
             _battleSystem = new BattleSystem(manager, this, _stats);
             _healthSystem = new HealthSystem(this, _stats);
-            _movementSystem = new MovementSystem(this, _stats);
+            _movementSystem = new MovementSystem(transform, _stats);
             _movementSystem.SetGroundPosition(groundYPosition);
 
             HFSM = StateBuilder.BuildState(this, stateData);

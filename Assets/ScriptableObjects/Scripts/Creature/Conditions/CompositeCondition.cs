@@ -8,24 +8,28 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
     {
         [SerializeField] private Condition[] conditions;
 
-        public override bool CheckCondition(BaseCreature target)
+        public override IStateCondition GetStateCondition()
         {
+            var ret = new StateConditionCompositeCondition(conditions);
+            return ret;
+        }
+    }
+
+    public class StateConditionCompositeCondition : IStateCondition {
+        private IStateCondition[] conditions;
+
+        public StateConditionCompositeCondition(Condition[] conditions) {
+            this.conditions = new IStateCondition[conditions.Length];
+            for (int i = 0; i < conditions.Length; ++i) {
+                this.conditions[i] = conditions[i]?.GetStateCondition();
+            }
+        }
+
+        public bool CheckCondition(BaseCreature target) {
             for (var i = 0; i < conditions.Length; ++i)
                 if (!conditions[i].CheckCondition(target))
                     return false;
             return true;
-        }
-
-        public override Condition GetCopy()
-        {
-            var copy = CreateInstance<CompositeCondition>();
-            copy.conditions = new Condition[conditions.Length];
-            for (var i = 0; i < conditions.Length; i++)
-            {
-                copy.conditions[i] = conditions[i]?.GetCopy();
-            }
-            
-            return copy;
         }
     }
 }

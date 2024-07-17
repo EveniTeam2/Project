@@ -9,17 +9,24 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         [SerializeField] private ActionData decoratorActionData;
         [SerializeField] private ActionData actionData;
 
-        public override IState OnAct(IState state)
+        public override IStateAction GetStateAction()
         {
-            return actionData.OnAct(decoratorActionData.OnAct(state));
+            var result = new StateActionDecoratorAction(decoratorActionData, actionData);
+            return result;
+        }
+    }
+
+    public class StateActionDecoratorAction : IStateAction {
+        private IStateAction decoratorActionData;
+        private IStateAction actionData;
+
+        public StateActionDecoratorAction(ActionData decoratorActionData, ActionData actionData) {
+            this.decoratorActionData = decoratorActionData.GetStateAction();
+            this.actionData = actionData.GetStateAction();
         }
 
-        public override ActionData GetCopy()
-        {
-            var copy = CreateInstance<DecoratorActionData>();
-            copy.decoratorActionData = decoratorActionData?.GetCopy();
-            copy.actionData = actionData?.GetCopy();
-            return copy;
+        public IState OnAct(IState state) {
+            return actionData.OnAct(decoratorActionData.OnAct(state));
         }
     }
 }

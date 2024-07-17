@@ -5,11 +5,10 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
 {
     public abstract class Condition : ScriptableObject
     {
-        /// <summary>
-        ///     조건을 확인합니다.
-        /// </summary>
-        public abstract bool CheckCondition(BaseCreature target);
+        public abstract IStateCondition GetStateCondition();
+    }
 
-        public abstract Condition GetCopy();
+    public interface IStateCondition {
+        bool CheckCondition(BaseCreature target);
     }
 }
