@@ -1,6 +1,8 @@
-using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace ScriptableObjects.Scripts.Creature.Actions {
     public class TakeDistance : ActionData {
@@ -8,29 +10,32 @@ namespace ScriptableObjects.Scripts.Creature.Actions {
         [SerializeField] private float distance;
         [SerializeField] private LayerMask targetLayer;
 
-        public override IStateAction GetStateAction() {
-            var ret = new StateActionTakeDistance(direction, distance, targetLayer);
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
+            var ret = new StateActionTakeDistance(transform, direction, distance, targetLayer, movementSystem);
             return ret;
         }
     }
 
     public class StateActionTakeDistance : IStateAction {
-        private Vector2 direction;
-        private float distance;
-        private LayerMask targetLayer;
+        private Transform _transform;
+        private Vector2 _direction;
+        private float _distance;
+        private LayerMask _targetLayer;
+        private MovementSystem movementSystem;
 
-        public StateActionTakeDistance(Vector2 direction, float distance, LayerMask targetLayer) {
-            this.direction = direction;
-            this.distance = distance;
-            this.targetLayer = targetLayer;
+        public StateActionTakeDistance(Transform _transform, Vector2 direction, float distance, LayerMask targetLayer, MovementSystem movementSystem) {
+            this._transform = _transform;
+            this._direction = direction;
+            this._distance = distance;
+            _targetLayer = targetLayer;
+            this.movementSystem = movementSystem;
         }
 
-        public IState OnAct(IState state) {
-            var obj = Physics2D.Raycast(state.StateMachine.Target.transform.position, direction, distance, targetLayer);
+        public void OnAct(StateType stateName, int parameterHash) {
+            RaycastHit2D obj = Physics2D.Raycast(_transform.position, _direction, _distance, _targetLayer);
             if (obj.collider != null) {
-                state.StateMachine.Target.Movement.SetBackStep(true);
+                movementSystem.SetBackward(true);
             }
-            return state;
         }
     }
 }

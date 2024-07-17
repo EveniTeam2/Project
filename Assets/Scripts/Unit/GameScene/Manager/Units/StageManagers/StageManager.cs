@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Interfaces;
-using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures;
@@ -10,23 +9,33 @@ using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
     // 채이환 숙제 : Ref 타입과 Value 타입에 대해서 다시 공부하기!
     
+    public class StageScore {
+        private float score;
+        private float playTime;
+        private float distance;
+
+        public float Score { get => score; }
+        public float PlayTime { get => playTime; }
+        public float Distance { get => distance; }
+    }
+
     public class StageManager : MonoBehaviour, IStage, ICommandReceiver<IStage>
     {
-        public event Action<Creature> OnPlayerDeath;
-        
+        public event Action OnPlayerDeath;
+        public StageScore StageScore { get => stageScore; }
+        private StageScore stageScore;
         public Character Character => _character;
         public LinkedList<Monster> Monsters => _monsterManager.Monsters;
         public float PlayTime => Time.time - _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
-        
+
+
         private Character _character;
         private MonsterSpawnManager _monsterManager;
         private float _startTime;
@@ -77,14 +86,14 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(this, characterSetting, playerSpawnPosition.y);
+                _character.Initialize(characterSetting, playerSpawnPosition.y);
             }
-            (_character.Health as IDamageable).OnDeath += PlayerIsDead;
+            _character.GetServiceProvider().RegistEvent(ECharacterEventType.Death, PlayerIsDead);
         }
 
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition)
         {
-            _monsterManager = new MonsterSpawnManager(this, extraSetting.monsterSpawnData, playerSpawnPosition.y);
+            _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore);
         }
 
         private void InitializeCamera(Camera cam)
@@ -107,8 +116,14 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 _commands.Dequeue().Execute(this);
         }
 
-        private void PlayerIsDead(Creature player) {
-            OnPlayerDeath?.Invoke(player);
+        private void PlayerIsDead() {
+            OnPlayerDeath?.Invoke();
         }
+    }
+
+    public enum ECharacterEventType {
+        Death,
+        Damage,
+
     }
 }

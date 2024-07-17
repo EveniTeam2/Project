@@ -18,10 +18,10 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules {
 
         [Header("몬스터 스폰에 대한 데이터")] public List<MonsterGroup> monsterGroup;
 
-        public StageMonsterSpawnData GetStageData() {
+        public StageMonsterSpawnData GetStageData(StageScore score) {
             List<StageMonsterGroup> monGroup = new List<StageMonsterGroup>();
             foreach (var monster in monsterGroup) {
-                monGroup.Add(monster.GetStageMonsterGroup());
+                monGroup.Add(monster.GetStageMonsterGroup(score));
             }
             var ret = new StageMonsterSpawnData(monstersRef, monsterStats.ToArray(), monsterSpawnOffset, monsterSpawnTimeOffset, monGroup.ToArray());
             return ret;
@@ -61,8 +61,8 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules {
             }
         }
 
-        public StageMonsterGroup GetStageMonsterGroup() {
-            var ret = new StageMonsterGroup(spawnDecider.GetMonsterSpawnDecider(), monsterSpawnGroups.ToArray(), TotalWeight);
+        public StageMonsterGroup GetStageMonsterGroup(StageScore score) {
+            var ret = new StageMonsterGroup(spawnDecider.GetMonsterSpawnDecider(score), monsterSpawnGroups.ToArray(), TotalWeight);
             return ret;
         }
     }

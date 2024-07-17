@@ -3,44 +3,48 @@ using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
 {
-    [CreateAssetMenu(fileName = nameof(Timer), menuName = "State/" + nameof(Condition) + "/" + nameof(Timer))]
-    public class Timer : Condition
-    {
-        [SerializeField] private float intervalTime = 1.0f;
+    //[CreateAssetMenu(fileName = nameof(Timer), menuName = "State/" + nameof(Condition) + "/" + nameof(Timer))]
+    //public class Timer : Condition
+    //{
+    //    [SerializeField] private float intervalTime = 1.0f;
 
-        public override IStateCondition GetStateCondition()
-        {
-            var ret = new StateConditionTimer(intervalTime);
-            return ret;
-        }
-    }
+    //    public override IStateCondition GetStateCondition()
+    //    {
+    //        var ret = new StateConditionTimer(intervalTime);
+    //        return ret;
+    //    }
+    //}
 
-    public class StateConditionTimer : IStateCondition {
-        private float intervalTime;
-        private bool _timer;
+    //public class StateConditionTimer : IStateCondition {
+    //    private float intervalTime;
+    //    private bool _timer;
 
-        public StateConditionTimer(float intervalTime) {
-            this.intervalTime = intervalTime;
-            _timer = true;
-        }
+    //    public StateConditionTimer(float intervalTime) {
+    //        this.intervalTime = intervalTime;
+    //        _timer = true;
+    //    }
 
-        public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
-            return _timer;
-        }
+    //    public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
+    //        return _timer;
+    //    }
 
-        public void StartTimer(Unit.GameScene.Stages.Creatures.Creature target) {
-            if (_timer)
-                target.StartCoroutine(CheckTime(intervalTime));
-        }
+    //    public bool CheckCondition() {
+    //        throw new System.NotImplementedException();
+    //    }
 
-        private IEnumerator CheckTime(float time) {
-            _timer = false;
-            var currentTime = 0f;
-            while (currentTime < time) {
-                currentTime += Time.deltaTime;
-                yield return null;
-            }
-            _timer = true;
-        }
-    }
+    //    public void StartTimer(Unit.GameScene.Stages.Creatures.Creature target) {
+    //        if (_timer)
+    //            target.StartCoroutine(CheckTime(intervalTime));
+    //    }
+
+    //    private IEnumerator CheckTime(float time) {
+    //        _timer = false;
+    //        var currentTime = 0f;
+    //        while (currentTime < time) {
+    //            currentTime += Time.deltaTime;
+    //            yield return null;
+    //        }
+    //        _timer = true;
+    //    }
+    //}
 }

@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
 {
@@ -11,29 +14,29 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
     {
         protected IState _current;
         protected IState _prev;
-        protected Dictionary<StateType, IState> _states = new();
+        protected Dictionary<StateType, IState> _states;
+        private readonly Animator animator;
 
-        public StateMachine(Creature baseCreature)
+        public StateMachine(Animator animator)
         {
-            Target = baseCreature;
+            _states = new Dictionary<StateType, IState>();
+            this.animator = animator;
         }
 
-        public Creature Target { get; protected set; }
-        public IState CurrentState => _current;
-        public IState PrevState => _prev;
+        protected IState CurrentState => _current;
+        protected IState PrevState => _prev;
 
         /// <summary>
         ///     상태를 추가합니다.
         /// </summary>
         public bool TryAddState(StateType name, IState state)
         {
-            if (_current == null)
-            {
-                _current = state;
-                _current.Enter(Target);
-            }
+            bool result = _states.TryAdd(name, state);
 
-            return _states.TryAdd(name, state);
+            if (_states.Count == 1)
+                _current = state;
+
+            return result;
         }
 
         /// <summary>
@@ -43,40 +46,29 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         {
             if (_states.TryGetValue(stateType, out var state))
             {
-                _current.Exit(Target);
+                _current.Exit();
                 _prev = _current;
                 _current = state;
-                _current.Enter(Target);
+                _current.Enter();
                 return true;
             }
-
-            //else
-            //{
-            //    foreach (var item in _states.Values)
-            //    {
-            //        if (item is StateMachine sub && sub.TryChangeState(name))
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //}
             return false;
         }
 
         /// <summary>
         ///     현재 상태를 업데이트합니다.
         /// </summary>
-        public void Update(Creature target)
+        public void Update()
         {
-            _current.Update(Target);
+            _current.Update();
         }
 
         /// <summary>
         ///     현재 상태를 고정 업데이트합니다.
         /// </summary>
-        public void FixedUpdate(Creature target)
+        public void FixedUpdate()
         {
-            _current.FixedUpdate(Target);
+            _current.FixedUpdate();
         }
 
         /// <summary>
@@ -84,15 +76,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public bool CanTransition()
         {
-            return _current.CanTransitionToThis(Target);
-        }
-
-        /// <summary>
-        ///     현재 애니메이션의 정규화된 시간을 반환합니다.
-        /// </summary>
-        public float GetCurrentAnimationNormalizedTime()
-        {
-            return GetAnimationNormalizedTime(_current.StateName);
+            return _current.CanTransitionToThis();
         }
 
         /// <summary>
@@ -100,8 +84,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public float GetAnimationNormalizedTime(StateType tag)
         {
-            var current = Target.Animator.GetCurrentAnimatorStateInfo(0);
-            var next = Target.Animator.GetNextAnimatorStateInfo(0);
+            var current = animator.GetCurrentAnimatorStateInfo(0);
+            var next = animator.GetNextAnimatorStateInfo(0);
             if (current.IsTag($"{tag}") || current.IsName($"{tag}"))
                 return current.normalizedTime;
             if (next.IsTag($"{tag}") || next.IsName($"{tag}"))
@@ -123,7 +107,16 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public void SetBoolAnimator(int parameterHash, bool onoff)
         {
-            Target.Animator.SetBool(parameterHash, onoff);
+            animator.SetBool(parameterHash, onoff);
+        }
+
+        public bool TryGetState(StateType stateType, out IState state) {
+            if (_states.TryGetValue(stateType, out state)) {
+                return true; 
+            }
+            state = null;
+            return false;
+
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Unit.GameScene.Manager.Modules
 
         bool ICommand<IStage>.IsExecutable(IStage stage)
         {
-            return stage.Character.HFSM.GetCurrentAnimationNormalizedTime() > _targetNormalTime;
+            return stage.Character.GetServiceProvider().GetCurrentAnimatorStateInfo().normalizedTime > _targetNormalTime;
         }
     }
 }

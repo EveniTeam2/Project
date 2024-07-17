@@ -1,6 +1,6 @@
 namespace Unit.GameScene.Stages.Creatures
 {
-    public class Stat<T> where T : struct
+    public class Stat<T>
     {
         public Stat(T origin)
         {
