@@ -30,9 +30,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
         private Animator _animator;
         private BattleSystem _battleSystem;
         private HealthSystem _healthSystem;
-        private UserInput _input;
+        private CommandInput _commandInput;
         private MovementSystem _movementSystem;
         private Stat<CharacterStat> _stats;
+        private Dictionary<AnimationParameterEnums, int> _characterAnimationParameter;
 
         private void Update()
         {
@@ -60,12 +61,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             HFSM = StateBuilder.BuildState(this, stateData);
             
             // TODO : After
-            _input = new UserInput(this, characterSetting.Type, characterSetting.CharacterSkillPresets);
+            // _input = new UserInput(this, characterSetting.Type, characterSetting.CharacterSkillPresets);
         }
 
         public void Input(BlockType blockType, int count)
         {
-            _input.Input(blockType, count);
+            _commandInput.Input(blockType, count);
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
