@@ -1,6 +1,7 @@
 using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -11,7 +12,7 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     public class SetBoolParameter : ActionData {
         [SerializeField] protected bool _value;
 
-        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine) {
             var ret = new StateActionSetBoolParameter(_value, animator);
             return ret;
         }

@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c67cf1c01b92e4cb4f38ed2910df80, type: 3}
-  m_Name: Attack3
+  m_Script: {fileID: 11500000, guid: 76551607e8e7a41498e07ee74523caf0, type: 3}
+  m_Name: CheckColliderAndTransAttack
   m_EditorClassIdentifier: 
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  _distance: 3
-  _attackMultiplier: 3
+  condition: {fileID: 11400000, guid: ded6356bc07f43c45b5f6a986649e118, type: 2}
+  targetStateName: 2

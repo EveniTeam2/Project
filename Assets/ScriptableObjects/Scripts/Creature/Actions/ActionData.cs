@@ -9,7 +9,7 @@ namespace ScriptableObjects.Scripts.Creature.Actions
 {
     public abstract class ActionData : ScriptableObject
     {
-        public abstract IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator);
+        public abstract IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine);
     }
 
     public interface IStateAction {
