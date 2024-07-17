@@ -28,7 +28,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.U
 
         public void ChangeState()
         {
-            _character.HFSM.TryChangeState(_targetState);
+            //_character.HFSM.TryChangeState(_targetState);
+            _character.GetServiceProvider().TryChangeState(_targetState);
             // _character.Animator.SetInteger();
         }
     }

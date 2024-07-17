@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Manager.Units.StageManagers;
@@ -16,20 +17,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
         [SerializeField] protected CharacterType characterType;
         [SerializeField] private StateDataDTO stateData;
         
-        private readonly LinkedList<ModifyStatData> _mods = new();
-        
-        private Animator _animator;
-        private BattleSystem _battleSystem;
-        private HealthSystem _healthSystem;
         private CommandInput _commandInput;
-        private MovementSystem _movementSystem;
         private Stat<CharacterStat> _stats;
         private Dictionary<AnimationParameterEnums, int> _characterAnimationParameter;
 
-        private void Update()
-
-        protected UserInput _input;
-        protected Stat<CharacterStat> _stats;
         protected CharacterServiceProvider _characterServiceProvider;
 
         protected void Update()
