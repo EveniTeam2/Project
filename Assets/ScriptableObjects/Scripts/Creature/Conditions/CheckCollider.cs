@@ -1,4 +1,6 @@
+using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
 {
@@ -10,10 +12,8 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
         [SerializeField] private Vector2 direction;
         [SerializeField] private float distance;
 
-        public override IStateCondition GetStateCondition()
-        {
-            var ret = new StateConditionCheckCollider(targetLayer, direction, distance);
-            return ret;
+        public override IStateCondition GetStateCondition(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
+            return new StateConditionCheckCollider(targetLayer, direction, distance, battleSystem);
         }
     }
 
@@ -21,15 +21,17 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
         private LayerMask targetLayer;
         private Vector2 direction;
         private float distance;
+        private readonly BattleSystem battleSystem;
 
-        public StateConditionCheckCollider(LayerMask targetLayer, Vector2 direction, float distance) {
+        public StateConditionCheckCollider(LayerMask targetLayer, Vector2 direction, float distance, BattleSystem battleSystem) {
             this.targetLayer = targetLayer;
             this.direction = direction;
             this.distance = distance;
+            this.battleSystem = battleSystem;
         }
 
-        public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
-            if (target.Battle.CheckCollider(targetLayer, direction, distance, out var collider))
+        public bool CheckCondition() {
+            if (battleSystem.CheckCollider(targetLayer, direction, distance, out var collider))
                 return collider.Length > 0;
 
             return false;

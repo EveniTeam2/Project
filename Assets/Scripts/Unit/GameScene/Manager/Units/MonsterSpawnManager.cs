@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 
 namespace Unit.GameScene.Manager.Units {
     public class MonsterSpawnManager {
-        protected readonly StageManager _stageManager;
         protected readonly StageMonsterSpawnData _data;
+        private readonly Transform playerPosition;
         private readonly float _ground;
         private Dictionary<int, CustomPool<Monster>> _monsterPool;
         private LinkedList<Monster> _spawnedMonsters;
@@ -31,39 +31,31 @@ namespace Unit.GameScene.Manager.Units {
             }
         }
 
-        public MonsterSpawnManager(StageManager stageManager, MonsterSpawnData data, float ground) {
-            _data = data.GetStageData();
-            _stageManager = stageManager;
+        public MonsterSpawnManager(Transform playerPosition, MonsterSpawnData data, float ground, StageScore score) {
+            _data = data.GetStageData(score);
+            this.playerPosition = playerPosition;
             _ground = ground;
             _spawnGroup = new LinkedList<StageMonsterGroup>();
             _waitGroup = new Queue<StageMonsterGroup>();
-            CreateMonsterPool(stageManager, _data, ground);
+            CreateMonsterPool(_data, ground);
         }
 
-        private void CreateMonsterPool(StageManager stageManager, StageMonsterSpawnData data, float ground) {
+        private void CreateMonsterPool(StageMonsterSpawnData data, float ground) {
             _monsterPool = new Dictionary<int, CustomPool<Monster>>();
             for (int i = 0; i < data.monstersRef.Length; ++i) {
                 int index = i;
                 _monsterPool.Add(index, new CustomPool<Monster>(data.monstersRef[index], null,
                     (monCreate, pool) => {
-                        monCreate.Initialize(stageManager, _data.monsterStats[index], ground);
+                        monCreate.Initialize(_data.monsterStats[index], ground);
                         monCreate.gameObject.SetActive(false);
                     },
-                    monGet => { monGet.ClearStat(); },
+                    monGet => { monGet.ClearModifiedStat(); },
                     monRelease => { },
                     monDestroy => { },
                     5, true));
-                //Core.Utils.AddressableLoader.DeployAsset(settings.monstersRef[i], settings.monsterSpawnOffset, Quaternion.identity, null, (obj) => {
-                //    if (obj.TryGetComponent(out MonsterCreature mon))
-                //    {
-                //        _monsters.Add(mon);
-                //        mon.Initialize(settings.monsterStats[index], groundYPosition);
-                //    }
-                //});
             }
         }
 
-        public StageManager StageManager => _stageManager;
 
         public void Start() {
             _onSpawn = true;
@@ -89,7 +81,8 @@ namespace Unit.GameScene.Manager.Units {
             CheckWaitList();
             var group = _spawnGroup.First;
             while (group != null)
-                if (group.Value.spawnDecider.Execute(this, group.Value)) {
+                if (group.Value.spawnDecider.CanExecute()) {
+                    // TODO spawn monster
                     group = group.Next;
                 }
                 else {
@@ -101,7 +94,7 @@ namespace Unit.GameScene.Manager.Units {
 
         private void CheckWaitList() {
             if (_waitGroup.Count > 0)
-                if (_waitGroup.Peek().spawnDecider.CanExecute(this)) {
+                if (_waitGroup.Peek().spawnDecider.CanExecute()) {
                     var group = _waitGroup.Dequeue();
                     _spawnGroup.AddLast(group);
                 }
@@ -113,11 +106,11 @@ namespace Unit.GameScene.Manager.Units {
                     Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i],
                         $"{_data.monsterStats.Length}|{group.monsterStatIndex[i]} 문제 발생!!");
                     var monster = pool.Get();
-                    monster.Initialize(_stageManager, _data.monsterStats[group.monsterStatIndex[i]], _ground);
-                    monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position +
+                    monster.Initialize(_data.monsterStats[group.monsterStatIndex[i]], _ground);
+                    monster.transform.position = _data.monsterSpawnOffset + playerPosition.position +
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
-                    monster.HFSM.TryChangeState(StateType.Run);
+                    monster.GetServiceProvider().Run(true);
                 }
         }
     }

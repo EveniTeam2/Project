@@ -13,7 +13,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
     {
         public override void Act(ActOnInput inputData, Character character, int count)
         {
-            character.HFSM.TryChangeState(Enum.Parse<StateType>(inputData.StateName));
+            character.GetServiceProvider().TryChangeState(Enum.Parse<StateType>(inputData.StateName));
+
         }
     }
 }

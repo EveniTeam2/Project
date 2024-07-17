@@ -1,86 +1,48 @@
 using System;
-using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
-using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
-{
-    public class HealthSystem : IDamageable
-    {
-        private readonly Creature _character;
-        private readonly Func<int> GetHeatlh;
-        private readonly Action<int> SetHealth;
+namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
+    public abstract class HealthSystem {
+        protected event Action _onDeath;
+        protected event Action _onDamage;
 
-        public HealthSystem(Character character, Stat<CharacterStat> stats)
-        {
-            _character = character;
-            GetHeatlh = () => stats.Current.health;
-            SetHealth = value =>
-            {
-                var cur = stats.Current;
-                cur.health -= value;
-                stats.SetCurrent(cur);
-            };
+        protected IHealthStat _healthStat;
+        protected bool _isDead => _healthStat.GetHealth() <= 0;
+        protected int _health { get => _healthStat.GetHealth(); set => _healthStat.SetHealth(value); }
+
+        public HealthSystem(IHealthStat stats) {
+            _healthStat = stats;
         }
 
-        public HealthSystem(Monster monster, Stat<MonsterStat> stats)
-        {
-            _character = monster;
-            GetHeatlh = () => stats.Current.Health;
+        public abstract void Damage(int dmg);
+
+        public void RegistOnDeathEvent(Action subscriber) {
+            _onDeath += subscriber;
         }
-
-        private bool _isDead => _health <= 0;
-        private int _health => GetHeatlh.Invoke();
-        int IDamageable.Health => _health;
-        bool IDamageable.IsDead => _isDead;
-
-        event Action<Creature> IDamageable.OnDeath
-        {
-            add => _onDeath += value;
-            remove => _onDeath -= value;
+        public void UnregistOnDeathEvent(Action subscriber) {
+            _onDeath -= subscriber;
         }
-
-        event Action<Creature> IDamageable.OnDamage
-        {
-            add => _onDamage += value;
-            remove => _onDamage -= value;
+        public void RegistOnDamageEvent(Action subscriber) {
+            _onDamage += subscriber;
         }
-
-        public void Damage(int dmg)
-        {
-            // TODO 방어력 있으면 적용해야되는 곳
-            Debug.Log($"{_character.name} {dmg} 데미지 적용");
-            SetHealth.Invoke(_health - dmg);
-            if (_health < 0)
-            {
-                SetHealth.Invoke(0);
-                _onDeath?.Invoke(_character);
-            }
-
-            _onDamage?.Invoke(_character);
+        public void UnregistOnDamageEvent(Action subscriber) {
+            _onDamage -= subscriber;
         }
-
-        private event Action<Creature> _onDeath;
-        private event Action<Creature> _onDamage;
+        public void ClearEvent() {
+            _onDeath = null;
+            _onDamage = null;
+        }
+        protected void CallDeath() {
+            _onDeath?.Invoke();
+        }
+        protected void CallDamage() {
+            _onDamage?.Invoke();
+        }
     }
 
-    public class HealthStat
-    {
-        private readonly Func<int> GetHealth;
-
-        public HealthStat(Stat<CharacterStat> stat)
-        {
-            GetHealth = () => stat.Current.health;
-        }
-
-        public HealthStat(Stat<MonsterStat> stat)
-        {
-            GetHealth = () => stat.Current.Health;
-        }
-
-        // TODO 방어력 있으면 적용해야되는 곳
-        public int Health => GetHealth.Invoke();
+    public interface IHealthStat {
+        int GetHealth();
+        void SetHealth(int health);
     }
 }

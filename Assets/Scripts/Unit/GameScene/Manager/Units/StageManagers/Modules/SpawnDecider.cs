@@ -3,12 +3,12 @@ using UnityEngine;
 namespace Unit.GameScene.Manager.Units.StageManagers.Modules {
     public abstract class SpawnDecider : ScriptableObject {
 
-        public abstract IMonsterSpawnDecider GetMonsterSpawnDecider();
+        public abstract IMonsterSpawnDecider GetMonsterSpawnDecider(StageScore score);
     }
 
     public interface IMonsterSpawnDecider {
         public void Initialize();
-        public bool CanExecute(MonsterSpawnManager manager);
-        public bool Execute(MonsterSpawnManager manager, StageMonsterGroup group);
+        public bool CanExecute();
+        //public bool Execute(StageMonsterGroup group);
     }
 }

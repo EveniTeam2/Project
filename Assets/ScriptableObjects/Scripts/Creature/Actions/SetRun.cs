@@ -1,4 +1,8 @@
+using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Actions
@@ -8,23 +12,24 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     {
         [SerializeField] private bool isRun;
 
-        public override IStateAction GetStateAction()
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator)
         {
-            var ret = new StateActionSetRun(isRun);
+            var ret = new StateActionSetRun(isRun, movementSystem);
             return ret;
         }
     }
 
     public class StateActionSetRun : IStateAction {
-        private bool isRun;
+        private bool _isRun;
+        private readonly MovementSystem _movement;
 
-        public StateActionSetRun(bool isRun) {
-            this.isRun = isRun;
+        public StateActionSetRun(bool isRun, MovementSystem movmenet) {
+            this._isRun = isRun;
+            this._movement = movmenet;
         }
 
-        public IState OnAct(IState state) {
-            state.StateMachine.Target.Movement.SetRun(isRun);
-            return state;
+        public void OnAct(StateType stateName, int parameterHash) {
+            _movement.SetRun(_isRun);
         }
     }
 }
