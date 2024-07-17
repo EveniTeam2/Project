@@ -20,16 +20,27 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
             else
                 Debug.LogWarning($"플레이어가 {col.collider.gameObject.name}의 컴포넌트를 가지고 올 수 없습니다.");
         }
+
+        public override void Update() {
+            
+        }
     }
 
     public class CharacterBattleStat : IBattleStat {
         Func<int> _attack;
+        private Func<float> _cool;
+
         public CharacterBattleStat(Stat<CharacterStat> stat) {
             _attack = () => stat.Current.Attack;
+            _cool = () => stat.Current.CoolTime;
         }
 
         public int GetAttack() {
             return _attack();
+        }
+
+        public float GetCoolTime() {
+            return _cool();
         }
     }
 
