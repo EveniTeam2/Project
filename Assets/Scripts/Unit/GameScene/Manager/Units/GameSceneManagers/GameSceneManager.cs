@@ -49,10 +49,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// </summary>
         private void Awake()
         {
-            InstantiateAndInitializeCharacterSetting();
             InstantiateAndInitializeCamera();
             InstantiateAndInitializeCanvas();
             InstantiateAndInitializeMap();
+            InstantiateAndInitializeCharacterSetting();
             InstantiateAndInitializeBoard();
             InstantiateAndInitializeStage();
         }
@@ -69,7 +69,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void InstantiateAndInitializeCanvas()
         {
-            _canvas = Instantiate(defaultSetting.canvasController.Canvas);
+            _canvas = Instantiate(defaultSetting.canvasController.Canvas).GetComponent<Canvas>();
 
             if (_canvas.renderMode != RenderMode.ScreenSpaceCamera)
             {
