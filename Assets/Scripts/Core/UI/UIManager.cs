@@ -11,167 +11,171 @@ namespace Core.UI
     /// </summary>
     public class UIManager : UnitySingleton<UIManager>
     {
-        private List<AssetReference> uiAssetRef = new List<AssetReference>();
-        private Dictionary<string, int> typeToAssetRefIndex = new Dictionary<string, int>();
-        private LinkedList<UIBase> openedUiList = new LinkedList<UIBase>();
-        private Dictionary<string, UIBase> uiDict = new Dictionary<string, UIBase>();
-        private Dictionary<CanvasOption, CanvasController> canvas = new Dictionary<CanvasOption, CanvasController>();
-
+        // {
+        //     private List<AssetReference> uiAssetRef = new List<AssetReference>();
+        //     private Dictionary<string, int> typeToAssetRefIndex = new Dictionary<string, int>();
+        //     private LinkedList<UIBase> openedUiList = new LinkedList<UIBase>();
+        //     private Dictionary<string, UIBase> uiDict = new Dictionary<string, UIBase>();
+        //     private Dictionary<CanvasOption, CanvasController> canvas = new Dictionary<CanvasOption, CanvasController>();
+        //
         protected override UIManager Initialize()
         {
-            openedUiList = new LinkedList<UIBase>();
-            uiDict = new Dictionary<string, UIBase>();
-            typeToAssetRefIndex = new Dictionary<string, int>();
+            // openedUiList = new LinkedList<UIBase>();
+            // uiDict = new Dictionary<string, UIBase>();
+            // typeToAssetRefIndex = new Dictionary<string, int>();
             return this;
         }
-
-        public UIManager SetData(List<AssetReference> uiAssetRef)
-        {
-            this.uiAssetRef = uiAssetRef;
-            return this;
-        }
-
-        private void Start()
-        {
-            LoadUI<GameObject>();
-        }
-
-        void LoadUI<T>(Action<T> onComplete = null)
-        {
-            for (var i = 0; i < uiAssetRef.Count; ++i)
-            {
-                var index = i;
-                AddressableLoader.LoadAsset<GameObject>(uiAssetRef[i], obj =>
-                {
-                    if (obj.TryGetComponent<T>(out var ui))
-                    {
-                        typeToAssetRefIndex.Add(ui.GetType().Name, index);
-                        onComplete?.Invoke(ui);
-                    }
-                });
-            }
-        }
-
-        void DeployUI<T>(AssetReference assetRef, Action<T> onComplete = null) where T : UIBase
-        {
-            AddressableLoader.DeployAsset(assetRef, Vector3.zero, Quaternion.identity, null, obj =>
-            {
-                if (obj.TryGetComponent<T>(out var ui))
-                {
-                    if (openedUiList == null)
-                    {
-                        openedUiList = new LinkedList<UIBase>();
-                    }
-                    if (uiDict == null)
-                    {
-                        uiDict = new Dictionary<string, UIBase>();
-                    }
-
-                    ui.ActOnDraw += () => openedUiList.AddLast(ui);
-                    ui.ActOnClose += () => openedUiList.Remove(ui);
-                    uiDict.Add(ui.GetType().Name, ui);
-                    ui.InitUI();
-                    if (obj.TryGetComponent(out RectTransform uiRectTransform))
-                    {
-                        if (canvas == null)
-                        {
-                            canvas = new Dictionary<CanvasOption, CanvasController>();
-                        }
-                        uiRectTransform.SetParent(canvas[ui.GetCanvasOption()].transform);
-                        uiRectTransform.localEulerAngles = Vector3.zero;
-                        uiRectTransform.localPosition = Vector3.zero;
-                        uiRectTransform.localScale = Vector3.one;
-                        uiRectTransform.sizeDelta = Vector2.zero;
-                    }
-                    onComplete?.Invoke(ui);
-                }
-            });
-        }
-
-        public T TryGetUI<T>(string typeName, Action<T> onLoadComplete = null) where T : UIBase
-        {
-            if (uiDict != null && uiDict.TryGetValue(typeName, out var ui))
-            {
-                onLoadComplete?.Invoke(ui as T);
-                return ui as T;
-            }
-
-            if (typeToAssetRefIndex != null && typeToAssetRefIndex.TryGetValue(typeName, out var index))
-            {
-                DeployUI<T>(uiAssetRef[index], onLoadComplete);
-            }
-            else
-            {
-                LoadUI<T>(ui => DeployUI(uiAssetRef[typeToAssetRefIndex[typeName]], onLoadComplete));
-            }
-
-            return null;
-        }
-
-        public void RegisterCanvas(CanvasController cv, CanvasOption opt)
-        {
-            if (canvas == null)
-            {
-                canvas = new Dictionary<CanvasOption, CanvasController>();
-            }
-
-            if (!canvas.TryAdd(opt, cv))
-            {
-                GameObject.Destroy(cv);
-            }
-        }
-
-        public UIBase TryGetTopUI()
-        {
-            if (openedUiList != null && openedUiList.Count > 0)
-            {
-                return openedUiList.Last.Value;
-            }
-            return null;
-        }
-
-        public void UpdateSize(float fontScale, float sizeScale)
-        {
-            if (openedUiList != null)
-            {
-                foreach (var ui in openedUiList)
-                {
-                    ui.SetFontScale(fontScale);
-                    ui.SetScale(sizeScale);
-                }
-            }
-        }
-
-        public Canvas TryGetCanvas(CanvasOption opt)
-        {
-            if (canvas != null && canvas.TryGetValue(opt, out var ui))
-            {
-                return ui.GetCanvasComponent();
-            }
-            return null;
-        }
-
-        public void CloseAllUI(int last = 0)
-        {
-            if (openedUiList != null)
-            {
-                while (openedUiList.Count > last)
-                {
-                    openedUiList.Last.Value.CloseUI();
-                }
-            }
-        }
-
-        public void UpdateUI()
-        {
-            if (openedUiList != null)
-            {
-                foreach (var ui in openedUiList)
-                {
-                    ui.UpdateUI();
-                }
-            }
-        }
+        //
+        //     public UIManager SetData(List<AssetReference> uiAssetRef)
+        //     {
+        //         this.uiAssetRef = uiAssetRef;
+        //         return this;
+        //     }
+        //
+        //     private void Start()
+        //     {
+        //         LoadUI<GameObject>();
+        //     }
+        //
+        //     void LoadUI<T>(Action<T> onComplete = null)
+        //     {
+        //         for (var i = 0; i < uiAssetRef.Count; ++i)
+        //         {
+        //             var index = i;
+        //             AddressableLoader.LoadAsset<GameObject>(uiAssetRef[i], obj =>
+        //             {
+        //                 if (obj.TryGetComponent<T>(out var ui))
+        //                 {
+        //                     typeToAssetRefIndex.Add(ui.GetType().Name, index);
+        //                     onComplete?.Invoke(ui);
+        //                 }
+        //             });
+        //         }
+        //     }
+        //
+        //     void DeployUI<T>(AssetReference assetRef, Action<T> onComplete = null) where T : UIBase
+        //     {
+        //         AddressableLoader.DeployAsset(assetRef, Vector3.zero, Quaternion.identity, null, obj =>
+        //         {
+        //             if (obj.TryGetComponent<T>(out var ui))
+        //             {
+        //                 if (openedUiList == null)
+        //                 {
+        //                     openedUiList = new LinkedList<UIBase>();
+        //                 }
+        //                 if (uiDict == null)
+        //                 {
+        //                     uiDict = new Dictionary<string, UIBase>();
+        //                 }
+        //
+        //                 ui.ActOnDraw += () => openedUiList.AddLast(ui);
+        //                 ui.ActOnClose += () => openedUiList.Remove(ui);
+        //                 uiDict.Add(ui.GetType().Name, ui);
+        //                 ui.InitUI();
+        //                 if (obj.TryGetComponent(out RectTransform uiRectTransform))
+        //                 {
+        //                     if (canvas == null)
+        //                     {
+        //                         canvas = new Dictionary<CanvasOption, CanvasController>();
+        //                     }
+        //                     uiRectTransform.SetParent(canvas[ui.GetCanvasOption()].transform);
+        //                     uiRectTransform.localEulerAngles = Vector3.zero;
+        //                     uiRectTransform.localPosition = Vector3.zero;
+        //                     uiRectTransform.localScale = Vector3.one;
+        //                     uiRectTransform.sizeDelta = Vector2.zero;
+        //                 }
+        //                 onComplete?.Invoke(ui);
+        //             }
+        //         });
+        //     }
+        //
+        //     public T TryGetUI<T>(string typeName, Action<T> onLoadComplete = null) where T : UIBase
+        //     {
+        //         if (uiDict != null && uiDict.TryGetValue(typeName, out var ui))
+        //         {
+        //             onLoadComplete?.Invoke(ui as T);
+        //             return ui as T;
+        //         }
+        //
+        //         if (typeToAssetRefIndex != null && typeToAssetRefIndex.TryGetValue(typeName, out var index))
+        //         {
+        //             DeployUI<T>(uiAssetRef[index], onLoadComplete);
+        //         }
+        //         else
+        //         {
+        //             LoadUI<T>(ui => DeployUI(uiAssetRef[typeToAssetRefIndex[typeName]], onLoadComplete));
+        //         }
+        //
+        //         return null;
+        //     }
+        //
+        //     public void RegisterCanvas(CanvasController cv, CanvasOption opt)
+        //     {
+        //         if (canvas == null)
+        //         {
+        //             canvas = new Dictionary<CanvasOption, CanvasController>();
+        //         }
+        //
+        //         if (!canvas.TryAdd(opt, cv))
+        //         {
+        //             GameObject.Destroy(cv);
+        //         }
+        //     }
+        //
+        //     public UIBase TryGetTopUI()
+        //     {
+        //         if (openedUiList != null && openedUiList.Count > 0)
+        //         {
+        //             return openedUiList.Last.Value;
+        //         }
+        //         return null;
+        //     }
+        //
+        //     public void UpdateSize(float fontScale, float sizeScale)
+        //     {
+        //         if (openedUiList != null)
+        //         {
+        //             foreach (var ui in openedUiList)
+        //             {
+        //                 ui.SetFontScale(fontScale);
+        //                 ui.SetScale(sizeScale);
+        //             }
+        //         }
+        //     }
+        //
+        //     public Canvas TryGetCanvas(CanvasOption opt)
+        //     {
+        //         if (canvas != null && canvas.TryGetValue(opt, out var ui))
+        //         {
+        //             return ui.GetCanvasComponent();
+        //         }
+        //         return null;
+        //     }
+        //
+        //     public void CloseAllUI(int last = 0)
+        //     {
+        //         if (openedUiList != null)
+        //         {
+        //             while (openedUiList.Count > last)
+        //             {
+        //                 openedUiList.Last.Value.CloseUI();
+        //             }
+        //         }
+        //     }
+        //
+        //     public void UpdateUI()
+        //     {
+        //         if (openedUiList != null)
+        //         {
+        //             foreach (var ui in openedUiList)
+        //             {
+        //                 ui.UpdateUI();
+        //             }
+        //         }
+        //     }
+        // }
+        //
+ 
     }
 
     /// <summary>
@@ -182,7 +186,7 @@ namespace Core.UI
     {
         public RenderMode renderMode;
         public bool isRaycaster;
-
+    
         public CanvasOption(RenderMode mode = RenderMode.ScreenSpaceCamera, bool isRaycast = true)
         {
             renderMode = mode;

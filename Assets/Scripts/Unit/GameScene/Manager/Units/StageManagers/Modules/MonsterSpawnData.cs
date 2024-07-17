@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unit.GameScene.Stages;
-using Unit.GameScene.Stages.Creautres.Monsters;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers.Modules {

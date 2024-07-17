@@ -1,6 +1,6 @@
 using ScriptableObjects.Scripts.Creature.Conditions;
-using Unit.GameScene.Stages.Creautres.Characters.Enums;
-using Unit.GameScene.Stages.Creautres.Interfaces;
+using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Actions
@@ -10,7 +10,7 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     public class CheckConditionAndTransition : ActionData
     {
         [SerializeField] private Condition condition;
-        [SerializeField] private StateEnums targetStateName;
+        [SerializeField] private StateType targetStateName;
 
         public override IStateAction GetStateAction()
         {
@@ -21,9 +21,9 @@ namespace ScriptableObjects.Scripts.Creature.Actions
 
     public class StateActionCheckConditionAndTransition : IStateAction {
         private IStateCondition condition;
-        private StateEnums targetStateName;
+        private StateType targetStateName;
 
-        public StateActionCheckConditionAndTransition(Condition condition, StateEnums targetStateName) {
+        public StateActionCheckConditionAndTransition(Condition condition, StateType targetStateName) {
             this.condition = condition.GetStateCondition();
             this.targetStateName = targetStateName;
         }

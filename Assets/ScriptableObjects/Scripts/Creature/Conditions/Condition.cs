@@ -1,4 +1,3 @@
-using Unit.GameScene.Stages.Creautres;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
@@ -9,6 +8,6 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
     }
 
     public interface IStateCondition {
-        bool CheckCondition(BaseCreature target);
+        bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target);
     }
 }

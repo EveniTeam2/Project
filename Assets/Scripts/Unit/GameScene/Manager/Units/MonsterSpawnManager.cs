@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Core.Utils;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
-using Unit.GameScene.Stages.Creautres.Characters.Enums;
-using Unit.GameScene.Stages.Creautres.Monsters;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -117,7 +117,7 @@ namespace Unit.GameScene.Manager.Units {
                     monster.transform.position = _data.monsterSpawnOffset + StageManager.Character.transform.position +
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
-                    monster.HFSM.TryChangeState(StateEnums.Run);
+                    monster.HFSM.TryChangeState(StateType.Run);
                 }
         }
     }

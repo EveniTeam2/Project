@@ -1,5 +1,4 @@
 using System.Collections;
-using Unit.GameScene.Stages.Creautres;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Conditions
@@ -25,11 +24,11 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
             _timer = true;
         }
 
-        public bool CheckCondition(BaseCreature target) {
+        public bool CheckCondition(Unit.GameScene.Stages.Creatures.Creature target) {
             return _timer;
         }
 
-        public void StartTimer(BaseCreature target) {
+        public void StartTimer(Unit.GameScene.Stages.Creatures.Creature target) {
             if (_timer)
                 target.StartCoroutine(CheckTime(intervalTime));
         }
