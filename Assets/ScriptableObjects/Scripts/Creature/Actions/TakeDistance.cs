@@ -10,7 +10,7 @@ namespace ScriptableObjects.Scripts.Creature.Actions {
         [SerializeField] private float distance;
         [SerializeField] private LayerMask targetLayer;
 
-        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine) {
             var ret = new StateActionTakeDistance(transform, direction, distance, targetLayer, movementSystem);
             return ret;
         }

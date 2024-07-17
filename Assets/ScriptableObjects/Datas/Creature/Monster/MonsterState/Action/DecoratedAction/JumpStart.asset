@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60b987fe0c494c8288865f9dc0ef760, type: 3}
   m_Name: JumpStart
   m_EditorClassIdentifier: 
-  decoratorActionData: {fileID: 11400000, guid: 183ba11d01f11804d8f5b3a0dbfdad3a, type: 2}
-  actionData: {fileID: 11400000, guid: 3fdb747779c97f747b8392819451645b, type: 2}
+  actionDatas:
+  - {fileID: 11400000, guid: 3fdb747779c97f747b8392819451645b, type: 2}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 
@@ -13,10 +14,10 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     {
         [SerializeField] private ActionData[] actionDatas;
 
-        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine) {
             List<IStateAction> actions = new List<IStateAction>();
             foreach (var actionData in actionDatas) {
-                actions.Add(actionData.GetStateAction(transform, battleSystem, healthSystem, movementSystem, animator));
+                actions.Add(actionData.GetStateAction(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine));
             }
             return new StateActionCompositeAction(actions.ToArray());
         }

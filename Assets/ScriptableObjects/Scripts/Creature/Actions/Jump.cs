@@ -1,6 +1,7 @@
 using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     {
         [SerializeField] private float _jumpPower;
 
-        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine) {
             var result = new StateActionJump(_jumpPower, movementSystem);
             return result;
         }

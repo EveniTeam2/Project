@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60b987fe0c494c8288865f9dc0ef760, type: 3}
   m_Name: AttackAndIdle
   m_EditorClassIdentifier: 
-  decoratorActionData: {fileID: 11400000, guid: 8b1d5b6ccde01be48adcebcd2249f017, type: 2}
-  actionData: {fileID: 11400000, guid: 1e0c9bbcd11a183438f4a70ed4b70891, type: 2}
+  actionDatas:
+  - {fileID: 0}
+  - {fileID: 0}

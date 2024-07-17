@@ -12,7 +12,7 @@ namespace ScriptableObjects.Scripts.Creature.Actions
     {
         [SerializeField] private bool isRun;
 
-        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator)
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine)
         {
             var ret = new StateActionSetRun(isRun, movementSystem);
             return ret;
