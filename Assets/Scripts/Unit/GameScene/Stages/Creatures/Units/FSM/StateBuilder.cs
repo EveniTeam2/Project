@@ -25,16 +25,18 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM {
             Action<StateType, int> update = data.OnUpdate != null ? data.OnUpdate.GetStateAction(tr, ba, he, mo, an, sm).OnAct : null;
             Action<StateType, int> fixedUpdate = data.OnFixedUpdate != null ? data.OnFixedUpdate.GetStateAction(tr, ba, he, mo, an, sm).OnAct : null;
             Func<bool> condition = data.Condition != null ? data.Condition.GetStateCondition(tr, ba, he, mo, an).CheckCondition : null;
-            FullState full = data.OnEveryAction.GetFullState(tr, ba, he, mo, an, sm);
+            FullState full = data.OnEveryAction?.GetFullState(tr, ba, he, mo, an, sm) ?? null;
 
             if ((int)data.AnimParameterEnums >= Enum.GetValues(typeof(AnimationParameterEnums)).Length) {
                 int hash = Animator.StringToHash(data.AnimParameterEnums.ToString());
                 var animationState = new BaseState(data.StateType, hash, enter, exit, update, fixedUpdate, condition);
-                animationState.SetFullState(full);
+                if (!ReferenceEquals(full, null))
+                    animationState.SetFullState(full);
                 return animationState;
             }
             var state = new BaseState(data.StateType, 0, enter, exit, update, fixedUpdate, condition);
-            state.SetFullState(full);
+            if (!ReferenceEquals(full, null))
+                state.SetFullState(full);
             return state;
         }
     }
