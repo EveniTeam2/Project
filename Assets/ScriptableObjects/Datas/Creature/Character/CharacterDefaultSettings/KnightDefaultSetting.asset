@@ -15,9 +15,11 @@ MonoBehaviour:
   baseCreature: {fileID: 1214194880391127291, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
   characterType: 0
   characterStat:
-    attack: 10
-    health: 10
-    speed: 10
+    Attack: 1
+    Health: 100
+    Speed: 1
+    CoolTime: 1
+  creatureAnimationParameter: 00000000010000000200000003000000040000000500000006000000
   knightSkillTypes:
   - skillIcon: {fileID: 0}
     skillType: 0

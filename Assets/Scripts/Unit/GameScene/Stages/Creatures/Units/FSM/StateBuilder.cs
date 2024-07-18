@@ -4,6 +4,7 @@ using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM {
@@ -31,12 +32,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM {
                 int hash = Animator.StringToHash(data.AnimParameterEnums.ToString());
                 var animationState = new BaseState(data.StateType, hash, enter, exit, update, fixedUpdate, condition);
                 if (!ReferenceEquals(full, null))
-                    animationState.SetFullState(full);
+                    full.SubscribeEvent(animationState);
                 return animationState;
             }
             var state = new BaseState(data.StateType, 0, enter, exit, update, fixedUpdate, condition);
             if (!ReferenceEquals(full, null))
-                state.SetFullState(full);
+                full.SubscribeEvent(state);
             return state;
         }
     }

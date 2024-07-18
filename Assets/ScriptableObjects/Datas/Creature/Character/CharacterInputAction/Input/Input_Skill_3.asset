@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Input_Skill_3
   m_EditorClassIdentifier: 
   blockType: 3
-  _stateName: 
-  act: {fileID: 0}
+  _stateName: Skill
+  act: {fileID: 11400000, guid: b32cf4c1883993547a3b8f0db715837b, type: 2}
