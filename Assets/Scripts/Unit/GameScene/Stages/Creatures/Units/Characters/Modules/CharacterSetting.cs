@@ -18,7 +18,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
         public CharacterType Type { get; }
         public CharacterStat Stat { get; }
         public List<CharacterSkill> CharacterSkills { get; }
-        public Dictionary<string, int> CharacterSkillIndexs { get; }
+        public Dictionary<string, int> CharacterSkillIndexes { get; }
 
         public CharacterSetting(CharacterDefaultSetting characterDefaultSetting, CharacterExtraSetting characterExtraSetting)
         {
@@ -26,7 +26,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             Type = characterDefaultSetting.characterType;
             Stat = characterDefaultSetting.characterStat;
 
-            CharacterSkillIndexs = new Dictionary<string, int>();
+            CharacterSkillIndexes = new Dictionary<string, int>();
             
             switch (characterDefaultSetting.characterType)
             {
@@ -35,7 +35,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
 
                     foreach (var knightSkillType in knightDefaultSetting.knightSkillTypes)
                     {
-                        CharacterSkillIndexs.Add($"{knightSkillType.skillType}", knightSkillType.skillIndex);
+                        CharacterSkillIndexes.Add($"{knightSkillType.skillType}", knightSkillType.skillIndex);
                     }
                     
                     break;
