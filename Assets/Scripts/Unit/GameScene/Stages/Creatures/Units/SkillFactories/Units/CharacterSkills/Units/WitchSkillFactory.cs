@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills.Units
 {
@@ -8,7 +8,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSk
     {
         public override List<CharacterSkill> CreateSkill()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

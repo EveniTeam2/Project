@@ -1,24 +1,28 @@
+using System;
+using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract
 {
     public abstract class CharacterSkill : Skill, ICharacterSkill
     {
-        public Character Character { get; private set; }
-        public CharacterType CharacterType { get; }
+        public event Action<int> OnActivateSkill;
 
-        protected CharacterSkill(CharacterType characterType)
+        public override void RegisterServiceProvider(ICreatureServiceProvider serviceProvider)
         {
-            CharacterType = characterType;
-        }
-
-        public void RegisterCharacterReference(Character character)
-        {
-            Character = character;
+            base.RegisterServiceProvider(serviceProvider);
+            
+            OnActivateSkill += HandleDefineSkill;
         }
         
-        public override void ActivateSkill() { }
+        protected abstract void HandleDefineSkill(int combo);
+        
+        public void ActivateSkill(int combo)
+        {
+            OnActivateSkill?.Invoke(combo);
+        }
     }
 }

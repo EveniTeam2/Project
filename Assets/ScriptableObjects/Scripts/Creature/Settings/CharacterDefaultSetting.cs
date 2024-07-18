@@ -12,17 +12,5 @@ namespace ScriptableObjects.Scripts.Creature.Settings
         
         [Header("캐릭터 기본 스탯"), Space(5)]
         public CharacterStat characterStat;
-        
-        [Header("애니메이션 파라미터"), Space(5)]
-        public AnimationParameterEnums[] creatureAnimationParameter =
-        {
-            AnimationParameterEnums.Idle,
-            AnimationParameterEnums.Run,
-            AnimationParameterEnums.IsSprint,
-            AnimationParameterEnums.SkillIndex,
-            AnimationParameterEnums.Hit,
-            AnimationParameterEnums.Die,
-            AnimationParameterEnums.Skill
-        };
     }
 }

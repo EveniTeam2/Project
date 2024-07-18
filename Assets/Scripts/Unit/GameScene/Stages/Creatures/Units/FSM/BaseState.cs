@@ -1,5 +1,5 @@
-using ScriptableObjects.Scripts.Creature.DTO;
 using System;
+using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 
@@ -11,14 +11,15 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
     public class BaseState : IState
     {
         protected StateType _name;
-        protected int _parameterHash;
-        public event Action<StateType, int> OnEnter;
-        public event Action<StateType, int> OnExit;
-        protected Action<StateType, int> _onUpdate;
         protected Action<StateType, int> _onFixedUpdate;
+        protected Action<StateType, int> _onUpdate;
+        protected int _parameterHash;
         protected Func<bool> _transitionCondition;
 
-        public BaseState(StateType name, int parameterHash, Action<StateType, int> OnEnter = null, Action<StateType, int> OnExit = null, Action<StateType, int> onUpdate = null, Action<StateType, int> onFixedUpdate = null, Func<bool> transitionCondition = null) {
+        public BaseState(StateType name, int parameterHash, Action<StateType, int> OnEnter = null,
+            Action<StateType, int> OnExit = null, Action<StateType, int> onUpdate = null,
+            Action<StateType, int> onFixedUpdate = null, Func<bool> transitionCondition = null)
+        {
             _name = name;
             _parameterHash = parameterHash;
             this.OnEnter += OnEnter;
@@ -28,12 +29,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             _transitionCondition = transitionCondition;
         }
 
-        public void SetFullState(FullState state) {
-            OnEnter += state.Enter;
-            OnExit += state.Exit;
-            _onUpdate += state.Update;
-            _onFixedUpdate += state.FixedUpdate;
-        }
+        public event Action<StateType, int> OnEnter;
+        public event Action<StateType, int> OnExit;
 
         /// <summary>
         ///     상태에 진입합니다.
@@ -68,11 +65,19 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         }
 
         /// <summary>
-        /// 
         /// </summary>
-        public bool CanTransitionToThis() {
-            bool result = _transitionCondition?.Invoke() ?? false;
+        public bool CanTransitionToThis()
+        {
+            var result = _transitionCondition?.Invoke() ?? false;
             return result;
+        }
+
+        public void SetFullState(FullState state)
+        {
+            OnEnter += state.Enter;
+            OnExit += state.Exit;
+            _onUpdate += state.Update;
+            _onFixedUpdate += state.FixedUpdate;
         }
     }
 }

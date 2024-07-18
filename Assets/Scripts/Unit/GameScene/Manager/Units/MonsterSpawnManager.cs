@@ -7,8 +7,10 @@ using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Unit.GameScene.Manager.Units {
-    public class MonsterSpawnManager {
+namespace Unit.GameScene.Manager.Units
+{
+    public class MonsterSpawnManager
+    {
         protected readonly StageMonsterSpawnData _data;
         private readonly Transform playerPosition;
         private readonly float _ground;
@@ -16,9 +18,9 @@ namespace Unit.GameScene.Manager.Units {
         private LinkedList<Monster> _spawnedMonsters;
         private LinkedList<StageMonsterGroup> _spawnGroup;
         private Queue<StageMonsterGroup> _waitGroup;
+        private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private bool _onSpawn;
-
-
+        
         public LinkedList<Monster> Monsters {
             get {
                 _spawnedMonsters.Clear();
@@ -31,12 +33,14 @@ namespace Unit.GameScene.Manager.Units {
             }
         }
 
-        public MonsterSpawnManager(Transform playerPosition, MonsterSpawnData data, float ground, StageScore score) {
+        public MonsterSpawnManager(Transform playerPosition, MonsterSpawnData data, float ground, StageScore score,
+            Dictionary<AnimationParameterEnums, int> animationParameter) {
             _data = data.GetStageData(score);
             this.playerPosition = playerPosition;
             _ground = ground;
             _spawnGroup = new LinkedList<StageMonsterGroup>();
             _waitGroup = new Queue<StageMonsterGroup>();
+            _animationParameter = animationParameter;
             CreateMonsterPool(_data, ground);
         }
 
@@ -46,7 +50,7 @@ namespace Unit.GameScene.Manager.Units {
                 int index = i;
                 _monsterPool.Add(index, new CustomPool<Monster>(data.monstersRef[index], null,
                     (monCreate, pool) => {
-                        monCreate.Initialize(_data.monsterStats[index], ground);
+                        monCreate.Initialize(_data.monsterStats[index], ground, _animationParameter);
                         monCreate.gameObject.SetActive(false);
                     },
                     monGet => { monGet.ClearModifiedStat(); },
@@ -106,7 +110,7 @@ namespace Unit.GameScene.Manager.Units {
                     Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i],
                         $"{_data.monsterStats.Length}|{group.monsterStatIndex[i]} 문제 발생!!");
                     var monster = pool.Get();
-                    monster.Initialize(_data.monsterStats[group.monsterStatIndex[i]], _ground);
+                    monster.Initialize(_data.monsterStats[group.monsterStatIndex[i]], _ground, _animationParameter);
                     monster.transform.position = _data.monsterSpawnOffset + playerPosition.position +
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
