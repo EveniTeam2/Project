@@ -7,10 +7,8 @@ using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Unit.GameScene.Manager.Units
-{
-    public class MonsterSpawnManager
-    {
+namespace Unit.GameScene.Manager.Units {
+    public class MonsterSpawnManager {
         protected readonly StageMonsterSpawnData _data;
         private readonly Transform playerPosition;
         private readonly float _ground;
@@ -19,7 +17,9 @@ namespace Unit.GameScene.Manager.Units
         private Queue<StageMonsterGroup> _waitGroup;
         private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private bool _onSpawn;
-        
+        readonly float _offsetTime = 0;
+        float _spawnTime = 0;
+
         public LinkedList<Monster> Monsters {
             get {
                 LinkedList<Monster> spawnedMonster = new LinkedList<Monster>();
@@ -42,6 +42,7 @@ namespace Unit.GameScene.Manager.Units
             _waitGroup = new Queue<StageMonsterGroup>();
             _animationParameter = animationParameter;
             CreateMonsterPool(_data, ground);
+            this._offsetTime = data.monsterSpawnTimeOffset;
         }
 
         private void CreateMonsterPool(StageMonsterSpawnData data, float ground) {
@@ -71,8 +72,11 @@ namespace Unit.GameScene.Manager.Units
         }
 
         public void Update() {
-            if (_onSpawn)
+            _spawnTime += Time.deltaTime;
+            if (_onSpawn && _spawnTime > _offsetTime) {
                 CheckConditionAndSpawn();
+                _spawnTime = 0;
+            }
         }
 
         private void InitializeDecider() {
@@ -87,6 +91,7 @@ namespace Unit.GameScene.Manager.Units
             while (group != null)
                 if (group.Value.spawnDecider.CanExecute()) {
                     // TODO spawn monster
+                    RandomSpawnMonster(group.Value);
                     group = group.Next;
                 }
                 else {
@@ -94,6 +99,18 @@ namespace Unit.GameScene.Manager.Units
                     group = group.Next;
                     _spawnGroup.Remove(deleteGroup);
                 }
+        }
+
+        private void RandomSpawnMonster(StageMonsterGroup value) {
+            int weight = 0;
+            int rand = Random.Range(0, value.TotalWeight);
+            foreach (var group in value.monsterSpawnGroups) {
+                weight += group.weight;
+                if (rand < weight) {
+                    SpawnMonster(group);
+                    break;
+                }
+            }
         }
 
         private void CheckWaitList() {
@@ -104,7 +121,7 @@ namespace Unit.GameScene.Manager.Units
                 }
         }
 
-        public void SpawnMonster(SpawnGroup group) {
+        private void SpawnMonster(SpawnGroup group) {
             for (var i = 0; i < group.monsterIndex.Length; ++i)
                 if (_monsterPool.TryGetValue(group.monsterIndex[i], out var pool)) {
                     Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i],
