@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Interfaces;
@@ -24,6 +25,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         public float Score { get => score; }
         public float PlayTime { get => playTime; }
         public float Distance { get => distance; }
+
+        public void SetStageScore(float time, float distance) {
+            playTime = time;
+            this.distance = distance;
+        }
     }
 
     public class StageManager : MonoBehaviour, IStage, ICommandReceiver<IStage>
@@ -43,14 +49,16 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         protected float _startTime;
         protected Vector3 _zeroPosition;
         protected Queue<ICommand<IStage>> _commands = new();
-        
         private readonly Dictionary<AnimationParameterEnums, int> _animationParameter = new ();
-        
+
+        Coroutine _stageScoreCoroutine;
+
         public void Initialize(CharacterSetting characterSetting, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam)
         {
+            stageScore = new StageScore();
             ChangeAnimationParameterToHash(defaultSetting.creatureAnimationParameter);
             InitializeCharacter(characterSetting, playerSpawnPosition);
-            InitializeMonster(extraSetting, playerSpawnPosition);
+            InitializeMonster(extraSetting, playerSpawnPosition, stageScore);
             InitializeCamera(cam);
             InitializeCommand();
 
@@ -60,9 +68,16 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         private void Update()
         {
             UpdateCommand();
-            
+
             // TODO : _monsterManager null이라 잠깐 막아놨습니다.
-            // _monsterManager.Update();
+            _monsterManager.Update();
+        }
+
+        private IEnumerator StageScoreUpdate(StageScore score) {
+            while (true) {
+                score.SetStageScore(PlayTime, Distance);
+                yield return null;
+            }
         }
 
         public void RegisterEventHandler(ISendCommand data)
@@ -95,7 +110,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             _character.GetServiceProvider().RegisterEvent(ECharacterEventType.Death, PlayerIsDead);
         }
 
-        private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition)
+        private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)
         {
             _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameter);
         }
