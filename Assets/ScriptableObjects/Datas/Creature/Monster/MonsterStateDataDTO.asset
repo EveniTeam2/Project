@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MonsterStateDataDTO
   m_EditorClassIdentifier: 
   states:
+  - {fileID: 11400000, guid: 0d27fe98141d8f246a6735f418e1acef, type: 2}
   - {fileID: 11400000, guid: 1a4fd15a10608ec46aaa7c7167068a9b, type: 2}
   - {fileID: 11400000, guid: 9baa3f865a061a44a9e9b3ccd885e49d, type: 2}
   - {fileID: 11400000, guid: ed89d401610d17a47803a1d2460bea58, type: 2}
   - {fileID: 11400000, guid: df1fae14f95f0644cac801e491d16ca1, type: 2}
-  - {fileID: 11400000, guid: 0d27fe98141d8f246a6735f418e1acef, type: 2}

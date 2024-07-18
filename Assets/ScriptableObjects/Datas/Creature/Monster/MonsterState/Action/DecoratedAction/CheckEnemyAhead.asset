@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06889cefeba1c4d4a95a15ef6ff43acf, type: 3}
-  m_Name: CheckPlayerCollider
+  m_Script: {fileID: 11500000, guid: e60b987fe0c494c8288865f9dc0ef760, type: 3}
+  m_Name: CheckEnemyAhead
   m_EditorClassIdentifier: 
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  direction: {x: -1, y: 0}
-  distance: 1
+  actionDatas:
+  - {fileID: 11400000, guid: 36fbf2b4f9a925f40bb055da73d53ade, type: 2}
+  - {fileID: 11400000, guid: d93c397829ed9e646a45dec9c3cabec3, type: 2}
