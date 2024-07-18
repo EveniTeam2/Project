@@ -1,5 +1,5 @@
-using ScriptableObjects.Scripts.Creature.DTO;
 using System;
+using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 
@@ -18,7 +18,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         public event Action<StateType, int> _onFixedUpdate;
         protected Func<bool> _transitionCondition;
 
-        public BaseState(StateType name, int parameterHash, Action<StateType, int> OnEnter = null, Action<StateType, int> OnExit = null, Action<StateType, int> onUpdate = null, Action<StateType, int> onFixedUpdate = null, Func<bool> transitionCondition = null) {
+        public BaseState(StateType name, int parameterHash, Action<StateType, int> OnEnter = null,
+            Action<StateType, int> OnExit = null, Action<StateType, int> onUpdate = null,
+            Action<StateType, int> onFixedUpdate = null, Func<bool> transitionCondition = null)
+        {
             _name = name;
             _parameterHash = parameterHash;
             this.OnEnter += OnEnter;
@@ -61,10 +64,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         }
 
         /// <summary>
-        /// 
         /// </summary>
-        public bool CanTransitionToThis() {
-            bool result = _transitionCondition?.Invoke() ?? false;
+        public bool CanTransitionToThis()
+        {
+            var result = _transitionCondition?.Invoke() ?? false;
             return result;
         }
     }

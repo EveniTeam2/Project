@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Stages.Backgrounds
 {

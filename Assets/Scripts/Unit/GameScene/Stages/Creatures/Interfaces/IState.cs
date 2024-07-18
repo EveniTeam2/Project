@@ -1,7 +1,5 @@
 using System;
-using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
 
 namespace Unit.GameScene.Stages.Creatures.Interfaces
 {
@@ -18,8 +16,9 @@ namespace Unit.GameScene.Stages.Creatures.Interfaces
         bool CanTransitionToThis();
     }
 
-    public enum EStateEventType {
+    public enum EStateEventType
+    {
         Enter,
-        Exit,
+        Exit
     }
 }

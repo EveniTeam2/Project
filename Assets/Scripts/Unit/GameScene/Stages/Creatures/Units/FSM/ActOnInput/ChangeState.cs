@@ -14,7 +14,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
         public override void Act(ActOnInput inputData, Character character, int count)
         {
             character.GetServiceProvider().TryChangeState(Enum.Parse<StateType>(inputData.StateName));
-
         }
     }
 }

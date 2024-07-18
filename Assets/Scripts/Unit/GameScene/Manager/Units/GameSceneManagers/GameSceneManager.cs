@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using ScriptableObjects.Scripts.Creature.Settings.KnightDefaultSetting;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Stages.Backgrounds;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
@@ -49,10 +48,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// </summary>
         private void Awake()
         {
-            InstantiateAndInitializeCharacterSetting();
             InstantiateAndInitializeCamera();
             InstantiateAndInitializeCanvas();
             InstantiateAndInitializeMap();
+            InstantiateAndInitializeCharacterSetting();
             InstantiateAndInitializeBoard();
             InstantiateAndInitializeStage();
         }
@@ -64,12 +63,12 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void InstantiateAndInitializeCamera()
         {
-            _camera = Instantiate(defaultSetting.mainCamera).GetComponent<Camera>();
+            _camera = defaultSetting.mainCamera.GetComponent<Camera>();
         }
 
         private void InstantiateAndInitializeCanvas()
         {
-            _canvas = Instantiate(defaultSetting.canvasController.Canvas);
+            _canvas = defaultSetting.canvas.GetComponent<Canvas>();
 
             if (_canvas.renderMode != RenderMode.ScreenSpaceCamera)
             {
@@ -81,7 +80,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                 _canvas.worldCamera = _camera;
             }
 
-            _blockPanel = defaultSetting.canvasController.BlockPanel;
+            _blockPanel = _canvas.GetComponent<CanvasController>().MatchBlockPanel;
         }
 
         /// <summary>

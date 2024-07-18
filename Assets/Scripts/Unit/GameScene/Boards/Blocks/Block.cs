@@ -41,9 +41,7 @@ namespace Unit.GameScene.Boards.Blocks
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform,
-                eventData.position, _canvas.worldCamera, out _startPosition);
-            Debug.Log("드래그 시작");
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform, eventData.position, _canvas.worldCamera, out _startPosition);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -52,15 +50,13 @@ namespace Unit.GameScene.Boards.Blocks
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log("드래그 종료");
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform,
                 eventData.position, _canvas.worldCamera, out var localPoint);
             var direction = (localPoint - _startPosition).normalized;
             direction = Mathf.Abs(direction.x) > Mathf.Abs(direction.y)
                 ? new Vector3(Mathf.Sign(direction.x), 0, 0)
                 : new Vector3(0, Mathf.Sign(direction.y), 0);
-
-            Debug.Log($"타겟 블록 좌표 {_rectTransform.anchoredPosition} / 드래그 방향 : {direction}");
+            
             OnMatchCheck?.Invoke(_rectTransform.anchoredPosition, direction);
         }
 

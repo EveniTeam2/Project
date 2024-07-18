@@ -2,6 +2,5 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.MonsterSkil
 {
     public class MonsterSkillFactory
     {
-        
     }
 }
