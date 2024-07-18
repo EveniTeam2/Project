@@ -1,4 +1,5 @@
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
@@ -16,6 +17,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.U
         public void ChangeState()
         {
             ServiceProvider.TryChangeState(StateType.Skill);
+
+            var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.SwordBuff}");
+            ServiceProvider.AnimatorSetInteger(AnimationParameterEnums.SkillIndex, skillIndex);
         }
     }
 }

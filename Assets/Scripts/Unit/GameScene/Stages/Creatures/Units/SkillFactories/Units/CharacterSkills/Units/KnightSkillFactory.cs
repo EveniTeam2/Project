@@ -11,11 +11,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSk
     public class KnightSkillFactory : SkillFactory<CharacterSkill>
     {
         private readonly List<string> _characterSkillPresets;
-        private readonly CharacterType _characterType;
 
-        public KnightSkillFactory(CharacterType characterType, List<string> characterSkillPresets)
+        public KnightSkillFactory(List<string> characterSkillPresets)
         {
-            _characterType = characterType;
             _characterSkillPresets = characterSkillPresets;
         }
 
@@ -33,9 +31,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSk
                     case KnightSkillType.BaseAttack:
                         skillPresets.Add(new KnightBaseAttack());
                         break;
-                    case KnightSkillType.LightAttack:
-                        skillPresets.Add(new KnightLightAttack());
-                        break;
+                    // case KnightSkillType.LightAttack:
+                    //     skillPresets.Add(new KnightLightAttack());
+                    //     break;
                     case KnightSkillType.SwordBuff:
                         skillPresets.Add(new KnightSwordBuff());
                         break;

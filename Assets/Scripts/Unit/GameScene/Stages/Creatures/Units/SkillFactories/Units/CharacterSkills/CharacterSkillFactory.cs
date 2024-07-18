@@ -20,7 +20,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSk
         {
             return _characterType switch
             {
-                CharacterType.Knight => new KnightSkillFactory(_characterType, _characterSkillPresets).CreateSkill(),
+                CharacterType.Knight => new KnightSkillFactory(_characterSkillPresets).CreateSkill(),
                 _ => null
             };
         }

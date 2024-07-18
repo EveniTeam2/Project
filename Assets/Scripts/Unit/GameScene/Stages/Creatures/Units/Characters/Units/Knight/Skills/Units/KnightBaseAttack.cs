@@ -17,9 +17,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.U
         public void ChangeState()
         {
             ServiceProvider.TryChangeState(StateType.Skill);
-            // var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.BaseAttack}");
-            // ServiceProvider.AnimatorSetBool(AnimationParameterEnums.Skill, true);
-            // ServiceProvider.AnimatorSetInteger(AnimationParameterEnums.Skill, skillIndex);
+
+            var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.BaseAttack}");
+            ServiceProvider.AnimatorSetInteger(AnimationParameterEnums.SkillIndex, skillIndex);
         }
     }
 }
