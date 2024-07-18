@@ -1,64 +1,34 @@
 using System;
-using Unit.GameScene.Manager.Units.StageManagers;
-using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
-{
-    public class BattleSystem
-    {
-        protected Creature _character;
-        protected StageManager _stageManager;
-        protected BattleStat _stat;
+namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
+    public abstract class BattleSystem {
+        protected Transform _targetTransform;
+        protected IBattleStat _stat;
+        protected bool _canAttackCool = true;
 
-        public BattleSystem(StageManager manager, Character self, Stat<CharacterStat> stat)
-        {
-            _character = self;
-            _stat = new BattleStat(stat);
-            _stageManager = manager;
+        protected bool CanAttackCool { get => _canAttackCool;  }
+
+        public BattleSystem(Transform targetTransform, IBattleStat stat) {
+            _targetTransform = targetTransform;
+            _stat = stat;
         }
 
-        public BattleSystem(StageManager manager, Monster target, Stat<MonsterStat> stat)
-        {
-            _character = target;
-            _stat = new BattleStat(stat);
-            _stageManager = manager;
-        }
-
-        public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee)
-        {
-            var hits = Physics2D.RaycastAll(_character.transform.position, direction, distance, targetLayer);
+        public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee) {
+            var hits = Physics2D.RaycastAll(_targetTransform.position, direction, distance, targetLayer);
             collidee = hits;
             if (collidee.Length > 0)
                 return true;
             return false;
         }
 
-        internal void Attack(RaycastHit2D col)
-        {
-            // TODO col.collider.GetInstanceID()를 다 들고 이를 통해 BaseCreature로 접근할 수 있게 미리 캐싱해두어 Dictionary<string, BaseCreature> spawnCreature가 있으면 좋겠습니다.
-            foreach (var mon in _stageManager.Monsters)
-                if (mon.gameObject.GetInstanceID() == col.collider.gameObject.GetInstanceID())
-                    mon.Health.Damage(_stat.Attack);
-        }
+        public abstract void Attack(RaycastHit2D col);
+        public abstract void Update();
     }
 
-    public class BattleStat
-    {
-        private readonly Func<int> GetAttack;
-
-        public BattleStat(Stat<CharacterStat> stat)
-        {
-            GetAttack = () => stat.Current.attack;
-        }
-
-        public BattleStat(Stat<MonsterStat> stat)
-        {
-            GetAttack = () => stat.Current.Attack;
-        }
-
-        public int Attack => GetAttack.Invoke();
+    public interface IBattleStat {
+        float GetCoolTime();
+        int GetAttack();
     }
 }

@@ -1,4 +1,9 @@
+using System;
+using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Actions
@@ -12,10 +17,8 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         [SerializeField] private float _distance;
         [SerializeField] private int _attackMultiplier;
 
-        public override IStateAction GetStateAction()
-        {
-            var result = new StateActionCheckColliderAndAttack(targetLayer, direction, _distance, _attackMultiplier);
-            return result;
+        public override IStateAction GetStateAction(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine) {
+            return new StateActionCheckColliderAndAttack(targetLayer, direction, _distance, _attackMultiplier, battleSystem);
         }
     }
 
@@ -24,17 +27,21 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         private Vector2 direction;
         private float _distance;
         private int _attackMultiplier;
-        public StateActionCheckColliderAndAttack(LayerMask targetLayer, Vector2 direction, float distance, int attackMultiplier) {
+        private readonly BattleSystem _battleSystem;
+
+        public StateActionCheckColliderAndAttack(LayerMask targetLayer, Vector2 direction, float distance, int attackMultiplier, BattleSystem battleSystem) {
             this.targetLayer = targetLayer;
             this.direction = direction;
             _distance = distance;
             _attackMultiplier = attackMultiplier;
+            this._battleSystem = battleSystem;
         }
-        public IState OnAct(IState state) {
-            if (state.StateMachine.Target.Battle.CheckCollider(targetLayer, direction, _distance, out var collider))
-                foreach (var col in collider)
-                    state.StateMachine.Target.Battle.Attack(col);
-            return state;
+
+        public void OnAct(StateType stateName, int parameterHash) {
+            if (_battleSystem.CheckCollider(targetLayer, direction, _distance, out var colldier)) {
+                foreach (var col in colldier)
+                    _battleSystem.Attack(col);
+            }
         }
     }
 }

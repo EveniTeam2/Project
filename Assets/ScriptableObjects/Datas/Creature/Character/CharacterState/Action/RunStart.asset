@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60b987fe0c494c8288865f9dc0ef760, type: 3}
   m_Name: RunStart
   m_EditorClassIdentifier: 
-  decoratorActionData: {fileID: 11400000, guid: df2df05d43a84e94888bf0703edf7125, type: 2}
-  actionData: {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
+  actionDatas:
+  - {fileID: 11400000, guid: fd2894bfb874d53488fdb59498e44693, type: 2}
+  - {fileID: 11400000, guid: df2df05d43a84e94888bf0703edf7125, type: 2}

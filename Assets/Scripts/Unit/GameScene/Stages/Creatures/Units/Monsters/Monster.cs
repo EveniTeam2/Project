@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
@@ -11,46 +12,34 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
     public class Monster : Creature
     {
         [SerializeField] private StateDataDTO stateData;
-        private Animator _animator;
 
-        private BattleSystem _battleSystem;
-        private HealthSystem _healthSystem;
-        private readonly LinkedList<ModifyStatData> _mods = new();
-        private MovementSystem _movementSystem;
-        private StageManager _stageManager;
-        private Stat<MonsterStat> _stats;
-
-        public override Animator Animator => _animator;
-        public override BattleSystem Battle => _battleSystem;
-        public override HealthSystem Health => _healthSystem;
-        public override MovementSystem Movement => _movementSystem;
-        public override LinkedList<ModifyStatData> ModifiedStatData => _mods;
-        
-        public StageManager StageManager => _stageManager;
+        protected Stat<MonsterStat> _stats;
+        MonsterServiceProvider _monsterServiceProvider;
 
         private void Update()
         {
-            HFSM?.Update(this);
-            Movement?.Update();
+            _fsm?.Update();
+            _movementSystem?.Update();
         }
 
         private void FixedUpdate()
         {
-            HFSM?.FixedUpdate(this);
-            Movement?.FixedUpdate();
+            _fsm?.FixedUpdate();
+            _movementSystem?.FixedUpdate();
         }
 
-        public void Initialize(StageManager manager, MonsterStat stat, float groundYPosition)
+        public void Initialize(MonsterStat stat, float groundYPosition)
         {
             _animator = gameObject.GetComponent<Animator>();
-            _stats = new Stat<MonsterStat>(stat);
-            _stageManager = manager;
-            _battleSystem = new BattleSystem(manager, this, _stats);
-            _healthSystem = new HealthSystem(this, _stats);
-            _movementSystem = new MovementSystem(transform, _stats);
-            _movementSystem.SetGroundPosition(groundYPosition);
 
-            HFSM = StateBuilder.BuildState(this, stateData);
+            _stats = new Stat<MonsterStat>(stat);
+            _battleSystem = new MonsterBattleSystem(transform, new MonsterBattleStat(_stats));
+            _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(_stats));
+            _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(_stats), groundYPosition);
+
+            _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator);
+
+            _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm);
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
@@ -59,7 +48,24 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             ModifyStat(statType, value);
         }
 
-        protected void ModifyStat(EStatType statType, int value)
+
+        public override void TempModifyStat(EStatType statType, int value, float duration)
+        {
+            StartCoroutine(TempModifyStatCoroutine(statType, value, duration));
+        }
+
+        public override void ClearModifiedStat()
+        {
+            _mods.Clear();
+            _stats.SetCurrent(_stats.Origin);
+            StopAllCoroutines();
+        }
+
+        public MonsterServiceProvider GetServiceProvider() {
+            return _monsterServiceProvider;
+        }
+
+        protected override void ModifyStat(EStatType statType, int value)
         {
             var cur = _stats.Current;
             switch (statType)
@@ -76,36 +82,89 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
                     cur.Speed += value;
                     break;
             }
-
             _stats.SetCurrent(cur);
         }
+    }
 
-        public override void TempModifyStat(EStatType statType, int value, float duration)
-        {
-            StartCoroutine(TempModifyStatCoroutine(statType, value, duration));
+    public class MonsterServiceProvider : ICreatureServiceProvider {
+        private readonly BattleSystem _battleSystem;
+        private readonly HealthSystem _healthSystem;
+        private readonly MovementSystem _movementSystem;
+        private readonly Animator _animator;
+        private readonly StateMachine _fsm;
+
+        public MonsterServiceProvider(BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine fsm) {
+            _battleSystem = battleSystem;
+            _healthSystem = healthSystem;
+            _movementSystem = movementSystem;
+            _animator = animator;
+            _fsm = fsm;
         }
 
-        public override void ClearStat()
-        {
-            _mods.Clear();
-            _stats.SetCurrent(_stats.Origin);
-            StopAllCoroutines();
+        public void AnimatorSetBool(int parameterHash, bool onoff) {
+            _animator.SetBool(parameterHash, onoff);
         }
 
-        private IEnumerator TempModifyStatCoroutine(EStatType statType, int value, float duration)
-        {
-            var data = new TempModifyStatData(statType, value, duration);
-            var node = _mods.AddLast(data);
-            ModifyStat(statType, value);
-            while (duration <= 0)
-            {
-                duration -= Time.deltaTime;
-                data.Duration = duration;
-                yield return null;
+        public void Attack(RaycastHit2D hit) {
+            _battleSystem.Attack(hit);
+        }
+
+        public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float _distance, out RaycastHit2D[] collider) {
+            return _battleSystem.CheckCollider(targetLayer, direction, _distance, out collider);
+        }
+
+        public int Damage(int atk) {
+            _healthSystem.Damage(atk);
+            return atk;
+        }
+        public AnimatorStateInfo GetCurrentAnimatorStateInfo() {
+            return _animator.GetCurrentAnimatorStateInfo(0);
+        }
+
+        public AnimatorStateInfo GetNextAnimatorStateInfo() {
+            return _animator.GetNextAnimatorStateInfo(0);
+        }
+
+        public void RegistEvent(ECharacterEventType type, Action subscriber) {
+            switch (type) {
+                case ECharacterEventType.Death:
+                    _healthSystem.RegistOnDeathEvent(subscriber);
+                    break;
+                case ECharacterEventType.Damage:
+                    _healthSystem.RegistOnDamageEvent(subscriber);
+                    break;
             }
+        }
 
-            _mods.Remove(node);
-            ModifyStat(statType, -value);
+        public void RegistStateEvent(StateType stateType, EStateEventType eventType, Action<StateType, int> subscriber) {
+            if (_fsm.TryGetState(stateType, out IState state)) {
+                switch (eventType) {
+                    case EStateEventType.Enter:
+                        state.OnEnter += subscriber;
+                        break;
+                    case EStateEventType.Exit:
+                        state.OnExit += subscriber;
+                        break;
+                }
+            }
+        }
+
+        public void Run(bool isRun) {
+            _fsm.TryChangeState(Characters.Enums.StateType.Run);
+            _movementSystem.SetRun(isRun);
+        }
+
+        public void UnregistStateEvent(StateType stateType, EStateEventType eventType, Action<StateType, int> subscriber) {
+            if (_fsm.TryGetState(stateType, out IState state)) {
+                switch (eventType) {
+                    case EStateEventType.Enter:
+                        state.OnEnter -= subscriber;
+                        break;
+                    case EStateEventType.Exit:
+                        state.OnExit -= subscriber;
+                        break;
+                }
+            }
         }
     }
 }

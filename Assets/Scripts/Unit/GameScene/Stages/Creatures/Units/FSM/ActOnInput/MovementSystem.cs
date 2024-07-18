@@ -1,105 +1,59 @@
 using System;
-using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
-{
-    public class MovementSystem : IRunnable
-    {
-        private readonly Transform _targetTransform;
-        private const float _gravity = -20f;
-        private float _currentYSpd;
+namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
+    public abstract class MovementSystem {
+        protected readonly Transform _targetTransform;
+        protected readonly IMovementStat _stats;
 
-        private float _currentSpd;
-        private readonly float _dampTime = 0.3f;
-        private float _dampVel;
-        private bool _isJump;
+        // X movement 관련
+        protected float _currentSpd;
+        protected float _targetSpd;
+        protected bool _wantToMove;
 
-        private bool _isRun;
-        private float _targetSpd;
-        private readonly Func<int> GetSpeed;
+        // 속도 댐핑 변수
+        protected readonly float _dampTime = 0.3f;
+        protected float _dampVel;
 
-        private float _forward;
-        private float _targetDirection;
+        // Y movement 관련
+        protected const float _gravity = -20f;
+        protected float _groundYPosition;
 
-        private float _boostTimer;
-        private float _boostSpeed;
-        
-        public bool IsJump => _targetTransform.position.y > GroundYPosition;
-        public float GroundYPosition { get; protected set; }
-        private int _speed => GetSpeed.Invoke();
-        public int Speed => _speed;
-        public bool IsRun => _currentSpd * _currentSpd > 0;
+        // 움직임 판단
+        public bool IsInAir => _targetTransform.position.y > _groundYPosition;
+        public bool IsMoving => _currentSpd * _currentSpd > 0;
 
-        public MovementSystem(Transform targetTransform, Stat<CharacterStat> stats)
-        {
+        public MovementSystem(Transform targetTransform, IMovementStat stats, float ground) {
             _targetTransform = targetTransform;
-            GetSpeed = () => stats.Current.speed;
-            _forward = 1f;
+            _groundYPosition = ground;
+            _stats = stats;
         }
-
-        public MovementSystem(Transform targetTransform, Stat<MonsterStat> stats)
-        {
-            _targetTransform = targetTransform;
-            GetSpeed = () => stats.Current.Speed;
-            _forward = -1f;
-        }
-
-        public void SetSpeedBoost(float boost, float duration) {
-            // TODO
-
-        }
-
-        private void SpeedBoost() {
-
-        }
-
-        public void SetRun(bool isRun)
-        {
-            _targetDirection = _forward;
-            _isRun = isRun;
-            if (isRun)
-                _targetSpd = _targetDirection * _speed;
-            else
-                _targetSpd = 0;
-        }
-
-        public void Update()
-        {
+        public virtual void Update() {
             Vector2 pos = _targetTransform.position;
-            if ((this as IRunnable).IsRun || _isRun)
-            {
+
+            if (IsMoving || _wantToMove) {
                 _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
                 pos.x += _currentSpd * Time.deltaTime;
-            }
-
-            if (IsJump || _isJump)
-            {
-                pos.y += _currentYSpd * Time.deltaTime;
-                if (pos.y < GroundYPosition)
-                    pos.y = GroundYPosition;
-                _isJump = false;
             }
 
             _targetTransform.position = pos;
         }
 
-        public void FixedUpdate()
-        {
-            if ((this as IRunnable).IsRun || _isRun) _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
-            JumpFixedUpdate();
+        public virtual void FixedUpdate() {
+            if (IsMoving || _wantToMove)
+                _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
         }
 
-        public void SetJump(float power)
-        {
-            _isJump = true;
-            _currentYSpd = power;
+        public abstract void SetRun(bool isRun);
+        public abstract void SetBackward(bool isBackward);
+        public virtual void SetGroundPosition(float groundYPosition) {
+            _groundYPosition = groundYPosition;
         }
+        public abstract void Jump(float power);
 
-        private float CalculateSpeed(float currentSpd, float targetSpd)
-        {
+        protected virtual float CalculateSpeed(float currentSpd, float targetSpd) {
             var value = currentSpd - targetSpd;
             if (value * value > 0.0001f)
                 currentSpd = Mathf.SmoothDamp(currentSpd, targetSpd, ref _dampVel, _dampTime);
@@ -107,24 +61,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
                 currentSpd = targetSpd;
             return currentSpd;
         }
+    }
 
-        private void JumpFixedUpdate()
-        {
-            _currentYSpd += _gravity * Time.fixedDeltaTime;
-        }
-
-        public void SetGroundPosition(float groundYPosition)
-        {
-            GroundYPosition = groundYPosition;
-        }
-
-        public void SetBackStep(bool isBack) {
-            _targetDirection = _forward * -1;
-            _isRun = isBack;
-            if (_isRun)
-                _targetSpd = _targetDirection * _speed;
-            else
-                _targetSpd = 0;
-        }
+    public interface IMovementStat {
+        int GetSpeed();
     }
 }

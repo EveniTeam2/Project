@@ -1,43 +1,44 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures
-{
-    public abstract class Creature : MonoBehaviour
-    {
+namespace Unit.GameScene.Stages.Creatures {
+    public abstract class Creature : MonoBehaviour {
         /// <summary>
         ///     StateMachine을 반환합니다.
         /// </summary>
-        public StateMachine HFSM { get; protected set; }
+        protected StateMachine _fsm;
 
         /// <summary>
         ///     전투에 관한 시스템을 반환합니다.
         /// </summary>
-        public abstract BattleSystem Battle { get; }
+        protected BattleSystem _battleSystem;
 
         /// <summary>
         ///     이동에 관한 시스템을 반환합니다.
         /// </summary>
-        public abstract MovementSystem Movement { get; }
+        protected MovementSystem _movementSystem;
 
         /// <summary>
         ///     방어에 관한 시스템을 반환합니다.
         /// </summary>
-        public abstract HealthSystem Health { get; }
+        protected HealthSystem _healthSystem;
 
         /// <summary>
         ///     애니메이터를 반환합니다.
         /// </summary>
-        public abstract Animator Animator { get; }
+        protected Animator _animator;
 
         /// <summary>
         ///     변경된 스탯 리스트입니다.
         /// </summary>
-        public abstract LinkedList<ModifyStatData> ModifiedStatData { get; }
+        protected LinkedList<ModifyStatData> _mods;
 
         /// <summary>
         ///     영구적으로 현재 스탯을 변경합니다.
@@ -57,19 +58,31 @@ namespace Unit.GameScene.Stages.Creatures
         /// <summary>
         ///     변경된 스텟을 전부 지웁니다.
         /// </summary>
-        public abstract void ClearStat();
+        public abstract void ClearModifiedStat();
+        protected abstract void ModifyStat(EStatType statType, int value);
+        protected IEnumerator TempModifyStatCoroutine(EStatType statType, int value, float duration) {
+            var data = new TempModifyStatData(statType, value, duration);
+            var node = _mods.AddLast(data);
+            ModifyStat(statType, value);
+            while (duration <= 0) {
+                duration -= Time.deltaTime;
+                data.Duration = duration;
+                yield return null;
+            }
+
+            _mods.Remove(node);
+            ModifyStat(statType, -value);
+        }
     }
 
     /// <summary>
     /// </summary>
-    public class ModifyStatData
-    {
+    public class ModifyStatData {
         /// <summary>
         /// </summary>
         /// <param name="statType"></param>
         /// <param name="value"></param>
-        public ModifyStatData(EStatType statType, int value)
-        {
+        public ModifyStatData(EStatType statType, int value) {
             StatType = statType;
             Value = value;
         }
@@ -85,15 +98,13 @@ namespace Unit.GameScene.Stages.Creatures
 
     /// <summary>
     /// </summary>
-    public class TempModifyStatData : ModifyStatData
-    {
+    public class TempModifyStatData : ModifyStatData {
         /// <summary>
         /// </summary>
         /// <param name="statType"></param>
         /// <param name="value"></param>
         /// <param name="duration"></param>
-        public TempModifyStatData(EStatType statType, int value, float duration) : base(statType, value)
-        {
+        public TempModifyStatData(EStatType statType, int value, float duration) : base(statType, value) {
             Duration = duration;
         }
 
@@ -104,11 +115,22 @@ namespace Unit.GameScene.Stages.Creatures
 
     /// <summary>
     /// </summary>
-    public enum EStatType
-    {
+    public enum EStatType {
         None = 0,
         Health = 1,
         Attack = 2,
         Speed = 3
+    }
+
+
+    public interface ICreatureServiceProvider {
+
+        void AnimatorSetBool(int parameterHash, bool onoff);
+        AnimatorStateInfo GetCurrentAnimatorStateInfo();
+        AnimatorStateInfo GetNextAnimatorStateInfo();
+
+        int Damage(int atk);
+        void RegistEvent(ECharacterEventType type, Action subscriber);
+        void Run(bool isRun);
     }
 }

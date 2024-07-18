@@ -1,3 +1,4 @@
+using ScriptableObjects.Scripts.Creature.DTO;
 using System;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
@@ -10,73 +11,68 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
     public class BaseState : IState
     {
         protected StateType _name;
-        protected Func<IState, IState> _onFixedUpdate;
-        protected Func<IState, IState> _onUpdate;
         protected int _parameterHash;
-        protected StateMachine _sm;
-        protected Func<Creature, bool> _transitionCondition;
+        public event Action<StateType, int> OnEnter;
+        public event Action<StateType, int> OnExit;
+        protected Action<StateType, int> _onUpdate;
+        protected Action<StateType, int> _onFixedUpdate;
+        protected Func<bool> _transitionCondition;
 
-        public BaseState(StateType stateType, int aniHash, StateMachine sm, Func<IState, IState> onEnter = null,
-            Func<IState, IState> onExit = null, Func<IState, IState> onUpdate = null,
-            Func<IState, IState> onFixedUpdate = null, Func<Creature, bool> transitionCondition = null)
-        {
-            _name = stateType;
-            _parameterHash = aniHash;
-            _sm = sm;
-            OnEnter = onEnter;
-            OnExit = onExit;
+        public BaseState(StateType name, int parameterHash, Action<StateType, int> OnEnter = null, Action<StateType, int> OnExit = null, Action<StateType, int> onUpdate = null, Action<StateType, int> onFixedUpdate = null, Func<bool> transitionCondition = null) {
+            _name = name;
+            _parameterHash = parameterHash;
+            this.OnEnter += OnEnter;
+            this.OnExit += OnExit;
             _onUpdate = onUpdate;
             _onFixedUpdate = onFixedUpdate;
             _transitionCondition = transitionCondition;
         }
 
-        public event Func<IState, IState> OnEnter;
-        public event Func<IState, IState> OnExit;
-
-        public StateType StateName => _name;
-        public int ParameterHash => _parameterHash;
-        public StateMachine StateMachine => _sm;
+        public void SetFullState(FullState state) {
+            OnEnter += state.Enter;
+            OnExit += state.Exit;
+            _onUpdate += state.Update;
+            _onFixedUpdate += state.FixedUpdate;
+        }
 
         /// <summary>
         ///     상태에 진입합니다.
         /// </summary>
-        public void Enter(Creature target)
+        public void Enter()
         {
-            OnEnter?.Invoke(this);
+            OnEnter?.Invoke(_name, _parameterHash);
         }
 
         /// <summary>
         ///     상태에서 나옵니다.
         /// </summary>
-        public void Exit(Creature target)
+        public void Exit()
         {
-            OnExit?.Invoke(this);
+            OnExit?.Invoke(_name, _parameterHash);
         }
 
         /// <summary>
         ///     고정 업데이트를 수행합니다.
         /// </summary>
-        public void FixedUpdate(Creature target)
+        public void FixedUpdate()
         {
-            _onFixedUpdate?.Invoke(this);
+            _onFixedUpdate?.Invoke(_name, _parameterHash);
         }
 
         /// <summary>
         ///     업데이트를 수행합니다.
         /// </summary>
-        public void Update(Creature target)
+        public void Update()
         {
-            _onUpdate?.Invoke(this);
+            _onUpdate?.Invoke(_name, _parameterHash);
         }
 
         /// <summary>
-        ///     상태 전환이 가능한지 확인합니다.
+        /// 
         /// </summary>
-        public bool CanTransitionToThis(Creature target)
-        {
-            if (_transitionCondition == null)
-                return true;
-            return _transitionCondition.Invoke(target);
+        public bool CanTransitionToThis() {
+            bool result = _transitionCondition?.Invoke() ?? false;
+            return result;
         }
     }
 }

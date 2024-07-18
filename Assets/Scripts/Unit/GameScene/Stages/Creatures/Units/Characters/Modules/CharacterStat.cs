@@ -5,11 +5,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
     namespace Unit.Character
     {
         [Serializable]
-        public struct CharacterStat
+        public class CharacterStat
         {
-            public int attack;
-            public int health;
-            public int speed;
+            public int Attack;
+            public int Health;
+            public int Speed;
+            public float CoolTime;
         }
     }
 }
