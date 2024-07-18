@@ -1,5 +1,6 @@
 using ScriptableObjects.Scripts.Creature.Actions;
 using ScriptableObjects.Scripts.Creature.Conditions;
+using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;

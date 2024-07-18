@@ -154,8 +154,6 @@ namespace Unit.GameScene.Manager.Units
                     var y = -_halfPanelWidth + j * _blockGap;
                     
                     _blockPositions.Add(new Tuple<float, float>(x, y));
-            
-                    Debug.Log($"블록 배치 좌표 : {x}, {y}");
                 }
             }
         }
@@ -255,11 +253,8 @@ namespace Unit.GameScene.Manager.Units
         /// <param name="blocks">제거 대상 블록 목록</param>
         private void RemoveBlocks(List<Block> blocks)
         {
-            Debug.Log("블록 제거");
-
             foreach (var block in blocks)
             {
-                Debug.Log($"드래그 카운트 {_dragCount} / 삭제 블록 타입 : {block.Type}");
                 RemoveBlock(block);
             }
         }
@@ -271,8 +266,6 @@ namespace Unit.GameScene.Manager.Units
         private void RemoveBlock(Block block)
         {
             var blockPos = block.GetComponent<RectTransform>().anchoredPosition;
-
-            Debug.Log($"{blockPos} 블록 제거 ");
 
             _tiles.Remove(new Tuple<float, float>(blockPos.x, blockPos.y));
             _blockPool.Release(block);
@@ -298,8 +291,7 @@ namespace Unit.GameScene.Manager.Units
         private IEnumerator ProcessBlockSwapAndFall(Block currentBlock, Block targetBlock,
             Tuple<float, float> currentBlockIndex, Tuple<float, float> targetBlockIndex)
         {
-            yield return StartCoroutine(_blockMover.SwapBlock(currentBlock, targetBlock, targetBlockIndex,
-                currentBlockIndex));
+            yield return StartCoroutine(_blockMover.SwapBlock(currentBlock, targetBlock, targetBlockIndex, currentBlockIndex));
 
             // 교환 후에 딕셔너리에서 블록 위치 업데이트
             UpdateBlockPositions(currentBlockIndex, targetBlockIndex, currentBlock, targetBlock);
@@ -331,9 +323,7 @@ namespace Unit.GameScene.Manager.Units
             {
                 var key = (Tuple<BlockType, int>)combo.Key;
                 var value = (int)combo.Value;
-
-                Debug.Log($"Key: ({key.Item1}, {key.Item2}), Value: {value}");
-
+                
                 OnSendCommand?.Invoke(new CommandPacket(key.Item1, value, 0.5f));
             }
 
@@ -364,10 +354,8 @@ namespace Unit.GameScene.Manager.Units
 
             var allMatchedBlocks = new HashSet<Block>(_blockMatcher.GetAdjacentMatches(currentMatchedBlocks));
             allMatchedBlocks.UnionWith(_blockMatcher.GetAdjacentMatches(targetMatchedBlocks));
-
-            Debug.Log($"삭제될 블록 수 {allMatchedBlocks.Count}");
+            
             RemoveBlocks(allMatchedBlocks.ToList());
-            Debug.Log($"남은 블록 수 {_tiles.Count}");
 
             yield return null;
         }
@@ -436,12 +424,9 @@ namespace Unit.GameScene.Manager.Units
                 {
                     // 콤보를 계산합니다.
                     if (group.Count >= 3) CheckBlockCombo(group[0].Type);
-
-                    Debug.Log($"삭제될 블록 그룹 수 {groupedMatches.Count}");
+                    
                     RemoveBlocks(group);
                 }
-
-                Debug.Log($"남은 블록 수 {_tiles.Count}");
 
                 yield return FillEmptySpaces();
                 yield return _progressTime;
@@ -456,8 +441,6 @@ namespace Unit.GameScene.Manager.Units
         /// </summary>
         private IEnumerator FillEmptySpaces()
         {
-            Debug.Log("빈 공간으로 블록 이동");
-
             var blockDic = new Dictionary<Tuple<float, float>, Block>();
 
             for (var x = -_halfPanelWidth; x <= _halfPanelWidth; x += _blockGap)
@@ -466,8 +449,6 @@ namespace Unit.GameScene.Manager.Units
                 {
                     var pos = new Tuple<float, float>(x, y);
                     if (_tiles.ContainsKey(pos)) continue;
-
-                    Debug.Log($"{pos} 블록 이동");
 
                     SetDestination(x, y, blockDic);
                 }
@@ -481,8 +462,6 @@ namespace Unit.GameScene.Manager.Units
         /// </summary>
         private IEnumerator FillNewBlocks()
         {
-            Debug.Log("새 블록 생성");
-
             var spawnHash = new HashSet<Tuple<float, float>>();
             var blockDic = new Dictionary<Tuple<float, float>, Block>();
 
@@ -532,19 +511,14 @@ namespace Unit.GameScene.Manager.Units
             var currentBlockIndex = new Tuple<float, float>(startPosition.x, startPosition.y);
             var targetBlockIndex = _blockMatcher.GetTargetIndex(startPosition, direction);
 
-            Debug.Log($"{startPosition} 블록 스왑 검증, 타겟 {targetBlockIndex}");
-
             if (!_blockMatcher.IsValidPosition(targetBlockIndex))
             {
-                Debug.Log("유효하지 않은 위치");
                 isLogicUpdating = false;
                 return;
             }
 
             if (CheckSwapForMatch(currentBlockIndex, targetBlockIndex))
             {
-                Debug.Log("스왑 시작");
-
                 OnIncreaseDragCount?.Invoke(++_dragCount);
 
                 var currentBlock = _tiles[currentBlockIndex];
@@ -553,7 +527,6 @@ namespace Unit.GameScene.Manager.Units
             }
             else
             {
-                Debug.Log("스왑 실패");
                 isLogicUpdating = false;
             }
         }

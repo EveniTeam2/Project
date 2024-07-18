@@ -7,6 +7,7 @@ using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
@@ -28,23 +29,26 @@ namespace Unit.GameScene.Manager.Units.StageManagers
     public class StageManager : MonoBehaviour, IStage, ICommandReceiver<IStage>
     {
         public event Action OnPlayerDeath;
+        
         public StageScore StageScore { get => stageScore; }
-        private StageScore stageScore;
         public Character Character => _character;
         public LinkedList<Monster> Monsters => _monsterManager.Monsters;
+        
         public float PlayTime => Time.time - _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
-
-
+        
+        private StageScore stageScore;
         private Character _character;
         private MonsterSpawnManager _monsterManager;
         private float _startTime;
         private Vector3 _zeroPosition;
-        
         private Queue<ICommand<IStage>> _commands = new();
+        
+        private readonly Dictionary<AnimationParameterEnums, int> _animationParameter = new ();
         
         public void Initialize(CharacterSetting characterSetting, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam)
         {
+            ChangeAnimationParameterToHash(defaultSetting.creatureAnimationParameter);
             InitializeCharacter(characterSetting, playerSpawnPosition);
             InitializeMonster(extraSetting, playerSpawnPosition);
             InitializeCamera(cam);
@@ -52,7 +56,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
             _monsterManager.Start();
         }
-        
+
         private void Update()
         {
             UpdateCommand();
@@ -86,14 +90,14 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(characterSetting, playerSpawnPosition.y);
+                _character.Initialize(characterSetting, playerSpawnPosition.y, _animationParameter);
             }
-            _character.GetServiceProvider().RegistEvent(ECharacterEventType.Death, PlayerIsDead);
+            _character.GetServiceProvider().RegisterEvent(ECharacterEventType.Death, PlayerIsDead);
         }
 
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition)
         {
-            _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore);
+            _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameter);
         }
 
         private void InitializeCamera(Camera cam)
@@ -104,20 +108,35 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         private void InitializeCommand()
         {
             if (_commands == null)
+            {
                 _commands = new Queue<ICommand<IStage>>();
+            }
             else
+            {
                 _commands.Clear();
+            }
         }
         
         
         public void UpdateCommand()
         {
             if (_commands.Count > 0 && _commands.Peek().IsExecutable(this))
+            {
+                Debug.Log("커맨드 Dequeue");
                 _commands.Dequeue().Execute(this);
+            }
         }
 
         private void PlayerIsDead() {
             OnPlayerDeath?.Invoke();
+        }
+        
+        private void ChangeAnimationParameterToHash(AnimationParameterEnums[] animationParameterEnums)
+        {
+            foreach (var animationParameter in animationParameterEnums)
+            {
+                _animationParameter.Add(animationParameter, Animator.StringToHash($"{animationParameter}"));
+            }
         }
     }
 

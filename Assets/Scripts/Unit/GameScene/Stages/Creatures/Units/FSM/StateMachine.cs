@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using UnityEngine;
 
@@ -12,10 +10,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
     /// </summary>
     public class StateMachine
     {
+        private readonly Animator animator;
         protected IState _current;
         protected IState _prev;
         protected Dictionary<StateType, IState> _states;
-        private readonly Animator animator;
 
         public StateMachine(Animator animator)
         {
@@ -31,7 +29,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public bool TryAddState(StateType name, IState state)
         {
-            bool result = _states.TryAdd(name, state);
+            var result = _states.TryAdd(name, state);
 
             if (_states.Count == 1)
                 _current = state;
@@ -52,6 +50,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
                 _current.Enter();
                 return true;
             }
+
             return false;
         }
 
@@ -110,13 +109,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             animator.SetBool(parameterHash, onoff);
         }
 
-        public bool TryGetState(StateType stateType, out IState state) {
-            if (_states.TryGetValue(stateType, out state)) {
-                return true; 
-            }
+        public bool TryGetState(StateType stateType, out IState state)
+        {
+            if (_states.TryGetValue(stateType, out state)) return true;
             state = null;
             return false;
-
         }
     }
 }

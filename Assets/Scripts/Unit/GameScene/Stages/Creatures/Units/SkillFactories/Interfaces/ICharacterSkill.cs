@@ -1,13 +1,14 @@
+using System;
 using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.FSM;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces
 {
     public interface ICharacterSkill
     {
-        public Character Character { get; }
-        public CharacterType CharacterType { get; }
-        
-        public void RegisterCharacterReference(Character character);
+        public event Action<int> OnActivateSkill;
+
+        public void ActivateSkill(int combo);
     }
 }

@@ -1,15 +1,21 @@
 using System;
+using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
-    public class CharacterBattleSystem : BattleSystem {
-        public CharacterBattleSystem(Transform targetTransform, CharacterBattleStat stat) : base(targetTransform, stat) {
+namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
+{
+    public class CharacterBattleSystem : BattleSystem
+    {
+        public CharacterBattleSystem(Transform targetTransform, CharacterBattleStat stat) : base(targetTransform, stat)
+        {
         }
 
-        public override void Attack(RaycastHit2D col) {
-            if (col.collider.gameObject.TryGetComponent<Monster>(out var target)) {
+        public override void Attack(RaycastHit2D col)
+        {
+            if (col.collider.gameObject.TryGetComponent<Monster>(out var target))
+            {
 #if UNITY_EDITOR
                 var dmg = target.GetServiceProvider().Damage(_stat.GetAttack());
                 Debug.Log($"플레이어가 {col.collider.gameObject.name}에게 {dmg} 피해를 입혔습니다.");
@@ -18,30 +24,35 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput {
 #endif
             }
             else
+            {
                 Debug.LogWarning($"플레이어가 {col.collider.gameObject.name}의 컴포넌트를 가지고 올 수 없습니다.");
+            }
         }
 
-        public override void Update() {
-            
+        public override void Update()
+        {
         }
     }
 
-    public class CharacterBattleStat : IBattleStat {
-        Func<int> _attack;
-        private Func<float> _cool;
+    public class CharacterBattleStat : IBattleStat
+    {
+        private readonly Func<int> _attack;
+        private readonly Func<float> _cool;
 
-        public CharacterBattleStat(Stat<CharacterStat> stat) {
+        public CharacterBattleStat(Stat<CharacterStat> stat)
+        {
             _attack = () => stat.Current.Attack;
             _cool = () => stat.Current.CoolTime;
         }
 
-        public int GetAttack() {
+        public int GetAttack()
+        {
             return _attack();
         }
 
-        public float GetCoolTime() {
+        public float GetCoolTime()
+        {
             return _cool();
         }
     }
-
 }

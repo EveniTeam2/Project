@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories
 {

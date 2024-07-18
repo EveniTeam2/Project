@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
@@ -16,12 +17,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
     {
         [SerializeField] protected CharacterType characterType;
         [SerializeField] private StateDataDTO stateData;
-        
+
+        protected CharacterServiceProvider CharacterServiceProvider;
+
         private CommandInput _commandInput;
         private Stat<CharacterStat> _stats;
         private Dictionary<AnimationParameterEnums, int> _characterAnimationParameter;
-
-        protected CharacterServiceProvider _characterServiceProvider;
 
         protected void Update()
         {
@@ -35,21 +36,22 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _movementSystem?.FixedUpdate();
         }
 
-        public void Initialize(CharacterSetting characterSetting, float groundYPosition)
+        public void Initialize(CharacterSetting characterSetting, float groundYPosition, Dictionary<AnimationParameterEnums, int> animParaDic)
         {
+            var characterTransform = transform;
+            characterType = characterSetting.Type;
+
             _animator = GetComponent<Animator>();
 
             _stats = new Stat<CharacterStat>(characterSetting.Stat);
             _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_stats));
             _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
-            _movementSystem = new CharacterMovementSystem(transform, new CharacterMovementStat(_stats), groundYPosition);
-
-            characterType = characterSetting.Type;
-
-            _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator);
-            _characterServiceProvider = new CharacterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm);
-            // TODO : After
-            // _input = new UserInput(this, characterSetting.Type, characterSetting.CharacterSkillPresets);
+            _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
+            _fsm = StateBuilder.BuildState(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animator);
+            
+            CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animParaDic, characterSetting.CharacterSkillIndexs);
+            
+            _commandInput = new CommandInput(CharacterServiceProvider, characterSetting.Type, characterSetting.CharacterSkills);
         }
 
         public void Input(BlockType blockType, int count)
@@ -74,13 +76,16 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _stats.SetCurrent(_stats.Origin);
         }
 
-        public CharacterServiceProvider GetServiceProvider() {
-            return _characterServiceProvider;
+        public CharacterServiceProvider GetServiceProvider()
+        {
+            return CharacterServiceProvider;
         }
 
-        protected override void ModifyStat(EStatType statType, int value) {
+        protected override void ModifyStat(EStatType statType, int value)
+        {
             var cur = _stats.Current;
-            switch (statType) {
+            switch (statType)
+            {
                 case EStatType.None:
                     break;
                 case EStatType.Health:
@@ -95,57 +100,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             }
 
             _stats.SetCurrent(cur);
-        }
-    }
-
-    public class CharacterServiceProvider : ICreatureServiceProvider {
-        private readonly BattleSystem _battleSystem;
-        private readonly HealthSystem _healthSystem;
-        private readonly MovementSystem _movementSystem;
-        private readonly Animator _animator;
-        private readonly StateMachine _fsm;
-        public CharacterServiceProvider(BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine fsm) {
-            _battleSystem = battleSystem;
-            _healthSystem = healthSystem;
-            _movementSystem = movementSystem;
-            _animator = animator;
-            _fsm = fsm;
-        }
-
-        public void AnimatorSetBool(int parameterHash, bool onoff) {
-            _animator.SetBool(parameterHash, onoff);
-        }
-
-        public int Damage(int atk) {
-            _healthSystem.Damage(atk);
-            return atk;
-        }
-
-        public AnimatorStateInfo GetCurrentAnimatorStateInfo() {
-            return _animator.GetCurrentAnimatorStateInfo(0);
-        }
-
-        public AnimatorStateInfo GetNextAnimatorStateInfo() {
-            return _animator.GetNextAnimatorStateInfo(0);
-        }
-
-        public void RegistEvent(ECharacterEventType type, Action subscriber) {
-            switch (type) {
-                case ECharacterEventType.Death:
-                    _healthSystem.RegistOnDeathEvent(subscriber);
-                    break;
-                case ECharacterEventType.Damage:
-                    _healthSystem.RegistOnDamageEvent(subscriber);
-                    break;
-            }
-        }
-
-        public void Run(bool isRun) {
-            _movementSystem.SetRun(isRun);
-        }
-
-        public bool TryChangeState(StateType stateType) {
-            return _fsm.TryChangeState(stateType);
         }
     }
 }
