@@ -49,7 +49,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
             _fsm = StateBuilder.BuildState(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animator);
             
-            CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animParaDic, characterSetting.CharacterSkillIndexs);
+            CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animParaDic, characterSetting.CharacterSkillIndexes);
             
             _commandInput = new CommandInput(CharacterServiceProvider, characterSetting.Type, characterSetting.CharacterSkills);
         }

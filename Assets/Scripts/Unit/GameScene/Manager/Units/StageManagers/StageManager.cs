@@ -60,9 +60,9 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         private void Update()
         {
             UpdateCommand();
-
-            //TODO : _monsterManager null이라 잠깐 막아놨습니다.
-            _monsterManager.Update();
+            
+            // TODO : _monsterManager null이라 잠깐 막아놨습니다.
+            // _monsterManager.Update();
         }
 
         public void RegisterEventHandler(ISendCommand data)
