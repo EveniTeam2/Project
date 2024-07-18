@@ -11,9 +11,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
     public class BaseState : IState
     {
         protected StateType _name;
-        protected Action<StateType, int> _onFixedUpdate;
-        protected Action<StateType, int> _onUpdate;
         protected int _parameterHash;
+        public event Action<StateType, int> OnEnter;
+        public event Action<StateType, int> OnExit;
+        public event Action<StateType, int> _onUpdate;
+        public event Action<StateType, int> _onFixedUpdate;
         protected Func<bool> _transitionCondition;
 
         public BaseState(StateType name, int parameterHash, Action<StateType, int> OnEnter = null,
@@ -28,9 +30,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             _onFixedUpdate = onFixedUpdate;
             _transitionCondition = transitionCondition;
         }
-
-        public event Action<StateType, int> OnEnter;
-        public event Action<StateType, int> OnExit;
 
         /// <summary>
         ///     상태에 진입합니다.
@@ -70,14 +69,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         {
             var result = _transitionCondition?.Invoke() ?? false;
             return result;
-        }
-
-        public void SetFullState(FullState state)
-        {
-            OnEnter += state.Enter;
-            OnExit += state.Exit;
-            _onUpdate += state.Update;
-            _onFixedUpdate += state.FixedUpdate;
         }
     }
 }

@@ -3,6 +3,7 @@ using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
@@ -37,15 +38,17 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             
             if (!ReferenceEquals(fullState, null))
             {
-                baseState.SetFullState(fullState);
+                var hash = Animator.StringToHash(data.AnimParameterEnums.ToString());
+                var animationState = new BaseState(data.StateType, hash, enter, exit, update, fixedUpdate, condition);
+                if (!ReferenceEquals(fullState, null))
+                    fullState.SubscribeEvent(animationState);
+                return animationState;
             }
 
-            return baseState;
-
-            // var state = new BaseState(data.StateType, 0, enter, exit, update, fixedUpdate, condition);
-            // if (!ReferenceEquals(full, null))
-            //     state.SetFullState(full);
-            // return state;
+            var state = new BaseState(data.StateType, 0, enter, exit, update, fixedUpdate, condition);
+            if (!ReferenceEquals(fullState, null))
+                fullState.SubscribeEvent(state);
+            return state;
         }
     }
 }

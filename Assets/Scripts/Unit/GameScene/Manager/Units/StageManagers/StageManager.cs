@@ -37,12 +37,12 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         public float PlayTime => Time.time - _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
         
-        private StageScore stageScore;
-        private Character _character;
-        private MonsterSpawnManager _monsterManager;
-        private float _startTime;
-        private Vector3 _zeroPosition;
-        private Queue<ICommand<IStage>> _commands = new();
+        protected StageScore stageScore;
+        protected Character _character;
+        protected MonsterSpawnManager _monsterManager;
+        protected float _startTime;
+        protected Vector3 _zeroPosition;
+        protected Queue<ICommand<IStage>> _commands = new();
         
         private readonly Dictionary<AnimationParameterEnums, int> _animationParameter = new ();
         
@@ -100,7 +100,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameter);
         }
 
-        private void InitializeCamera(Camera cam)
+        protected virtual void InitializeCamera(Camera cam)
         {
             cam.GetComponent<CameraController>().Initialize(_character.transform);
         }

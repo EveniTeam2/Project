@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f1a262529ee524da60c209a25e543e, type: 3}
-  m_Name: Input_Skill_2
+  m_Script: {fileID: 11500000, guid: 8399f3f3480918e43a261943afdc4159, type: 3}
+  m_Name: AttackOnce
   m_EditorClassIdentifier: 
-  blockType: 2
-  _stateName: Sill
-  act: {fileID: 11400000, guid: b32cf4c1883993547a3b8f0db715837b, type: 2}
+  _act: {fileID: 11400000, guid: 9b969dc918d72c248ac2fef19a26b409, type: 2}
+  _con: {fileID: 11400000, guid: 4678c880a8348d14188eb64609a3feea, type: 2}

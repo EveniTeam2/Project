@@ -15,7 +15,6 @@ namespace Unit.GameScene.Manager.Units
         private readonly Transform playerPosition;
         private readonly float _ground;
         private Dictionary<int, CustomPool<Monster>> _monsterPool;
-        private LinkedList<Monster> _spawnedMonsters;
         private LinkedList<StageMonsterGroup> _spawnGroup;
         private Queue<StageMonsterGroup> _waitGroup;
         private Dictionary<AnimationParameterEnums, int> _animationParameter;
@@ -23,12 +22,13 @@ namespace Unit.GameScene.Manager.Units
         
         public LinkedList<Monster> Monsters {
             get {
-                _spawnedMonsters.Clear();
+                LinkedList<Monster> spawnedMonster = new LinkedList<Monster>();
+                spawnedMonster.Clear();
                 foreach (var (key, pool) in _monsterPool) {
                     foreach (var creature in pool.UsedList)
-                        _spawnedMonsters.AddLast(creature);
+                        spawnedMonster.AddLast(creature);
                 }
-                return _spawnedMonsters;
+                return spawnedMonster;
 
             }
         }
@@ -116,6 +116,12 @@ namespace Unit.GameScene.Manager.Units
                     monster.gameObject.SetActive(true);
                     monster.GetServiceProvider().Run(true);
                 }
+        }
+
+        public void Clear() {
+            foreach (var mon in _monsterPool) {
+                mon.Value.DestroyPool();
+            }
         }
     }
 }
