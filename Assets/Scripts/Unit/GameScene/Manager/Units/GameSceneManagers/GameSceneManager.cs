@@ -18,35 +18,35 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
     public class GameSceneManager : MonoBehaviour
     {
         // TODO : 이후에 BoardManager와 StageManager 내부의 CharacterManager와 MonsterManager가 해당 액션을 구독하도록 수정
-        private event Action<bool> OnGameOver;
+        protected event Action<bool> OnGameOver;
         
         [Header("==== Scene 추가 세팅 ====")]
-        [SerializeField] private SceneExtraSetting extraSetting;
+        [SerializeField] protected SceneExtraSetting extraSetting;
 
         [Header("==== Scene 기본 세팅 ====")]
-        [SerializeField] private SceneDefaultSetting defaultSetting;
+        [SerializeField] protected SceneDefaultSetting defaultSetting;
 
         [Header("드래그 횟수")]
-        [SerializeField] private int dragCount;
+        [SerializeField] protected int dragCount;
         
         [Header("게임 오버")]
-        [SerializeField] private bool isGameOver;
+        [SerializeField] protected bool isGameOver;
         
         [Header("현재 진행 시간")]
-        [SerializeField] private float currentTime;
+        [SerializeField] protected float currentTime;
 
-        private CharacterSetting _characterSetting;
-        private RectTransform _blockPanel;
-        private BackgroundController _backgroundController;
-        private BoardManager _boardManager;
-        private StageManager _stageManager;
-        private Camera _camera;
-        private Canvas _canvas;
+        protected CharacterSetting _characterSetting;
+        protected RectTransform _blockPanel;
+        protected BackgroundController _backgroundController;
+        protected BoardManager _boardManager;
+        protected StageManager _stageManager;
+        protected Camera _camera;
+        protected Canvas _canvas;
 
         /// <summary>
         ///     게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
         /// </summary>
-        private void Awake()
+        protected virtual void Awake()
         {
             InstantiateAndInitializeCamera();
             InstantiateAndInitializeCanvas();
@@ -56,17 +56,17 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             InstantiateAndInitializeStage();
         }
 
-        private void InstantiateAndInitializeCharacterSetting()
+        protected void InstantiateAndInitializeCharacterSetting()
         {
             _characterSetting = new CharacterSetting(extraSetting.characterDefaultSetting, extraSetting.characterExtraSetting);
         }
 
-        private void InstantiateAndInitializeCamera()
+        protected void InstantiateAndInitializeCamera()
         {
             _camera = defaultSetting.mainCamera.GetComponent<Camera>();
         }
 
-        private void InstantiateAndInitializeCanvas()
+        protected void InstantiateAndInitializeCanvas()
         {
             _canvas = defaultSetting.canvas.GetComponent<Canvas>();
 
@@ -86,7 +86,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// <summary>
         ///     게임 시작 시 타이머를 시작합니다.
         /// </summary>
-        private void Start()
+        protected virtual void Start()
         {
             StartCoroutine(Timer(extraSetting.limitTime));
         }
@@ -94,7 +94,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// <summary>
         ///     맵을 인스턴스화하고 초기화합니다.
         /// </summary>
-        private void InstantiateAndInitializeMap()
+        protected void InstantiateAndInitializeMap()
         {
             _backgroundController = Instantiate(extraSetting.mapPrefab).GetComponent<BackgroundController>();
             _backgroundController.transform.SetParent(_camera.transform);
@@ -104,7 +104,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// <summary>
         ///     보드를 인스턴스화하고 초기화합니다.
         /// </summary>
-        private void InstantiateAndInitializeBoard()
+        protected void InstantiateAndInitializeBoard()
         {
             _boardManager = Instantiate(defaultSetting.boardManagerPrefab).GetComponent<BoardManager>();
             _boardManager.Initialize(extraSetting.blockInfos, _blockPanel, _canvas);
@@ -115,7 +115,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// <summary>
         ///     스테이지를 인스턴스화하고 초기화합니다.
         /// </summary>
-        private void InstantiateAndInitializeStage()
+        protected void InstantiateAndInitializeStage()
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
             _stageManager.Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, _camera);
@@ -126,7 +126,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// <summary>
         ///     드래그 횟수 증가 이벤트를 보드에 연결합니다.
         /// </summary>
-        private void AttachBoard(IIncreaseDragCount data)
+        protected void AttachBoard(IIncreaseDragCount data)
         {
             data.OnIncreaseDragCount += IncreaseDragCount;
         }
@@ -135,7 +135,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         ///     드래그 횟수를 증가시킵니다.
         /// </summary>
         /// <param name="count">드래그 횟수</param>
-        private void IncreaseDragCount(int count)
+        protected void IncreaseDragCount(int count)
         {
             dragCount = count;
         }
@@ -144,7 +144,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         ///     제한 시간 타이머 코루틴입니다.
         /// </summary>
         /// <param name="limitTime">제한 시간</param>
-        private IEnumerator Timer(float limitTime)
+        protected IEnumerator Timer(float limitTime)
         {
             isGameOver = false;
 
