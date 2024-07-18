@@ -10,39 +10,33 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
 {
     public static class StateBuilder
     {
-        public static StateMachine BuildState(StateDataDTO data, Transform tr, BattleSystem ba, HealthSystem he,
-            MovementSystem mo, Animator an)
+        public static StateMachine BuildState(StateDataDTO stateDataDto, Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator)
         {
-            var sm = new StateMachine(an);
+            var stateMachine = new StateMachine(animator);
 
-            foreach (var stateData in data.StateDatas)
+            foreach (var stateData in stateDataDto.StateDatas)
             {
-                var state = BuildState(stateData, tr, ba, he, mo, an, sm);
-                sm.TryAddState(stateData.StateType, state);
+                var state = BuildState(stateData, transform, battleSystem, healthSystem, movementSystem, animator, stateMachine);
+                stateMachine.TryAddState(stateData.StateType, state);
             }
 
-            return sm;
+            return stateMachine;
         }
 
-        private static BaseState BuildState(StateData data, Transform tr, BattleSystem ba, HealthSystem he,
-            MovementSystem mo, Animator an, StateMachine sm)
+        private static BaseState BuildState(StateData data, Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine)
         {
-            Action<StateType, int> enter =
-                data.OnEnter != null ? data.OnEnter.GetStateAction(tr, ba, he, mo, an, sm).OnAct : null;
-            Action<StateType, int> exit =
-                data.OnExit != null ? data.OnExit.GetStateAction(tr, ba, he, mo, an, sm).OnAct : null;
-            Action<StateType, int> update = data.OnUpdate != null
-                ? data.OnUpdate.GetStateAction(tr, ba, he, mo, an, sm).OnAct
-                : null;
-            Action<StateType, int> fixedUpdate = data.OnFixedUpdate != null
-                ? data.OnFixedUpdate.GetStateAction(tr, ba, he, mo, an, sm).OnAct
-                : null;
-            Func<bool> condition = data.Condition != null
-                ? data.Condition.GetStateCondition(tr, ba, he, mo, an).CheckCondition
-                : null;
-            var full = data.OnEveryAction?.GetFullState(tr, ba, he, mo, an, sm) ?? null;
-
-            if ((int)data.AnimParameterEnums >= Enum.GetValues(typeof(AnimationParameterEnums)).Length)
+            Action<StateType, int> enter = data.OnEnter != null ? data.OnEnter.GetStateAction(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine).OnAct : null;
+            Action<StateType, int> exit = data.OnExit != null ? data.OnExit.GetStateAction(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine).OnAct : null;
+            Action<StateType, int> update = data.OnUpdate != null ? data.OnUpdate.GetStateAction(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine).OnAct : null;
+            Action<StateType, int> fixedUpdate = data.OnFixedUpdate != null ? data.OnFixedUpdate.GetStateAction(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine).OnAct : null;
+            
+            Func<bool> condition = data.Condition != null ? data.Condition.GetStateCondition(transform, battleSystem, healthSystem, movementSystem, animator).CheckCondition : null;
+            
+            var fullState = data.OnEveryAction?.GetFullState(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine);
+            var animationParameterHash = Animator.StringToHash(data.AnimParameterEnums.ToString());
+            var baseState = new BaseState(data.StateType, animationParameterHash, enter, exit, update, fixedUpdate, condition);
+            
+            if (!ReferenceEquals(fullState, null))
             {
                 var hash = Animator.StringToHash(data.AnimParameterEnums.ToString());
                 var animationState = new BaseState(data.StateType, hash, enter, exit, update, fixedUpdate, condition);
