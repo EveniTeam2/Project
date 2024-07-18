@@ -32,7 +32,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             var result = _states.TryAdd(name, state);
 
             if (_states.Count == 1)
+            {
                 _current = state;
+                _current.Enter();
+            }
 
             return result;
         }

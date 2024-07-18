@@ -17,6 +17,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.U
         public void ChangeState()
         {
             ServiceProvider.TryChangeState(StateType.Skill);
+
+            var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.HolyHeal}");
+            ServiceProvider.AnimatorSetInteger(AnimationParameterEnums.SkillIndex, skillIndex);
         }
     }
 }
