@@ -40,14 +40,14 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             {
                 var hash = Animator.StringToHash(data.AnimParameterEnums.ToString());
                 var animationState = new BaseState(data.StateType, hash, enter, exit, update, fixedUpdate, condition);
-                if (!ReferenceEquals(full, null))
-                    full.SubscribeEvent(animationState);
+                if (!ReferenceEquals(fullState, null))
+                    fullState.SubscribeEvent(animationState);
                 return animationState;
             }
 
             var state = new BaseState(data.StateType, 0, enter, exit, update, fixedUpdate, condition);
-            if (!ReferenceEquals(full, null))
-                full.SubscribeEvent(state);
+            if (!ReferenceEquals(fullState, null))
+                fullState.SubscribeEvent(state);
             return state;
         }
     }
