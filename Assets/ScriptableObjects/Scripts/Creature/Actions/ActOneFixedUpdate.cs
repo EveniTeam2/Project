@@ -1,5 +1,7 @@
 using ScriptableObjects.Scripts.Creature.Actions;
 using ScriptableObjects.Scripts.Creature.Conditions;
+using System;
+using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 
 namespace ScriptableObjects.Scripts.Creature.DTO {
@@ -25,6 +27,11 @@ namespace ScriptableObjects.Scripts.Creature.DTO {
         public override void FixedUpdate(StateType state, int hash) {
             if (!_isPerformed && _condition.CheckCondition())
                 _action.OnAct(state, hash);
+        }
+
+        public override void SubscribeEvent(IState state) {
+            state.OnEnter += Enter;
+            state._onFixedUpdate += FixedUpdate;
         }
     }
 }
