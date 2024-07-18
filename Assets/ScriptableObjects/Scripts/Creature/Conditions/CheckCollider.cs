@@ -12,9 +12,10 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
         [SerializeField] private LayerMask targetLayer;
         [SerializeField] private Vector2 direction;
         [SerializeField] private float distance;
+        [SerializeField] private bool yesOrNo;
 
         public override IStateCondition GetStateCondition(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
-            return new StateConditionCheckCollider(targetLayer, direction, distance, battleSystem);
+            return new StateConditionCheckCollider(targetLayer, direction, distance, battleSystem, yesOrNo);
         }
     }
 
@@ -23,8 +24,9 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
         private Vector2 direction;
         private float distance;
         private readonly BattleSystem battleSystem;
+        private bool isThereCollider;
 
-        public StateConditionCheckCollider(LayerMask targetLayer, Vector2 direction, float distance, BattleSystem battleSystem) {
+        public StateConditionCheckCollider(LayerMask targetLayer, Vector2 direction, float distance, BattleSystem battleSystem, bool yesOrNo) {
             this.targetLayer = targetLayer;
             this.direction = direction;
             this.distance = distance;
@@ -33,9 +35,9 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
 
         public bool CheckCondition() {
             if (battleSystem.CheckCollider(targetLayer, direction, distance, out var collider))
-                return collider.Length > 0;
+                return isThereCollider == (collider.Length > 0);
 
-            return false;
+            return isThereCollider == false;
         }
     }
 }
