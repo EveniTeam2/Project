@@ -43,6 +43,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter);
 
             _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animationParameter, null);
+            _mods = new LinkedList<ModifyStatData>();
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)

@@ -61,7 +61,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             InitializeMonster(extraSetting, playerSpawnPosition, stageScore);
             InitializeCamera(cam);
             InitializeCommand();
-
+            StartCoroutine(StageScoreUpdate(stageScore));
             _monsterManager.Start();
         }
 

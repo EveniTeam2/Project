@@ -52,6 +52,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animParaDic, characterSetting.CharacterSkillIndexes);
             
             _commandInput = new CommandInput(CharacterServiceProvider, characterSetting.Type, characterSetting.CharacterSkills);
+            _mods = new LinkedList<ModifyStatData>();
         }
 
         public void Input(BlockType blockType, int count)
