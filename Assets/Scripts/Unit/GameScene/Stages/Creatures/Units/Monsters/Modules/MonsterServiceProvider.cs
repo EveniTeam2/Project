@@ -47,6 +47,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
             _animator.SetInteger(_animationParameter[parameter], value);
         }
 
+        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AnimatorSetBool(AnimationParameterEnums parameter, bool value)
         {
             _animator.SetBool(_animationParameter[parameter], value);

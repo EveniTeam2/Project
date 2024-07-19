@@ -9,6 +9,7 @@ namespace Unit.GameScene.Stages.Creatures.Interfaces
     {
         public int GetSkillIndex(string skillName);
         public void AnimatorSetInteger(AnimationParameterEnums parameter, int value);
+        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value);
         public void AnimatorSetBool(AnimationParameterEnums parameter, bool value);
         public AnimatorStateInfo GetCurrentAnimatorStateInfo();
         public AnimatorStateInfo GetNextAnimatorStateInfo();

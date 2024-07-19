@@ -22,7 +22,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
 
         private CommandInput _commandInput;
         private Stat<CharacterStat> _stats;
-        private Dictionary<AnimationParameterEnums, int> _characterAnimationParameter;
+        private Dictionary<AnimationParameterEnums, int> _animationParameter;
 
         protected void Update()
         {
@@ -40,7 +40,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
         {
             var characterTransform = transform;
             characterType = characterSetting.Type;
-            _characterAnimationParameter = animationParameter;
+            _animationParameter = animationParameter;
             
             _animator = GetComponent<Animator>();
 
@@ -50,7 +50,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
             _fsm = StateBuilder.BuildState(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter);
             
-            CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, _characterAnimationParameter, characterSetting.CharacterSkillIndexes);
+            CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, _animationParameter, characterSetting.CharacterSkillIndexes);
             
             _commandInput = new CommandInput(CharacterServiceProvider, characterSetting.Type, characterSetting.CharacterSkills);
             _mods = new LinkedList<ModifyStatData>();

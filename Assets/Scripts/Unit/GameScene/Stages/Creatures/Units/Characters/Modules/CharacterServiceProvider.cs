@@ -51,6 +51,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             _animator.SetInteger(_animationParameter[parameter], value);
         }
 
+        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value)
+        {
+            _animator.SetFloat(_animationParameter[parameter], value);
+        }
+
         public void AnimatorSetBool(AnimationParameterEnums parameter, bool value)
         {
             _animator.SetBool(_animationParameter[parameter], value);

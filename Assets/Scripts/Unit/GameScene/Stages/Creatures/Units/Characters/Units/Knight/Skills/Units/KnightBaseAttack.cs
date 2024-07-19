@@ -16,10 +16,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.U
 
         public void ChangeState()
         {
+            var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.SwordBuff}");
+            ServiceProvider.AnimatorSetFloat(AnimationParameterEnums.SkillIndex, skillIndex);
+            
             ServiceProvider.TryChangeState(StateType.Skill);
-
-            var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.BaseAttack}");
-            ServiceProvider.AnimatorSetInteger(AnimationParameterEnums.SkillIndex, skillIndex);
             
             Debug.Log($"{nameof(skillIndex)} {skillIndex}");
         }

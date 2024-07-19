@@ -33,8 +33,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             
             Func<bool> condition = data.Condition != null ? data.Condition.GetStateCondition(transform, battleSystem, healthSystem, movementSystem, animator).CheckCondition : null;
             
-            var fullState = data.OnEveryAction?.GetFullState(transform, battleSystem, healthSystem, movementSystem,
-                animator, stateMachine);
+            var fullState = data.OnEveryAction?.GetFullState(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine);
             var baseState = new BaseState(data.StateType, animationParameter[data.AnimParameterEnums], enter, exit, update, fixedUpdate, condition);
 
             //if (!ReferenceEquals(fullState, null))

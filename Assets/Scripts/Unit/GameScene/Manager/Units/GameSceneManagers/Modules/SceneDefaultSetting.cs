@@ -15,15 +15,5 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
         [Header("BoardManager Prefabs"), Space(5)] public GameObject boardManagerPrefab;
         [Header("StageManager Prefabs"), Space(5)] public GameObject stageManagerPrefab;
         [Header("Player Spawn Position"), Space(5)] public Vector3 playerSpawnPosition;
-        [Header("Creature Animation Parameter"), Space(5)] public AnimationParameterEnums[] creatureAnimationParameter =
-        {
-            AnimationParameterEnums.Idle,
-            AnimationParameterEnums.Run,
-            AnimationParameterEnums.IsSprint,
-            AnimationParameterEnums.SkillIndex,
-            AnimationParameterEnums.Hit,
-            AnimationParameterEnums.Die,
-            AnimationParameterEnums.Skill
-        };
     }
 }
