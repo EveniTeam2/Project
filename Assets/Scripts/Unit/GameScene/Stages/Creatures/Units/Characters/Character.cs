@@ -36,11 +36,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _movementSystem?.FixedUpdate();
         }
 
-        public void Initialize(CharacterSetting characterSetting, float groundYPosition, Dictionary<AnimationParameterEnums, int> animParaDic)
+        public void Initialize(CharacterSetting characterSetting, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             var characterTransform = transform;
             characterType = characterSetting.Type;
-
+            _characterAnimationParameter = animationParameter;
+            
             _animator = GetComponent<Animator>();
 
             _stats = new Stat<CharacterStat>(characterSetting.Stat);
@@ -49,7 +50,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
             _fsm = StateBuilder.BuildState(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animator);
             
-            CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animParaDic, characterSetting.CharacterSkillIndexes);
+            CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, _characterAnimationParameter, characterSetting.CharacterSkillIndexes);
             
             _commandInput = new CommandInput(CharacterServiceProvider, characterSetting.Type, characterSetting.CharacterSkills);
         }

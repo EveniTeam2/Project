@@ -20,6 +20,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.U
 
             var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.HolySlash}");
             ServiceProvider.AnimatorSetInteger(AnimationParameterEnums.SkillIndex, skillIndex);
+            
+            Debug.Log($"{nameof(skillIndex)} {skillIndex}");
         }
     }
 }

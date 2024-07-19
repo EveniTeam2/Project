@@ -136,6 +136,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             foreach (var animationParameter in animationParameterEnums)
             {
                 _animationParameter.Add(animationParameter, Animator.StringToHash($"{animationParameter}"));
+                Debug.Log($"{animationParameter} => {Animator.StringToHash($"{animationParameter}")} 파싱");
             }
         }
     }
