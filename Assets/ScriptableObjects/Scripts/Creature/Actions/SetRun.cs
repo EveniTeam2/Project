@@ -20,17 +20,23 @@ namespace ScriptableObjects.Scripts.Creature.Actions
         }
     }
 
-    public class StateActionSetRun : IStateAction {
+    public class StateActionSetRun : IStateAction
+    {
         private bool _isRun;
         private readonly MovementSystem _movement;
 
-        public StateActionSetRun(bool isRun, MovementSystem movmenet) {
+        public StateActionSetRun(bool isRun, MovementSystem movmenet)
+        {
             this._isRun = isRun;
             this._movement = movmenet;
         }
 
-        public void OnAct(StateType stateName, int parameterHash) {
+        public void OnAct(StateType stateName, int parameterHash)
+        {
             _movement.SetRun(_isRun);
+#if UNITY_EDITOR
+            //Debug.Log($"IsMoving:{_movement.IsMoving} / WantToRun:{_isRun}");
+#endif
         }
     }
 }

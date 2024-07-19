@@ -1,4 +1,5 @@
 using System;
+using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
 
 namespace Unit.GameScene.Stages.Creatures.Module
 {
@@ -58,6 +59,11 @@ namespace Unit.GameScene.Stages.Creatures.Module
         protected void CallDamage()
         {
             _onDamage?.Invoke();
+        }
+
+        internal void SpawnInit(MonsterHealthStat monsterHealthStat)
+        {
+            _healthStat = monsterHealthStat;
         }
     }
 

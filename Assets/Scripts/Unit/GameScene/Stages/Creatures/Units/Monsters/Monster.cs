@@ -90,5 +90,15 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
 
             _stats.SetCurrent(cur);
         }
+
+        internal void SpawnInit(MonsterStat monsterStat)
+        {
+            _stats = new Stat<MonsterStat>(monsterStat);
+            _battleSystem.SpawnInit(new MonsterBattleStat(_stats));
+            _healthSystem.SpawnInit(new MonsterHealthStat(_stats));
+            _movementSystem.SpawnInit(new MonsterMovementStat(_stats));
+            _fsm.TryChangeState(StateType.Run);
+            ClearModifiedStat();
+        }
     }
 }

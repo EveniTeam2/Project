@@ -1,3 +1,5 @@
+using System;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Module
@@ -19,6 +21,9 @@ namespace Unit.GameScene.Stages.Creatures.Module
         public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee)
         {
             var hits = Physics2D.RaycastAll(_targetTransform.position, direction, distance, targetLayer);
+#if UNITY_EDITOR
+            Debug.DrawRay(_targetTransform.position, distance * direction, Color.red);
+#endif
             collidee = hits;
             if (collidee.Length > 0)
                 return true;
@@ -27,6 +32,11 @@ namespace Unit.GameScene.Stages.Creatures.Module
 
         public abstract void Attack(RaycastHit2D col);
         public abstract void Update();
+
+        internal void SpawnInit(IBattleStat stat)
+        {
+            _stat = stat;
+        }
     }
 
     public interface IBattleStat

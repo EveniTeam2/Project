@@ -118,5 +118,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             state = null;
             return false;
         }
+
+        public StateType GetCurrentStateType()
+        {
+            return _current.GetStateType();
+        }
     }
 }
