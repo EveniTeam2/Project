@@ -40,9 +40,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(_stats));
             _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(_stats), groundYPosition);
 
-            _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator);
+            _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter);
 
             _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animationParameter, null);
+            _mods = new LinkedList<ModifyStatData>();
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)

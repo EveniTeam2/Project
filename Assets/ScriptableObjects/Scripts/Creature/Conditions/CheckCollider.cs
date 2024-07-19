@@ -31,6 +31,7 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
             this.direction = direction;
             this.distance = distance;
             this.battleSystem = battleSystem;
+            isThereCollider = yesOrNo;
         }
 
         public bool CheckCondition() {

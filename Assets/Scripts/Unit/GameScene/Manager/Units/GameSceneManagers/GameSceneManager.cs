@@ -37,7 +37,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         protected CharacterSetting _characterSetting;
         protected RectTransform _blockPanel;
-        protected BackgroundController _backgroundController;
         protected BoardManager _boardManager;
         protected StageManager _stageManager;
         protected Camera _camera;
@@ -50,7 +49,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             InstantiateAndInitializeCamera();
             InstantiateAndInitializeCanvas();
-            InstantiateAndInitializeMap();
             InstantiateAndInitializeCharacterSetting();
             InstantiateAndInitializeBoard();
             InstantiateAndInitializeStage();
@@ -89,16 +87,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         protected virtual void Start()
         {
             StartCoroutine(Timer(extraSetting.limitTime));
-        }
-
-        /// <summary>
-        ///     맵을 인스턴스화하고 초기화합니다.
-        /// </summary>
-        protected void InstantiateAndInitializeMap()
-        {
-            _backgroundController = Instantiate(extraSetting.mapPrefab).GetComponent<BackgroundController>();
-            _backgroundController.transform.SetParent(_camera.transform);
-            _backgroundController.Initialize(_camera);
         }
 
         /// <summary>

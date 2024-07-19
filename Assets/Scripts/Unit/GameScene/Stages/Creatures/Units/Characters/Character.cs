@@ -48,11 +48,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_stats));
             _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
-            _fsm = StateBuilder.BuildState(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animator);
+            _fsm = StateBuilder.BuildState(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter);
             
             CharacterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, _characterAnimationParameter, characterSetting.CharacterSkillIndexes);
             
             _commandInput = new CommandInput(CharacterServiceProvider, characterSetting.Type, characterSetting.CharacterSkills);
+            _mods = new LinkedList<ModifyStatData>();
         }
 
         public void Input(BlockType blockType, int count)
