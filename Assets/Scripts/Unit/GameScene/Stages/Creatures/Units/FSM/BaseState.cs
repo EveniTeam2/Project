@@ -2,6 +2,7 @@ using System;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
 {
@@ -36,6 +37,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public void Enter()
         {
+            Debug.Log($"{_name} Enter");
             OnEnter?.Invoke(_name, _parameterHash);
         }
 
@@ -44,6 +46,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public void Exit()
         {
+            Debug.Log($"{_name} Out");
             OnExit?.Invoke(_name, _parameterHash);
         }
 
