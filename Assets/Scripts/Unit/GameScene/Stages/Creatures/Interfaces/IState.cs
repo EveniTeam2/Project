@@ -14,6 +14,7 @@ namespace Unit.GameScene.Stages.Creatures.Interfaces
         void Update();
         void FixedUpdate();
         bool CanTransitionToThis();
+        StateType GetStateType();
     }
 
     public enum EStateEventType

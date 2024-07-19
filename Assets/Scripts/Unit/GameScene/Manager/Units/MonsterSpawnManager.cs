@@ -127,11 +127,11 @@ namespace Unit.GameScene.Manager.Units {
                     Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i],
                         $"{_data.monsterStats.Length}|{group.monsterStatIndex[i]} 문제 발생!!");
                     var monster = pool.Get();
-                    monster.Initialize(_data.monsterStats[group.monsterStatIndex[i]], _ground, _animationParameter);
+                    monster.SpawnInit(_data.monsterStats[group.monsterStatIndex[i]]);
                     monster.transform.position = _data.monsterSpawnOffset + playerPosition.position +
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
-                    monster.GetServiceProvider().Run(true);
+                    //monster.GetServiceProvider().Run(true);
                 }
         }
 

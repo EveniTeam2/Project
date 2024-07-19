@@ -70,5 +70,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             var result = _transitionCondition?.Invoke() ?? false;
             return result;
         }
+
+        StateType IState.GetStateType()
+        {
+            return _name;
+        }
     }
 }

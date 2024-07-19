@@ -1,3 +1,5 @@
+using System;
+using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Module
@@ -9,7 +11,7 @@ namespace Unit.GameScene.Stages.Creatures.Module
 
         // 속도 댐핑 변수
         protected readonly float _dampTime = 0.3f;
-        protected readonly IMovementStat _stats;
+        protected IMovementStat _stats;
         protected readonly Transform _targetTransform;
 
         // X movement 관련
@@ -41,6 +43,9 @@ namespace Unit.GameScene.Stages.Creatures.Module
             }
 
             _targetTransform.position = pos;
+#if UNITY_EDITOR
+            //Debug.Log($"현재 속도:{_currentSpd}/{_targetSpd}");
+#endif
         }
 
         public virtual void FixedUpdate()
@@ -67,6 +72,11 @@ namespace Unit.GameScene.Stages.Creatures.Module
             else
                 currentSpd = targetSpd;
             return currentSpd;
+        }
+
+        internal void SpawnInit(MonsterMovementStat monsterMovementStat)
+        {
+            _stats = monsterMovementStat;
         }
     }
 
