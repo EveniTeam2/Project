@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills.Units
 {
     public class WitchSkillFactory : SkillFactory<CharacterSkill>
     {
-        public override List<CharacterSkill> CreateSkill()
+        public override List<CommandAction> CreateSkill()
         {
             throw new NotImplementedException();
         }

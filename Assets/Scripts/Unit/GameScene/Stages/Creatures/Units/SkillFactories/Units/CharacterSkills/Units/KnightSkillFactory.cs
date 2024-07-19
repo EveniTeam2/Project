@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.Units;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills.Units
@@ -11,15 +14,17 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSk
     public class KnightSkillFactory : SkillFactory<CharacterSkill>
     {
         private readonly List<string> _characterSkillPresets;
+        private readonly CharacterServiceProvider _characterServiceProvider;
 
-        public KnightSkillFactory(List<string> characterSkillPresets)
+        public KnightSkillFactory(List<string> characterSkillPresets, CharacterServiceProvider characterServiceProvider)
         {
             _characterSkillPresets = characterSkillPresets;
+            _characterServiceProvider = characterServiceProvider;
         }
 
-        public override List<CharacterSkill> CreateSkill()
+        public override List<CommandAction> CreateSkill()
         {
-            var skillPresets = new List<CharacterSkill>();
+            var skillPresets = new List<CommandAction>();
 
             foreach (var characterSkillPreset in _characterSkillPresets)
             {
@@ -29,19 +34,20 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSk
                 switch (skillType)
                 {
                     case KnightSkillType.BaseAttack:
-                        skillPresets.Add(new KnightBaseAttack());
+                        ISkillCommand knightBaseAttack = new KnightBaseAttack(_characterServiceProvider);
+                        skillPresets.Add(new CommandAction(knightBaseAttack));
                         break;
-                    // case KnightSkillType.LightAttack:
-                    //     skillPresets.Add(new KnightLightAttack());
-                    //     break;
                     case KnightSkillType.SwordBuff:
-                        skillPresets.Add(new KnightSwordBuff());
+                        ISkillCommand knightSwordBuff = new KnightSwordBuff(_characterServiceProvider);
+                        skillPresets.Add(new CommandAction(knightSwordBuff));
                         break;
                     case KnightSkillType.HolyHeal:
-                        skillPresets.Add(new KnightHolyHeal());
+                        ISkillCommand knightHolyHeal = new KnightHolyHeal(_characterServiceProvider);
+                        skillPresets.Add(new CommandAction(knightHolyHeal));
                         break;
                     case KnightSkillType.HolySlash:
-                        skillPresets.Add(new KnightHolySlash());
+                        ISkillCommand knightHolySlash = new KnightHolySlash(_characterServiceProvider);
+                        skillPresets.Add(new CommandAction(knightHolySlash));
                         break;
                 }
             }

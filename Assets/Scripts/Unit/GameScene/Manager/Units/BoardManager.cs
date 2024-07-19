@@ -8,10 +8,8 @@ using Unit.GameScene.Boards;
 using Unit.GameScene.Boards.Blocks;
 using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Interfaces;
-using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Unit.GameScene.Manager.Units
 {
@@ -21,13 +19,11 @@ namespace Unit.GameScene.Manager.Units
     public class BoardManager : MonoBehaviour, ISendCommand, IIncreaseDragCount
     {
         public event Action<int> OnIncreaseDragCount;
-        public event Action<ICommand<IStage>> OnSendCommand;
+        public event Action<CommandPacket> OnSendCommand;
         
-        [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")] [SerializeField]
-        private int width;
-
-        [SerializeField]
-        private int height;
+        [Header("보드 가로 x 세로 사이즈 (단위 : 칸)")]
+        [SerializeField] private int width;
+        [SerializeField] private int height;
 
         [Header("각각의 로직 사이의 대기 시간 (단위 : Second)")] [SerializeField] [Range(0, 1f)]
         private float logicProgressTime;
@@ -70,7 +66,6 @@ namespace Unit.GameScene.Manager.Units
         private OrderedDictionary _currentMatchBlock;
 
         private int _dragCount;
-        
         private float _blockGap;
         private float _halfPanelWidth;
         private int _poolSize;
@@ -131,19 +126,27 @@ namespace Unit.GameScene.Manager.Units
         private void CalculateBlockSpawnPositions()
         {
             // panelWidth 구하기
-            var localScale = _blockPanel.localScale;
-            var panelWidth = (float)(int)Math.Round(_canvas.GetComponent<RectTransform>().rect.width);
+            var localScale = (float) Math.Round(_blockPanel.localScale.x);
+            var panelSize = (float)(int)Math.Round(_blockPanel.rect.width * localScale);
             
-            if (panelWidth <= 0) return;
+            // var panelHeight = (float)(int)Math.Round(_canvas.GetComponent<RectTransform>().rect.height);
+            // var panelWidth = (float)(int)Math.Round(_canvas.GetComponent<RectTransform>().rect.width);
+            //
+            // var newPanelSize = panelWidth <= panelHeight ? panelWidth : panelHeight;
+            // newPanelSize *= localScale;
+            
+            // _blockPanel.sizeDelta = new Vector2(newPanelSize, newPanelSize);
+            
+            if (panelSize <= 0) return;
             
             // 블록 간격 계산
-            _blockGap = (float) Math.Truncate(panelWidth / (width - 1));
+            _blockGap = (float) Math.Truncate(panelSize / (width - 1));
             _blockPositions = new List<Tuple<float, float>>();
 
-            _halfPanelWidth = panelWidth / 2;
+            _halfPanelWidth = panelSize / 2;
 
             // 블록 크기 계산
-            _blockSize = new Vector2(_blockGap * localScale.x, _blockGap * localScale.x);
+            _blockSize = new Vector2(_blockGap * localScale, _blockGap * localScale);
 
             // 블록 배치 좌표 계산
             for (var i = 0; i < width; i++)
@@ -324,7 +327,7 @@ namespace Unit.GameScene.Manager.Units
                 var key = (Tuple<BlockType, int>)combo.Key;
                 var value = (int)combo.Value;
                 
-                OnSendCommand?.Invoke(new CommandPacket(key.Item1, value, 0.5f));
+                OnSendCommand?.Invoke(new CommandPacket(key.Item1, value));
             }
 
             _currentMatchBlock.Clear();
@@ -364,10 +367,8 @@ namespace Unit.GameScene.Manager.Units
         {
             var key = new Tuple<BlockType, int>(type, _dragCount);
 
-            if (_currentMatchBlock.Contains(key))
-                _currentMatchBlock[key] = (int)_currentMatchBlock[key] + 1;
-            else
-                _currentMatchBlock.Add(key, 1);
+            if (_currentMatchBlock.Contains(key)) _currentMatchBlock[key] = (int)_currentMatchBlock[key] + 1;
+            else _currentMatchBlock.Add(key, 1);
         }
 
         /// <summary>
@@ -391,15 +392,16 @@ namespace Unit.GameScene.Manager.Units
                 while (toVisit.Count > 0)
                 {
                     var current = toVisit.Dequeue();
-                    if (visited.Contains(current)) continue;
+                    if (!visited.Add(current)) continue;
 
-                    visited.Add(current);
                     group.Add(current);
 
                     var neighbors = _blockMatcher.GetAdjacentMatches(new List<Block> { current });
-                    foreach (var neighbor in neighbors)
-                        if (!visited.Contains(neighbor) && blocks.Contains(neighbor))
-                            toVisit.Enqueue(neighbor);
+
+                    foreach (var neighbor in neighbors.Where(neighbor => !visited.Contains(neighbor) && blocks.Contains(neighbor)))
+                    {
+                        toVisit.Enqueue(neighbor);
+                    }
                 }
 
                 if (group.Count > 0) groups.Add(group);

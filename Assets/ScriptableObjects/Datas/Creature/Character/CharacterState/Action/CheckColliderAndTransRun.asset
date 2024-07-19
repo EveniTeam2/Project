@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CheckColliderAndTransRun
   m_EditorClassIdentifier: 
   condition: {fileID: 11400000, guid: 140bd555d4ec5be4d821b9b526e48632, type: 2}
-  targetStateName: 1
+  targetStateName: 0

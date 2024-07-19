@@ -1,4 +1,5 @@
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
@@ -6,20 +7,27 @@ using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.Units
 {
-    public class KnightHolyHeal : CharacterSkill, IChangeState
+    public class KnightHolyHeal : CharacterSkill, ISkillCommand, IChangeState, ISetFloatParameter
     {
-        protected override void HandleDefineSkill(int combo)
+        public KnightHolyHeal(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) { }
+
+        public void Execute(int comboCount)
         {
-            Debug.Log($"{nameof(CharacterSkill)} - {nameof(KnightHolyHeal)} x {combo}");
+            Debug.Log($"{nameof(CharacterSkill)} - {nameof(KnightHolyHeal)} x {comboCount}");
+            
+            SetFloatParameter();
             ChangeState();
         }
 
         public void ChangeState()
         {
-            var skillIndex = ServiceProvider.GetSkillIndex($"{KnightSkillType.SwordBuff}");
-            ServiceProvider.AnimatorSetFloat(AnimationParameterEnums.SkillIndex, skillIndex);
-            
-            ServiceProvider.TryChangeState(StateType.Skill);
+            CharacterServiceProvider.TryChangeState(StateType.Skill);
+        }
+
+        public void SetFloatParameter()
+        {
+            var skillIndex = CharacterServiceProvider.GetSkillIndex($"{KnightSkillType.HolyHeal}");
+            CharacterServiceProvider.AnimatorSetFloat(AnimationParameterEnums.SkillIndex, skillIndex);
             
             Debug.Log($"{nameof(skillIndex)} {skillIndex}");
         }

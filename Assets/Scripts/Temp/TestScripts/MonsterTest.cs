@@ -31,8 +31,11 @@ namespace Temp {
                 StopOrStartGame();
             }
             foreach (var command in testCommand) {
+                // TODO : 이환님 CommandPacket 구조체로 변경되어서 막아뒀습니다!! 수정해주셔야해요!!
                 if (Input.GetKeyDown(command.key))
-                    (command.packet as ICommand<IStage>).Execute(this);
+                {
+                    // command.packet.Execute(this);
+                }
             }
         }
         Action onInput;

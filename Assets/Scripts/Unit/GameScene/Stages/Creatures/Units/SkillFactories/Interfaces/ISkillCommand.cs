@@ -1,7 +1,7 @@
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces
 {
-    public interface ISkill
+    public interface ISkillCommand
     {
-        public void ActivateSkill();
+        public void Execute(int comboCount);
     }
 }

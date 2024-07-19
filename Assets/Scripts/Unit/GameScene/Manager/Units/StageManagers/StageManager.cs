@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Interfaces;
+using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
 using Unit.GameScene.Stages.Backgrounds;
@@ -16,8 +17,9 @@ using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
-    public class StageManager : MonoBehaviour, IStage, ICommandReceiver<IStage>
+    public class StageManager : MonoBehaviour, IStage, ISendCommand
     {
+        public event Action<CommandPacket> OnSendCommand;
         public event Action OnPlayerDeath;
         
         public StageScore StageScore { get => _stageScore; }
@@ -32,7 +34,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         protected MonsterSpawnManager _monsterManager;
         protected float _startTime;
         protected Vector3 _zeroPosition;
-        protected Queue<ICommand<IStage>> _commands = new();
         private Dictionary<AnimationParameterEnums, int> _animationParameters;
 
         Coroutine _stageScoreCoroutine;
@@ -45,7 +46,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             InitializeCharacter(characterSetting, playerSpawnPosition);
             InitializeMonster(extraSetting, playerSpawnPosition, _stageScore);
             InitializeCamera(cam);
-            InitializeCommand();
             InitializeMap(extraSetting.mapPrefab);
             
             StartCoroutine(StageScoreUpdate(_stageScore));
@@ -54,8 +54,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         private void Update()
         {
-            UpdateCommand();
-            
             // _monsterManager.Update();
         }
 
@@ -68,13 +66,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         public void RegisterEventHandler(ISendCommand data)
         {
-            Debug.Log("Attach Clear");
-            data.OnSendCommand += ReceiveCommand;
-        }
-        
-        public void ReceiveCommand(ICommand<IStage> command)
-        {
-            _commands.Enqueue(command);
+            data.OnSendCommand += OnSendCommand;
         }
         
         private void InitializeCharacter(CharacterSetting characterSetting, Vector3 playerSpawnPosition)
@@ -92,6 +84,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             if (character.TryGetComponent(out _character))
             {
                 _character.Initialize(characterSetting, playerSpawnPosition.y, _animationParameters);
+                OnSendCommand += _character.HandleReceiveCommand;
             }
             _character.GetServiceProvider().RegisterEvent(ECharacterEventType.Death, PlayerIsDead);
         }
@@ -106,18 +99,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             cam.GetComponent<CameraController>().Initialize(_character.transform);
         }
 
-        private void InitializeCommand()
-        {
-            if (_commands == null)
-            {
-                _commands = new Queue<ICommand<IStage>>();
-            }
-            else
-            {
-                _commands.Clear();
-            }
-        }
-
         /// <summary>
         ///     맵을 인스턴스화하고 초기화합니다.
         /// </summary>
@@ -127,16 +108,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             var backgroundController = Instantiate(mapPrefab);
             // _backgroundController.transform.SetParent(_camera.transform);
             backgroundController.GetComponent<BackgroundController>().Initialize(_character);
-        }
-        
-        
-        public void UpdateCommand()
-        {
-            if (_commands.Count > 0 && _commands.Peek().IsExecutable(this))
-            {
-                Debug.Log("커맨드 Dequeue");
-                _commands.Dequeue().Execute(this);
-            }
         }
 
         private void PlayerIsDead() {
