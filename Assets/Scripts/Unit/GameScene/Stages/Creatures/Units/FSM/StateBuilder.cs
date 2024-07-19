@@ -34,7 +34,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             Func<bool> condition = data.Condition != null ? data.Condition.GetStateCondition(transform, battleSystem, healthSystem, movementSystem, animator).CheckCondition : null;
             
             var fullState = data.OnEveryAction?.GetFullState(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine);
-            //var animationParameterHash = Animator.StringToHash(data.AnimParameterEnums.ToString());
             var baseState = new BaseState(data.StateType, animationParameter[data.AnimParameterEnums], enter, exit, update, fixedUpdate, condition);
 
             //if (!ReferenceEquals(fullState, null))
@@ -47,8 +46,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             //}
 
             //var state = new BaseState(data.StateType, 0, enter, exit, update, fixedUpdate, condition);
-            if (!ReferenceEquals(fullState, null))
-                fullState.SubscribeEvent(baseState);
+            fullState?.SubscribeEvent(baseState);
+
             return baseState;
         }
     }

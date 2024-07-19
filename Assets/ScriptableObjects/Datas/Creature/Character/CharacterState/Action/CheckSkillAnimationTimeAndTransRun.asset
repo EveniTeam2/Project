@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76551607e8e7a41498e07ee74523caf0, type: 3}
-  m_Name: CheckAnimTimeAndTransIdle
+  m_Name: CheckSkillAnimationTimeAndTransRun
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: 8790df2ca704f7a4db2e3a0f8d5bc133, type: 2}
-  targetStateName: 0
+  condition: {fileID: 11400000, guid: a6ad35a65b083414bb94157eea514174, type: 2}
+  targetStateName: 1

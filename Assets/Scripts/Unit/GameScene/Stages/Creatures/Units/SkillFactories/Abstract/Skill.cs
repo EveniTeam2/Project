@@ -1,16 +1,11 @@
+using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract
 {
     public abstract class Skill
     {
-        public ICreatureServiceProvider ServiceProvider;
-        public int SkillAnimationIndex;
-
-        public virtual void RegisterServiceProvider(ICreatureServiceProvider serviceProvider)
-        {
-            ServiceProvider = serviceProvider;
-        }
     }
 }

@@ -1,3 +1,4 @@
+using Unit.GameScene.Stages.Creatures.Units.Characters;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Backgrounds
@@ -7,13 +8,10 @@ namespace Unit.GameScene.Stages.Backgrounds
     /// </summary>
     public class ParallaxBackground : MonoBehaviour
     {
-        [SerializeField] [Range(0f, 10f)] [Tooltip("배율이 높을수록 카메라보다 빠르게 움직입니다. 배율이 낮을수록 카메라보다 느리게 움직입니다.")]
-        private float parallaxEffectMultiplier;
-
-        private Camera _mainCamera;
+        private Transform _character;
 
         private float _spriteLength, _startPosition;
-
+        private float _parallaxEffectMultiplier;
         private void FixedUpdate()
         {
             ApplyParallaxEffect();
@@ -23,22 +21,21 @@ namespace Unit.GameScene.Stages.Backgrounds
         /// <summary>
         ///     배경의 초기 위치와 길이를 초기화합니다.
         /// </summary>
-        public void InitializeBackground(Camera mainCamera)
+        public void InitializeBackground(Character character, float parallaxEffectMultiplier)
         {
-            parallaxEffectMultiplier *= -1;
+            _parallaxEffectMultiplier = parallaxEffectMultiplier * -1;
             _startPosition = transform.position.x;
             _spriteLength = GetComponent<SpriteRenderer>().bounds.size.x;
-            _mainCamera = mainCamera;
+            _character = character.transform;
         }
 
         /// <summary>
-        ///     카메라의 이동에 따라 패럴럭스 효과를 적용합니다.
+        ///     캐릭터의 이동에 따라 패럴럭스 효과를 적용합니다.
         /// </summary>
         private void ApplyParallaxEffect()
         {
-            var cameraDisplacement = _mainCamera.transform.position.x * (1 + parallaxEffectMultiplier);
-            transform.position = new Vector3(_startPosition + cameraDisplacement, transform.position.y,
-                transform.position.z);
+            var cameraDisplacement = _character.position.x * _parallaxEffectMultiplier;
+            transform.position = new Vector3(_startPosition + cameraDisplacement, transform.position.y, transform.position.z);
         }
 
         /// <summary>
@@ -46,10 +43,9 @@ namespace Unit.GameScene.Stages.Backgrounds
         /// </summary>
         private void AdjustStartPosition()
         {
-            var cameraMovement = _mainCamera.transform.position.x * (1 - parallaxEffectMultiplier);
+            var cameraMovement = _character.position.x * (1 - _parallaxEffectMultiplier);
 
-            if (cameraMovement > _startPosition + _spriteLength)
-                _startPosition += _spriteLength;
+            if (cameraMovement > _startPosition + _spriteLength) _startPosition += _spriteLength;
             else if (cameraMovement < _startPosition - _spriteLength) _startPosition -= _spriteLength;
         }
     }

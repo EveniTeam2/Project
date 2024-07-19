@@ -1,30 +1,48 @@
 using Unit.GameScene.Stages.Creatures.Module;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace ScriptableObjects.Scripts.Creature.Conditions {
+namespace ScriptableObjects.Scripts.Creature.Conditions
+{
     [CreateAssetMenu(fileName = nameof(CheckAnimationTime), menuName = "State/" + nameof(Condition) + "/" + nameof(CheckAnimationTime))]
-    public class CheckAnimationTime : Condition {
-        [SerializeField] protected float _percentage;
+    public class CheckAnimationTime : Condition
+    {
+        [SerializeField] protected float percentage;
+        [SerializeField] protected StateType currentState;
 
-        public override IStateCondition GetStateCondition(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator) {
-            return new StateConditionCheckAnimationTime(_percentage, animator);
+        public override IStateCondition GetStateCondition(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator)
+        {
+            return new StateConditionCheckAnimationTime(percentage, currentState, animator);
         }
     }
 
     public class StateConditionCheckAnimationTime : IStateCondition {
-        protected float _percentage;
+        private readonly float _percentage;
         private readonly Animator _animator;
+        private readonly StateType _currentState;
 
-        public StateConditionCheckAnimationTime(float percentage, Animator animator) {
+        public StateConditionCheckAnimationTime(float percentage, StateType currentState, Animator animator) {
             _percentage = percentage;
-            this._animator = animator;
+            _animator = animator;
+            _currentState = currentState;
         }
 
-        public bool CheckCondition() {
-            var normalTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if (_percentage < normalTime)
-                return true;
+        public bool CheckCondition()
+        {
+            var currentState = _animator.GetCurrentAnimatorStateInfo(0);
+
+            if (currentState.tagHash == Animator.StringToHash(_currentState.ToString()))
+            {
+                var normalTime = currentState.normalizedTime;
+
+                if (_percentage < normalTime)
+                {
+                    return true;
+                }
+            }
+            
             return false;
         }
     }

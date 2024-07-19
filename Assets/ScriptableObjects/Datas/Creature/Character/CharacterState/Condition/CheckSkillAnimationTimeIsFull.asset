@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 123aa03f40c934d44b7ecc195d5fe8a7, type: 3}
-  m_Name: DefaultBlock
+  m_Script: {fileID: 11500000, guid: 5e5a60fbba60a4758a68295e75834fa4, type: 3}
+  m_Name: CheckSkillAnimationTimeIsFull
   m_EditorClassIdentifier: 
-  type: 0
-  background: {fileID: 21300000, guid: e442f0de696f2f244acb118d31a4194b, type: 3}
-  text: "\uAE30\uBCF8"
+  percentage: 0.99
+  currentState: 2
