@@ -6,7 +6,6 @@ namespace Unit.GameScene.Stages.Creatures.Module
     public abstract class HealthSystem
     {
         protected IHealthStat _healthStat;
-        protected event Action _onHeal;
 
         public HealthSystem(IHealthStat stats)
         {
@@ -21,6 +20,7 @@ namespace Unit.GameScene.Stages.Creatures.Module
             set => _healthStat.SetHealth(value);
         }
 
+        protected event Action _onHeal;
         protected event Action _onDeath;
         protected event Action _onDamage;
 
@@ -62,7 +62,7 @@ namespace Unit.GameScene.Stages.Creatures.Module
             _onDamage?.Invoke();
         }
 
-        protected void CallHealth()
+        protected void CallHeal()
         {
             _onHeal?.Invoke();
         }

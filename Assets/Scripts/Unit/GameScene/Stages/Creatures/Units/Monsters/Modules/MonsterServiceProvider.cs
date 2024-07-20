@@ -98,6 +98,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
             _movementSystem.SetRun(isRun);
         }
 
+        public void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
+        {
+            _fsm.RegistOnSkillState(OnEnter, OnExit, OnUpdate, OnFixedUpdate);
+        }
+
         //public void Attack(RaycastHit2D hit)
         //{
         //    _battleSystem.Attack(hit);
