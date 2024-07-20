@@ -1,35 +1,36 @@
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.Units
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Units
 {
-    public class KnightHolySlash : CharacterSkill, ISkillCommand, IChangeState, ISetFloatParameter
+    public class KnightHolySlash : CharacterSkill
     {
+        private readonly int _skillIndex;
+        
         public KnightHolySlash(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) { }
         
-        public void Execute(int comboCount)
+        protected override void HandleOnEnter(int combo)
         {
-            Debug.Log($"{nameof(CharacterSkill)} - {nameof(KnightHolySlash)} x {comboCount}");
-
-            SetFloatParameter();
-            ChangeState();
-        }
-        
-        public void ChangeState()
-        {
-            CharacterServiceProvider.TryChangeState(StateType.Skill);
-        }
-
-        public void SetFloatParameter()
-        {
-            var skillIndex = CharacterServiceProvider.GetSkillIndex($"{KnightSkillType.HolySlash}");
-            CharacterServiceProvider.AnimatorSetFloat(AnimationParameterEnums.SkillIndex, skillIndex);
+            base.HandleOnEnter(combo);
             
-            Debug.Log($"{nameof(skillIndex)} {skillIndex}");
+            Debug.Log($"{nameof(KnightHolySlash)} Action");
+            
+            SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.HolySlash}"));
+            SetDamageOnBattleSystem(GetSkillValue($"{KnightSkillType.HolySlash}") * combo);
+        }
+
+        protected override void HandleOnUpdate(int combo) { }
+
+        protected override void HandleOnFixedUpdate(int combo) { }
+        
+        protected override void HandleOnExit(int combo)
+        {
+            base.HandleOnExit(combo);
+            
+            ChangeState(StateType.Run);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules

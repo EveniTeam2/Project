@@ -17,7 +17,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             if (col.collider.gameObject.TryGetComponent<Monster>(out var target))
             {
 #if UNITY_EDITOR
-                var dmg = target.GetServiceProvider().Damage(_stat.GetAttack());
+                var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
                 Debug.Log($"플레이어가 {col.collider.gameObject.name}에게 {dmg} 피해를 입혔습니다.");
 #else
                 target.GetServiceProvider().Damage(_stat.GetAttack());

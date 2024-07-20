@@ -4,6 +4,7 @@ using ScriptableObjects.Scripts.Blocks;
 using ScriptableObjects.Scripts.Creature.Settings;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 using UnityEngine.Serialization;
 

@@ -43,6 +43,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         {
             base.Update();
         }
+        
         public override void FixedUpdate()
         {
             base.FixedUpdate();

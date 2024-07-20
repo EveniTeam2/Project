@@ -9,7 +9,9 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
@@ -25,7 +27,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private List<CommandAction> _characterSkills;
 
-        private bool _isSkillAnimationRunning;
+        [SerializeField] private bool skillTransition;
         
         public void HandleReceiveCommand(CommandPacket command)
         {
@@ -34,7 +36,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         public void Initialize(CharacterSetting characterSetting, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
-            _isSkillAnimationRunning = false;
+            skillTransition = false;
             
             var characterTransform = transform;
             characterType = characterSetting.Type;
@@ -47,7 +49,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
             _fsm = StateBuilder.BuildState(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter);
-            _characterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, _animationParameter, characterSetting.CharacterSkillIndexes);
+            _characterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animator, _fsm, _animationParameter, characterSetting.CharacterSkillIndexes, characterSetting.CharacterSkillValues);
             _characterSkills = new CharacterSkillFactory(_characterServiceProvider, characterSetting.Type, characterSetting.CharacterSkillPresets).CreateSkill();
             _commandSystem = new CommandSystem(_characterServiceProvider, characterSetting.Type, _characterSkills);
             _mods = new LinkedList<ModifyStatData>();
@@ -78,17 +80,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         private void ActivateCommand()
         {
-            if (_isSkillAnimationRunning == false && _commands.Count > 0)
-            {
-                if (_fsm.GetCurrentStateType() == StateType.Idle || _fsm.GetCurrentStateType() == StateType.Run )
-                {
-                    Debug.Log($"현재 StateType : {_fsm.GetCurrentStateType()}");
-
-
-                    var command = _commands.Dequeue();
-                    _commandSystem.ActivateCommand(command.BlockType, command.ComboCount);
-                }
-            }
+            if (skillTransition || _commands.Count <= 0) return;
+            
+            Debug.Log("Command Dequeue");
+            var command = _commands.Dequeue();
+            _commandSystem.ActivateCommand(command.BlockType, command.ComboCount);
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
@@ -140,8 +136,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         /// <param name="result"></param>
         public void CheckAnimatorRunning(int result)
         {
-            _isSkillAnimationRunning = result == 1;
-            Debug.Log($"애니메이션 동작 여부 {_isSkillAnimationRunning}");
+            skillTransition = result == 1;
+            _characterServiceProvider.SetSkillAnimationState(skillTransition);
+            
+            Debug.Log($"애니메이션 동작 여부 {skillTransition}");
         }
     }
 }

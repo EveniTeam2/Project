@@ -1,25 +1,25 @@
-using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.Settings;
 using ScriptableObjects.Scripts.Creature.Settings.KnightDefaultSetting;
-using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills;
-using UnityEngine;
+using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
+using UnityEngine.UI;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     public class CharacterSetting
     {
         public Creature Prefab { get; }
         public CharacterType Type { get; }
         public CharacterStat Stat { get; }
-        public Dictionary<string, int> CharacterSkillIndexes { get; }
         public List<string> CharacterSkillPresets { get; }
+        
+        public Dictionary<string, Image> CharacterSkillIcons { get; }
+        public Dictionary<string, int> CharacterSkillIndexes { get; }
+        public Dictionary<string, float> CharacterSkillValues { get; }
 
         public CharacterSetting(CharacterDefaultSetting characterDefaultSetting, CharacterExtraSetting characterExtraSetting)
         {
@@ -27,19 +27,23 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             Type = characterDefaultSetting.characterType;
             Stat = characterDefaultSetting.characterStat;
             CharacterSkillPresets = characterExtraSetting.characterSkillPresets;
-
+            
+            CharacterSkillIcons = new Dictionary<string, Image>();
             CharacterSkillIndexes = new Dictionary<string, int>();
+            CharacterSkillValues = new Dictionary<string, float>();
             
             switch (characterDefaultSetting.characterType)
             {
                 case CharacterType.Knight:
                     var knightDefaultSetting = (KnightDefaultSetting)characterDefaultSetting;
 
-                    foreach (var knightSkillType in knightDefaultSetting.knightSkillTypes)
+                    foreach (var knightSkillSetting in knightDefaultSetting.knightSkillSettings)
                     {
-                        CharacterSkillIndexes.Add($"{knightSkillType.skillType}", knightSkillType.skillIndex);
+                        CharacterSkillIcons.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillIcon);
+                        CharacterSkillIndexes.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillIndex);
+                        CharacterSkillValues.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillValue);
                     }
-                    
+
                     break;
                 case CharacterType.Wizard:
                     break;

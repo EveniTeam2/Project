@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     [Serializable]
     public class CharacterExtraSetting

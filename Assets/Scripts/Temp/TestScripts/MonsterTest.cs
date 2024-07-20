@@ -8,6 +8,7 @@ using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 
 namespace Temp {
