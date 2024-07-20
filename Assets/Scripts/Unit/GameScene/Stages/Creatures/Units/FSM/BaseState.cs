@@ -34,7 +34,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Enter()
         {
-            Debug.Log($"{_name} Enter");
+            Debug.Log($"{_baseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
             //_enterTime = Time.time;
         }
@@ -44,7 +44,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Exit()
         {
-            Debug.Log($"{_name} Out");
+            Debug.Log($"{_baseStateInfo.stateType} Out");
             OnExit?.Invoke();
         }
 
