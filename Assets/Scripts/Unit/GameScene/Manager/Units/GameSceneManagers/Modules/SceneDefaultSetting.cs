@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Unit.GameScene.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules

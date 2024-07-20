@@ -6,7 +6,6 @@ using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
 {
     public class Monster : Creature
     {
-        [SerializeField] private StateDataDTO stateData;
+        [SerializeField] private StateMachineDTO stateData;
         private MonsterServiceProvider _monsterServiceProvider;
 
         protected Stat<MonsterStat> _stats;

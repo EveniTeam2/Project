@@ -99,5 +99,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
         {
             return _fsm.TryChangeState(stateType);
         }
+
+        //public bool TryChangeState(StateType stateType, Action onExecute)
+        //{
+        //    return _fsm.TryChangeState(stateType, onExecute);
+        //}
     }
 }

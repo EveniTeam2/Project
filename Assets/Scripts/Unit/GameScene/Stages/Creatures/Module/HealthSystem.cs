@@ -6,6 +6,7 @@ namespace Unit.GameScene.Stages.Creatures.Module
     public abstract class HealthSystem
     {
         protected IHealthStat _healthStat;
+        protected event Action _onHeal;
 
         public HealthSystem(IHealthStat stats)
         {
@@ -61,10 +62,17 @@ namespace Unit.GameScene.Stages.Creatures.Module
             _onDamage?.Invoke();
         }
 
-        internal void SpawnInit(MonsterHealthStat monsterHealthStat)
+        protected void CallHealth()
+        {
+            _onHeal?.Invoke();
+        }
+
+        public void SpawnInit(MonsterHealthStat monsterHealthStat)
         {
             _healthStat = monsterHealthStat;
         }
+
+        public abstract void Heal(int healAmount);
     }
 
     public interface IHealthStat
