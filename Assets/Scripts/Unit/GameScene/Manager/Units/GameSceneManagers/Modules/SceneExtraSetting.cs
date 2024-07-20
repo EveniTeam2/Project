@@ -29,7 +29,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
         //public AssetReference[] monstersRef;
         
         [Space(5)]
-        [Header("---- Block Settings ----")] public List<BlockSo> blockInfos;
+        [Header("---- Block Settings ----")] public List<BlockModel> blockInfos;
         
         [Space(5)]
         [Header("---- Map Settings ----")] public GameObject mapPrefab;

@@ -186,7 +186,7 @@ MonoBehaviour:
   defaultSetting:
     canvas: {fileID: 2507619777691445654}
     mainCamera: {fileID: 8448268395749990800}
-    boardManagerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
+    matchBoardControllerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
     stageManagerPrefab: {fileID: 3768410994747056990, guid: a9ef38b8df63343d4bdf7f5312703ecc, type: 3}
     playerSpawnPosition: {x: 0, y: 3, z: 0}
   dragCount: 0
@@ -201,6 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 880642944}
+  - component: {fileID: 880642945}
   m_Layer: 5
   m_Name: ComboBlockPanel
   m_TagString: Untagged
@@ -228,6 +229,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &880642945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880642943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!224 &202452015274074228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -246,7 +271,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 768}
+  m_SizeDelta: {x: 1080, y: 810}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &365499054063180160
 MonoBehaviour:
@@ -433,9 +458,9 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1778558241
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2956356416689922066
@@ -608,7 +633,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 192}
+  m_SizeDelta: {x: 1080, y: 150}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &6556566827738508722
 GameObject:

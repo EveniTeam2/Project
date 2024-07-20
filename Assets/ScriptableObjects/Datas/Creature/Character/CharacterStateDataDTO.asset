@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CharacterStateDataDTO
   m_EditorClassIdentifier: Assembly-CSharp:Unit.Character:CharacterStateData
   states:
-  - {fileID: 11400000, guid: c17b183dbfb5adb4596f7875bcbcf65c, type: 2}
-  - {fileID: 11400000, guid: 69214442147a73a49b75ffec53156097, type: 2}
-  - {fileID: 11400000, guid: ba5956a278259ea42872576c7ea7d4a0, type: 2}
   - {fileID: 11400000, guid: f7e31be88d82d314391af44b165dc255, type: 2}
   - {fileID: 11400000, guid: 1879baae9833232418560832cd7e4920, type: 2}
+  - {fileID: 11400000, guid: 39d70319d7ef948329e1389cbf5e4f3f, type: 2}
+  - {fileID: 11400000, guid: 633ba558819d846b1914dd874af24b20, type: 2}
+  - {fileID: 11400000, guid: 50e27b268593c4a129a6d133516e1499, type: 2}

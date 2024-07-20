@@ -8,6 +8,7 @@ using Unit.GameScene.Module;
 using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
@@ -37,7 +38,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         protected CharacterSetting _characterSetting;
         protected RectTransform _blockPanel;
-        protected BoardManager _boardManager;
+        protected MatchBoardController MatchBoardController;
         protected StageManager _stageManager;
         protected Camera _camera;
         protected Canvas _canvas;
@@ -94,10 +95,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// </summary>
         protected void InstantiateAndInitializeBoard()
         {
-            _boardManager = Instantiate(defaultSetting.boardManagerPrefab).GetComponent<BoardManager>();
-            _boardManager.Initialize(extraSetting.blockInfos, _blockPanel, _canvas);
+            MatchBoardController = Instantiate(defaultSetting.matchBoardControllerPrefab).GetComponent<MatchBoardController>();
+            MatchBoardController.Initialize(extraSetting.blockInfos, _blockPanel, _canvas);
 
-            AttachBoard(_boardManager);
+            AttachBoard(MatchBoardController);
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
             _stageManager.Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, _camera);
 
-            _stageManager.RegisterEventHandler(_boardManager);
+            _stageManager.RegisterEventHandler(MatchBoardController);
         }
 
         /// <summary>
