@@ -7,12 +7,12 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 {
     public class HitState : BaseState
     {
-        protected readonly HitStateInfo _hitStateInfo;
+        //protected readonly HitStateInfo _hitStateInfo;
         private Animator _animator;
 
-        public HitState(BaseStateInfo baseStateInfo, HitStateInfo hitStateInfo, Func<StateType, bool> tryChangeState) : base(baseStateInfo, tryChangeState)
+        public HitState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState) : base(baseStateInfo, tryChangeState)
         {
-            this._hitStateInfo = hitStateInfo;
+            //this._hitStateInfo = hitStateInfo;
         }
 
         public override void Enter()

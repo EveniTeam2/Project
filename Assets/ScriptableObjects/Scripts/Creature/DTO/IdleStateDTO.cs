@@ -15,7 +15,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         [SerializeField] IdleStateInfoDTO idleInfoDTO;
         public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
         {
-            return new IdleState(baseStateInfoDTO.GetInfo(anPa), idleInfoDTO.GetInfo(anPa), st.TryChangeState);
+            return new IdleState(baseStateInfoDTO.GetInfo(anPa), idleInfoDTO.GetInfo(anPa), st.TryChangeState, an, ba);
         }
     }
 

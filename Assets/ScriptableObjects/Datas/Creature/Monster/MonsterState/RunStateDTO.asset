@@ -9,21 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3db555cbbb1c16a47aa06a2d5053882a, type: 3}
-  m_Name: Skill2StateDTO
+  m_Script: {fileID: 11500000, guid: e2dc8361fb82a894bb8d3165967b0b2c, type: 3}
+  m_Name: RunStateDTO
   m_EditorClassIdentifier: 
   baseStateInfoDTO:
-    stateType: 2
-    stateParameter: 6
-    defaultExitState: 0
-    animationTime: 1
-    canTransitTime: 1
-  skillInfoDTO:
-    skillParameter: 3
-    skillValue: 2
+    stateType: 1
+    stateParameter: 1
+    defaultExitState: 1
+    animationTime: 2
+    canTransitTime: 2
+  runStateInfoDTO:
     targetLayer:
       serializedVersion: 2
       m_Bits: 128
     direction: {x: 1, y: 0}
-    distance: 1
-    attackTiming: 0.3
+    distance: 2
