@@ -11,7 +11,6 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
     public class Character : Creature
     {
         [SerializeField] protected CharacterType characterType;
-        [SerializeField] private StateDataDTO stateData;
+        [SerializeField] private StateMachineDTO stateData;
 
         private CharacterServiceProvider _characterServiceProvider;
         private Queue<CommandPacket> _commands = new();
@@ -84,6 +83,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
                 if (_fsm.GetCurrentStateType() == StateType.Idle || _fsm.GetCurrentStateType() == StateType.Run )
                 {
                     Debug.Log($"현재 StateType : {_fsm.GetCurrentStateType()}");
+
 
                     var command = _commands.Dequeue();
                     _commandSystem.ActivateCommand(command.BlockType, command.ComboCount);

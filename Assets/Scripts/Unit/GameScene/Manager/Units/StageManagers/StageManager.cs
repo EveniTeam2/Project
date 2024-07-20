@@ -54,7 +54,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         private void Update()
         {
-            // _monsterManager.Update();
+            _monsterManager.Update();
         }
 
         private IEnumerator StageScoreUpdate(StageScore score) {

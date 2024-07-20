@@ -1,82 +1,101 @@
 using System;
-using ScriptableObjects.Scripts.Creature.DTO;
+using UnityEngine;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using UnityEngine;
+using ScriptableObjects.Scripts.Creature.DTO;
+using System.Collections.Generic;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
 {
     /// <summary>
     ///     상태를 나타내는 기본 클래스입니다.
     /// </summary>
-    public class BaseState : IState
+    public abstract class BaseState : IState
     {
-        protected StateType _name;
-        protected int _parameterHash;
-        public event Action<StateType, int> OnEnter;
-        public event Action<StateType, int> OnExit;
-        public event Action<StateType, int> _onUpdate;
-        public event Action<StateType, int> _onFixedUpdate;
-        protected Func<bool> _transitionCondition;
+        public event Action OnEnter;
+        public event Action OnExit;
+        public event Action OnUpdate;
+        public event Action OnFixedUpdate;
 
-        public BaseState(StateType name, int parameterHash, Action<StateType, int> OnEnter = null,
-            Action<StateType, int> OnExit = null, Action<StateType, int> onUpdate = null,
-            Action<StateType, int> onFixedUpdate = null, Func<bool> transitionCondition = null)
+        protected readonly BaseStateInfo _baseStateInfo;
+        protected Func<StateType, bool> _tryChangeState;
+
+        //protected float _enterTime;
+
+        public BaseState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState)
         {
-            _name = name;
-            _parameterHash = parameterHash;
-            this.OnEnter += OnEnter;
-            this.OnExit += OnExit;
-            _onUpdate = onUpdate;
-            _onFixedUpdate = onFixedUpdate;
-            _transitionCondition = transitionCondition;
+            _baseStateInfo = baseStateInfo;
+            _tryChangeState = tryChangeState;
         }
 
         /// <summary>
         ///     상태에 진입합니다.
         /// </summary>
-        public void Enter()
+        public virtual void Enter()
         {
-            Debug.Log($"{_name} Enter");
-            OnEnter?.Invoke(_name, _parameterHash);
+            Debug.Log($"{_baseStateInfo.stateType} Enter");
+            OnEnter?.Invoke();
+            //_enterTime = Time.time;
         }
 
         /// <summary>
         ///     상태에서 나옵니다.
         /// </summary>
-        public void Exit()
+        public virtual void Exit()
         {
-            Debug.Log($"{_name} Out");
-            OnExit?.Invoke(_name, _parameterHash);
+            Debug.Log($"{_baseStateInfo.stateType} Out");
+            OnExit?.Invoke();
         }
 
         /// <summary>
         ///     고정 업데이트를 수행합니다.
         /// </summary>
-        public void FixedUpdate()
+        public virtual void FixedUpdate()
         {
-            _onFixedUpdate?.Invoke(_name, _parameterHash);
+            OnFixedUpdate?.Invoke();
         }
 
         /// <summary>
         ///     업데이트를 수행합니다.
         /// </summary>
-        public void Update()
+        public virtual void Update()
         {
-            _onUpdate?.Invoke(_name, _parameterHash);
+            OnUpdate?.Invoke();
+            //float duration = Time.time - _enterTime;
+            //if (duration > _baseStateInfo.animationTime)
+            //    _tryChangeState(_baseStateInfo.defaultExitState);
         }
 
         /// <summary>
         /// </summary>
-        public bool CanTransitionToThis()
-        {
-            var result = _transitionCondition?.Invoke() ?? false;
-            return result;
-        }
+        //public virtual bool CanTransitionToOther()
+        //{
+        //    float duration = Time.time - _enterTime;
+        //    return duration > _baseStateInfo.canTransitTime;
+        //}
 
-        StateType IState.GetStateType()
+        protected void ClearEvent(EStateEventType type)
         {
-            return _name;
+            switch (type)
+            {
+                case EStateEventType.Enter:
+                    OnEnter = null;
+                    break;
+                case EStateEventType.Exit:
+                    OnExit = null;
+                    break;
+                case EStateEventType.Update:
+                    OnUpdate = null;
+                    break;
+                case EStateEventType.FixedUpdate:
+                    OnFixedUpdate = null;
+                    break;
+            }
+        }
+        public StateType GetStateType()
+        {
+            return _baseStateInfo.stateType;
         }
     }
 }
