@@ -8,31 +8,25 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules
     {
         [SerializeField] private float minTime;
         [SerializeField] private float maxTime;
-        [SerializeField] private float intervalTime = 1f;
 
         public override IMonsterSpawnDecider GetMonsterSpawnDecider(StageScore score) {
-            return new RandomTimeMonsterSpawnDecider(minTime, maxTime, intervalTime, score);
+            return new RandomTimeMonsterSpawnDecider(minTime, maxTime, score);
         }
     }
 
     public class RandomTimeMonsterSpawnDecider : IMonsterSpawnDecider {
         private float minTime;
         private float maxTime;
-        private float intervalTime;
         private readonly StageScore score;
-        private int count;
 
-        public RandomTimeMonsterSpawnDecider(float minTime, float maxTime, float intervalTime, StageScore score) {
+        public RandomTimeMonsterSpawnDecider(float minTime, float maxTime, StageScore score) {
             this.minTime = minTime;
             this.maxTime = maxTime;
-            this.intervalTime = intervalTime;
             this.score = score;
-            this.count = 0;
         }
 
         public void Initialize() {
-            count = 0;
-            Debug.Log($"Count => {count}");
+
         }
         public bool CanExecute() {
             var decision = score.PlayTime;

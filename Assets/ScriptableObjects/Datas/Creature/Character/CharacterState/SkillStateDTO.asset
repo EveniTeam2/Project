@@ -15,15 +15,4 @@ MonoBehaviour:
   baseStateInfoDTO:
     stateType: 2
     stateParameter: 6
-    defaultExitState: 0
-    animationTime: 1
-    canTransitTime: 1
-  skillInfoDTO:
-    skillParameter: 3
-    skillValue: 0
-    targetLayer:
-      serializedVersion: 2
-      m_Bits: 128
-    direction: {x: 1, y: 0}
-    distance: 1
-    attackTiming: 0.3
+    defaultExitState: 1

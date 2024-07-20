@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Manager.Units.StageManagers;
@@ -13,10 +12,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
 {
     public class Monster : Creature
     {
-        [SerializeField] private StateMachineDTO stateData;
+        [SerializeField] private MonsterStateMachineDTO stateData;
         private MonsterServiceProvider _monsterServiceProvider;
 
         protected Stat<MonsterStat> _stats;
+        private MonsterBattleStat _battleStat;
+        protected MonsterEventPublisher _eventPublisher;
 
         private void Update()
         {
@@ -34,12 +35,14 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
         {
             _animator = gameObject.GetComponent<Animator>();
 
+            _eventPublisher = new MonsterEventPublisher();
             _stats = new Stat<MonsterStat>(stat);
-            _battleSystem = new MonsterBattleSystem(transform, new MonsterBattleStat(_stats));
+            _battleStat = new MonsterBattleStat(_stats);
+            _battleSystem = new MonsterBattleSystem(transform, _battleStat);
             _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(_stats));
             _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(_stats), groundYPosition);
 
-            _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter);
+            _fsm = StateBuilder.MonsterBuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter, _eventPublisher);
 
             _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animationParameter, null);
             _mods = new LinkedList<ModifyStatData>();
@@ -90,14 +93,24 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             _stats.SetCurrent(cur);
         }
 
-        internal void SpawnInit(MonsterStat monsterStat)
+        public void SpawnInit(MonsterStat monsterStat)
         {
             _stats = new Stat<MonsterStat>(monsterStat);
             _battleSystem.SpawnInit(new MonsterBattleStat(_stats));
             _healthSystem.SpawnInit(new MonsterHealthStat(_stats));
             _movementSystem.SpawnInit(new MonsterMovementStat(_stats));
-            _fsm.TryChangeState(StateType.Run);
+            //_fsm.TryChangeState(StateType.Run);
             ClearModifiedStat();
+        }
+
+        public void AnimationAttackEvent()
+        {
+            _eventPublisher.CallAttackEvent(_battleStat);
+        }
+
+        public void AnimationEndEvent()
+        {
+            _eventPublisher.CallAnimationEndEvent();
         }
     }
 }

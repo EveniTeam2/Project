@@ -16,11 +16,9 @@ MonoBehaviour:
     stateType: 0
     stateParameter: 0
     defaultExitState: 0
-    animationTime: 2
-    canTransitTime: 2
   idleInfoDTO:
     targetLayer:
       serializedVersion: 2
-      m_Bits: 128
-    direction: {x: 1, y: 0}
+      m_Bits: 64
+    direction: {x: -1, y: 0}
     distance: 2

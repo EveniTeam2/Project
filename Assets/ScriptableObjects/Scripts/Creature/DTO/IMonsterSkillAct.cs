@@ -1,7 +1,7 @@
 ﻿namespace ScriptableObjects.Scripts.Creature.DTO
 {
-    public interface ISkillAct
+    public interface IMonsterSkillAct
     {
-        public void Act();
+
     }
 }

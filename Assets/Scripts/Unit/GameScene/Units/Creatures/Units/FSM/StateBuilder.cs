@@ -4,6 +4,7 @@ using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
@@ -15,9 +16,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             return stateDataDTO.Build(transform, battleSystem, healthSystem, movementSystem, animator, animationParameter);
         }
 
-        public static IState BuildState(BaseStateDTO data, Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, StateMachine stateMachine, Dictionary<AnimationParameterEnums, int> animationParameter)
+        public static StateMachine MonsterBuildState(MonsterStateMachineDTO stateDataDTO, Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, Dictionary<AnimationParameterEnums, int> animationParameter, MonsterEventPublisher eventPublisher)
         {
-            return data.Build(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine, animationParameter);
+            return stateDataDTO.BuildMonster(transform, battleSystem, healthSystem, movementSystem, animator, animationParameter, eventPublisher);
         }
     }
 }

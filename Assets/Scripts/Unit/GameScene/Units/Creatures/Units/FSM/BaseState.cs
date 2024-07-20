@@ -2,9 +2,7 @@ using System;
 using UnityEngine;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using UnityEngine;
 using ScriptableObjects.Scripts.Creature.DTO;
-using System.Collections.Generic;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
 {
@@ -34,9 +32,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Enter()
         {
-            Debug.Log($"{_baseStateInfo.stateType} Enter");
+            //Debug.Log($"{_baseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
-            //_enterTime = Time.time;
         }
 
         /// <summary>
@@ -44,7 +41,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Exit()
         {
-            Debug.Log($"{_baseStateInfo.stateType} Out");
+            //Debug.Log($"{_baseStateInfo.stateType} Out");
             OnExit?.Invoke();
         }
 
@@ -62,18 +59,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         public virtual void Update()
         {
             OnUpdate?.Invoke();
-            //float duration = Time.time - _enterTime;
-            //if (duration > _baseStateInfo.animationTime)
-            //    _tryChangeState(_baseStateInfo.defaultExitState);
         }
 
-        /// <summary>
-        /// </summary>
-        //public virtual bool CanTransitionToOther()
-        //{
-        //    float duration = Time.time - _enterTime;
-        //    return duration > _baseStateInfo.canTransitTime;
-        //}
 
         protected void ClearEvent(EStateEventType type)
         {

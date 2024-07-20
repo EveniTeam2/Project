@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
-using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
+
     public class SkillState : BaseState
     {
         //protected Animator _animator;

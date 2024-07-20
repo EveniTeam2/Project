@@ -36,13 +36,10 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         }
         private void CheckTargetAndIdle()
         {
-            //if (CanTransitionToOther())
+            if (_battleSystem.CheckCollider(_runStateInfo.targetLayer, _runStateInfo.direction, _runStateInfo.distance, out _))
             {
-                if (_battleSystem.CheckCollider(_runStateInfo.targetLayer, _runStateInfo.direction, _runStateInfo.distance, out _))
-                {
-                    OnFixedUpdate -= CheckTargetAndIdle;
-                    _tryChangeState.Invoke(StateType.Idle);
-                }
+                OnFixedUpdate -= CheckTargetAndIdle;
+                _tryChangeState.Invoke(StateType.Idle);
             }
         }
     }
