@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using UnityEditorInternal;
+using UnityEngine;
 using ScriptableObjects.Scripts.Creature.DTO;
 using System.Collections.Generic;
 
@@ -34,6 +34,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Enter()
         {
+            Debug.Log($"{_name} Enter");
             OnEnter?.Invoke();
             //_enterTime = Time.time;
         }
@@ -43,6 +44,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Exit()
         {
+            Debug.Log($"{_name} Out");
             OnExit?.Invoke();
         }
 

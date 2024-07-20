@@ -61,7 +61,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             _movementSystem?.Update();
             
             // TODO : 커맨드 인풋 내부로 이동 예정
-            UpdateCommand();
+            ActivateCommand();
         }
         
         protected void FixedUpdate()
@@ -76,14 +76,18 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             else _commands.Clear();
         }
 
-        private void UpdateCommand()
+        private void ActivateCommand()
         {
             if (_commands.Count > 0)
             {
-                //Debug.Log("커맨드 Dequeue");
+                if (_fsm.GetCurrentStateType() == StateType.Idle || _fsm.GetCurrentStateType() == StateType.Run)
+                {
+                    Debug.Log("커맨드 Dequeue");
 
-                var command = _commands.Dequeue();
-                _commandSystem.ActivateCommand(command.BlockType, command.ComboCount);
+
+                    var command = _commands.Dequeue();
+                    _commandSystem.ActivateCommand(command.BlockType, command.ComboCount);
+                }
                 
                 // TODO : 작업 예정
                 
