@@ -4,6 +4,8 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills.Units;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills
 {
@@ -13,8 +15,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSk
         private readonly List<string> _characterSkillPresets;
         private readonly CharacterType _characterType;
 
-        public CharacterSkillFactory(CharacterServiceProvider characterServiceProvider, CharacterType characterType,
-            List<string> characterSkillPresets)
+        public CharacterSkillFactory(CharacterServiceProvider characterServiceProvider, CharacterType characterType, List<string> characterSkillPresets)
         {
             _characterType = characterType;
             _characterSkillPresets = characterSkillPresets;

@@ -14,6 +14,7 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using Unit.GameScene.Units.Creatures.Units.Characters;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers

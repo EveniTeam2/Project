@@ -7,6 +7,7 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
 {
@@ -20,6 +21,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
         private readonly MovementSystem _movementSystem;
         private readonly Dictionary<AnimationParameterEnums, int> _animationParameter;
         private readonly Dictionary<string, int> _skillIndexes;
+        private readonly Dictionary<string, float> _skillValues;
+        private bool _skillTransition;
 
         public CharacterServiceProvider(
             CharacterType characterType,
@@ -29,7 +32,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             Animator animator,
             StateMachine fsm,
             Dictionary<AnimationParameterEnums, int> animationParameter,
-            Dictionary<string, int> skillIndexes)
+            Dictionary<string, int> skillIndexes,
+            Dictionary<string, float> skillValues)
         {
             _characterType = characterType;
             _battleSystem = battleSystem;
@@ -39,11 +43,32 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             _fsm = fsm;
             _animationParameter = animationParameter;
             _skillIndexes = skillIndexes;
+            _skillValues = skillValues;
+        }
+
+        public void SetSkillAnimationState(bool value)
+        {
+            _skillTransition = value;
+        }
+
+        public bool GetSkillAnimationState()
+        {
+            return _skillTransition;
+        }
+
+        public float GetSkillValue(string skillName)
+        {
+            return _skillValues[skillName];
         }
 
         public int GetSkillIndex(string skillName)
         {
             return _skillIndexes[skillName];
+        }
+
+        public void AttackEnemy(float damage)
+        {
+            // TODO : damage 주면 몬스터 때찌해주세요 (채이환)
         }
 
         public void AnimatorSetInteger(AnimationParameterEnums parameter, int value)
@@ -61,7 +86,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             _animator.SetBool(_animationParameter[parameter], value);
         }
 
-        public int Damage(int atk)
+        public int TakeDamage(int atk)
         {
             _healthSystem.Damage(atk);
             return atk;
@@ -100,9 +125,9 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             return _fsm.TryChangeState(stateType);
         }
 
-        public void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
+        public void RegisterEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
         {
-            _fsm.RegistOnSkillState(OnEnter, OnExit, OnUpdate, OnFixedUpdate);
+            _fsm.RegisterOnSkillState(OnEnter, OnExit, OnUpdate, OnFixedUpdate);
         }
 
         //public bool TryChangeState(StateType stateType, Action onExecute)

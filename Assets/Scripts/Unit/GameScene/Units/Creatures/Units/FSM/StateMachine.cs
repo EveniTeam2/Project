@@ -164,7 +164,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         //    return false;
         //}
 
-        public void RegistOnSkillState(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
+        public void RegisterOnSkillState(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
         {
             var skill = _states[StateType.Skill];
             skill.OnEnter += OnEnter;

@@ -9,6 +9,7 @@ using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
