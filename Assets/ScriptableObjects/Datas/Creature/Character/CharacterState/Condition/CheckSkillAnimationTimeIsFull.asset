@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5a60fbba60a4758a68295e75834fa4, type: 3}
   m_Name: CheckSkillAnimationTimeIsFull
   m_EditorClassIdentifier: 
-  percentage: 0.99
-  currentState: 2
+  percentage: 0.9
+  currentState: 6

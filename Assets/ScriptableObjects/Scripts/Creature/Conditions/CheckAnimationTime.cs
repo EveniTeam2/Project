@@ -10,7 +10,7 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
     public class CheckAnimationTime : Condition
     {
         [SerializeField] protected float percentage;
-        [SerializeField] protected StateType currentState;
+        [SerializeField] protected AnimationParameterEnums currentState;
 
         public override IStateCondition GetStateCondition(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator)
         {
@@ -21,9 +21,9 @@ namespace ScriptableObjects.Scripts.Creature.Conditions
     public class StateConditionCheckAnimationTime : IStateCondition {
         private readonly float _percentage;
         private readonly Animator _animator;
-        private readonly StateType _currentState;
+        private readonly AnimationParameterEnums _currentState;
 
-        public StateConditionCheckAnimationTime(float percentage, StateType currentState, Animator animator) {
+        public StateConditionCheckAnimationTime(float percentage, AnimationParameterEnums currentState, Animator animator) {
             _percentage = percentage;
             _animator = animator;
             _currentState = currentState;

@@ -1,13 +1,15 @@
 using Unit.GameScene.Boards.Blocks;
+using Unit.GameScene.Units.Blocks.Units.MatchBlock;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace Match2D {
     [CreateAssetMenu(fileName = "BlockPlacerTile", menuName = "Tile/Block Placer Tile")]
     public class BlockPlacerTile : TileBase {
         public Sprite PreviewEditorSprite;
-        [Tooltip("If null this will be a random gem")]
-        public Block PlacedBlock = null;
+        [FormerlySerializedAs("placedMatchBlockView")] [FormerlySerializedAs("placedBlockView")] [FormerlySerializedAs("PlacedBlock")] [Tooltip("If null this will be a random gem")]
+        public MatchMatchBlockView placedMatchMatchBlockView = null;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData) {
             tileData.sprite = !Application.isPlaying ? PreviewEditorSprite : null;

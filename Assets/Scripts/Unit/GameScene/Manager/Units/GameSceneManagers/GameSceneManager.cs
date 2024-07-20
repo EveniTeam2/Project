@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using ScriptableObjects.Scripts.Creature.Settings.KnightDefaultSetting;
 using Unit.GameScene.Boards.Interfaces;
+using Unit.GameScene.Manager.Units.BoardManagers;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
@@ -37,7 +38,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         protected CharacterSetting _characterSetting;
         protected RectTransform _blockPanel;
-        protected BoardManager _boardManager;
+        protected MatchBoardController MatchBoardController;
         protected StageManager _stageManager;
         protected Camera _camera;
         protected Canvas _canvas;
@@ -94,10 +95,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// </summary>
         protected void InstantiateAndInitializeBoard()
         {
-            _boardManager = Instantiate(defaultSetting.boardManagerPrefab).GetComponent<BoardManager>();
-            _boardManager.Initialize(extraSetting.blockInfos, _blockPanel, _canvas);
+            MatchBoardController = Instantiate(defaultSetting.boardManagerPrefab).GetComponent<MatchBoardController>();
+            MatchBoardController.Initialize(extraSetting.blockInfos, _blockPanel, _canvas);
 
-            AttachBoard(_boardManager);
+            AttachBoard(MatchBoardController);
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
             _stageManager.Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, _camera);
 
-            _stageManager.RegisterEventHandler(_boardManager);
+            _stageManager.RegisterEventHandler(MatchBoardController);
         }
 
         /// <summary>
