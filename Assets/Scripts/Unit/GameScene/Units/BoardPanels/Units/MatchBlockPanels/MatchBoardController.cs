@@ -8,11 +8,12 @@ using Unit.GameScene.Boards;
 using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Modules;
+using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock;
 using Unit.GameScene.Units.BoardPanels.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Manager.Units.BoardManagers
+namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
 {
     /// <summary>
     ///     보드 상태를 관리하며, 블록 교환, 매칭 및 보드 갱신을 처리합니다.
@@ -41,8 +42,8 @@ namespace Unit.GameScene.Manager.Units.BoardManagers
         [Header("블록 낙하 이후 바운스 대기 시간 (단위 : Second)")] [SerializeField] [Range(0, 1f)]
         private float bounceDuration;
 
-        [Header("블록 풀링 관련 설정")] [SerializeField]
-        private MatchMatchBlockView matchMatchBlockViewPrefab;
+        [Header("매치 블록 풀링 관련 설정")] [SerializeField]
+        private BlockView matchMatchBlockViewPrefab;
         
         [Header("로직 동작 여부")] [SerializeField]
         private bool isLogicUpdating;

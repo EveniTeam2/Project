@@ -1,5 +1,6 @@
 using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters;
+using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput

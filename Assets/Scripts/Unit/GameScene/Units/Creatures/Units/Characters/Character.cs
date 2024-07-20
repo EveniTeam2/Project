@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
-using Unit.GameScene.Boards.Blocks.Enums;
-using Unit.GameScene.Boards.Interfaces;
-using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
-using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Stages.Creatures;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
@@ -15,7 +11,7 @@ using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters
+namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
     public class Character : Creature
     {
@@ -28,6 +24,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
         private Stat<CharacterStat> _stats;
         private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private List<CommandAction> _characterSkills;
+
+        private bool _isSkillAnimationRunning;
         
         public void HandleReceiveCommand(CommandPacket command)
         {
@@ -36,6 +34,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
 
         public void Initialize(CharacterSetting characterSetting, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
+            _isSkillAnimationRunning = false;
+            
             var characterTransform = transform;
             characterType = characterSetting.Type;
             _animationParameter = animationParameter;
@@ -78,7 +78,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
 
         private void ActivateCommand()
         {
-            if (_commands.Count > 0)
+            if (_isSkillAnimationRunning == false && _commands.Count > 0)
             {
                 if (_fsm.GetCurrentStateType() == StateType.Idle || _fsm.GetCurrentStateType() == StateType.Run )
                 {
@@ -88,17 +88,8 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
                     var command = _commands.Dequeue();
                     _commandSystem.ActivateCommand(command.BlockType, command.ComboCount);
                 }
-                
-                // TODO : 작업 예정
-                
-                // _commands.Dequeue().Execute(this);
             }
         }
-
-        // public void Input(BlockType blockType, int count)
-        // {
-        //     _commandInput.Input(blockType, count);
-        // }
 
         public override void PermanentModifyStat(EStatType statType, int value)
         {
@@ -141,6 +132,16 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters
             }
 
             _stats.SetCurrent(cur);
+        }
+        
+        /// <summary>
+        /// Character Animator 이벤트입니다.
+        /// </summary>
+        /// <param name="result"></param>
+        public void CheckAnimatorRunning(int result)
+        {
+            _isSkillAnimationRunning = result == 1;
+            Debug.Log($"애니메이션 동작 여부 {_isSkillAnimationRunning}");
         }
     }
 }

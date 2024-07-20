@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using ScriptableObjects.Scripts.Creature.Settings.KnightDefaultSetting;
 using Unit.GameScene.Boards.Interfaces;
-using Unit.GameScene.Manager.Units.BoardManagers;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
@@ -95,7 +95,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// </summary>
         protected void InstantiateAndInitializeBoard()
         {
-            MatchBoardController = Instantiate(defaultSetting.boardManagerPrefab).GetComponent<MatchBoardController>();
+            MatchBoardController = Instantiate(defaultSetting.matchBoardControllerPrefab).GetComponent<MatchBoardController>();
             MatchBoardController.Initialize(extraSetting.blockInfos, _blockPanel, _canvas);
 
             AttachBoard(MatchBoardController);

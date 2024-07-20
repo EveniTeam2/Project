@@ -1,5 +1,6 @@
 using System;
 using Unit.GameScene.Stages.Creatures.Units.Characters;
+using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM.ActOnInput
