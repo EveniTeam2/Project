@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 {
-   public class MonsterServiceProvider : ICreatureServiceProvider
+    public class MonsterServiceProvider : ICreatureServiceProvider
     {
         private readonly Animator _animator;
         private readonly BattleSystem _battleSystem;
@@ -98,44 +98,48 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
             _movementSystem.SetRun(isRun);
         }
 
-        public void Attack(RaycastHit2D hit)
+        public void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
         {
-            _battleSystem.Attack(hit);
+            _fsm.RegistOnSkillState(OnEnter, OnExit, OnUpdate, OnFixedUpdate);
         }
 
-        public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float _distance,
-            out RaycastHit2D[] collider)
-        {
-            return _battleSystem.CheckCollider(targetLayer, direction, _distance, out collider);
-        }
+        //public void Attack(RaycastHit2D hit)
+        //{
+        //    _battleSystem.Attack(hit);
+        //}
 
-        public void RegistStateEvent(StateType stateType, EStateEventType eventType, Action<StateType, int> subscriber)
-        {
-            if (_fsm.TryGetState(stateType, out var state))
-                switch (eventType)
-                {
-                    case EStateEventType.Enter:
-                        state.OnEnter += subscriber;
-                        break;
-                    case EStateEventType.Exit:
-                        state.OnExit += subscriber;
-                        break;
-                }
-        }
+        //public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float _distance,
+        //    out RaycastHit2D[] collider)
+        //{
+        //    return _battleSystem.CheckCollider(targetLayer, direction, _distance, out collider);
+        //}
 
-        public void UnregistStateEvent(StateType stateType, EStateEventType eventType,
-            Action<StateType, int> subscriber)
-        {
-            if (_fsm.TryGetState(stateType, out var state))
-                switch (eventType)
-                {
-                    case EStateEventType.Enter:
-                        state.OnEnter -= subscriber;
-                        break;
-                    case EStateEventType.Exit:
-                        state.OnExit -= subscriber;
-                        break;
-                }
-        }
+        //public void RegistStateEvent(StateType stateType, EStateEventType eventType, Action subscriber)
+        //{
+        //    if (_fsm.TryGetState(stateType, out var state))
+        //        switch (eventType)
+        //        {
+        //            case EStateEventType.Enter:
+        //                state.OnEnter += subscriber;
+        //                break;
+        //            case EStateEventType.Exit:
+        //                state.OnExit += subscriber;
+        //                break;
+        //        }
+        //}
+
+        //public void UnregistStateEvent(StateType stateType, EStateEventType eventType, Action subscriber)
+        //{
+        //    if (_fsm.TryGetState(stateType, out var state))
+        //        switch (eventType)
+        //        {
+        //            case EStateEventType.Enter:
+        //                state.OnEnter -= subscriber;
+        //                break;
+        //            case EStateEventType.Exit:
+        //                state.OnExit -= subscriber;
+        //                break;
+        //        }
+        //}
     }
 }

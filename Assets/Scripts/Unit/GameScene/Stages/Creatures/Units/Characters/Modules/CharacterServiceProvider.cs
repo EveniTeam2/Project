@@ -99,5 +99,15 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
         {
             return _fsm.TryChangeState(stateType);
         }
+
+        public void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
+        {
+            _fsm.RegistOnSkillState(OnEnter, OnExit, OnUpdate, OnFixedUpdate);
+        }
+
+        //public bool TryChangeState(StateType stateType, Action onExecute)
+        //{
+        //    return _fsm.TryChangeState(stateType, onExecute);
+        //}
     }
 }
