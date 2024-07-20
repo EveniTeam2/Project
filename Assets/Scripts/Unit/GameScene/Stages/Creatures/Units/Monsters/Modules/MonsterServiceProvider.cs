@@ -49,7 +49,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 
         public void AnimatorSetFloat(AnimationParameterEnums parameter, float value)
         {
-            throw new NotImplementedException();
+            _animator.SetFloat(_animationParameter[parameter], value);
         }
 
         public void AnimatorSetBool(AnimationParameterEnums parameter, bool value)
@@ -59,7 +59,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 
         public bool TryChangeState(StateType stateType)
         {
-            // throw new NotImplementedException();
+            _fsm.TryChangeState(stateType);
             return false;
         }
 

@@ -14,10 +14,12 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 
         protected readonly IdleStateInfo _idleStateInfo;
 
-        public IdleState(BaseStateInfo baseInfo, IdleStateInfo idleStateInfo, Func<StateType, bool> tryChangeState)
+        public IdleState(BaseStateInfo baseInfo, IdleStateInfo idleStateInfo, Func<StateType, bool> tryChangeState, Animator animator, BattleSystem battleSystem)
             : base(baseInfo, tryChangeState)
         {
             _idleStateInfo = idleStateInfo;
+            _animator = animator;
+            _battleSystem = battleSystem;
         }
 
         public override void Enter()

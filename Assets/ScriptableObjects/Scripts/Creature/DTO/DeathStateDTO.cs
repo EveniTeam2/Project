@@ -11,22 +11,22 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     [CreateAssetMenu(fileName = nameof(DeathStateDTO), menuName = "State/" + nameof(DeathStateDTO))]
     public class DeathStateDTO : BaseStateDTO
     {
-        [Header("Death State Info")]
-        [SerializeField] DeathStateInfoDTO deathStateInfoDTO;
+        //[Header("Death State Info")]
+        //[SerializeField] DeathStateInfoDTO deathStateInfoDTO;
         public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
         {
-            throw new System.NotImplementedException();
+            return new DeathState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState, an);
         }
     }
 
-    [Serializable]
-    public struct DeathStateInfoDTO
-    {
+    //[Serializable]
+    //public struct DeathStateInfoDTO
+    //{
 
-    }
+    //}
 
-    public struct DeathStateInfo
-    {
+    //public struct DeathStateInfo
+    //{
 
-    }
+    //}
 }

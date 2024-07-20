@@ -7,13 +7,13 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 {
     public class DeathState : BaseState
     {
-        private readonly DeathStateInfo _deathInfo;
+        //private readonly DeathStateInfo _deathInfo;
         private Animator _animator;
 
-        public DeathState(BaseStateInfo baseStateInfo, DeathStateInfo deathInfo, Func<StateType, bool> tryChangeState, Animator animator)
+        public DeathState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState, Animator animator)
             : base(baseStateInfo, tryChangeState)
         {
-            _deathInfo = deathInfo;
+            //_deathInfo = deathInfo;
             _animator = animator;
         }
 
