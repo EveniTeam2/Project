@@ -22,6 +22,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
 
             CallDamage();
         }
+
+        public override void Heal(int healAmount)
+        {
+            _health += healAmount;
+            CallHeal();
+        }
     }
 
     public class CharacterHealthStat : IHealthStat

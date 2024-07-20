@@ -17,6 +17,7 @@ namespace Unit.GameScene.Stages.Creatures.Interfaces
 
         int Damage(int atk);
         void RegisterEvent(ECharacterEventType type, Action subscriber);
+        void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate);
         void Run(bool isRun);
     }
 }

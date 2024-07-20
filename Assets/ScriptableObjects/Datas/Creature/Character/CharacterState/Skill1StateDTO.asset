@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db555cbbb1c16a47aa06a2d5053882a, type: 3}
+  m_Name: Skill1StateDTO
+  m_EditorClassIdentifier: 
+  baseStateInfoDTO:
+    stateType: 2
+    stateParameter: 6
+    defaultExitState: 0
+    animationTime: 1
+    canTransitTime: 1
+  skillInfoDTO:
+    skillParameter: 3
+    skillValue: 1
+    targetLayer:
+      serializedVersion: 2
+      m_Bits: 128
+    direction: {x: 1, y: 0}
+    distance: 1
+    attackTiming: 0.3

@@ -21,6 +21,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 
             CallDamage();
         }
+
+        public override void Heal(int healAmount)
+        {
+            _health += healAmount;
+            CallHeal();
+        }
     }
 
     public class MonsterHealthStat : IHealthStat
