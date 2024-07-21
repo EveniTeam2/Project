@@ -13,8 +13,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
   
         protected override void ActivateSkill(int combo)
         {
-            Debug.Log($"{nameof(KnightSwordBuff)} {nameof(ActivateSkill)} 로직 처리");
-            
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.SwordBuff}"), null);
             SetDamageOnBattleSystem(GetSkillValue($"{KnightSkillType.SwordBuff}") * combo);
             
