@@ -15,7 +15,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
         protected override void ActivateSkill(int combo)
         {
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.HolyHeal}"), null);
-            SetDamageOnBattleSystem(GetSkillValue($"{KnightSkillType.HolyHeal}") * combo);
             
             base.ActivateSkill(combo);
         }

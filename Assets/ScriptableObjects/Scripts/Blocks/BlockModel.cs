@@ -11,6 +11,5 @@ namespace ScriptableObjects.Scripts.Blocks
     {
         public BlockType type;
         public Sprite background;
-        public string text;
     }
 }

@@ -9,9 +9,9 @@ namespace Unit.GameScene.Boards.Interfaces
     /// <summary>
     ///     블록 생성기 인터페이스
     /// </summary>
-    public interface IBlockGenerator
+    public interface IMatchBlockGenerator
     {
         void GenerateAllRandomBlocks();
-        BlockModel GetRandomValidBlock(Dictionary<Tuple<float, float>, MatchMatchBlockView> tiles, Tuple<float, float> pos);
+        BlockModel GetRandomValidBlock(Dictionary<Tuple<float, float>, MatchBlockView> tiles, Tuple<float, float> pos);
     }
 }

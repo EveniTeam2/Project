@@ -20,19 +20,19 @@ MonoBehaviour:
     Speed: 1
     CoolTime: 1
   knightSkillSettings:
-  - skillIcon: {fileID: 0}
+  - skillIcon: {fileID: 21300000, guid: b9466e23c7a304e5b96aa5d80d8f829d, type: 3}
     skillType: 0
     skillIndex: 0
     skillValue: 10
-  - skillIcon: {fileID: 0}
+  - skillIcon: {fileID: 21300000, guid: adbe307c5ddba4834935b7f7b6277001, type: 3}
     skillType: 1
     skillIndex: 1
     skillValue: 20
-  - skillIcon: {fileID: 0}
+  - skillIcon: {fileID: 21300000, guid: 2dfd524e80c6243f38aa824f4b5aaa1e, type: 3}
     skillType: 3
     skillIndex: 2
     skillValue: 30
-  - skillIcon: {fileID: 0}
+  - skillIcon: {fileID: 21300000, guid: 087e60450db0b48e3aea6c0a29d95812, type: 3}
     skillType: 4
     skillIndex: 3
     skillValue: 40

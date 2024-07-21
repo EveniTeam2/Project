@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Boards.Blocks;
+using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock;
 using Unit.GameScene.Units.BoardPanels.Interfaces;
@@ -13,7 +14,7 @@ namespace Unit.GameScene.Boards
     /// <summary>
     ///     블록을 생성하는 클래스입니다.
     /// </summary>
-    public class MatchBlockGenerator : IBlockGenerator
+    public class MatchMatchBlockGenerator : IMatchBlockGenerator
     {
         private readonly float _blockGap;
         private readonly RectTransform _blockPanel;
@@ -23,7 +24,8 @@ namespace Unit.GameScene.Boards
         private readonly List<BlockModel> _blockSos;
         private readonly Canvas _canvas;
         private readonly Action<Vector3, Vector3> _matchCheckHandler;
-        private readonly Dictionary<Tuple<float, float>, MatchMatchBlockView> _tiles;
+        private readonly Dictionary<Tuple<float, float>, MatchBlockView> _tiles;
+        private Dictionary<BlockType, Sprite> _blockIcons;
 
         /// <summary>
         ///     BlockGenerator 생성자입니다.
@@ -37,9 +39,18 @@ namespace Unit.GameScene.Boards
         /// <param name="blockPositions">블록 위치 목록</param>
         /// <param name="checkForMatch">매치 확인 핸들러</param>
         /// <param name="blockGap">블록 간격</param>
-        public MatchBlockGenerator(List<BlockModel> blockSos, IBlockPool blockPool,
-            Dictionary<Tuple<float, float>, MatchMatchBlockView> tiles, Canvas canvas, RectTransform blockPanel, Vector2 blockSize,
-            List<Tuple<float, float>> blockPositions, Action<Vector3, Vector3> checkForMatch, float blockGap)
+        /// <param name="blockIcons"></param>
+        public MatchMatchBlockGenerator(
+            List<BlockModel> blockSos,
+            IBlockPool blockPool,
+            Dictionary<Tuple<float, float>, MatchBlockView> tiles,
+            Canvas canvas,
+            RectTransform blockPanel,
+            Vector2 blockSize,
+            List<Tuple<float, float>> blockPositions,
+            Action<Vector3, Vector3> checkForMatch,
+            float blockGap,
+            Dictionary<BlockType, Sprite> blockIcons)
         {
             _blockSos = blockSos;
             _blockPool = blockPool;
@@ -50,6 +61,7 @@ namespace Unit.GameScene.Boards
             _blockPositions = blockPositions;
             _blockGap = blockGap;
             _matchCheckHandler = checkForMatch;
+            _blockIcons = blockIcons;
         }
 
         /// <summary>
@@ -61,7 +73,7 @@ namespace Unit.GameScene.Boards
 
             foreach (var (x, y) in _blockPositions)
             {
-                var block = (MatchMatchBlockView) _blockPool.Get();
+                var block = (MatchBlockView) _blockPool.Get();
                 var newBlock = GetRandomValidBlock(_tiles, new Tuple<float, float>(x, y));
                 var position = new Vector3(x, y, 0);
                 var rectTransform = block.GetComponent<RectTransform>();
@@ -70,7 +82,7 @@ namespace Unit.GameScene.Boards
                 rectTransform.sizeDelta = _blockSize;
                 rectTransform.anchoredPosition = position;
 
-                block.Initialize(newBlock, _matchCheckHandler, _canvas);
+                block.Initialize(newBlock.type, _matchCheckHandler, _canvas, _blockIcons[newBlock.type], newBlock.background);
                 _tiles.Add(new Tuple<float, float>(x, y), block);
             }
         }
@@ -81,7 +93,7 @@ namespace Unit.GameScene.Boards
         /// <param name="blockDic">블록 딕셔너리</param>
         /// <param name="position">블록의 위치</param>
         /// <returns>유효한 랜덤 블록</returns>
-        public BlockModel GetRandomValidBlock(Dictionary<Tuple<float, float>, MatchMatchBlockView> blockDic,
+        public BlockModel GetRandomValidBlock(Dictionary<Tuple<float, float>, MatchBlockView> blockDic,
             Tuple<float, float> position)
         {
             List<BlockModel> validBlocks = new();
@@ -102,7 +114,7 @@ namespace Unit.GameScene.Boards
         /// <param name="position">위치</param>
         /// <param name="blockTypeInfo">블록 정보</param>
         /// <returns>유효 여부</returns>
-        private bool IsValidPosition(Dictionary<Tuple<float, float>, MatchMatchBlockView> blockDic, Tuple<float, float> position,
+        private bool IsValidPosition(Dictionary<Tuple<float, float>, MatchBlockView> blockDic, Tuple<float, float> position,
             BlockModel blockTypeInfo)
         {
             var directions = new[]
@@ -125,7 +137,7 @@ namespace Unit.GameScene.Boards
         /// <param name="blockTypeInfo">블록 정보</param>
         /// <param name="direction">방향</param>
         /// <returns>매칭되는 블록 수</returns>
-        private int CheckDirection(Dictionary<Tuple<float, float>, MatchMatchBlockView> blockDic, Tuple<float, float> position,
+        private int CheckDirection(Dictionary<Tuple<float, float>, MatchBlockView> blockDic, Tuple<float, float> position,
             BlockModel blockTypeInfo, Vector2 direction)
         {
             var matchCount = 0;

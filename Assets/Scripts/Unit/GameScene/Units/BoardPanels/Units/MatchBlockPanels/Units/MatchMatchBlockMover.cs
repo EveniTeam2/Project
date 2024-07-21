@@ -11,7 +11,7 @@ namespace Unit.GameScene.Boards
     /// <summary>
     ///     블록의 이동을 처리하는 클래스입니다.
     /// </summary>
-    public class MatchBlockMover : IBlockMover
+    public class MatchMatchBlockMover : IMatchBlockMover
     {
         private readonly float _blockGap;
         private readonly float _bounceDuration;
@@ -21,7 +21,7 @@ namespace Unit.GameScene.Boards
         private readonly MonoBehaviour _monoBehaviour;
         private readonly WaitForSeconds _swapDelay;
 
-        public MatchBlockMover(float duration, float dropDurationPerUnit, float bounceHeight, float bounceDuration,
+        public MatchMatchBlockMover(float duration, float dropDurationPerUnit, float bounceHeight, float bounceDuration,
             WaitForSeconds progressTime, float blockGap, MonoBehaviour monoBehaviour)
         {
             _swapDelay = progressTime;

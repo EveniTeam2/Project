@@ -8,12 +8,16 @@ using Unit.GameScene.Boards;
 using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Modules;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock;
 using Unit.GameScene.Units.BoardPanels.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
+namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
 {
     /// <summary>
     ///     보드 상태를 관리하며, 블록 교환, 매칭 및 보드 갱신을 처리합니다.
@@ -42,17 +46,18 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         [Header("블록 낙하 이후 바운스 대기 시간 (단위 : Second)")] [SerializeField] [Range(0, 1f)]
         private float bounceDuration;
 
-        [Header("매치 블록 풀링 관련 설정")] [SerializeField]
-        private BlockView matchMatchBlockViewPrefab;
+        [FormerlySerializedAs("matchMatchBlockViewPrefab")] [Header("매치 블록 풀링 관련 설정")] [SerializeField]
+        private BlockView matchBlockViewPrefab;
         
         [Header("로직 동작 여부")] [SerializeField]
         private bool isLogicUpdating;
         
         // 하나의 클래스는 하나의 기능을 가진다.
 
-        private IBlockGenerator _blockGenerator;
-        private IBlockMatcher _blockMatcher;
-        private IBlockMover _blockMover;
+        private IMatchBlockGenerator _matchBlockGenerator;
+        private IMatchBlockMatcher _matchBlockMatcher;
+        private IMatchBlockMover _matchBlockMover;
+        
         private IBlockPool _blockPool;
         
         private RectTransform _blockPanel;
@@ -73,7 +78,9 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         private int _poolSize;
         
         private WaitForSeconds _progressTime;
-        private Dictionary<Tuple<float, float>, MatchMatchBlockView> _tiles;
+        private Dictionary<Tuple<float, float>, MatchBlockView> _blockViews;
+        private Dictionary<BlockType, Sprite> _blockIcons;
+        private CharacterSetting _characterSetting;
 
         #region #### 보드 초기화 ####
 
@@ -83,9 +90,11 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <param name="blockSos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
-        public void Initialize(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas)
+        /// <param name="skillPresets"></param>
+        /// <param name="skillIcons"></param>
+        public void Initialize(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, List<string> skillPresets, Dictionary<string, Sprite> skillIcons)
         {
-            InitializeBoard(blockSos, blockPanel, canvas);
+            InitializeBoard(blockSos, blockPanel, canvas, skillPresets, skillIcons);
             GenerateAllRandomBlocks();
         }
 
@@ -95,9 +104,11 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <param name="blockSos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
-        private void InitializeBoard(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas)
+        /// <param name="skillPresets"></param>
+        /// <param name="skillIcons"></param>
+        private void InitializeBoard(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, IReadOnlyList<string> skillPresets, IReadOnlyDictionary<string, Sprite> skillIcons)
         {
-            InitializeValues(blockSos, blockPanel, canvas);
+            InitializeValues(blockSos, blockPanel, canvas, skillPresets, skillIcons);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
         }
@@ -108,7 +119,9 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <param name="blockSos">생성할 블록 정보</param>
         /// <param name="blockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
-        private void InitializeValues(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas)
+        /// <param name="skillPresets"></param>
+        /// <param name="skillIcons"></param>
+        private void InitializeValues(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, IReadOnlyList<string> skillPresets, IReadOnlyDictionary<string, Sprite> skillIcons)
         {
             _dragCount = 0;
             isLogicUpdating = false;
@@ -116,10 +129,16 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
             _blockInfos = blockSos;
             _blockPanel = blockPanel;
             _canvas = canvas;
-
-            _tiles = new Dictionary<Tuple<float, float>, MatchMatchBlockView>();
+            
+            _blockIcons = new Dictionary<BlockType, Sprite>();
+            _blockViews = new Dictionary<Tuple<float, float>, MatchBlockView>();
             _currentMatchBlock = new OrderedDictionary();
             _progressTime = new WaitForSeconds(logicProgressTime);
+            
+            for (var i = 0; i < skillPresets.Count; i++)
+            {
+                _blockIcons.Add((BlockType) i, skillIcons[skillPresets[i]]);
+            }
         }
 
         /// <summary>
@@ -131,20 +150,12 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
             var localScale = (float) Math.Round(_blockPanel.localScale.x);
             var panelSize = (float)(int)Math.Round(_blockPanel.rect.width * localScale);
             
-            // var panelHeight = (float)(int)Math.Round(_canvas.GetComponent<RectTransform>().rect.height);
-            // var panelWidth = (float)(int)Math.Round(_canvas.GetComponent<RectTransform>().rect.width);
-            //
-            // var newPanelSize = panelWidth <= panelHeight ? panelWidth : panelHeight;
-            // newPanelSize *= localScale;
-            
-            // _blockPanel.sizeDelta = new Vector2(newPanelSize, newPanelSize);
-            
             if (panelSize <= 0) return;
             
             // 블록 간격 계산
             _blockGap = (float) Math.Truncate(panelSize / (width - 1));
             _blockPositions = new List<Tuple<float, float>>();
-
+            
             _halfPanelWidth = panelSize / 2;
 
             // 블록 크기 계산
@@ -168,10 +179,10 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// </summary>
         private void RegisterDependencies()
         {
-            _blockPool = new MatchBlockPool(matchMatchBlockViewPrefab, _blockPanel, _poolSize, true);
-            _blockGenerator = new MatchBlockGenerator(_blockInfos, _blockPool, _tiles, _canvas, _blockPanel, _blockSize, _blockPositions, CheckForMatch, _blockGap);
-            _blockMatcher = new MatchBlockMatcher(_tiles, _blockGap);
-            _blockMover = new MatchBlockMover(moveDuration, 1 / dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, _blockGap, this);
+            _blockPool = new BlockPool(matchBlockViewPrefab, _blockPanel, _poolSize, true);
+            _matchBlockGenerator = new MatchMatchBlockGenerator(_blockInfos, _blockPool, _blockViews, _canvas, _blockPanel, _blockSize, _blockPositions, CheckForMatch, _blockGap, _blockIcons);
+            _matchBlockMatcher = new MatchMatchBlockMatcher(_blockViews, _blockGap);
+            _matchBlockMover = new MatchMatchBlockMover(moveDuration, 1 / dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, _blockGap, this);
         }
 
         #endregion
@@ -185,7 +196,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         {
             while (true)
             {
-                _blockGenerator.GenerateAllRandomBlocks();
+                _matchBlockGenerator.GenerateAllRandomBlocks();
 
                 if (IsAnyPossibleMatches()) break;
 
@@ -199,7 +210,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <param name="spawnHash">스폰된 블록의 위치 해시셋</param>
         /// <param name="blockDic">이동할 블록 딕셔너리</param>
         /// <param name="pos">새 블록의 위치</param>
-        private void GenerateBlockAndSetDestination(ISet<Tuple<float, float>> spawnHash, Dictionary<Tuple<float, float>, MatchMatchBlockView> blockDic, Tuple<float, float> pos)
+        private void GenerateBlockAndSetDestination(ISet<Tuple<float, float>> spawnHash, Dictionary<Tuple<float, float>, MatchBlockView> blockDic, Tuple<float, float> pos)
         {
             var adjustY = 0f;
 
@@ -210,11 +221,11 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
 
                 if (spawnHash.Contains(dropPosition)) continue;
 
-                var newBlockInfo = _blockGenerator.GetRandomValidBlock(_tiles, pos);
-                var block = (MatchMatchBlockView) _blockPool.Get();
+                var newBlockInfo = _matchBlockGenerator.GetRandomValidBlock(_blockViews, pos);
+                var block = (MatchBlockView) _blockPool.Get();
                 block.GetComponent<RectTransform>().anchoredPosition = new Vector3(dropPosition.Item1, dropPosition.Item2, 0);
-                block.Initialize(newBlockInfo, CheckForMatch, _canvas);
-                _tiles[pos] = block;
+                block.Initialize(newBlockInfo.type, CheckForMatch, _canvas, _blockIcons[newBlockInfo.type], newBlockInfo.background);
+                _blockViews[pos] = block;
 
                 spawnHash.Add(dropPosition);
 
@@ -232,17 +243,17 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <param name="x">블록의 x 좌표</param>
         /// <param name="y">블록의 y 좌표</param>
         /// <param name="blockDic">이동할 블록 딕셔너리</param>
-        private void SetDestination(float x, float y, Dictionary<Tuple<float, float>, MatchMatchBlockView> blockDic)
+        private void SetDestination(float x, float y, Dictionary<Tuple<float, float>, MatchBlockView> blockDic)
         {
             for (var aboveY = y + _blockGap; aboveY <= _halfPanelWidth; aboveY += _blockGap)
             {
                 var abovePos = new Tuple<float, float>(x, aboveY);
                 
-                if (!_tiles.ContainsKey(abovePos)) continue;
+                if (!_blockViews.ContainsKey(abovePos)) continue;
 
-                var block = _tiles[abovePos];
-                _tiles.Remove(abovePos);
-                _tiles[new Tuple<float, float>(x, y)] = block;
+                var block = _blockViews[abovePos];
+                _blockViews.Remove(abovePos);
+                _blockViews[new Tuple<float, float>(x, y)] = block;
                 blockDic.Add(new Tuple<float, float>(x, y), block);
                 break;
             }
@@ -256,7 +267,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         ///     여러 블록들을 제거합니다.
         /// </summary>
         /// <param name="blocks">제거 대상 블록 목록</param>
-        private void RemoveBlocks(List<MatchMatchBlockView> blocks)
+        private void RemoveBlocks(List<MatchBlockView> blocks)
         {
             foreach (var block in blocks)
             {
@@ -267,13 +278,13 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <summary>
         ///     블록을 제거합니다.
         /// </summary>
-        /// <param name="matchMatchBlockView">제거할 블록</param>
-        private void RemoveBlock(MatchMatchBlockView matchMatchBlockView)
+        /// <param name="matchBlockView">제거할 블록</param>
+        private void RemoveBlock(BlockView matchBlockView)
         {
-            var blockPos = matchMatchBlockView.GetComponent<RectTransform>().anchoredPosition;
+            var blockPos = matchBlockView.GetComponent<RectTransform>().anchoredPosition;
 
-            _tiles.Remove(new Tuple<float, float>(blockPos.x, blockPos.y));
-            _blockPool.Release(matchMatchBlockView);
+            _blockViews.Remove(new Tuple<float, float>(blockPos.x, blockPos.y));
+            _blockPool.Release(matchBlockView);
         }
 
         /// <summary>
@@ -281,7 +292,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// </summary>
         private void RemoveAllBlocks()
         {
-            var allBlocks = _tiles.Select(tile => tile.Value).ToList();
+            var allBlocks = _blockViews.Select(tile => tile.Value).ToList();
 
             RemoveBlocks(allBlocks);
         }
@@ -293,13 +304,13 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <summary>
         ///     블록 교환 및 이후의 낙하, 매칭 및 블록 채우기 작업을 처리합니다.
         /// </summary>
-        private IEnumerator ProcessBlockSwapAndFall(MatchMatchBlockView currentMatchMatchBlockView, MatchMatchBlockView targetMatchMatchBlockView,
+        private IEnumerator ProcessBlockSwapAndFall(MatchBlockView currentMatchBlockView, MatchBlockView targetMatchBlockView,
             Tuple<float, float> currentBlockIndex, Tuple<float, float> targetBlockIndex)
         {
-            yield return StartCoroutine(_blockMover.SwapBlock(currentMatchMatchBlockView, targetMatchMatchBlockView, targetBlockIndex, currentBlockIndex));
+            yield return StartCoroutine(_matchBlockMover.SwapBlock(currentMatchBlockView, targetMatchBlockView, targetBlockIndex, currentBlockIndex));
 
             // 교환 후에 딕셔너리에서 블록 위치 업데이트
-            UpdateBlockPositions(currentBlockIndex, targetBlockIndex, currentMatchMatchBlockView, targetMatchMatchBlockView);
+            UpdateBlockPositions(currentBlockIndex, targetBlockIndex, currentMatchBlockView, targetMatchBlockView);
 
             // 초기 매칭된 블록 제거
             yield return ProcessMatchedBlocks(currentBlockIndex, targetBlockIndex);
@@ -319,7 +330,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
             while (!IsAnyPossibleMatches())
             {
                 RemoveAllBlocks();
-                _blockGenerator.GenerateAllRandomBlocks();
+                _matchBlockGenerator.GenerateAllRandomBlocks();
             }
 
             isLogicUpdating = false;
@@ -339,10 +350,10 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         ///     블록 위치를 업데이트합니다.
         /// </summary>
         private void UpdateBlockPositions(Tuple<float, float> currentBlockIndex, Tuple<float, float> targetBlockIndex,
-            MatchMatchBlockView currentMatchMatchBlockView, MatchMatchBlockView targetMatchMatchBlockView)
+            MatchBlockView currentMatchBlockView, MatchBlockView targetMatchBlockView)
         {
-            _tiles[currentBlockIndex] = targetMatchMatchBlockView;
-            _tiles[targetBlockIndex] = currentMatchMatchBlockView;
+            _blockViews[currentBlockIndex] = targetMatchBlockView;
+            _blockViews[targetBlockIndex] = currentMatchBlockView;
         }
 
         /// <summary>
@@ -351,14 +362,14 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         private IEnumerator ProcessMatchedBlocks(Tuple<float, float> currentBlockIndex,
             Tuple<float, float> targetBlockIndex)
         {
-            _blockMatcher.CheckMatchesForBlock(targetBlockIndex, out var currentMatchedBlocks);
-            _blockMatcher.CheckMatchesForBlock(currentBlockIndex, out var targetMatchedBlocks);
+            _matchBlockMatcher.CheckMatchesForBlock(targetBlockIndex, out var currentMatchedBlocks);
+            _matchBlockMatcher.CheckMatchesForBlock(currentBlockIndex, out var targetMatchedBlocks);
 
             if (currentMatchedBlocks.Count > 0) CheckBlockCombo(currentMatchedBlocks[0].Type);
             if (targetMatchedBlocks.Count > 0) CheckBlockCombo(targetMatchedBlocks[0].Type);
 
-            var allMatchedBlocks = new HashSet<MatchMatchBlockView>(_blockMatcher.GetAdjacentMatches(currentMatchedBlocks));
-            allMatchedBlocks.UnionWith(_blockMatcher.GetAdjacentMatches(targetMatchedBlocks));
+            var allMatchedBlocks = new HashSet<MatchBlockView>(_matchBlockMatcher.GetAdjacentMatches(currentMatchedBlocks));
+            allMatchedBlocks.UnionWith(_matchBlockMatcher.GetAdjacentMatches(targetMatchedBlocks));
             
             RemoveBlocks(allMatchedBlocks.ToList());
 
@@ -378,17 +389,17 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// </summary>
         /// <param name="blocks">매칭된 블록 목록</param>
         /// <returns>블록 그룹 목록</returns>
-        private List<List<MatchMatchBlockView>> GroupAdjacentMatches(List<MatchMatchBlockView> blocks)
+        private List<List<MatchBlockView>> GroupAdjacentMatches(List<MatchBlockView> blocks)
         {
-            var visited = new HashSet<MatchMatchBlockView>();
-            var groups = new List<List<MatchMatchBlockView>>();
+            var visited = new HashSet<MatchBlockView>();
+            var groups = new List<List<MatchBlockView>>();
 
             foreach (var block in blocks)
             {
                 if (visited.Contains(block)) continue;
 
-                var group = new List<MatchMatchBlockView>();
-                var toVisit = new Queue<MatchMatchBlockView>();
+                var group = new List<MatchBlockView>();
+                var toVisit = new Queue<MatchBlockView>();
                 toVisit.Enqueue(block);
 
                 while (toVisit.Count > 0)
@@ -398,7 +409,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
 
                     group.Add(current);
 
-                    var neighbors = _blockMatcher.GetAdjacentMatches(new List<MatchMatchBlockView> { current });
+                    var neighbors = _matchBlockMatcher.GetAdjacentMatches(new List<MatchBlockView> { current });
 
                     foreach (var neighbor in neighbors.Where(neighbor => !visited.Contains(neighbor) && blocks.Contains(neighbor)))
                     {
@@ -419,7 +430,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         {
             while (true)
             {
-                var matchedBlocks = _blockMatcher.FindAllMatches(_tiles);
+                var matchedBlocks = _matchBlockMatcher.FindAllMatches(_blockViews);
                 if (matchedBlocks.Count == 0) break;
 
                 var groupedMatches = GroupAdjacentMatches(matchedBlocks);
@@ -445,14 +456,14 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// </summary>
         private IEnumerator FillEmptySpaces()
         {
-            var blockDic = new Dictionary<Tuple<float, float>, MatchMatchBlockView>();
+            var blockDic = new Dictionary<Tuple<float, float>, MatchBlockView>();
 
             for (var x = -_halfPanelWidth; x <= _halfPanelWidth; x += _blockGap)
             {
                 for (var y = -_halfPanelWidth; y <= _halfPanelWidth; y += _blockGap)
                 {
                     var pos = new Tuple<float, float>(x, y);
-                    if (_tiles.ContainsKey(pos)) continue;
+                    if (_blockViews.ContainsKey(pos)) continue;
 
                     SetDestination(x, y, blockDic);
                 }
@@ -467,13 +478,13 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         private IEnumerator FillNewBlocks()
         {
             var spawnHash = new HashSet<Tuple<float, float>>();
-            var blockDic = new Dictionary<Tuple<float, float>, MatchMatchBlockView>();
+            var blockDic = new Dictionary<Tuple<float, float>, MatchBlockView>();
 
             for (var x = -_halfPanelWidth; x <= _halfPanelWidth; x += _blockGap)
             for (var y = -_halfPanelWidth; y <= _halfPanelWidth; y += _blockGap)
             {
                 var pos = new Tuple<float, float>(x, y);
-                if (_tiles.ContainsKey(pos)) continue;
+                if (_blockViews.ContainsKey(pos)) continue;
 
                 GenerateBlockAndSetDestination(spawnHash, blockDic, pos);
             }
@@ -485,14 +496,14 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         ///     블록을 목표 위치로 떨어뜨리는 코루틴을 실행합니다.
         /// </summary>
         /// <param name="blocks">이동할 블록 목록</param>
-        private IEnumerator DropBlocks(IEnumerable<MatchMatchBlockView> blocks)
+        private IEnumerator DropBlocks(IEnumerable<MatchBlockView> blocks)
         {
             var dropCoroutines = new List<Coroutine>();
 
             foreach (var block in blocks)
             {
-                var targetPos = _tiles.FirstOrDefault(t => t.Value == block).Key;
-                dropCoroutines.Add(StartCoroutine(_blockMover.DropBlock(targetPos, block)));
+                var targetPos = _blockViews.FirstOrDefault(t => t.Value == block).Key;
+                dropCoroutines.Add(StartCoroutine(_matchBlockMover.DropBlock(targetPos, block)));
             }
 
             foreach (var coroutine in dropCoroutines) yield return coroutine;
@@ -513,9 +524,9 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
             isLogicUpdating = true;
 
             var currentBlockIndex = new Tuple<float, float>(startPosition.x, startPosition.y);
-            var targetBlockIndex = _blockMatcher.GetTargetIndex(startPosition, direction);
+            var targetBlockIndex = _matchBlockMatcher.GetTargetIndex(startPosition, direction);
 
-            if (!_blockMatcher.IsValidPosition(targetBlockIndex))
+            if (!_matchBlockMatcher.IsValidPosition(targetBlockIndex))
             {
                 isLogicUpdating = false;
                 return;
@@ -525,8 +536,8 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
             {
                 OnIncreaseDragCount?.Invoke(++_dragCount);
 
-                var currentBlock = _tiles[currentBlockIndex];
-                var targetBlock = _tiles[targetBlockIndex];
+                var currentBlock = _blockViews[currentBlockIndex];
+                var targetBlock = _blockViews[targetBlockIndex];
                 StartCoroutine(ProcessBlockSwapAndFall(currentBlock, targetBlock, currentBlockIndex, targetBlockIndex));
             }
             else
@@ -541,7 +552,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <returns>매칭할 수 있는 블록이 있으면 true, 없으면 false</returns>
         private bool IsAnyPossibleMatches()
         {
-            var tileKeys = new List<Tuple<float, float>>(_tiles.Keys);
+            var tileKeys = new List<Tuple<float, float>>(_blockViews.Keys);
 
             foreach (var position in tileKeys)
             {
@@ -549,10 +560,10 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
 
                 foreach (var direction in directions)
                 {
-                    var targetIndex = _blockMatcher.GetTargetIndex(new Vector3(position.Item1, position.Item2, 0),
+                    var targetIndex = _matchBlockMatcher.GetTargetIndex(new Vector3(position.Item1, position.Item2, 0),
                         new Vector3(direction.x, direction.y, 0));
 
-                    if (_blockMatcher.IsValidPosition(targetIndex) && CheckSwapForMatch(position, targetIndex))
+                    if (_matchBlockMatcher.IsValidPosition(targetIndex) && CheckSwapForMatch(position, targetIndex))
                         return true;
                 }
             }
@@ -568,17 +579,17 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
         /// <returns>매칭 여부</returns>
         private bool CheckSwapForMatch(Tuple<float, float> startPos, Tuple<float, float> targetPos)
         {
-            var currentBlock = _tiles[startPos];
-            var targetBlock = _tiles[targetPos];
+            var currentBlock = _blockViews[startPos];
+            var targetBlock = _blockViews[targetPos];
 
-            _tiles[startPos] = targetBlock;
-            _tiles[targetPos] = currentBlock;
+            _blockViews[startPos] = targetBlock;
+            _blockViews[targetPos] = currentBlock;
 
-            var currentBlockNewPositionHasMatches = _blockMatcher.CheckMatchesForBlock(targetPos, out _);
-            var targetBlockNewPositionHasMatches = _blockMatcher.CheckMatchesForBlock(startPos, out _);
+            var currentBlockNewPositionHasMatches = _matchBlockMatcher.CheckMatchesForBlock(targetPos, out _);
+            var targetBlockNewPositionHasMatches = _matchBlockMatcher.CheckMatchesForBlock(startPos, out _);
 
-            _tiles[startPos] = currentBlock;
-            _tiles[targetPos] = targetBlock;
+            _blockViews[startPos] = currentBlock;
+            _blockViews[targetPos] = targetBlock;
 
             return currentBlockNewPositionHasMatches || targetBlockNewPositionHasMatches;
         }

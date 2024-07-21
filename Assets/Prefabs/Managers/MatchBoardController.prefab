@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2471270884412427181}
   - component: {fileID: 5296941759258203337}
   m_Layer: 0
-  m_Name: BoardController
+  m_Name: MatchBoardController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
