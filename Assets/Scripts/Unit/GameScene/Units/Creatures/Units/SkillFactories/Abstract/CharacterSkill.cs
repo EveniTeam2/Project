@@ -18,7 +18,7 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
         
         public void Execute(int combo)
         {
-            CharacterServiceProvider.RegisterEventSkill(
+            CharacterServiceProvider.RegistEventSkill(
                 () => HandleOnEnter(combo),
                 () => HandleOnExit(combo),
                 () => HandleOnUpdate(combo), 
