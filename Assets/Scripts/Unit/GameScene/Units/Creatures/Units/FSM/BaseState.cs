@@ -61,7 +61,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
             OnUpdate?.Invoke();
         }
 
-
         protected void ClearEvent(EStateEventType type)
         {
             switch (type)
@@ -80,6 +79,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
                     break;
             }
         }
+
         public StateType GetStateType()
         {
             return _baseStateInfo.stateType;

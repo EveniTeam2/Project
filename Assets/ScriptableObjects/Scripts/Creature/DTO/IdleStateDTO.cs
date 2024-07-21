@@ -4,7 +4,6 @@ using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -14,7 +13,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     {
         [Header("Idle State Info")]
         [SerializeField] IdleStateInfoDTO idleInfoDTO;
-        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher eventPublisher)
+        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
         {
             return new IdleState(baseStateInfoDTO.GetInfo(anPa), idleInfoDTO.GetInfo(anPa), st.TryChangeState, an, ba);
         }

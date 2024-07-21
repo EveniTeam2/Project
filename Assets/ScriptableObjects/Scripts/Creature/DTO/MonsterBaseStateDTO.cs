@@ -10,33 +10,34 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 {
     public abstract class MonsterBaseStateDTO : ScriptableObject
     {
-        [Header("Monster State Info")]
+        [Header("Default State Info")]
         [SerializeField] protected MonsterBaseStateinfoDTO monsterBaseStateInfoDTO;
         public abstract IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher eventPublisher);
     }
 
     public class MonsterBaseStateinfoDTO
     {
-        public BaseStateInfoDTO BaseStateInfoDTO;
+        public StateType stateType;
+        public AnimationParameterEnums stateParameter;
         public StateType _defaultExitState;
 
         public MonsterBaseStateInfo GetInfo(Dictionary<AnimationParameterEnums, int> animationParameterEnums)
         {
-            return new MonsterBaseStateInfo(_defaultExitState);
-        }
-        public BaseStateInfo GetBaseInfo(Dictionary<AnimationParameterEnums, int> animationParameterEnums)
-        {
-            return BaseStateInfoDTO.GetInfo(animationParameterEnums);
+            return new MonsterBaseStateInfo(stateType, animationParameterEnums[stateParameter], _defaultExitState);
         }
     }
 
     public struct MonsterBaseStateInfo
     {
+        public StateType stateType;
+        public int stateParameter;
         public StateType _defaultExitState;
 
-        public MonsterBaseStateInfo(StateType defaultExitState)
+        public MonsterBaseStateInfo(StateType stateType, int stateParameter, StateType defaultExitState)
         {
             _defaultExitState = defaultExitState;
+            this.stateType = stateType;
+            this.stateParameter = stateParameter;
         }
     }
 }

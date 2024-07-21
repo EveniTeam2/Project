@@ -14,11 +14,24 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     {
         //[Header("Death State Info")]
         //[SerializeField] DeathStateInfoDTO deathStateInfoDTO;
-        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher eventPublisher)
+        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
         {
             return new DeathState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState, an);
         }
     }
+
+    [CreateAssetMenu(fileName = nameof(MonsterDeathStateDTO), menuName = "State/Monster/" + nameof(MonsterDeathStateDTO))]
+    public class MonsterDeathStateDTO : MonsterBaseStateDTO
+    {
+        //[Header("Death State Info")]
+        //[SerializeField] DeathStateInfoDTO deathStateInfoDTO;
+        public override IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher eventPublisher)
+        {
+            return new MonsterDeathState(monsterBaseStateInfoDTO.GetInfo(anPa), st.TryChangeState, an, eventPublisher);
+        }
+    }
+
+    //
 
     //[Serializable]
     //public struct DeathStateInfoDTO

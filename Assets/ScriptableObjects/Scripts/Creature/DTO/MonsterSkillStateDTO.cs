@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
-    [CreateAssetMenu(fileName = nameof(SkillStateDTO), menuName = "State/" + nameof(SkillStateDTO))]
+    [CreateAssetMenu(fileName = nameof(SkillStateDTO), menuName = "State/Monster/" + nameof(SkillStateDTO))]
     public class MonsterSkillStateDTO : MonsterBaseStateDTO
     {
         [Header("Skill State Info")]
@@ -24,9 +24,8 @@ namespace ScriptableObjects.Scripts.Creature.DTO
                                             Dictionary<AnimationParameterEnums, int> animationParameterEnums,
                                             MonsterEventPublisher eventPublisher)
         {
-            return new MonsterSkillState(skillInfoDTO.GetInfo(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine, animationParameterEnums),
-                                         monsterBaseStateInfoDTO.GetInfo(animationParameterEnums),
-                                         monsterBaseStateInfoDTO.GetBaseInfo(animationParameterEnums),
+            return new MonsterSkillState(monsterBaseStateInfoDTO.GetInfo(animationParameterEnums),
+                                         skillInfoDTO.GetInfo(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine, animationParameterEnums),
                                          stateMachine.TryChangeState,
                                          battleSystem,
                                          animator,

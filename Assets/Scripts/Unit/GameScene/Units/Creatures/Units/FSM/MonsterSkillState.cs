@@ -11,39 +11,34 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public class MonsterSkillState : MonsterBaseState
     {
         protected Animator _animator;
-        protected readonly MonsterEventPublisher _eventPublisher;
         protected BattleSystem _battleSystem;
         MonsterSkillStateInfo _skillInfo;
 
-        public MonsterSkillState(MonsterSkillStateInfo skillInfo,
-                                 MonsterBaseStateInfo monsterBaseStateInfo,
-                                 BaseStateInfo baseInfo,
+        public MonsterSkillState(MonsterBaseStateInfo monsterBaseStateInfo,
+                                 MonsterSkillStateInfo skillInfo,
                                  Func<StateType, bool> tryChangeState,
                                  BattleSystem battleSystem,
                                  Animator animator,
                                  MonsterEventPublisher eventPublisher)
-            : base(monsterBaseStateInfo, baseInfo, tryChangeState, eventPublisher)
+            : base(monsterBaseStateInfo, tryChangeState, eventPublisher)
         {
             _skillInfo = skillInfo;
             _battleSystem = battleSystem;
             _animator = animator;
-            _eventPublisher = eventPublisher;
         }
 
         public override void Enter()
         {
             base.Enter();
-            _animator.SetBool(_baseStateInfo.stateParameter, true);
+            _animator.SetBool(_monsterBaseStateInfo.stateParameter, true);
             _eventPublisher.RegistOnAttackEvent(AttackEvent);
-            _eventPublisher.RegistOnEvent(eEventType.AnimationEnd, AnimationEnd);
         }
 
         public override void Exit()
         {
             base.Exit();
-            _animator.SetBool(_baseStateInfo.stateParameter, false);
+            _animator.SetBool(_monsterBaseStateInfo.stateParameter, false);
             _eventPublisher.UnregistOnAttackEvent(AttackEvent);
-            _eventPublisher.UnregistOnEvent(eEventType.AnimationEnd, AnimationEnd);
         }
 
         private void AttackEvent(IBattleStat stat)
@@ -54,13 +49,8 @@ namespace ScriptableObjects.Scripts.Creature.DTO
                                             out var targets))
             {
                 foreach (var target in targets)
-                    _battleSystem.Attack(target);
+                    _skillInfo.skillAct.Act(stat, target);
             }
-        }
-
-        private void AnimationEnd()
-        {
-            _tryChangeState.Invoke(monsterBaseStateInfo._defaultExitState);
         }
     }
 }

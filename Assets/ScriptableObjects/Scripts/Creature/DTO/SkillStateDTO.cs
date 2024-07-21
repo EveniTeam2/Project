@@ -16,7 +16,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         //[Header("Skill State Info")]
         //[SerializeField] protected SkillStateInfoDTO skillInfoDTO;
 
-        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher eventPublisher)
+        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
         {
             //return new SkillState(baseStateInfoDTO.GetInfo(anPa), skillInfoDTO.GetInfo(tr, ba, he, mo, an, st, anPa), st.TryChangeState, ba, an);
             return new SkillState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState);
