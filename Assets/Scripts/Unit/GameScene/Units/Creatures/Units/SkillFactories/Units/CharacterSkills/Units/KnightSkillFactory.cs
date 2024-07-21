@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Units;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.CharacterSkills.Units

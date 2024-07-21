@@ -5,6 +5,7 @@ using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -14,9 +15,9 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     {
         [Header("Run State Info")]
         [SerializeField] MonsterRunStateInfoDTO monsterRunStateInfoDTO;
-        public override IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher monsterEventPublisher)
+        public override IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, StateMachine st, AnimatorEventReceiver animatorEventReceiver, Dictionary<AnimationParameterEnums, int> anPa)
         {
-            return new MonsterRunState(monsterBaseStateInfoDTO.GetInfo(anPa), monsterRunStateInfoDTO.GetInfo(), st.TryChangeState, ba, mo, an, monsterEventPublisher);
+            return new MonsterRunState(monsterBaseStateInfoDTO.GetInfo(anPa), monsterRunStateInfoDTO.GetInfo(), st.TryChangeState, ba, mo, animatorEventReceiver);
         }
     }
 

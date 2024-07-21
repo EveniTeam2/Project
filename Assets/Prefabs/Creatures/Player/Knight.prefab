@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8443874437453871835}
   - component: {fileID: 2134033668311223475}
   - component: {fileID: 1214194880391127291}
+  - component: {fileID: -6006869876885084726}
   m_Layer: 6
   m_Name: Knight
   m_TagString: Untagged
@@ -167,3 +168,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterType: 0
   stateData: {fileID: 11400000, guid: 9849db3bed64e6a4e81b6698737b7e36, type: 2}
+--- !u!114 &-6006869876885084726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166940013976387877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235ce2bf718f44a4870470a762553ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationClips:
+  - {fileID: 7400000, guid: a26635234fe274c8bbd4fef4691c03bc, type: 2}
+  - {fileID: 7400000, guid: 77e016da92b244f0ab5022466966f663, type: 2}
+  - {fileID: 7400000, guid: 7a6b62aa4ed47414eb5a309bb30f1a87, type: 2}
+  - {fileID: 7400000, guid: 34a64b68cd6ab4a558a4015fd4babd7c, type: 2}
+  - {fileID: 7400000, guid: a3c47fb2dec5e4bb9aee1301ab0e909e, type: 2}

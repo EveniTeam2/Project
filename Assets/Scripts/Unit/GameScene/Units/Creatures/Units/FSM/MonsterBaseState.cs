@@ -3,6 +3,7 @@ using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
@@ -15,15 +16,15 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 
         protected readonly MonsterBaseStateInfo _monsterBaseStateInfo;
         protected Func<StateType, bool> _tryChangeState;
-        protected readonly MonsterEventPublisher _eventPublisher;
+        protected AnimatorEventReceiver animatorEventReceiver;
 
         protected MonsterBaseState(MonsterBaseStateInfo monsterBaseStateInfo,
                                    Func<StateType, bool> tryChangeState,
-                                   MonsterEventPublisher eventPublisher)
+                                   AnimatorEventReceiver animatorEventReceiver)
         {
             this._monsterBaseStateInfo = monsterBaseStateInfo;
             _tryChangeState = tryChangeState;
-            this._eventPublisher = eventPublisher;
+            this.animatorEventReceiver = animatorEventReceiver;
         }
 
         /// <summary>
@@ -33,7 +34,6 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         {
             //Debug.Log($"{_baseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
-            _eventPublisher.RegistOnEvent(eEventType.AnimationEnd, ChangeToDefaultState);
         }
 
         /// <summary>
@@ -43,7 +43,6 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         {
             //Debug.Log($"{_baseStateInfo.stateType} Out");
             OnExit?.Invoke();
-            _eventPublisher.UnregistOnEvent(eEventType.AnimationEnd, ChangeToDefaultState);
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
             OnUpdate?.Invoke();
         }
 
-        private void ChangeToDefaultState()
+        protected void ChangeToDefaultState()
         {
             _tryChangeState.Invoke(_monsterBaseStateInfo._defaultExitState);
         }

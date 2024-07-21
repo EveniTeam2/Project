@@ -4,17 +4,17 @@ using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
+    [Serializable]
     public class CharacterServiceProvider : ICreatureServiceProvider
     {
         private readonly CharacterType _characterType;
-        private readonly Animator _animator;
+        private readonly AnimatorEventReceiver _animatorEventReceiver;
         private readonly BattleSystem _battleSystem;
         private readonly StateMachine _fsm;
         private readonly HealthSystem _healthSystem;
@@ -22,14 +22,15 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
         private readonly Dictionary<AnimationParameterEnums, int> _animationParameter;
         private readonly Dictionary<string, int> _skillIndexes;
         private readonly Dictionary<string, float> _skillValues;
-        private bool _skillTransition;
+        
+        [SerializeField] private bool _readyForCommand;
 
         public CharacterServiceProvider(
             CharacterType characterType,
             BattleSystem battleSystem,
             HealthSystem healthSystem,
             MovementSystem movementSystem,
-            Animator animator,
+            AnimatorEventReceiver animatorEventReceiver,
             StateMachine fsm,
             Dictionary<AnimationParameterEnums, int> animationParameter,
             Dictionary<string, int> skillIndexes,
@@ -39,21 +40,23 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             _battleSystem = battleSystem;
             _healthSystem = healthSystem;
             _movementSystem = movementSystem;
-            _animator = animator;
+            _animatorEventReceiver = animatorEventReceiver;
             _fsm = fsm;
             _animationParameter = animationParameter;
             _skillIndexes = skillIndexes;
             _skillValues = skillValues;
+
+            SetReadyForCommand(true);
         }
 
-        public void SetSkillAnimationState(bool value)
+        public void SetReadyForCommand(bool isReady)
         {
-            _skillTransition = value;
+            _readyForCommand = isReady;
         }
 
-        public bool GetSkillAnimationState()
+        public bool GetReadyForCommand()
         {
-            return _skillTransition;
+            return _readyForCommand;
         }
 
         public float GetSkillValue(string skillName)
@@ -71,19 +74,19 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
             // TODO : damage 주면 몬스터 때찌해주세요 (채이환)
         }
 
-        public void AnimatorSetInteger(AnimationParameterEnums parameter, int value)
+        public void AnimatorSetInteger(AnimationParameterEnums parameter, int value, Action action)
         {
-            _animator.SetInteger(_animationParameter[parameter], value);
+            _animatorEventReceiver.SetInteger(_animationParameter[parameter], value, action);
         }
 
-        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value)
+        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value, Action action)
         {
-            _animator.SetFloat(_animationParameter[parameter], value);
+            _animatorEventReceiver.SetFloat(_animationParameter[parameter], value, action);
         }
 
-        public void AnimatorSetBool(AnimationParameterEnums parameter, bool value)
+        public void AnimatorSetBool(AnimationParameterEnums parameter, bool value, Action action)
         {
-            _animator.SetBool(_animationParameter[parameter], value);
+            _animatorEventReceiver.SetBool(_animationParameter[parameter], value, action);
         }
 
         public int TakeDamage(int atk)
@@ -94,12 +97,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
 
         public AnimatorStateInfo GetCurrentAnimatorStateInfo()
         {
-            return _animator.GetCurrentAnimatorStateInfo(0);
+            return _animatorEventReceiver.GetCurrentAnimatorStateInfo(0);
         }
 
         public AnimatorStateInfo GetNextAnimatorStateInfo()
         {
-            return _animator.GetNextAnimatorStateInfo(0);
+            return _animatorEventReceiver.GetNextAnimatorStateInfo(0);
         }
 
         public void RegisterEvent(ECharacterEventType type, Action subscriber)
@@ -123,6 +126,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
         public bool TryChangeState(StateType stateType)
         {
             return _fsm.TryChangeState(stateType);
+        }
+
+        public StateType GetCurrentStateType()
+        {
+            return _fsm.GetCurrentStateType();
         }
 
         public void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)

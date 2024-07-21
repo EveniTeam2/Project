@@ -6,6 +6,7 @@ using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.Monsters
@@ -17,7 +18,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
 
         protected Stat<MonsterStat> _stats;
         private MonsterBattleStat _battleStat;
-        protected MonsterEventPublisher _eventPublisher;
 
         private void Update()
         {
@@ -33,18 +33,17 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
 
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
-            _animator = gameObject.GetComponent<Animator>();
+            _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
 
-            _eventPublisher = new MonsterEventPublisher();
             _stats = new Stat<MonsterStat>(stat);
             _battleStat = new MonsterBattleStat(_stats);
             _battleSystem = new MonsterBattleSystem(transform, _battleStat);
             _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(_stats));
             _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(_stats), groundYPosition);
 
-            _fsm = StateBuilder.MonsterBuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter, _eventPublisher);
+            _fsm = StateBuilder.BuildStateMachine(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
 
-            _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animationParameter, null);
+            _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, animationParameter, null);
             _mods = new LinkedList<ModifyStatData>();
         }
 
@@ -101,16 +100,6 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             _movementSystem.SpawnInit(new MonsterMovementStat(_stats));
             //_fsm.TryChangeState(StateType.Run);
             ClearModifiedStat();
-        }
-
-        public void AnimationAttackEvent()
-        {
-            _eventPublisher.CallAttackEvent(_battleStat);
-        }
-
-        public void AnimationEndEvent()
-        {
-            _eventPublisher.CallAnimationEndEvent();
         }
     }
 }

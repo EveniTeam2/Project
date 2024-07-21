@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff06dba26e77e0043ab1cfc85431d7d3, type: 3}
-  m_Name: HitStateDTO
+  m_Script: {fileID: 11500000, guid: b2cd872ecbce8bd4b96758198f86cc05, type: 3}
+  m_Name: MonsterHitStateDTO
   m_EditorClassIdentifier: 
-  baseStateInfoDTO:
+  monsterBaseStateInfoDTO:
     stateType: 4
     stateParameter: 4
-    defaultExitState: 0
-    animationTime: 2
-    canTransitTime: 2
+    _defaultExitState: 0

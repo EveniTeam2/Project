@@ -8,9 +8,9 @@ namespace Unit.GameScene.Stages.Creatures.Interfaces
     public interface ICreatureServiceProvider
     {
         public int GetSkillIndex(string skillName);
-        public void AnimatorSetInteger(AnimationParameterEnums parameter, int value);
-        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value);
-        public void AnimatorSetBool(AnimationParameterEnums parameter, bool value);
+        public void AnimatorSetInteger(AnimationParameterEnums parameter, int value, Action action);
+        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value, Action action);
+        public void AnimatorSetBool(AnimationParameterEnums parameter, bool value, Action action);
         public AnimatorStateInfo GetCurrentAnimatorStateInfo();
         public AnimatorStateInfo GetNextAnimatorStateInfo();
         public bool TryChangeState(StateType stateType);

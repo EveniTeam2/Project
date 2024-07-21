@@ -5,13 +5,14 @@ using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 {
     public class MonsterServiceProvider : ICreatureServiceProvider
     {
-        private readonly Animator _animator;
+        private readonly AnimatorEventReceiver _animatorEventReceiver;
         private readonly BattleSystem _battleSystem;
         private readonly StateMachine _fsm;
         private readonly HealthSystem _healthSystem;
@@ -23,7 +24,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
             BattleSystem battleSystem,
             HealthSystem healthSystem,
             MovementSystem movementSystem,
-            Animator animator,
+            AnimatorEventReceiver animatorEventReceiver,
             StateMachine fsm,
             Dictionary<AnimationParameterEnums, int> animationParameter,
             Dictionary<string, int> skillIndexes)
@@ -31,7 +32,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
             _battleSystem = battleSystem;
             _healthSystem = healthSystem;
             _movementSystem = movementSystem;
-            _animator = animator;
+            _animatorEventReceiver = animatorEventReceiver;
             _fsm = fsm;
             _animationParameter = animationParameter;
             _skillIndexes = skillIndexes;
@@ -42,19 +43,19 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
             return _skillIndexes[skillName];
         }
 
-        public void AnimatorSetInteger(AnimationParameterEnums parameter, int value)
+        public void AnimatorSetInteger(AnimationParameterEnums parameter, int value, Action action)
         {
-            _animator.SetInteger(_animationParameter[parameter], value);
+            _animatorEventReceiver.SetInteger(_animationParameter[parameter], value, null);
         }
 
-        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value)
+        public void AnimatorSetFloat(AnimationParameterEnums parameter, float value, Action action)
         {
-            _animator.SetFloat(_animationParameter[parameter], value);
+            _animatorEventReceiver.SetFloat(_animationParameter[parameter], value, null);
         }
 
-        public void AnimatorSetBool(AnimationParameterEnums parameter, bool value)
+        public void AnimatorSetBool(AnimationParameterEnums parameter, bool value, Action action)
         {
-            _animator.SetBool(_animationParameter[parameter], value);
+            _animatorEventReceiver.SetBool(_animationParameter[parameter], value, null);
         }
 
         public bool TryChangeState(StateType stateType)
@@ -71,12 +72,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 
         public AnimatorStateInfo GetCurrentAnimatorStateInfo()
         {
-            return _animator.GetCurrentAnimatorStateInfo(0);
+            return _animatorEventReceiver.GetCurrentAnimatorStateInfo(0);
         }
 
         public AnimatorStateInfo GetNextAnimatorStateInfo()
         {
-            return _animator.GetNextAnimatorStateInfo(0);
+            return _animatorEventReceiver.GetNextAnimatorStateInfo(0);
         }
 
         public void RegisterEvent(ECharacterEventType type, Action subscriber)

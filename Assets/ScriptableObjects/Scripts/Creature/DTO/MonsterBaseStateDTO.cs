@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -12,10 +14,11 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     {
         [Header("Default State Info")]
         [SerializeField] protected MonsterBaseStateinfoDTO monsterBaseStateInfoDTO;
-        public abstract IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher eventPublisher);
+        public abstract IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, StateMachine st, AnimatorEventReceiver animatorEventReceiver, Dictionary<AnimationParameterEnums, int> anPa);
     }
 
-    public class MonsterBaseStateinfoDTO
+    [Serializable]
+    public struct MonsterBaseStateinfoDTO
     {
         public StateType stateType;
         public AnimationParameterEnums stateParameter;

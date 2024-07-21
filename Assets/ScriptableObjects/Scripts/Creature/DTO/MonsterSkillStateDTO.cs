@@ -5,11 +5,12 @@ using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
-    [CreateAssetMenu(fileName = nameof(SkillStateDTO), menuName = "State/Monster/" + nameof(SkillStateDTO))]
+    [CreateAssetMenu(fileName = nameof(MonsterSkillStateDTO), menuName = "State/Monster/" + nameof(MonsterSkillStateDTO))]
     public class MonsterSkillStateDTO : MonsterBaseStateDTO
     {
         [Header("Skill State Info")]
@@ -19,17 +20,14 @@ namespace ScriptableObjects.Scripts.Creature.DTO
                                             BattleSystem battleSystem,
                                             HealthSystem healthSystem,
                                             MovementSystem movementSystem,
-                                            Animator animator,
                                             StateMachine stateMachine,
-                                            Dictionary<AnimationParameterEnums, int> animationParameterEnums,
-                                            MonsterEventPublisher eventPublisher)
+                                            AnimatorEventReceiver animatorEventReceiver,
+                                            Dictionary<AnimationParameterEnums, int> animationParameterEnums)
         {
             return new MonsterSkillState(monsterBaseStateInfoDTO.GetInfo(animationParameterEnums),
-                                         skillInfoDTO.GetInfo(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine, animationParameterEnums),
+                                         skillInfoDTO.GetInfo(transform, battleSystem, healthSystem, movementSystem, stateMachine, animationParameterEnums, animatorEventReceiver),
                                          stateMachine.TryChangeState,
-                                         battleSystem,
-                                         animator,
-                                         eventPublisher);
+                                         battleSystem, animatorEventReceiver);
         }
     }
 
@@ -47,16 +45,16 @@ namespace ScriptableObjects.Scripts.Creature.DTO
                                              BattleSystem battleSystem,
                                              HealthSystem healthSystem,
                                              MovementSystem movementSystem,
-                                             Animator animator,
                                              StateMachine stateMachine,
-                                             Dictionary<AnimationParameterEnums, int> animationParameterEnums)
+                                             Dictionary<AnimationParameterEnums, int> animationParameterEnums,
+                                             AnimatorEventReceiver animatorEventReceiver)
         {
             return new MonsterSkillStateInfo(animationParameterEnums[skillParameter],
                                              skillValue,
                                              targetLayer,
                                              direction,
                                              distance,
-                                             skillAct.GetSkillAct(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine, animationParameterEnums));
+                                             skillAct.GetSkillAct(transform, battleSystem, healthSystem, movementSystem, stateMachine, animationParameterEnums, animatorEventReceiver));
         }
     }
 

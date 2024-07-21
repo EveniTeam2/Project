@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
-    [CreateAssetMenu(fileName = nameof(MonsterSkillAttackDTO), menuName = "State/Monster/" + nameof(MonsterSkillActDTO) + nameof(MonsterSkillAttackDTO))]
+    [CreateAssetMenu(fileName = nameof(MonsterSkillAttackDTO), menuName = "State/Monster/" + nameof(MonsterSkillActDTO) + "/" + nameof(MonsterSkillAttackDTO))]
     public class MonsterSkillAttackDTO : MonsterSkillActDTO
     {
         [SerializeField] SkillAttackInfoDTO skillAttackInfoDTO;
 
-        public override IMonsterSkillAct GetSkillAct(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
+        public override IMonsterSkillAct GetSkillAct(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, AnimatorEventReceiver animatorEventReceiver)
         {
             return new MonsterSkillAttack(skillAttackInfoDTO.GetInfo(), ba);
         }

@@ -5,18 +5,19 @@ using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
-    [CreateAssetMenu(fileName = nameof(IdleStateDTO), menuName = "State/" + nameof(IdleStateDTO))]
+    [CreateAssetMenu(fileName = nameof(MonsterIdleStateDTO), menuName = "State/Monster/" + nameof(MonsterIdleStateDTO))]
     public class MonsterIdleStateDTO : MonsterBaseStateDTO
     {
         [Header("Idle State Info")]
         [SerializeField] MonsterIdleStateInfoDTO mosnterIdleStateInfo;
-        public override IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa, MonsterEventPublisher eventPublisher)
+        public override IState BuildMonster(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, StateMachine st, AnimatorEventReceiver animatorEventReceiver, Dictionary<AnimationParameterEnums, int> anPa)
         {
-            return new MonsterIdleState(monsterBaseStateInfoDTO.GetInfo(anPa), mosnterIdleStateInfo.GetInfo(anPa), st.TryChangeState, an, ba, eventPublisher);
+            return new MonsterIdleState(monsterBaseStateInfoDTO.GetInfo(anPa), mosnterIdleStateInfo.GetInfo(anPa), st.TryChangeState, animatorEventReceiver, ba);
         }
     }
 

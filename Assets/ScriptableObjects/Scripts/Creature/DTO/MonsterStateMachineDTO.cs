@@ -3,6 +3,7 @@ using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -14,12 +15,12 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         [SerializeField] private List<MonsterBaseStateDTO> states;
         public MonsterBaseStateDTO[] StateDatas => states.ToArray();
 
-        public StateMachine BuildMonster(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, Animator animator, Dictionary<AnimationParameterEnums, int> animationParameter, MonsterEventPublisher eventPublisher)
+        public StateMachine BuildMonster(Transform transform, BattleSystem battleSystem, HealthSystem healthSystem, MovementSystem movementSystem, AnimatorEventReceiver animatorEventReceiver, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
-            var stateMachine = new StateMachine(animator);
+            var stateMachine = new StateMachine(animatorEventReceiver);
             foreach (var stateData in StateDatas)
             {
-                var state = stateData.BuildMonster(transform, battleSystem, healthSystem, movementSystem, animator, stateMachine, animationParameter, eventPublisher);
+                var state = stateData.BuildMonster(transform, battleSystem, healthSystem, movementSystem, stateMachine, animatorEventReceiver, animationParameter);
                 stateMachine.TryAddState(state.GetStateType(), state);
             }
 

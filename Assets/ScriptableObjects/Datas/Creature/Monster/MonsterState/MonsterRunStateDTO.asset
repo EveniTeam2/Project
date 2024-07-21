@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2dc8361fb82a894bb8d3165967b0b2c, type: 3}
-  m_Name: RunStateDTO
+  m_Script: {fileID: 11500000, guid: 3a03099ff60d2c64cacd2b56bcee2b58, type: 3}
+  m_Name: MonsterRunStateDTO
   m_EditorClassIdentifier: 
-  baseStateInfoDTO:
+  monsterBaseStateInfoDTO:
     stateType: 1
     stateParameter: 1
-    defaultExitState: 1
-  runStateInfoDTO:
+    _defaultExitState: 1
+  monsterRunStateInfoDTO:
     targetLayer:
       serializedVersion: 2
       m_Bits: 64

@@ -2,7 +2,10 @@ using System;
 using UnityEngine;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using UnityEngine;
 using ScriptableObjects.Scripts.Creature.DTO;
+using System.Collections.Generic;
+using Unit.GameScene.Units.Creatures.Module;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
 {
@@ -18,13 +21,15 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
 
         protected readonly BaseStateInfo _baseStateInfo;
         protected Func<StateType, bool> _tryChangeState;
+        protected AnimatorEventReceiver _animatorEventReceiver;
 
         //protected float _enterTime;
 
-        public BaseState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState)
+        public BaseState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animationEventReceiver)
         {
             _baseStateInfo = baseStateInfo;
             _tryChangeState = tryChangeState;
+            _animatorEventReceiver = animationEventReceiver;
         }
 
         /// <summary>
@@ -34,6 +39,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         {
             //Debug.Log($"{_baseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
+            //_enterTime = Time.time;
         }
 
         /// <summary>

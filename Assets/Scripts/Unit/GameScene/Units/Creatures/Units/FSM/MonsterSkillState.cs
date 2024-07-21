@@ -4,13 +4,13 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
     public class MonsterSkillState : MonsterBaseState
     {
-        protected Animator _animator;
         protected BattleSystem _battleSystem;
         MonsterSkillStateInfo _skillInfo;
 
@@ -18,27 +18,23 @@ namespace ScriptableObjects.Scripts.Creature.DTO
                                  MonsterSkillStateInfo skillInfo,
                                  Func<StateType, bool> tryChangeState,
                                  BattleSystem battleSystem,
-                                 Animator animator,
-                                 MonsterEventPublisher eventPublisher)
-            : base(monsterBaseStateInfo, tryChangeState, eventPublisher)
+                                 AnimatorEventReceiver animatorEventReceiver)
+            : base(monsterBaseStateInfo, tryChangeState, animatorEventReceiver)
         {
             _skillInfo = skillInfo;
             _battleSystem = battleSystem;
-            _animator = animator;
         }
 
         public override void Enter()
         {
             base.Enter();
-            _animator.SetBool(_monsterBaseStateInfo.stateParameter, true);
-            _eventPublisher.RegistOnAttackEvent(AttackEvent);
+            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, true, ChangeToDefaultState);
         }
 
         public override void Exit()
         {
             base.Exit();
-            _animator.SetBool(_monsterBaseStateInfo.stateParameter, false);
-            _eventPublisher.UnregistOnAttackEvent(AttackEvent);
+            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, false, null);
         }
 
         private void AttackEvent(IBattleStat stat)

@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 123aa03f40c934d44b7ecc195d5fe8a7, type: 3}
-  m_Name: Skill3Block
+  m_Script: {fileID: 11500000, guid: ad26689cffd42694b8cee64f63923f5a, type: 3}
+  m_Name: MonsterDeathStateDTO
   m_EditorClassIdentifier: 
-  type: 3
-  background: {fileID: 21300000, guid: 5b3a1c4f2d2e1f846a6e76cd2c5aa23b, type: 3}
-  text: "\uACF5\uBC9E"
+  monsterBaseStateInfoDTO:
+    stateType: 3
+    stateParameter: 5
+    _defaultExitState: 0

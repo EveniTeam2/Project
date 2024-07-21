@@ -2,6 +2,7 @@ using System;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
 
@@ -18,38 +19,43 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
         
         public void Execute(int combo)
         {
+            ActivateSkill(combo);
+        }
+
+        protected virtual void ActivateSkill(int combo)
+        {
             CharacterServiceProvider.RegistEventSkill(
                 () => HandleOnEnter(combo),
                 () => HandleOnExit(combo),
-                () => HandleOnUpdate(combo), 
+                () => HandleOnUpdate(combo),
                 () => HandleOnFixedUpdate(combo));
             
             ChangeState(StateType.Skill);
-        }
-
-        protected virtual void HandleOnEnter(int combo)
-        {
-            SetBoolOnAnimator(AnimationParameterEnums.Skill, true);
-        }
-
-        protected virtual void HandleOnExit(int combo)
-        {
-            SetBoolOnAnimator(AnimationParameterEnums.Skill, false);
-        }
-
-        protected virtual void HandleOnUpdate(int combo)
-        {
-            if (!CharacterServiceProvider.GetSkillAnimationState())
-            {
-                ChangeState(StateType.Run);
-            }
+            SetBoolOnAnimator(AnimationParameterEnums.Skill, true, HandleOnAnimationFinished);
         }
         
-        protected abstract void HandleOnFixedUpdate(int combo);
+        protected virtual void HandleOnEnter(int combo) { }
+        protected virtual void HandleOnUpdate(int combo) { }
+        protected virtual void HandleOnFixedUpdate(int combo) { }
+        protected virtual void HandleOnExit(int combo) { }
 
-        protected void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value)
+        private void HandleOnAnimationFinished()
         {
-            CharacterServiceProvider.AnimatorSetBool(targetParameter, value);
+            SetBoolOnAnimator(AnimationParameterEnums.Skill, false, null);
+            SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, -1, null);
+            
+            ChangeState(StateType.Idle);
+            SetReadyForInvokingCommand(true);
+        }
+        
+        protected void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
+        {
+            CharacterServiceProvider.AnimatorSetBool(targetParameter, value, action);
+        }
+
+        private void SetReadyForInvokingCommand(bool isReady)
+        {
+            CharacterServiceProvider.SetReadyForCommand(isReady);
         }
 
         protected void ChangeState(StateType targetState)
@@ -57,9 +63,9 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
             CharacterServiceProvider.TryChangeState(targetState);
         }
 
-        protected void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value)
+        protected void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
         {
-            CharacterServiceProvider.AnimatorSetFloat(targetParameter, value);
+            CharacterServiceProvider.AnimatorSetFloat(targetParameter, value, action);
         }
 
         protected void SetDamageOnBattleSystem(float damage)

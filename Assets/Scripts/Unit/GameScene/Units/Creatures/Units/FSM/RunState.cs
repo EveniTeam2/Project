@@ -2,7 +2,7 @@
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -10,14 +10,12 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public class RunState : BaseState
     {
         protected RunStateInfo _runStateInfo;
-        private Animator _animator;
         private MovementSystem _movementSystem;
         private BattleSystem _battleSystem;
 
-        public RunState(BaseStateInfo baseInfo, RunStateInfo runStateInfo, Func<StateType, bool> tryChangeState, BattleSystem battleSystem, MovementSystem movementSystem, Animator animator) : base(baseInfo, tryChangeState)
+        public RunState(BaseStateInfo baseInfo, RunStateInfo runStateInfo, Func<StateType, bool> tryChangeState, BattleSystem battleSystem, MovementSystem movementSystem, AnimatorEventReceiver animatorEventReceiver) : base(baseInfo, tryChangeState, animatorEventReceiver)
         {
             _runStateInfo = runStateInfo;
-            _animator = animator;
             _movementSystem = movementSystem;
             _battleSystem = battleSystem;
         }
@@ -25,14 +23,14 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         public override void Enter()
         {
             base.Enter();
-            _animator.SetBool(_baseStateInfo.stateParameter, true);
+            _animatorEventReceiver.SetBool(_baseStateInfo.stateParameter, true, null);
             _movementSystem.SetRun(true);
             OnFixedUpdate += CheckTargetAndIdle;
         }
         public override void Exit()
         {
             base.Exit();
-            _animator.SetBool(_baseStateInfo.stateParameter, false);
+            _animatorEventReceiver.SetBool(_baseStateInfo.stateParameter, false, null);
             _movementSystem.SetRun(false);
         }
         private void CheckTargetAndIdle()
@@ -48,7 +46,6 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public class MonsterRunState : MonsterBaseState
     {
         protected MonsterRunStateInfo _monsterRunStateInfo;
-        private Animator _animator;
         private MovementSystem _movementSystem;
         private BattleSystem _battleSystem;
 
@@ -57,11 +54,9 @@ namespace ScriptableObjects.Scripts.Creature.DTO
                                Func<StateType, bool> tryChangeState,
                                BattleSystem battleSystem,
                                MovementSystem movementSystem,
-                               Animator animator,
-                               MonsterEventPublisher monsterEventPublisher) : base(monsterBaseInfo, tryChangeState, monsterEventPublisher)
+                               AnimatorEventReceiver animatorEventReceiver) : base(monsterBaseInfo, tryChangeState, animatorEventReceiver)
         {
             _monsterRunStateInfo = monsterRunStateInfo;
-            _animator = animator;
             _movementSystem = movementSystem;
             _battleSystem = battleSystem;
         }
@@ -69,14 +64,14 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         public override void Enter()
         {
             base.Enter();
-            _animator.SetBool(_monsterBaseStateInfo.stateParameter, true);
+            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, true, ChangeToDefaultState);
             _movementSystem.SetRun(true);
             OnFixedUpdate += CheckTargetAndIdle;
         }
         public override void Exit()
         {
             base.Exit();
-            _animator.SetBool(_monsterBaseStateInfo.stateParameter, false);
+            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, false, null);
             _movementSystem.SetRun(false);
         }
         private void CheckTargetAndIdle()

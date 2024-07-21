@@ -4,6 +4,7 @@ using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -13,9 +14,9 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     {
         //[Header("Hit State Info")]
         //[SerializeField] HitStateInfoDTO hitStateInfoDTO;
-        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, Animator an, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
+        public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, AnimatorEventReceiver animatorEventReceiver, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
         {
-            return new HitState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState);
+            return new HitState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState, animatorEventReceiver);
         }
     }
 

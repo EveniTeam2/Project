@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
@@ -11,17 +12,17 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
     /// </summary>
     public class StateMachine
     {
-        private readonly Animator animator;
+        private readonly AnimatorEventReceiver _animatorEventReceiver;
         protected IState _current;
         protected IState _prev;
         protected Dictionary<StateType, IState> _states;
         protected IState CurrentState => _current;
         protected IState PrevState => _prev;
 
-        public StateMachine(Animator animator)
+        public StateMachine(AnimatorEventReceiver animatorEventReceiver)
         {
             _states = new Dictionary<StateType, IState>();
-            this.animator = animator;
+            _animatorEventReceiver = animatorEventReceiver;
         }
 
         /// <summary>
@@ -47,15 +48,14 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
 
         public bool TryChangeState(StateType stateType)
         {
-            if (_states.ContainsKey(stateType))
-            {
-                _current.Exit();
-                _prev = _current;
-                _current = _states[stateType];
-                _current.Enter();
-                return true;
-            }
-            return false;
+            if (!_states.TryGetValue(stateType, out var targetState))
+                return false;
+
+            _current.Exit();
+            _prev = _current;
+            _current = _states[stateType];
+            _current.Enter();
+            return true;
         }
 
         /// <summary>

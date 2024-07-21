@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
 
     public class SkillState : BaseState
     {
-        public SkillState(BaseStateInfo baseInfo, Func<StateType, bool> tryChangeState)
-            : base(baseInfo, tryChangeState)
+        public SkillState(BaseStateInfo baseInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver)
+            : base(baseInfo, tryChangeState, animatorEventReceiver)
         {
 
         }
