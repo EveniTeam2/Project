@@ -2,8 +2,8 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 
 namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces
 {
-    public interface IChangeState
+    public interface ISetFloatOnAnimator
     {
-        public void ChangeState(StateType targetState);
+        public void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value);
     }
 }

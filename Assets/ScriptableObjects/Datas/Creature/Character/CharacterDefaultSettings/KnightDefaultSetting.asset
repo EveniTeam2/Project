@@ -19,16 +19,20 @@ MonoBehaviour:
     Health: 1
     Speed: 1
     CoolTime: 1
-  knightSkillTypes:
+  knightSkillSettings:
   - skillIcon: {fileID: 0}
     skillType: 0
     skillIndex: 0
+    skillValue: 10
   - skillIcon: {fileID: 0}
     skillType: 1
     skillIndex: 1
+    skillValue: 20
   - skillIcon: {fileID: 0}
     skillType: 3
     skillIndex: 2
+    skillValue: 30
   - skillIcon: {fileID: 0}
     skillType: 4
     skillIndex: 3
+    skillValue: 40

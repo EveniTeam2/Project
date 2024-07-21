@@ -1,35 +1,35 @@
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.Units
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Units
 {
-    public class KnightHolyHeal : CharacterSkill, ISkillCommand, IChangeState, ISetFloatParameter
+    public class KnightHolyHeal : CharacterSkill
     {
         public KnightHolyHeal(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) { }
 
-        public void Execute(int comboCount)
+        protected override void HandleOnEnter(int combo)
         {
-            Debug.Log($"{nameof(CharacterSkill)} - {nameof(KnightHolyHeal)} x {comboCount}");
+            base.HandleOnEnter(combo);
             
-            SetFloatParameter();
-            ChangeState();
+            Debug.Log($"{nameof(KnightHolyHeal)} Action");
+            
+            SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.HolyHeal}"));
+            SetDamageOnBattleSystem(GetSkillValue($"{KnightSkillType.HolyHeal}") * combo);
         }
 
-        public void ChangeState()
-        {
-            CharacterServiceProvider.TryChangeState(StateType.Skill);
-        }
+        protected override void HandleOnUpdate(int combo) { }
 
-        public void SetFloatParameter()
+        protected override void HandleOnFixedUpdate(int combo) { }
+        
+        protected override void HandleOnExit(int combo)
         {
-            var skillIndex = CharacterServiceProvider.GetSkillIndex($"{KnightSkillType.HolyHeal}");
-            CharacterServiceProvider.AnimatorSetFloat(AnimationParameterEnums.SkillIndex, skillIndex);
+            base.HandleOnExit(combo);
             
-            Debug.Log($"{nameof(skillIndex)} {skillIndex}");
+            ChangeState(StateType.Run);
         }
     }
 }

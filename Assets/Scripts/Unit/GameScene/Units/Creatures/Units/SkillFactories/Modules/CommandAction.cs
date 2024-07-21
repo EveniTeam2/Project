@@ -1,5 +1,6 @@
 using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 
 namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules
 {

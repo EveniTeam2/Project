@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces
+namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces
 {
     public interface ISkillCommand
     {

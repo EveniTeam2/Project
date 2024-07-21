@@ -1,35 +1,34 @@
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Skills.Units
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Units
 {
-    public class KnightSwordBuff : CharacterSkill, ISkillCommand, IChangeState, ISetFloatParameter
+    public class KnightSwordBuff : CharacterSkill
     {
         public KnightSwordBuff(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) { }
+  
+        protected override void HandleOnEnter(int combo)
+        {
+            base.HandleOnEnter(combo);
+            
+            Debug.Log($"{nameof(KnightSwordBuff)} Action");
+            
+            SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.SwordBuff}"));
+            SetDamageOnBattleSystem(GetSkillValue($"{KnightSkillType.SwordBuff}") * combo);
+        }
+
+        protected override void HandleOnUpdate(int combo) { }
+
+        protected override void HandleOnFixedUpdate(int combo) { }
         
-        public void Execute(int comboCount)
+        protected override void HandleOnExit(int combo)
         {
-            Debug.Log($"{nameof(CharacterSkill)} - {nameof(KnightSwordBuff)} x {comboCount}");
+            base.HandleOnExit(combo);
             
-            SetFloatParameter();
-            ChangeState();
-        }
-
-        public void ChangeState()
-        {
-            CharacterServiceProvider.TryChangeState(StateType.Skill);
-        }
-
-        public void SetFloatParameter()
-        {
-            var skillIndex = CharacterServiceProvider.GetSkillIndex($"{KnightSkillType.SwordBuff}");
-            CharacterServiceProvider.AnimatorSetFloat(AnimationParameterEnums.SkillIndex, skillIndex);
-            
-            Debug.Log($"{nameof(skillIndex)} {skillIndex}");
+            ChangeState(StateType.Run);
         }
     }
 }

@@ -15,9 +15,9 @@ namespace Unit.GameScene.Stages.Creatures.Interfaces
         public AnimatorStateInfo GetNextAnimatorStateInfo();
         public bool TryChangeState(StateType stateType);
 
-        int Damage(int atk);
+        int TakeDamage(int atk);
         void RegisterEvent(ECharacterEventType type, Action subscriber);
-        void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate);
+        void RegisterEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate);
         void Run(bool isRun);
     }
 }
