@@ -79,6 +79,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
         {
             // TODO
         }
+
+        public override void SpawnInit(IMovementStat movementStat)
+        {
+            _stats = movementStat;
+        }
     }
 
     public class CharacterMovementStat : IMovementStat

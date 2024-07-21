@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
@@ -11,15 +12,12 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public class IdleState : BaseState
     {
         protected BattleSystem _battleSystem;
-        protected AnimatorEventReceiver _animatorEventReceiver;
-
         protected readonly IdleStateInfo _idleStateInfo;
 
-        public IdleState(BaseStateInfo baseInfo, IdleStateInfo idleStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver, BattleSystem battleSystem)
-            : base(baseInfo, tryChangeState)
+        public IdleState(BaseStateInfo baseInfo, IdleStateInfo idleStateInfo, Func<StateType, bool> tryChangeState, BattleSystem battleSystem, AnimatorEventReceiver animatorEventReceiver)
+            : base(baseInfo, tryChangeState, animatorEventReceiver)
         {
             _idleStateInfo = idleStateInfo;
-            _animatorEventReceiver = animatorEventReceiver;
             _battleSystem = battleSystem;
         }
 
@@ -37,13 +35,46 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 
         protected virtual void CheckTargetAndRun()
         {
-            //if (CanTransitionToOther())
+            if (!_battleSystem.CheckCollider(_idleStateInfo.targetLayer, _idleStateInfo.direction, _idleStateInfo.distance, out _))
             {
-                if (!_battleSystem.CheckCollider(_idleStateInfo.targetLayer, _idleStateInfo.direction, _idleStateInfo.distance, out _))
-                {
-                    OnFixedUpdate -= CheckTargetAndRun;
-                    _tryChangeState.Invoke(StateType.Run);
-                }
+                OnFixedUpdate -= CheckTargetAndRun;
+                _tryChangeState.Invoke(StateType.Run);
+            }
+        }
+    }
+
+    public class MonsterIdleState : MonsterBaseState
+    {
+        protected BattleSystem _battleSystem;
+
+        protected readonly MonsterIdleStateInfo _monsterIdleStateInfo;
+
+        public MonsterIdleState(MonsterBaseStateInfo baseInfo, MonsterIdleStateInfo monsterIdleStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver, BattleSystem battleSystem)
+            : base(baseInfo, tryChangeState, animatorEventReceiver)
+        {
+            _monsterIdleStateInfo = monsterIdleStateInfo;
+            _battleSystem = battleSystem;
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, true, ChangeToDefaultState);
+            OnFixedUpdate += CheckTargetAndRun;
+        }
+        public override void Exit()
+        {
+            base.Exit();
+            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, false, null);
+            OnFixedUpdate -= CheckTargetAndRun;
+        }
+
+        protected virtual void CheckTargetAndRun()
+        {
+            if (!_battleSystem.CheckCollider(_monsterIdleStateInfo.targetLayer, _monsterIdleStateInfo.direction, _monsterIdleStateInfo.distance, out _))
+            {
+                OnFixedUpdate -= CheckTargetAndRun;
+                _tryChangeState.Invoke(StateType.Run);
             }
         }
     }

@@ -5,6 +5,7 @@ using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -19,6 +20,8 @@ namespace ScriptableObjects.Scripts.Creature.DTO
             return new DeathState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState, animatorEventReceiver);
         }
     }
+
+    //
 
     //[Serializable]
     //public struct DeathStateInfoDTO

@@ -71,6 +71,13 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public void AttackEnemy(float damage)
         {
+            if (_battleSystem.CheckCollider(LayerMask.NameToLayer("Monster"), Vector2.right, 2.0f, out var targets))
+            {
+                foreach (var target in targets)
+                {
+                    _battleSystem.Attack(target);
+                }
+            }
             // TODO : damage 주면 몬스터 때찌해주세요 (채이환)
         }
 
@@ -133,9 +140,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             return _fsm.GetCurrentStateType();
         }
 
-        public void RegisterEventSkill(Action onEnter, Action onExit, Action onUpdate, Action onFixedUpdate)
+        public void RegistEventSkill(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
         {
-            _fsm.RegisterOnSkillState(onEnter, onExit, onUpdate, onFixedUpdate);
+            _fsm.RegistOnSkillState(OnEnter, OnExit, OnUpdate, OnFixedUpdate);
         }
 
         //public bool TryChangeState(StateType stateType, Action onExecute)

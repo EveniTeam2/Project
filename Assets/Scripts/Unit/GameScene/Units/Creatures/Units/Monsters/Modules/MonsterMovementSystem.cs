@@ -14,7 +14,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
         public override void SetRun(bool isRun)
         {
 #if UNITY_EDITOR
-            //Debug.Log($"Run State:{isRun}");
+            Debug.Log($"Run State:{isRun}");
 #endif
             _wantToMove = isRun;
             if (isRun)
@@ -34,6 +34,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 
         public override void Jump(float power)
         {
+        }
+
+        public override void SpawnInit(IMovementStat movementStat)
+        {
+            _stats = movementStat;
         }
     }
 

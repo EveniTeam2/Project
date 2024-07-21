@@ -16,7 +16,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         //[SerializeField] HitStateInfoDTO hitStateInfoDTO;
         public override IState Build(Transform tr, BattleSystem ba, HealthSystem he, MovementSystem mo, AnimatorEventReceiver animatorEventReceiver, StateMachine st, Dictionary<AnimationParameterEnums, int> anPa)
         {
-            return new HitState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState);
+            return new HitState(baseStateInfoDTO.GetInfo(anPa), st.TryChangeState, animatorEventReceiver);
         }
     }
 

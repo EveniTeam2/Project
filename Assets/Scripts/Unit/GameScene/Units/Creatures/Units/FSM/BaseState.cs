@@ -5,6 +5,7 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using UnityEngine;
 using ScriptableObjects.Scripts.Creature.DTO;
 using System.Collections.Generic;
+using Unit.GameScene.Units.Creatures.Module;
 
 namespace Unit.GameScene.Stages.Creatures.Units.FSM
 {
@@ -20,13 +21,15 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
 
         protected readonly BaseStateInfo _baseStateInfo;
         protected Func<StateType, bool> _tryChangeState;
+        protected AnimatorEventReceiver _animatorEventReceiver;
 
         //protected float _enterTime;
 
-        public BaseState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState)
+        public BaseState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animationEventReceiver)
         {
             _baseStateInfo = baseStateInfo;
             _tryChangeState = tryChangeState;
+            _animatorEventReceiver = animationEventReceiver;
         }
 
         /// <summary>
@@ -34,7 +37,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Enter()
         {
-            // Debug.Log($"{_baseStateInfo.stateType} Enter");
+            //Debug.Log($"{_baseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
             //_enterTime = Time.time;
         }
@@ -44,7 +47,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         /// </summary>
         public virtual void Exit()
         {
-            // Debug.Log($"{_baseStateInfo.stateType} Out");
+            //Debug.Log($"{_baseStateInfo.stateType} Out");
             OnExit?.Invoke();
         }
 
@@ -62,18 +65,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         public virtual void Update()
         {
             OnUpdate?.Invoke();
-            //float duration = Time.time - _enterTime;
-            //if (duration > _baseStateInfo.animationTime)
-            //    _tryChangeState(_baseStateInfo.defaultExitState);
         }
-
-        /// <summary>
-        /// </summary>
-        //public virtual bool CanTransitionToOther()
-        //{
-        //    float duration = Time.time - _enterTime;
-        //    return duration > _baseStateInfo.canTransitTime;
-        //}
 
         protected void ClearEvent(EStateEventType type)
         {
@@ -93,6 +85,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
                     break;
             }
         }
+
         public StateType GetStateType()
         {
             return _baseStateInfo.stateType;
