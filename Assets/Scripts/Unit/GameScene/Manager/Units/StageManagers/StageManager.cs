@@ -84,7 +84,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 _character.Initialize(characterSetting, playerSpawnPosition.y, _animationParameters);
                 OnSendCommand += _character.HandleReceiveCommand;
             }
-            _character.GetServiceProvider().RegisterEvent(ECharacterEventType.Death, PlayerIsDead);
+            _character.GetServiceProvider().RegistEvent(ECharacterEventType.Death, PlayerIsDead);
         }
 
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)

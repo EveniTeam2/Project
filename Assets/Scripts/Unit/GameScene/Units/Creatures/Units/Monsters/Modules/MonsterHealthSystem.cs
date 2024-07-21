@@ -11,15 +11,17 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
 
         public override void Damage(int dmg)
         {
-            // TODO 방어력 있으면 적용해야되는 곳
-            _health = dmg;
+            if (_invinsible)
+                return;
+
+            _health -= dmg;
             if (_health <= 0)
             {
                 _health = 0;
                 CallDeath();
             }
-
-            CallDamage();
+            else
+                CallDamage();
         }
 
         public override void Heal(int healAmount)

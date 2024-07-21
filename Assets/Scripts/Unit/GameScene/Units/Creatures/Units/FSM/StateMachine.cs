@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
@@ -96,6 +97,12 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         public StateType GetCurrentStateType()
         {
             return _current.GetStateType();
+        }
+
+        internal void RegistOnDeathState(Action death)
+        {
+            Debug.Log("Regist on Death");
+            _states[StateType.Die].OnExit += death;
         }
     }
 }
