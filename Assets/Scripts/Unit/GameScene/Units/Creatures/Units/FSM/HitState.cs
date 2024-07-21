@@ -30,7 +30,6 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public class MonsterHitState : MonsterBaseState
     {
         //protected readonly HitStateInfo _hitStateInfo;
-        private Animator _animator;
 
         public MonsterHitState(MonsterBaseStateInfo monsterBaseStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver) : base(monsterBaseStateInfo, tryChangeState, animatorEventReceiver)
         {
@@ -40,7 +39,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         public override void Enter()
         {
             base.Enter();
-            _animator.SetTrigger(_monsterBaseStateInfo.stateParameter);
+            animatorEventReceiver.SetTrigger(_monsterBaseStateInfo.stateParameter, null);
         }
         public override void Exit()
         {

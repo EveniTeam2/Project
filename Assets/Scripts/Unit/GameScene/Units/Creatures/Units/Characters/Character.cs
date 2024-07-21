@@ -54,8 +54,18 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _mods = new LinkedList<ModifyStatData>();
             
             InitializeCommand();
+            _healthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
         }
-        
+
+        private void CheckAndTransitToHit()
+        {
+            var stateType = _fsm.GetCurrentStateType();
+            if (stateType == StateType.Idle || stateType == StateType.Run)
+            {
+                _fsm.TryChangeState(StateType.Hit);
+            }
+        }
+
         protected void Update()
         {
             _fsm?.Update();

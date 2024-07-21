@@ -59,7 +59,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         public override void Enter()
         {
             base.Enter();
-            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, true, ChangeToDefaultState);
+            animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, true, null);
             OnFixedUpdate += CheckTargetAndRun;
         }
         public override void Exit()

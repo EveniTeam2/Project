@@ -45,6 +45,13 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
 
             _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, animationParameter, null);
             _mods = new LinkedList<ModifyStatData>();
+
+            _healthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
+        }
+
+        private void CheckAndTransitToHit()
+        {
+            _fsm.TryChangeState(StateType.Hit);
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
