@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -10,28 +11,28 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public class IdleState : BaseState
     {
         protected BattleSystem _battleSystem;
-        protected Animator _animator;
+        protected AnimatorEventReceiver _animatorEventReceiver;
 
         protected readonly IdleStateInfo _idleStateInfo;
 
-        public IdleState(BaseStateInfo baseInfo, IdleStateInfo idleStateInfo, Func<StateType, bool> tryChangeState, Animator animator, BattleSystem battleSystem)
+        public IdleState(BaseStateInfo baseInfo, IdleStateInfo idleStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver, BattleSystem battleSystem)
             : base(baseInfo, tryChangeState)
         {
             _idleStateInfo = idleStateInfo;
-            _animator = animator;
+            _animatorEventReceiver = animatorEventReceiver;
             _battleSystem = battleSystem;
         }
 
         public override void Enter()
         {
             base.Enter();
-            _animator.SetBool(_baseStateInfo.stateParameter, true);
+            _animatorEventReceiver.SetBool(_baseStateInfo.stateParameter, true, null);
             OnFixedUpdate += CheckTargetAndRun;
         }
         public override void Exit()
         {
             base.Exit();
-            _animator.SetBool(_baseStateInfo.stateParameter, false);
+            _animatorEventReceiver.SetBool(_baseStateInfo.stateParameter, false, null);
         }
 
         protected virtual void CheckTargetAndRun()

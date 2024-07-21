@@ -7,6 +7,7 @@ using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Units.Monsters
@@ -32,16 +33,16 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
 
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
-            _animator = gameObject.GetComponent<Animator>();
+            _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
 
             _stats = new Stat<MonsterStat>(stat);
             _battleSystem = new MonsterBattleSystem(transform, new MonsterBattleStat(_stats));
             _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(_stats));
             _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(_stats), groundYPosition);
 
-            _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animator, animationParameter);
+            _fsm = StateBuilder.BuildState(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
 
-            _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animator, _fsm, animationParameter, null);
+            _monsterServiceProvider = new MonsterServiceProvider(_battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, animationParameter, null);
             _mods = new LinkedList<ModifyStatData>();
         }
 

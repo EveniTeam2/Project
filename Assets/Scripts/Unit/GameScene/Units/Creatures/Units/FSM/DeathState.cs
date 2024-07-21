@@ -1,6 +1,7 @@
 ﻿using System;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -8,19 +9,19 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public class DeathState : BaseState
     {
         //private readonly DeathStateInfo _deathInfo;
-        private Animator _animator;
+        private AnimatorEventReceiver _animatorEventReceiver;
 
-        public DeathState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState, Animator animator)
+        public DeathState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver)
             : base(baseStateInfo, tryChangeState)
         {
             //_deathInfo = deathInfo;
-            _animator = animator;
+            _animatorEventReceiver = animatorEventReceiver;
         }
 
         public override void Enter()
         {
             base.Enter();
-            _animator.SetTrigger(_baseStateInfo.stateParameter);
+            _animatorEventReceiver.SetTrigger(_baseStateInfo.stateParameter, null);
         }
         public override void Exit()
         {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7466724201665167229}
   - component: {fileID: 1672940475951353492}
   - component: {fileID: 4425341940894063391}
+  - component: {fileID: 2621508476384722006}
   m_Layer: 7
   m_Name: TestMonsterDino
   m_TagString: Untagged
@@ -97,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1081108743891100633}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dfe04fc0a8ebe41ba851eeebf265bdc6, type: 2}
+  m_Controller: {fileID: 9100000, guid: d008bd3474d034b75a894047ece4ccfb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -166,3 +167,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.09375, y: 0.09375}
   m_EdgeRadius: 0
+--- !u!114 &2621508476384722006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081108743891100633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235ce2bf718f44a4870470a762553ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationClips: []

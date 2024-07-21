@@ -5,6 +5,7 @@ using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Stages.Creatures.Module;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures
@@ -14,7 +15,7 @@ namespace Unit.GameScene.Stages.Creatures
         /// <summary>
         ///     애니메이터를 반환합니다.
         /// </summary>
-        protected Animator _animator;
+        protected AnimatorEventReceiver _animatorEventReceiver;
 
         /// <summary>
         ///     전투에 관한 시스템을 반환합니다.

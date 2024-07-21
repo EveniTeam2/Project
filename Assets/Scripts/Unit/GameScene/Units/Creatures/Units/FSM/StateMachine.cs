@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
     /// </summary>
     public class StateMachine
     {
-        private readonly Animator animator;
+        private readonly AnimatorEventReceiver _animatorEventReceiver;
         protected IState _current;
         protected IState _prev;
         protected Dictionary<StateType, IState> _states;
@@ -20,10 +21,10 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         protected IState PrevState => _prev;
         protected Queue<IStateCommand> _command;
 
-        public StateMachine(Animator animator)
+        public StateMachine(AnimatorEventReceiver animatorEventReceiver)
         {
             _states = new Dictionary<StateType, IState>();
-            this.animator = animator;
+            _animatorEventReceiver = animatorEventReceiver;
             _command = new Queue<IStateCommand>();
         }
 
@@ -63,16 +64,13 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
 
         public bool TryChangeState(StateType stateType)
         {
-            if (_states.ContainsKey(stateType))
-            {
-                //CommandReceived(new StateCommand(stateType));
-                _current.Exit();
-                _prev = _current;
-                _current = _states[stateType];
-                _current.Enter();
-                return true;
-            }
-            return false;
+            if (!_states.TryGetValue(stateType, out var targetState)) return false;
+            
+            _current.Exit();
+            _prev = _current;
+            _current = targetState;
+            _current.Enter();
+            return true;
         }
 
         //private void CommandReceived(IStateCommand command)
@@ -164,13 +162,13 @@ namespace Unit.GameScene.Stages.Creatures.Units.FSM
         //    return false;
         //}
 
-        public void RegisterOnSkillState(Action OnEnter, Action OnExit, Action OnUpdate, Action OnFixedUpdate)
+        public void RegisterOnSkillState(Action onEnter, Action onExit, Action onUpdate, Action onFixedUpdate)
         {
             var skill = _states[StateType.Skill];
-            skill.OnEnter += OnEnter;
-            skill.OnExit += OnExit;
-            skill.OnUpdate += OnUpdate;
-            skill.OnFixedUpdate += OnFixedUpdate;
+            skill.OnEnter += onEnter;
+            skill.OnExit += onExit;
+            skill.OnUpdate += onUpdate;
+            skill.OnFixedUpdate += onFixedUpdate;
         }
 
         public StateType GetCurrentStateType()

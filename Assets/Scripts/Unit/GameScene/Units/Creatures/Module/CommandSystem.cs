@@ -5,7 +5,7 @@ using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Stages.Creatures.Module
