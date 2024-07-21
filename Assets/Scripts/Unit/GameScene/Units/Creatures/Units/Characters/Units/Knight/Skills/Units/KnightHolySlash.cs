@@ -15,8 +15,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
         
         protected override void ActivateSkill(int combo)
         {
-            Debug.Log($"{nameof(KnightHolySlash)} {nameof(HandleOnEnter)} 로직 처리");
-            
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.HolySlash}"), null);
             SetDamageOnBattleSystem(GetSkillValue($"{KnightSkillType.HolySlash}") * combo);
             

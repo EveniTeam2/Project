@@ -24,21 +24,10 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
 
         protected virtual void ActivateSkill(int combo)
         {
-            CharacterServiceProvider.RegisterEventSkill(
-                () => HandleOnEnter(combo),
-                () => HandleOnExit(combo),
-                () => HandleOnUpdate(combo),
-                () => HandleOnFixedUpdate(combo));
-            
             ChangeState(StateType.Skill);
             SetBoolOnAnimator(AnimationParameterEnums.Skill, true, HandleOnAnimationFinished);
         }
         
-        protected virtual void HandleOnEnter(int combo) { }
-        protected virtual void HandleOnUpdate(int combo) { }
-        protected virtual void HandleOnFixedUpdate(int combo) { }
-        protected virtual void HandleOnExit(int combo) { }
-
         private void HandleOnAnimationFinished()
         {
             SetBoolOnAnimator(AnimationParameterEnums.Skill, false, null);
@@ -47,6 +36,19 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
             ChangeState(StateType.Idle);
             SetReadyForInvokingCommand(true);
         }
+        
+        // CharacterServiceProvider.RegisterEventSkill(
+        //     () => HandleOnEnter(combo),
+        //     () => HandleOnExit(combo),
+        //     () => HandleOnUpdate(combo),
+        //     () => HandleOnFixedUpdate(combo));
+        
+        // protected virtual void HandleOnEnter(int combo) { }
+        // protected virtual void HandleOnUpdate(int combo) { }
+        // protected virtual void HandleOnFixedUpdate(int combo) { }
+        // protected virtual void HandleOnExit(int combo) { }
+
+
         
         protected void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
         {
