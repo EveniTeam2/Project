@@ -90,7 +90,6 @@ namespace Unit.GameScene.Manager.Units {
             var group = _spawnGroup.First;
             while (group != null)
                 if (group.Value.spawnDecider.CanExecute()) {
-                    // TODO spawn monster
                     RandomSpawnMonster(group.Value);
                     group = group.Next;
                 }

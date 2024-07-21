@@ -98,7 +98,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             _battleSystem.SpawnInit(new MonsterBattleStat(_stats));
             _healthSystem.SpawnInit(new MonsterHealthStat(_stats));
             _movementSystem.SpawnInit(new MonsterMovementStat(_stats));
-            //_fsm.TryChangeState(StateType.Run);
+            _fsm.TryChangeState(StateType.Run);
             ClearModifiedStat();
         }
     }

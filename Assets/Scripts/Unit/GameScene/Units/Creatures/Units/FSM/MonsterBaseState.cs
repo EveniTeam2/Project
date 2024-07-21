@@ -1,9 +1,8 @@
 ﻿using System;
 using Unit.GameScene.Stages.Creatures.Interfaces;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using Unit.GameScene.Units.Creatures.Module;
+using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
@@ -32,7 +31,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         /// </summary>
         public virtual void Enter()
         {
-            //Debug.Log($"{_baseStateInfo.stateType} Enter");
+            Debug.Log($"{_monsterBaseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
         }
 
@@ -41,7 +40,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         /// </summary>
         public virtual void Exit()
         {
-            //Debug.Log($"{_baseStateInfo.stateType} Out");
+            Debug.Log($"{_monsterBaseStateInfo.stateType} Out");
             OnExit?.Invoke();
         }
 

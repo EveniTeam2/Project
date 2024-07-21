@@ -20,7 +20,9 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     {
         public BaseStateInfo GetInfo(Dictionary<AnimationParameterEnums, int> animationParameterEnums);
     }
-    public class BaseStateInfoDTO : IStateInfoDTO
+
+    [Serializable]
+    public struct BaseStateInfoDTO : IStateInfoDTO
     {
         public StateType stateType;
         public AnimationParameterEnums stateParameter;
