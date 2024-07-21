@@ -21,13 +21,21 @@ namespace Unit.GameScene.Stages.Creatures.Module
         public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee)
         {
             var hits = Physics2D.RaycastAll(_targetTransform.position, direction, distance, targetLayer);
-#if UNITY_EDITOR
-            Debug.DrawRay(_targetTransform.position, distance * direction, Color.red);
-#endif
             collidee = hits;
             if (collidee.Length > 0)
+            {
+#if UNITY_EDITOR
+                Debug.DrawRay(_targetTransform.position, distance * direction, Color.red, 0.3f);
+#endif
                 return true;
-            return false;
+            }
+            else
+            {
+#if UNITY_EDITOR
+                Debug.DrawRay(_targetTransform.position, distance * direction, Color.green, 0.3f);
+#endif
+                return false;
+            }
         }
 
         public abstract void Attack(RaycastHit2D col);

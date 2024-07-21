@@ -71,7 +71,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public void AttackEnemy(float damage)
         {
-            if (_battleSystem.CheckCollider(LayerMask.NameToLayer("Monster"), Vector2.right, 2.0f, out var targets))
+            var targetLayer = new LayerMask() {value = 1 << LayerMask.NameToLayer("Monster") };
+            if (_battleSystem.CheckCollider(targetLayer, Vector2.right, 5.0f, out var targets))
             {
                 foreach (var target in targets)
                 {
