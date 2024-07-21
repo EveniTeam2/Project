@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Manager.Units.StageManagers;
@@ -47,11 +48,17 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             _mods = new LinkedList<ModifyStatData>();
 
             _healthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
+            _healthSystem.RegistOnDeathEvent(Die);
         }
 
         private void CheckAndTransitToHit()
         {
             _fsm.TryChangeState(StateType.Hit);
+        }
+
+        private void Die()
+        {
+            _fsm.TryChangeState(StateType.Die);
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
@@ -107,6 +114,11 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters
             _movementSystem.SpawnInit(new MonsterMovementStat(_stats));
             _fsm.TryChangeState(StateType.Run);
             ClearModifiedStat();
+        }
+
+        internal void RegistEventDeath(Action<Monster> release)
+        {
+            _fsm.RegistOnDeathState(() => release.Invoke(this));
         }
     }
 }

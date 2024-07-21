@@ -80,7 +80,7 @@ namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
             return _animatorEventReceiver.GetNextAnimatorStateInfo(0);
         }
 
-        public void RegisterEvent(ECharacterEventType type, Action subscriber)
+        public void RegistEvent(ECharacterEventType type, Action subscriber)
         {
             switch (type)
             {

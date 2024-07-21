@@ -31,7 +31,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         /// </summary>
         public virtual void Enter()
         {
-            Debug.Log($"{_monsterBaseStateInfo.stateType} Enter");
+            //Debug.Log($"{_monsterBaseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
         }
 
@@ -40,7 +40,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         /// </summary>
         public virtual void Exit()
         {
-            Debug.Log($"{_monsterBaseStateInfo.stateType} Out");
+            //Debug.Log($"{_monsterBaseStateInfo.stateType} Out");
             OnExit?.Invoke();
         }
 

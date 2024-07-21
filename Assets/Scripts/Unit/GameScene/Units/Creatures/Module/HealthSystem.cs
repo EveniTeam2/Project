@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
 
 namespace Unit.GameScene.Stages.Creatures.Module
@@ -6,10 +7,12 @@ namespace Unit.GameScene.Stages.Creatures.Module
     public abstract class HealthSystem
     {
         protected IHealthStat _healthStat;
+        protected bool _invinsible;
 
         public HealthSystem(IHealthStat stats)
         {
             _healthStat = stats;
+            _invinsible = false;
         }
 
         protected bool _isDead => _healthStat.GetHealth() <= 0;
@@ -23,6 +26,11 @@ namespace Unit.GameScene.Stages.Creatures.Module
         protected event Action _onHeal;
         protected event Action _onDeath;
         protected event Action _onDamage;
+
+        public bool IsInvinsible()
+        {
+            return _invinsible;
+        }
 
         public abstract void Damage(int dmg);
 
@@ -55,11 +63,14 @@ namespace Unit.GameScene.Stages.Creatures.Module
         protected void CallDeath()
         {
             _onDeath?.Invoke();
+            _invinsible = true;
+            Debug.Log($"죽었다.");
         }
 
         protected void CallDamage()
         {
             _onDamage?.Invoke();
+            Debug.Log($"대미지를 입었다.");
         }
 
         protected void CallHeal()
@@ -70,6 +81,7 @@ namespace Unit.GameScene.Stages.Creatures.Module
         public void SpawnInit(MonsterHealthStat monsterHealthStat)
         {
             _healthStat = monsterHealthStat;
+            _invinsible = false;
         }
 
         public abstract void Heal(int healAmount);

@@ -41,11 +41,13 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         public override void Enter()
         {
             base.Enter();
-            animatorEventReceiver.SetTrigger(_monsterBaseStateInfo.stateParameter, null);
+            animatorEventReceiver.SetTrigger(_monsterBaseStateInfo.stateParameter, ChangeToDefaultState);
+            Debug.Log("Monster is dead start.");
         }
         public override void Exit()
         {
             base.Exit();
+            Debug.Log("Monster is dead end.");
         }
     }
 }
