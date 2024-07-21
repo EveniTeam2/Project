@@ -1,6 +1,7 @@
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 
@@ -12,25 +13,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
         
         public KnightHolySlash(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) { }
         
-        protected override void HandleOnEnter(int combo)
+        protected override void ActivateSkill(int combo)
         {
-            base.HandleOnEnter(combo);
+            Debug.Log($"{nameof(KnightHolySlash)} {nameof(HandleOnEnter)} 로직 처리");
             
-            Debug.Log($"{nameof(KnightHolySlash)} Action");
-            
-            SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.HolySlash}"));
+            SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.HolySlash}"), null);
             SetDamageOnBattleSystem(GetSkillValue($"{KnightSkillType.HolySlash}") * combo);
-        }
-
-        protected override void HandleOnUpdate(int combo) { }
-
-        protected override void HandleOnFixedUpdate(int combo) { }
-        
-        protected override void HandleOnExit(int combo)
-        {
-            base.HandleOnExit(combo);
             
-            ChangeState(StateType.Run);
+            base.ActivateSkill(combo);
         }
     }
 }
