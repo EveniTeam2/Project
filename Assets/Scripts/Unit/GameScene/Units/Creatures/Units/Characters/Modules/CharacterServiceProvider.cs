@@ -71,6 +71,13 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public void AttackEnemy(float damage)
         {
+            if (_battleSystem.CheckCollider(LayerMask.NameToLayer("Monster"), Vector2.right, 2.0f, out var targets))
+            {
+                foreach (var target in targets)
+                {
+                    _battleSystem.Attack(target);
+                }
+            }
             // TODO : damage 주면 몬스터 때찌해주세요 (채이환)
         }
 

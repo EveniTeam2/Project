@@ -66,6 +66,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         {
             base.Exit();
             animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, false, null);
+            OnFixedUpdate -= CheckTargetAndRun;
         }
 
         protected virtual void CheckTargetAndRun()

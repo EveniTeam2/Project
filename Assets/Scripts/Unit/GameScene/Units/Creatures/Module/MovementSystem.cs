@@ -74,10 +74,7 @@ namespace Unit.GameScene.Stages.Creatures.Module
             return currentSpd;
         }
 
-        internal void SpawnInit(MonsterMovementStat monsterMovementStat)
-        {
-            _stats = monsterMovementStat;
-        }
+        public abstract void SpawnInit(IMovementStat movementStat);
     }
 
     public interface IMovementStat

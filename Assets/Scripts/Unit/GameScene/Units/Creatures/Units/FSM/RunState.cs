@@ -73,6 +73,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
             base.Exit();
             animatorEventReceiver.SetBool(_monsterBaseStateInfo.stateParameter, false, null);
             _movementSystem.SetRun(false);
+            OnFixedUpdate -= CheckTargetAndIdle;
         }
         private void CheckTargetAndIdle()
         {
