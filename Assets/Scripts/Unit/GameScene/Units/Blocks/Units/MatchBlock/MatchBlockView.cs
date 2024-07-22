@@ -13,26 +13,24 @@ namespace Unit.GameScene.Units.Blocks.Units.MatchBlock
     /// <summary>
     ///     게임 내 블록을 나타내며, 드래그하여 다른 블록과 위치를 교환할 수 있습니다.
     /// </summary>
-    public class MatchMatchBlockView : BlockView, IDraggable
+    public class MatchBlockView : BlockView, IDraggable
     {
         public event Action<Vector3, Vector3> OnMatchCheck;
         
-        [SerializeField] private TextMeshProUGUI temp;
-
-        private BlockModel _blockModel;
         private Canvas _canvas;
-        private RectTransform _rectTransform;
         private Vector2 _startPosition;
-
-        public void Initialize(BlockModel info, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas)
+        private RectTransform _rectTransform;
+        
+        public void Initialize(BlockType type, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas, Sprite icon, Sprite background)
         {
+            Type = type;
+            
             OnMatchCheck = matchCheckHandler;
-            _canvas = canvas;
-            _blockModel = info;
-            temp.text = info.text;
-            blockBackground.sprite = _blockModel.background;
-            Type = _blockModel.type;
 
+            blockBackground.sprite = background;
+            blockIcon.sprite = icon;
+
+            _canvas = canvas;
             _rectTransform = GetComponent<RectTransform>();
         }
 

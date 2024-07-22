@@ -8,8 +8,8 @@ namespace Match2D {
     [CreateAssetMenu(fileName = "BlockPlacerTile", menuName = "Tile/Block Placer Tile")]
     public class BlockPlacerTile : TileBase {
         public Sprite PreviewEditorSprite;
-        [FormerlySerializedAs("placedMatchBlockView")] [FormerlySerializedAs("placedBlockView")] [FormerlySerializedAs("PlacedBlock")] [Tooltip("If null this will be a random gem")]
-        public MatchMatchBlockView placedMatchMatchBlockView = null;
+        [FormerlySerializedAs("placedMatchMatchBlockView")] [FormerlySerializedAs("placedBlockView")] [FormerlySerializedAs("PlacedBlock")] [Tooltip("If null this will be a random gem")]
+        public MatchBlockView placedMatchBlockView = null;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData) {
             tileData.sprite = !Application.isPlaying ? PreviewEditorSprite : null;

@@ -10,12 +10,12 @@ namespace Unit.GameScene.Boards
     /// <summary>
     ///     블록의 매칭을 검사하는 클래스입니다.
     /// </summary>
-    public class MatchBlockMatcher : IBlockMatcher
+    public class MatchMatchBlockMatcher : IMatchBlockMatcher
     {
         private readonly float _blockGap;
-        private readonly Dictionary<Tuple<float, float>, MatchMatchBlockView> _tiles;
+        private readonly Dictionary<Tuple<float, float>, MatchBlockView> _tiles;
 
-        public MatchBlockMatcher(Dictionary<Tuple<float, float>, MatchMatchBlockView> tiles, float blockGap)
+        public MatchMatchBlockMatcher(Dictionary<Tuple<float, float>, MatchBlockView> tiles, float blockGap)
         {
             _tiles = tiles;
             _blockGap = blockGap;
@@ -53,9 +53,9 @@ namespace Unit.GameScene.Boards
         /// <param name="position">위치</param>
         /// <param name="matchedBlocks">매칭된 블록 목록</param>
         /// <returns>매칭 여부</returns>
-        public bool CheckMatchesForBlock(Tuple<float, float> position, out List<MatchMatchBlockView> matchedBlocks)
+        public bool CheckMatchesForBlock(Tuple<float, float> position, out List<MatchBlockView> matchedBlocks)
         {
-            matchedBlocks = new List<MatchMatchBlockView>();
+            matchedBlocks = new List<MatchBlockView>();
 
             if (CheckDirection(position, Vector2.up * _blockGap, Vector2.down * _blockGap, out var verticalMatches))
                 matchedBlocks.AddRange(verticalMatches);
@@ -77,10 +77,10 @@ namespace Unit.GameScene.Boards
         /// </summary>
         /// <param name="initialMatches">초기 매칭된 블록 목록</param>
         /// <returns>인접한 매칭된 블록 목록</returns>
-        public List<MatchMatchBlockView> GetAdjacentMatches(List<MatchMatchBlockView> initialMatches)
+        public List<MatchBlockView> GetAdjacentMatches(List<MatchBlockView> initialMatches)
         {
-            var allMatches = new HashSet<MatchMatchBlockView>(initialMatches);
-            var toCheck = new Queue<MatchMatchBlockView>(initialMatches);
+            var allMatches = new HashSet<MatchBlockView>(initialMatches);
+            var toCheck = new Queue<MatchBlockView>(initialMatches);
 
             while (toCheck.Count > 0)
             {
@@ -96,7 +96,7 @@ namespace Unit.GameScene.Boards
                     }
             }
 
-            return new List<MatchMatchBlockView>(allMatches);
+            return new List<MatchBlockView>(allMatches);
         }
 
         /// <summary>
@@ -104,9 +104,9 @@ namespace Unit.GameScene.Boards
         /// </summary>
         /// <param name="tiles">블록 딕셔너리</param>
         /// <returns>매칭된 블록 목록</returns>
-        public List<MatchMatchBlockView> FindAllMatches(Dictionary<Tuple<float, float>, MatchMatchBlockView> tiles)
+        public List<MatchBlockView> FindAllMatches(Dictionary<Tuple<float, float>, MatchBlockView> tiles)
         {
-            var matchedBlocks = new List<MatchMatchBlockView>();
+            var matchedBlocks = new List<MatchBlockView>();
 
             foreach (var tile in tiles)
             {
@@ -114,8 +114,8 @@ namespace Unit.GameScene.Boards
                 if (CheckMatchesForBlock(position, out var matches)) matchedBlocks.AddRange(matches);
             }
 
-            var allMatchedBlocks = new HashSet<MatchMatchBlockView>(matchedBlocks);
-            var toCheck = new Queue<MatchMatchBlockView>(matchedBlocks);
+            var allMatchedBlocks = new HashSet<MatchBlockView>(matchedBlocks);
+            var toCheck = new Queue<MatchBlockView>(matchedBlocks);
 
             while (toCheck.Count > 0)
             {
@@ -130,7 +130,7 @@ namespace Unit.GameScene.Boards
                     }
             }
 
-            return new List<MatchMatchBlockView>(allMatchedBlocks);
+            return new List<MatchBlockView>(allMatchedBlocks);
         }
 
         /// <summary>
@@ -141,9 +141,9 @@ namespace Unit.GameScene.Boards
         /// <param name="dir2">방향 2</param>
         /// <param name="matches">매칭된 블록 목록</param>
         /// <returns>매칭 여부</returns>
-        private bool CheckDirection(Tuple<float, float> start, Vector2 dir1, Vector2 dir2, out List<MatchMatchBlockView> matches)
+        private bool CheckDirection(Tuple<float, float> start, Vector2 dir1, Vector2 dir2, out List<MatchBlockView> matches)
         {
-            matches = new List<MatchMatchBlockView>();
+            matches = new List<MatchBlockView>();
             matches.AddRange(CountMatchesInDirection(start, dir1));
             matches.AddRange(CountMatchesInDirection(start, dir2));
 
@@ -156,9 +156,9 @@ namespace Unit.GameScene.Boards
         /// <param name="start">시작 위치</param>
         /// <param name="direction">방향</param>
         /// <returns>매칭된 블록 목록</returns>
-        private List<MatchMatchBlockView> CountMatchesInDirection(Tuple<float, float> start, Vector2 direction)
+        private List<MatchBlockView> CountMatchesInDirection(Tuple<float, float> start, Vector2 direction)
         {
-            var matches = new List<MatchMatchBlockView>();
+            var matches = new List<MatchBlockView>();
             var x = start.Item1;
             var y = start.Item2;
 
@@ -179,13 +179,13 @@ namespace Unit.GameScene.Boards
         /// <summary>
         ///     주어진 블록의 모든 이웃 블록을 가져옵니다.
         /// </summary>
-        /// <param name="matchMatchBlockView">블록</param>
+        /// <param name="matchBlockView">블록</param>
         /// <returns>이웃 블록 목록</returns>
-        private List<MatchMatchBlockView> GetAllNeighbors(MatchMatchBlockView matchMatchBlockView)
+        private List<MatchBlockView> GetAllNeighbors(MatchBlockView matchBlockView)
         {
-            var neighbors = new List<MatchMatchBlockView>();
+            var neighbors = new List<MatchBlockView>();
             var directions = new List<Vector2> { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
-            var blockPos = matchMatchBlockView.GetComponent<RectTransform>().anchoredPosition;
+            var blockPos = matchBlockView.GetComponent<RectTransform>().anchoredPosition;
 
             foreach (var direction in directions)
             {

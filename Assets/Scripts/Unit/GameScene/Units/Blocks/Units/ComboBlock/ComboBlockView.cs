@@ -1,18 +1,24 @@
 using System;
 using ScriptableObjects.Scripts.Blocks;
 using TMPro;
+using Unit.GameScene.Boards.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.Abstract;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Units.Blocks.Units.ComboBlock
 {
     public class ComboBlockView : BlockView
     {
-        [SerializeField] private TextMeshProUGUI comboText;
+        [SerializeField] private TextMeshProUGUI comboCountText;
         
-        public void Initialize(BlockModel info)
+        public void Initialize(BlockType type, int comboCount, Sprite icon, Sprite background)
         {
-            
+            Type = type;
+
+            blockBackground.sprite = background;
+            blockIcon.sprite = icon;
+            comboCountText.text = $"x {comboCount}";
         }
     }
 }

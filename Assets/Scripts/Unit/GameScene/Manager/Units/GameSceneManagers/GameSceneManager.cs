@@ -8,7 +8,10 @@ using Unit.GameScene.Module;
 using Unit.GameScene.Stages.Backgrounds;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels;
+using Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels;
+using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 
@@ -37,12 +40,17 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         [Header("현재 진행 시간")]
         [SerializeField] protected float currentTime;
 
-        protected CharacterSetting _characterSetting;
-        protected RectTransform _blockPanel;
-        protected MatchBoardController MatchBoardController;
-        protected StageManager _stageManager;
-        protected Camera _camera;
-        protected Canvas _canvas;
+        private RectTransform _comboBlockPanel;
+        private RectTransform _comboBlockEnter;
+        private RectTransform _comboBlockExit;
+        private RectTransform _matchBlockPanel;
+        private CharacterSetting _characterSetting;
+        private ComboBoardController _comboBoardController;
+        private MatchBoardController _matchBoardController;
+        private StageManager _stageManager;
+        private Camera _camera;
+        private Canvas _canvas;
+        private CanvasController _canvasController;
 
         /// <summary>
         ///     게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
@@ -52,13 +60,17 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             InstantiateAndInitializeCamera();
             InstantiateAndInitializeCanvas();
             InstantiateAndInitializeCharacterSetting();
-            InstantiateAndInitializeBoard();
+            InstantiateAndInitializeComboBoard();
+            InstantiateAndInitializeMatchBoard();
             InstantiateAndInitializeStage();
         }
-
-        protected void InstantiateAndInitializeCharacterSetting()
+        
+        /// <summary>
+        ///     게임 시작 시 타이머를 시작합니다.
+        /// </summary>
+        protected virtual void Start()
         {
-            _characterSetting = new CharacterSetting(extraSetting.characterDefaultSetting, extraSetting.characterExtraSetting);
+            StartCoroutine(Timer(extraSetting.limitTime));
         }
 
         protected void InstantiateAndInitializeCamera()
@@ -69,7 +81,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         protected void InstantiateAndInitializeCanvas()
         {
             _canvas = defaultSetting.canvas.GetComponent<Canvas>();
-
+            _canvasController = _canvas.GetComponent<CanvasController>();
             if (_canvas.renderMode != RenderMode.ScreenSpaceCamera)
             {
                 _canvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -79,27 +91,33 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             {
                 _canvas.worldCamera = _camera;
             }
-
-            _blockPanel = _canvas.GetComponent<CanvasController>().MatchBlockPanel;
+            
+            _matchBlockPanel = _canvasController.MatchBlockPanel;
+            _comboBlockPanel = _canvasController.ComboBlockPanel;
+            _comboBlockEnter = _canvasController.ComboBlockEnter;
+            _comboBlockExit = _canvasController.ComboBlockExit;
+        }
+        
+        private void InstantiateAndInitializeComboBoard()
+        {
+            _comboBoardController = Instantiate(defaultSetting.comboBoardControllerPrefab).GetComponent<ComboBoardController>();
+            _comboBoardController.Initialize(extraSetting.blockInfos, _comboBlockPanel, _comboBlockEnter, _comboBlockExit, _characterSetting.CharacterSkillPresets, _characterSetting.CharacterSkillIcons);
         }
 
-        /// <summary>
-        ///     게임 시작 시 타이머를 시작합니다.
-        /// </summary>
-        protected virtual void Start()
+        protected void InstantiateAndInitializeCharacterSetting()
         {
-            StartCoroutine(Timer(extraSetting.limitTime));
+            _characterSetting = new CharacterSetting(extraSetting.characterDefaultSetting, extraSetting.characterExtraSetting);
         }
 
         /// <summary>
         ///     보드를 인스턴스화하고 초기화합니다.
         /// </summary>
-        protected void InstantiateAndInitializeBoard()
+        protected void InstantiateAndInitializeMatchBoard()
         {
-            MatchBoardController = Instantiate(defaultSetting.matchBoardControllerPrefab).GetComponent<MatchBoardController>();
-            MatchBoardController.Initialize(extraSetting.blockInfos, _blockPanel, _canvas);
+            _matchBoardController = Instantiate(defaultSetting.matchBoardControllerPrefab).GetComponent<MatchBoardController>();
+            _matchBoardController.Initialize(extraSetting.blockInfos, _matchBlockPanel, _canvas, _characterSetting.CharacterSkillPresets, _characterSetting.CharacterSkillIcons);
 
-            AttachBoard(MatchBoardController);
+            AttachBoard(_matchBoardController);
         }
 
         /// <summary>
@@ -110,7 +128,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
             _stageManager.Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, _camera);
 
-            _stageManager.RegisterEventHandler(MatchBoardController);
+            _stageManager.RegisterEventHandler(_matchBoardController);
         }
 
         /// <summary>

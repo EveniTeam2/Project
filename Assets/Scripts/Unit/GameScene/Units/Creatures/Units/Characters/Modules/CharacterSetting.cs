@@ -6,6 +6,7 @@ using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
@@ -15,9 +16,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         public Creature Prefab { get; }
         public CharacterType Type { get; }
         public CharacterStat Stat { get; }
-        public List<string> CharacterSkillPresets { get; }
         
-        public Dictionary<string, Image> CharacterSkillIcons { get; }
+        public List<string> CharacterSkillPresets { get; }
+        public Dictionary<string, Sprite> CharacterSkillIcons { get; }
         public Dictionary<string, int> CharacterSkillIndexes { get; }
         public Dictionary<string, float> CharacterSkillValues { get; }
 
@@ -28,7 +29,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             Stat = characterDefaultSetting.characterStat;
             CharacterSkillPresets = characterExtraSetting.characterSkillPresets;
             
-            CharacterSkillIcons = new Dictionary<string, Image>();
+            CharacterSkillIcons = new Dictionary<string, Sprite>();
             CharacterSkillIndexes = new Dictionary<string, int>();
             CharacterSkillValues = new Dictionary<string, float>();
             
