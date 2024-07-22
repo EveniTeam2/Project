@@ -1,11 +1,10 @@
 ﻿using System;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
+using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Units.Creatures.Module;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using UnityEngine;
 
-namespace ScriptableObjects.Scripts.Creature.DTO
+namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
     public class DeathState : BaseState
     {

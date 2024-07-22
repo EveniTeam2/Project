@@ -1,22 +1,32 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Unit.GameScene.Stages.Backgrounds
+namespace Unit.GameScene.Units.StagePanels.Backgrounds
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] private Transform _target;
+        [SerializeField] private Transform target;
+        private float _adjustX;
+        private float _adjustY;
+        private float _adjustZ;
 
         private void LateUpdate()
         {
-            if (_target == null) return;
+            if (target == null) return;
 
-            var newPos = _target.transform.position;
-            transform.position = new Vector3(newPos.x, transform.position.y, transform.position.z);
+            var position = transform.position;
+            var newPos = target.transform.position;
+            
+            position = new Vector3(newPos.x + _adjustX, position.y + _adjustY, position.z + _adjustZ);
+            transform.position = position;
         }
 
-        public void Initialize(Transform target)
+        public void Initialize(Transform target, Vector3 cameraSpawnPosition)
         {
-            _target = target;
+            this.target = target;
+            _adjustX = cameraSpawnPosition.x;
+            _adjustY = cameraSpawnPosition.y;
+            _adjustZ = cameraSpawnPosition.z;
         }
     }
 }

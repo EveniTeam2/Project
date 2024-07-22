@@ -1,6 +1,6 @@
 using System;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     namespace Unit.Character
     {

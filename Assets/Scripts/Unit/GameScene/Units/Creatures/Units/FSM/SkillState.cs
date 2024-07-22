@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
+using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 
-namespace ScriptableObjects.Scripts.Creature.DTO
+namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
 
     public class SkillState : BaseState
@@ -22,10 +22,10 @@ namespace ScriptableObjects.Scripts.Creature.DTO
         public override void Exit()
         {
             base.Exit();
-            base.ClearEvent(Unit.GameScene.Stages.Creatures.Interfaces.EStateEventType.Enter);
-            base.ClearEvent(Unit.GameScene.Stages.Creatures.Interfaces.EStateEventType.Exit);
-            base.ClearEvent(Unit.GameScene.Stages.Creatures.Interfaces.EStateEventType.Update);
-            base.ClearEvent(Unit.GameScene.Stages.Creatures.Interfaces.EStateEventType.FixedUpdate);
+            base.ClearEvent(EStateEventType.Enter);
+            base.ClearEvent(EStateEventType.Exit);
+            base.ClearEvent(EStateEventType.Update);
+            base.ClearEvent(EStateEventType.FixedUpdate);
         }
         public override void Update()
         {

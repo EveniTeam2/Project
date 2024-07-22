@@ -1,11 +1,9 @@
 ﻿using System;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Units.Creatures.Module;
-using UnityEngine;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 
-namespace ScriptableObjects.Scripts.Creature.DTO
+namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
     public class HitState : BaseState
     {

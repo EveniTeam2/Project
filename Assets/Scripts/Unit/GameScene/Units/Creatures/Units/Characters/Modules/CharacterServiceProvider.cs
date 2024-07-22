@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Manager.Units.StageManagers;
-using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Module;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.FSM;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
@@ -69,7 +68,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             return _skillIndexes[skillName];
         }
 
-        public void AttackEnemy(float damage)
+        public void AttackEnemy(float value)
         {
             var targetLayer = new LayerMask() {value = 1 << LayerMask.NameToLayer("Monster") };
             if (_battleSystem.CheckCollider(targetLayer, Vector2.right, 5.0f, out var targets))
@@ -79,7 +78,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
                     _battleSystem.Attack(target);
                 }
             }
-            // TODO : damage 주면 몬스터 때찌해주세요 (채이환)
+            // TODO : value 주면 몬스터 때찌해주세요 (채이환)
+        }
+
+        public void HealMyself(float value)
+        {
+            // TODO : value 주면 체력 회복해주세요 (채이환)
         }
 
         public void AnimatorSetInteger(AnimationParameterEnums parameter, int value, Action action)

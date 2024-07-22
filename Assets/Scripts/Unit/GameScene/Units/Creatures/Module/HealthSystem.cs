@@ -1,8 +1,8 @@
 using System;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 using UnityEngine;
-using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
 
-namespace Unit.GameScene.Stages.Creatures.Module
+namespace Unit.GameScene.Units.Creatures.Module
 {
     public abstract class HealthSystem
     {
@@ -64,13 +64,13 @@ namespace Unit.GameScene.Stages.Creatures.Module
         {
             _onDeath?.Invoke();
             _invinsible = true;
-            Debug.Log($"Á×¾ú´Ù.");
+            Debug.Log($"ï¿½×¾ï¿½ï¿½ï¿½.");
         }
 
         protected void CallDamage()
         {
             _onDamage?.Invoke();
-            Debug.Log($"´ë¹ÌÁö¸¦ ÀÔ¾ú´Ù.");
+            Debug.Log($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¾ï¿½ï¿½ï¿½.");
         }
 
         protected void CallHeal()

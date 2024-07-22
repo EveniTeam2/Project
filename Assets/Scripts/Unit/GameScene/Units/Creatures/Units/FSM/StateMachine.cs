@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.FSM
+namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
     /// <summary>
     ///     상태 머신을 관리하는 클래스입니다.

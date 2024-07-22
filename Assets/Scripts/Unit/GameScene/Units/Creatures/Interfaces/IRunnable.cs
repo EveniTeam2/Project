@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Stages.Creatures.Interfaces
+namespace Unit.GameScene.Units.Creatures.Interfaces
 {
     public interface IRunnable
     {

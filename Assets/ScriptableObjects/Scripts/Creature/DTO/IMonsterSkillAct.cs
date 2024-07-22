@@ -1,4 +1,4 @@
-﻿using Unit.GameScene.Stages.Creatures.Module;
+﻿using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO

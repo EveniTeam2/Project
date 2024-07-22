@@ -1,8 +1,7 @@
 using System;
-using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
 
-namespace Unit.GameScene.Boards.Interfaces
+namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces
 {
     public interface ISendCommand
     {

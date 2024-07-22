@@ -1,9 +1,9 @@
 using System;
 using Unit.GameScene.Manager.Units.StageManagers;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Interfaces
+namespace Unit.GameScene.Units.Creatures.Interfaces
 {
     public interface ICreatureServiceProvider
     {

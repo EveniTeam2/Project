@@ -1,17 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Core.Utils;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Manager.Modules;
-using Unit.GameScene.Stages.Creatures;
-using Unit.GameScene.Stages.Creatures.Module;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.CharacterSkills;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Unit.Character;
+using Unit.GameScene.Units.Creatures.Units.FSM;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.CharacterSkills;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -19,12 +17,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
     public class Character : Creature
     {
+        public event Action OnCommandDequeue;
+        
         [SerializeField] protected CharacterType characterType;
         [SerializeField] private StateMachineDTO stateData;
         [SerializeField] private SerializableQueue<CommandPacket> commands = new();
         
         private CharacterServiceProvider _characterServiceProvider;
         private CommandSystem _commandSystem;
+        private CommandAction _commandAction; 
         private Stat<CharacterStat> _stats;
         private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private List<CommandAction> _characterSkills;
@@ -97,12 +98,19 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
                 Debug.Log($"ReadyForCommand : {_characterServiceProvider.GetReadyForCommand()}");
 
                 var command = commands.Dequeue();
+                OnCommandDequeue?.Invoke();
 
                 Debug.Log($"{command.ComboCount} 콤보 {command.BlockType} 블록 커맨드 Dequeue");
                 Debug.Log($"잔여 커맨드 : {commands.Count}");
                 
+                _commandAction = _commandSystem.GetCommandAction(command.BlockType);
                 _commandSystem.ActivateCommand(command.BlockType, command.ComboCount);
             }
+        }
+
+        public void ActivateSkillEffects()
+        {
+            _commandAction?.ActivateCommandAction();
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)

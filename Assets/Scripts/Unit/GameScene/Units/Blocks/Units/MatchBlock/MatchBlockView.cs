@@ -1,9 +1,9 @@
 using System;
 using ScriptableObjects.Scripts.Blocks;
 using TMPro;
-using Unit.GameScene.Boards.Blocks.Enums;
-using Unit.GameScene.Boards.Blocks.Interfaces;
 using Unit.GameScene.Units.Blocks.Abstract;
+using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
+using Unit.GameScene.Units.Blocks.Units.MatchBlock.Interfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

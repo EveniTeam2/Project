@@ -1,6 +1,6 @@
 using System;
 using ScriptableObjects.Scripts.Blocks;
-using Unit.GameScene.Boards.Blocks.Enums;
+using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 

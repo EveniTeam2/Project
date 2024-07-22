@@ -1,7 +1,6 @@
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
@@ -12,11 +11,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
     {
         public KnightHolyHeal(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) { }
 
-        protected override void ActivateSkill(int combo)
+        protected override void ActivateSkill()
         {
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.HolyHeal}"), null);
             
-            base.ActivateSkill(combo);
+            base.ActivateSkill();
+        }
+        
+        public override void ActivateSkillEffects()
+        {
+            Debug.Log("홀리 힐!");
+            HealMyself(GetSkillValue($"{KnightSkillType.HolyHeal}") * comboCount);
         }
     }
 }

@@ -1,10 +1,10 @@
 using System;
-using Unit.GameScene.Stages.Creatures.Module;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Unit.Character;
+using Unit.GameScene.Units.Creatures.Units.Monsters;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     public class CharacterBattleSystem : BattleSystem
     {

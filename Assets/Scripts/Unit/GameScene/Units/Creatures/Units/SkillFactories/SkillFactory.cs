@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 
-namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories
+namespace Unit.GameScene.Units.Creatures.Units.SkillFactories
 {
     public abstract class SkillFactory<T> where T : Skill
     {

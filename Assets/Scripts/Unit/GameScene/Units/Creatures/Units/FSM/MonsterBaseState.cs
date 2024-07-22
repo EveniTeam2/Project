@@ -1,10 +1,10 @@
 ﻿using System;
-using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
-using UnityEngine;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 
-namespace ScriptableObjects.Scripts.Creature.DTO
+namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
     public abstract class MonsterBaseState : IState
     {

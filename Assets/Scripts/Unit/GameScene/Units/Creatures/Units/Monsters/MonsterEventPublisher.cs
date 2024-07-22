@@ -1,7 +1,7 @@
 ﻿using System;
-using Unit.GameScene.Stages.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Module;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Monsters
+namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
     public enum eEventType
     {

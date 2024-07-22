@@ -1,13 +1,10 @@
 using System;
-using UnityEngine;
-using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using UnityEngine;
 using ScriptableObjects.Scripts.Creature.DTO;
-using System.Collections.Generic;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 
-namespace Unit.GameScene.Stages.Creatures.Units.FSM
+namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
     /// <summary>
     ///     상태를 나타내는 기본 클래스입니다.

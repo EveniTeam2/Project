@@ -1,8 +1,7 @@
-using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Backgrounds
+namespace Unit.GameScene.Units.StagePanels.Backgrounds
 {
     /// <summary>
     ///     패럴럭스 배경을 처리하는 클래스입니다.

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Match2D {
+namespace Temp.Match2D {
     [CreateAssetMenu(fileName = "BlockSpawnerTile", menuName = "Tile/Block Spawner Tile")]
     public class BlockSpawnerTile : TileBase {
         public Sprite EditorPreviewSprite;

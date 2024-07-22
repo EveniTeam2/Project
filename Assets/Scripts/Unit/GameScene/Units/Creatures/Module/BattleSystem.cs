@@ -1,8 +1,6 @@
-using System;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Module
+namespace Unit.GameScene.Units.Creatures.Module
 {
     public abstract class BattleSystem
     {

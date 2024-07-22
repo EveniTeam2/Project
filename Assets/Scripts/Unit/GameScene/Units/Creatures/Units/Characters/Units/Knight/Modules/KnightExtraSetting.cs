@@ -1,9 +1,9 @@
 using System;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Characters.Modules
+namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules
 {
     [Serializable]
     public class KnightExtraSetting : CharacterExtraSetting

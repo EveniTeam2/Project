@@ -3,7 +3,7 @@ using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.BoardPanels.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels
+namespace Unit.GameScene.Units.BoardPanels.Modules
 {
     /// <summary>
     ///     블록 풀링을 관리하는 클래스입니다.
