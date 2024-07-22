@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module
@@ -33,23 +34,30 @@ namespace Unit.GameScene.Units.Creatures.Module
         {
             foreach (var animationClip in animationClips)
             {
-                var animationStartEvent = new AnimationEvent
+                if (TryGetAnimationEvents(animationClip, out var animationEvents))
                 {
-                    time = 0,
-                    functionName = "AnimationStartHandler",
-                    stringParameter = animationClip.name
-                };
-                
-                animationClip.AddEvent(animationStartEvent);
+                    CheckAnimationEventCorrectly(animationClip, animationEvents);
+                }
+                else
+                {
+                    var animationStartEvent = new AnimationEvent
+                    {
+                        time = 0,
+                        functionName = "AnimationStartHandler",
+                        stringParameter = animationClip.name
+                    };
 
-                var animationEndEvent = new AnimationEvent
-                {
-                    time = animationClip.length,
-                    functionName = "AnimationEndHandler",
-                    stringParameter = animationClip.name
-                };
-                
-                animationClip.AddEvent(animationEndEvent);
+                    animationClip.AddEvent(animationStartEvent);
+
+                    var animationEndEvent = new AnimationEvent
+                    {
+                        time = animationClip.length-0.1f,
+                        functionName = "AnimationEndHandler",
+                        stringParameter = animationClip.name
+                    };
+
+                    animationClip.AddEvent(animationEndEvent);
+                }
             }
         }
 
@@ -196,6 +204,59 @@ namespace Unit.GameScene.Units.Creatures.Module
             }
             
             _isPlayingAnimator = false;
+        }
+
+        private bool TryGetAnimationEvents(AnimationClip animationClip, out AnimationEvent[] animationEvents)
+        {
+            if (animationClip == null)
+            {
+                Debug.LogError("애니메이션 클립이 지정되지 않았습니다.");
+                animationEvents = null;
+                return false;
+            }
+
+            // 애니메이션 클립에 있는 이벤트들 가져오기
+            animationEvents = AnimationUtility.GetAnimationEvents(animationClip);
+#if UNITY_EDITOR
+            // 이벤트 정보 출력
+            foreach (AnimationEvent animationEvent in animationEvents)
+            {
+                Debug.Log($"이벤트 함수 이름: {animationEvent.functionName}, 시간: {animationEvent.time}");
+            }
+#endif
+            if (animationEvents.Length > 0)
+                return true;
+            return false;
+        }
+
+        private void CheckAnimationEventCorrectly(AnimationClip clip, AnimationEvent[] animationEvents)
+        {
+            bool[] isCheck = new bool[2];
+            for (int i = 0; i < animationEvents.Length; ++i)
+            {
+                if (animationEvents[i].functionName == "AnimationStartHandler")
+                    isCheck[0] = true;
+                else if (animationEvents[i].functionName == "AnimationEndHandler")
+                    isCheck[1] = true;
+            }
+
+            if (!isCheck[0])
+                AddEvent(clip, 0, "AnimationStartHandler");
+            if (!isCheck[1])
+                AddEvent(clip, clip.length, "AnimationEndHandler");
+        }
+
+        private void AddEvent(AnimationClip clip, float position, string functionName)
+        {
+
+            var animationStartEvent = new AnimationEvent
+            {
+                time = position - 0.1f,
+                functionName = functionName,
+                stringParameter = clip.name
+            };
+
+            clip.AddEvent(animationStartEvent);
         }
     }
 }
