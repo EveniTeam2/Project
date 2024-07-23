@@ -1,10 +1,9 @@
-using Unit.GameScene.Boards.Blocks;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
-namespace Match2D {
+namespace Temp.Match2D {
     [CreateAssetMenu(fileName = "BlockPlacerTile", menuName = "Tile/Block Placer Tile")]
     public class BlockPlacerTile : TileBase {
         public Sprite PreviewEditorSprite;

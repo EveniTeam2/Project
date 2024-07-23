@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Units.MonsterSkills
+namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.MonsterSkills
 {
     public class MonsterSkillFactory
     {

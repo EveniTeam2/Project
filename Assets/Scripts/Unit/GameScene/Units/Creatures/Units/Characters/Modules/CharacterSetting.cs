@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.Settings;
 using ScriptableObjects.Scripts.Creature.Settings.KnightDefaultSetting;
-using Unit.GameScene.Stages.Creatures;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
 using UnityEngine;
 using UnityEngine.UI;

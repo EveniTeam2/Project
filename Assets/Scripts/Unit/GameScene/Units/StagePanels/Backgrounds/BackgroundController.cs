@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Backgrounds
+namespace Unit.GameScene.Units.StagePanels.Backgrounds
 {
     public class BackgroundController : MonoBehaviour
     {

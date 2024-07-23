@@ -1,4 +1,3 @@
-using Unit.GameScene.Stages;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers.Modules {

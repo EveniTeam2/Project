@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolSize: 20
   blockGap: 10
-  dropDurationPerUnit: 50
+  dropDurationPerUnit: 80
   comboBlockViewPrefab: {fileID: 3342208564218397982, guid: 3e225382434574c87911acacfba56a3f, type: 3}

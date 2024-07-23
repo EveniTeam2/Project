@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Stages.Creatures
+namespace Unit.GameScene.Units.Creatures
 {
     public class Stat<T>
     {

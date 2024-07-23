@@ -1,7 +1,7 @@
-using Unit.GameScene.Stages.Creatures.Interfaces;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Module
+namespace Unit.GameScene.Units.Creatures.Module
 {
     public class AnimationController : MonoBehaviour, IAnimationController
     {

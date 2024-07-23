@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Unit.GameScene.Boards.Blocks.Enums;
-using Unit.GameScene.Manager.Interfaces;
-using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Module
+namespace Unit.GameScene.Units.Creatures.Module
 {
     /// <summary>
     ///     사용자 입력을 처리하는 클래스입니다.
@@ -26,10 +24,15 @@ namespace Unit.GameScene.Stages.Creatures.Module
             _serviceProvider = serviceProvider;
             _skillDictionary = new Dictionary<BlockType, CommandAction>();
 
-            RegisterSkillToCommand(skillPresets);
+            RegisterCommandAction(skillPresets);
+        }
+        
+        public CommandAction GetCommandAction(BlockType blockType)
+        {
+            return _skillDictionary.GetValueOrDefault(blockType);
         }
 
-        private void RegisterSkillToCommand(IReadOnlyList<CommandAction> skillPresets)
+        private void RegisterCommandAction(IReadOnlyList<CommandAction> skillPresets)
         {
             for (var i = 0; i < Enum.GetValues(typeof(BlockType)).Length - 1; i++)
             {

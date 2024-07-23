@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Match2D {
+namespace Temp.Match2D {
     [CreateAssetMenu(fileName = "ObstaclePlacerTile", menuName = "Tile/Obstacle Placer Tile")]
     public class ObstaclePlacerTile : TileBase {
         public Sprite PreviewEditorSprite;

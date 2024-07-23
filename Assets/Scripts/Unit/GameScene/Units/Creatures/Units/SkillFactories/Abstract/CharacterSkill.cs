@@ -1,7 +1,5 @@
 using System;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
@@ -10,6 +8,7 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
 {
     public abstract class CharacterSkill : Skill, ISkillCommand
     {
+        protected int comboCount;
         protected readonly CharacterServiceProvider CharacterServiceProvider;
 
         protected CharacterSkill(CharacterServiceProvider characterServiceProvider)
@@ -19,10 +18,12 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
         
         public void Execute(int combo)
         {
-            ActivateSkill(combo);
+            comboCount = combo;
+            
+            ActivateSkill();
         }
 
-        protected virtual void ActivateSkill(int combo)
+        protected virtual void ActivateSkill()
         {
             ChangeState(StateType.Skill);
             SetBoolOnAnimator(AnimationParameterEnums.Skill, true, HandleOnAnimationFinished);
@@ -36,6 +37,8 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
             ChangeState(StateType.Idle);
             SetReadyForInvokingCommand(true);
         }
+
+        public abstract void ActivateSkillEffects();
         
         // CharacterServiceProvider.RegisterEventSkill(
         //     () => HandleOnEnter(combo),
@@ -70,9 +73,14 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
             CharacterServiceProvider.AnimatorSetFloat(targetParameter, value, action);
         }
 
-        protected void SetDamageOnBattleSystem(float damage)
+        protected void AttackEnemy(float value)
         {
-            CharacterServiceProvider.AttackEnemy(damage);
+            CharacterServiceProvider.AttackEnemy(value);
+        }
+
+        protected void HealMyself(float value)
+        {
+            CharacterServiceProvider.AttackEnemy(value);
         }
 
         protected int GetSkillIndex(string skillName)

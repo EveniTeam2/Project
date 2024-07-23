@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Core.Utils;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.Monsters;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

@@ -1,22 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unit.GameScene.Boards.Interfaces;
 using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
-using Unit.GameScene.Stages.Backgrounds;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
+using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Characters;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Monsters;
+using Unit.GameScene.Units.StagePanels.Backgrounds;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
     public class StageManager : MonoBehaviour, IStage, ISendCommand
     {
+        public event Action OnCommandDequeue;
         public event Action<CommandPacket> OnSendCommand;
         public event Action OnPlayerDeath;
         
@@ -43,10 +44,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             
             InitializeCharacter(characterSetting, playerSpawnPosition);
             InitializeMonster(extraSetting, playerSpawnPosition, _stageScore);
-            InitializeCamera(cam);
+            InitializeCamera(cam, defaultSetting.cameraSpawnPosition);
             InitializeMap(extraSetting.mapPrefab);
             
             StartCoroutine(StageScoreUpdate(_stageScore));
+            
             _monsterManager.Start();
         }
 
@@ -62,9 +64,14 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             }
         }
 
-        public void RegisterEventHandler(ISendCommand data)
+        public void RegisterHandleSendCommand(ISendCommand data)
         {
             data.OnSendCommand += OnSendCommand;
+        }
+        
+        private void HandleCommandDequeue()
+        {
+            OnCommandDequeue?.Invoke();
         }
         
         private void InitializeCharacter(CharacterSetting characterSetting, Vector3 playerSpawnPosition)
@@ -83,6 +90,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             {
                 _character.Initialize(characterSetting, playerSpawnPosition.y, _animationParameters);
                 OnSendCommand += _character.HandleReceiveCommand;
+                _character.OnCommandDequeue += HandleCommandDequeue;
             }
             _character.GetServiceProvider().RegistEvent(ECharacterEventType.Death, PlayerIsDead);
         }
@@ -92,9 +100,9 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameters);
         }
 
-        protected virtual void InitializeCamera(Camera cam)
+        protected virtual void InitializeCamera(Camera cam, Vector3 cameraSpawnPosition)
         {
-            cam.GetComponent<CameraController>().Initialize(_character.transform);
+            cam.GetComponent<CameraController>().Initialize(_character.transform, cameraSpawnPosition);
         }
 
         /// <summary>

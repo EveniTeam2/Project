@@ -262,6 +262,7 @@ MonoBehaviour:
   defaultSetting:
     canvas: {fileID: 2507619777691445654}
     mainCamera: {fileID: 8448268395749990800}
+    cameraSpawnPosition: {x: 2.5, y: 0, z: 0}
     matchBoardControllerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
     comboBoardControllerPrefab: {fileID: 7277854389095133772, guid: 5d7801c495db4433382a51ce6500baa3, type: 3}
     stageManagerPrefab: {fileID: 3768410994747056990, guid: a9ef38b8df63343d4bdf7f5312703ecc, type: 3}
@@ -421,6 +422,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880642943}
   m_CullTransparentMesh: 1
+--- !u!1 &1138542390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138542391}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1138542391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138542390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 65.83338, y: 2.94, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &202452015274074228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -453,7 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1ee68c5b774daa839c3567bcd87457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
+  target: {fileID: 0}
 --- !u!114 &822418924810992059
 MonoBehaviour:
   m_ObjectHideFlags: 0

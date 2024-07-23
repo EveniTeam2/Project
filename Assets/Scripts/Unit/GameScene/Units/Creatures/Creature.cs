@@ -1,14 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unit.GameScene.Manager.Units.StageManagers;
-using Unit.GameScene.Stages.Creatures.Module;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.FSM;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures
+namespace Unit.GameScene.Units.Creatures
 {
     public abstract class Creature : MonoBehaviour
     {

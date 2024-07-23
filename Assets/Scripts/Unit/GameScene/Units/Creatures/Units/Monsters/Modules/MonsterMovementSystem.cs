@@ -1,8 +1,8 @@
 using System;
-using Unit.GameScene.Stages.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Monsters.Modules
+namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 {
     public class MonsterMovementSystem : MovementSystem
     {

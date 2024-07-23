@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scripts.Unit.GameScene.Units.Creatures.Units.Characters.Modules
+﻿namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     //public class AttackEvent
     //{

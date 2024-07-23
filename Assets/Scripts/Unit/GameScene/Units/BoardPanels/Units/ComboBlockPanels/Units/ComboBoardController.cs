@@ -5,13 +5,15 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ScriptableObjects.Scripts.Blocks;
-using Unit.GameScene.Boards.Blocks.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Units.ComboBlock;
+using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using Unit.GameScene.Units.BoardPanels.Interfaces;
+using Unit.GameScene.Units.BoardPanels.Modules;
 using Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Interfaces;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels;
+using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -59,11 +61,11 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                EnqueueInstantiateComboBlocks(BlockType.Skill1, 10);
+                HandleInstantiateComboBlock(new CommandPacket(BlockType.Skill1, 10));
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
-                EnqueueDestroyComboBlocks();
+                HandleDestroyComboBlock();
             }
         }
 
@@ -120,12 +122,12 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
             _blockMover = new ComboBlockMover();
         }
 
-        public void EnqueueInstantiateComboBlocks(BlockType type, int comboCount)
+        public void HandleInstantiateComboBlock(CommandPacket commandPacket)
         {
-            _actions.Enqueue(() => InstantiateComboBlocks(type, comboCount));
+            _actions.Enqueue(() => InstantiateComboBlocks(commandPacket.BlockType, commandPacket.ComboCount));
         }
 
-        public void EnqueueDestroyComboBlocks()
+        public void HandleDestroyComboBlock()
         {
             _actions.Enqueue(DestroyComboBlocks);
         }
@@ -137,7 +139,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
             {
                 var block = (ComboBlockView)_blockPool.Get();
 
-                BlockModel blockModel = new();
+                var blockModel = ScriptableObject.CreateInstance<BlockModel>();
                 
                 foreach (var blockInfo in _blockInfos.Where(blockInfo => blockInfo.type == type))
                 {
@@ -152,15 +154,12 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
                 
                 rectTransform.anchoredPosition = spawnPosition;
                         
-                block.Initialize(blockModel.type, comboCount, blockModel.background, _blockIcons[blockModel.type]);
+                block.Initialize(blockModel.type, comboCount, _blockIcons[blockModel.type], blockModel.background);
 
-                foreach (var blockPosition in _blockPositions)
+                foreach (var blockPosition in _blockPositions.Where(blockPosition => _blocks.TryAdd(blockPosition, block)))
                 {
-                    if (_blocks.TryAdd(blockPosition, block))
-                    {
-                        await MoveBlock(block, blockPosition);
-                        break;
-                    }
+                    await MoveBlock(block, blockPosition);
+                    break;
                 }
             }
             finally
@@ -215,7 +214,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
         {
             var duration = dropDurationPerUnit * 100;
             var currentBlockStartPos = block.GetComponent<RectTransform>().anchoredPosition;
-            var exitPosition = _comboBlockExit.localPosition;
+            var exitPosition = new Vector3(_comboBlockExit.localPosition.x, 0, 0);
             var distance = Vector3.Distance(currentBlockStartPos, exitPosition);
             var elapsedTime = 0f;
 

@@ -1,17 +1,13 @@
 using System;
-using System.Collections.Generic;
 using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
-using Unit.GameScene.Manager.Units;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
-using Unit.GameScene.Stages.Backgrounds;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Stages.Creatures.Units.Monsters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.StagePanels.Backgrounds;
 using UnityEngine;
 
-namespace Temp {
+namespace Temp.TestScripts {
     [Serializable]
     public struct TestCommand {
         public KeyCode key;
@@ -49,7 +45,7 @@ namespace Temp {
 
             Destroy(_character);
             _monsterManager.Clear();
-            cam.Initialize(null);
+            cam.Initialize(null, cam.transform.position);
         }
 
         void InitGame() {
@@ -58,9 +54,9 @@ namespace Temp {
             Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, defaultSetting.mainCamera);
         }
 
-        protected override void InitializeCamera(Camera cam) {
+        protected override void InitializeCamera(Camera cam, Vector3 cameraSpawnPosition) {
             this.cam = cam.GetComponent<CameraController>();
-            this.cam.Initialize(_character.transform);
+            this.cam.Initialize(_character.transform, cameraSpawnPosition);
         }
     }
 }

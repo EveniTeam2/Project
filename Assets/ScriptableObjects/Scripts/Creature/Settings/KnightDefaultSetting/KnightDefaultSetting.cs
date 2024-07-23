@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Manager.Interfaces;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
 using UnityEngine;
 using UnityEngine.Serialization;

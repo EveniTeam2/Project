@@ -2,7 +2,7 @@ using System;
 using Unit.GameScene.Manager.Interfaces;
 using UnityEngine;
 using UnityEngine.Serialization;
-using BlockType = Unit.GameScene.Boards.Blocks.Enums.BlockType;
+using BlockType = Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums.BlockType;
 
 namespace Unit.GameScene.Manager.Modules
 {

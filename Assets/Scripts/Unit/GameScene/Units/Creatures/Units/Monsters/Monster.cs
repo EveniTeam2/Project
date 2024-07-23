@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
-using Unit.GameScene.Manager.Units.StageManagers;
-using Unit.GameScene.Stages.Creatures.Interfaces;
-using Unit.GameScene.Stages.Creatures.Module;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.FSM;
-using Unit.GameScene.Stages.Creatures.Units.Monsters.Modules;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 using UnityEngine;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Monsters
+namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
     public class Monster : Creature
     {

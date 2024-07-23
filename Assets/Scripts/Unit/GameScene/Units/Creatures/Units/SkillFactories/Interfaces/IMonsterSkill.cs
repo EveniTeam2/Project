@@ -1,6 +1,6 @@
-using Unit.GameScene.Stages.Creatures.Units.Monsters.Enums;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Enums;
 
-namespace Unit.GameScene.Stages.Creatures.Units.SkillFactories.Interfaces
+namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces
 {
     public interface IMonsterSkill
     {

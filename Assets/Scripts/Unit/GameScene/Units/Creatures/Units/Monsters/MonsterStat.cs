@@ -1,6 +1,6 @@
 using System;
 
-namespace Unit.GameScene.Stages.Creatures.Units.Monsters
+namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
     [Serializable]
     public class MonsterStat

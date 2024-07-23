@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using Unit.GameScene.Boards.Blocks;
 using Unit.GameScene.Units.Blocks.Abstract;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock;
 
-namespace Unit.GameScene.Boards.Interfaces
+namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces
 {
     /// <summary>
     ///     블록 이동 처리 인터페이스

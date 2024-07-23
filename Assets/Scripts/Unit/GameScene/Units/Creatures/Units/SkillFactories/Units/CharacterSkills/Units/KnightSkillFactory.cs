@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Units.Knight.Enums;
-using Unit.GameScene.Stages.Creatures.Units.SkillFactories;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Units;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;

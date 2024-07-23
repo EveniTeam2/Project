@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Stages.Creatures.Units.Characters.Modules.Unit.Character;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Unit.Character;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Settings
