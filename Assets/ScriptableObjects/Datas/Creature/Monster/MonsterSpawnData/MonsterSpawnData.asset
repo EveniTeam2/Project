@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MonsterSpawnData
   m_EditorClassIdentifier: 
   monstersRef:
-  - {fileID: 1672940475951353492, guid: 7de578e0ebe8de445887e9a3fda449aa, type: 3}
+  - {fileID: 350301380735278074, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
   monsterStats:
   - Attack: 1
     Health: 1
@@ -22,7 +22,7 @@ MonoBehaviour:
   monsterSpawnOffset: {x: 20, y: 0, z: 0}
   monsterSpawnTimeOffset: 5
   monsterGroup:
-  - spawnDecider: {fileID: 11400000, guid: 5eab4fa2fce74084a915190c466117ed, type: 2}
+  - spawnDecider: {fileID: 11400000, guid: 7722e2688ef47684b9e0483cea55742e, type: 2}
     monsterSpawnGroups:
     - weight: 1
       monsterIndex: 00000000
