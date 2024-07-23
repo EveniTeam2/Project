@@ -13,7 +13,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
         protected override void ActivateSkill()
         {
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, GetSkillIndex($"{KnightSkillType.SwordBuff}"), null);
-
+            
             base.ActivateSkill();
         }
 
