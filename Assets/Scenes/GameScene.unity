@@ -334,6 +334,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263529483}
   m_CullTransparentMesh: 1
+--- !u!1001 &602778449
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356521436317079731, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481290193544286815, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
+      propertyPath: m_Name
+      value: GoblinKings
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
 --- !u!1 &745679371
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +462,7 @@ MonoBehaviour:
     matchBoardControllerPrefab: {fileID: 4715849651182700137, guid: 5d9e1014e3be8458cb9ed368f28f84b5, type: 3}
     comboBoardControllerPrefab: {fileID: 7277854389095133772, guid: 5d7801c495db4433382a51ce6500baa3, type: 3}
     stageManagerPrefab: {fileID: 3768410994747056990, guid: a9ef38b8df63343d4bdf7f5312703ecc, type: 3}
-    playerSpawnPosition: {x: 0, y: 3, z: 0}
+    playerSpawnPosition: {x: 0, y: 2, z: 0}
   dragCount: 0
   isGameOver: 0
   currentTime: 0
