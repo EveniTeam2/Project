@@ -17,7 +17,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         
         public List<string> CharacterSkillPresets { get; }
         public Dictionary<string, Sprite> CharacterSkillIcons { get; }
-        public Dictionary<string, int> CharacterSkillIndexes { get; }
+        public Dictionary<string, int> CharacterSkillAnimationIndexes { get; }
         public Dictionary<string, float> CharacterSkillValues { get; }
 
         public CharacterSetting(CharacterDefaultSetting characterDefaultSetting, CharacterExtraSetting characterExtraSetting)
@@ -28,7 +28,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             CharacterSkillPresets = characterExtraSetting.characterSkillPresets;
             
             CharacterSkillIcons = new Dictionary<string, Sprite>();
-            CharacterSkillIndexes = new Dictionary<string, int>();
+            CharacterSkillAnimationIndexes = new Dictionary<string, int>();
             CharacterSkillValues = new Dictionary<string, float>();
             
             switch (characterDefaultSetting.characterType)
@@ -39,8 +39,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
                     foreach (var knightSkillSetting in knightDefaultSetting.knightSkillSettings)
                     {
                         CharacterSkillIcons.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillIcon);
-                        CharacterSkillIndexes.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillIndex);
-                        CharacterSkillValues.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillValue);
+                        CharacterSkillAnimationIndexes.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillIndex);
+                        CharacterSkillValues.Add($"{knightSkillSetting.skillType}", knightSkillSetting.skillEffectValue);
                     }
 
                     break;

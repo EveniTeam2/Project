@@ -92,23 +92,10 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
         /// <param name="skillIcons"></param>
         public void Initialize(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, List<string> skillPresets, Dictionary<string, Sprite> skillIcons)
         {
-            InitializeBoard(blockSos, blockPanel, canvas, skillPresets, skillIcons);
-            GenerateAllRandomBlocks();
-        }
-
-        /// <summary>
-        ///     보드를 초기화합니다. 값 설정, 스폰 위치 계산 및 의존성 등록을 수행합니다.
-        /// </summary>
-        /// <param name="blockSos">생성할 블록 정보</param>
-        /// <param name="blockPanel">블록 생성 위치</param>
-        /// <param name="canvas">캔버스</param>
-        /// <param name="skillPresets"></param>
-        /// <param name="skillIcons"></param>
-        private void InitializeBoard(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, IReadOnlyList<string> skillPresets, IReadOnlyDictionary<string, Sprite> skillIcons)
-        {
             InitializeValues(blockSos, blockPanel, canvas, skillPresets, skillIcons);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
+            GenerateAllRandomBlocks();
         }
 
         /// <summary>
