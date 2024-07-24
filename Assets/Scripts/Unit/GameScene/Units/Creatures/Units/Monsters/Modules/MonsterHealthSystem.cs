@@ -39,7 +39,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         public MonsterHealthStat(Stat<MonsterStat> stat)
         {
             _getHealth = () => stat.Current.Health;
-            _setHealth = value => stat.Current.Health = value;
+            _setHealth = value =>
+            {
+                var current = stat.Current;
+                current.Health = value;
+                stat.SetCurrent(current);
+            };
         }
 
         public int GetHealth()

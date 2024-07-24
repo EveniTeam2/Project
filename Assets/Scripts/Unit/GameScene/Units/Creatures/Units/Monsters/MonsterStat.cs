@@ -3,7 +3,7 @@ using System;
 namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
     [Serializable]
-    public class MonsterStat
+    public struct MonsterStat
     {
         public int Attack;
         public int Health;
