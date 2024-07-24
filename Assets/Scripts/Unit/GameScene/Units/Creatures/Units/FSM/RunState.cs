@@ -30,6 +30,7 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
             base.Exit();
             _animatorEventReceiver.SetBool(_baseStateInfo.stateParameter, false, null);
             _movementSystem.SetRun(false);
+            OnFixedUpdate -= CheckTargetAndIdle;
         }
         private void CheckTargetAndIdle()
         {

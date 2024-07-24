@@ -3,6 +3,7 @@ using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
@@ -31,7 +32,7 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
         /// </summary>
         public virtual void Enter()
         {
-            //Debug.Log($"{_monsterBaseStateInfo.stateType} Enter");
+            Debug.Log($"{_monsterBaseStateInfo.stateType} Enter");
             OnEnter?.Invoke();
         }
 
@@ -40,7 +41,7 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
         /// </summary>
         public virtual void Exit()
         {
-            //Debug.Log($"{_monsterBaseStateInfo.stateType} Out");
+            Debug.Log($"{_monsterBaseStateInfo.stateType} Out");
             OnExit?.Invoke();
         }
 

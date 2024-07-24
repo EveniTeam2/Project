@@ -15,11 +15,11 @@ MonoBehaviour:
   monstersRef:
   - {fileID: 350301380735278074, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
   monsterStats:
-  - Attack: 1
-    Health: 1
+  - Attack: 5
+    Health: 100
     Speed: 1
-    CoolTime: 1
-  monsterSpawnOffset: {x: 20, y: 0, z: 0}
+    CoolTime: 4
+  monsterSpawnOffset: {x: 10, y: 0, z: 0}
   monsterSpawnTimeOffset: 5
   monsterGroup:
   - spawnDecider: {fileID: 11400000, guid: 7722e2688ef47684b9e0483cea55742e, type: 2}

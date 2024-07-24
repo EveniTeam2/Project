@@ -40,7 +40,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         public CharacterHealthStat(Stat<CharacterStat> stat)
         {
             _getHealth = () => stat.Current.Health;
-            _setHealth = value => stat.Current.Health = value;
+            _setHealth = value =>
+            {
+                var current = stat.Current;
+                current.Health = value;
+                stat.SetCurrent(current);
+            };
         }
 
         public int GetHealth()

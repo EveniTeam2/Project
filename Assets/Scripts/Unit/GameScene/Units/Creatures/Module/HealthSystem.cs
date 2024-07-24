@@ -64,13 +64,11 @@ namespace Unit.GameScene.Units.Creatures.Module
         {
             _onDeath?.Invoke();
             _invinsible = true;
-            Debug.Log($"�׾���.");
         }
 
         protected void CallDamage()
         {
             _onDamage?.Invoke();
-            Debug.Log($"������� �Ծ���.");
         }
 
         protected void CallHeal()

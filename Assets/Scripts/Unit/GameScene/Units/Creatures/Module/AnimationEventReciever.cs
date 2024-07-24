@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,7 +22,8 @@ namespace Unit.GameScene.Units.Creatures.Module
 
         private Coroutine _coroutine = null;
         private bool _isPlayingAnimator = false;
-        
+        public event Action OnAttack;
+
         private void Awake()
         {
             // 애니메이터 내에 있는 모든 애니메이션 클립의 시작과 끝에 이벤트를 생성한다.
@@ -204,6 +206,11 @@ namespace Unit.GameScene.Units.Creatures.Module
             }
             
             _isPlayingAnimator = false;
+        }
+
+        public void ActivateSkillEffects()
+        {
+            OnAttack?.Invoke();
         }
 
         private bool TryGetAnimationEvents(AnimationClip animationClip, out AnimationEvent[] animationEvents)
