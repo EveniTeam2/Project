@@ -7,42 +7,20 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     public class CharacterMovementSystem : MovementSystem
     {
-        protected float _boostSpeed;
-
         // 속도 부스트
+        protected float _boostSpeed;
         protected float _boostTimer;
-
-        // 점프 관련
-        protected float _currentYSpd;
-        protected bool _wantToJump;
 
         public CharacterMovementSystem(Transform targetTransform, CharacterMovementStat stats, float ground) : base(
             targetTransform, stats, ground)
         {
         }
 
-        public override void Update()
-        {
-            base.Update();
-            Vector2 pos = _targetTransform.position;
-
-            if (IsInAir || _wantToJump)
-            {
-                pos.y += _currentYSpd * Time.deltaTime;
-                if (pos.y < _groundYPosition)
-                    pos.y = _groundYPosition;
-                _wantToJump = false;
-            }
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            JumpFixedUpdate();
-        }
-
         public override void SetRun(bool isRun)
         {
+            if (_impactDuration > 0)
+                return;
+
             _wantToMove = isRun;
             if (isRun)
                 _targetSpd = _stats.GetSpeed();
@@ -59,20 +37,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
                 _targetSpd = 0;
         }
 
-        public override void Jump(float power)
-        {
-            _wantToJump = true;
-            _currentYSpd = power;
-        }
-
         public void SetSpeedBoost(float boost, float duration)
         {
             // TODO
-        }
-
-        protected void JumpFixedUpdate()
-        {
-            _currentYSpd += _gravity * Time.fixedDeltaTime;
         }
 
         private void SpeedBoost()
