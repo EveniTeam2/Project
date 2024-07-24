@@ -8,12 +8,12 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
 {
     public class DeathState : BaseState
     {
-        //private readonly DeathStateInfo _deathInfo;
+        private readonly DeathStateInfo _deathInfo;
 
-        public DeathState(BaseStateInfo baseStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver)
+        public DeathState(BaseStateInfo baseStateInfo, DeathStateInfo deathInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver)
             : base(baseStateInfo, tryChangeState, animatorEventReceiver)
         {
-            //_deathInfo = deathInfo;
+            _deathInfo = deathInfo;
         }
 
         public override void Enter()
@@ -29,24 +29,40 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
 
     public class MonsterDeathState : MonsterBaseState
     {
-        //private readonly MonsterDeathStateInfo _deathInfo;
+        private readonly DeathStateInfo deathStateInfo;
+        private readonly SpriteRenderer spriteRenderer;
+        private float dampVel;
 
-        public MonsterDeathState(MonsterBaseStateInfo monsterBaseStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver)
+        public MonsterDeathState(MonsterBaseStateInfo monsterBaseStateInfo, DeathStateInfo deathStateInfo, Func<StateType, bool> tryChangeState, AnimatorEventReceiver animatorEventReceiver, SpriteRenderer spriteRenderer)
             : base(monsterBaseStateInfo, tryChangeState, animatorEventReceiver)
         {
-            //_deathInfo = deathInfo;
+            this.deathStateInfo = deathStateInfo;
+            this.spriteRenderer = spriteRenderer;
         }
 
         public override void Enter()
         {
             base.Enter();
             animatorEventReceiver.SetTrigger(_monsterBaseStateInfo.stateParameter, ChangeToDefaultState);
-            Debug.Log("Monster is dead start.");
         }
+
         public override void Exit()
         {
             base.Exit();
-            Debug.Log("Monster is dead end.");
+            var color = spriteRenderer.color;
+            spriteRenderer.color = new Color(color.r, color.g, color.b, 0);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            var color = spriteRenderer.color;
+
+            if (color.a * color.a > 0)
+            {
+                color.a = Mathf.SmoothDamp(color.a, 0, ref dampVel, deathStateInfo.fadeTime);
+                spriteRenderer.color = color;
+            }
         }
     }
 }

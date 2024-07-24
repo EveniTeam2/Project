@@ -27,6 +27,7 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
         {
             base.Exit();
             _animatorEventReceiver.SetBool(_baseStateInfo.stateParameter, false, null);
+            OnFixedUpdate -= CheckTargetAndRun;
         }
 
         protected virtual void CheckTargetAndRun()
@@ -67,10 +68,15 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
 
         protected virtual void CheckTargetAndRun()
         {
-            if (!_battleSystem.CheckCollider(_monsterIdleStateInfo.targetLayer, _monsterIdleStateInfo.direction, _monsterIdleStateInfo.distance, out _))
+            if (!_battleSystem.CheckCollider(_monsterIdleStateInfo.targetLayer, _monsterIdleStateInfo.direction, _monsterIdleStateInfo.distance, out var targets))
             {
                 OnFixedUpdate -= CheckTargetAndRun;
                 _tryChangeState.Invoke(StateType.Run);
+            }
+            else
+            {
+                if (_battleSystem.CanAttackCool)
+                    _tryChangeState.Invoke(StateType.Skill);
             }
         }
     }

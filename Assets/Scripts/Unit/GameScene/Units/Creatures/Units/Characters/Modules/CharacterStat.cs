@@ -5,7 +5,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
     namespace Unit.Character
     {
         [Serializable]
-        public class CharacterStat
+        public struct CharacterStat
         {
             public int Attack;
             public int Health;

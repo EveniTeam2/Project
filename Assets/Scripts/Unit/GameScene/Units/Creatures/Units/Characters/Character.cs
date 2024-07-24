@@ -43,7 +43,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             
             // _animator = GetComponent<Animator>();
             _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
-            
+            _animatorEventReceiver.OnAttack += ActivateSkill;
+
             _stats = new Stat<CharacterStat>(characterSetting.Stat);
             _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_stats));
             _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
@@ -108,7 +109,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             }
         }
 
-        public void ActivateSkillEffects()
+        private void ActivateSkill()
         {
             _commandAction?.ActivateCommandAction();
         }
