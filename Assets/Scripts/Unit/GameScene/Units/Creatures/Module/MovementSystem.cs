@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module
@@ -8,7 +9,7 @@ namespace Unit.GameScene.Units.Creatures.Module
         protected const float _gravity = -20f;
 
         // 속도 댐핑 변수
-        protected readonly float _dampTime = 0.3f;
+        protected float _dampTime = 0.3f;
         protected IMovementStat _stats;
         protected readonly Transform _targetTransform;
 
@@ -19,6 +20,17 @@ namespace Unit.GameScene.Units.Creatures.Module
         protected float _targetSpd;
         protected bool _wantToMove;
 
+        // 점프 관련
+        protected float _currentYSpd;
+        protected bool _wantToJump;
+
+        // 움직임 판단
+        public bool IsInAir => _targetTransform.position.y > _groundYPosition;
+        public bool IsMoving => _currentSpd * _currentSpd > 0;
+
+        // 임팩트
+        protected float _impactDuration;
+
         public MovementSystem(Transform targetTransform, IMovementStat stats, float ground)
         {
             _targetTransform = targetTransform;
@@ -26,30 +38,34 @@ namespace Unit.GameScene.Units.Creatures.Module
             _stats = stats;
         }
 
-        // 움직임 판단
-        public bool IsInAir => _targetTransform.position.y > _groundYPosition;
-        public bool IsMoving => _currentSpd * _currentSpd > 0;
-
         public virtual void Update()
         {
+            _impactDuration -= Time.deltaTime;
             Vector2 pos = _targetTransform.position;
 
+            // 달리기
             if (IsMoving || _wantToMove)
             {
                 _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
                 pos.x += _currentSpd * Time.deltaTime;
             }
 
+            // 점프
+            if (IsInAir || _wantToJump)
+            {
+                pos.y += _currentYSpd * Time.deltaTime;
+                if (pos.y < _groundYPosition)
+                    pos.y = _groundYPosition;
+                _wantToJump = false;
+            }
             _targetTransform.position = pos;
-#if UNITY_EDITOR
-            //Debug.Log($"현재 속도:{_currentSpd}/{_targetSpd}");
-#endif
         }
 
         public virtual void FixedUpdate()
         {
             if (IsMoving || _wantToMove)
                 _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
+            JumpFixedUpdate();
         }
 
         public abstract void SetRun(bool isRun);
@@ -60,8 +76,6 @@ namespace Unit.GameScene.Units.Creatures.Module
             _groundYPosition = groundYPosition;
         }
 
-        public abstract void Jump(float power);
-
         protected virtual float CalculateSpeed(float currentSpd, float targetSpd)
         {
             var value = currentSpd - targetSpd;
@@ -70,6 +84,28 @@ namespace Unit.GameScene.Units.Creatures.Module
             else
                 currentSpd = targetSpd;
             return currentSpd;
+        }
+
+        public virtual void Jump(float power)
+        {
+            if (_impactDuration > 0)
+                return;
+
+            _wantToJump = true;
+            _currentYSpd = power;
+        }
+
+        protected void JumpFixedUpdate()
+        {
+            _currentYSpd += _gravity * Time.fixedDeltaTime;
+        }
+
+        public virtual void SetImpact(Vector2 impact, float duration)
+        {
+            _currentSpd += impact.x;
+            _currentYSpd += impact.y;
+            _targetSpd = 0;
+            _impactDuration = duration;
         }
 
         public abstract void SpawnInit(IMovementStat movementStat);

@@ -13,9 +13,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 
         public override void SetRun(bool isRun)
         {
-#if UNITY_EDITOR
-            //Debug.Log($"Run State:{isRun}");
-#endif
+            if (_impactDuration > 0)
+                return;
+
             _wantToMove = isRun;
             if (isRun)
                 _targetSpd = -1 * _stats.GetSpeed();
@@ -30,10 +30,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
                 _targetSpd = _stats.GetSpeed();
             else
                 _targetSpd = 0;
-        }
-
-        public override void Jump(float power)
-        {
         }
 
         public override void SpawnInit(IMovementStat movementStat)

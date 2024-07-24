@@ -16,3 +16,5 @@ MonoBehaviour:
     stateType: 3
     stateParameter: 5
     _defaultExitState: 0
+  deathStateInfoDTO:
+    fadeTime: 1

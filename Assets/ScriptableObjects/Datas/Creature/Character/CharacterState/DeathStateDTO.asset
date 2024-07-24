@@ -15,6 +15,5 @@ MonoBehaviour:
   baseStateInfoDTO:
     stateType: 3
     stateParameter: 5
-    defaultExitState: 0
-    animationTime: 2
-    canTransitTime: 2
+  deathStateInfoDTO:
+    fadeTime: 1
