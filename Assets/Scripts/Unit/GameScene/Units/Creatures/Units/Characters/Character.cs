@@ -11,7 +11,6 @@ using Unit.GameScene.Units.Creatures.Units.FSM;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.CharacterSkills;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
@@ -25,7 +24,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         
         private CharacterServiceProvider _characterServiceProvider;
         private CommandSystem _commandSystem;
-        private CommandAction _commandAction; 
+        private CommandAction _commandAction;
         private Stat<CharacterStat> _stats;
         private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private List<CommandAction> _characterSkills;
@@ -50,7 +49,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
             _fsm = StateBuilder.BuildStateMachine(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
-            _characterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, _animationParameter, characterSetting.CharacterSkillIndexes, characterSetting.CharacterSkillValues);
+            _characterServiceProvider = new CharacterServiceProvider(characterType, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, _animationParameter, characterSetting.CharacterSkillIndexes, characterSetting.CharacterSkillValues, TempModifyStat, ModifyStat);
             _characterSkills = new CharacterSkillFactory(_characterServiceProvider, characterSetting.Type, characterSetting.CharacterSkillPresets).CreateSkill();
             _commandSystem = new CommandSystem(_characterServiceProvider, characterSetting.Type, _characterSkills);
             _mods = new LinkedList<ModifyStatData>();
@@ -72,7 +71,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         {
             _fsm?.Update();
             _movementSystem?.Update();
-            
+            _battleSystem?.Update();
             // TODO : 커맨드 인풋 내부로 이동 예정
             ActivateCommand();
         }
@@ -114,6 +113,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _commandAction?.ActivateCommandAction();
         }
 
+        public CharacterServiceProvider GetServiceProvider()
+        {
+            return _characterServiceProvider;
+        }
+
         public override void PermanentModifyStat(EStatType statType, int value)
         {
             _mods.AddLast(new ModifyStatData(statType, value));
@@ -129,11 +133,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         {
             _mods.Clear();
             _stats.SetCurrent(_stats.Origin);
-        }
-
-        public CharacterServiceProvider GetServiceProvider()
-        {
-            return _characterServiceProvider;
         }
 
         protected override void ModifyStat(EStatType statType, int value)

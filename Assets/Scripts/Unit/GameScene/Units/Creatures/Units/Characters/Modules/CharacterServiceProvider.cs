@@ -21,7 +21,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         private readonly Dictionary<AnimationParameterEnums, int> _animationParameter;
         private readonly Dictionary<string, int> _skillIndexes;
         private readonly Dictionary<string, float> _skillValues;
-        
+        private readonly Action<EStatType, int, float> tempModifyStat;
+        private readonly Action<EStatType, int> modifyStat;
         [SerializeField] private bool _readyForCommand;
 
         public CharacterServiceProvider(
@@ -33,7 +34,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             StateMachine fsm,
             Dictionary<AnimationParameterEnums, int> animationParameter,
             Dictionary<string, int> skillIndexes,
-            Dictionary<string, float> skillValues)
+            Dictionary<string, float> skillValues,
+            Action<EStatType, int, float> tempModifyStat,
+            Action<EStatType, int> modifyStat)
         {
             _characterType = characterType;
             _battleSystem = battleSystem;
@@ -44,7 +47,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             _animationParameter = animationParameter;
             _skillIndexes = skillIndexes;
             _skillValues = skillValues;
-
+            this.tempModifyStat = tempModifyStat;
+            this.modifyStat = modifyStat;
             SetReadyForCommand(true);
         }
 
@@ -154,5 +158,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         //{
         //    return _fsm.TryChangeState(stateType, onExecute);
         //}
+
+        public void ModifyStat(EStatType stateType, int value)
+        {
+            modifyStat.Invoke(stateType, value);
+        }
+
+        public void ModifyStat(EStatType statType, int value, float duration)
+        {
+            tempModifyStat.Invoke(statType, value, duration);
+        }
     }
 }
