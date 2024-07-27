@@ -50,8 +50,8 @@ namespace Temp.TestScripts {
 
         void InitGame() {
             onInput = StopGame;
-            var _characterSetting = new CharacterSetting(extraSetting.characterDefaultSetting, extraSetting.characterExtraSetting);
-            Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, defaultSetting.mainCamera);
+            // var _characterSetting = new CharacterData(extraSetting.characterDefaultSetting, extraSetting.characterExtraSetting);
+            // Initialize(_characterSetting, defaultSetting.playerSpawnPosition, extraSetting, defaultSetting, defaultSetting.mainCamera);
         }
 
         protected override void InitializeCamera(Camera cam, Vector3 cameraSpawnPosition) {

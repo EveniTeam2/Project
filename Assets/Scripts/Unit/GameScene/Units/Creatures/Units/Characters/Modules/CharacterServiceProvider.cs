@@ -1,49 +1,49 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     [Serializable]
     public class CharacterServiceProvider : ICreatureServiceProvider
     {
-        private readonly CharacterType _characterType;
+        private readonly CharacterClassType _characterClassType;
         private readonly AnimatorEventReceiver _animatorEventReceiver;
         private readonly BattleSystem _battleSystem;
         private readonly StateMachine _fsm;
         private readonly HealthSystem _healthSystem;
         private readonly MovementSystem _movementSystem;
         private readonly Dictionary<AnimationParameterEnums, int> _animationParameter;
-        private readonly Dictionary<string, int> _skillIndexes;
-        private readonly Dictionary<string, float> _skillValues;
+        private readonly SkillManager _skillManager;
         
-        [SerializeField] private bool _readyForCommand;
+        private bool _readyForCommand;
 
         public CharacterServiceProvider(
-            CharacterType characterType,
+            CharacterClassType characterClassType,
             BattleSystem battleSystem,
             HealthSystem healthSystem,
             MovementSystem movementSystem,
             AnimatorEventReceiver animatorEventReceiver,
             StateMachine fsm,
             Dictionary<AnimationParameterEnums, int> animationParameter,
-            Dictionary<string, int> skillIndexes,
-            Dictionary<string, float> skillValues)
+            CharacterData characterData)
         {
-            _characterType = characterType;
+            _characterClassType = characterClassType;
             _battleSystem = battleSystem;
             _healthSystem = healthSystem;
             _movementSystem = movementSystem;
             _animatorEventReceiver = animatorEventReceiver;
             _fsm = fsm;
             _animationParameter = animationParameter;
-            _skillIndexes = skillIndexes;
-            _skillValues = skillValues;
+            _skillManager = characterData.SkillManager;
 
             SetReadyForCommand(true);
         }
@@ -58,20 +58,25 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             return _readyForCommand;
         }
 
-        public float GetSkillValue(string skillName)
+        public int GetSkillValue(string skillName)
         {
-            return _skillValues[skillName];
+            return _skillManager.GetSkillValue(skillName);
         }
 
         public int GetSkillIndex(string skillName)
         {
-            return _skillIndexes[skillName];
+            return _skillManager.GetSkillIndex(skillName);
+        }
+        
+        public float GetSkillRange(string skillName)
+        {
+            return _skillManager.GetSkillRange(skillName);
         }
 
-        public void AttackEnemy(float value)
+        public void AttackEnemy(int value, float range)
         {
             var targetLayer = new LayerMask() {value = 1 << LayerMask.NameToLayer("Monster") };
-            if (_battleSystem.CheckCollider(targetLayer, Vector2.right, 5.0f, out var targets))
+            if (_battleSystem.CheckCollider(targetLayer, Vector2.right, range, out var targets))
             {
                 foreach (var target in targets)
                 {

@@ -1,6 +1,8 @@
+using ScriptableObjects.Scripts.Creature.Data.KnightData;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 
@@ -8,7 +10,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
 {
     public class KnightSwordBuff : CharacterSkill
     {
-        public KnightSwordBuff(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) {}
+        public KnightSwordBuff(KnightSkillData knightSkillData)
+        {
+            SkillName = $"{knightSkillData.skillName}";
+            Icon = knightSkillData.SkillIcon;
+        }
 
         protected override void ActivateSkill()
         {
@@ -20,7 +26,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
         public override void ActivateSkillEffects()
         {
             Debug.Log("소드 버프!");
-            AttackEnemy(GetSkillValue($"{KnightSkillType.SwordBuff}") * comboCount);
+            AttackEnemy(GetSkillValue(SkillName) * ComboCount, GetSkillRange(SkillName));
         }
     }
 }

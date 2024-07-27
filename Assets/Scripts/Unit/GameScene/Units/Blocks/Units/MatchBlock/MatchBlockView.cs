@@ -4,6 +4,7 @@ using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,14 +22,27 @@ namespace Unit.GameScene.Units.Blocks.Units.MatchBlock
         private Vector2 _startPosition;
         private RectTransform _rectTransform;
         
-        public void Initialize(BlockType type, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas, Sprite icon, Sprite background)
+        public void Initialize(BlockType type, Action<Vector3, Vector3> matchCheckHandler, Canvas canvas, CharacterSkill skill, Sprite background)
         {
             Type = type;
             
             OnMatchCheck = matchCheckHandler;
 
             blockBackground.sprite = background;
-            blockIcon.sprite = icon;
+            
+            if (skill == null && blockIcon.gameObject.activeInHierarchy)
+            {
+                blockIcon.gameObject.SetActive(false);
+            }
+            else if (skill != null)
+            {
+                if (!blockIcon.gameObject.activeInHierarchy)
+                {
+                    blockIcon.gameObject.SetActive(true);     
+                }
+                
+                blockIcon.sprite = skill.Icon;
+            }
 
             _canvas = canvas;
             _rectTransform = GetComponent<RectTransform>();

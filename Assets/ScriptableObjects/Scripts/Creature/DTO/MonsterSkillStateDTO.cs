@@ -33,7 +33,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public struct MonsterSkillStateInfoDTO
     {
         public AnimationParameterEnums skillParameter;
-        public float skillValue;
+        public int skillValue;
         public LayerMask targetLayer;
         public Vector2 direction;
         public float distance;
@@ -59,14 +59,14 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     public struct MonsterSkillStateInfo
     {
         public int skillParameter;
-        public float skillValue;
+        public int skillValue;
         public LayerMask targetLayer;
         public Vector2 direction;
         public float distance;
 
         public IMonsterSkillAct skillAct;
         public MonsterSkillStateInfo(int skillParameter,
-                                     float skillValue,
+                                     int skillValue,
                                      LayerMask targetLayer,
                                      Vector2 direction,
                                      float distance,

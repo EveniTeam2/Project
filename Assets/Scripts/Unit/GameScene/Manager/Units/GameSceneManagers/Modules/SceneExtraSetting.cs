@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
-using ScriptableObjects.Scripts.Creature.Settings;
+using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
+using Unit.GameScene.Units.Creatures;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,24 +17,37 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
     [Serializable]
     public class SceneExtraSetting
     {
-        [Header("---- Limit Time Setting ----")]
-        public float limitTime;
+        [Header("---- Camera Position ----"), Space(5)]
+        public Vector3 cameraSpawnPosition;
+        
+        [Header("---- Player Spawn Position ----"), Space(5)]
+        public Vector3 playerSpawnPosition;
 
-        [Space(5)]
-        [Header("---- Player Setting ----")]
-        // TODO : 임시로 잡아둔 세팅입니다, 이전 씬에서 해당 값들을 보내줘야 함
-        [Header("캐릭터 기본 정보")] public CharacterDefaultSetting characterDefaultSetting;
-        [Header("캐릭터 추가 정보")] public CharacterExtraSetting characterExtraSetting;
+        [Space(5), Header("---- Player Setting ----")]
+        // TODO : 이전 씬에서 캐릭터를 선택하면 현재 씬에서 팩토리를 통해 스킬과 스탯을 생성하도록 해야 함
+        public CharacterClassType characterClassType;
+        public List<CreatureDataSo> characterData;
+        public TextAsset characterTextAsset;
+        public TextAsset skillTextAsset;
+        
         // public AssetReference characterRef;
 
-        [Space(5)] [Header("---- Monster Setting ----")]
-        [Header("몬스터 스폰 정보")] public MonsterSpawnData monsterSpawnData;
+        [Space(5), Header("---- Monster Setting ----")]
+        public MonsterSpawnData monsterSpawnData;
         //public AssetReference[] monstersRef;
         
-        [Space(5)]
-        [Header("---- Block Settings ----")] public List<BlockModel> blockInfos;
+        [Space(5), Header("---- Block Settings ----")]
+        public List<BlockModel> blockInfos;
         
-        [Space(5)]
-        [Header("---- Map Settings ----")] public GameObject mapPrefab;
+        [Space(5), Header("---- Map Settings ----")]
+        public GameObject mapPrefab;
     }
+
+    [Serializable]
+    public struct CharacterDefaultData
+    {
+        [FormerlySerializedAs("type")] public CharacterClassType classType;
+        public Creature prefab;
+        public List<CharacterSkillData> skills;
+    } 
 }

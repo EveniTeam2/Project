@@ -1,4 +1,5 @@
 using System;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
@@ -6,21 +7,33 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
 {
-    public abstract class CharacterSkill : Skill, ISkillCommand
+    public abstract class CharacterSkill : ISkillCommand
     {
-        protected int comboCount;
-        protected readonly CharacterServiceProvider CharacterServiceProvider;
-
-        protected CharacterSkill(CharacterServiceProvider characterServiceProvider)
-        {
-            CharacterServiceProvider = characterServiceProvider;
-        }
+        public string SkillName { get; protected set; }
+        public int SkillLevel { get; protected set; } = 1;
+        public Sprite Icon { get; protected set; }
         
+        protected int MatchBlockCount;
+        protected int ComboCount;
+        
+        private CharacterServiceProvider _characterServiceProvider;
+
         public void Execute(int combo)
         {
-            comboCount = combo;
+            ComboCount = combo;
             
             ActivateSkill();
+        }
+        
+        
+        public void IncreaseLevel()
+        {
+            SkillLevel++;
+        }
+
+        public void RegisterCharacterServiceProvider(CharacterServiceProvider characterServiceProvider)
+        {
+            _characterServiceProvider = characterServiceProvider;
         }
 
         protected virtual void ActivateSkill()
@@ -55,42 +68,47 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
         
         protected void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
         {
-            CharacterServiceProvider.AnimatorSetBool(targetParameter, value, action);
+            _characterServiceProvider.AnimatorSetBool(targetParameter, value, action);
         }
 
         private void SetReadyForInvokingCommand(bool isReady)
         {
-            CharacterServiceProvider.SetReadyForCommand(isReady);
+            _characterServiceProvider.SetReadyForCommand(isReady);
         }
 
         protected void ChangeState(StateType targetState)
         {
-            CharacterServiceProvider.TryChangeState(targetState);
+            _characterServiceProvider.TryChangeState(targetState);
         }
 
         protected void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
         {
-            CharacterServiceProvider.AnimatorSetFloat(targetParameter, value, action);
+            _characterServiceProvider.AnimatorSetFloat(targetParameter, value, action);
         }
 
-        protected void AttackEnemy(float value)
+        protected void AttackEnemy(int value, float range)
         {
-            CharacterServiceProvider.AttackEnemy(value);
+            _characterServiceProvider.AttackEnemy(value, range);
         }
 
-        protected void HealMyself(float value)
+        protected void HealMyself(int value)
         {
-            CharacterServiceProvider.AttackEnemy(value);
+            _characterServiceProvider.HealMyself(value);
         }
 
         protected int GetSkillIndex(string skillName)
         {
-            return CharacterServiceProvider.GetSkillIndex(skillName);
+            return _characterServiceProvider.GetSkillIndex(skillName);
         }
 
-        protected float GetSkillValue(string skillName)
+        protected int GetSkillValue(string skillName)
         {
-            return CharacterServiceProvider.GetSkillValue(skillName);
+            return _characterServiceProvider.GetSkillValue(skillName);
+        }
+        
+        protected float GetSkillRange(string skillName)
+        {
+            return _characterServiceProvider.GetSkillRange(skillName);
         }
     }
 }

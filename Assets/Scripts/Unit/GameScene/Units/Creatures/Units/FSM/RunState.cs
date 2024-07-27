@@ -1,5 +1,6 @@
 ﻿using System;
 using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 
@@ -30,6 +31,7 @@ namespace Unit.GameScene.Units.Creatures.Units.FSM
             base.Exit();
             _animatorEventReceiver.SetBool(_baseStateInfo.stateParameter, false, null);
             _movementSystem.SetRun(false);
+            OnFixedUpdate -= CheckTargetAndIdle;
         }
         private void CheckTargetAndIdle()
         {

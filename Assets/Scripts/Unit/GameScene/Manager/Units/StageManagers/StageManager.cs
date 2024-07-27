@@ -5,11 +5,13 @@ using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
+using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.StagePanels.Backgrounds;
 using UnityEngine;
 
@@ -37,14 +39,14 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         Coroutine _stageScoreCoroutine;
 
-        public void Initialize(CharacterSetting characterSetting, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam)
+        public void Initialize(CharacterData characterData, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             _stageScore = new StageScore();
             ChangeAnimationParameterToHash();
             
-            InitializeCharacter(characterSetting, playerSpawnPosition);
+            InitializeCharacter(characterData, playerSpawnPosition, blockInfo);
             InitializeMonster(extraSetting, playerSpawnPosition, _stageScore);
-            InitializeCamera(cam, defaultSetting.cameraSpawnPosition);
+            InitializeCamera(cam, extraSetting.cameraSpawnPosition);
             InitializeMap(extraSetting.mapPrefab);
             
             StartCoroutine(StageScoreUpdate(_stageScore));
@@ -74,21 +76,21 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             OnCommandDequeue?.Invoke();
         }
         
-        private void InitializeCharacter(CharacterSetting characterSetting, Vector3 playerSpawnPosition)
+        private void InitializeCharacter(CharacterData characterData, Vector3 playerSpawnPosition, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             // Core.Utils.AddressableLoader.DeployAsset(settings.characterRef, settings.playerPosition, Quaternion.identity, null, (obj) => {
             //     if (obj.TryGetComponent(out _character))
             //         _character.Initialize(settings.characterStat, _backgroundDisplay);
             // });
             
-            var character = Instantiate(characterSetting.Prefab, playerSpawnPosition, Quaternion.identity);
+            var character = Instantiate(characterData.CharacterDataSo.creature, playerSpawnPosition, Quaternion.identity);
             
             _zeroPosition = playerSpawnPosition;
             _startTime = Time.time;
             
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(characterSetting, playerSpawnPosition.y, _animationParameters);
+                _character.Initialize(characterData, playerSpawnPosition.y, _animationParameters, blockInfo);
                 OnSendCommand += _character.HandleReceiveCommand;
                 _character.OnCommandDequeue += HandleCommandDequeue;
             }

@@ -12,6 +12,7 @@ using Unit.GameScene.Units.BoardPanels.Interfaces;
 using Unit.GameScene.Units.BoardPanels.Modules;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -44,7 +45,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
         [Header("블록 낙하 이후 바운스 대기 시간 (단위 : Second)")] [SerializeField] [Range(0, 1f)]
         private float bounceDuration;
 
-        [FormerlySerializedAs("matchMatchBlockViewPrefab")] [Header("매치 블록 풀링 관련 설정")] [SerializeField]
+        [Header("매치 블록 풀링 관련 설정")] [SerializeField]
         private BlockView matchBlockViewPrefab;
         
         [Header("로직 동작 여부")] [SerializeField]
@@ -55,88 +56,66 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
         private IMatchBlockGenerator _matchBlockGenerator;
         private IMatchBlockMatcher _matchBlockMatcher;
         private IMatchBlockMover _matchBlockMover;
-        
         private IBlockPool _blockPool;
         
         private RectTransform _blockPanel;
-        private List<BlockModel> _blockInfos;
+        private List<BlockModel> _blockModels;
         private List<Tuple<float, float>> _blockPositions;
-
         private Vector2 _blockSize;
         private RectTransform _blockSpawnPos;
-
+        private Dictionary<Tuple<float, float>, MatchBlockView> _blockViews;
+        private Dictionary<BlockType, CharacterSkill> _blockInfo;
         private Canvas _canvas;
-
-        [Header("명령 대기 리스트")]
+        private WaitForSeconds _progressTime;
+        private CharacterData _characterData;
         private OrderedDictionary _currentMatchBlock;
-
+        
         private int _dragCount;
         private float _blockGap;
         private float _halfPanelWidth;
         private int _poolSize;
         
-        private WaitForSeconds _progressTime;
-        private Dictionary<Tuple<float, float>, MatchBlockView> _blockViews;
-        private Dictionary<BlockType, Sprite> _blockIcons;
-        private CharacterSetting _characterSetting;
-
         #region #### 보드 초기화 ####
 
         /// <summary>
         ///     보드를 초기화하고, 블록을 생성합니다.
         /// </summary>
-        /// <param name="blockSos">생성할 블록 정보</param>
-        /// <param name="blockPanel">블록 생성 위치</param>
+        /// <param name="blockModels">생성할 블록 정보</param>
+        /// <param name="matchBlockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
-        /// <param name="skillPresets"></param>
-        /// <param name="skillIcons"></param>
-        public void Initialize(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, List<string> skillPresets, Dictionary<string, Sprite> skillIcons)
+        /// <param name="characterData"></param>
+        /// <param name="blockInfo"></param>
+        public void Initialize(List<BlockModel> blockModels, RectTransform matchBlockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            InitializeBoard(blockSos, blockPanel, canvas, skillPresets, skillIcons);
-            GenerateAllRandomBlocks();
-        }
-
-        /// <summary>
-        ///     보드를 초기화합니다. 값 설정, 스폰 위치 계산 및 의존성 등록을 수행합니다.
-        /// </summary>
-        /// <param name="blockSos">생성할 블록 정보</param>
-        /// <param name="blockPanel">블록 생성 위치</param>
-        /// <param name="canvas">캔버스</param>
-        /// <param name="skillPresets"></param>
-        /// <param name="skillIcons"></param>
-        private void InitializeBoard(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, IReadOnlyList<string> skillPresets, IReadOnlyDictionary<string, Sprite> skillIcons)
-        {
-            InitializeValues(blockSos, blockPanel, canvas, skillPresets, skillIcons);
+            InitializeValues(blockModels, matchBlockPanel, canvas, characterData, blockInfo);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
+            GenerateAllRandomBlocks();
         }
 
         /// <summary>
         ///     보드 값을 초기화합니다.
         /// </summary>
-        /// <param name="blockSos">생성할 블록 정보</param>
-        /// <param name="blockPanel">블록 생성 위치</param>
+        /// <param name="blockModels">생성할 블록 정보</param>
+        /// <param name="matchBlockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
-        /// <param name="skillPresets"></param>
-        /// <param name="skillIcons"></param>
-        private void InitializeValues(List<BlockModel> blockSos, RectTransform blockPanel, Canvas canvas, IReadOnlyList<string> skillPresets, IReadOnlyDictionary<string, Sprite> skillIcons)
+        /// <param name="characterData"></param>
+        /// <param name="blockInfo"></param>
+        private void InitializeValues(List<BlockModel> blockModels, RectTransform matchBlockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             _dragCount = 0;
             isLogicUpdating = false;
             _poolSize = width * height;
-            _blockInfos = blockSos;
-            _blockPanel = blockPanel;
+            _blockModels = blockModels;
+            _blockPanel = matchBlockPanel;
             _canvas = canvas;
+            _characterData = characterData; 
             
-            _blockIcons = new Dictionary<BlockType, Sprite>();
             _blockViews = new Dictionary<Tuple<float, float>, MatchBlockView>();
             _currentMatchBlock = new OrderedDictionary();
             _progressTime = new WaitForSeconds(logicProgressTime);
-            
-            for (var i = 0; i < skillPresets.Count; i++)
-            {
-                _blockIcons.Add((BlockType) i, skillIcons[skillPresets[i]]);
-            }
+
+            _blockInfo = blockInfo;
         }
 
         /// <summary>
@@ -178,7 +157,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
         private void RegisterDependencies()
         {
             _blockPool = new BlockPool(matchBlockViewPrefab, _blockPanel, _poolSize, true);
-            _matchBlockGenerator = new MatchMatchBlockGenerator(_blockInfos, _blockPool, _blockViews, _canvas, _blockPanel, _blockSize, _blockPositions, CheckForMatch, _blockGap, _blockIcons);
+            _matchBlockGenerator = new MatchMatchBlockGenerator(_blockModels, _blockPool, _blockViews, _canvas, _blockPanel, _blockSize, _blockPositions, CheckForMatch, _blockGap, _blockInfo);
             _matchBlockMatcher = new MatchMatchBlockMatcher(_blockViews, _blockGap);
             _matchBlockMover = new MatchMatchBlockMover(moveDuration, 1 / dropDurationPerUnit, bounceHeight, bounceDuration, _progressTime, _blockGap, this);
         }
@@ -222,7 +201,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
                 var newBlockInfo = _matchBlockGenerator.GetRandomValidBlock(_blockViews, pos);
                 var block = (MatchBlockView) _blockPool.Get();
                 block.GetComponent<RectTransform>().anchoredPosition = new Vector3(dropPosition.Item1, dropPosition.Item2, 0);
-                block.Initialize(newBlockInfo.type, CheckForMatch, _canvas, _blockIcons[newBlockInfo.type], newBlockInfo.background);
+                block.Initialize(newBlockInfo.type, CheckForMatch, _canvas, _blockInfo[newBlockInfo.type], newBlockInfo.background);
                 _blockViews[pos] = block;
 
                 spawnHash.Add(dropPosition);

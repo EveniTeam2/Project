@@ -51,5 +51,5 @@ MonoBehaviour:
   dropDurationPerUnit: 20
   bounceHeight: 0.25
   bounceDuration: 0.14
-  matchMatchBlockViewPrefab: {fileID: 4914153491292411587, guid: ac1d9e4df06b344c182f2f7f526385a7, type: 3}
+  matchBlockViewPrefab: {fileID: 4914153491292411587, guid: ac1d9e4df06b344c182f2f7f526385a7, type: 3}
   isLogicUpdating: 0

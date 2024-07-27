@@ -1,5 +1,6 @@
 ﻿using System;
 using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;

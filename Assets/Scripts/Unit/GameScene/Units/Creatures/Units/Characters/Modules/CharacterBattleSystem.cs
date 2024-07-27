@@ -1,6 +1,5 @@
 using System;
 using Unit.GameScene.Units.Creatures.Module;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Unit.Character;
 using Unit.GameScene.Units.Creatures.Units.Monsters;
 using UnityEngine;
 
@@ -41,7 +40,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public CharacterBattleStat(Stat<CharacterStat> stat)
         {
-            _attack = () => stat.Current.Attack;
+            _attack = () => stat.Current.Damage;
             _cool = () => stat.Current.CoolTime;
         }
 

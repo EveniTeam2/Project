@@ -5,10 +5,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums
     [Serializable]
     public enum KnightSkillType
     {
-        BaseAttack,
-        SwordBuff,
         LightAttack,
+        Slash,
+        LightCut,
+        UpLightAttack,
+        FrontHeavyAttack,
+        AirAttack,
+        AirHeavyAttack,
+        HolySlash,
+        SwordBuff,
+        ShieldBuff,
         HolyHeal,
-        HolySlash
+        SaintHeal
     }
 }

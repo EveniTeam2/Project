@@ -14,7 +14,11 @@ using Unit.GameScene.Units.BoardPanels.Modules;
 using Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Interfaces;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -35,7 +39,6 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
         private BlockView comboBlockViewPrefab;
         
         private IComboBlockMover _blockMover;
-            
         private IBlockPool _blockPool;
         
         private List<BlockModel> _blockInfos;
@@ -45,10 +48,13 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
         private List<float> _blockPositions;
         private Vector2 _blockSize;
         private Dictionary<float, ComboBlockView> _blocks;
-        private Dictionary<BlockType, Sprite> _blockIcons;
+        private Dictionary<BlockType, CharacterSkill> _blockInfo;
+        private bool _isProcessing;
+        private CharacterData _characterData;
+        private Dictionary<string, SkillData> _skillData;
+        
         private readonly SemaphoreSlim _semaphore = new(1, 1);
         private readonly Queue<Func<Task>> _actions = new();
-        private bool _isProcessing;
 
         private void Update()
         {
@@ -69,32 +75,24 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
             }
         }
 
-        public void Initialize(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, List<string> characterSkillPresets, Dictionary<string, Sprite> characterSkillIcons)
+        public void Initialize(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            InitializeComboBoard(blockInfos, comboBlockPanel, comboBlockEnter, comboBlockExit, characterSkillPresets, characterSkillIcons);
-        }
-
-        private void InitializeComboBoard(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, List<string> characterSkillPresets, Dictionary<string, Sprite> characterSkillIcons)
-        {
-            InitializeValues(blockInfos, comboBlockPanel, comboBlockEnter, comboBlockExit, characterSkillPresets, characterSkillIcons);
+            InitializeValues(blockInfos, comboBlockPanel, comboBlockEnter, comboBlockExit, characterData, blockInfo);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
         }
 
-        private void InitializeValues(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, List<string> characterSkillPresets, Dictionary<string, Sprite> characterSkillIcons)
+        private void InitializeValues(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             _blockInfos = blockInfos;
             _comboBlockPanel = comboBlockPanel;
             _comboBlockEnter = comboBlockEnter;
             _comboBlockExit = comboBlockExit;
             
-            _blocks = new Dictionary<float, ComboBlockView>();
-            _blockIcons = new Dictionary<BlockType, Sprite>();
+            _characterData = characterData;
             
-            for (var i = 0; i < characterSkillPresets.Count; i++)
-            {
-                _blockIcons.Add((BlockType) i, characterSkillIcons[characterSkillPresets[i]]);
-            }
+            _blocks = new Dictionary<float, ComboBlockView>();
+            _blockInfo = blockInfo;
         }
         
         private void CalculateBlockSpawnPositions()
@@ -154,7 +152,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units
                 
                 rectTransform.anchoredPosition = spawnPosition;
                         
-                block.Initialize(blockModel.type, comboCount, _blockIcons[blockModel.type], blockModel.background);
+                block.Initialize(blockModel.type, comboCount, _blockInfo[blockModel.type], blockModel.background);
 
                 foreach (var blockPosition in _blockPositions.Where(blockPosition => _blocks.TryAdd(blockPosition, block)))
                 {

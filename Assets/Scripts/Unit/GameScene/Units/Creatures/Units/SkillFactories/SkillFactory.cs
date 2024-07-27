@@ -4,8 +4,8 @@ using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 
 namespace Unit.GameScene.Units.Creatures.Units.SkillFactories
 {
-    public abstract class SkillFactory<T> where T : Skill
+    public abstract class SkillFactory
     {
-        public abstract List<CommandAction> CreateSkill();
+        public abstract Dictionary<string, CharacterSkill> CreateSkill();
     }
 }

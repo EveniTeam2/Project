@@ -1,5 +1,6 @@
 using System;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using UnityEngine;
 

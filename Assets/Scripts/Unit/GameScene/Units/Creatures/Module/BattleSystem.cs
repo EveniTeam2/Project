@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module
@@ -14,7 +15,7 @@ namespace Unit.GameScene.Units.Creatures.Module
             _stat = stat;
         }
 
-        protected bool CanAttackCool => _canAttackCool;
+        public bool CanAttackCool => _canAttackCool;
 
         public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee)
         {
@@ -42,6 +43,11 @@ namespace Unit.GameScene.Units.Creatures.Module
         internal void SpawnInit(IBattleStat stat)
         {
             _stat = stat;
+        }
+
+        internal IBattleStat GetBattleStat()
+        {
+            return _stat;
         }
     }
 

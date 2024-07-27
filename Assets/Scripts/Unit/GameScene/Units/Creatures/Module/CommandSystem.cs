@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
@@ -13,46 +16,33 @@ namespace Unit.GameScene.Units.Creatures.Module
     /// </summary>
     public class CommandSystem
     {
-        private readonly ICreatureServiceProvider _serviceProvider;
-        private readonly Dictionary<BlockType, CommandAction> _skillDictionary;
+        private readonly Dictionary<BlockType, CharacterSkill> _skillCommands;
 
         /// <summary>
         ///     입력을 처리하는 클래스입니다.
         /// </summary>
-        public CommandSystem(ICreatureServiceProvider serviceProvider, CharacterType type, IReadOnlyList<CommandAction> skillPresets)
+        public CommandSystem(Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            _serviceProvider = serviceProvider;
-            _skillDictionary = new Dictionary<BlockType, CommandAction>();
-
-            RegisterCommandAction(skillPresets);
+            _skillCommands = blockInfo;
         }
         
         public CommandAction GetCommandAction(BlockType blockType)
         {
-            return _skillDictionary.GetValueOrDefault(blockType);
-        }
-
-        private void RegisterCommandAction(IReadOnlyList<CommandAction> skillPresets)
-        {
-            for (var i = 0; i < Enum.GetValues(typeof(BlockType)).Length - 1; i++)
-            {
-                _skillDictionary.Add((BlockType)i, skillPresets[i]);
-                
-                Debug.Log($"{(BlockType)i} 커맨드 추가 / Value : {skillPresets[i].GetType()}");
-            }
+            return new CommandAction(_skillCommands.GetValueOrDefault(blockType));
         }
         
         /// <summary>
         ///     입력을 처리합니다.
         /// </summary>
-        public void ActivateCommand(BlockType blockType, int count)
+        public bool ActivateCommand(BlockType blockType, int count)
         {
-            _skillDictionary[blockType].ActivateCommand(count);
-        }
-        
-        public void Clear()
-        {
-            _skillDictionary.Clear();
+            var command = _skillCommands[blockType];
+
+            if (command == null) return false;
+            
+            command.Execute(count);
+            return true;
+
         }
     }
 }

@@ -1,31 +1,37 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using ScriptableObjects.Scripts.Creature.Data;
+using ScriptableObjects.Scripts.Creature.Data.KnightData;
+using ScriptableObjects.Scripts.Creature.Data.WizardData;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.CharacterSkills.Units;
+using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.CharacterSkills
 {
-    public class CharacterSkillFactory : SkillFactory<CharacterSkill>
+    public class CharacterSkillFactory : SkillFactory
     {
-        private readonly CharacterServiceProvider _characterServiceProvider;
-        private readonly List<string> _characterSkillPresets;
-        private readonly CharacterType _characterType;
+        private readonly CharacterClassType _characterClassType;
+        private readonly CharacterDataSo _characterDataSo;
 
-        public CharacterSkillFactory(CharacterServiceProvider characterServiceProvider, CharacterType characterType, List<string> characterSkillPresets)
+        public CharacterSkillFactory(CharacterDataSo characterDataSo)
         {
-            _characterType = characterType;
-            _characterSkillPresets = characterSkillPresets;
-            _characterServiceProvider = characterServiceProvider;
+            _characterDataSo = characterDataSo;
+            _characterClassType = characterDataSo.classType;
         }
 
-        public override List<CommandAction> CreateSkill()
+        public override Dictionary<string, CharacterSkill> CreateSkill()
         {
-            return _characterType switch
+            return _characterClassType switch
             {
-                CharacterType.Knight => new KnightSkillFactory(_characterSkillPresets, _characterServiceProvider).CreateSkill(),
-                _ => null
+                CharacterClassType.Knight => new KnightSkillFactory((KnightDataSo)_characterDataSo).CreateSkill(),
+                CharacterClassType.Wizard => new WitchSkillFactory((WizardDataSo)_characterDataSo).CreateSkill(),
+                // CharacterClassType.Centaurs => expr,
+                _ => throw new ArgumentOutOfRangeException()
             };
         }
     }

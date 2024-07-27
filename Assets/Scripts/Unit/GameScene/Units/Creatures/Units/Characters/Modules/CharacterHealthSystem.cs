@@ -1,6 +1,5 @@
 using System;
 using Unit.GameScene.Units.Creatures.Module;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Unit.Character;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
@@ -39,8 +38,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public CharacterHealthStat(Stat<CharacterStat> stat)
         {
-            _getHealth = () => stat.Current.Health;
-            _setHealth = value => stat.Current.Health = value;
+            //TODO : 채이환
+            _getHealth = () => stat.Current.MaxHp;
+            _setHealth = value =>
+            {
+                var current = stat.Current;
+                current.CurrentHp = value;
+                stat.SetCurrent(current);
+            };
         }
 
         public int GetHealth()

@@ -1,6 +1,8 @@
+using ScriptableObjects.Scripts.Creature.Data.KnightData;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
@@ -9,7 +11,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
 {
     public class KnightHolyHeal : CharacterSkill
     {
-        public KnightHolyHeal(CharacterServiceProvider characterServiceProvider) : base(characterServiceProvider) { }
+        public KnightHolyHeal(KnightSkillData knightSkillData)
+        {
+            SkillName = $"{knightSkillData.skillName}";
+            Icon = knightSkillData.SkillIcon;
+        }
 
         protected override void ActivateSkill()
         {
@@ -21,7 +27,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Un
         public override void ActivateSkillEffects()
         {
             Debug.Log("홀리 힐!");
-            HealMyself(GetSkillValue($"{KnightSkillType.HolyHeal}") * comboCount);
+            HealMyself(GetSkillValue($"{KnightSkillType.HolyHeal}") * ComboCount);
         }
     }
 }

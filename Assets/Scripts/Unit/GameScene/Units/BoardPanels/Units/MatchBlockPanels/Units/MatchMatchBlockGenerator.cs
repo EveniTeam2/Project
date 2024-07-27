@@ -5,6 +5,7 @@ using Unit.GameScene.Units.Blocks.Units.MatchBlock;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using Unit.GameScene.Units.BoardPanels.Interfaces;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,7 +25,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
         private readonly Canvas _canvas;
         private readonly Action<Vector3, Vector3> _matchCheckHandler;
         private readonly Dictionary<Tuple<float, float>, MatchBlockView> _tiles;
-        private Dictionary<BlockType, Sprite> _blockIcons;
+        private Dictionary<BlockType, CharacterSkill> _blockInfos;
 
         /// <summary>
         ///     BlockGenerator 생성자입니다.
@@ -38,7 +39,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
         /// <param name="blockPositions">블록 위치 목록</param>
         /// <param name="checkForMatch">매치 확인 핸들러</param>
         /// <param name="blockGap">블록 간격</param>
-        /// <param name="blockIcons"></param>
+        /// <param name="blockInfos"></param>
         public MatchMatchBlockGenerator(
             List<BlockModel> blockSos,
             IBlockPool blockPool,
@@ -49,7 +50,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
             List<Tuple<float, float>> blockPositions,
             Action<Vector3, Vector3> checkForMatch,
             float blockGap,
-            Dictionary<BlockType, Sprite> blockIcons)
+            Dictionary<BlockType, CharacterSkill> blockInfos)
         {
             _blockSos = blockSos;
             _blockPool = blockPool;
@@ -60,7 +61,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
             _blockPositions = blockPositions;
             _blockGap = blockGap;
             _matchCheckHandler = checkForMatch;
-            _blockIcons = blockIcons;
+            _blockInfos = blockInfos;
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units
                 rectTransform.sizeDelta = _blockSize;
                 rectTransform.anchoredPosition = position;
 
-                block.Initialize(newBlock.type, _matchCheckHandler, _canvas, _blockIcons[newBlock.type], newBlock.background);
+                block.Initialize(newBlock.type, _matchCheckHandler, _canvas, _blockInfos[newBlock.type], newBlock.background);
                 _tiles.Add(new Tuple<float, float>(x, y), block);
             }
         }

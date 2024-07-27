@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.FSM;
@@ -13,7 +14,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
     {
         [SerializeField] private MonsterStateMachineDTO stateData;
         private MonsterServiceProvider _monsterServiceProvider;
-
+        private SpriteRenderer _spriteRenderer;
         protected Stat<MonsterStat> _stats;
         private MonsterBattleStat _battleStat;
 
@@ -21,6 +22,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             _fsm?.Update();
             _movementSystem?.Update();
+            _battleSystem?.Update();
         }
 
         private void FixedUpdate()
@@ -32,6 +34,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
 
             _stats = new Stat<MonsterStat>(stat);
             _battleStat = new MonsterBattleStat(_stats);
@@ -63,7 +66,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _mods.AddLast(new ModifyStatData(statType, value));
             ModifyStat(statType, value);
         }
-
 
         public override void TempModifyStat(EStatType statType, int value, float duration)
         {
@@ -111,6 +113,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _movementSystem.SpawnInit(new MonsterMovementStat(_stats));
             _fsm.TryChangeState(StateType.Run);
             ClearModifiedStat();
+            _spriteRenderer.color = Color.white;
         }
 
         internal void RegistEventDeath(Action<Monster> release)

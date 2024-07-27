@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b45be1bdd27446da15199f2a658d0e6, type: 3}
+  m_Name: Centaurs
+  m_EditorClassIdentifier: 
+  creature: {fileID: 1214194880391127291, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
+  classType: 2
+  knightSkillData:
+  - SkillIcon: {fileID: 0}
+    skillName: 0
+  - SkillIcon: {fileID: 0}
+    skillName: 1
+  - SkillIcon: {fileID: 0}
+    skillName: 2
+  - SkillIcon: {fileID: 0}
+    skillName: 3
+  - SkillIcon: {fileID: 0}
+    skillName: 4
+  - SkillIcon: {fileID: 0}
+    skillName: 5
+  - SkillIcon: {fileID: 0}
+    skillName: 6
+  - SkillIcon: {fileID: 0}
+    skillName: 7
+  - SkillIcon: {fileID: 0}
+    skillName: 8
+  - SkillIcon: {fileID: 0}
+    skillName: 9
