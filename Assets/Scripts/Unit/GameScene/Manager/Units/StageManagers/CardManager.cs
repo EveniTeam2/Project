@@ -101,9 +101,8 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             rarity = cardData.Rarity;
         }
 
-        public abstract void Apply(CharacterServiceProvider character);
+        public abstract void Apply(IStage stage);
     }
-
 
     public class CardData : ScriptableObject
     {

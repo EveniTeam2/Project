@@ -1,4 +1,5 @@
 ﻿using System;
+using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Units.Creatures;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 
@@ -13,11 +14,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             this.data = data.statCardDataPairs;
         }
 
-        public override void Apply(CharacterServiceProvider character)
+        public override void Apply(IStage stage)
         {
             foreach (var pair in data)
             {
-                character.ModifyStat(pair.statType, pair.value);
+                stage.Character.PermanentModifyStat(pair.statType, pair.value);
             }
         }
     }
