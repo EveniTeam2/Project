@@ -1,3 +1,4 @@
+using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
 using System;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Monsters;
@@ -19,13 +20,18 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
                 var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
                 Debug.Log($"플레이어가 {col.collider.gameObject.name}에게 {dmg} 피해를 입혔습니다.");
 #else
-                target.GetServiceProvider().Damage(_stat.GetAttack());
+                var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
 #endif
             }
             else
             {
                 Debug.LogWarning($"플레이어가 {col.collider.gameObject.name}의 컴포넌트를 가지고 올 수 없습니다.");
             }
+        }
+
+        public override void Attack(RaycastHit2D col, IBattleEffect effect)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Update()

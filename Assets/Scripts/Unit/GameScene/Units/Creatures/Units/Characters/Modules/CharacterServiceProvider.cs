@@ -25,6 +25,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         private readonly SkillManager _skillManager;
         
         private bool _readyForCommand;
+        private readonly Action<EStatType, int, float> tempModifyStat;
+        private readonly Action<EStatType, int> modifyStat;
 
         public CharacterServiceProvider(
             CharacterClassType characterClassType,
@@ -35,6 +37,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             StateMachine fsm,
             Dictionary<AnimationParameterEnums, int> animationParameter,
             CharacterData characterData)
+            Action<EStatType, int, float> tempModifyStat,
+            Action<EStatType, int> modifyStat)
         {
             _characterClassType = characterClassType;
             _battleSystem = battleSystem;
@@ -45,6 +49,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             _animationParameter = animationParameter;
             _skillManager = characterData.SkillManager;
 
+            this.tempModifyStat = tempModifyStat;
+            this.modifyStat = modifyStat;
             SetReadyForCommand(true);
         }
 
@@ -159,5 +165,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         //{
         //    return _fsm.TryChangeState(stateType, onExecute);
         //}
+
+        public void ModifyStat(EStatType stateType, int value)
+        {
+            modifyStat.Invoke(stateType, value);
+        }
+
+        public void ModifyStat(EStatType statType, int value, float duration)
+        {
+            tempModifyStat.Invoke(statType, value, duration);
+        }
     }
 }

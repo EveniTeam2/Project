@@ -1,3 +1,4 @@
+using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
 using System;
 using UnityEngine;
 
@@ -37,7 +38,28 @@ namespace Unit.GameScene.Units.Creatures.Module
             }
         }
 
+        public bool CheckCollider(LayerMask targetLayer, Vector2 startPosition, Vector2 direction, float distance, out RaycastHit2D[] collidee)
+        {
+            var hits = Physics2D.RaycastAll(startPosition, direction, distance, targetLayer);
+            collidee = hits;
+            if (collidee.Length > 0)
+            {
+#if UNITY_EDITOR
+                Debug.DrawRay(startPosition, distance * direction, Color.red, 0.3f);
+#endif
+                return true;
+            }
+            else
+            {
+#if UNITY_EDITOR
+                Debug.DrawRay(startPosition, distance * direction, Color.green, 0.3f);
+#endif
+                return false;
+            }
+        }
+
         public abstract void Attack(RaycastHit2D col);
+        public abstract void Attack(RaycastHit2D col, IBattleEffect effect);
         public abstract void Update();
 
         internal void SpawnInit(IBattleStat stat)

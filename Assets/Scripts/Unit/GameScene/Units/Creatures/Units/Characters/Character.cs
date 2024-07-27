@@ -87,7 +87,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         {
             _fsm?.Update();
             _movementSystem?.Update();
-            
+            _battleSystem?.Update();
             // TODO : 커맨드 인풋 내부로 이동 예정
             ActivateCommand();
         }
@@ -121,7 +121,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             OnCommandDequeue?.Invoke();
         }
 
-        private void ActivateSkill()
+        public void ActivateSkillEffects()
         {
             _commandAction?.ActivateCommandAction();
         }
@@ -141,11 +141,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         {
             _mods.Clear();
             _stats.SetCurrent(_stats.Origin);
-        }
-
-        public CharacterServiceProvider GetServiceProvider()
-        {
-            return _characterServiceProvider;
         }
 
         protected override void ModifyStat(EStatType statType, int value)
