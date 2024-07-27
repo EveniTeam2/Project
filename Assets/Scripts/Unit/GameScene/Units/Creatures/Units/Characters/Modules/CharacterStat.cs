@@ -6,7 +6,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
     [Serializable]
     public struct CharacterStat
     {
-        public CreatureStat<int> HP;
         public int CurrentHp { get; set; }
         public int MaxHp { get; }
         public int CurrentExp { get; }
