@@ -63,6 +63,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         private void CheckAndTransitToHit()
         {
             _fsm.TryChangeState(StateType.Hit);
+            MovementSystem.SetImpact(new Vector2(.3f, .2f), 1);
         }
 
         private void Die()

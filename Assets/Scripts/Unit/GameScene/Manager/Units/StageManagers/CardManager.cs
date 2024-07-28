@@ -1,48 +1,78 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Unit.GameScene.Manager.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
     public class CardManager
     {
-        private LinkedList<CardGachaPair> cardGachaPool;
+        private Dictionary<string, CardGachaPair> cardGachaPool;
         private int totalWeight;
 
-        public CardManager(CardGachaPair[] cardGachaPool)
+        public CardManager(params CardGachaPair[] cardGachas)
         {
-            foreach (var cardGachaPair in cardGachaPool)
-                this.cardGachaPool.AddLast(cardGachaPair);
+            cardGachaPool = new Dictionary<string, CardGachaPair>();
+            foreach (var cardGachaPair in cardGachas)
+            {
+                this.cardGachaPool.Add(cardGachaPair.Card.Title, cardGachaPair);
+                cardGachaPair.Card.OnLevelUP += CheckLevelToRemove;
+            }
+            totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
         }
 
         public Card[] GetCards(int count)
         {
-            totalWeight = cardGachaPool.Sum(item => item.Weight);
             List<Card> gacha = new List<Card>();
 
             for (int i = 0; i < count; ++i)
             {
-                int rand = Random.Range(0, totalWeight + 1);
+                int rand = UnityEngine.Random.Range(0, totalWeight + 1);
                 gacha.Add(GetCardGacha(rand));
             }
             return gacha.ToArray();
         }
 
-        public void RemoveCardsFromPool(params Card[] cards)
+        public void RemoveCardsFromPool(params string[] titles)
         {
-            foreach (var card in cards)
+            foreach (var card in titles)
             {
                 RemoveCardFromPool(card);
             }
+            totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
+        }
+
+        public void AddCardsToPool(params CardGachaPair[] cards)
+        {
+            foreach (var card in cards)
+            {
+                AddCardToPool(card);
+            }
+            totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
+        }
+
+        public bool TryChangeCardWeight(string title, int weight)
+        {
+            if (cardGachaPool.TryGetValue(title, out var pair))
+            {
+                pair.SetWeight(weight);
+                totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
+                return true;
+            }
+            return false;
+        }
+
+        private void AddCardToPool(CardGachaPair card)
+        {
+            cardGachaPool.Add(card.Card.Title, card);
+            card.Card.OnLevelUP += CheckLevelToRemove;
         }
 
         private Card GetCardGacha(int randValue)
         {
             int weight = 0;
-            foreach (var gacha in cardGachaPool)
+            var pairs = cardGachaPool.Values.ToArray();
+            foreach (var gacha in pairs)
             {
                 weight += gacha.Weight;
                 if (weight > randValue)
@@ -50,21 +80,22 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                     return gacha.Card;
                 }
             }
-            return cardGachaPool.Last.Value.Card;
+            return pairs[pairs.Length-1].Card;
         }
 
-        private void RemoveCardFromPool(Card card)
+        private void RemoveCardFromPool(string title)
         {
-            LinkedListNode<CardGachaPair> target = cardGachaPool.First;
-            while (target != null)
+            if (cardGachaPool.TryGetValue(title, out var cardpair))
             {
-                if (target.Value.Card == card)
-                {
-                    cardGachaPool.Remove(target);
-                    break;
-                }
-                target = target.Next;
+                cardGachaPool[title].Card.OnLevelUP -= CheckLevelToRemove;
+                cardGachaPool.Remove(title);
             }
+        }
+
+        private void CheckLevelToRemove(Card card, int level)
+        {
+            if (card.MaxLevel <= level)
+                RemoveCardFromPool(card.Title);
         }
     }
 
@@ -72,6 +103,17 @@ namespace Unit.GameScene.Manager.Units.StageManagers
     {
         public Card Card { get; private set; }
         public int Weight { get; private set; }
+
+        public CardGachaPair(Card card, int weight)
+        {
+            Card = card;
+            Weight = weight;
+        }
+
+        public void SetWeight(int weight)
+        {
+            Weight = weight;
+        }
     }
 
     public enum ERarity
@@ -79,41 +121,5 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         Normal,
         Rare,
         Epic,
-    }
-
-    public abstract class Card
-    {
-        private string title;
-        private string description;
-        private Sprite image;
-        private ERarity rarity;
-
-        public string Title { get => title; }
-        public string Description { get => description; }
-        public Sprite Image { get => image; }
-        public ERarity Rarity { get => rarity; }
-
-        protected Card(CardData cardData)
-        {
-            title = cardData.Title;
-            description = cardData.Description;
-            image = cardData.Image;
-            rarity = cardData.Rarity;
-        }
-
-        public abstract void Apply(IStage stage);
-    }
-
-    public class CardData : ScriptableObject
-    {
-        [SerializeField] private string title;
-        [SerializeField] private string description;
-        [SerializeField] private Sprite image;
-        [SerializeField] private ERarity rarity;
-
-        public string Title { get => title; }
-        public string Description { get => description; }
-        public Sprite Image { get => image; }
-        public ERarity Rarity { get => rarity; }
     }
 }
