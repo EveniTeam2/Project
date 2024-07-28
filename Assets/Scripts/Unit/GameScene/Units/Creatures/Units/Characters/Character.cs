@@ -47,6 +47,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         ICreatureServiceProvider ICharacterServiceProvider.creatureServiceProvider => throw new NotImplementedException();
 
+        public event Action OnLevelUP;
+
         public void HandleReceiveCommand(CommandPacket command)
         {
             _commands.Enqueue(command);

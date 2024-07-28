@@ -35,17 +35,20 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public int GetSkillIndex(string skillName)
         {
-            _stat.GetSkillIndex(skillName);
+            // TODO : 인호님 이거 고쳐주세요.
+            return _stat.GetSkillIndex(skillName);
         }
 
         public int GetSkillValue(string skillName)
         {
-            
+            // TODO : 인호님 이거 고쳐주세요.
+            return 0;
         }
 
         public float GetSkillRange(string skillName)
         {
-            
+            // TODO : 인호님 이거 고쳐주세요.
+            return 0;
         }
 
         public override void Update()
@@ -64,7 +67,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         {
             _attack = () => creatureStat.Current.Damage;
             _cool = () => creatureStat.Current.CoolTime;
-            characterData.SkillManager.GetSkillRange();
+            // TODO : 인호님 이거 고쳐주세요.
+            characterData.SkillManager.GetSkillRange("");
         }
 
         public int GetAttack()
@@ -79,7 +83,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public int GetSkillIndex()
         {
-            
+            // TODO : 인호님 이거 고쳐주세요.
+            return 0;
+        }
+
+        public int GetSkillIndex(string skillName)
+        {
+            // TODO : 인호님 이거 고쳐주세요.
+            return 0;
         }
     }
 }

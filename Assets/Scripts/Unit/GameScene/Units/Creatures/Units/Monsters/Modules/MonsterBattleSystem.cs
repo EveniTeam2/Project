@@ -71,5 +71,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         {
             return _attack();
         }
+
+        public int GetSkillIndex(string skillName)
+        {
+            // TODO : 인호님 이거 고쳐주세요.
+            return 0;
+        }
     }
 }

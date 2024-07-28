@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1aab63c31e2b434badabad8d72c42b9, type: 3}
+  m_Name: CharacterStatCardData2
+  m_EditorClassIdentifier: 
+  title: "\uC18D\uB3C4 \uC99D\uAC00"
+  description: "\uC18D\uB3C4\uB97C \uC99D\uAC00\uC2DC\uCF1C\uC900\uB2E4."
+  image: {fileID: 0}
+  rarity: 0
+  maxLevel: 5
+  statCardDataPairs:
+  - statType: 3
+    value: 0100000001000000010000000100000001000000

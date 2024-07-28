@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Core.UI;
 using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
@@ -42,6 +43,11 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         [Header("현재 진행 시간"), SerializeField]
         private float currentTime;
 
+        [Header("카드 정보"), SerializeField]
+        private CardGachaPairDatas cardGachaPairDatas;
+        [SerializeField]
+        private UICardManager uiCardManagerPrefab;
+
         #endregion
 
         private RectTransform _comboBlockPanel;
@@ -54,6 +60,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private ComboBoardController _comboBoardController;
         private MatchBoardController _matchBoardController;
         private StageManager _stageManager;
+        private CardManager _cardManager;
         private Camera _camera;
         private Canvas _canvas;
         private CanvasController _canvasController;
@@ -73,6 +80,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             InstantiateAndInitializeComboBoard();
             InstantiateAndInitializeMatchBoard();
             InstantiateAndInitializeStage();
+
+            InstantiateAndInitializeCard(Instantiate<UICardManager>(uiCardManagerPrefab), _stageManager);
         }
 
         // /// <summary>
@@ -160,6 +169,18 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
             _stageManager.RegisterHandleSendCommand(_matchBoardController);
             _stageManager.OnCommandDequeue += _comboBoardController.HandleDestroyComboBlock;
+        }
+
+        private void InstantiateAndInitializeCard(UICardManager ui, StageManager stage)
+        {
+            ui.InitUI();
+            _cardManager = new CardManager(ui, stage, cardGachaPairDatas.GetCardGachaPairs());
+            stage.Character.OnLevelUP += DrawCard;
+        }
+
+        private void DrawCard()
+        {
+            var cards = _cardManager.GetCards(3);
         }
 
         /// <summary>

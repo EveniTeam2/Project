@@ -2,7 +2,6 @@
 using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Units.Creatures;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
@@ -29,17 +28,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         {
             ++levelStartFrom1;
             base.LevelUp();
-        }
-    }
-
-    [CreateAssetMenu(fileName = nameof(CharacterStatCardData), menuName = "Card/" + nameof(CharacterStatCardData))]
-    public class CharacterStatCardData : CardData
-    {
-        public StatCardDataPair[] statCardDataPairs;
-
-        public override Card GetCard()
-        {
-            return new CharacterStatCard(this);
         }
     }
 

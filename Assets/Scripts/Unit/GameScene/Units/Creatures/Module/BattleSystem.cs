@@ -82,5 +82,7 @@ namespace Unit.GameScene.Units.Creatures.Module
     {
         float GetCoolTime();
         int GetAttack();
+        // TODO : 인호님 이거 고쳐주세요.
+        int GetSkillIndex(string skillName);
     }
 }

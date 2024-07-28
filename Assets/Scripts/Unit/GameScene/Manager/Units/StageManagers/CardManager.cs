@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Core.UI;
+using Unit.GameScene.Units.Creatures.Interfaces;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
@@ -9,8 +11,10 @@ namespace Unit.GameScene.Manager.Units.StageManagers
     {
         private Dictionary<string, CardGachaPair> cardGachaPool;
         private int totalWeight;
+        private readonly UICardManager ui;
+        private readonly StageManager stage;
 
-        public CardManager(params CardGachaPair[] cardGachas)
+        public CardManager(UICardManager ui, StageManager stage, params CardGachaPair[] cardGachas)
         {
             cardGachaPool = new Dictionary<string, CardGachaPair>();
             foreach (var cardGachaPair in cardGachas)
@@ -19,6 +23,8 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 cardGachaPair.Card.OnLevelUP += CheckLevelToRemove;
             }
             totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
+            this.ui = ui;
+            this.stage = stage;
         }
 
         public Card[] GetCards(int count)
@@ -30,7 +36,15 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 int rand = UnityEngine.Random.Range(0, totalWeight + 1);
                 gacha.Add(GetCardGacha(rand));
             }
+
+            ui.DrawCardButton(gacha.ToArray(), SelectCard);
+
             return gacha.ToArray();
+        }
+
+        private void SelectCard(Card card)
+        {
+            card.Apply(stage);
         }
 
         public void RemoveCardsFromPool(params string[] titles)
