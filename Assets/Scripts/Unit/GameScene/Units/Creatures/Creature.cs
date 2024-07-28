@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.FSM;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures
 {
-    public abstract class Creature : MonoBehaviour
+    public abstract class Creature : MonoBehaviour, ICreatureServiceProvider, ICreatureStatModifier
     {
         /// <summary>
         ///     애니메이터를 반환합니다.
@@ -37,6 +38,14 @@ namespace Unit.GameScene.Units.Creatures
         ///     이동에 관한 시스템을 반환합니다.
         /// </summary>
         protected MovementSystem _movementSystem;
+
+        ICreatureStatModifier ICreatureServiceProvider.StatModifier => this;
+
+        ICreatureBattle ICreatureServiceProvider.BattleSystem => _battleSystem;
+
+        ICreatureHeath ICreatureServiceProvider.HeathSystem => _healthSystem;
+
+        ICreatureMovement ICreatureServiceProvider.MovementSystem => _movementSystem;
 
         /// <summary>
         ///     영구적으로 현재 스탯을 변경합니다.

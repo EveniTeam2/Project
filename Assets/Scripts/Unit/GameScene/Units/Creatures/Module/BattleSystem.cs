@@ -1,10 +1,10 @@
 using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
-using System;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module
 {
-    public abstract class BattleSystem
+    public abstract class BattleSystem : ICreatureBattle
     {
         protected bool _canAttackCool = true;
         protected IBattleStat _stat;

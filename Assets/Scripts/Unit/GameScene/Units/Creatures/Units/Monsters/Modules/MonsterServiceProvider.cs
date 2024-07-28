@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 {
-    public class MonsterServiceProvider : ICreatureServiceProvider
+    public class MonsterServiceProvider : ICreatureStatModifier
     {
         private readonly AnimatorEventReceiver _animatorEventReceiver;
         private readonly BattleSystem _battleSystem;
@@ -66,7 +66,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 
         public int TakeDamage(int atk)
         {
-            _healthSystem.Damage(atk);
+            _healthSystem.TakeDamage(atk);
             return atk;
         }
 

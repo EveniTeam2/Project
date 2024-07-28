@@ -9,7 +9,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         {
         }
 
-        public override void Damage(int dmg)
+        public override void TakeDamage(int dmg)
         {
             if (_invinsible)
                 return;
@@ -24,7 +24,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
                 CallDamage();
         }
 
-        public override void Heal(int healAmount)
+        public override void TakeHeal(int healAmount)
         {
             _health += healAmount;
             CallHeal();

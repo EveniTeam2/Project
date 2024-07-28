@@ -4,10 +4,10 @@ using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-
 using Unit.GameScene.Units.Creatures.Units.FSM;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
@@ -51,7 +51,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
             _fsm = StateBuilder.BuildStateMachine(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
-            _characterServiceProvider = new CharacterServiceProvider(characterClassType, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, _animationParameter, characterData);
+            _characterServiceProvider = new CharacterServiceProvider(characterClassType, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, _animationParameter, characterData, TempModifyStat, PermanentModifyStat);
             _commandSystem = new CommandSystem(blockInfo);
             _mods = new LinkedList<ModifyStatData>();
             

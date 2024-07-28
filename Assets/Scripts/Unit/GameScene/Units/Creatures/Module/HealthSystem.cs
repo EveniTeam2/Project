@@ -1,10 +1,10 @@
 using System;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
-using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module
 {
-    public abstract class HealthSystem
+    public abstract class HealthSystem : ICreatureHeath
     {
         protected IHealthStat _healthStat;
         protected bool _invinsible;
@@ -32,7 +32,8 @@ namespace Unit.GameScene.Units.Creatures.Module
             return _invinsible;
         }
 
-        public abstract void Damage(int dmg);
+        public abstract void TakeDamage(int damage);
+        public abstract void TakeHeal(int heal);
 
         public void RegistOnDeathEvent(Action subscriber)
         {
@@ -82,7 +83,6 @@ namespace Unit.GameScene.Units.Creatures.Module
             _invinsible = false;
         }
 
-        public abstract void Heal(int healAmount);
     }
 
     public interface IHealthStat

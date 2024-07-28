@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.DTO;
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.FSM;
@@ -77,11 +78,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _mods.Clear();
             _stats.SetCurrent(_stats.Origin);
             StopAllCoroutines();
-        }
-
-        public MonsterServiceProvider GetServiceProvider()
-        {
-            return _monsterServiceProvider;
         }
 
         protected override void ModifyStat(EStatType statType, int value)

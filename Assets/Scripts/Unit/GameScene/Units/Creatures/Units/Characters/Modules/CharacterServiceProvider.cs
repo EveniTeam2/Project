@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     [Serializable]
-    public class CharacterServiceProvider : ICreatureServiceProvider
+    public class CharacterServiceProvider : ICreatureStatModifier
     {
         private readonly CharacterClassType _characterClassType;
         private readonly AnimatorEventReceiver _animatorEventReceiver;
@@ -33,7 +35,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             AnimatorEventReceiver animatorEventReceiver,
             StateMachine fsm,
             Dictionary<AnimationParameterEnums, int> animationParameter,
-            CharacterData characterData)
+            CharacterData characterData,
             Action<EStatType, int, float> tempModifyStat,
             Action<EStatType, int> modifyStat)
         {
@@ -111,7 +113,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public int TakeDamage(int atk)
         {
-            _healthSystem.Damage(atk);
+            _healthSystem.TakeDamage(atk);
             return atk;
         }
 

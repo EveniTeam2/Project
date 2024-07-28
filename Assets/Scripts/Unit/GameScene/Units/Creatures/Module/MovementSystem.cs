@@ -1,9 +1,9 @@
-using System.Collections;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module
 {
-    public abstract class MovementSystem
+    public abstract class MovementSystem : ICreatureMovement
     {
         // Y movement 관련
         protected const float _gravity = -20f;
