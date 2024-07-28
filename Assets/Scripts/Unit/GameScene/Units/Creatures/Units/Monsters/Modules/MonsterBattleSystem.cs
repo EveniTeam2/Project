@@ -1,5 +1,6 @@
 using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
 using System;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
@@ -19,11 +20,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
             _canAttackCool = false;
             timer = _stat.GetCoolTime();
 
-            if (col.collider.gameObject.TryGetComponent<Character>(out var target))
+            if (col.collider.gameObject.TryGetComponent<ICreatureServiceProvider>(out var target))
             {
 #if UNITY_EDITOR
-                var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
-                Debug.Log($"몬스터가 {col.collider.gameObject.name}에게 {dmg} 피해를 입혔습니다.");
+                target.HeathSystem.TakeDamage(_stat.GetAttack());
+                Debug.Log($"몬스터가 {col.collider.gameObject.name}에게 {_stat.GetAttack()} 피해를 입혔습니다.");
 #else
                 var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
 #endif
@@ -55,10 +56,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         private readonly Func<int> _attack;
         private readonly Func<float> _coolTime;
 
-        public MonsterBattleStat(Stat<MonsterStat> stat)
+        public MonsterBattleStat(CreatureStat<MonsterStat> creatureStat)
         {
-            _attack = () => stat.Current.Attack;
-            _coolTime = () => stat.Current.CoolTime;
+            _attack = () => creatureStat.Current.Attack;
+            _coolTime = () => creatureStat.Current.CoolTime;
         }
 
         public float GetCoolTime()

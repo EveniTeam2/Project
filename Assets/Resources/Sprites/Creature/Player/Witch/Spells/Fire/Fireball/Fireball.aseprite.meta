@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 220
       width: 43
       height: 32
-    spriteID: 3671964d6b4a84a08b7c4c47bf0b1abc
+    spriteID: c8d31cd5c9edd486fa986222000ad8b5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 215
       width: 53
       height: 35
-    spriteID: 99f0d6b622fcf4d7482c8c748c12c18b
+    spriteID: b3bae2fd130304481a6eb07344b97bab
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 170
       width: 63
       height: 37
-    spriteID: ca0615ff54b954fff86efe28a508b6d2
+    spriteID: 65b644e11ce8e416a85f82354422f92c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 86
       width: 64
       height: 42
-    spriteID: c59699977388e47479797504ccab48f9
+    spriteID: 216c4896d5ec7401caf3a35a53775c6f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -210,7 +210,7 @@ ScriptedImporter:
       y: 170
       width: 51
       height: 42
-    spriteID: 09e4de359cd974d888c28f50972314d0
+    spriteID: 305f92d509d7d4b33a6b7dbb89cddffe
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -230,7 +230,7 @@ ScriptedImporter:
       y: 170
       width: 51
       height: 35
-    spriteID: 69b278b91e17749a2a8d5e233f202b96
+    spriteID: 2e6d7ce6f450242a09bc7ab5f591244e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -250,7 +250,7 @@ ScriptedImporter:
       y: 86
       width: 54
       height: 58
-    spriteID: 0f8389be4a80141b8948b47f0127a0d9
+    spriteID: 31530e373bb1446c8aabf6e680853322
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -270,7 +270,7 @@ ScriptedImporter:
       y: 4
       width: 59
       height: 69
-    spriteID: 26d81176d5fcb43a0b8c635f1af5dbf3
+    spriteID: e56570ae3477d4aebbd157a5c2dede50
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -290,7 +290,7 @@ ScriptedImporter:
       y: 4
       width: 65
       height: 74
-    spriteID: 4a9d7f0c73312464f8dd9bddc7adeb7f
+    spriteID: 96e8e5d15ca774a5c8e65fe7b5ebf3ee
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -310,7 +310,7 @@ ScriptedImporter:
       y: 4
       width: 57
       height: 74
-    spriteID: d4daa12c26cf4489b8e8accc2ddda3d2
+    spriteID: b62936bb65f054c9285c33c4d2d9c027
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -330,7 +330,7 @@ ScriptedImporter:
       y: 86
       width: 57
       height: 76
-    spriteID: 0b325f75b496d48e28325b0d122c3433
+    spriteID: 4b83048f3d7484a8db78774f9b1ead77
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -350,7 +350,7 @@ ScriptedImporter:
       y: 86
       width: 47
       height: 75
-    spriteID: 374dd416242fe426daeb770ed7476c90
+    spriteID: b45d3bbc5029a414599a7a7314b3509c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -370,7 +370,7 @@ ScriptedImporter:
       y: 4
       width: 38
       height: 37
-    spriteID: 98ea282b2d2fa4383af75704e0fe7c74
+    spriteID: 0bc1d288467064bd08fb52768fc98ef8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -395,7 +395,7 @@ ScriptedImporter:
         y: 51
         width: 43
         height: 32
-      spriteId: 3671964d6b4a84a08b7c4c47bf0b1abc
+      spriteId: c8d31cd5c9edd486fa986222000ad8b5
     - name: Fireball_Frame_1
       frameIndex: 1
       cellRect:
@@ -403,7 +403,7 @@ ScriptedImporter:
         y: 49
         width: 53
         height: 35
-      spriteId: 99f0d6b622fcf4d7482c8c748c12c18b
+      spriteId: b3bae2fd130304481a6eb07344b97bab
     - name: Fireball_Frame_2
       frameIndex: 2
       cellRect:
@@ -411,7 +411,7 @@ ScriptedImporter:
         y: 48
         width: 63
         height: 37
-      spriteId: ca0615ff54b954fff86efe28a508b6d2
+      spriteId: 65b644e11ce8e416a85f82354422f92c
     - name: Fireball_Frame_3
       frameIndex: 3
       cellRect:
@@ -419,7 +419,7 @@ ScriptedImporter:
         y: 45
         width: 64
         height: 42
-      spriteId: c59699977388e47479797504ccab48f9
+      spriteId: 216c4896d5ec7401caf3a35a53775c6f
     - name: Fireball_Frame_4
       frameIndex: 4
       cellRect:
@@ -427,7 +427,7 @@ ScriptedImporter:
         y: 45
         width: 51
         height: 42
-      spriteId: 09e4de359cd974d888c28f50972314d0
+      spriteId: 305f92d509d7d4b33a6b7dbb89cddffe
     - name: Fireball_Frame_5
       frameIndex: 5
       cellRect:
@@ -435,7 +435,7 @@ ScriptedImporter:
         y: 47
         width: 51
         height: 35
-      spriteId: 69b278b91e17749a2a8d5e233f202b96
+      spriteId: 2e6d7ce6f450242a09bc7ab5f591244e
     - name: Fireball_Frame_6
       frameIndex: 6
       cellRect:
@@ -443,7 +443,7 @@ ScriptedImporter:
         y: 35
         width: 54
         height: 58
-      spriteId: 0f8389be4a80141b8948b47f0127a0d9
+      spriteId: 31530e373bb1446c8aabf6e680853322
     - name: Fireball_Frame_7
       frameIndex: 7
       cellRect:
@@ -451,7 +451,7 @@ ScriptedImporter:
         y: 28
         width: 59
         height: 69
-      spriteId: 26d81176d5fcb43a0b8c635f1af5dbf3
+      spriteId: e56570ae3477d4aebbd157a5c2dede50
     - name: Fireball_Frame_8
       frameIndex: 8
       cellRect:
@@ -459,7 +459,7 @@ ScriptedImporter:
         y: 26
         width: 65
         height: 74
-      spriteId: 4a9d7f0c73312464f8dd9bddc7adeb7f
+      spriteId: 96e8e5d15ca774a5c8e65fe7b5ebf3ee
     - name: Fireball_Frame_9
       frameIndex: 9
       cellRect:
@@ -467,7 +467,7 @@ ScriptedImporter:
         y: 26
         width: 57
         height: 74
-      spriteId: d4daa12c26cf4489b8e8accc2ddda3d2
+      spriteId: b62936bb65f054c9285c33c4d2d9c027
     - name: Fireball_Frame_10
       frameIndex: 10
       cellRect:
@@ -475,7 +475,7 @@ ScriptedImporter:
         y: 25
         width: 57
         height: 76
-      spriteId: 0b325f75b496d48e28325b0d122c3433
+      spriteId: 4b83048f3d7484a8db78774f9b1ead77
     - name: Fireball_Frame_11
       frameIndex: 11
       cellRect:
@@ -483,7 +483,7 @@ ScriptedImporter:
         y: 26
         width: 47
         height: 75
-      spriteId: 374dd416242fe426daeb770ed7476c90
+      spriteId: b45d3bbc5029a414599a7a7314b3509c
     - name: Fireball_Frame_12
       frameIndex: 12
       cellRect:
@@ -491,7 +491,7 @@ ScriptedImporter:
         y: 58
         width: 38
         height: 37
-      spriteId: 98ea282b2d2fa4383af75704e0fe7c74
+      spriteId: 0bc1d288467064bd08fb52768fc98ef8
     linkedCells: []
     parentIndex: -1
   platformSettings: []

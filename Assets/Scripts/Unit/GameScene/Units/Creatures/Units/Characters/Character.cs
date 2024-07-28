@@ -24,12 +24,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         private CharacterData _characterData;
         private Queue<CommandPacket> _commands = new();
-        private CharacterServiceProvider _characterServiceProvider;
         private CommandSystem _commandSystem;
         private CommandAction _commandAction; 
-        private Stat<CharacterStat> _stats;
-        private Dictionary<AnimationParameterEnums, int> _animationParameter;
+        private CreatureStat<CharacterStat> _creatureStats;
         private List<CommandAction> _characterSkills;
+
+        private bool isReadyForCommand;
         
         public void HandleReceiveCommand(CommandPacket command)
         {
@@ -41,26 +41,23 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             var characterTransform = transform;
             _characterData = characterData;
             characterClassType = _characterData.CharacterDataSo.classType;
-            _animationParameter = animationParameter;
-            
             _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
-            _animatorEventReceiver.OnAttack += ActivateSkill;
-            
-            _stats = new Stat<CharacterStat>(GetCharacterStat(1));
-            _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_stats));
-            _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
-            _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
+            _animatorEventReceiver.Initialize(animationParameter);
+            _animatorEventReceiver.OnAttack += ActivateSkillEffects;
+            _creatureStats = new CreatureStat<CharacterStat>(GetCharacterStat(1));
+            _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_creatureStats), _characterData);
+            _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_creatureStats));
+            _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_creatureStats), groundYPosition);
             _fsm = StateBuilder.BuildStateMachine(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
-            _characterServiceProvider = new CharacterServiceProvider(characterClassType, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, _animationParameter, characterData, TempModifyStat, PermanentModifyStat);
             _commandSystem = new CommandSystem(blockInfo);
             _mods = new LinkedList<ModifyStatData>();
             
             InitializeCommand();
             
-            _characterData.RegisterCharacterServiceProvider(_characterServiceProvider);
+            _characterData.RegisterCharacterServiceProvider(this);
             _healthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
         }
-
+        
         private CharacterStat GetCharacterStat(int currentLevel)
         {
             var statManager = _characterData.StatManager;
@@ -106,16 +103,16 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         private void ActivateCommand()
         {
-            if (!_characterServiceProvider.GetReadyForCommand() || _commands.Count <= 0) return;
+            if (!GetReadyForCommand() || _commands.Count <= 0) return;
             
-            _characterServiceProvider.SetReadyForCommand(false);
+            SetReadyForCommand(false);
 
             var command = _commands.Dequeue();
             _commandAction = _commandSystem.GetCommandAction(command.BlockType);
             
             if (!_commandSystem.ActivateCommand(command.BlockType, command.ComboCount))
             {
-                _characterServiceProvider.SetReadyForCommand(true);
+                SetReadyForCommand(true);
             }
             
             OnCommandDequeue?.Invoke();
@@ -124,6 +121,16 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public void ActivateSkillEffects()
         {
             _commandAction?.ActivateCommandAction();
+        }
+
+        public override bool GetReadyForCommand()
+        {
+            return isReadyForCommand;
+        }
+
+        public override void SetReadyForCommand(bool value)
+        {
+            isReadyForCommand = value;
         }
 
         public override void PermanentModifyStat(EStatType statType, int value)
@@ -140,13 +147,13 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public override void ClearModifiedStat()
         {
             _mods.Clear();
-            _stats.SetCurrent(_stats.Origin);
+            _creatureStats.SetCurrent(_creatureStats.Origin);
         }
 
         protected override void ModifyStat(EStatType statType, int value)
         {
             // TODO : 채이환
-            var cur = _stats.Current;
+            var cur = _creatureStats.Current;
             switch (statType)
             {
                 case EStatType.None:
@@ -162,7 +169,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
                     break;
             }
 
-            _stats.SetCurrent(cur);
+            _creatureStats.SetCurrent(cur);
         }
     }
 }

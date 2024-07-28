@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Centaurs.Enums;
@@ -26,11 +27,11 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules
             _skillData = skillData;
         }
 
-        public void RegisterCharacterServiceProvider(CharacterServiceProvider characterServiceProvider)
+        public void RegisterCharacterServiceProvider(ICreatureServiceProvider creatureServiceProvider)
         {
             foreach (var skill in _skills)
             {
-                skill.Value.RegisterCharacterServiceProvider(characterServiceProvider);
+                skill.Value.RegisterCharacterServiceProvider(creatureServiceProvider);
             }
         }
 

@@ -42,9 +42,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
     {
         protected Func<int> _getSpeed;
 
-        public MonsterMovementStat(Stat<MonsterStat> stats)
+        public MonsterMovementStat(CreatureStat<MonsterStat> creatureStats)
         {
-            _getSpeed = () => stats.Current.Speed;
+            _getSpeed = () => creatureStats.Current.Speed;
         }
 
         public int GetSpeed()

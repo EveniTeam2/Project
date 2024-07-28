@@ -7,6 +7,7 @@ using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
 using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
@@ -94,7 +95,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 OnSendCommand += _character.HandleReceiveCommand;
                 _character.OnCommandDequeue += HandleCommandDequeue;
             }
-            _character.GetServiceProvider().RegistEvent(ECharacterEventType.Death, PlayerIsDead);
+            (_character as ICreatureServiceProvider).StateSystem.RegistOnDeathState(PlayerIsDead);
         }
 
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)

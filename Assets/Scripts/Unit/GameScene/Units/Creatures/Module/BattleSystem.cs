@@ -60,6 +60,11 @@ namespace Unit.GameScene.Units.Creatures.Module
 
         public abstract void Attack(RaycastHit2D col);
         public abstract void Attack(RaycastHit2D col, IBattleEffect effect);
+        public void Attack(int damage, float range)
+        {
+            //TODO : 채이환
+        }
+
         public abstract void Update();
 
         internal void SpawnInit(IBattleStat stat)

@@ -39,13 +39,17 @@ namespace Unit.GameScene.Units.Creatures
         /// </summary>
         protected MovementSystem _movementSystem;
 
+        private AnimatorEventReceiver _animatorSystem;
+
         ICreatureStatModifier ICreatureServiceProvider.StatModifier => this;
-
         ICreatureBattle ICreatureServiceProvider.BattleSystem => _battleSystem;
-
         ICreatureHeath ICreatureServiceProvider.HeathSystem => _healthSystem;
-
         ICreatureMovement ICreatureServiceProvider.MovementSystem => _movementSystem;
+        StateMachine ICreatureServiceProvider.StateSystem => _fsm;
+        AnimatorEventReceiver ICreatureServiceProvider.AnimatorSystem => _animatorSystem;
+        
+        public abstract bool GetReadyForCommand();
+        public abstract void SetReadyForCommand(bool value);
 
         /// <summary>
         ///     영구적으로 현재 스탯을 변경합니다.

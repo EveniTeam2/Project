@@ -1,4 +1,6 @@
 using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
+using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Units.FSM;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Interfaces
@@ -9,6 +11,14 @@ namespace Unit.GameScene.Units.Creatures.Interfaces
         public ICreatureBattle BattleSystem { get; }
         public ICreatureHeath HeathSystem { get; }
         public ICreatureMovement MovementSystem { get; }
+        public StateMachine StateSystem { get; }
+        AnimatorEventReceiver AnimatorSystem { get; }
+    }
+
+    public interface ICharacterServiceProvider : ICreatureServiceProvider
+    {
+        public bool GetReadyForCommand();
+        public void SetReadyForCommand(bool value);
     }
 
     public interface ICreatureStatModifier
@@ -24,6 +34,14 @@ namespace Unit.GameScene.Units.Creatures.Interfaces
         public bool CheckCollider(LayerMask targetLayer, Vector2 startPosition, Vector2 direction, float distance, out RaycastHit2D[] collidee);
         public void Attack(RaycastHit2D col);
         public void Attack(RaycastHit2D col, IBattleEffect effect);
+        public void Attack(int damage, float range);
+    }
+    
+    public interface ICharacterBattle : ICreatureBattle
+    {
+        public int GetSkillIndex(string skillName);
+        public int GetSkillValue(string skillName);
+        public float GetSkillRange(string skillName);
     }
 
     public interface ICreatureHeath
