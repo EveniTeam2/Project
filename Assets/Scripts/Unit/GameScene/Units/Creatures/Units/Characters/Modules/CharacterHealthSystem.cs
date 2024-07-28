@@ -1,9 +1,10 @@
 using System;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
-    public class CharacterHealthSystem : HealthSystem
+    public class CharacterHealthSystem : HealthSystem, ICharacterHealth
     {
         public CharacterHealthSystem(CharacterHealthStat stats) : base(stats)
         {

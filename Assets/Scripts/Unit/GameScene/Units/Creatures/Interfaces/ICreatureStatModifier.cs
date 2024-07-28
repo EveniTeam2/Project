@@ -9,17 +9,22 @@ namespace Unit.GameScene.Units.Creatures.Interfaces
     {
         public ICreatureStatModifier StatModifier { get; }
         public ICreatureBattle BattleSystem { get; }
-        public ICreatureHeath HeathSystem { get; }
+        public ICreatureHealth HeathSystem { get; }
         public ICreatureMovement MovementSystem { get; }
         public StateMachine StateSystem { get; }
         AnimatorEventReceiver AnimatorSystem { get; }
     }
 
-    public interface ICharacterServiceProvider : ICreatureServiceProvider
+    public interface ICharacterServiceProvider
     {
+        public ICreatureServiceProvider creatureServiceProvider { get; }
+        public ICharacterBattle BattleSystem { get; }
+        public ICharacterHealth HeathSystem { get; }
+        public ICharacterMovement MovementSystem { get; }
         public bool GetReadyForCommand();
         public void SetReadyForCommand(bool value);
     }
+
 
     public interface ICreatureStatModifier
     {
@@ -44,7 +49,12 @@ namespace Unit.GameScene.Units.Creatures.Interfaces
         public float GetSkillRange(string skillName);
     }
 
-    public interface ICreatureHeath
+    public interface ICharacterHealth : ICreatureHealth
+    {
+
+    }
+
+    public interface ICreatureHealth
     {
         public bool IsInvinsible();
         public void TakeDamage(int damage);
@@ -58,5 +68,10 @@ namespace Unit.GameScene.Units.Creatures.Interfaces
         public void Jump(float power);
         public void SetGroundPosition(float groundYPosition);
         public void SetImpact(Vector2 impact, float duration);
+    }
+
+    public interface ICharacterMovement : ICreatureMovement
+    {
+
     }
 }

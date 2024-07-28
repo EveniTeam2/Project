@@ -35,7 +35,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public int GetSkillIndex(string skillName)
         {
-            _stat.GetSkillIndex(string skillName);
+            _stat.GetSkillIndex(skillName);
         }
 
         public int GetSkillValue(string skillName)

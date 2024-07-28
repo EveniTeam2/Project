@@ -27,7 +27,7 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules
             _skillData = skillData;
         }
 
-        public void RegisterCharacterServiceProvider(ICreatureServiceProvider creatureServiceProvider)
+        public void RegisterCharacterServiceProvider(ICharacterServiceProvider creatureServiceProvider)
         {
             foreach (var skill in _skills)
             {

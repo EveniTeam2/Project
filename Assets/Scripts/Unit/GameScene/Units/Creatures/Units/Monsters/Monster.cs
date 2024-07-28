@@ -18,17 +18,27 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         protected CreatureStat<MonsterStat> CreatureStats;
         private MonsterBattleStat _battleStat;
 
+        MonsterBattleSystem _monsterBattleSystem;
+        MonsterHealthSystem _monsterHealthSystem;
+        MonsterMovementSystem _monsterMovementSystem;
+
+        protected override BattleSystem BattleSystem => _monsterBattleSystem;
+
+        protected override HealthSystem HealthSystem => _monsterHealthSystem;
+
+        protected override MovementSystem MovementSystem => _monsterMovementSystem;
+
         private void Update()
         {
             _fsm?.Update();
-            _movementSystem?.Update();
-            _battleSystem?.Update();
+            MovementSystem?.Update();
+            BattleSystem?.Update();
         }
 
         private void FixedUpdate()
         {
             _fsm?.FixedUpdate();
-            _movementSystem?.FixedUpdate();
+            MovementSystem?.FixedUpdate();
         }
 
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
@@ -38,16 +48,16 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
             CreatureStats = new CreatureStat<MonsterStat>(stat);
             _battleStat = new MonsterBattleStat(CreatureStats);
-            _battleSystem = new MonsterBattleSystem(transform, _battleStat);
-            _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(CreatureStats));
-            _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(CreatureStats), groundYPosition);
+            _monsterBattleSystem = new MonsterBattleSystem(transform, _battleStat);
+            _monsterHealthSystem = new MonsterHealthSystem(new MonsterHealthStat(CreatureStats));
+            _monsterMovementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(CreatureStats), groundYPosition);
 
-            _fsm = StateBuilder.BuildStateMachine(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
+            _fsm = StateBuilder.BuildStateMachine(stateData, transform, BattleSystem, HealthSystem, MovementSystem, _animatorEventReceiver, animationParameter);
             
             _mods = new LinkedList<ModifyStatData>();
 
-            _healthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
-            _healthSystem.RegistOnDeathEvent(Die);
+            HealthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
+            HealthSystem.RegistOnDeathEvent(Die);
         }
 
         private void CheckAndTransitToHit()
@@ -59,13 +69,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             _fsm.TryChangeState(StateType.Die);
         }
-
-        public override bool GetReadyForCommand()
-        {
-            return false;
-        }
-
-        public override void SetReadyForCommand(bool value) { }
 
         public override void PermanentModifyStat(EStatType statType, int value)
         {
@@ -109,9 +112,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void SpawnInit(MonsterStat monsterStat)
         {
             CreatureStats = new CreatureStat<MonsterStat>(monsterStat);
-            _battleSystem.SpawnInit(new MonsterBattleStat(CreatureStats));
-            _healthSystem.SpawnInit(new MonsterHealthStat(CreatureStats));
-            _movementSystem.SpawnInit(new MonsterMovementStat(CreatureStats));
+            BattleSystem.SpawnInit(new MonsterBattleStat(CreatureStats));
+            HealthSystem.SpawnInit(new MonsterHealthStat(CreatureStats));
+            MovementSystem.SpawnInit(new MonsterMovementStat(CreatureStats));
             _fsm.TryChangeState(StateType.Run);
             ClearModifiedStat();
             _spriteRenderer.color = Color.white;
