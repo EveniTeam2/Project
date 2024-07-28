@@ -1,2 +1,640 @@
 fileFormatVersion: 2
 guid: c4b8b3b2d16084e21bc99c5635c35bca
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: YeallowThunderStrike(Glow)_Frame_0
+    originalName: 
+    pivot: {x: 0.39130434, y: -3.6666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 228
+      y: 288
+      width: 23
+      height: 24
+    spriteID: 5448162e18502416d97480c0c315d8b3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 228, y: 288}
+  - name: YeallowThunderStrike(Glow)_Frame_2
+    originalName: 
+    pivot: {x: 0.50000006, y: -2.5757577}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 475
+      width: 34
+      height: 33
+    spriteID: af178dd30630e4030ad5afe7fc884c08
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 475}
+  - name: YeallowThunderStrike(Glow)_Frame_4
+    originalName: 
+    pivot: {x: 0.41666663, y: -1.975}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 434
+      width: 36
+      height: 40
+    spriteID: 102b31b95460b48e0969ffa7264497db
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 434}
+  - name: YeallowThunderStrike(Glow)_Frame_6
+    originalName: 
+    pivot: {x: 0.4727273, y: -1.1578947}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 195
+      y: 109
+      width: 55
+      height: 57
+    spriteID: 7266fe01e40f542a3bf06854c1ab2ede
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 195, y: 109}
+  - name: YeallowThunderStrike(Glow)_Frame_7
+    originalName: 
+    pivot: {x: 0.43333337, y: -0.03305785}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 238
+      width: 60
+      height: 121
+    spriteID: 6179d0aba05a0439688822f694514259
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 238}
+  - name: YeallowThunderStrike(Glow)_Frame_8
+    originalName: 
+    pivot: {x: 0.51948047, y: -0.041322313}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 109
+      width: 77
+      height: 121
+    spriteID: 9805786bf6ecd4ee7a6881e860b598dd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 109}
+  - name: YeallowThunderStrike(Glow)_Frame_9
+    originalName: 
+    pivot: {x: 0.51648355, y: -0.03305785}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 260
+      width: 91
+      height: 121
+    spriteID: 8f7b9b2829cfb4855b50cabf180667be
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 260}
+  - name: YeallowThunderStrike(Glow)_Frame_10
+    originalName: 
+    pivot: {x: 0.5, y: -0.03305785}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 131
+      width: 94
+      height: 121
+    spriteID: e66b3ddbbc618404f8899d7a9e2df71c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 131}
+  - name: YeallowThunderStrike(Glow)_Frame_11
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.042016808}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 98
+      height: 119
+    spriteID: ed11063afb2744a5092466960d361ff6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: YeallowThunderStrike(Glow)_Frame_12
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.05154639}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 4
+      width: 100
+      height: 97
+    spriteID: 2f0176c20593045afa3499a55aa04f24
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 4}
+  - name: YeallowThunderStrike(Glow)_Frame_13
+    originalName: 
+    pivot: {x: 0.49494946, y: -0.08695652}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 367
+      width: 99
+      height: 69
+    spriteID: c3c6f779e18784f78badc94f8cacab38
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 367}
+  - name: YeallowThunderStrike(Glow)_Frame_14
+    originalName: 
+    pivot: {x: 0.49494946, y: -0.20588236}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 444
+      width: 99
+      height: 34
+    spriteID: addcb2fdbee9f4bc8b16c020f38eb280
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 444}
+  - name: YeallowThunderStrike(Glow)_Frame_15
+    originalName: 
+    pivot: {x: 0.41666663, y: -0.25714287}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 432
+      width: 36
+      height: 35
+    spriteID: d6097fbd229314a3381d43fb73d08bcd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 432}
+  - name: YeallowThunderStrike(Glow)_Frame_16
+    originalName: 
+    pivot: {x: 0.5227273, y: -0.23809524}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 178
+      y: 238
+      width: 44
+      height: 42
+    spriteID: 0c27071847b5d4a5fbe47bad96c06b05
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 178, y: 238}
+  - name: YeallowThunderStrike(Glow)_Frame_18
+    originalName: 
+    pivot: {x: 0.5641026, y: -0.2702703}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 389
+      width: 39
+      height: 37
+    spriteID: 6113e57ea528145ae86c16d6be6971e4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 389}
+  - name: YeallowThunderStrike(Glow)_Frame_20
+    originalName: 
+    pivot: {x: 0.52380955, y: -0.2857143}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 178
+      y: 288
+      width: 42
+      height: 35
+    spriteID: b496c2bf7abbf4c8aae712cddc070429
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 178, y: 288}
+  - name: YeallowThunderStrike(Glow)_Frame_22
+    originalName: 
+    pivot: {x: 0.45000002, y: -0.31428573}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 389
+      width: 40
+      height: 35
+    spriteID: 6325a536dcaf448bb9e952d579095dd4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 389}
+  - name: YeallowThunderStrike(Glow)_Frame_24
+    originalName: 
+    pivot: {x: 0.48888892, y: -0.23809524}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 195
+      y: 174
+      width: 45
+      height: 42
+    spriteID: e56c8ed150a7c42a98b6a86d3f5845a9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 195, y: 174}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -1662579495
+    name: YeallowThunderStrike(Glow)
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: YeallowThunderStrike(Glow)_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 66
+        y: 88
+        width: 23
+        height: 24
+      spriteId: 5448162e18502416d97480c0c315d8b3
+    - name: YeallowThunderStrike(Glow)_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 58
+        y: 85
+        width: 34
+        height: 33
+      spriteId: af178dd30630e4030ad5afe7fc884c08
+    - name: YeallowThunderStrike(Glow)_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 60
+        y: 79
+        width: 36
+        height: 40
+      spriteId: 102b31b95460b48e0969ffa7264497db
+    - name: YeallowThunderStrike(Glow)_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 49
+        y: 66
+        width: 55
+        height: 57
+      spriteId: 7266fe01e40f542a3bf06854c1ab2ede
+    - name: YeallowThunderStrike(Glow)_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 49
+        y: 4
+        width: 60
+        height: 121
+      spriteId: 6179d0aba05a0439688822f694514259
+    - name: YeallowThunderStrike(Glow)_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 35
+        y: 5
+        width: 77
+        height: 121
+      spriteId: 9805786bf6ecd4ee7a6881e860b598dd
+    - name: YeallowThunderStrike(Glow)_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 28
+        y: 4
+        width: 91
+        height: 121
+      spriteId: 8f7b9b2829cfb4855b50cabf180667be
+    - name: YeallowThunderStrike(Glow)_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 28
+        y: 4
+        width: 94
+        height: 121
+      spriteId: e66b3ddbbc618404f8899d7a9e2df71c
+    - name: YeallowThunderStrike(Glow)_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 26
+        y: 5
+        width: 98
+        height: 119
+      spriteId: ed11063afb2744a5092466960d361ff6
+    - name: YeallowThunderStrike(Glow)_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 25
+        y: 5
+        width: 100
+        height: 97
+      spriteId: 2f0176c20593045afa3499a55aa04f24
+    - name: YeallowThunderStrike(Glow)_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 26
+        y: 6
+        width: 99
+        height: 69
+      spriteId: c3c6f779e18784f78badc94f8cacab38
+    - name: YeallowThunderStrike(Glow)_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 26
+        y: 7
+        width: 99
+        height: 34
+      spriteId: addcb2fdbee9f4bc8b16c020f38eb280
+    - name: YeallowThunderStrike(Glow)_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 60
+        y: 9
+        width: 36
+        height: 35
+      spriteId: d6097fbd229314a3381d43fb73d08bcd
+    - name: YeallowThunderStrike(Glow)_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 52
+        y: 10
+        width: 44
+        height: 42
+      spriteId: 0c27071847b5d4a5fbe47bad96c06b05
+    - name: YeallowThunderStrike(Glow)_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 53
+        y: 10
+        width: 39
+        height: 37
+      spriteId: 6113e57ea528145ae86c16d6be6971e4
+    - name: YeallowThunderStrike(Glow)_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 53
+        y: 10
+        width: 42
+        height: 35
+      spriteId: b496c2bf7abbf4c8aae712cddc070429
+    - name: YeallowThunderStrike(Glow)_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 57
+        y: 11
+        width: 40
+        height: 35
+      spriteId: 6325a536dcaf448bb9e952d579095dd4
+    - name: YeallowThunderStrike(Glow)_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 53
+        y: 10
+        width: 45
+        height: 42
+      spriteId: e56c8ed150a7c42a98b6a86d3f5845a9
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 150, y: 128}

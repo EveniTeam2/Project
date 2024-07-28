@@ -1,2 +1,1676 @@
 fileFormatVersion: 2
 guid: 190e437d89d4245608d8f667c0e504c7
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: CentaurLadyMoveSet2_Frame_0
+    originalName: 
+    pivot: {x: 0.5, y: -0.9318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 118
+      width: 64
+      height: 44
+    spriteID: 3dd3b7c6e9b314200814806e04362435
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 118}
+  - name: CentaurLadyMoveSet2_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: -0.9111111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 436
+      y: 64
+      width: 64
+      height: 45
+    spriteID: 68aa96c318e644089b2e0c18cd004064
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 436, y: 64}
+  - name: CentaurLadyMoveSet2_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -0.9111111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 118
+      width: 64
+      height: 45
+    spriteID: 4386bc4fc95a14ab6972aca6480d63c5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 118}
+  - name: CentaurLadyMoveSet2_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: -0.8913044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 436
+      y: 4
+      width: 64
+      height: 46
+    spriteID: e6257eaab18074924a6cc77fd502954a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 436, y: 4}
+  - name: CentaurLadyMoveSet2_Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: -0.8913044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 64
+      width: 64
+      height: 46
+    spriteID: 80df9241d9dab495287aab23f456e53a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 64}
+  - name: CentaurLadyMoveSet2_Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: -0.8913044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 64
+      width: 64
+      height: 46
+    spriteID: 8640b34d574b742c4b6ed41530873cb3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 64}
+  - name: CentaurLadyMoveSet2_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: -0.8913044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 64
+      width: 64
+      height: 46
+    spriteID: 937e2e7b019984c089ae58bbe9e36de4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 64}
+  - name: CentaurLadyMoveSet2_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: -0.9111111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 118
+      width: 64
+      height: 45
+    spriteID: 444d8fe6f6e6c448da669e1c18084b3d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 118}
+  - name: CentaurLadyMoveSet2_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: -0.8913044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 64
+      width: 64
+      height: 46
+    spriteID: 48aa7b223936644f5bd23b180a3bd7d3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 64}
+  - name: CentaurLadyMoveSet2_Frame_9
+    originalName: 
+    pivot: {x: 0.5, y: -0.9111111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 118
+      width: 64
+      height: 45
+    spriteID: 6fb2a36f245b341829848ff1ffec58f7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 118}
+  - name: CentaurLadyMoveSet2_Frame_10
+    originalName: 
+    pivot: {x: 0.5, y: -0.9111111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 118
+      width: 64
+      height: 45
+    spriteID: 48dd06a8af8734f8481f72bc7ed2f761
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 118}
+  - name: CentaurLadyMoveSet2_Frame_11
+    originalName: 
+    pivot: {x: 0.5, y: -0.9318182}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 436
+      y: 118
+      width: 64
+      height: 44
+    spriteID: c9fb2c8ae4e2d4e90822dfaedde6253d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 436, y: 118}
+  - name: CentaurLadyMoveSet2_Frame_12
+    originalName: 
+    pivot: {x: 0.5, y: -0.95348835}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 171
+      width: 64
+      height: 43
+    spriteID: 93415a0d1c5af46de9e2e9ad6447fe34
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 171}
+  - name: CentaurLadyMoveSet2_Frame_13
+    originalName: 
+    pivot: {x: 0.5, y: -0.9761905}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 223
+      width: 64
+      height: 42
+    spriteID: 2fd485a7e26a04b06b9b41dc3e709650
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 223}
+  - name: CentaurLadyMoveSet2_Frame_14
+    originalName: 
+    pivot: {x: 0.5, y: -1.051282}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 436
+      y: 223
+      width: 64
+      height: 39
+    spriteID: 2220d52ee277745079b29f17baa52697
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 436, y: 223}
+  - name: CentaurLadyMoveSet2_Frame_15
+    originalName: 
+    pivot: {x: 0.5, y: -0.8409091}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 171
+      width: 64
+      height: 44
+    spriteID: 9283796c954dd4b4881caeef1437f868
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 171}
+  - name: CentaurLadyMoveSet2_Frame_16
+    originalName: 
+    pivot: {x: 0.5, y: -0.88372093}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 171
+      width: 64
+      height: 43
+    spriteID: 99659ede5dff4475caa44e3cf64189e5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 171}
+  - name: CentaurLadyMoveSet2_Frame_17
+    originalName: 
+    pivot: {x: 0.5, y: -0.88372093}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 171
+      width: 64
+      height: 43
+    spriteID: 117f634f27cb34aad88588d2f0292926
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 171}
+  - name: CentaurLadyMoveSet2_Frame_18
+    originalName: 
+    pivot: {x: 0.5, y: -0.7755102}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 4
+      width: 64
+      height: 49
+    spriteID: 95b84d3a0789546b380eacb5bb4c36af
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 4}
+  - name: CentaurLadyMoveSet2_Frame_19
+    originalName: 
+    pivot: {x: 0.5, y: -0.7307693}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 64
+      height: 52
+    spriteID: 4bee2fd0ef4554f31b3ef972dc1ea63f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: CentaurLadyMoveSet2_Frame_20
+    originalName: 
+    pivot: {x: 0.5, y: -0.7755102}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 4
+      width: 64
+      height: 49
+    spriteID: 5ad437eb12089466a9bc331ec97417cb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 4}
+  - name: CentaurLadyMoveSet2_Frame_21
+    originalName: 
+    pivot: {x: 0.5, y: -0.8085106}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 4
+      width: 64
+      height: 47
+    spriteID: 7d09ee2e5d1e042d7956acf6fd36daae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 4}
+  - name: CentaurLadyMoveSet2_Frame_22
+    originalName: 
+    pivot: {x: 0.5, y: -0.88372093}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 171
+      width: 64
+      height: 43
+    spriteID: a7ea39ced15ea44bcac77fb212048d87
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 171}
+  - name: CentaurLadyMoveSet2_Frame_23
+    originalName: 
+    pivot: {x: 0.5, y: -0.88372093}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 436
+      y: 171
+      width: 64
+      height: 43
+    spriteID: 823d49ab2d3834bdd84d1542979b888a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 436, y: 171}
+  - name: CentaurLadyMoveSet2_Frame_24
+    originalName: 
+    pivot: {x: 0.5, y: -0.88372093}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 223
+      width: 64
+      height: 43
+    spriteID: 2c2eb1d704f8049f98a77d861edb00aa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 223}
+  - name: CentaurLadyMoveSet2_Frame_25
+    originalName: 
+    pivot: {x: 0.5, y: -0.9268292}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 223
+      width: 64
+      height: 41
+    spriteID: 94ec454504fc0480b87906f3b4c3b88c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 223}
+  - name: CentaurLadyMoveSet2_Frame_26
+    originalName: 
+    pivot: {x: 0.5, y: -1}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 274
+      width: 64
+      height: 38
+    spriteID: 349eb65cc2b7b4bd2b2e42faf4d28921
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 274}
+  - name: CentaurLadyMoveSet2_Frame_27
+    originalName: 
+    pivot: {x: 0.5, y: -1}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 274
+      width: 64
+      height: 38
+    spriteID: 8792d20f77fa8435d989ed242791ed2e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 274}
+  - name: CentaurLadyMoveSet2_Frame_28
+    originalName: 
+    pivot: {x: 0.5, y: -1.027027}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 274
+      width: 64
+      height: 37
+    spriteID: 5dc8eb93e6902411ca50af246855086f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 274}
+  - name: CentaurLadyMoveSet2_Frame_29
+    originalName: 
+    pivot: {x: 0.5, y: -1.0833334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 436
+      y: 320
+      width: 64
+      height: 36
+    spriteID: 52b2e602035084637888e673f6551dd7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 436, y: 320}
+  - name: CentaurLadyMoveSet2_Frame_30
+    originalName: 
+    pivot: {x: 0.5, y: -1.0833334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 365
+      width: 64
+      height: 36
+    spriteID: 45f3b2dc598c6472795c23f50578780b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 365}
+  - name: CentaurLadyMoveSet2_Frame_31
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 274
+      width: 64
+      height: 37
+    spriteID: b7cb5a0ce9d25498eacb45c8807ac0f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 274}
+  - name: CentaurLadyMoveSet2_Frame_32
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 274
+      width: 64
+      height: 37
+    spriteID: ab9da9fa377904662aa9a32e72949387
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 274}
+  - name: CentaurLadyMoveSet2_Frame_33
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 274
+      width: 64
+      height: 37
+    spriteID: 4b09dbdff5ef944168544e8cec8cdf7a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 274}
+  - name: CentaurLadyMoveSet2_Frame_34
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 436
+      y: 274
+      width: 64
+      height: 37
+    spriteID: 21992f29e1bdb42a1b1a8d6efc5e2807
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 436, y: 274}
+  - name: CentaurLadyMoveSet2_Frame_35
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 320
+      width: 64
+      height: 37
+    spriteID: 83c972f5b8765456f89e6b845a9446a5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 320}
+  - name: CentaurLadyMoveSet2_Frame_36
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 320
+      width: 64
+      height: 37
+    spriteID: e7a5dffdb66204660ac1fcf9bf0c7e33
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 320}
+  - name: CentaurLadyMoveSet2_Frame_37
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 320
+      width: 64
+      height: 37
+    spriteID: cb0b2c73dff4a424292a51e50a3e3152
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 320}
+  - name: CentaurLadyMoveSet2_Frame_38
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 320
+      width: 64
+      height: 37
+    spriteID: 40357e540117b4897a76833a80ec8c3c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 320}
+  - name: CentaurLadyMoveSet2_Frame_39
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 320
+      width: 64
+      height: 37
+    spriteID: a9561f1998f8e4085985475bd2683680
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 320}
+  - name: CentaurLadyMoveSet2_Frame_40
+    originalName: 
+    pivot: {x: 0.5, y: -1.054054}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 320
+      width: 64
+      height: 37
+    spriteID: 5aa744439643643068a9778b74b6b286
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 320}
+  - name: CentaurLadyMoveSet2_Frame_41
+    originalName: 
+    pivot: {x: 0.5, y: -1.1142857}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 365
+      width: 64
+      height: 35
+    spriteID: 85ce2fd8d4ad54112998addcc713be6f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 365}
+  - name: CentaurLadyMoveSet2_Frame_42
+    originalName: 
+    pivot: {x: 0.5, y: -1.1142857}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 365
+      width: 64
+      height: 35
+    spriteID: ada4d844f60ac4158b47c99870ca8de5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 365}
+  - name: CentaurLadyMoveSet2_Frame_43
+    originalName: 
+    pivot: {x: 0.5, y: -1.0833334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 365
+      width: 64
+      height: 36
+    spriteID: 7e3d51965f7814601bcd8a95e870f041
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 365}
+  - name: CentaurLadyMoveSet2_Frame_44
+    originalName: 
+    pivot: {x: 0.5, y: -1.0833334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 365
+      width: 64
+      height: 36
+    spriteID: f651760b58c6247ca861998f2bde1ab0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 365}
+  - name: CentaurLadyMoveSet2_Frame_45
+    originalName: 
+    pivot: {x: 0.5, y: -1.0833334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 365
+      width: 64
+      height: 36
+    spriteID: a8730b421f9964e8cbf962290ecc783a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 365}
+  - name: CentaurLadyMoveSet2_Frame_46
+    originalName: 
+    pivot: {x: 0.5, y: -0.975}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 223
+      width: 64
+      height: 40
+    spriteID: 0b220f00bcd79487184c929db1483079
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 223}
+  - name: CentaurLadyMoveSet2_Frame_47
+    originalName: 
+    pivot: {x: 0.5, y: -0.92857146}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 223
+      width: 64
+      height: 42
+    spriteID: 73ceb0d1deb4d4e9c82e303c8244b950
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 223}
+  - name: CentaurLadyMoveSet2_Frame_48
+    originalName: 
+    pivot: {x: 0.5, y: -0.8666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 118
+      width: 64
+      height: 45
+    spriteID: 51bfd0ae6b7ce490e88fc4af78743bf5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 118}
+  - name: CentaurLadyMoveSet2_Frame_49
+    originalName: 
+    pivot: {x: 0.5, y: -0.975}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 223
+      width: 64
+      height: 40
+    spriteID: f52ae22c2a3cd452c9e8d46ad8a78537
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 223}
+  - name: CentaurLadyMoveSet2_Frame_50
+    originalName: 
+    pivot: {x: 0.5, y: -0.8297872}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 4
+      width: 64
+      height: 47
+    spriteID: a4bd54221295f423ba19f17231463d9e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 4}
+  - name: CentaurLadyMoveSet2_Frame_51
+    originalName: 
+    pivot: {x: 0.5, y: -0.8863637}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 171
+      width: 64
+      height: 44
+    spriteID: c5a9aaf62f49e46b8a64ab56ce57fc56
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 171}
+  - name: CentaurLadyMoveSet2_Frame_52
+    originalName: 
+    pivot: {x: 0.5, y: -0.8478261}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 292
+      y: 64
+      width: 64
+      height: 46
+    spriteID: 0576be1af941f45b4afd57a7dad38b0c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 292, y: 64}
+  - name: CentaurLadyMoveSet2_Frame_53
+    originalName: 
+    pivot: {x: 0.5, y: -0.8478261}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 364
+      y: 64
+      width: 64
+      height: 46
+    spriteID: aaf50e6fff46247e997b5117bf298910
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 364, y: 64}
+  - name: CentaurLadyMoveSet2_Frame_54
+    originalName: 
+    pivot: {x: 0.5, y: -0.8125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 4
+      width: 64
+      height: 48
+    spriteID: 91617c6d8e6bf4078bc9d97a3050f78f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 4}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -732879589
+    name: CentaurLadyMoveSet2
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: CentaurLadyMoveSet2_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 44
+      spriteId: 3dd3b7c6e9b314200814806e04362435
+    - name: CentaurLadyMoveSet2_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 45
+      spriteId: 68aa96c318e644089b2e0c18cd004064
+    - name: CentaurLadyMoveSet2_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 45
+      spriteId: 4386bc4fc95a14ab6972aca6480d63c5
+    - name: CentaurLadyMoveSet2_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 46
+      spriteId: e6257eaab18074924a6cc77fd502954a
+    - name: CentaurLadyMoveSet2_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 46
+      spriteId: 80df9241d9dab495287aab23f456e53a
+    - name: CentaurLadyMoveSet2_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 46
+      spriteId: 8640b34d574b742c4b6ed41530873cb3
+    - name: CentaurLadyMoveSet2_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 46
+      spriteId: 937e2e7b019984c089ae58bbe9e36de4
+    - name: CentaurLadyMoveSet2_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 45
+      spriteId: 444d8fe6f6e6c448da669e1c18084b3d
+    - name: CentaurLadyMoveSet2_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 46
+      spriteId: 48aa7b223936644f5bd23b180a3bd7d3
+    - name: CentaurLadyMoveSet2_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 45
+      spriteId: 6fb2a36f245b341829848ff1ffec58f7
+    - name: CentaurLadyMoveSet2_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 45
+      spriteId: 48dd06a8af8734f8481f72bc7ed2f761
+    - name: CentaurLadyMoveSet2_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 44
+      spriteId: c9fb2c8ae4e2d4e90822dfaedde6253d
+    - name: CentaurLadyMoveSet2_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 43
+      spriteId: 93415a0d1c5af46de9e2e9ad6447fe34
+    - name: CentaurLadyMoveSet2_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 42
+      spriteId: 2fd485a7e26a04b06b9b41dc3e709650
+    - name: CentaurLadyMoveSet2_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 32
+        y: 41
+        width: 64
+        height: 39
+      spriteId: 2220d52ee277745079b29f17baa52697
+    - name: CentaurLadyMoveSet2_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 32
+        y: 37
+        width: 64
+        height: 44
+      spriteId: 9283796c954dd4b4881caeef1437f868
+    - name: CentaurLadyMoveSet2_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 43
+      spriteId: 99659ede5dff4475caa44e3cf64189e5
+    - name: CentaurLadyMoveSet2_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 43
+      spriteId: 117f634f27cb34aad88588d2f0292926
+    - name: CentaurLadyMoveSet2_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 49
+      spriteId: 95b84d3a0789546b380eacb5bb4c36af
+    - name: CentaurLadyMoveSet2_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 52
+      spriteId: 4bee2fd0ef4554f31b3ef972dc1ea63f
+    - name: CentaurLadyMoveSet2_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 49
+      spriteId: 5ad437eb12089466a9bc331ec97417cb
+    - name: CentaurLadyMoveSet2_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 47
+      spriteId: 7d09ee2e5d1e042d7956acf6fd36daae
+    - name: CentaurLadyMoveSet2_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 43
+      spriteId: a7ea39ced15ea44bcac77fb212048d87
+    - name: CentaurLadyMoveSet2_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 43
+      spriteId: 823d49ab2d3834bdd84d1542979b888a
+    - name: CentaurLadyMoveSet2_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 43
+      spriteId: 2c2eb1d704f8049f98a77d861edb00aa
+    - name: CentaurLadyMoveSet2_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 41
+      spriteId: 94ec454504fc0480b87906f3b4c3b88c
+    - name: CentaurLadyMoveSet2_Frame_26
+      frameIndex: 26
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 38
+      spriteId: 349eb65cc2b7b4bd2b2e42faf4d28921
+    - name: CentaurLadyMoveSet2_Frame_27
+      frameIndex: 27
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 38
+      spriteId: 8792d20f77fa8435d989ed242791ed2e
+    - name: CentaurLadyMoveSet2_Frame_28
+      frameIndex: 28
+      cellRect:
+        x: 32
+        y: 38
+        width: 64
+        height: 37
+      spriteId: 5dc8eb93e6902411ca50af246855086f
+    - name: CentaurLadyMoveSet2_Frame_29
+      frameIndex: 29
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 36
+      spriteId: 52b2e602035084637888e673f6551dd7
+    - name: CentaurLadyMoveSet2_Frame_30
+      frameIndex: 30
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 36
+      spriteId: 45f3b2dc598c6472795c23f50578780b
+    - name: CentaurLadyMoveSet2_Frame_31
+      frameIndex: 31
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: b7cb5a0ce9d25498eacb45c8807ac0f2
+    - name: CentaurLadyMoveSet2_Frame_32
+      frameIndex: 32
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: ab9da9fa377904662aa9a32e72949387
+    - name: CentaurLadyMoveSet2_Frame_33
+      frameIndex: 33
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: 4b09dbdff5ef944168544e8cec8cdf7a
+    - name: CentaurLadyMoveSet2_Frame_34
+      frameIndex: 34
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: 21992f29e1bdb42a1b1a8d6efc5e2807
+    - name: CentaurLadyMoveSet2_Frame_35
+      frameIndex: 35
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: 83c972f5b8765456f89e6b845a9446a5
+    - name: CentaurLadyMoveSet2_Frame_36
+      frameIndex: 36
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: e7a5dffdb66204660ac1fcf9bf0c7e33
+    - name: CentaurLadyMoveSet2_Frame_37
+      frameIndex: 37
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: cb0b2c73dff4a424292a51e50a3e3152
+    - name: CentaurLadyMoveSet2_Frame_38
+      frameIndex: 38
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: 40357e540117b4897a76833a80ec8c3c
+    - name: CentaurLadyMoveSet2_Frame_39
+      frameIndex: 39
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: a9561f1998f8e4085985475bd2683680
+    - name: CentaurLadyMoveSet2_Frame_40
+      frameIndex: 40
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 37
+      spriteId: 5aa744439643643068a9778b74b6b286
+    - name: CentaurLadyMoveSet2_Frame_41
+      frameIndex: 41
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 35
+      spriteId: 85ce2fd8d4ad54112998addcc713be6f
+    - name: CentaurLadyMoveSet2_Frame_42
+      frameIndex: 42
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 35
+      spriteId: ada4d844f60ac4158b47c99870ca8de5
+    - name: CentaurLadyMoveSet2_Frame_43
+      frameIndex: 43
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 36
+      spriteId: 7e3d51965f7814601bcd8a95e870f041
+    - name: CentaurLadyMoveSet2_Frame_44
+      frameIndex: 44
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 36
+      spriteId: f651760b58c6247ca861998f2bde1ab0
+    - name: CentaurLadyMoveSet2_Frame_45
+      frameIndex: 45
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 36
+      spriteId: a8730b421f9964e8cbf962290ecc783a
+    - name: CentaurLadyMoveSet2_Frame_46
+      frameIndex: 46
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 40
+      spriteId: 0b220f00bcd79487184c929db1483079
+    - name: CentaurLadyMoveSet2_Frame_47
+      frameIndex: 47
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 42
+      spriteId: 73ceb0d1deb4d4e9c82e303c8244b950
+    - name: CentaurLadyMoveSet2_Frame_48
+      frameIndex: 48
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 45
+      spriteId: 51bfd0ae6b7ce490e88fc4af78743bf5
+    - name: CentaurLadyMoveSet2_Frame_49
+      frameIndex: 49
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 40
+      spriteId: f52ae22c2a3cd452c9e8d46ad8a78537
+    - name: CentaurLadyMoveSet2_Frame_50
+      frameIndex: 50
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 47
+      spriteId: a4bd54221295f423ba19f17231463d9e
+    - name: CentaurLadyMoveSet2_Frame_51
+      frameIndex: 51
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 44
+      spriteId: c5a9aaf62f49e46b8a64ab56ce57fc56
+    - name: CentaurLadyMoveSet2_Frame_52
+      frameIndex: 52
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 46
+      spriteId: 0576be1af941f45b4afd57a7dad38b0c
+    - name: CentaurLadyMoveSet2_Frame_53
+      frameIndex: 53
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 46
+      spriteId: aaf50e6fff46247e997b5117bf298910
+    - name: CentaurLadyMoveSet2_Frame_54
+      frameIndex: 54
+      cellRect:
+        x: 32
+        y: 39
+        width: 64
+        height: 48
+      spriteId: 91617c6d8e6bf4078bc9d97a3050f78f
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 128, y: 128}
