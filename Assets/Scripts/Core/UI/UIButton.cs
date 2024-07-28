@@ -5,19 +5,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Core.UI {
-    public class UIButton : UIBase {
+    public class UIButton : UIBase<UIButton> {
         [SerializeField] protected Button btn;
         [SerializeField] protected TextPair text;
-        public override UIBase InitUI() {
+        public override UIButton InitUI() {
             return this;
         }
 
-        public override UIBase DrawUI() {
+        public override UIButton DrawUI() {
             CallActOnDraw();
             return this;
         }
 
-        public override UIBase CloseUI() {
+        public override UIButton CloseUI() {
             CallActOnClose();
             return this;
         }
@@ -26,7 +26,7 @@ namespace Core.UI {
             text.text.fontSize = text.fontSize * fontScale;
         }
 
-        public override UIBase UpdateUI() {
+        public override UIButton UpdateUI() {
             return this;
         }
     }

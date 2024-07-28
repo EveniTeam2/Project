@@ -1,15 +1,16 @@
 using System;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
-    public class CharacterHealthSystem : HealthSystem
+    public class CharacterHealthSystem : HealthSystem, ICharacterHealth
     {
         public CharacterHealthSystem(CharacterHealthStat stats) : base(stats)
         {
         }
 
-        public override void Damage(int dmg)
+        public override void TakeDamage(int dmg)
         {
             if (_invinsible)
                 return;
@@ -24,7 +25,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
                 CallDamage();
         }
 
-        public override void Heal(int healAmount)
+        public override void TakeHeal(int healAmount)
         {
             _health += healAmount;
             CallHeal();

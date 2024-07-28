@@ -1,4 +1,5 @@
 using ScriptableObjects.Scripts.Creature.Data;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
@@ -16,9 +17,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             SkillManager = skillManager;
         }
 
-        public void RegisterCharacterServiceProvider(CharacterServiceProvider characterServiceProvider)
+        public void RegisterCharacterServiceProvider(ICharacterServiceProvider creatureServiceProvider)
         {
-            SkillManager.RegisterCharacterServiceProvider(characterServiceProvider);
+            SkillManager.RegisterCharacterServiceProvider(creatureServiceProvider);
         }
     }
 }

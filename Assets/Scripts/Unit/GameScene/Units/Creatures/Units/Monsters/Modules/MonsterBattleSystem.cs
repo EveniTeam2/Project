@@ -1,4 +1,6 @@
+using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
 using System;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
@@ -18,19 +20,24 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
             _canAttackCool = false;
             timer = _stat.GetCoolTime();
 
-            if (col.collider.gameObject.TryGetComponent<Character>(out var target))
+            if (col.collider.gameObject.TryGetComponent<ICreatureServiceProvider>(out var target))
             {
 #if UNITY_EDITOR
-                var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
-                Debug.Log($"몬스터가 {col.collider.gameObject.name}에게 {dmg} 피해를 입혔습니다.");
+                target.HeathSystem.TakeDamage(_stat.GetAttack());
+                Debug.Log($"몬스터가 {col.collider.gameObject.name}에게 {_stat.GetAttack()} 피해를 입혔습니다.");
 #else
-                target.GetServiceProvider().Damage(_stat.GetAttack());
+                var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
 #endif
             }
             else
             {
                 Debug.LogWarning($"몬스터가 {col.collider.gameObject.name}의 컴포넌트를 가지고 올 수 없습니다.");
             }
+        }
+
+        public override void Attack(RaycastHit2D col, IBattleEffect effect)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Update()
@@ -63,6 +70,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         public int GetAttack()
         {
             return _attack();
+        }
+
+        public int GetSkillIndex(string skillName)
+        {
+            // TODO : 인호님 이거 고쳐주세요.
+            return 0;
         }
     }
 }

@@ -2,11 +2,12 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Core.UI {
+namespace Core.UI
+{
     /// <summary>
     /// UIBase 클래스: 모든 UI의 기본 추상 클래스입니다.
     /// </summary>
-    public abstract class UIBase : MonoBehaviour {
+    public abstract partial class UIBase<UI> : MonoBehaviour {
         public Vector3 originScale = Vector3.one;
 
         /// <summary>
@@ -41,25 +42,25 @@ namespace Core.UI {
         /// UI 요소를 닫고 OnClose 이벤트를 트리거합니다.
         /// </summary>
         /// <returns>이 UI</returns>
-        public abstract UIBase CloseUI();
+        public abstract UI CloseUI();
 
         /// <summary>
         /// UI를 업데이트하는 메서드
         /// </summary>
         /// <returns>이 UI</returns>
-        public abstract UIBase UpdateUI();
+        public abstract UI UpdateUI();
 
         /// <summary>
         /// UI를 그리는 메서드
         /// </summary>
         /// <returns>이 UI</returns>
-        public abstract UIBase DrawUI();
+        public abstract UI DrawUI();
 
         /// <summary>
         /// UI를 초기화하는 메서드
         /// </summary>
         /// <returns>이 UI</returns>
-        public abstract UIBase InitUI();
+        public abstract UI InitUI();
 
         protected void CallActOnDraw() {
             ActOnDraw?.Invoke();
@@ -73,6 +74,7 @@ namespace Core.UI {
     /// <summary>
     /// 텍스트의 폰트 크기를 제어하는 구조체
     /// </summary>
+    [Serializable]
     public struct TextPair {
         public TMP_Text text;
         public float fontSize;

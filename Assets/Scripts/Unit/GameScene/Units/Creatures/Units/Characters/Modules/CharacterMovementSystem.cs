@@ -1,10 +1,11 @@
 using System;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
-    public class CharacterMovementSystem : MovementSystem
+    public class CharacterMovementSystem : MovementSystem, ICharacterMovement
     {
         // 속도 부스트
         protected float _boostSpeed;

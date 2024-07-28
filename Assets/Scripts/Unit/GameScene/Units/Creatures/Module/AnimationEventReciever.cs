@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEditor;
 using UnityEngine;
@@ -19,15 +20,18 @@ namespace Unit.GameScene.Units.Creatures.Module
         private Animator _animator = null;
         private readonly Dictionary<string, List<Action>> _startEvents = new();
         private readonly Dictionary<string, List<Action>> _endEvents = new();
+        
+        private Dictionary<AnimationParameterEnums, int> _animationParameter;
 
         private Coroutine _coroutine = null;
         private bool _isPlayingAnimator = false;
         public event Action OnAttack;
-
-        private void Awake()
+        
+        public void Initialize(Dictionary<AnimationParameterEnums, int> animationParameter)
         {
-            // 애니메이터 내에 있는 모든 애니메이션 클립의 시작과 끝에 이벤트를 생성한다.
             _animator = GetComponent<Animator>();
+            
+            _animationParameter = animationParameter;
             
             AddEventsToSpecificAnimationClips();
         }
@@ -114,6 +118,11 @@ namespace Unit.GameScene.Units.Creatures.Module
             _animator.SetBool(param, value, action);
         }
 
+        public void SetBool(AnimationParameterEnums para, bool value, Action action)
+        {
+            _animator.SetBool(_animationParameter[para], value, action);
+        }
+
         public void SetBool(string param, bool value, Action action)
         {
             _animator.SetBool(param, value, action);
@@ -127,6 +136,11 @@ namespace Unit.GameScene.Units.Creatures.Module
         public void SetFloat(string param, float value, Action action)
         {
             _animator.SetFloat(param, value, action);
+        }
+        
+        public void SetFloat(AnimationParameterEnums para, int value, Action action)
+        {
+            _animator.SetFloat(_animationParameter[para], value, action);
         }
         
         public void SetInteger(string param, int value, Action action)

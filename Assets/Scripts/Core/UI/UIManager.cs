@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core.Utils;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+//using UnityEngine.AddressableAssets;
 
 namespace Core.UI
 {
