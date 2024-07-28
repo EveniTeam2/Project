@@ -56,9 +56,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
     {
         protected Func<int> _getSpeed;
 
-        public CharacterMovementStat(Stat<CharacterStat> stats)
+        public CharacterMovementStat(CreatureStat<CharacterStat> creatureStats)
         {
-            _getSpeed = () => stats.Current.Speed;
+            _getSpeed = () => creatureStats.Current.Speed;
         }
 
         public int GetSpeed()

@@ -27,7 +27,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         private CharacterServiceProvider _characterServiceProvider;
         private CommandSystem _commandSystem;
         private CommandAction _commandAction; 
-        private Stat<CharacterStat> _stats;
+        private CreatureStat<CharacterStat> _creatureStats;
         private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private List<CommandAction> _characterSkills;
         
@@ -45,11 +45,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             
             _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
             _animatorEventReceiver.OnAttack += ActivateSkill;
-            
-            _stats = new Stat<CharacterStat>(GetCharacterStat(1));
-            _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_stats));
-            _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_stats));
-            _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_stats), groundYPosition);
+            _creatureStats = new CreatureStat<CharacterStat>(GetCharacterStat(1));
+            _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_creatureStats));
+            _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_creatureStats));
+            _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_creatureStats), groundYPosition);
             _fsm = StateBuilder.BuildStateMachine(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
             _characterServiceProvider = new CharacterServiceProvider(characterClassType, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, _fsm, _animationParameter, characterData);
             _commandSystem = new CommandSystem(blockInfo);
@@ -60,7 +59,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterData.RegisterCharacterServiceProvider(_characterServiceProvider);
             _healthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
         }
-
+        
         private CharacterStat GetCharacterStat(int currentLevel)
         {
             var statManager = _characterData.StatManager;
@@ -140,7 +139,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public override void ClearModifiedStat()
         {
             _mods.Clear();
-            _stats.SetCurrent(_stats.Origin);
+            _creatureStats.SetCurrent(_creatureStats.Origin);
         }
 
         public CharacterServiceProvider GetServiceProvider()
@@ -151,7 +150,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         protected override void ModifyStat(EStatType statType, int value)
         {
             // TODO : 채이환
-            var cur = _stats.Current;
+            var cur = _creatureStats.Current;
             switch (statType)
             {
                 case EStatType.None:
@@ -167,7 +166,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
                     break;
             }
 
-            _stats.SetCurrent(cur);
+            _creatureStats.SetCurrent(cur);
         }
     }
 }

@@ -36,15 +36,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         private readonly Func<int> _getHealth;
         private readonly Action<int> _setHealth;
 
-        public CharacterHealthStat(Stat<CharacterStat> stat)
+        public CharacterHealthStat(CreatureStat<CharacterStat> creatureStat)
         {
             //TODO : 채이환
-            _getHealth = () => stat.Current.MaxHp;
+            _getHealth = () => creatureStat.Current.MaxHp;
             _setHealth = value =>
             {
-                var current = stat.Current;
+                var current = creatureStat.Current;
                 current.CurrentHp = value;
-                stat.SetCurrent(current);
+                creatureStat.SetCurrent(current);
             };
         }
 

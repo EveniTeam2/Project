@@ -49,10 +49,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         private readonly Func<int> _attack;
         private readonly Func<float> _coolTime;
 
-        public MonsterBattleStat(Stat<MonsterStat> stat)
+        public MonsterBattleStat(CreatureStat<MonsterStat> creatureStat)
         {
-            _attack = () => stat.Current.Attack;
-            _coolTime = () => stat.Current.CoolTime;
+            _attack = () => creatureStat.Current.Attack;
+            _coolTime = () => creatureStat.Current.CoolTime;
         }
 
         public float GetCoolTime()

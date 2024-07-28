@@ -15,7 +15,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         [SerializeField] private MonsterStateMachineDTO stateData;
         private MonsterServiceProvider _monsterServiceProvider;
         private SpriteRenderer _spriteRenderer;
-        protected Stat<MonsterStat> _stats;
+        protected CreatureStat<MonsterStat> CreatureStats;
         private MonsterBattleStat _battleStat;
 
         private void Update()
@@ -36,11 +36,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
-            _stats = new Stat<MonsterStat>(stat);
-            _battleStat = new MonsterBattleStat(_stats);
+            CreatureStats = new CreatureStat<MonsterStat>(stat);
+            _battleStat = new MonsterBattleStat(CreatureStats);
             _battleSystem = new MonsterBattleSystem(transform, _battleStat);
-            _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(_stats));
-            _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(_stats), groundYPosition);
+            _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(CreatureStats));
+            _movementSystem = new MonsterMovementSystem(transform, new MonsterMovementStat(CreatureStats), groundYPosition);
 
             _fsm = StateBuilder.BuildStateMachine(stateData, transform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
 
@@ -75,7 +75,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public override void ClearModifiedStat()
         {
             _mods.Clear();
-            _stats.SetCurrent(_stats.Origin);
+            CreatureStats.SetCurrent(CreatureStats.Origin);
             StopAllCoroutines();
         }
 
@@ -86,7 +86,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
         protected override void ModifyStat(EStatType statType, int value)
         {
-            var cur = _stats.Current;
+            var cur = CreatureStats.Current;
             switch (statType)
             {
                 case EStatType.None:
@@ -102,15 +102,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
                     break;
             }
 
-            _stats.SetCurrent(cur);
+            CreatureStats.SetCurrent(cur);
         }
 
         public void SpawnInit(MonsterStat monsterStat)
         {
-            _stats = new Stat<MonsterStat>(monsterStat);
-            _battleSystem.SpawnInit(new MonsterBattleStat(_stats));
-            _healthSystem.SpawnInit(new MonsterHealthStat(_stats));
-            _movementSystem.SpawnInit(new MonsterMovementStat(_stats));
+            CreatureStats = new CreatureStat<MonsterStat>(monsterStat);
+            _battleSystem.SpawnInit(new MonsterBattleStat(CreatureStats));
+            _healthSystem.SpawnInit(new MonsterHealthStat(CreatureStats));
+            _movementSystem.SpawnInit(new MonsterMovementStat(CreatureStats));
             _fsm.TryChangeState(StateType.Run);
             ClearModifiedStat();
             _spriteRenderer.color = Color.white;

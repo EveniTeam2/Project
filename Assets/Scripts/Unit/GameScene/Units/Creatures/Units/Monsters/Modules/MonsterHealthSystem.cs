@@ -36,14 +36,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         private readonly Func<int> _getHealth;
         private readonly Action<int> _setHealth;
 
-        public MonsterHealthStat(Stat<MonsterStat> stat)
+        public MonsterHealthStat(CreatureStat<MonsterStat> creatureStat)
         {
-            _getHealth = () => stat.Current.Health;
+            _getHealth = () => creatureStat.Current.Health;
             _setHealth = value =>
             {
-                var current = stat.Current;
+                var current = creatureStat.Current;
                 current.Health = value;
-                stat.SetCurrent(current);
+                creatureStat.SetCurrent(current);
             };
         }
 

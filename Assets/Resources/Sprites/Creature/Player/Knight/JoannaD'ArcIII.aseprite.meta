@@ -1,0 +1,4840 @@
+fileFormatVersion: 2
+guid: c322dd472efbc420a84ef8728546cde0
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: JoannaD'ArcIII_Frame_0
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1273
+      width: 75
+      height: 76
+    spriteID: 4a8ca093e21d4481c844a3b5a189a8fb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1273}
+  - name: JoannaD'ArcIII_Frame_1
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1357
+      width: 75
+      height: 76
+    spriteID: 58a988ee5d3b6412eb990a85d6ac5961
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1357}
+  - name: JoannaD'ArcIII_Frame_2
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1441
+      width: 75
+      height: 76
+    spriteID: 978a18a1c21f04d3d92c28a055ee0b5c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1441}
+  - name: JoannaD'ArcIII_Frame_3
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1525
+      width: 75
+      height: 76
+    spriteID: 67b669654609f4ab49d765f9b31cd1b9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1525}
+  - name: JoannaD'ArcIII_Frame_4
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1609
+      width: 75
+      height: 76
+    spriteID: 1b0f0d87257a848a2b56d3a814812fac
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1609}
+  - name: JoannaD'ArcIII_Frame_5
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1693
+      width: 75
+      height: 76
+    spriteID: 06e16e8e3aaae4cdcbaa5f95cc5c6690
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1693}
+  - name: JoannaD'ArcIII_Frame_6
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1777
+      width: 75
+      height: 76
+    spriteID: 6c20e24e4fbc043bcb111521fd55e26f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1777}
+  - name: JoannaD'ArcIII_Frame_7
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1861
+      width: 75
+      height: 76
+    spriteID: c2909b72c8d7e4d4c9682678dfa8806b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1861}
+  - name: JoannaD'ArcIII_Frame_8
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1945
+      width: 75
+      height: 76
+    spriteID: 38b30c7f8920344babbdcbe03c6ca666
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1945}
+  - name: JoannaD'ArcIII_Frame_9
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 4
+      width: 75
+      height: 76
+    spriteID: b0fe04be5c1c44d64860374d70a2226b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 4}
+  - name: JoannaD'ArcIII_Frame_10
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 88
+      width: 75
+      height: 76
+    spriteID: ccc41dffd1d384e8993f0bf50d5bc4d7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 88}
+  - name: JoannaD'ArcIII_Frame_11
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 172
+      width: 75
+      height: 76
+    spriteID: ce43476bb4c73478eae9e5a605f01391
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 172}
+  - name: JoannaD'ArcIII_Frame_12
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 256
+      width: 75
+      height: 76
+    spriteID: 1139795f570844f8794126a4ffd4303d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 256}
+  - name: JoannaD'ArcIII_Frame_13
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 340
+      width: 75
+      height: 76
+    spriteID: b1c9e7c85aec041de913811a02a6a98b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 340}
+  - name: JoannaD'ArcIII_Frame_14
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 424
+      width: 75
+      height: 76
+    spriteID: b9bc1aa2e133a4398beb2512ab59bfb9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 424}
+  - name: JoannaD'ArcIII_Frame_15
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 508
+      width: 75
+      height: 76
+    spriteID: fd4c62e87ac854ea39e576eb001df8a4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 508}
+  - name: JoannaD'ArcIII_Frame_16
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 592
+      width: 75
+      height: 76
+    spriteID: 3c4ffb550a2ff448eb0035257c620789
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 592}
+  - name: JoannaD'ArcIII_Frame_17
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 676
+      width: 75
+      height: 76
+    spriteID: 3722ee29e55144653bb0c27f8b26f2a8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 676}
+  - name: JoannaD'ArcIII_Frame_18
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 760
+      width: 75
+      height: 76
+    spriteID: f63c06e9d37fa406ebfc4cfa09918786
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 760}
+  - name: JoannaD'ArcIII_Frame_19
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 844
+      width: 75
+      height: 76
+    spriteID: 7195cf19b669e44d6b145d010426413e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 844}
+  - name: JoannaD'ArcIII_Frame_20
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 928
+      width: 75
+      height: 76
+    spriteID: f9062173a1c944188a3a0e8d497b23ed
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 928}
+  - name: JoannaD'ArcIII_Frame_21
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1012
+      width: 75
+      height: 76
+    spriteID: ffbb09dae869d4fc08f975e1d7fec234
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1012}
+  - name: JoannaD'ArcIII_Frame_22
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1096
+      width: 75
+      height: 76
+    spriteID: dc6f56e6f8e4d486a9fef7cc645904e1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1096}
+  - name: JoannaD'ArcIII_Frame_23
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1180
+      width: 75
+      height: 76
+    spriteID: bf5004c3fe11944f88d823613161d3bf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1180}
+  - name: JoannaD'ArcIII_Frame_24
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1264
+      width: 75
+      height: 76
+    spriteID: 85c28eafc20144269a458bea2310316b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1264}
+  - name: JoannaD'ArcIII_Frame_25
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1348
+      width: 75
+      height: 76
+    spriteID: ceafae2c5693c41d5826c69d7bea65ce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1348}
+  - name: JoannaD'ArcIII_Frame_26
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1432
+      width: 75
+      height: 76
+    spriteID: 4e7df51af05b5451ea966a1e18a16b62
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1432}
+  - name: JoannaD'ArcIII_Frame_27
+    originalName: 
+    pivot: {x: 0.56578946, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 681
+      width: 76
+      height: 76
+    spriteID: 7e012bd632df9411d90c6949bc7734a5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 681}
+  - name: JoannaD'ArcIII_Frame_28
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1516
+      width: 75
+      height: 76
+    spriteID: 37acca38af4f040338405bab0a2c69b2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1516}
+  - name: JoannaD'ArcIII_Frame_29
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1600
+      width: 75
+      height: 76
+    spriteID: ab7def19a4e6e4012b38740bce7fc02f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1600}
+  - name: JoannaD'ArcIII_Frame_30
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1684
+      width: 75
+      height: 76
+    spriteID: 9d8aa2082dfc2423baf5c01a6f6c2ef6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1684}
+  - name: JoannaD'ArcIII_Frame_31
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1768
+      width: 75
+      height: 76
+    spriteID: e1952b1808bc34b2791e8fa149aff43a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1768}
+  - name: JoannaD'ArcIII_Frame_32
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1852
+      width: 75
+      height: 76
+    spriteID: 5f6efc48006a248c48c526b63477ed55
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1852}
+  - name: JoannaD'ArcIII_Frame_33
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 1936
+      width: 75
+      height: 76
+    spriteID: 75dc5d6785b7240a99949466a78c53aa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 1936}
+  - name: JoannaD'ArcIII_Frame_34
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 4
+      width: 75
+      height: 76
+    spriteID: eb8d62196554049c29670df44f098374
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 4}
+  - name: JoannaD'ArcIII_Frame_35
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 88
+      width: 75
+      height: 76
+    spriteID: 93a2ccf125b2947a1a927eac77263adf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 88}
+  - name: JoannaD'ArcIII_Frame_36
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 172
+      width: 75
+      height: 76
+    spriteID: 15dadfc08d96a4af7a560f1ea26c8685
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 172}
+  - name: JoannaD'ArcIII_Frame_37
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 256
+      width: 75
+      height: 76
+    spriteID: d10164a34d3c64252b0ad69abecb7257
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 256}
+  - name: JoannaD'ArcIII_Frame_38
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 340
+      width: 75
+      height: 76
+    spriteID: 6eef33fb81d9f468a8a2a20ac803a5eb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 340}
+  - name: JoannaD'ArcIII_Frame_39
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 424
+      width: 75
+      height: 76
+    spriteID: eafbb2b767cd94c96b5772d65c4019c6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 424}
+  - name: JoannaD'ArcIII_Frame_40
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 508
+      width: 75
+      height: 76
+    spriteID: a8478d00b0ecf45e09c4780fe82ead8a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 508}
+  - name: JoannaD'ArcIII_Frame_41
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 592
+      width: 75
+      height: 76
+    spriteID: b739b36552fa1449fb83c79db52d3d66
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 592}
+  - name: JoannaD'ArcIII_Frame_42
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 676
+      width: 75
+      height: 76
+    spriteID: a51f0210c2a964643bcfa5ae2be578c2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 676}
+  - name: JoannaD'ArcIII_Frame_43
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 760
+      width: 75
+      height: 76
+    spriteID: 4a1cc100432d143428865d550c56d68e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 760}
+  - name: JoannaD'ArcIII_Frame_44
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 844
+      width: 75
+      height: 76
+    spriteID: 19ed364af4e5341a488a81b7d6d140b5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 844}
+  - name: JoannaD'ArcIII_Frame_45
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 928
+      width: 75
+      height: 76
+    spriteID: 6b10b25519a164dbdb6e0ded261f59ac
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 928}
+  - name: JoannaD'ArcIII_Frame_46
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1012
+      width: 75
+      height: 76
+    spriteID: 2664bbafe6e734e469932e5ac6bfc3d6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1012}
+  - name: JoannaD'ArcIII_Frame_47
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1096
+      width: 75
+      height: 76
+    spriteID: 2f1dbada1910345a3bec265b7b499e09
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1096}
+  - name: JoannaD'ArcIII_Frame_48
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1180
+      width: 75
+      height: 76
+    spriteID: 75d126f341d8d409c8c275ff8ac6dc6e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1180}
+  - name: JoannaD'ArcIII_Frame_49
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1264
+      width: 75
+      height: 76
+    spriteID: 47f2077e024c348a9b002c98271acd6a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1264}
+  - name: JoannaD'ArcIII_Frame_50
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1348
+      width: 75
+      height: 76
+    spriteID: a979e5542df9a4bd480259de9f2724a1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1348}
+  - name: JoannaD'ArcIII_Frame_51
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1432
+      width: 75
+      height: 76
+    spriteID: 7ffe52cf8448d4bc58ecaae25f1dd2d8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1432}
+  - name: JoannaD'ArcIII_Frame_52
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1516
+      width: 75
+      height: 76
+    spriteID: aaca24a1b14f6444eb0fa647e4ea96b1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1516}
+  - name: JoannaD'ArcIII_Frame_53
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1600
+      width: 75
+      height: 76
+    spriteID: 758694ba771a349bcabeafa8b5bba218
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1600}
+  - name: JoannaD'ArcIII_Frame_54
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1684
+      width: 75
+      height: 76
+    spriteID: a70f0ca26c5244c55b097df63d8163ad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1684}
+  - name: JoannaD'ArcIII_Frame_55
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1768
+      width: 75
+      height: 76
+    spriteID: e022201f4352f440abc9a77d347a2a30
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1768}
+  - name: JoannaD'ArcIII_Frame_56
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1852
+      width: 75
+      height: 76
+    spriteID: 7e8477a36aeda4cdeb933cc079d0c3cb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1852}
+  - name: JoannaD'ArcIII_Frame_57
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 316
+      y: 1936
+      width: 75
+      height: 76
+    spriteID: 34015fc39d5e54defa8d3198334002af
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 316, y: 1936}
+  - name: JoannaD'ArcIII_Frame_58
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 4
+      width: 75
+      height: 76
+    spriteID: 4204e1f253d3c48638f97ee4fbc66157
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 4}
+  - name: JoannaD'ArcIII_Frame_59
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 88
+      width: 75
+      height: 76
+    spriteID: 98bc1f519c8aa418ebb402d038cbad6d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 88}
+  - name: JoannaD'ArcIII_Frame_60
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 172
+      width: 75
+      height: 76
+    spriteID: 5fe1a2318eed9442a8333813569e7709
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 172}
+  - name: JoannaD'ArcIII_Frame_61
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 256
+      width: 75
+      height: 76
+    spriteID: e5ab384329f1b42c08f012953bdd30ea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 256}
+  - name: JoannaD'ArcIII_Frame_62
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 340
+      width: 75
+      height: 76
+    spriteID: 0ec3fd6f8756a4fa5befd2d9a872d597
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 340}
+  - name: JoannaD'ArcIII_Frame_63
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 424
+      width: 75
+      height: 76
+    spriteID: 1e4a558ab213e4bd2a2aa3851c3b74f3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 424}
+  - name: JoannaD'ArcIII_Frame_64
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 508
+      width: 75
+      height: 76
+    spriteID: e3c9b47fff5094df999d86f1c208617b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 508}
+  - name: JoannaD'ArcIII_Frame_65
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 592
+      width: 75
+      height: 76
+    spriteID: 2f7d9aff87db44ef0b0134dff692c01a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 592}
+  - name: JoannaD'ArcIII_Frame_66
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 676
+      width: 75
+      height: 76
+    spriteID: 96abd6a52c3284101ab2af4fcac4315a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 676}
+  - name: JoannaD'ArcIII_Frame_67
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 760
+      width: 75
+      height: 76
+    spriteID: e0c9ce68511e14eb59afaa65c521c4cd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 760}
+  - name: JoannaD'ArcIII_Frame_68
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 844
+      width: 75
+      height: 76
+    spriteID: 367695816e7274f59a83ec3b4fb23a23
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 844}
+  - name: JoannaD'ArcIII_Frame_69
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 928
+      width: 75
+      height: 76
+    spriteID: 7f7613bf06c1249bba880817ca8209f4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 928}
+  - name: JoannaD'ArcIII_Frame_70
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1012
+      width: 75
+      height: 76
+    spriteID: 02b5dcaf4ea6a416d8b013c10586a463
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1012}
+  - name: JoannaD'ArcIII_Frame_71
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1096
+      width: 75
+      height: 76
+    spriteID: 194864cba6a224028ac7cf66e62fb8d6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1096}
+  - name: JoannaD'ArcIII_Frame_72
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1180
+      width: 75
+      height: 76
+    spriteID: 0a2de966e0db546b9b28fc73a0f59c6d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1180}
+  - name: JoannaD'ArcIII_Frame_73
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1264
+      width: 75
+      height: 76
+    spriteID: 078c3094dcd5e4ed6ac38a2229c00f8a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1264}
+  - name: JoannaD'ArcIII_Frame_74
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1348
+      width: 75
+      height: 76
+    spriteID: bbe95453bb76741c0b31ccf089d9ae32
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1348}
+  - name: JoannaD'ArcIII_Frame_75
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1432
+      width: 75
+      height: 76
+    spriteID: 5d1985d983ea7418c935680e2e669546
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1432}
+  - name: JoannaD'ArcIII_Frame_76
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1516
+      width: 75
+      height: 76
+    spriteID: f692354b0512242b3a8ca24a8d6f9903
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1516}
+  - name: JoannaD'ArcIII_Frame_77
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1600
+      width: 75
+      height: 76
+    spriteID: 4dfacaf4475674a96a1830e8064ea596
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1600}
+  - name: JoannaD'ArcIII_Frame_78
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1684
+      width: 75
+      height: 76
+    spriteID: 01e7b38e0a8d543a29ab7dc8beb9346e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1684}
+  - name: JoannaD'ArcIII_Frame_79
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5769231}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1592
+      width: 75
+      height: 78
+    spriteID: 377f011015de0405ab5eb2574712b432
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1592}
+  - name: JoannaD'ArcIII_Frame_80
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5769231}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1678
+      width: 75
+      height: 78
+    spriteID: 416162451013d475f806847db3ac12b5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1678}
+  - name: JoannaD'ArcIII_Frame_81
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5769231}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1764
+      width: 75
+      height: 78
+    spriteID: 26efb050528574d57abb8214b7d7468b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1764}
+  - name: JoannaD'ArcIII_Frame_82
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5769231}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1850
+      width: 75
+      height: 78
+    spriteID: 204399b3d544a46dfa4f4120ff389a33
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1850}
+  - name: JoannaD'ArcIII_Frame_83
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5769231}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1936
+      width: 75
+      height: 78
+    spriteID: 95e1d4fe192d6458bad6ce4972b4280e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1936}
+  - name: JoannaD'ArcIII_Frame_84
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1768
+      width: 75
+      height: 76
+    spriteID: f347cb4e811bd47bd89b5255a46ae397
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1768}
+  - name: JoannaD'ArcIII_Frame_85
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1852
+      width: 75
+      height: 76
+    spriteID: e19f91f68fa3e432e8ee037d6812cc06
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1852}
+  - name: JoannaD'ArcIII_Frame_86
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 399
+      y: 1936
+      width: 75
+      height: 76
+    spriteID: 3bb251ea0b69147a18da2bb2614690a2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 399, y: 1936}
+  - name: JoannaD'ArcIII_Frame_87
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 4
+      width: 75
+      height: 76
+    spriteID: 8a6cf0c2707d046cea39a6d3eb4c03ca
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 4}
+  - name: JoannaD'ArcIII_Frame_88
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 88
+      width: 75
+      height: 76
+    spriteID: a26a243018524406b88f8b54045122ef
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 88}
+  - name: JoannaD'ArcIII_Frame_89
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 172
+      width: 75
+      height: 76
+    spriteID: 291e9371b991c461db2d7eda7198db8a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 172}
+  - name: JoannaD'ArcIII_Frame_90
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 256
+      width: 75
+      height: 76
+    spriteID: 399c1b34238f7499c86c696a11f4a604
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 256}
+  - name: JoannaD'ArcIII_Frame_91
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 340
+      width: 75
+      height: 76
+    spriteID: 27e0ee3d5aa0a4435bdded4db6a1b675
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 340}
+  - name: JoannaD'ArcIII_Frame_92
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 424
+      width: 75
+      height: 76
+    spriteID: 2bb661fca3b254cbf9acd5819ca0cef3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 424}
+  - name: JoannaD'ArcIII_Frame_93
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 508
+      width: 75
+      height: 76
+    spriteID: 44216fedd49c14e5e823563327763c13
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 508}
+  - name: JoannaD'ArcIII_Frame_94
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 592
+      width: 75
+      height: 76
+    spriteID: 3862a117404fa470789094d0931d272e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 592}
+  - name: JoannaD'ArcIII_Frame_95
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 676
+      width: 75
+      height: 76
+    spriteID: 75cfa192779e540d9b6b98e8ee286ab7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 676}
+  - name: JoannaD'ArcIII_Frame_96
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 760
+      width: 75
+      height: 76
+    spriteID: 818407325a43542b797da3024486fcd1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 760}
+  - name: JoannaD'ArcIII_Frame_97
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 844
+      width: 75
+      height: 76
+    spriteID: e793402bbc9a54a20a2eb9f1d93f2758
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 844}
+  - name: JoannaD'ArcIII_Frame_98
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 928
+      width: 75
+      height: 76
+    spriteID: 1ac358acd12a9434d8d10abbb4cbe825
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 928}
+  - name: JoannaD'ArcIII_Frame_99
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1012
+      width: 75
+      height: 76
+    spriteID: febbed6dffcd6442db0755dd332af302
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1012}
+  - name: JoannaD'ArcIII_Frame_100
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5769231}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 509
+      width: 75
+      height: 78
+    spriteID: a8a55076fcd1845869fd4787ec596116
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 509}
+  - name: JoannaD'ArcIII_Frame_101
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.556962}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1244
+      width: 75
+      height: 79
+    spriteID: 6b8b2040de1c448fbb4c5cf9b05897e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1244}
+  - name: JoannaD'ArcIII_Frame_102
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.556962}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1331
+      width: 75
+      height: 79
+    spriteID: 9c8763505bd3248db807a41acb41c41d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1331}
+  - name: JoannaD'ArcIII_Frame_103
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.53749996}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1156
+      width: 75
+      height: 80
+    spriteID: 174f98a7847344b31b6072ed852b2884
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1156}
+  - name: JoannaD'ArcIII_Frame_104
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5185185}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 533
+      width: 75
+      height: 81
+    spriteID: 0f6e536c188c941a28be9b52148450e1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 533}
+  - name: JoannaD'ArcIII_Frame_105
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.49999997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 263
+      width: 75
+      height: 82
+    spriteID: 7d12ef1a0f62f4585850132b5248fd36
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 263}
+  - name: JoannaD'ArcIII_Frame_106
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5185185}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 622
+      width: 75
+      height: 81
+    spriteID: 111be40f33bc94a0c9d3629f017f3d63
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 622}
+  - name: JoannaD'ArcIII_Frame_107
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5974026}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 933
+      width: 75
+      height: 77
+    spriteID: 58ecbd28c0e444a098dff94e91125401
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 933}
+  - name: JoannaD'ArcIII_Frame_108
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1096
+      width: 75
+      height: 76
+    spriteID: 6eca585bcd44d4173aa2c75eed5ba3eb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1096}
+  - name: JoannaD'ArcIII_Frame_109
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1180
+      width: 75
+      height: 76
+    spriteID: 95e9375fdd57a4c1287b26b0faa0a578
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1180}
+  - name: JoannaD'ArcIII_Frame_110
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5974026}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1018
+      width: 75
+      height: 77
+    spriteID: 12b09fd72d75d484e931ff68e68f2afb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1018}
+  - name: JoannaD'ArcIII_Frame_111
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1264
+      width: 75
+      height: 76
+    spriteID: a626f9aa6a22148c38ea49cd630227fb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1264}
+  - name: JoannaD'ArcIII_Frame_112
+    originalName: 
+    pivot: {x: 0.5584416, y: -0.5974026}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 172
+      width: 77
+      height: 77
+    spriteID: e470f77eabd164609a9e9d0700921f29
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 172}
+  - name: JoannaD'ArcIII_Frame_113
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.556962}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1418
+      width: 75
+      height: 79
+    spriteID: e098bec8dff9b49aeae7b24d5502b6c8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1418}
+  - name: JoannaD'ArcIII_Frame_114
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.556962}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1505
+      width: 75
+      height: 79
+    spriteID: 068ea4f568a064930bb69a32560e81c5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1505}
+  - name: JoannaD'ArcIII_Frame_115
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5185185}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 711
+      width: 75
+      height: 81
+    spriteID: 9ffc39a4e28f04118ba0061e01bdea6e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 711}
+  - name: JoannaD'ArcIII_Frame_116
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5185185}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 800
+      width: 75
+      height: 81
+    spriteID: 4aff3f9ee6f404e25b334cd830bb4b42
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 800}
+  - name: JoannaD'ArcIII_Frame_117
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5185185}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 889
+      width: 75
+      height: 81
+    spriteID: bb2ea0e7a879a4977afa710f0528ffa8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 889}
+  - name: JoannaD'ArcIII_Frame_118
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.49999997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 353
+      width: 75
+      height: 82
+    spriteID: 9b85a858ddd8b45c3978a39529852fc8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 353}
+  - name: JoannaD'ArcIII_Frame_119
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5769231}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 595
+      width: 75
+      height: 78
+    spriteID: adf31474094a24f6fadaa5e07e0699a2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 595}
+  - name: JoannaD'ArcIII_Frame_120
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5185185}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 978
+      width: 75
+      height: 81
+    spriteID: d78a2e21830624461a20ba0fd788a96b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 978}
+  - name: JoannaD'ArcIII_Frame_121
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1348
+      width: 75
+      height: 76
+    spriteID: 33094bae31cbf4f3393b963c6359bef3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1348}
+  - name: JoannaD'ArcIII_Frame_122
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5185185}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1067
+      width: 75
+      height: 81
+    spriteID: aa5c19802b9484b09946762192b2536d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1067}
+  - name: JoannaD'ArcIII_Frame_123
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5974026}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1103
+      width: 75
+      height: 77
+    spriteID: 617754e41532047a29d17214d274ae18
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1103}
+  - name: JoannaD'ArcIII_Frame_124
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1432
+      width: 75
+      height: 76
+    spriteID: c5e81e7198b744e80b9ecde2c5a883ff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1432}
+  - name: JoannaD'ArcIII_Frame_125
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1516
+      width: 75
+      height: 76
+    spriteID: ff418c74fb4cd48ffb2b177d66e28313
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1516}
+  - name: JoannaD'ArcIII_Frame_126
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1600
+      width: 75
+      height: 76
+    spriteID: 29bf687cdd38a42b88b35f29bd94e735
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1600}
+  - name: JoannaD'ArcIII_Frame_127
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1684
+      width: 75
+      height: 76
+    spriteID: 9e55c142cb55b4ee58136bc7e94122da
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1684}
+  - name: JoannaD'ArcIII_Frame_128
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1768
+      width: 75
+      height: 76
+    spriteID: ff8a00ba7b95c427dbefe7f94f872197
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1768}
+  - name: JoannaD'ArcIII_Frame_129
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1852
+      width: 75
+      height: 76
+    spriteID: 152f751f5da4c4b98adf7c3fe0c023b5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1852}
+  - name: JoannaD'ArcIII_Frame_130
+    originalName: 
+    pivot: {x: 0.8552036, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 221
+      height: 76
+    spriteID: 268e6a0b90fdf4bf5ba74bd70c0da8a6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: JoannaD'ArcIII_Frame_131
+    originalName: 
+    pivot: {x: 0.8552036, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 88
+      width: 221
+      height: 76
+    spriteID: 47d71d5df64bc46578b9e1a989f524e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 88}
+  - name: JoannaD'ArcIII_Frame_132
+    originalName: 
+    pivot: {x: 0.56578946, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 765
+      width: 76
+      height: 76
+    spriteID: bd8de5767b15f4b35963b5f51976c24b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 765}
+  - name: JoannaD'ArcIII_Frame_133
+    originalName: 
+    pivot: {x: 0.5584416, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 425
+      width: 77
+      height: 76
+    spriteID: a43ed1d62843d46d4bdd238caa0eee0c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 425}
+  - name: JoannaD'ArcIII_Frame_134
+    originalName: 
+    pivot: {x: 0.55128205, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 257
+      width: 78
+      height: 76
+    spriteID: a3cd0fdb6e0ec4181b39e27413844d55
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 257}
+  - name: JoannaD'ArcIII_Frame_135
+    originalName: 
+    pivot: {x: 0.55128205, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 341
+      width: 78
+      height: 76
+    spriteID: 02bd17c6c338e41bfa21b5d1fb3651ca
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 341}
+  - name: JoannaD'ArcIII_Frame_136
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 482
+      y: 1936
+      width: 75
+      height: 76
+    spriteID: ec1246fbfe8394090ac64bf048f402e1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 482, y: 1936}
+  - name: JoannaD'ArcIII_Frame_137
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 4
+      width: 75
+      height: 76
+    spriteID: fbdfedb3d9b454d4b9c65cf0e2b9687e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 4}
+  - name: JoannaD'ArcIII_Frame_138
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 88
+      width: 75
+      height: 76
+    spriteID: 163e532d59c1e438faacd4017716cca5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 88}
+  - name: JoannaD'ArcIII_Frame_139
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 172
+      width: 75
+      height: 76
+    spriteID: 9042a9e79da8f4382a5445900122def4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 172}
+  - name: JoannaD'ArcIII_Frame_140
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 256
+      width: 75
+      height: 76
+    spriteID: 138f993a5c99b4dfba3255cff96cbee3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 256}
+  - name: JoannaD'ArcIII_Frame_141
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 340
+      width: 75
+      height: 76
+    spriteID: 9a0f3434e803c4e88b7ffd93551dd410
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 340}
+  - name: JoannaD'ArcIII_Frame_142
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 424
+      width: 75
+      height: 76
+    spriteID: 437762cd0d0ea455db431b2225f4f906
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 424}
+  - name: JoannaD'ArcIII_Frame_143
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 508
+      width: 75
+      height: 76
+    spriteID: 348278c9f3b5642c988ce93249371662
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 508}
+  - name: JoannaD'ArcIII_Frame_144
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 592
+      width: 75
+      height: 76
+    spriteID: 5476c2af156ed4edbbd18734080c3ecc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 592}
+  - name: JoannaD'ArcIII_Frame_145
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 676
+      width: 75
+      height: 76
+    spriteID: ac826a4eaa97949eeb6bd70545b0fc9d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 676}
+  - name: JoannaD'ArcIII_Frame_146
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 760
+      width: 75
+      height: 76
+    spriteID: 59098545a896b40379302bf5bf591fc8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 760}
+  - name: JoannaD'ArcIII_Frame_147
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 844
+      width: 75
+      height: 76
+    spriteID: 6e74cff091d4541f9912b18037baff0d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 844}
+  - name: JoannaD'ArcIII_Frame_148
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 928
+      width: 75
+      height: 76
+    spriteID: deec8c2c3b3db4d7bb4231daa84c6edc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 928}
+  - name: JoannaD'ArcIII_Frame_149
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1012
+      width: 75
+      height: 76
+    spriteID: 70cddf8fc37e24db28881eee424b1913
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1012}
+  - name: JoannaD'ArcIII_Frame_150
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1096
+      width: 75
+      height: 76
+    spriteID: 1558078d70b9a424bbf2e4346679215c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1096}
+  - name: JoannaD'ArcIII_Frame_151
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1180
+      width: 75
+      height: 76
+    spriteID: 26d5cf8d1f57a4f88ac16f8cd9a83fe8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1180}
+  - name: JoannaD'ArcIII_Frame_152
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1264
+      width: 75
+      height: 76
+    spriteID: d640b3a1317e74b2cb39b547b945ca82
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1264}
+  - name: JoannaD'ArcIII_Frame_153
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1348
+      width: 75
+      height: 76
+    spriteID: 9de23319e07d44c71a35d2a5665b4408
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1348}
+  - name: JoannaD'ArcIII_Frame_154
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1432
+      width: 75
+      height: 76
+    spriteID: 485e50564bdad452fbf034148a355c1a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1432}
+  - name: JoannaD'ArcIII_Frame_155
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1516
+      width: 75
+      height: 76
+    spriteID: fa0873a35abd24382970165c977a3766
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1516}
+  - name: JoannaD'ArcIII_Frame_156
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1600
+      width: 75
+      height: 76
+    spriteID: f63fbc00227444c79b97a64999bde0ff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1600}
+  - name: JoannaD'ArcIII_Frame_157
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1684
+      width: 75
+      height: 76
+    spriteID: afbe165cc658b40a7b72cca0878e303f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1684}
+  - name: JoannaD'ArcIII_Frame_158
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1768
+      width: 75
+      height: 76
+    spriteID: b0d172e53f78149f4aa989a05cd0f6bb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1768}
+  - name: JoannaD'ArcIII_Frame_159
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.49999997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 443
+      width: 75
+      height: 82
+    spriteID: bd54fb45503f746e3b09fc1422ce043f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 443}
+  - name: JoannaD'ArcIII_Frame_160
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.48192775}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 172
+      width: 75
+      height: 83
+    spriteID: f09e0dd415bb94b8e96d6025c52fb327
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 172}
+  - name: JoannaD'ArcIII_Frame_161
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1852
+      width: 75
+      height: 76
+    spriteID: 7404aff9ed5354a0c93acc8e9880649b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1852}
+  - name: JoannaD'ArcIII_Frame_162
+    originalName: 
+    pivot: {x: 0.57894737, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 849
+      width: 76
+      height: 76
+    spriteID: 83c2c870168c04ebfb1da864d0ed4c89
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 849}
+  - name: JoannaD'ArcIII_Frame_163
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 565
+      y: 1936
+      width: 75
+      height: 76
+    spriteID: f076085a6ca774d2887ad397d6c75acb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 565, y: 1936}
+  - name: JoannaD'ArcIII_Frame_164
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.5974026}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 87
+      y: 1188
+      width: 75
+      height: 77
+    spriteID: 4d4681589ec704407addc8b36b723e50
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 87, y: 1188}
+  - name: JoannaD'ArcIII_Frame_165
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 648
+      y: 4
+      width: 75
+      height: 76
+    spriteID: aa08d2dd4c5db429f9d15caa30edd5b7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 648, y: 4}
+  - name: JoannaD'ArcIII_Frame_166
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 648
+      y: 88
+      width: 75
+      height: 76
+    spriteID: aba5faf7c04cf449083fe22eb4afb136
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 648, y: 88}
+  - name: JoannaD'ArcIII_Frame_167
+    originalName: 
+    pivot: {x: 0.5733333, y: -0.6184211}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 648
+      y: 172
+      width: 75
+      height: 76
+    spriteID: 017479094011f4c559f699aeba930295
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 648, y: 172}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -1644896941
+    name: JoannaD'ArcIII
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: JoannaD'ArcIII_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 4a8ca093e21d4481c844a3b5a189a8fb
+    - name: JoannaD'ArcIII_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 58a988ee5d3b6412eb990a85d6ac5961
+    - name: JoannaD'ArcIII_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 978a18a1c21f04d3d92c28a055ee0b5c
+    - name: JoannaD'ArcIII_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 67b669654609f4ab49d765f9b31cd1b9
+    - name: JoannaD'ArcIII_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 1b0f0d87257a848a2b56d3a814812fac
+    - name: JoannaD'ArcIII_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 06e16e8e3aaae4cdcbaa5f95cc5c6690
+    - name: JoannaD'ArcIII_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 6c20e24e4fbc043bcb111521fd55e26f
+    - name: JoannaD'ArcIII_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: c2909b72c8d7e4d4c9682678dfa8806b
+    - name: JoannaD'ArcIII_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 38b30c7f8920344babbdcbe03c6ca666
+    - name: JoannaD'ArcIII_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: b0fe04be5c1c44d64860374d70a2226b
+    - name: JoannaD'ArcIII_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ccc41dffd1d384e8993f0bf50d5bc4d7
+    - name: JoannaD'ArcIII_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ce43476bb4c73478eae9e5a605f01391
+    - name: JoannaD'ArcIII_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 1139795f570844f8794126a4ffd4303d
+    - name: JoannaD'ArcIII_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: b1c9e7c85aec041de913811a02a6a98b
+    - name: JoannaD'ArcIII_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: b9bc1aa2e133a4398beb2512ab59bfb9
+    - name: JoannaD'ArcIII_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: fd4c62e87ac854ea39e576eb001df8a4
+    - name: JoannaD'ArcIII_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 3c4ffb550a2ff448eb0035257c620789
+    - name: JoannaD'ArcIII_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 3722ee29e55144653bb0c27f8b26f2a8
+    - name: JoannaD'ArcIII_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: f63c06e9d37fa406ebfc4cfa09918786
+    - name: JoannaD'ArcIII_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 7195cf19b669e44d6b145d010426413e
+    - name: JoannaD'ArcIII_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: f9062173a1c944188a3a0e8d497b23ed
+    - name: JoannaD'ArcIII_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ffbb09dae869d4fc08f975e1d7fec234
+    - name: JoannaD'ArcIII_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: dc6f56e6f8e4d486a9fef7cc645904e1
+    - name: JoannaD'ArcIII_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: bf5004c3fe11944f88d823613161d3bf
+    - name: JoannaD'ArcIII_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 85c28eafc20144269a458bea2310316b
+    - name: JoannaD'ArcIII_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ceafae2c5693c41d5826c69d7bea65ce
+    - name: JoannaD'ArcIII_Frame_26
+      frameIndex: 26
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 4e7df51af05b5451ea966a1e18a16b62
+    - name: JoannaD'ArcIII_Frame_27
+      frameIndex: 27
+      cellRect:
+        x: 21
+        y: 47
+        width: 76
+        height: 76
+      spriteId: 7e012bd632df9411d90c6949bc7734a5
+    - name: JoannaD'ArcIII_Frame_28
+      frameIndex: 28
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 37acca38af4f040338405bab0a2c69b2
+    - name: JoannaD'ArcIII_Frame_29
+      frameIndex: 29
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ab7def19a4e6e4012b38740bce7fc02f
+    - name: JoannaD'ArcIII_Frame_30
+      frameIndex: 30
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 9d8aa2082dfc2423baf5c01a6f6c2ef6
+    - name: JoannaD'ArcIII_Frame_31
+      frameIndex: 31
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: e1952b1808bc34b2791e8fa149aff43a
+    - name: JoannaD'ArcIII_Frame_32
+      frameIndex: 32
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 5f6efc48006a248c48c526b63477ed55
+    - name: JoannaD'ArcIII_Frame_33
+      frameIndex: 33
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 75dc5d6785b7240a99949466a78c53aa
+    - name: JoannaD'ArcIII_Frame_34
+      frameIndex: 34
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: eb8d62196554049c29670df44f098374
+    - name: JoannaD'ArcIII_Frame_35
+      frameIndex: 35
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 93a2ccf125b2947a1a927eac77263adf
+    - name: JoannaD'ArcIII_Frame_36
+      frameIndex: 36
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 15dadfc08d96a4af7a560f1ea26c8685
+    - name: JoannaD'ArcIII_Frame_37
+      frameIndex: 37
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: d10164a34d3c64252b0ad69abecb7257
+    - name: JoannaD'ArcIII_Frame_38
+      frameIndex: 38
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 6eef33fb81d9f468a8a2a20ac803a5eb
+    - name: JoannaD'ArcIII_Frame_39
+      frameIndex: 39
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: eafbb2b767cd94c96b5772d65c4019c6
+    - name: JoannaD'ArcIII_Frame_40
+      frameIndex: 40
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: a8478d00b0ecf45e09c4780fe82ead8a
+    - name: JoannaD'ArcIII_Frame_41
+      frameIndex: 41
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: b739b36552fa1449fb83c79db52d3d66
+    - name: JoannaD'ArcIII_Frame_42
+      frameIndex: 42
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: a51f0210c2a964643bcfa5ae2be578c2
+    - name: JoannaD'ArcIII_Frame_43
+      frameIndex: 43
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 4a1cc100432d143428865d550c56d68e
+    - name: JoannaD'ArcIII_Frame_44
+      frameIndex: 44
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 19ed364af4e5341a488a81b7d6d140b5
+    - name: JoannaD'ArcIII_Frame_45
+      frameIndex: 45
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 6b10b25519a164dbdb6e0ded261f59ac
+    - name: JoannaD'ArcIII_Frame_46
+      frameIndex: 46
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 2664bbafe6e734e469932e5ac6bfc3d6
+    - name: JoannaD'ArcIII_Frame_47
+      frameIndex: 47
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 2f1dbada1910345a3bec265b7b499e09
+    - name: JoannaD'ArcIII_Frame_48
+      frameIndex: 48
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 75d126f341d8d409c8c275ff8ac6dc6e
+    - name: JoannaD'ArcIII_Frame_49
+      frameIndex: 49
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 47f2077e024c348a9b002c98271acd6a
+    - name: JoannaD'ArcIII_Frame_50
+      frameIndex: 50
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: a979e5542df9a4bd480259de9f2724a1
+    - name: JoannaD'ArcIII_Frame_51
+      frameIndex: 51
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 7ffe52cf8448d4bc58ecaae25f1dd2d8
+    - name: JoannaD'ArcIII_Frame_52
+      frameIndex: 52
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: aaca24a1b14f6444eb0fa647e4ea96b1
+    - name: JoannaD'ArcIII_Frame_53
+      frameIndex: 53
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 758694ba771a349bcabeafa8b5bba218
+    - name: JoannaD'ArcIII_Frame_54
+      frameIndex: 54
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: a70f0ca26c5244c55b097df63d8163ad
+    - name: JoannaD'ArcIII_Frame_55
+      frameIndex: 55
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: e022201f4352f440abc9a77d347a2a30
+    - name: JoannaD'ArcIII_Frame_56
+      frameIndex: 56
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 7e8477a36aeda4cdeb933cc079d0c3cb
+    - name: JoannaD'ArcIII_Frame_57
+      frameIndex: 57
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 34015fc39d5e54defa8d3198334002af
+    - name: JoannaD'ArcIII_Frame_58
+      frameIndex: 58
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 4204e1f253d3c48638f97ee4fbc66157
+    - name: JoannaD'ArcIII_Frame_59
+      frameIndex: 59
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 98bc1f519c8aa418ebb402d038cbad6d
+    - name: JoannaD'ArcIII_Frame_60
+      frameIndex: 60
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 5fe1a2318eed9442a8333813569e7709
+    - name: JoannaD'ArcIII_Frame_61
+      frameIndex: 61
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: e5ab384329f1b42c08f012953bdd30ea
+    - name: JoannaD'ArcIII_Frame_62
+      frameIndex: 62
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 0ec3fd6f8756a4fa5befd2d9a872d597
+    - name: JoannaD'ArcIII_Frame_63
+      frameIndex: 63
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 1e4a558ab213e4bd2a2aa3851c3b74f3
+    - name: JoannaD'ArcIII_Frame_64
+      frameIndex: 64
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: e3c9b47fff5094df999d86f1c208617b
+    - name: JoannaD'ArcIII_Frame_65
+      frameIndex: 65
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 2f7d9aff87db44ef0b0134dff692c01a
+    - name: JoannaD'ArcIII_Frame_66
+      frameIndex: 66
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 96abd6a52c3284101ab2af4fcac4315a
+    - name: JoannaD'ArcIII_Frame_67
+      frameIndex: 67
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: e0c9ce68511e14eb59afaa65c521c4cd
+    - name: JoannaD'ArcIII_Frame_68
+      frameIndex: 68
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 367695816e7274f59a83ec3b4fb23a23
+    - name: JoannaD'ArcIII_Frame_69
+      frameIndex: 69
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 7f7613bf06c1249bba880817ca8209f4
+    - name: JoannaD'ArcIII_Frame_70
+      frameIndex: 70
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 02b5dcaf4ea6a416d8b013c10586a463
+    - name: JoannaD'ArcIII_Frame_71
+      frameIndex: 71
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 194864cba6a224028ac7cf66e62fb8d6
+    - name: JoannaD'ArcIII_Frame_72
+      frameIndex: 72
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 0a2de966e0db546b9b28fc73a0f59c6d
+    - name: JoannaD'ArcIII_Frame_73
+      frameIndex: 73
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 078c3094dcd5e4ed6ac38a2229c00f8a
+    - name: JoannaD'ArcIII_Frame_74
+      frameIndex: 74
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: bbe95453bb76741c0b31ccf089d9ae32
+    - name: JoannaD'ArcIII_Frame_75
+      frameIndex: 75
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 5d1985d983ea7418c935680e2e669546
+    - name: JoannaD'ArcIII_Frame_76
+      frameIndex: 76
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: f692354b0512242b3a8ca24a8d6f9903
+    - name: JoannaD'ArcIII_Frame_77
+      frameIndex: 77
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 4dfacaf4475674a96a1830e8064ea596
+    - name: JoannaD'ArcIII_Frame_78
+      frameIndex: 78
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 01e7b38e0a8d543a29ab7dc8beb9346e
+    - name: JoannaD'ArcIII_Frame_79
+      frameIndex: 79
+      cellRect:
+        x: 21
+        y: 45
+        width: 75
+        height: 78
+      spriteId: 377f011015de0405ab5eb2574712b432
+    - name: JoannaD'ArcIII_Frame_80
+      frameIndex: 80
+      cellRect:
+        x: 21
+        y: 45
+        width: 75
+        height: 78
+      spriteId: 416162451013d475f806847db3ac12b5
+    - name: JoannaD'ArcIII_Frame_81
+      frameIndex: 81
+      cellRect:
+        x: 21
+        y: 45
+        width: 75
+        height: 78
+      spriteId: 26efb050528574d57abb8214b7d7468b
+    - name: JoannaD'ArcIII_Frame_82
+      frameIndex: 82
+      cellRect:
+        x: 21
+        y: 45
+        width: 75
+        height: 78
+      spriteId: 204399b3d544a46dfa4f4120ff389a33
+    - name: JoannaD'ArcIII_Frame_83
+      frameIndex: 83
+      cellRect:
+        x: 21
+        y: 45
+        width: 75
+        height: 78
+      spriteId: 95e1d4fe192d6458bad6ce4972b4280e
+    - name: JoannaD'ArcIII_Frame_84
+      frameIndex: 84
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: f347cb4e811bd47bd89b5255a46ae397
+    - name: JoannaD'ArcIII_Frame_85
+      frameIndex: 85
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: e19f91f68fa3e432e8ee037d6812cc06
+    - name: JoannaD'ArcIII_Frame_86
+      frameIndex: 86
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 3bb251ea0b69147a18da2bb2614690a2
+    - name: JoannaD'ArcIII_Frame_87
+      frameIndex: 87
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 8a6cf0c2707d046cea39a6d3eb4c03ca
+    - name: JoannaD'ArcIII_Frame_88
+      frameIndex: 88
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: a26a243018524406b88f8b54045122ef
+    - name: JoannaD'ArcIII_Frame_89
+      frameIndex: 89
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 291e9371b991c461db2d7eda7198db8a
+    - name: JoannaD'ArcIII_Frame_90
+      frameIndex: 90
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 399c1b34238f7499c86c696a11f4a604
+    - name: JoannaD'ArcIII_Frame_91
+      frameIndex: 91
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 27e0ee3d5aa0a4435bdded4db6a1b675
+    - name: JoannaD'ArcIII_Frame_92
+      frameIndex: 92
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 2bb661fca3b254cbf9acd5819ca0cef3
+    - name: JoannaD'ArcIII_Frame_93
+      frameIndex: 93
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 44216fedd49c14e5e823563327763c13
+    - name: JoannaD'ArcIII_Frame_94
+      frameIndex: 94
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 3862a117404fa470789094d0931d272e
+    - name: JoannaD'ArcIII_Frame_95
+      frameIndex: 95
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 75cfa192779e540d9b6b98e8ee286ab7
+    - name: JoannaD'ArcIII_Frame_96
+      frameIndex: 96
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 818407325a43542b797da3024486fcd1
+    - name: JoannaD'ArcIII_Frame_97
+      frameIndex: 97
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: e793402bbc9a54a20a2eb9f1d93f2758
+    - name: JoannaD'ArcIII_Frame_98
+      frameIndex: 98
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 1ac358acd12a9434d8d10abbb4cbe825
+    - name: JoannaD'ArcIII_Frame_99
+      frameIndex: 99
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: febbed6dffcd6442db0755dd332af302
+    - name: JoannaD'ArcIII_Frame_100
+      frameIndex: 100
+      cellRect:
+        x: 21
+        y: 45
+        width: 75
+        height: 78
+      spriteId: a8a55076fcd1845869fd4787ec596116
+    - name: JoannaD'ArcIII_Frame_101
+      frameIndex: 101
+      cellRect:
+        x: 21
+        y: 44
+        width: 75
+        height: 79
+      spriteId: 6b8b2040de1c448fbb4c5cf9b05897e7
+    - name: JoannaD'ArcIII_Frame_102
+      frameIndex: 102
+      cellRect:
+        x: 21
+        y: 44
+        width: 75
+        height: 79
+      spriteId: 9c8763505bd3248db807a41acb41c41d
+    - name: JoannaD'ArcIII_Frame_103
+      frameIndex: 103
+      cellRect:
+        x: 21
+        y: 43
+        width: 75
+        height: 80
+      spriteId: 174f98a7847344b31b6072ed852b2884
+    - name: JoannaD'ArcIII_Frame_104
+      frameIndex: 104
+      cellRect:
+        x: 21
+        y: 42
+        width: 75
+        height: 81
+      spriteId: 0f6e536c188c941a28be9b52148450e1
+    - name: JoannaD'ArcIII_Frame_105
+      frameIndex: 105
+      cellRect:
+        x: 21
+        y: 41
+        width: 75
+        height: 82
+      spriteId: 7d12ef1a0f62f4585850132b5248fd36
+    - name: JoannaD'ArcIII_Frame_106
+      frameIndex: 106
+      cellRect:
+        x: 21
+        y: 42
+        width: 75
+        height: 81
+      spriteId: 111be40f33bc94a0c9d3629f017f3d63
+    - name: JoannaD'ArcIII_Frame_107
+      frameIndex: 107
+      cellRect:
+        x: 21
+        y: 46
+        width: 75
+        height: 77
+      spriteId: 58ecbd28c0e444a098dff94e91125401
+    - name: JoannaD'ArcIII_Frame_108
+      frameIndex: 108
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 6eca585bcd44d4173aa2c75eed5ba3eb
+    - name: JoannaD'ArcIII_Frame_109
+      frameIndex: 109
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 95e9375fdd57a4c1287b26b0faa0a578
+    - name: JoannaD'ArcIII_Frame_110
+      frameIndex: 110
+      cellRect:
+        x: 21
+        y: 46
+        width: 75
+        height: 77
+      spriteId: 12b09fd72d75d484e931ff68e68f2afb
+    - name: JoannaD'ArcIII_Frame_111
+      frameIndex: 111
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: a626f9aa6a22148c38ea49cd630227fb
+    - name: JoannaD'ArcIII_Frame_112
+      frameIndex: 112
+      cellRect:
+        x: 21
+        y: 46
+        width: 77
+        height: 77
+      spriteId: e470f77eabd164609a9e9d0700921f29
+    - name: JoannaD'ArcIII_Frame_113
+      frameIndex: 113
+      cellRect:
+        x: 21
+        y: 44
+        width: 75
+        height: 79
+      spriteId: e098bec8dff9b49aeae7b24d5502b6c8
+    - name: JoannaD'ArcIII_Frame_114
+      frameIndex: 114
+      cellRect:
+        x: 21
+        y: 44
+        width: 75
+        height: 79
+      spriteId: 068ea4f568a064930bb69a32560e81c5
+    - name: JoannaD'ArcIII_Frame_115
+      frameIndex: 115
+      cellRect:
+        x: 21
+        y: 42
+        width: 75
+        height: 81
+      spriteId: 9ffc39a4e28f04118ba0061e01bdea6e
+    - name: JoannaD'ArcIII_Frame_116
+      frameIndex: 116
+      cellRect:
+        x: 21
+        y: 42
+        width: 75
+        height: 81
+      spriteId: 4aff3f9ee6f404e25b334cd830bb4b42
+    - name: JoannaD'ArcIII_Frame_117
+      frameIndex: 117
+      cellRect:
+        x: 21
+        y: 42
+        width: 75
+        height: 81
+      spriteId: bb2ea0e7a879a4977afa710f0528ffa8
+    - name: JoannaD'ArcIII_Frame_118
+      frameIndex: 118
+      cellRect:
+        x: 21
+        y: 41
+        width: 75
+        height: 82
+      spriteId: 9b85a858ddd8b45c3978a39529852fc8
+    - name: JoannaD'ArcIII_Frame_119
+      frameIndex: 119
+      cellRect:
+        x: 21
+        y: 45
+        width: 75
+        height: 78
+      spriteId: adf31474094a24f6fadaa5e07e0699a2
+    - name: JoannaD'ArcIII_Frame_120
+      frameIndex: 120
+      cellRect:
+        x: 21
+        y: 42
+        width: 75
+        height: 81
+      spriteId: d78a2e21830624461a20ba0fd788a96b
+    - name: JoannaD'ArcIII_Frame_121
+      frameIndex: 121
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 33094bae31cbf4f3393b963c6359bef3
+    - name: JoannaD'ArcIII_Frame_122
+      frameIndex: 122
+      cellRect:
+        x: 21
+        y: 42
+        width: 75
+        height: 81
+      spriteId: aa5c19802b9484b09946762192b2536d
+    - name: JoannaD'ArcIII_Frame_123
+      frameIndex: 123
+      cellRect:
+        x: 21
+        y: 46
+        width: 75
+        height: 77
+      spriteId: 617754e41532047a29d17214d274ae18
+    - name: JoannaD'ArcIII_Frame_124
+      frameIndex: 124
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: c5e81e7198b744e80b9ecde2c5a883ff
+    - name: JoannaD'ArcIII_Frame_125
+      frameIndex: 125
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ff418c74fb4cd48ffb2b177d66e28313
+    - name: JoannaD'ArcIII_Frame_126
+      frameIndex: 126
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 29bf687cdd38a42b88b35f29bd94e735
+    - name: JoannaD'ArcIII_Frame_127
+      frameIndex: 127
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 9e55c142cb55b4ee58136bc7e94122da
+    - name: JoannaD'ArcIII_Frame_128
+      frameIndex: 128
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ff8a00ba7b95c427dbefe7f94f872197
+    - name: JoannaD'ArcIII_Frame_129
+      frameIndex: 129
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 152f751f5da4c4b98adf7c3fe0c023b5
+    - name: JoannaD'ArcIII_Frame_130
+      frameIndex: 130
+      cellRect:
+        x: -125
+        y: 47
+        width: 221
+        height: 76
+      spriteId: 268e6a0b90fdf4bf5ba74bd70c0da8a6
+    - name: JoannaD'ArcIII_Frame_131
+      frameIndex: 131
+      cellRect:
+        x: -125
+        y: 47
+        width: 221
+        height: 76
+      spriteId: 47d71d5df64bc46578b9e1a989f524e7
+    - name: JoannaD'ArcIII_Frame_132
+      frameIndex: 132
+      cellRect:
+        x: 21
+        y: 47
+        width: 76
+        height: 76
+      spriteId: bd8de5767b15f4b35963b5f51976c24b
+    - name: JoannaD'ArcIII_Frame_133
+      frameIndex: 133
+      cellRect:
+        x: 21
+        y: 47
+        width: 77
+        height: 76
+      spriteId: a43ed1d62843d46d4bdd238caa0eee0c
+    - name: JoannaD'ArcIII_Frame_134
+      frameIndex: 134
+      cellRect:
+        x: 21
+        y: 47
+        width: 78
+        height: 76
+      spriteId: a3cd0fdb6e0ec4181b39e27413844d55
+    - name: JoannaD'ArcIII_Frame_135
+      frameIndex: 135
+      cellRect:
+        x: 21
+        y: 47
+        width: 78
+        height: 76
+      spriteId: 02bd17c6c338e41bfa21b5d1fb3651ca
+    - name: JoannaD'ArcIII_Frame_136
+      frameIndex: 136
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ec1246fbfe8394090ac64bf048f402e1
+    - name: JoannaD'ArcIII_Frame_137
+      frameIndex: 137
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: fbdfedb3d9b454d4b9c65cf0e2b9687e
+    - name: JoannaD'ArcIII_Frame_138
+      frameIndex: 138
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 163e532d59c1e438faacd4017716cca5
+    - name: JoannaD'ArcIII_Frame_139
+      frameIndex: 139
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 9042a9e79da8f4382a5445900122def4
+    - name: JoannaD'ArcIII_Frame_140
+      frameIndex: 140
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 138f993a5c99b4dfba3255cff96cbee3
+    - name: JoannaD'ArcIII_Frame_141
+      frameIndex: 141
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 9a0f3434e803c4e88b7ffd93551dd410
+    - name: JoannaD'ArcIII_Frame_142
+      frameIndex: 142
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 437762cd0d0ea455db431b2225f4f906
+    - name: JoannaD'ArcIII_Frame_143
+      frameIndex: 143
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 348278c9f3b5642c988ce93249371662
+    - name: JoannaD'ArcIII_Frame_144
+      frameIndex: 144
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 5476c2af156ed4edbbd18734080c3ecc
+    - name: JoannaD'ArcIII_Frame_145
+      frameIndex: 145
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: ac826a4eaa97949eeb6bd70545b0fc9d
+    - name: JoannaD'ArcIII_Frame_146
+      frameIndex: 146
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 59098545a896b40379302bf5bf591fc8
+    - name: JoannaD'ArcIII_Frame_147
+      frameIndex: 147
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 6e74cff091d4541f9912b18037baff0d
+    - name: JoannaD'ArcIII_Frame_148
+      frameIndex: 148
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: deec8c2c3b3db4d7bb4231daa84c6edc
+    - name: JoannaD'ArcIII_Frame_149
+      frameIndex: 149
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 70cddf8fc37e24db28881eee424b1913
+    - name: JoannaD'ArcIII_Frame_150
+      frameIndex: 150
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 1558078d70b9a424bbf2e4346679215c
+    - name: JoannaD'ArcIII_Frame_151
+      frameIndex: 151
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 26d5cf8d1f57a4f88ac16f8cd9a83fe8
+    - name: JoannaD'ArcIII_Frame_152
+      frameIndex: 152
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: d640b3a1317e74b2cb39b547b945ca82
+    - name: JoannaD'ArcIII_Frame_153
+      frameIndex: 153
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 9de23319e07d44c71a35d2a5665b4408
+    - name: JoannaD'ArcIII_Frame_154
+      frameIndex: 154
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 485e50564bdad452fbf034148a355c1a
+    - name: JoannaD'ArcIII_Frame_155
+      frameIndex: 155
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: fa0873a35abd24382970165c977a3766
+    - name: JoannaD'ArcIII_Frame_156
+      frameIndex: 156
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: f63fbc00227444c79b97a64999bde0ff
+    - name: JoannaD'ArcIII_Frame_157
+      frameIndex: 157
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: afbe165cc658b40a7b72cca0878e303f
+    - name: JoannaD'ArcIII_Frame_158
+      frameIndex: 158
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: b0d172e53f78149f4aa989a05cd0f6bb
+    - name: JoannaD'ArcIII_Frame_159
+      frameIndex: 159
+      cellRect:
+        x: 21
+        y: 41
+        width: 75
+        height: 82
+      spriteId: bd54fb45503f746e3b09fc1422ce043f
+    - name: JoannaD'ArcIII_Frame_160
+      frameIndex: 160
+      cellRect:
+        x: 21
+        y: 40
+        width: 75
+        height: 83
+      spriteId: f09e0dd415bb94b8e96d6025c52fb327
+    - name: JoannaD'ArcIII_Frame_161
+      frameIndex: 161
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 7404aff9ed5354a0c93acc8e9880649b
+    - name: JoannaD'ArcIII_Frame_162
+      frameIndex: 162
+      cellRect:
+        x: 20
+        y: 47
+        width: 76
+        height: 76
+      spriteId: 83c2c870168c04ebfb1da864d0ed4c89
+    - name: JoannaD'ArcIII_Frame_163
+      frameIndex: 163
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: f076085a6ca774d2887ad397d6c75acb
+    - name: JoannaD'ArcIII_Frame_164
+      frameIndex: 164
+      cellRect:
+        x: 21
+        y: 46
+        width: 75
+        height: 77
+      spriteId: 4d4681589ec704407addc8b36b723e50
+    - name: JoannaD'ArcIII_Frame_165
+      frameIndex: 165
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: aa08d2dd4c5db429f9d15caa30edd5b7
+    - name: JoannaD'ArcIII_Frame_166
+      frameIndex: 166
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: aba5faf7c04cf449083fe22eb4afb136
+    - name: JoannaD'ArcIII_Frame_167
+      frameIndex: 167
+      cellRect:
+        x: 21
+        y: 47
+        width: 75
+        height: 76
+      spriteId: 017479094011f4c559f699aeba930295
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 128, y: 144}

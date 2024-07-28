@@ -38,10 +38,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         private readonly Func<int> _attack;
         private readonly Func<float> _cool;
 
-        public CharacterBattleStat(Stat<CharacterStat> stat)
+        public CharacterBattleStat(CreatureStat<CharacterStat> creatureStat)
         {
-            _attack = () => stat.Current.Damage;
-            _cool = () => stat.Current.CoolTime;
+            _attack = () => creatureStat.Current.Damage;
+            _cool = () => creatureStat.Current.CoolTime;
         }
 
         public int GetAttack()

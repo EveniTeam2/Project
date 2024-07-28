@@ -1,8 +1,8 @@
 namespace Unit.GameScene.Units.Creatures.Module
 {
-    public class Stat<T>
+    public class CreatureStat<T>
     {
-        public Stat(T origin)
+        public CreatureStat(T origin)
         {
             Origin = origin;
             Current = origin;

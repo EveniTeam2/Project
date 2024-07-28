@@ -1,0 +1,2600 @@
+fileFormatVersion: 2
+guid: dd460ea4cfe694859977de41975984a9
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: FemaleGoblin_Frame_10
+    originalName: 
+    pivot: {x: 0.4444445, y: -1.0227273}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 887
+      width: 36
+      height: 44
+    spriteID: 0b0c2a60bd59d4c348c842501d30e3c4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 887}
+  - name: FemaleGoblin_Frame_11
+    originalName: 
+    pivot: {x: 0.4705883, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 64
+      y: 470
+      width: 34
+      height: 45
+    spriteID: 5fd0bfcb5827a4332a97025af9d8fd18
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 64, y: 470}
+  - name: FemaleGoblin_Frame_12
+    originalName: 
+    pivot: {x: 0.43749994, y: -1.0731708}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 898
+      width: 32
+      height: 41
+    spriteID: 89347747554be4ff1ab7475b51f2d37f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 898}
+  - name: FemaleGoblin_Frame_13
+    originalName: 
+    pivot: {x: 0.39285707, y: -1.0476191}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 122
+      width: 28
+      height: 42
+    spriteID: 77312a3cce75b4c5ea47c2546a4ec0b7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 122}
+  - name: FemaleGoblin_Frame_14
+    originalName: 
+    pivot: {x: 0.42424238, y: -1.0714285}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 596
+      width: 33
+      height: 42
+    spriteID: 3ac4aac40e9764af797f5cfece19c830
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 596}
+  - name: FemaleGoblin_Frame_15
+    originalName: 
+    pivot: {x: 0.46875, y: -1.0714285}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 696
+      width: 32
+      height: 42
+    spriteID: fcd20c59555f741b0ae5d5e0c69be2ad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 696}
+  - name: FemaleGoblin_Frame_16
+    originalName: 
+    pivot: {x: 0.50000006, y: -1.0476191}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 746
+      width: 32
+      height: 42
+    spriteID: 013677436189d4b458969e6cc8d271bb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 746}
+  - name: FemaleGoblin_Frame_17
+    originalName: 
+    pivot: {x: 0.48275858, y: -1.0731708}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 270
+      y: 240
+      width: 29
+      height: 41
+    spriteID: 8f73d26181e034af2822ddafe5eed590
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 270, y: 240}
+  - name: FemaleGoblin_Frame_18
+    originalName: 
+    pivot: {x: 0.45161283, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 796
+      width: 31
+      height: 43
+    spriteID: ae0a660e1bd6242ad9ef5c0f620210ba
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 796}
+  - name: FemaleGoblin_Frame_19
+    originalName: 
+    pivot: {x: 0.45454547, y: -1.0465117}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 545
+      width: 33
+      height: 43
+    spriteID: ceff053765e0a477b8e4fbd0bd95956b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 545}
+  - name: FemaleGoblin_Frame_35
+    originalName: 
+    pivot: {x: 0.3846154, y: -0.9361703}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 485
+      width: 39
+      height: 47
+    spriteID: 48cb6474399934d67a2a9e6f884c6ae3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 485}
+  - name: FemaleGoblin_Frame_36
+    originalName: 
+    pivot: {x: 0.4193549, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 66
+      y: 412
+      width: 31
+      height: 45
+    spriteID: cd088122c1df94029b49339238811550
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 66, y: 412}
+  - name: FemaleGoblin_Frame_37
+    originalName: 
+    pivot: {x: 0.47222218, y: -0.84615386}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 618
+      width: 36
+      height: 52
+    spriteID: f9542c96a6c6b42e48e3bbef8921dda5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 618}
+  - name: FemaleGoblin_Frame_38
+    originalName: 
+    pivot: {x: 0.48648646, y: -0.8}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 862
+      width: 37
+      height: 55
+    spriteID: e20ca225438bf49f989c5f28eb52a020
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 862}
+  - name: FemaleGoblin_Frame_39
+    originalName: 
+    pivot: {x: 0.52777785, y: -0.74576277}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 671
+      width: 36
+      height: 59
+    spriteID: 35df6bb6187ca453b9998d09f6888e4f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 671}
+  - name: FemaleGoblin_Frame_40
+    originalName: 
+    pivot: {x: 0.4705883, y: -0.73333335}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 794
+      width: 34
+      height: 60
+    spriteID: 4c3d414f41da6444f88087a896cea544
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 794}
+  - name: FemaleGoblin_Frame_41
+    originalName: 
+    pivot: {x: 0.32758626, y: -0.73333335}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 122
+      width: 58
+      height: 60
+    spriteID: fc18ccd99c43b4271966d67c0376d5bb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 122}
+  - name: FemaleGoblin_Frame_42
+    originalName: 
+    pivot: {x: 0.34375003, y: -0.88}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 190
+      width: 64
+      height: 50
+    spriteID: 615570076617a4a0dbb52a418ce1db4c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 190}
+  - name: FemaleGoblin_Frame_43
+    originalName: 
+    pivot: {x: 0.31147546, y: -0.86274517}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 248
+      width: 61
+      height: 51
+    spriteID: bca6744ec6438419db3bdc5a796dc9f5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 248}
+  - name: FemaleGoblin_Frame_54
+    originalName: 
+    pivot: {x: 0.6666666, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 947
+      width: 30
+      height: 43
+    spriteID: ef18b2e533e76444ca702a2fefd38839
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 947}
+  - name: FemaleGoblin_Frame_55
+    originalName: 
+    pivot: {x: 0.72727275, y: -1.0476191}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 646
+      width: 33
+      height: 42
+    spriteID: 8e2faf7c7187b46bb84023a29b9bde32
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 646}
+  - name: FemaleGoblin_Frame_56
+    originalName: 
+    pivot: {x: 0.6666667, y: -1.0731708}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 496
+      width: 36
+      height: 41
+    spriteID: b670cd8d823f14c5d880516e38e4a64a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 496}
+  - name: FemaleGoblin_Frame_57
+    originalName: 
+    pivot: {x: 0.5161291, y: -1.1891892}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 271
+      y: 144
+      width: 31
+      height: 37
+    spriteID: c12dfb4b19940454d8b596e4b0a88b0e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 271, y: 144}
+  - name: FemaleGoblin_Frame_58
+    originalName: 
+    pivot: {x: 0.33999994, y: -1.1578948}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 144
+      width: 50
+      height: 38
+    spriteID: 69a2f2e14db394aeab74927e018507c7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 144}
+  - name: FemaleGoblin_Frame_59
+    originalName: 
+    pivot: {x: 0.338983, y: -1.2571429}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 189
+      width: 59
+      height: 35
+    spriteID: 198c0d6946a6e4d7586f115010013a48
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 189}
+  - name: FemaleGoblin_Frame_60
+    originalName: 
+    pivot: {x: 0.32758626, y: -1.2571429}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 232
+      width: 58
+      height: 35
+    spriteID: 0a35e587d2f474771967102885d9ec4e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 232}
+  - name: FemaleGoblin_Frame_0
+    originalName: 
+    pivot: {x: 0.4054054, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 782
+      width: 37
+      height: 45
+    spriteID: 5fd9d96d2570542e5bf6d297c8180c86
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 782}
+  - name: FemaleGoblin_Frame_1
+    originalName: 
+    pivot: {x: 0.4358974, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 745
+      width: 39
+      height: 45
+    spriteID: f381ecb22a144448fb6de7d1d5ecd21b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 745}
+  - name: FemaleGoblin_Frame_2
+    originalName: 
+    pivot: {x: 0.4736842, y: -1}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 678
+      width: 38
+      height: 44
+    spriteID: 4246cd32076174b6a9a91d27cb6e61b5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 678}
+  - name: FemaleGoblin_Frame_3
+    originalName: 
+    pivot: {x: 0.4736842, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 941
+      width: 38
+      height: 43
+    spriteID: 1eea758595daf4f80a2e537aa6b29264
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 941}
+  - name: FemaleGoblin_Frame_4
+    originalName: 
+    pivot: {x: 0.46341467, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 540
+      width: 41
+      height: 43
+    spriteID: 034ca3ba987494515aa2b1e5fac3f5b3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 540}
+  - name: FemaleGoblin_Frame_5
+    originalName: 
+    pivot: {x: 0.44736835, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 475
+      width: 38
+      height: 43
+    spriteID: bf3dac17fdd424e05b3d33badf576f18
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 475}
+  - name: FemaleGoblin_Frame_6
+    originalName: 
+    pivot: {x: 0.43243247, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 785
+      width: 37
+      height: 43
+    spriteID: abc56ef7d56554df483a9ce1bca7984d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 785}
+  - name: FemaleGoblin_Frame_7
+    originalName: 
+    pivot: {x: 0.4166667, y: -0.95555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 679
+      width: 36
+      height: 45
+    spriteID: 92e93af85e18c40cf9310bb8cae766cb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 679}
+  - name: FemaleGoblin_Frame_8
+    originalName: 
+    pivot: {x: 0.44117647, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 284
+      width: 34
+      height: 45
+    spriteID: 58857fd2b8fe0455bb2c899be2d6d33d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 284}
+  - name: FemaleGoblin_Frame_9
+    originalName: 
+    pivot: {x: 0.41176465, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 337
+      width: 34
+      height: 45
+    spriteID: d228a91864fc84fff92835e2803383d7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 337}
+  - name: FemaleGoblin_Frame_20
+    originalName: 
+    pivot: {x: 0.41176465, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 390
+      width: 34
+      height: 45
+    spriteID: d4c9244543a4a4da7ab0c916b661d373
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 390}
+  - name: FemaleGoblin_Frame_21
+    originalName: 
+    pivot: {x: 0.41463408, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 591
+      width: 41
+      height: 43
+    spriteID: bbb178b71d7a14477b646d181eb83917
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 591}
+  - name: FemaleGoblin_Frame_22
+    originalName: 
+    pivot: {x: 0.382353, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 443
+      width: 34
+      height: 45
+    spriteID: 580beca0a302949a496fc333749c0830
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 443}
+  - name: FemaleGoblin_Frame_23
+    originalName: 
+    pivot: {x: 0.40000007, y: -1.0697675}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 957
+      width: 40
+      height: 43
+    spriteID: 99102311c1f814a4bbe311c1b3f4f688
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 957}
+  - name: FemaleGoblin_Frame_24
+    originalName: 
+    pivot: {x: 0.41025648, y: -1.0697675}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 373
+      width: 39
+      height: 43
+    spriteID: e50700df1fb894328b5f44bbc0c26e99
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 373}
+  - name: FemaleGoblin_Frame_25
+    originalName: 
+    pivot: {x: 0.41025648, y: -1.0697675}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 424
+      width: 39
+      height: 43
+    spriteID: 79f58d64fdd284ba7834b08dac062cb5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 424}
+  - name: FemaleGoblin_Frame_26
+    originalName: 
+    pivot: {x: 0.40000007, y: -1.0454546}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 693
+      width: 40
+      height: 44
+    spriteID: f814a1f30119d41c28b7803619b278b8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 693}
+  - name: FemaleGoblin_Frame_27
+    originalName: 
+    pivot: {x: 0.47727275, y: -1.0909091}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 976
+      width: 44
+      height: 44
+    spriteID: ea4b2e0bf0e7a45b5848e1f526e294dc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 976}
+  - name: FemaleGoblin_Frame_28
+    originalName: 
+    pivot: {x: 0.50000006, y: -1.0909091}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 328
+      width: 44
+      height: 44
+    spriteID: 034559916b5d44593afd3a4062f9f897
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 328}
+  - name: FemaleGoblin_Frame_29
+    originalName: 
+    pivot: {x: 0.511628, y: -1.0666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 432
+      width: 43
+      height: 45
+    spriteID: 471f52252c3fa414e8ac8f750d614752
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 432}
+  - name: FemaleGoblin_Frame_30
+    originalName: 
+    pivot: {x: 0.50000006, y: -1.0909091}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 380
+      width: 44
+      height: 44
+    spriteID: 6f16aa4fedd0c4ab5be3bdda492cb2cf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 380}
+  - name: FemaleGoblin_Frame_31
+    originalName: 
+    pivot: {x: 0.47727275, y: -0.8958333}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 738
+      width: 44
+      height: 48
+    spriteID: bbcaa55bc78dc4e9d969ac6b02039145
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 738}
+  - name: FemaleGoblin_Frame_32
+    originalName: 
+    pivot: {x: 0.48936167, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 925
+      width: 47
+      height: 43
+    spriteID: 0a2353538e94649829db856c9b3d5fa5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 925}
+  - name: FemaleGoblin_Frame_33
+    originalName: 
+    pivot: {x: 0.5, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 618
+      width: 48
+      height: 45
+    spriteID: 62ccfe669379842c9b9f9f1929f96ab3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 618}
+  - name: FemaleGoblin_Frame_34
+    originalName: 
+    pivot: {x: 0.3409091, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 275
+      width: 44
+      height: 45
+    spriteID: 194139aaa4f43404e8eb40661630bfc5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 275}
+  - name: FemaleGoblin_Frame_44
+    originalName: 
+    pivot: {x: 0.3, y: -0.9166667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 356
+      width: 60
+      height: 48
+    spriteID: ee9fba74abb68445da56845fc0cf6c03
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 356}
+  - name: FemaleGoblin_Frame_45
+    originalName: 
+    pivot: {x: 0.35555562, y: -1.0731708}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 275
+      width: 45
+      height: 41
+    spriteID: d7b1eadf166304dc998323bd939828e1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 275}
+  - name: FemaleGoblin_Frame_46
+    originalName: 
+    pivot: {x: 0.3846154, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 798
+      width: 39
+      height: 45
+    spriteID: 0eabf2f984a8a4111a10de0841aa5a24
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 798}
+  - name: FemaleGoblin_Frame_47
+    originalName: 
+    pivot: {x: 0.3846154, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 851
+      width: 39
+      height: 45
+    spriteID: 225c01f3f32b24df6acf4c30b86f9772
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 851}
+  - name: FemaleGoblin_Frame_48
+    originalName: 
+    pivot: {x: 0.39999995, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 939
+      width: 35
+      height: 45
+    spriteID: ac4cf2ebeaa7c4b4982e81c08fc96c68
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 939}
+  - name: FemaleGoblin_Frame_49
+    originalName: 
+    pivot: {x: 0.4054054, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 835
+      width: 37
+      height: 45
+    spriteID: bd6cd25d46595491abf6acdc9e2eccda
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 835}
+  - name: FemaleGoblin_Frame_50
+    originalName: 
+    pivot: {x: 0.42105266, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 526
+      width: 38
+      height: 43
+    spriteID: 36b4dedfc9e7f471abd2b261f4f5aed5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 526}
+  - name: FemaleGoblin_Frame_51
+    originalName: 
+    pivot: {x: 0.4444445, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 233
+      width: 36
+      height: 43
+    spriteID: 49dddd21fee7c424da329803856a9984
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 233}
+  - name: FemaleGoblin_Frame_52
+    originalName: 
+    pivot: {x: 0.5161291, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 847
+      width: 31
+      height: 43
+    spriteID: 2e4aad884928c479d9affb493043019a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 847}
+  - name: FemaleGoblin_Frame_53
+    originalName: 
+    pivot: {x: 0.5517242, y: -1.0476191}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 270
+      y: 190
+      width: 29
+      height: 42
+    spriteID: 0b19c244e6a4b4ac98e6a3052580fd78
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 270, y: 190}
+  - name: FemaleGoblin_Frame_61
+    originalName: 
+    pivot: {x: 0.3333333, y: -1.1891892}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 573
+      width: 60
+      height: 37
+    spriteID: 6f47906844ecb4db480a12db4ddda6ab
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 573}
+  - name: FemaleGoblin_Frame_62
+    originalName: 
+    pivot: {x: 0.40816322, y: -1.1282052}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 97
+      width: 49
+      height: 39
+    spriteID: ed90d1f846a9d4a3b9e6d2e472be9aeb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 97}
+  - name: FemaleGoblin_Frame_63
+    originalName: 
+    pivot: {x: 0.35555562, y: -1.0731708}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 324
+      width: 45
+      height: 41
+    spriteID: 1fc4b1910111a4bcfb246d05bd2737d9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 324}
+  - name: FemaleGoblin_Frame_64
+    originalName: 
+    pivot: {x: 0.4054054, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 888
+      width: 37
+      height: 45
+    spriteID: 20e7a4dfb030e40a1a33151979b14f85
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 888}
+  - name: FemaleGoblin_Frame_65
+    originalName: 
+    pivot: {x: 0.4358974, y: -0.97777784}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 904
+      width: 39
+      height: 45
+    spriteID: 837887cfb6b164d44a63d38f6b01e04c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 904}
+  - name: FemaleGoblin_Frame_66
+    originalName: 
+    pivot: {x: 0.4736842, y: -1}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 730
+      width: 38
+      height: 44
+    spriteID: 65710324e85594c2ead5c7e10663caba
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 730}
+  - name: FemaleGoblin_Frame_67
+    originalName: 
+    pivot: {x: 0.4736842, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 577
+      width: 38
+      height: 43
+    spriteID: e788888c39f8f4f459cad024ad57fd70
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 577}
+  - name: FemaleGoblin_Frame_68
+    originalName: 
+    pivot: {x: 0.46341467, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 642
+      width: 41
+      height: 43
+    spriteID: 2c29dbb2f8b3e4df4a45ba815af26358
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 642}
+  - name: FemaleGoblin_Frame_69
+    originalName: 
+    pivot: {x: 0.44736835, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 628
+      width: 38
+      height: 43
+    spriteID: 552725d0a3c8b4d329d31bb351b061d4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 628}
+  - name: FemaleGoblin_Frame_70
+    originalName: 
+    pivot: {x: 0.43243247, y: -1.0232558}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 836
+      width: 37
+      height: 43
+    spriteID: 852cc5c50f927482486a25f0d64a9fd9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 836}
+  - name: FemaleGoblin_Frame_71
+    originalName: 
+    pivot: {x: 0.4166667, y: -0.95555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 732
+      width: 36
+      height: 45
+    spriteID: a8190412f4a9c4c79b70d03c9106dca8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 732}
+  - name: FemaleGoblin_Frame_72
+    originalName: 
+    pivot: {x: 0.44230765, y: -0.85999995}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 470
+      width: 52
+      height: 50
+    spriteID: 6d074b754421c49a49ba65f134ce6ccc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 470}
+  - name: FemaleGoblin_Frame_73
+    originalName: 
+    pivot: {x: 0.462963, y: -0.85999995}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 412
+      width: 54
+      height: 50
+    spriteID: cc3bd648be8f84d9197b85a7c5b73501
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 412}
+  - name: FemaleGoblin_Frame_74
+    originalName: 
+    pivot: {x: 0.40816322, y: -1.4857143}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 190
+      width: 49
+      height: 35
+    spriteID: 3a868b93576ce4445a831e279bb7911d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 190}
+  - name: FemaleGoblin_Frame_75
+    originalName: 
+    pivot: {x: 0.53125, y: -1.3243243}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 528
+      width: 64
+      height: 37
+    spriteID: 6980d6b13093c43bcaadb2155de83339
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 528}
+  - name: FemaleGoblin_Frame_76
+    originalName: 
+    pivot: {x: 0.5675675, y: -1.0731708}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 307
+      width: 74
+      height: 41
+    spriteID: 98c27af3bbecc454cb1fed39e9696715
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 307}
+  - name: FemaleGoblin_Frame_77
+    originalName: 
+    pivot: {x: 0.6436782, y: -0.7916667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 66
+      width: 87
+      height: 48
+    spriteID: 85758702053a94c5caf401d76e2220b6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 66}
+  - name: FemaleGoblin_Frame_78
+    originalName: 
+    pivot: {x: 0.67021275, y: -0.5925926}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 94
+      height: 54
+    spriteID: b29cc162ca0f9437e91a1785e2f2bbf0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: FemaleGoblin_Frame_79
+    originalName: 
+    pivot: {x: 0.6868687, y: -0.80851066}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 4
+      width: 99
+      height: 47
+    spriteID: bd03fe71bbe6341d1b668a24e663344a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 4}
+  - name: FemaleGoblin_Frame_80
+    originalName: 
+    pivot: {x: 0.72549015, y: -1.9000001}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 69
+      width: 102
+      height: 20
+    spriteID: 9bb93c679215d4730b62a4aadab0baa6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 69}
+  - name: FemaleGoblin_Frame_81
+    originalName: 
+    pivot: {x: 0.7378641, y: -1.5454545}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 323
+      y: 4
+      width: 103
+      height: 22
+    spriteID: 00e35c6bb51d44787bb78d64b28b711a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 323, y: 4}
+  - name: FemaleGoblin_Frame_82
+    originalName: 
+    pivot: {x: 0.76237625, y: -1.4782609}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 38
+      width: 101
+      height: 23
+    spriteID: 8d039f71941694332b5498aa369a0047
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 38}
+  - name: FemaleGoblin_Frame_83
+    originalName: 
+    pivot: {x: 0.75490195, y: -1.2307693}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 213
+      y: 4
+      width: 102
+      height: 26
+    spriteID: c6d46efee43e24583bc7541180191310
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 213, y: 4}
+  - name: FemaleGoblin_Frame_84
+    originalName: 
+    pivot: {x: 0.7777778, y: -1.2307693}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 59
+      width: 99
+      height: 26
+    spriteID: e6d65951a8cdc4dc591ca4a14ea11276
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 59}
+  - name: FemaleGoblin_Frame_85
+    originalName: 
+    pivot: {x: 0.7938144, y: -1.3333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 157
+      width: 97
+      height: 24
+    spriteID: 0a9568e1284fc4863af86203813ea81d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 157}
+  - name: FemaleGoblin_Frame_86
+    originalName: 
+    pivot: {x: 0.7777778, y: -1.3333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 93
+      width: 99
+      height: 24
+    spriteID: 6adb6b80fe678403f8089eb432846172
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 93}
+  - name: FemaleGoblin_Frame_87
+    originalName: 
+    pivot: {x: 0.7777778, y: -1.3333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 125
+      width: 99
+      height: 24
+    spriteID: 58b17d28d9d34425390feccf36e9af7e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 125}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -370442401
+    name: FemaleGoblin
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: FemaleGoblin_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 80
+        y: 45
+        width: 36
+        height: 44
+      spriteId: 0b0c2a60bd59d4c348c842501d30e3c4
+    - name: FemaleGoblin_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 80
+        y: 44
+        width: 34
+        height: 45
+      spriteId: 5fd0bfcb5827a4332a97025af9d8fd18
+    - name: FemaleGoblin_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 82
+        y: 44
+        width: 32
+        height: 41
+      spriteId: 89347747554be4ff1ab7475b51f2d37f
+    - name: FemaleGoblin_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 85
+        y: 44
+        width: 28
+        height: 42
+      spriteId: 77312a3cce75b4c5ea47c2546a4ec0b7
+    - name: FemaleGoblin_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 82
+        y: 45
+        width: 33
+        height: 42
+      spriteId: 3ac4aac40e9764af797f5cfece19c830
+    - name: FemaleGoblin_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 81
+        y: 45
+        width: 32
+        height: 42
+      spriteId: fcd20c59555f741b0ae5d5e0c69be2ad
+    - name: FemaleGoblin_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 80
+        y: 44
+        width: 32
+        height: 42
+      spriteId: 013677436189d4b458969e6cc8d271bb
+    - name: FemaleGoblin_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 82
+        y: 44
+        width: 29
+        height: 41
+      spriteId: 8f73d26181e034af2822ddafe5eed590
+    - name: FemaleGoblin_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 82
+        y: 44
+        width: 31
+        height: 43
+      spriteId: ae0a660e1bd6242ad9ef5c0f620210ba
+    - name: FemaleGoblin_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 81
+        y: 45
+        width: 33
+        height: 43
+      spriteId: ceff053765e0a477b8e4fbd0bd95956b
+    - name: FemaleGoblin_Frame_35
+      frameIndex: 35
+      cellRect:
+        x: 81
+        y: 44
+        width: 39
+        height: 47
+      spriteId: 48cb6474399934d67a2a9e6f884c6ae3
+    - name: FemaleGoblin_Frame_36
+      frameIndex: 36
+      cellRect:
+        x: 83
+        y: 44
+        width: 31
+        height: 45
+      spriteId: cd088122c1df94029b49339238811550
+    - name: FemaleGoblin_Frame_37
+      frameIndex: 37
+      cellRect:
+        x: 79
+        y: 44
+        width: 36
+        height: 52
+      spriteId: f9542c96a6c6b42e48e3bbef8921dda5
+    - name: FemaleGoblin_Frame_38
+      frameIndex: 38
+      cellRect:
+        x: 78
+        y: 44
+        width: 37
+        height: 55
+      spriteId: e20ca225438bf49f989c5f28eb52a020
+    - name: FemaleGoblin_Frame_39
+      frameIndex: 39
+      cellRect:
+        x: 77
+        y: 44
+        width: 36
+        height: 59
+      spriteId: 35df6bb6187ca453b9998d09f6888e4f
+    - name: FemaleGoblin_Frame_40
+      frameIndex: 40
+      cellRect:
+        x: 80
+        y: 44
+        width: 34
+        height: 60
+      spriteId: 4c3d414f41da6444f88087a896cea544
+    - name: FemaleGoblin_Frame_41
+      frameIndex: 41
+      cellRect:
+        x: 77
+        y: 44
+        width: 58
+        height: 60
+      spriteId: fc18ccd99c43b4271966d67c0376d5bb
+    - name: FemaleGoblin_Frame_42
+      frameIndex: 42
+      cellRect:
+        x: 74
+        y: 44
+        width: 64
+        height: 50
+      spriteId: 615570076617a4a0dbb52a418ce1db4c
+    - name: FemaleGoblin_Frame_43
+      frameIndex: 43
+      cellRect:
+        x: 77
+        y: 44
+        width: 61
+        height: 51
+      spriteId: bca6744ec6438419db3bdc5a796dc9f5
+    - name: FemaleGoblin_Frame_54
+      frameIndex: 54
+      cellRect:
+        x: 76
+        y: 44
+        width: 30
+        height: 43
+      spriteId: ef18b2e533e76444ca702a2fefd38839
+    - name: FemaleGoblin_Frame_55
+      frameIndex: 55
+      cellRect:
+        x: 72
+        y: 44
+        width: 33
+        height: 42
+      spriteId: 8e2faf7c7187b46bb84023a29b9bde32
+    - name: FemaleGoblin_Frame_56
+      frameIndex: 56
+      cellRect:
+        x: 72
+        y: 44
+        width: 36
+        height: 41
+      spriteId: b670cd8d823f14c5d880516e38e4a64a
+    - name: FemaleGoblin_Frame_57
+      frameIndex: 57
+      cellRect:
+        x: 80
+        y: 44
+        width: 31
+        height: 37
+      spriteId: c12dfb4b19940454d8b596e4b0a88b0e
+    - name: FemaleGoblin_Frame_58
+      frameIndex: 58
+      cellRect:
+        x: 79
+        y: 44
+        width: 50
+        height: 38
+      spriteId: 69a2f2e14db394aeab74927e018507c7
+    - name: FemaleGoblin_Frame_59
+      frameIndex: 59
+      cellRect:
+        x: 76
+        y: 44
+        width: 59
+        height: 35
+      spriteId: 198c0d6946a6e4d7586f115010013a48
+    - name: FemaleGoblin_Frame_60
+      frameIndex: 60
+      cellRect:
+        x: 77
+        y: 44
+        width: 58
+        height: 35
+      spriteId: 0a35e587d2f474771967102885d9ec4e
+    - name: FemaleGoblin_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 81
+        y: 44
+        width: 37
+        height: 45
+      spriteId: 5fd9d96d2570542e5bf6d297c8180c86
+    - name: FemaleGoblin_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 79
+        y: 44
+        width: 39
+        height: 45
+      spriteId: f381ecb22a144448fb6de7d1d5ecd21b
+    - name: FemaleGoblin_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 78
+        y: 44
+        width: 38
+        height: 44
+      spriteId: 4246cd32076174b6a9a91d27cb6e61b5
+    - name: FemaleGoblin_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 78
+        y: 44
+        width: 38
+        height: 43
+      spriteId: 1eea758595daf4f80a2e537aa6b29264
+    - name: FemaleGoblin_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 77
+        y: 44
+        width: 41
+        height: 43
+      spriteId: 034ca3ba987494515aa2b1e5fac3f5b3
+    - name: FemaleGoblin_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 79
+        y: 44
+        width: 38
+        height: 43
+      spriteId: bf3dac17fdd424e05b3d33badf576f18
+    - name: FemaleGoblin_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 80
+        y: 44
+        width: 37
+        height: 43
+      spriteId: abc56ef7d56554df483a9ce1bca7984d
+    - name: FemaleGoblin_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 81
+        y: 43
+        width: 36
+        height: 45
+      spriteId: 92e93af85e18c40cf9310bb8cae766cb
+    - name: FemaleGoblin_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 81
+        y: 44
+        width: 34
+        height: 45
+      spriteId: 58857fd2b8fe0455bb2c899be2d6d33d
+    - name: FemaleGoblin_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 82
+        y: 44
+        width: 34
+        height: 45
+      spriteId: d228a91864fc84fff92835e2803383d7
+    - name: FemaleGoblin_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 82
+        y: 44
+        width: 34
+        height: 45
+      spriteId: d4c9244543a4a4da7ab0c916b661d373
+    - name: FemaleGoblin_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 79
+        y: 44
+        width: 41
+        height: 43
+      spriteId: bbb178b71d7a14477b646d181eb83917
+    - name: FemaleGoblin_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 83
+        y: 44
+        width: 34
+        height: 45
+      spriteId: 580beca0a302949a496fc333749c0830
+    - name: FemaleGoblin_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 80
+        y: 46
+        width: 40
+        height: 43
+      spriteId: 99102311c1f814a4bbe311c1b3f4f688
+    - name: FemaleGoblin_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 80
+        y: 46
+        width: 39
+        height: 43
+      spriteId: e50700df1fb894328b5f44bbc0c26e99
+    - name: FemaleGoblin_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 80
+        y: 46
+        width: 39
+        height: 43
+      spriteId: 79f58d64fdd284ba7834b08dac062cb5
+    - name: FemaleGoblin_Frame_26
+      frameIndex: 26
+      cellRect:
+        x: 80
+        y: 46
+        width: 40
+        height: 44
+      spriteId: f814a1f30119d41c28b7803619b278b8
+    - name: FemaleGoblin_Frame_27
+      frameIndex: 27
+      cellRect:
+        x: 75
+        y: 48
+        width: 44
+        height: 44
+      spriteId: ea4b2e0bf0e7a45b5848e1f526e294dc
+    - name: FemaleGoblin_Frame_28
+      frameIndex: 28
+      cellRect:
+        x: 74
+        y: 48
+        width: 44
+        height: 44
+      spriteId: 034559916b5d44593afd3a4062f9f897
+    - name: FemaleGoblin_Frame_29
+      frameIndex: 29
+      cellRect:
+        x: 74
+        y: 48
+        width: 43
+        height: 45
+      spriteId: 471f52252c3fa414e8ac8f750d614752
+    - name: FemaleGoblin_Frame_30
+      frameIndex: 30
+      cellRect:
+        x: 74
+        y: 48
+        width: 44
+        height: 44
+      spriteId: 6f16aa4fedd0c4ab5be3bdda492cb2cf
+    - name: FemaleGoblin_Frame_31
+      frameIndex: 31
+      cellRect:
+        x: 75
+        y: 43
+        width: 44
+        height: 48
+      spriteId: bbcaa55bc78dc4e9d969ac6b02039145
+    - name: FemaleGoblin_Frame_32
+      frameIndex: 32
+      cellRect:
+        x: 73
+        y: 44
+        width: 47
+        height: 43
+      spriteId: 0a2353538e94649829db856c9b3d5fa5
+    - name: FemaleGoblin_Frame_33
+      frameIndex: 33
+      cellRect:
+        x: 72
+        y: 44
+        width: 48
+        height: 45
+      spriteId: 62ccfe669379842c9b9f9f1929f96ab3
+    - name: FemaleGoblin_Frame_34
+      frameIndex: 34
+      cellRect:
+        x: 81
+        y: 44
+        width: 44
+        height: 45
+      spriteId: 194139aaa4f43404e8eb40661630bfc5
+    - name: FemaleGoblin_Frame_44
+      frameIndex: 44
+      cellRect:
+        x: 78
+        y: 44
+        width: 60
+        height: 48
+      spriteId: ee9fba74abb68445da56845fc0cf6c03
+    - name: FemaleGoblin_Frame_45
+      frameIndex: 45
+      cellRect:
+        x: 80
+        y: 44
+        width: 45
+        height: 41
+      spriteId: d7b1eadf166304dc998323bd939828e1
+    - name: FemaleGoblin_Frame_46
+      frameIndex: 46
+      cellRect:
+        x: 81
+        y: 44
+        width: 39
+        height: 45
+      spriteId: 0eabf2f984a8a4111a10de0841aa5a24
+    - name: FemaleGoblin_Frame_47
+      frameIndex: 47
+      cellRect:
+        x: 81
+        y: 44
+        width: 39
+        height: 45
+      spriteId: 225c01f3f32b24df6acf4c30b86f9772
+    - name: FemaleGoblin_Frame_48
+      frameIndex: 48
+      cellRect:
+        x: 82
+        y: 44
+        width: 35
+        height: 45
+      spriteId: ac4cf2ebeaa7c4b4982e81c08fc96c68
+    - name: FemaleGoblin_Frame_49
+      frameIndex: 49
+      cellRect:
+        x: 81
+        y: 44
+        width: 37
+        height: 45
+      spriteId: bd6cd25d46595491abf6acdc9e2eccda
+    - name: FemaleGoblin_Frame_50
+      frameIndex: 50
+      cellRect:
+        x: 80
+        y: 44
+        width: 38
+        height: 43
+      spriteId: 36b4dedfc9e7f471abd2b261f4f5aed5
+    - name: FemaleGoblin_Frame_51
+      frameIndex: 51
+      cellRect:
+        x: 80
+        y: 44
+        width: 36
+        height: 43
+      spriteId: 49dddd21fee7c424da329803856a9984
+    - name: FemaleGoblin_Frame_52
+      frameIndex: 52
+      cellRect:
+        x: 80
+        y: 44
+        width: 31
+        height: 43
+      spriteId: 2e4aad884928c479d9affb493043019a
+    - name: FemaleGoblin_Frame_53
+      frameIndex: 53
+      cellRect:
+        x: 80
+        y: 44
+        width: 29
+        height: 42
+      spriteId: 0b19c244e6a4b4ac98e6a3052580fd78
+    - name: FemaleGoblin_Frame_61
+      frameIndex: 61
+      cellRect:
+        x: 76
+        y: 44
+        width: 60
+        height: 37
+      spriteId: 6f47906844ecb4db480a12db4ddda6ab
+    - name: FemaleGoblin_Frame_62
+      frameIndex: 62
+      cellRect:
+        x: 76
+        y: 44
+        width: 49
+        height: 39
+      spriteId: ed90d1f846a9d4a3b9e6d2e472be9aeb
+    - name: FemaleGoblin_Frame_63
+      frameIndex: 63
+      cellRect:
+        x: 80
+        y: 44
+        width: 45
+        height: 41
+      spriteId: 1fc4b1910111a4bcfb246d05bd2737d9
+    - name: FemaleGoblin_Frame_64
+      frameIndex: 64
+      cellRect:
+        x: 81
+        y: 44
+        width: 37
+        height: 45
+      spriteId: 20e7a4dfb030e40a1a33151979b14f85
+    - name: FemaleGoblin_Frame_65
+      frameIndex: 65
+      cellRect:
+        x: 79
+        y: 44
+        width: 39
+        height: 45
+      spriteId: 837887cfb6b164d44a63d38f6b01e04c
+    - name: FemaleGoblin_Frame_66
+      frameIndex: 66
+      cellRect:
+        x: 78
+        y: 44
+        width: 38
+        height: 44
+      spriteId: 65710324e85594c2ead5c7e10663caba
+    - name: FemaleGoblin_Frame_67
+      frameIndex: 67
+      cellRect:
+        x: 78
+        y: 44
+        width: 38
+        height: 43
+      spriteId: e788888c39f8f4f459cad024ad57fd70
+    - name: FemaleGoblin_Frame_68
+      frameIndex: 68
+      cellRect:
+        x: 77
+        y: 44
+        width: 41
+        height: 43
+      spriteId: 2c29dbb2f8b3e4df4a45ba815af26358
+    - name: FemaleGoblin_Frame_69
+      frameIndex: 69
+      cellRect:
+        x: 79
+        y: 44
+        width: 38
+        height: 43
+      spriteId: 552725d0a3c8b4d329d31bb351b061d4
+    - name: FemaleGoblin_Frame_70
+      frameIndex: 70
+      cellRect:
+        x: 80
+        y: 44
+        width: 37
+        height: 43
+      spriteId: 852cc5c50f927482486a25f0d64a9fd9
+    - name: FemaleGoblin_Frame_71
+      frameIndex: 71
+      cellRect:
+        x: 81
+        y: 43
+        width: 36
+        height: 45
+      spriteId: a8190412f4a9c4c79b70d03c9106dca8
+    - name: FemaleGoblin_Frame_72
+      frameIndex: 72
+      cellRect:
+        x: 73
+        y: 43
+        width: 52
+        height: 50
+      spriteId: 6d074b754421c49a49ba65f134ce6ccc
+    - name: FemaleGoblin_Frame_73
+      frameIndex: 73
+      cellRect:
+        x: 71
+        y: 43
+        width: 54
+        height: 50
+      spriteId: cc3bd648be8f84d9197b85a7c5b73501
+    - name: FemaleGoblin_Frame_74
+      frameIndex: 74
+      cellRect:
+        x: 76
+        y: 52
+        width: 49
+        height: 35
+      spriteId: 3a868b93576ce4445a831e279bb7911d
+    - name: FemaleGoblin_Frame_75
+      frameIndex: 75
+      cellRect:
+        x: 62
+        y: 49
+        width: 64
+        height: 37
+      spriteId: 6980d6b13093c43bcaadb2155de83339
+    - name: FemaleGoblin_Frame_76
+      frameIndex: 76
+      cellRect:
+        x: 54
+        y: 44
+        width: 74
+        height: 41
+      spriteId: 98c27af3bbecc454cb1fed39e9696715
+    - name: FemaleGoblin_Frame_77
+      frameIndex: 77
+      cellRect:
+        x: 40
+        y: 38
+        width: 87
+        height: 48
+      spriteId: 85758702053a94c5caf401d76e2220b6
+    - name: FemaleGoblin_Frame_78
+      frameIndex: 78
+      cellRect:
+        x: 33
+        y: 32
+        width: 94
+        height: 54
+      spriteId: b29cc162ca0f9437e91a1785e2f2bbf0
+    - name: FemaleGoblin_Frame_79
+      frameIndex: 79
+      cellRect:
+        x: 28
+        y: 38
+        width: 99
+        height: 47
+      spriteId: bd03fe71bbe6341d1b668a24e663344a
+    - name: FemaleGoblin_Frame_80
+      frameIndex: 80
+      cellRect:
+        x: 22
+        y: 38
+        width: 102
+        height: 20
+      spriteId: 9bb93c679215d4730b62a4aadab0baa6
+    - name: FemaleGoblin_Frame_81
+      frameIndex: 81
+      cellRect:
+        x: 20
+        y: 34
+        width: 103
+        height: 22
+      spriteId: 00e35c6bb51d44787bb78d64b28b711a
+    - name: FemaleGoblin_Frame_82
+      frameIndex: 82
+      cellRect:
+        x: 19
+        y: 34
+        width: 101
+        height: 23
+      spriteId: 8d039f71941694332b5498aa369a0047
+    - name: FemaleGoblin_Frame_83
+      frameIndex: 83
+      cellRect:
+        x: 19
+        y: 32
+        width: 102
+        height: 26
+      spriteId: c6d46efee43e24583bc7541180191310
+    - name: FemaleGoblin_Frame_84
+      frameIndex: 84
+      cellRect:
+        x: 19
+        y: 32
+        width: 99
+        height: 26
+      spriteId: e6d65951a8cdc4dc591ca4a14ea11276
+    - name: FemaleGoblin_Frame_85
+      frameIndex: 85
+      cellRect:
+        x: 19
+        y: 32
+        width: 97
+        height: 24
+      spriteId: 0a9568e1284fc4863af86203813ea81d
+    - name: FemaleGoblin_Frame_86
+      frameIndex: 86
+      cellRect:
+        x: 19
+        y: 32
+        width: 99
+        height: 24
+      spriteId: 6adb6b80fe678403f8089eb432846172
+    - name: FemaleGoblin_Frame_87
+      frameIndex: 87
+      cellRect:
+        x: 19
+        y: 32
+        width: 99
+        height: 24
+      spriteId: 58b17d28d9d34425390feccf36e9af7e
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 192, y: 156}
