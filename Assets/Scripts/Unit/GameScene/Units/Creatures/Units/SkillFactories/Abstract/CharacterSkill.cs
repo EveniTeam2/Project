@@ -17,7 +17,7 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
         protected int MatchBlockCount;
         protected int ComboCount;
         
-        private ICreatureServiceProvider _characterServiceProvider;
+        private ICharacterServiceProvider _characterServiceProvider;
 
         public void Execute(int combo)
         {
@@ -32,7 +32,7 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
             SkillLevel++;
         }
 
-        public void RegisterCharacterServiceProvider(ICreatureServiceProvider creatureServiceProvider)
+        public void RegisterCharacterServiceProvider(ICharacterServiceProvider creatureServiceProvider)
         {
             _characterServiceProvider = creatureServiceProvider;
         }
@@ -67,7 +67,7 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
         
         protected void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
         {
-            _characterServiceProvider.AnimatorSystem.SetBool(targetParameter, value, action);
+            _characterServiceProvider.creatureServiceProvider.AnimatorSystem.SetBool(targetParameter, value, action);
         }
 
         private void SetReadyForInvokingCommand(bool isReady)
@@ -77,12 +77,12 @@ namespace Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract
 
         protected void ChangeState(StateType targetState)
         {
-            _characterServiceProvider.StateSystem.TryChangeState(targetState);
+            _characterServiceProvider.creatureServiceProvider.StateSystem.TryChangeState(targetState);
         }
 
         protected void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
         {
-            _characterServiceProvider.AnimatorSystem.SetFloat(targetParameter, value, action);
+            _characterServiceProvider.creatureServiceProvider.AnimatorSystem.SetFloat(targetParameter, value, action);
         }
 
         protected void AttackEnemy(int value, float range)

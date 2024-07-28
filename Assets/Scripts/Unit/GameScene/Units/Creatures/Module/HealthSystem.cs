@@ -4,7 +4,7 @@ using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 
 namespace Unit.GameScene.Units.Creatures.Module
 {
-    public abstract class HealthSystem : ICreatureHeath
+    public abstract class HealthSystem : ICreatureHealth
     {
         protected IHealthStat _healthStat;
         protected bool _invinsible;

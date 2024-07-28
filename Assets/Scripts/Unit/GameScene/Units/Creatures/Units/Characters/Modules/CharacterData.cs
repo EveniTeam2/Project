@@ -17,7 +17,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             SkillManager = skillManager;
         }
 
-        public void RegisterCharacterServiceProvider(ICreatureServiceProvider creatureServiceProvider)
+        public void RegisterCharacterServiceProvider(ICharacterServiceProvider creatureServiceProvider)
         {
             SkillManager.RegisterCharacterServiceProvider(creatureServiceProvider);
         }

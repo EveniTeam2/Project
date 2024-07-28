@@ -15,7 +15,7 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
-    public class Character : Creature
+    public class Character : Creature, ICharacterServiceProvider
     {
         public event Action OnCommandDequeue;
         
@@ -30,7 +30,23 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         private List<CommandAction> _characterSkills;
 
         private bool isReadyForCommand;
-        
+
+        private CharacterBattleSystem _battleSystem;
+        private CharacterHealthSystem _healthSystem;
+        private CharacterMovementSystem _movementSystem;
+
+        protected override BattleSystem BattleSystem => _battleSystem;
+        protected override HealthSystem HealthSystem => _healthSystem;
+        protected override MovementSystem MovementSystem => _movementSystem;
+
+        ICharacterBattle ICharacterServiceProvider.BattleSystem => _battleSystem;
+
+        ICharacterHealth ICharacterServiceProvider.HeathSystem => _healthSystem;
+
+        ICharacterMovement ICharacterServiceProvider.MovementSystem => _movementSystem;
+
+        ICreatureServiceProvider ICharacterServiceProvider.creatureServiceProvider => throw new NotImplementedException();
+
         public void HandleReceiveCommand(CommandPacket command)
         {
             _commands.Enqueue(command);
@@ -45,17 +61,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _animatorEventReceiver.Initialize(animationParameter);
             _animatorEventReceiver.OnAttack += ActivateSkillEffects;
             _creatureStats = new CreatureStat<CharacterStat>(GetCharacterStat(1));
-            _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_creatureStats), _characterData);
+            _battleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_creatureStats, _characterData));
             _healthSystem = new CharacterHealthSystem(new CharacterHealthStat(_creatureStats));
             _movementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_creatureStats), groundYPosition);
-            _fsm = StateBuilder.BuildStateMachine(stateData, characterTransform, _battleSystem, _healthSystem, _movementSystem, _animatorEventReceiver, animationParameter);
+            _fsm = StateBuilder.BuildStateMachine(stateData, characterTransform, BattleSystem, HealthSystem, MovementSystem, _animatorEventReceiver, animationParameter);
             _commandSystem = new CommandSystem(blockInfo);
             _mods = new LinkedList<ModifyStatData>();
             
             InitializeCommand();
             
             _characterData.RegisterCharacterServiceProvider(this);
-            _healthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
+            HealthSystem.RegistOnDamageEvent(CheckAndTransitToHit);
         }
         
         private CharacterStat GetCharacterStat(int currentLevel)
@@ -83,8 +99,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         protected void Update()
         {
             _fsm?.Update();
-            _movementSystem?.Update();
-            _battleSystem?.Update();
+            MovementSystem?.Update();
+            BattleSystem?.Update();
             // TODO : 커맨드 인풋 내부로 이동 예정
             ActivateCommand();
         }
@@ -92,7 +108,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         protected void FixedUpdate()
         {
             _fsm?.FixedUpdate();
-            _movementSystem?.FixedUpdate();
+            MovementSystem?.FixedUpdate();
         }
         
         private void InitializeCommand()
@@ -123,15 +139,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _commandAction?.ActivateCommandAction();
         }
 
-        public override bool GetReadyForCommand()
-        {
-            return isReadyForCommand;
-        }
 
-        public override void SetReadyForCommand(bool value)
-        {
-            isReadyForCommand = value;
-        }
 
         public override void PermanentModifyStat(EStatType statType, int value)
         {
@@ -171,5 +179,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
             _creatureStats.SetCurrent(cur);
         }
+
+        public bool GetReadyForCommand()
+        {
+            return isReadyForCommand;
+
+        }
+
+        public void SetReadyForCommand(bool value)
+        {
+            isReadyForCommand = value;
+        }
+
     }
 }

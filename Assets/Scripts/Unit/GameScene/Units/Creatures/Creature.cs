@@ -9,47 +9,43 @@ namespace Unit.GameScene.Units.Creatures
 {
     public abstract class Creature : MonoBehaviour, ICreatureServiceProvider, ICreatureStatModifier
     {
-        /// <summary>
-        ///     애니메이터를 반환합니다.
-        /// </summary>
-        protected AnimatorEventReceiver _animatorEventReceiver;
 
         /// <summary>
         ///     전투에 관한 시스템을 반환합니다.
         /// </summary>
-        protected BattleSystem _battleSystem;
+        protected abstract BattleSystem BattleSystem { get; }
 
+        /// <summary>
+        ///     방어에 관한 시스템을 반환합니다.
+        /// </summary>
+        protected abstract HealthSystem HealthSystem { get; }
+
+        /// <summary>
+        ///     이동에 관한 시스템을 반환합니다.
+        /// </summary>
+        protected abstract MovementSystem MovementSystem { get; }
+
+
+        /// <summary>
+        ///     변경된 스탯 리스트입니다.
+        /// </summary>
+        protected LinkedList<ModifyStatData> _mods;
         /// <summary>
         ///     StateMachine을 반환합니다.
         /// </summary>
         protected StateMachine _fsm;
 
         /// <summary>
-        ///     방어에 관한 시스템을 반환합니다.
+        ///     애니메이터를 반환합니다.
         /// </summary>
-        protected HealthSystem _healthSystem;
-
-        /// <summary>
-        ///     변경된 스탯 리스트입니다.
-        /// </summary>
-        protected LinkedList<ModifyStatData> _mods;
-
-        /// <summary>
-        ///     이동에 관한 시스템을 반환합니다.
-        /// </summary>
-        protected MovementSystem _movementSystem;
-
-        private AnimatorEventReceiver _animatorSystem;
+        protected AnimatorEventReceiver _animatorEventReceiver;
 
         ICreatureStatModifier ICreatureServiceProvider.StatModifier => this;
-        ICreatureBattle ICreatureServiceProvider.BattleSystem => _battleSystem;
-        ICreatureHeath ICreatureServiceProvider.HeathSystem => _healthSystem;
-        ICreatureMovement ICreatureServiceProvider.MovementSystem => _movementSystem;
+        ICreatureBattle ICreatureServiceProvider.BattleSystem => BattleSystem;
+        ICreatureHealth ICreatureServiceProvider.HeathSystem => HealthSystem;
+        ICreatureMovement ICreatureServiceProvider.MovementSystem => MovementSystem;
         StateMachine ICreatureServiceProvider.StateSystem => _fsm;
-        AnimatorEventReceiver ICreatureServiceProvider.AnimatorSystem => _animatorSystem;
-        
-        public abstract bool GetReadyForCommand();
-        public abstract void SetReadyForCommand(bool value);
+        AnimatorEventReceiver ICreatureServiceProvider.AnimatorSystem => _animatorEventReceiver;
 
         /// <summary>
         ///     영구적으로 현재 스탯을 변경합니다.
