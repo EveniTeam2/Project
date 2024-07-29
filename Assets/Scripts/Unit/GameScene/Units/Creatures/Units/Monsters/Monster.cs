@@ -44,6 +44,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             _animatorEventReceiver = GetComponent<AnimatorEventReceiver>();
+            _animatorEventReceiver.Initialize(animationParameter);
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
             CreatureStats = new CreatureStat<MonsterStat>(stat);

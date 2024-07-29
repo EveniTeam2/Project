@@ -402,8 +402,8 @@ MonoBehaviour:
   dragCount: 0
   isGameOver: 0
   currentTime: 0
-  cardGachaPairDatas: {fileID: 0}
-  uiCardManagerPrefab: {fileID: 0}
+  cardGachaPairDatas: {fileID: 11400000, guid: 76fb47cbddafdac47848e3a8cd2a7116, type: 2}
+  uiCardManagerPrefab: {fileID: 6680058419042962073, guid: ad8886fc5454b9a46b2f2a4c8a3214fc, type: 3}
 --- !u!1 &820143611
 GameObject:
   m_ObjectHideFlags: 0
