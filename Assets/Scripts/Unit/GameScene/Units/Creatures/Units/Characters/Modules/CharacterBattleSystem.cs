@@ -3,21 +3,22 @@ using System;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     public class CharacterBattleSystem : BattleSystem, ICharacterBattle
     {
-        public CharacterBattleSystem(Transform targetTransform, CharacterBattleStat stat) : base(targetTransform, stat) { }
+        public CharacterBattleSystem(Transform targetTransform, IBattleStat battleStat) : base(targetTransform, battleStat) { }
 
         public override void Attack(RaycastHit2D col)
         {
             if (col.collider.gameObject.TryGetComponent<ICreatureServiceProvider>(out var target))
             {
 #if UNITY_EDITOR
-                target.HeathSystem.TakeDamage(_stat.GetAttack());
-                Debug.Log($"플레이어가 {col.collider.gameObject.name}에게 {_stat.GetAttack()} 피해를 입혔습니다.");
+                target.HeathSystem.TakeDamage(BattleStat.GetAttack());
+                Debug.Log($"플레이어가 {col.collider.gameObject.name}에게 {BattleStat.GetAttack()} 피해를 입혔습니다.");
 #else
                 var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
 #endif
@@ -35,20 +36,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public int GetSkillIndex(string skillName)
         {
-            // TODO : 인호님 이거 고쳐주세요.
-            return _stat.GetSkillIndex(skillName);
+            return BattleStat.GetSkillIndex(skillName);
         }
 
         public int GetSkillValue(string skillName)
         {
-            // TODO : 인호님 이거 고쳐주세요.
-            return 0;
+            return BattleStat.GetSkillValue(skillName);
         }
 
         public float GetSkillRange(string skillName)
         {
-            // TODO : 인호님 이거 고쳐주세요.
-            return 0;
+            return BattleStat.GetSkillValue(skillName);
         }
 
         public override void Update()
@@ -60,15 +58,19 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
     {
         private readonly Func<int> _attack;
         private readonly Func<float> _cool;
+        private readonly Func<string, float> _skillRange;
+        private readonly Func<string, int> _skillIndex;
+        private readonly Func<string, int> _skillValue;
 
-        private CharacterData _characterData;
+        private StatManager _statManager;
         
         public CharacterBattleStat(CreatureStat<CharacterStat> creatureStat, CharacterData characterData)
         {
             _attack = () => creatureStat.Current.Damage;
             _cool = () => creatureStat.Current.CoolTime;
-            // TODO : 인호님 이거 고쳐주세요.
-            characterData.SkillManager.GetSkillRange("");
+            _skillRange = (skillName) => characterData.SkillManager.GetSkillRange(skillName);
+            _skillIndex = (skillName) => characterData.SkillManager.GetSkillIndex(skillName);
+            _skillValue = (skillName) => characterData.SkillManager.GetSkillValue(skillName);
         }
 
         public int GetAttack()
@@ -81,16 +83,19 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
             return _cool();
         }
 
-        public int GetSkillIndex()
-        {
-            // TODO : 인호님 이거 고쳐주세요.
-            return 0;
-        }
-
         public int GetSkillIndex(string skillName)
         {
-            // TODO : 인호님 이거 고쳐주세요.
-            return 0;
+            return _skillIndex(skillName);
+        }
+
+        public int GetSkillValue(string skillName)
+        {
+            return _skillValue(skillName);
+        }
+        
+        public float GetSkillRange(string skillName)
+        {
+            return _skillRange(skillName);
         }
     }
 }

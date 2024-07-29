@@ -383,11 +383,9 @@ MonoBehaviour:
     playerSpawnPosition: {x: 0, y: 2, z: 0}
     characterClassType: 0
     characterData:
-    - {fileID: 11400000, guid: d5e97713bc5ea4bcfb6b65eefc7bf92d, type: 2}
-    - {fileID: 11400000, guid: bcc5a56e7905d4c268578c33a17647b3, type: 2}
-    - {fileID: 11400000, guid: 5832f8501455b4794a1d716990d4c4a6, type: 2}
-    characterTextAsset: {fileID: 4900000, guid: 276019d236e754d7192324fc768781e2, type: 3}
-    skillTextAsset: {fileID: 4900000, guid: fe16e01c7f85e4d33b80b797eae10bd7, type: 3}
+    - {fileID: 11400000, guid: 5cb02db772c824e328f47458ef4e5fd3, type: 2}
+    characterTextAsset: {fileID: 4900000, guid: 1471e7d7b8c3b416bbae753d4d6c534f, type: 3}
+    skillTextAsset: {fileID: 4900000, guid: 60005efd706584dbc8dc388daace5dbe, type: 3}
     monsterSpawnData: {fileID: 11400000, guid: 70cf15452822e884889fa283c49507f0, type: 2}
     blockInfos:
     - {fileID: 11400000, guid: 0c454b8881b554ab7889ad76bbe8e2ac, type: 2}
@@ -404,6 +402,8 @@ MonoBehaviour:
   dragCount: 0
   isGameOver: 0
   currentTime: 0
+  cardGachaPairDatas: {fileID: 0}
+  uiCardManagerPrefab: {fileID: 0}
 --- !u!1 &820143611
 GameObject:
   m_ObjectHideFlags: 0

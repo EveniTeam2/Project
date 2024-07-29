@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b45be1bdd27446da15199f2a658d0e6, type: 3}
-  m_Name: WizardData
+  m_Script: {fileID: 11500000, guid: 81d44113838b540f494251d4dac61164, type: 3}
+  m_Name: KnightDataSo
   m_EditorClassIdentifier: 
   creature: {fileID: 1214194880391127291, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
-  classType: 1
-  knightSkillData:
+  classType: 0
+  skillData:
   - SkillIcon: {fileID: 0}
     skillName: 0
   - SkillIcon: {fileID: 0}
@@ -35,3 +35,7 @@ MonoBehaviour:
     skillName: 8
   - SkillIcon: {fileID: 0}
     skillName: 9
+  - SkillIcon: {fileID: 0}
+    skillName: 10
+  - SkillIcon: {fileID: 0}
+    skillName: 11
