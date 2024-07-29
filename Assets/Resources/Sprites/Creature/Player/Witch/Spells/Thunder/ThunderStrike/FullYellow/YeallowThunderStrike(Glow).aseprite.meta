@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 288
       width: 23
       height: 24
-    spriteID: a7582c5ba9fcf4d92b88f6e22bff247b
+    spriteID: 38e96e66f2f28477a8a38819411e24ef
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 475
       width: 34
       height: 33
-    spriteID: 09b1686fba4474f57993b8d2b64993bc
+    spriteID: 3ec96ec393f304e4b8639ffa407efa9c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 434
       width: 36
       height: 40
-    spriteID: 074de21421ba241b890872beb42d4da4
+    spriteID: a903f09462fd3433fae5fdb21fdcbb18
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 109
       width: 55
       height: 57
-    spriteID: e4697091757a34f09a3f6b1997efae93
+    spriteID: 306c646748c0c4c208aaff80a439a634
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -210,7 +210,7 @@ ScriptedImporter:
       y: 238
       width: 60
       height: 121
-    spriteID: 41938682b804345bda2442a20209f711
+    spriteID: 77364c44c32244e57bf5ffcfdc3380df
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -230,7 +230,7 @@ ScriptedImporter:
       y: 109
       width: 77
       height: 121
-    spriteID: bf517e6c7de854b60ac367e7135e0288
+    spriteID: 85325f35924ec4c5a82cf513bb2b71e3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -250,7 +250,7 @@ ScriptedImporter:
       y: 260
       width: 91
       height: 121
-    spriteID: 1c2e35997f1ca4403ac6954083deb801
+    spriteID: cc34709fe68784e85abb2dbf1c97f2f4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -270,7 +270,7 @@ ScriptedImporter:
       y: 131
       width: 94
       height: 121
-    spriteID: 8f62291065d944016b5d9f4936f41c2f
+    spriteID: b59dcda24c6cf4669842f5cd5097dd86
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -290,7 +290,7 @@ ScriptedImporter:
       y: 4
       width: 98
       height: 119
-    spriteID: c9f04c7eecd344ef7bb0c1c6c725debc
+    spriteID: 81ad3a76ad8c34f1abb31ec9f54c797b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -310,7 +310,7 @@ ScriptedImporter:
       y: 4
       width: 100
       height: 97
-    spriteID: f0aee9dab7cd34218947d7c629f55bff
+    spriteID: d7b31502117654b96bc8fe44d7e46676
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -330,7 +330,7 @@ ScriptedImporter:
       y: 367
       width: 99
       height: 69
-    spriteID: 2b1a995a70a564b9094d2315225bf7cc
+    spriteID: 0f4b35bc6f5cb4cf1882fb4f8220d034
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -350,7 +350,7 @@ ScriptedImporter:
       y: 444
       width: 99
       height: 34
-    spriteID: 8418a89d99ba24086afeedecea854e48
+    spriteID: 220e86f906bde49e5b3f5016c1e7685a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -370,7 +370,7 @@ ScriptedImporter:
       y: 432
       width: 36
       height: 35
-    spriteID: 8bb03bf9abd9049e180bf9ec4141d1f0
+    spriteID: b2d51c02e0f614b37bfe371573430dc0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -390,7 +390,7 @@ ScriptedImporter:
       y: 238
       width: 44
       height: 42
-    spriteID: 4a8bf3385d1a8418ca37dd9ba5c6e2db
+    spriteID: 390cb951541bc4411b0bf76893c581f4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -410,7 +410,7 @@ ScriptedImporter:
       y: 389
       width: 39
       height: 37
-    spriteID: b7cc80e021a82439ea71e45cf99c07fd
+    spriteID: 17bc4b65e6eb743d28bedd859a1ea490
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -430,7 +430,7 @@ ScriptedImporter:
       y: 288
       width: 42
       height: 35
-    spriteID: 081296d25df5d43ee84a852ef8f628ee
+    spriteID: 3a713d35066db4ecd82ea0cdbbacad64
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -450,7 +450,7 @@ ScriptedImporter:
       y: 389
       width: 40
       height: 35
-    spriteID: 538fe344e340247d0b166d15efd23e9d
+    spriteID: a5770142488ba43ea9118badb1b68341
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -470,7 +470,7 @@ ScriptedImporter:
       y: 174
       width: 45
       height: 42
-    spriteID: 795418c454e9f4e58b9ee3262d8f5035
+    spriteID: ae2f61818698240668f2be31555a759d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -495,7 +495,7 @@ ScriptedImporter:
         y: 88
         width: 23
         height: 24
-      spriteId: a7582c5ba9fcf4d92b88f6e22bff247b
+      spriteId: 38e96e66f2f28477a8a38819411e24ef
     - name: YeallowThunderStrike(Glow)_Frame_2
       frameIndex: 2
       cellRect:
@@ -503,7 +503,7 @@ ScriptedImporter:
         y: 85
         width: 34
         height: 33
-      spriteId: 09b1686fba4474f57993b8d2b64993bc
+      spriteId: 3ec96ec393f304e4b8639ffa407efa9c
     - name: YeallowThunderStrike(Glow)_Frame_4
       frameIndex: 4
       cellRect:
@@ -511,7 +511,7 @@ ScriptedImporter:
         y: 79
         width: 36
         height: 40
-      spriteId: 074de21421ba241b890872beb42d4da4
+      spriteId: a903f09462fd3433fae5fdb21fdcbb18
     - name: YeallowThunderStrike(Glow)_Frame_6
       frameIndex: 6
       cellRect:
@@ -519,7 +519,7 @@ ScriptedImporter:
         y: 66
         width: 55
         height: 57
-      spriteId: e4697091757a34f09a3f6b1997efae93
+      spriteId: 306c646748c0c4c208aaff80a439a634
     - name: YeallowThunderStrike(Glow)_Frame_7
       frameIndex: 7
       cellRect:
@@ -527,7 +527,7 @@ ScriptedImporter:
         y: 4
         width: 60
         height: 121
-      spriteId: 41938682b804345bda2442a20209f711
+      spriteId: 77364c44c32244e57bf5ffcfdc3380df
     - name: YeallowThunderStrike(Glow)_Frame_8
       frameIndex: 8
       cellRect:
@@ -535,7 +535,7 @@ ScriptedImporter:
         y: 5
         width: 77
         height: 121
-      spriteId: bf517e6c7de854b60ac367e7135e0288
+      spriteId: 85325f35924ec4c5a82cf513bb2b71e3
     - name: YeallowThunderStrike(Glow)_Frame_9
       frameIndex: 9
       cellRect:
@@ -543,7 +543,7 @@ ScriptedImporter:
         y: 4
         width: 91
         height: 121
-      spriteId: 1c2e35997f1ca4403ac6954083deb801
+      spriteId: cc34709fe68784e85abb2dbf1c97f2f4
     - name: YeallowThunderStrike(Glow)_Frame_10
       frameIndex: 10
       cellRect:
@@ -551,7 +551,7 @@ ScriptedImporter:
         y: 4
         width: 94
         height: 121
-      spriteId: 8f62291065d944016b5d9f4936f41c2f
+      spriteId: b59dcda24c6cf4669842f5cd5097dd86
     - name: YeallowThunderStrike(Glow)_Frame_11
       frameIndex: 11
       cellRect:
@@ -559,7 +559,7 @@ ScriptedImporter:
         y: 5
         width: 98
         height: 119
-      spriteId: c9f04c7eecd344ef7bb0c1c6c725debc
+      spriteId: 81ad3a76ad8c34f1abb31ec9f54c797b
     - name: YeallowThunderStrike(Glow)_Frame_12
       frameIndex: 12
       cellRect:
@@ -567,7 +567,7 @@ ScriptedImporter:
         y: 5
         width: 100
         height: 97
-      spriteId: f0aee9dab7cd34218947d7c629f55bff
+      spriteId: d7b31502117654b96bc8fe44d7e46676
     - name: YeallowThunderStrike(Glow)_Frame_13
       frameIndex: 13
       cellRect:
@@ -575,7 +575,7 @@ ScriptedImporter:
         y: 6
         width: 99
         height: 69
-      spriteId: 2b1a995a70a564b9094d2315225bf7cc
+      spriteId: 0f4b35bc6f5cb4cf1882fb4f8220d034
     - name: YeallowThunderStrike(Glow)_Frame_14
       frameIndex: 14
       cellRect:
@@ -583,7 +583,7 @@ ScriptedImporter:
         y: 7
         width: 99
         height: 34
-      spriteId: 8418a89d99ba24086afeedecea854e48
+      spriteId: 220e86f906bde49e5b3f5016c1e7685a
     - name: YeallowThunderStrike(Glow)_Frame_15
       frameIndex: 15
       cellRect:
@@ -591,7 +591,7 @@ ScriptedImporter:
         y: 9
         width: 36
         height: 35
-      spriteId: 8bb03bf9abd9049e180bf9ec4141d1f0
+      spriteId: b2d51c02e0f614b37bfe371573430dc0
     - name: YeallowThunderStrike(Glow)_Frame_16
       frameIndex: 16
       cellRect:
@@ -599,7 +599,7 @@ ScriptedImporter:
         y: 10
         width: 44
         height: 42
-      spriteId: 4a8bf3385d1a8418ca37dd9ba5c6e2db
+      spriteId: 390cb951541bc4411b0bf76893c581f4
     - name: YeallowThunderStrike(Glow)_Frame_18
       frameIndex: 18
       cellRect:
@@ -607,7 +607,7 @@ ScriptedImporter:
         y: 10
         width: 39
         height: 37
-      spriteId: b7cc80e021a82439ea71e45cf99c07fd
+      spriteId: 17bc4b65e6eb743d28bedd859a1ea490
     - name: YeallowThunderStrike(Glow)_Frame_20
       frameIndex: 20
       cellRect:
@@ -615,7 +615,7 @@ ScriptedImporter:
         y: 10
         width: 42
         height: 35
-      spriteId: 081296d25df5d43ee84a852ef8f628ee
+      spriteId: 3a713d35066db4ecd82ea0cdbbacad64
     - name: YeallowThunderStrike(Glow)_Frame_22
       frameIndex: 22
       cellRect:
@@ -623,7 +623,7 @@ ScriptedImporter:
         y: 11
         width: 40
         height: 35
-      spriteId: 538fe344e340247d0b166d15efd23e9d
+      spriteId: a5770142488ba43ea9118badb1b68341
     - name: YeallowThunderStrike(Glow)_Frame_24
       frameIndex: 24
       cellRect:
@@ -631,7 +631,7 @@ ScriptedImporter:
         y: 10
         width: 45
         height: 42
-      spriteId: 795418c454e9f4e58b9ee3262d8f5035
+      spriteId: ae2f61818698240668f2be31555a759d
     linkedCells: []
     parentIndex: -1
   platformSettings: []

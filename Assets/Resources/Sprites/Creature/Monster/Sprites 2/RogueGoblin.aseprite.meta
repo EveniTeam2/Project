@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 192
       height: 252
-    spriteID: 7b8a4529c973e49e3a5ddaa30d0c3e3f
+    spriteID: a87395c0bcd63467582371439a510c8b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 264
       width: 192
       height: 252
-    spriteID: f87a8ad7be5104b7d8ecfb8ca8bd4010
+    spriteID: cd3ba13b4e9214400bbf113f84b84446
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 524
       width: 192
       height: 252
-    spriteID: 0e5ec51032dc744f2aafdfd5e6fbbec6
+    spriteID: 7f8f9e27c07a24734b6ea79ed96f590c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 784
       width: 192
       height: 252
-    spriteID: 283359b9d2c6744c1bf8aaac92a9e1b9
+    spriteID: 59a21b322d9d44300b89b1868225677a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -210,7 +210,7 @@ ScriptedImporter:
       y: 1044
       width: 192
       height: 252
-    spriteID: 183104b9d46e0446bb5a3ace792f3b49
+    spriteID: df67389b07d5c4dcaa8e14a4dd371356
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -230,7 +230,7 @@ ScriptedImporter:
       y: 1304
       width: 192
       height: 252
-    spriteID: a0d5050e0947a4bf2bcdea557239f787
+    spriteID: 491c64fdd305e40b0b28c12f512e6964
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -250,7 +250,7 @@ ScriptedImporter:
       y: 1564
       width: 192
       height: 252
-    spriteID: 21f58e66bf8d54d29aa454b8f65dc6d2
+    spriteID: 567690723b30c4be0a107a6f18dd62b2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -270,7 +270,7 @@ ScriptedImporter:
       y: 1824
       width: 192
       height: 252
-    spriteID: d98aef300785e4c47a27540d80f36612
+    spriteID: 8f75972a072c242f5acbe8eb481fa655
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -290,7 +290,7 @@ ScriptedImporter:
       y: 2084
       width: 192
       height: 252
-    spriteID: 797302901cfd34d92bf5f3a80fb50867
+    spriteID: 812529bb387ff43d78c7a432c68cf377
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -310,7 +310,7 @@ ScriptedImporter:
       y: 2344
       width: 192
       height: 252
-    spriteID: cd97ed20310b2494ba25f2256d62fd8a
+    spriteID: 14c6c1e6076d14ec9b732a90c4283ce8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -330,7 +330,7 @@ ScriptedImporter:
       y: 2604
       width: 192
       height: 252
-    spriteID: 8b930c6dacba34d6e866fca26ded01c0
+    spriteID: 3040e7065f3df48839dc50db08ecd57d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -350,7 +350,7 @@ ScriptedImporter:
       y: 2864
       width: 192
       height: 252
-    spriteID: ee850a8565f234ef0b78d8b2af97a31d
+    spriteID: 60cd6949549ec46ae9ed6b515568bca6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -370,7 +370,7 @@ ScriptedImporter:
       y: 3124
       width: 192
       height: 252
-    spriteID: 909a94baab41f4ead9a4cfa8d26f3b00
+    spriteID: 909f9cabad03a46cd8c83d471bc9e86a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -390,7 +390,7 @@ ScriptedImporter:
       y: 3384
       width: 192
       height: 252
-    spriteID: 077cccc9a4c9a4f68a80b96f27a7c1bb
+    spriteID: ee1cc82a333e14bebb8a140a1078bb3f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -410,7 +410,7 @@ ScriptedImporter:
       y: 3644
       width: 192
       height: 252
-    spriteID: dff5237fbdb5945209401d2e8f3bef34
+    spriteID: 8cefb51ece666405f90b778af7da5a20
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -430,7 +430,7 @@ ScriptedImporter:
       y: 4
       width: 192
       height: 252
-    spriteID: f06d92a37fbf74739bed04dbd343fd52
+    spriteID: e789ba36f75bc47d0b975c24173044d8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -450,7 +450,7 @@ ScriptedImporter:
       y: 264
       width: 192
       height: 252
-    spriteID: f6e16ff1031574c2198022ffcddb98d2
+    spriteID: 41ce8781f32264d3c8177a51cd70858f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -470,7 +470,7 @@ ScriptedImporter:
       y: 524
       width: 192
       height: 252
-    spriteID: aaaba989f5f3f4210a5a51e88b8db984
+    spriteID: 36ec5b0948f7f40ca950c0a36ad99b8f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -490,7 +490,7 @@ ScriptedImporter:
       y: 784
       width: 192
       height: 252
-    spriteID: a130ac13bde064cbc9eda4d0d2a0316a
+    spriteID: 297bf6fd2503e41329f9ab4abff559c2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -510,7 +510,7 @@ ScriptedImporter:
       y: 1044
       width: 192
       height: 252
-    spriteID: 09386d16fefd943f9afc2091871de7a8
+    spriteID: bf05427fdd41d4892b4f9b25665e3d40
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -530,7 +530,7 @@ ScriptedImporter:
       y: 1304
       width: 192
       height: 252
-    spriteID: a60539ed35cf24bcf9f911336fb475de
+    spriteID: b9702455215684a42bdd0760d4bba29e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -550,7 +550,7 @@ ScriptedImporter:
       y: 1564
       width: 192
       height: 252
-    spriteID: 6c76190814ada470b83b14e19caeb431
+    spriteID: 6b86e0f497c36450fbb1c8141337ecd9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -570,7 +570,7 @@ ScriptedImporter:
       y: 1824
       width: 192
       height: 252
-    spriteID: 2d447358f86cd4314bfb6ff2077365a1
+    spriteID: d3288607b95414ed882e67ca43ff21fb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -590,7 +590,7 @@ ScriptedImporter:
       y: 2084
       width: 192
       height: 252
-    spriteID: 0c9ddc45a202d4e4b9ef1a97bda7fae8
+    spriteID: 34bd61a02a3fa42d1ac97bc275fe36ba
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -610,7 +610,7 @@ ScriptedImporter:
       y: 2344
       width: 192
       height: 252
-    spriteID: 8b0ade5a261fb40258369b72a28e339e
+    spriteID: e0ee9fa3b0f3e4ef6a7c02177457023f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -630,7 +630,7 @@ ScriptedImporter:
       y: 2604
       width: 192
       height: 252
-    spriteID: 5c035d01586d74bbdb4f5ec138df910b
+    spriteID: 630a9f06df52a4093b8a93543a116ab2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -650,7 +650,7 @@ ScriptedImporter:
       y: 2864
       width: 192
       height: 252
-    spriteID: 7e2279ca54292468c88f1bf32f942975
+    spriteID: 878c8bd7599f446f896615b50e4148e7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -670,7 +670,7 @@ ScriptedImporter:
       y: 3124
       width: 192
       height: 252
-    spriteID: a32800571fdc142949ae190ba874ad54
+    spriteID: 24eff90651fc349ab8029d6b1e1bd6d5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -690,7 +690,7 @@ ScriptedImporter:
       y: 3384
       width: 192
       height: 252
-    spriteID: 4d7068126382b484e9f7c3b54e1f8b97
+    spriteID: 4ef03068fc2004911b1fdf30d18a39ba
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -710,7 +710,7 @@ ScriptedImporter:
       y: 3644
       width: 192
       height: 252
-    spriteID: ce6b40663f88a4598bd8c4f083f9f10e
+    spriteID: 082349c7e96cc448780f441d5f98281f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -730,7 +730,7 @@ ScriptedImporter:
       y: 4
       width: 192
       height: 252
-    spriteID: 322874e55fd374d40b1454609890ecf5
+    spriteID: 06658069a33c241dea172ac514fdcb98
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -750,7 +750,7 @@ ScriptedImporter:
       y: 264
       width: 192
       height: 252
-    spriteID: d2b11286a4b50409d9e12b34865b8ef7
+    spriteID: be8cc7a2b338a457fb6d4a327462dd30
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -770,7 +770,7 @@ ScriptedImporter:
       y: 524
       width: 192
       height: 252
-    spriteID: c13f6a2420ffb41bd93fc4ca0ad8ba7c
+    spriteID: 389a982b70adc443783f7c3926aafc9e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -790,7 +790,7 @@ ScriptedImporter:
       y: 784
       width: 192
       height: 252
-    spriteID: cde888cacf29b4eb4bdcfb826cfe8da7
+    spriteID: 801d5542afeaa40698509d1323d6fb9a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -810,7 +810,7 @@ ScriptedImporter:
       y: 1044
       width: 192
       height: 252
-    spriteID: a45e036fc19274b899eb2ae4e3678e2e
+    spriteID: ffd00f46234884173941f83de9891803
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -830,7 +830,7 @@ ScriptedImporter:
       y: 1304
       width: 192
       height: 252
-    spriteID: 2e0358b0cf7934d689c36dfe3a8b33d5
+    spriteID: c36c528ce01b14b74a2096b67c0300e8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -850,7 +850,7 @@ ScriptedImporter:
       y: 1564
       width: 192
       height: 252
-    spriteID: c6dec47ab9b6749af9ef70afa84551b8
+    spriteID: 91c288e063870453286ce18a5864b88a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -870,7 +870,7 @@ ScriptedImporter:
       y: 1824
       width: 192
       height: 252
-    spriteID: acbf109a930aa49bd85e0434962ded2f
+    spriteID: 9691799c96636430a833b0b8e670365c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -890,7 +890,7 @@ ScriptedImporter:
       y: 2084
       width: 192
       height: 252
-    spriteID: a82964852b28c40b494d429ee975dc89
+    spriteID: ae8af8e8f01cb440e83dedcd63b0308a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -910,7 +910,7 @@ ScriptedImporter:
       y: 2344
       width: 192
       height: 252
-    spriteID: 5d886ac53251d4ef7952aad46aa0c6a9
+    spriteID: f7aa662e9df0a4f8ba8ac6b868bdeeb4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -930,7 +930,7 @@ ScriptedImporter:
       y: 2604
       width: 192
       height: 252
-    spriteID: 9315d9fdbf96640b1b43e6c5d821dd75
+    spriteID: ddbf374ae1d81451c93beaa9895154fa
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -950,7 +950,7 @@ ScriptedImporter:
       y: 2864
       width: 192
       height: 252
-    spriteID: 46211830bd84a4c168c84307d72aca5a
+    spriteID: 6c3099e3539f24ae88161ac39190a7f7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -970,7 +970,7 @@ ScriptedImporter:
       y: 3124
       width: 192
       height: 252
-    spriteID: bd790bf15882e4c3cb3bee1a8a348c89
+    spriteID: 76f42ecefb833482ca235e6bf71cb1ea
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -990,7 +990,7 @@ ScriptedImporter:
       y: 3384
       width: 192
       height: 252
-    spriteID: 78c4f8fcb5cbc46e5b0ed89fb4aa6254
+    spriteID: 0ba4f10d64b7b45138963d896bb2ed44
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1010,7 +1010,7 @@ ScriptedImporter:
       y: 3644
       width: 192
       height: 252
-    spriteID: 99d6a87c3be9546b2b3d3db122296465
+    spriteID: 6b2b7c515c8214cae911c534325fb542
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1030,7 +1030,7 @@ ScriptedImporter:
       y: 4
       width: 192
       height: 252
-    spriteID: 345a6500efe4e47a7a16d3a7ccfd2c77
+    spriteID: 2f2a5497f4d4347ab886710da6246ed8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1050,7 +1050,7 @@ ScriptedImporter:
       y: 264
       width: 192
       height: 252
-    spriteID: 4a0f30acd39db4d86a71a14eb2471ac5
+    spriteID: 48f6ef1da735b48fb989b5e16a8c54ed
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1070,7 +1070,7 @@ ScriptedImporter:
       y: 524
       width: 192
       height: 252
-    spriteID: 55a7acca5aef44655aa1018a8b0b3a9e
+    spriteID: 3d0cf9f90855042d490eac9d0e02cad6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1090,7 +1090,7 @@ ScriptedImporter:
       y: 784
       width: 192
       height: 252
-    spriteID: df653a8f06ac64ef69c3164846bed27b
+    spriteID: 84e314a7ed7354de0ba54d4e71a92f4c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1110,7 +1110,7 @@ ScriptedImporter:
       y: 1044
       width: 192
       height: 252
-    spriteID: 7209af489c43a4f9ba7d6513c184ec1f
+    spriteID: fde8e4ad932654ecd80b4786b924c671
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1130,7 +1130,7 @@ ScriptedImporter:
       y: 1304
       width: 192
       height: 252
-    spriteID: 4a7f03b40070449c18033c8a619f8324
+    spriteID: 48e5f67c11c8740058113d0fb084da39
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1150,7 +1150,7 @@ ScriptedImporter:
       y: 1564
       width: 192
       height: 252
-    spriteID: cfa1244f6344f430593689f9b897f009
+    spriteID: 5fd2c2833d4514eaba5de9083c7e4c1d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1170,7 +1170,7 @@ ScriptedImporter:
       y: 1824
       width: 192
       height: 252
-    spriteID: 6d7fb1e9b7bfb4aacb45d799a7fc0c00
+    spriteID: 94891b729fea648f5b9d4ad95e913dda
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1190,7 +1190,7 @@ ScriptedImporter:
       y: 2084
       width: 192
       height: 252
-    spriteID: 0e174f516149f4ec3b946ba18f29957d
+    spriteID: f5085a6ed9e4c46a6b914b6dc736098f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1210,7 +1210,7 @@ ScriptedImporter:
       y: 2344
       width: 192
       height: 252
-    spriteID: f74df76fda342429694b169dc8bd0b6e
+    spriteID: 781a9deb9d2bb4b5a8fb4826b7ae9fb6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1230,7 +1230,7 @@ ScriptedImporter:
       y: 2604
       width: 192
       height: 252
-    spriteID: a12e502a2869a4f26a85e60b0ebee0aa
+    spriteID: 4501ab1f6ccbc40d8bfde7c8ab1b8edd
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1250,7 +1250,7 @@ ScriptedImporter:
       y: 2864
       width: 192
       height: 252
-    spriteID: 06101b010774240be9d41c47c16f9bbd
+    spriteID: 65cfc18fa1fb64b52a6362bae248db7b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1270,7 +1270,7 @@ ScriptedImporter:
       y: 3124
       width: 192
       height: 252
-    spriteID: 90dbfd312c8a34d458823e7cf3262e79
+    spriteID: cf5c8184b9a5a4e369cc8ccaf535b9ff
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1290,7 +1290,7 @@ ScriptedImporter:
       y: 3384
       width: 192
       height: 252
-    spriteID: 8f1bbe4a0e9744c0786bfed24e927f53
+    spriteID: 3be00833186fb45f7aaabbff66cdfb8d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1310,7 +1310,7 @@ ScriptedImporter:
       y: 3644
       width: 192
       height: 252
-    spriteID: 3457d1f3a5f864516b53dedd431410f0
+    spriteID: 0dbe43070ef054626917642832668a86
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1330,7 +1330,7 @@ ScriptedImporter:
       y: 4
       width: 192
       height: 252
-    spriteID: 535a35b4834944be78de41158aec3ced
+    spriteID: aeccddb69730f4f08963a13845dadbc8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1350,7 +1350,7 @@ ScriptedImporter:
       y: 264
       width: 192
       height: 252
-    spriteID: 4a4fa4490a5ef46ca98415abee15512f
+    spriteID: ada91d0cf725d44d2a34219e9abee148
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1370,7 +1370,7 @@ ScriptedImporter:
       y: 524
       width: 192
       height: 252
-    spriteID: c9f2b8fb9b7a948beb0054a270f8a5be
+    spriteID: c3a5b642a664e4096b76e3f5e7e3ee09
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1390,7 +1390,7 @@ ScriptedImporter:
       y: 784
       width: 192
       height: 252
-    spriteID: ee8b55f5aab184c34b03555613c279b3
+    spriteID: 9670e31dca192479ea68addbab54e85f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1410,7 +1410,7 @@ ScriptedImporter:
       y: 1044
       width: 192
       height: 252
-    spriteID: e7d6ca8a68c574cde9a17c474fc6b6f0
+    spriteID: 9f8de333fa8944f04a17140a1c761f1e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1430,7 +1430,7 @@ ScriptedImporter:
       y: 1304
       width: 192
       height: 252
-    spriteID: 38cec52677eed4e57abfc54b837bf3fa
+    spriteID: a649d18891da94efaa3f877c36f459d5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1450,7 +1450,7 @@ ScriptedImporter:
       y: 1564
       width: 192
       height: 252
-    spriteID: a743056997f5c45c99104806bbbb0198
+    spriteID: 606ca58f5811c4fb29197cf28f4209ec
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1470,7 +1470,7 @@ ScriptedImporter:
       y: 1824
       width: 192
       height: 252
-    spriteID: ed5e3edd1e3f249509d01ce52ac8a038
+    spriteID: bd1b57616a05d4e8cb2819d0f1e799f4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1490,7 +1490,7 @@ ScriptedImporter:
       y: 2084
       width: 192
       height: 252
-    spriteID: 54d2bd51ec51b41ad93a0007fd6a2e22
+    spriteID: 3fa89bf577b8146fca5d8b4742e3b5ef
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1510,7 +1510,7 @@ ScriptedImporter:
       y: 2344
       width: 192
       height: 252
-    spriteID: 1b129fe99fb3246ae852c449ec9da182
+    spriteID: 8d854e90b103a4208b01fb330aca6abf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1530,7 +1530,7 @@ ScriptedImporter:
       y: 2604
       width: 192
       height: 252
-    spriteID: c658e8864f10546159f39b17af3ff168
+    spriteID: 78d170aaabde044188fe687cfebdca15
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1550,7 +1550,7 @@ ScriptedImporter:
       y: 2864
       width: 192
       height: 252
-    spriteID: 2959b9b759f0b4bfab7cc097b47ff05a
+    spriteID: 882e398f9f1b6447e85930a96b4df2f9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1570,7 +1570,7 @@ ScriptedImporter:
       y: 3124
       width: 192
       height: 252
-    spriteID: 2140a20720bc1433698b7c70016eb4a6
+    spriteID: b7c3e9693c7894867b258ba0bad2366c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1590,7 +1590,7 @@ ScriptedImporter:
       y: 3384
       width: 192
       height: 252
-    spriteID: e430d9f7e34634056a7f41ef9546542a
+    spriteID: 0a175a53286f846a1aa426bea6f00177
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1610,7 +1610,7 @@ ScriptedImporter:
       y: 3644
       width: 192
       height: 252
-    spriteID: 5b3b042299f544ebe80d1a30ba2298b3
+    spriteID: 9a52b968ce9ec4a71a5a548cfcff7ae4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1630,7 +1630,7 @@ ScriptedImporter:
       y: 4
       width: 192
       height: 252
-    spriteID: 13b9d124782f54300a29e10a4d13e40b
+    spriteID: 5d68e01e715c541faa8ccc87bcf5f90c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1650,7 +1650,7 @@ ScriptedImporter:
       y: 264
       width: 192
       height: 252
-    spriteID: 9c13eab28562e4e2fb171c3b909ab80f
+    spriteID: 72546537714e5434db214c4b8e0123f9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1670,7 +1670,7 @@ ScriptedImporter:
       y: 524
       width: 192
       height: 252
-    spriteID: c5142a6ef450b404ba53ce23b68b75a1
+    spriteID: 475f173d7aa694541aa84383c24e4451
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1690,7 +1690,7 @@ ScriptedImporter:
       y: 784
       width: 192
       height: 252
-    spriteID: 69455422e17f94b6b8f977614e238186
+    spriteID: be67a693acd7e4983b26dd27c4cd1b64
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1710,7 +1710,7 @@ ScriptedImporter:
       y: 1044
       width: 192
       height: 252
-    spriteID: a39c6b630306e419d9fcf0f106fc8d88
+    spriteID: da2cfcfe7bde943b9ab663c957b3ed91
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1730,7 +1730,7 @@ ScriptedImporter:
       y: 1304
       width: 192
       height: 252
-    spriteID: f81babe5086b447d5b347ee9609924e2
+    spriteID: a2ee4d72626ef4a83b5e6108b8929c78
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1750,7 +1750,7 @@ ScriptedImporter:
       y: 1564
       width: 192
       height: 252
-    spriteID: 3f8c10c855ccf4af8a168b32910805b5
+    spriteID: 8b132843f75a64efa98e1197c2b46441
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1770,7 +1770,7 @@ ScriptedImporter:
       y: 1824
       width: 192
       height: 252
-    spriteID: 0708ab4b7956b493b80003c773dd2ed0
+    spriteID: eefd8049b9a154e35907b356c9ec78a6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1790,7 +1790,7 @@ ScriptedImporter:
       y: 2084
       width: 192
       height: 252
-    spriteID: 92e2f8c7f307b4a528bc914693fd91d3
+    spriteID: bfa56c0f9632c40ada7019dfb56ced9b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1810,7 +1810,7 @@ ScriptedImporter:
       y: 2344
       width: 192
       height: 252
-    spriteID: 0043247c784774c248a1b6d35092c42d
+    spriteID: 9ece0ed45d989441ab972c945c8caa58
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1830,7 +1830,7 @@ ScriptedImporter:
       y: 2604
       width: 192
       height: 252
-    spriteID: 71f3226c659554f57a8eeb3fe060332e
+    spriteID: b348177f35e8b430b82315133549a522
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1850,7 +1850,7 @@ ScriptedImporter:
       y: 2864
       width: 192
       height: 252
-    spriteID: 6aba6617c645743d881ffbbfb406ac30
+    spriteID: 5fbdceb07fc0c4f1e80ef16e2a17db44
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1870,7 +1870,7 @@ ScriptedImporter:
       y: 3124
       width: 192
       height: 252
-    spriteID: 555b5137b09bd45c9ba8216b0dc481ca
+    spriteID: 884afbaedc68d40618a111a226b6c33c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1890,7 +1890,7 @@ ScriptedImporter:
       y: 3384
       width: 192
       height: 252
-    spriteID: 3d07c5cd693f544818dc5605b8bd3860
+    spriteID: cb8a68c6c20ec483885ef3a90436fa41
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1910,7 +1910,7 @@ ScriptedImporter:
       y: 3644
       width: 192
       height: 252
-    spriteID: 6f448ebd8a29345d2a23a84e7716d8b2
+    spriteID: 38070e4c6a1e043cb92aba5a92471581
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1930,7 +1930,7 @@ ScriptedImporter:
       y: 4
       width: 192
       height: 252
-    spriteID: 55c8bdc88a0e7493b9171b15125728a4
+    spriteID: c2c49b146f3874cba841e1ba1e1d99b9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1950,7 +1950,7 @@ ScriptedImporter:
       y: 264
       width: 192
       height: 252
-    spriteID: 10f0031f1b84c4ddda15f67971bb3d79
+    spriteID: 43c0b77530a5c471db79b0ecea280733
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1970,7 +1970,7 @@ ScriptedImporter:
       y: 524
       width: 192
       height: 252
-    spriteID: 7df5205a9d18e4433a6e2c801daf09ae
+    spriteID: cadabcd1f91844864a5afd03a578972f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -1990,7 +1990,7 @@ ScriptedImporter:
       y: 784
       width: 192
       height: 252
-    spriteID: 398eeb40fbc7942cdbcc8e981eee5e8e
+    spriteID: 31ef744a9dcc3470796fccb0e20f24af
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -2010,7 +2010,7 @@ ScriptedImporter:
       y: 1044
       width: 192
       height: 252
-    spriteID: ad86483895a594401939dd54e6e70a1f
+    spriteID: 2f1ad19471b7940e98ce23929d59bb7a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -2030,7 +2030,7 @@ ScriptedImporter:
       y: 1304
       width: 192
       height: 252
-    spriteID: 3053ce4b3f20341b89121250beb0a804
+    spriteID: 0c2694ba4c30d48bdae0fe8cbcaca559
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -2050,7 +2050,7 @@ ScriptedImporter:
       y: 1564
       width: 192
       height: 252
-    spriteID: 1a5236e6ed13b4f4c8c525603816c521
+    spriteID: b40be8de945a14089977a9ffd47d2cae
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -2070,7 +2070,7 @@ ScriptedImporter:
       y: 1824
       width: 192
       height: 252
-    spriteID: 31d9e7f5e988243e2b180bfe8527903b
+    spriteID: a1ecf67f2d98c4c5fa5ea23864850c0f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -2090,7 +2090,7 @@ ScriptedImporter:
       y: 2084
       width: 192
       height: 252
-    spriteID: 4cb9493e5e9bb43d794259a58a471e5d
+    spriteID: a62f56b98d02d470380c8fd3cc55b226
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -2115,7 +2115,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 7b8a4529c973e49e3a5ddaa30d0c3e3f
+      spriteId: a87395c0bcd63467582371439a510c8b
     - name: RogueGoblin_Frame_1
       frameIndex: 1
       cellRect:
@@ -2123,7 +2123,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: f87a8ad7be5104b7d8ecfb8ca8bd4010
+      spriteId: cd3ba13b4e9214400bbf113f84b84446
     - name: RogueGoblin_Frame_2
       frameIndex: 2
       cellRect:
@@ -2131,7 +2131,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 0e5ec51032dc744f2aafdfd5e6fbbec6
+      spriteId: 7f8f9e27c07a24734b6ea79ed96f590c
     - name: RogueGoblin_Frame_3
       frameIndex: 3
       cellRect:
@@ -2139,7 +2139,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 283359b9d2c6744c1bf8aaac92a9e1b9
+      spriteId: 59a21b322d9d44300b89b1868225677a
     - name: RogueGoblin_Frame_4
       frameIndex: 4
       cellRect:
@@ -2147,7 +2147,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 183104b9d46e0446bb5a3ace792f3b49
+      spriteId: df67389b07d5c4dcaa8e14a4dd371356
     - name: RogueGoblin_Frame_5
       frameIndex: 5
       cellRect:
@@ -2155,7 +2155,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a0d5050e0947a4bf2bcdea557239f787
+      spriteId: 491c64fdd305e40b0b28c12f512e6964
     - name: RogueGoblin_Frame_6
       frameIndex: 6
       cellRect:
@@ -2163,7 +2163,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 21f58e66bf8d54d29aa454b8f65dc6d2
+      spriteId: 567690723b30c4be0a107a6f18dd62b2
     - name: RogueGoblin_Frame_7
       frameIndex: 7
       cellRect:
@@ -2171,7 +2171,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: d98aef300785e4c47a27540d80f36612
+      spriteId: 8f75972a072c242f5acbe8eb481fa655
     - name: RogueGoblin_Frame_8
       frameIndex: 8
       cellRect:
@@ -2179,7 +2179,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 797302901cfd34d92bf5f3a80fb50867
+      spriteId: 812529bb387ff43d78c7a432c68cf377
     - name: RogueGoblin_Frame_9
       frameIndex: 9
       cellRect:
@@ -2187,7 +2187,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: cd97ed20310b2494ba25f2256d62fd8a
+      spriteId: 14c6c1e6076d14ec9b732a90c4283ce8
     - name: RogueGoblin_Frame_10
       frameIndex: 10
       cellRect:
@@ -2195,7 +2195,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 8b930c6dacba34d6e866fca26ded01c0
+      spriteId: 3040e7065f3df48839dc50db08ecd57d
     - name: RogueGoblin_Frame_11
       frameIndex: 11
       cellRect:
@@ -2203,7 +2203,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: ee850a8565f234ef0b78d8b2af97a31d
+      spriteId: 60cd6949549ec46ae9ed6b515568bca6
     - name: RogueGoblin_Frame_12
       frameIndex: 12
       cellRect:
@@ -2211,7 +2211,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 909a94baab41f4ead9a4cfa8d26f3b00
+      spriteId: 909f9cabad03a46cd8c83d471bc9e86a
     - name: RogueGoblin_Frame_13
       frameIndex: 13
       cellRect:
@@ -2219,7 +2219,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 077cccc9a4c9a4f68a80b96f27a7c1bb
+      spriteId: ee1cc82a333e14bebb8a140a1078bb3f
     - name: RogueGoblin_Frame_14
       frameIndex: 14
       cellRect:
@@ -2227,7 +2227,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: dff5237fbdb5945209401d2e8f3bef34
+      spriteId: 8cefb51ece666405f90b778af7da5a20
     - name: RogueGoblin_Frame_15
       frameIndex: 15
       cellRect:
@@ -2235,7 +2235,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: f06d92a37fbf74739bed04dbd343fd52
+      spriteId: e789ba36f75bc47d0b975c24173044d8
     - name: RogueGoblin_Frame_16
       frameIndex: 16
       cellRect:
@@ -2243,7 +2243,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: f6e16ff1031574c2198022ffcddb98d2
+      spriteId: 41ce8781f32264d3c8177a51cd70858f
     - name: RogueGoblin_Frame_17
       frameIndex: 17
       cellRect:
@@ -2251,7 +2251,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: aaaba989f5f3f4210a5a51e88b8db984
+      spriteId: 36ec5b0948f7f40ca950c0a36ad99b8f
     - name: RogueGoblin_Frame_18
       frameIndex: 18
       cellRect:
@@ -2259,7 +2259,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a130ac13bde064cbc9eda4d0d2a0316a
+      spriteId: 297bf6fd2503e41329f9ab4abff559c2
     - name: RogueGoblin_Frame_19
       frameIndex: 19
       cellRect:
@@ -2267,7 +2267,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 09386d16fefd943f9afc2091871de7a8
+      spriteId: bf05427fdd41d4892b4f9b25665e3d40
     - name: RogueGoblin_Frame_20
       frameIndex: 20
       cellRect:
@@ -2275,7 +2275,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a60539ed35cf24bcf9f911336fb475de
+      spriteId: b9702455215684a42bdd0760d4bba29e
     - name: RogueGoblin_Frame_21
       frameIndex: 21
       cellRect:
@@ -2283,7 +2283,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 6c76190814ada470b83b14e19caeb431
+      spriteId: 6b86e0f497c36450fbb1c8141337ecd9
     - name: RogueGoblin_Frame_22
       frameIndex: 22
       cellRect:
@@ -2291,7 +2291,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 2d447358f86cd4314bfb6ff2077365a1
+      spriteId: d3288607b95414ed882e67ca43ff21fb
     - name: RogueGoblin_Frame_23
       frameIndex: 23
       cellRect:
@@ -2299,7 +2299,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 0c9ddc45a202d4e4b9ef1a97bda7fae8
+      spriteId: 34bd61a02a3fa42d1ac97bc275fe36ba
     - name: RogueGoblin_Frame_24
       frameIndex: 24
       cellRect:
@@ -2307,7 +2307,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 8b0ade5a261fb40258369b72a28e339e
+      spriteId: e0ee9fa3b0f3e4ef6a7c02177457023f
     - name: RogueGoblin_Frame_25
       frameIndex: 25
       cellRect:
@@ -2315,7 +2315,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 5c035d01586d74bbdb4f5ec138df910b
+      spriteId: 630a9f06df52a4093b8a93543a116ab2
     - name: RogueGoblin_Frame_26
       frameIndex: 26
       cellRect:
@@ -2323,7 +2323,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 7e2279ca54292468c88f1bf32f942975
+      spriteId: 878c8bd7599f446f896615b50e4148e7
     - name: RogueGoblin_Frame_27
       frameIndex: 27
       cellRect:
@@ -2331,7 +2331,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a32800571fdc142949ae190ba874ad54
+      spriteId: 24eff90651fc349ab8029d6b1e1bd6d5
     - name: RogueGoblin_Frame_28
       frameIndex: 28
       cellRect:
@@ -2339,7 +2339,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 4d7068126382b484e9f7c3b54e1f8b97
+      spriteId: 4ef03068fc2004911b1fdf30d18a39ba
     - name: RogueGoblin_Frame_29
       frameIndex: 29
       cellRect:
@@ -2347,7 +2347,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: ce6b40663f88a4598bd8c4f083f9f10e
+      spriteId: 082349c7e96cc448780f441d5f98281f
     - name: RogueGoblin_Frame_30
       frameIndex: 30
       cellRect:
@@ -2355,7 +2355,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 322874e55fd374d40b1454609890ecf5
+      spriteId: 06658069a33c241dea172ac514fdcb98
     - name: RogueGoblin_Frame_31
       frameIndex: 31
       cellRect:
@@ -2363,7 +2363,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: d2b11286a4b50409d9e12b34865b8ef7
+      spriteId: be8cc7a2b338a457fb6d4a327462dd30
     - name: RogueGoblin_Frame_32
       frameIndex: 32
       cellRect:
@@ -2371,7 +2371,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: c13f6a2420ffb41bd93fc4ca0ad8ba7c
+      spriteId: 389a982b70adc443783f7c3926aafc9e
     - name: RogueGoblin_Frame_33
       frameIndex: 33
       cellRect:
@@ -2379,7 +2379,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: cde888cacf29b4eb4bdcfb826cfe8da7
+      spriteId: 801d5542afeaa40698509d1323d6fb9a
     - name: RogueGoblin_Frame_34
       frameIndex: 34
       cellRect:
@@ -2387,7 +2387,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a45e036fc19274b899eb2ae4e3678e2e
+      spriteId: ffd00f46234884173941f83de9891803
     - name: RogueGoblin_Frame_35
       frameIndex: 35
       cellRect:
@@ -2395,7 +2395,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 2e0358b0cf7934d689c36dfe3a8b33d5
+      spriteId: c36c528ce01b14b74a2096b67c0300e8
     - name: RogueGoblin_Frame_36
       frameIndex: 36
       cellRect:
@@ -2403,7 +2403,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: c6dec47ab9b6749af9ef70afa84551b8
+      spriteId: 91c288e063870453286ce18a5864b88a
     - name: RogueGoblin_Frame_37
       frameIndex: 37
       cellRect:
@@ -2411,7 +2411,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: acbf109a930aa49bd85e0434962ded2f
+      spriteId: 9691799c96636430a833b0b8e670365c
     - name: RogueGoblin_Frame_38
       frameIndex: 38
       cellRect:
@@ -2419,7 +2419,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a82964852b28c40b494d429ee975dc89
+      spriteId: ae8af8e8f01cb440e83dedcd63b0308a
     - name: RogueGoblin_Frame_39
       frameIndex: 39
       cellRect:
@@ -2427,7 +2427,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 5d886ac53251d4ef7952aad46aa0c6a9
+      spriteId: f7aa662e9df0a4f8ba8ac6b868bdeeb4
     - name: RogueGoblin_Frame_40
       frameIndex: 40
       cellRect:
@@ -2435,7 +2435,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 9315d9fdbf96640b1b43e6c5d821dd75
+      spriteId: ddbf374ae1d81451c93beaa9895154fa
     - name: RogueGoblin_Frame_41
       frameIndex: 41
       cellRect:
@@ -2443,7 +2443,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 46211830bd84a4c168c84307d72aca5a
+      spriteId: 6c3099e3539f24ae88161ac39190a7f7
     - name: RogueGoblin_Frame_42
       frameIndex: 42
       cellRect:
@@ -2451,7 +2451,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: bd790bf15882e4c3cb3bee1a8a348c89
+      spriteId: 76f42ecefb833482ca235e6bf71cb1ea
     - name: RogueGoblin_Frame_43
       frameIndex: 43
       cellRect:
@@ -2459,7 +2459,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 78c4f8fcb5cbc46e5b0ed89fb4aa6254
+      spriteId: 0ba4f10d64b7b45138963d896bb2ed44
     - name: RogueGoblin_Frame_44
       frameIndex: 44
       cellRect:
@@ -2467,7 +2467,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 99d6a87c3be9546b2b3d3db122296465
+      spriteId: 6b2b7c515c8214cae911c534325fb542
     - name: RogueGoblin_Frame_45
       frameIndex: 45
       cellRect:
@@ -2475,7 +2475,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 345a6500efe4e47a7a16d3a7ccfd2c77
+      spriteId: 2f2a5497f4d4347ab886710da6246ed8
     - name: RogueGoblin_Frame_46
       frameIndex: 46
       cellRect:
@@ -2483,7 +2483,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 4a0f30acd39db4d86a71a14eb2471ac5
+      spriteId: 48f6ef1da735b48fb989b5e16a8c54ed
     - name: RogueGoblin_Frame_47
       frameIndex: 47
       cellRect:
@@ -2491,7 +2491,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 55a7acca5aef44655aa1018a8b0b3a9e
+      spriteId: 3d0cf9f90855042d490eac9d0e02cad6
     - name: RogueGoblin_Frame_48
       frameIndex: 48
       cellRect:
@@ -2499,7 +2499,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: df653a8f06ac64ef69c3164846bed27b
+      spriteId: 84e314a7ed7354de0ba54d4e71a92f4c
     - name: RogueGoblin_Frame_49
       frameIndex: 49
       cellRect:
@@ -2507,7 +2507,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 7209af489c43a4f9ba7d6513c184ec1f
+      spriteId: fde8e4ad932654ecd80b4786b924c671
     - name: RogueGoblin_Frame_50
       frameIndex: 50
       cellRect:
@@ -2515,7 +2515,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 4a7f03b40070449c18033c8a619f8324
+      spriteId: 48e5f67c11c8740058113d0fb084da39
     - name: RogueGoblin_Frame_51
       frameIndex: 51
       cellRect:
@@ -2523,7 +2523,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: cfa1244f6344f430593689f9b897f009
+      spriteId: 5fd2c2833d4514eaba5de9083c7e4c1d
     - name: RogueGoblin_Frame_52
       frameIndex: 52
       cellRect:
@@ -2531,7 +2531,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 6d7fb1e9b7bfb4aacb45d799a7fc0c00
+      spriteId: 94891b729fea648f5b9d4ad95e913dda
     - name: RogueGoblin_Frame_53
       frameIndex: 53
       cellRect:
@@ -2539,7 +2539,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 0e174f516149f4ec3b946ba18f29957d
+      spriteId: f5085a6ed9e4c46a6b914b6dc736098f
     - name: RogueGoblin_Frame_54
       frameIndex: 54
       cellRect:
@@ -2547,7 +2547,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: f74df76fda342429694b169dc8bd0b6e
+      spriteId: 781a9deb9d2bb4b5a8fb4826b7ae9fb6
     - name: RogueGoblin_Frame_55
       frameIndex: 55
       cellRect:
@@ -2555,7 +2555,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a12e502a2869a4f26a85e60b0ebee0aa
+      spriteId: 4501ab1f6ccbc40d8bfde7c8ab1b8edd
     - name: RogueGoblin_Frame_56
       frameIndex: 56
       cellRect:
@@ -2563,7 +2563,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 06101b010774240be9d41c47c16f9bbd
+      spriteId: 65cfc18fa1fb64b52a6362bae248db7b
     - name: RogueGoblin_Frame_57
       frameIndex: 57
       cellRect:
@@ -2571,7 +2571,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 90dbfd312c8a34d458823e7cf3262e79
+      spriteId: cf5c8184b9a5a4e369cc8ccaf535b9ff
     - name: RogueGoblin_Frame_58
       frameIndex: 58
       cellRect:
@@ -2579,7 +2579,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 8f1bbe4a0e9744c0786bfed24e927f53
+      spriteId: 3be00833186fb45f7aaabbff66cdfb8d
     - name: RogueGoblin_Frame_59
       frameIndex: 59
       cellRect:
@@ -2587,7 +2587,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 3457d1f3a5f864516b53dedd431410f0
+      spriteId: 0dbe43070ef054626917642832668a86
     - name: RogueGoblin_Frame_60
       frameIndex: 60
       cellRect:
@@ -2595,7 +2595,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 535a35b4834944be78de41158aec3ced
+      spriteId: aeccddb69730f4f08963a13845dadbc8
     - name: RogueGoblin_Frame_61
       frameIndex: 61
       cellRect:
@@ -2603,7 +2603,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 4a4fa4490a5ef46ca98415abee15512f
+      spriteId: ada91d0cf725d44d2a34219e9abee148
     - name: RogueGoblin_Frame_62
       frameIndex: 62
       cellRect:
@@ -2611,7 +2611,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: c9f2b8fb9b7a948beb0054a270f8a5be
+      spriteId: c3a5b642a664e4096b76e3f5e7e3ee09
     - name: RogueGoblin_Frame_63
       frameIndex: 63
       cellRect:
@@ -2619,7 +2619,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: ee8b55f5aab184c34b03555613c279b3
+      spriteId: 9670e31dca192479ea68addbab54e85f
     - name: RogueGoblin_Frame_64
       frameIndex: 64
       cellRect:
@@ -2627,7 +2627,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: e7d6ca8a68c574cde9a17c474fc6b6f0
+      spriteId: 9f8de333fa8944f04a17140a1c761f1e
     - name: RogueGoblin_Frame_65
       frameIndex: 65
       cellRect:
@@ -2635,7 +2635,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 38cec52677eed4e57abfc54b837bf3fa
+      spriteId: a649d18891da94efaa3f877c36f459d5
     - name: RogueGoblin_Frame_66
       frameIndex: 66
       cellRect:
@@ -2643,7 +2643,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a743056997f5c45c99104806bbbb0198
+      spriteId: 606ca58f5811c4fb29197cf28f4209ec
     - name: RogueGoblin_Frame_67
       frameIndex: 67
       cellRect:
@@ -2651,7 +2651,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: ed5e3edd1e3f249509d01ce52ac8a038
+      spriteId: bd1b57616a05d4e8cb2819d0f1e799f4
     - name: RogueGoblin_Frame_68
       frameIndex: 68
       cellRect:
@@ -2659,7 +2659,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 54d2bd51ec51b41ad93a0007fd6a2e22
+      spriteId: 3fa89bf577b8146fca5d8b4742e3b5ef
     - name: RogueGoblin_Frame_69
       frameIndex: 69
       cellRect:
@@ -2667,7 +2667,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 1b129fe99fb3246ae852c449ec9da182
+      spriteId: 8d854e90b103a4208b01fb330aca6abf
     - name: RogueGoblin_Frame_70
       frameIndex: 70
       cellRect:
@@ -2675,7 +2675,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: c658e8864f10546159f39b17af3ff168
+      spriteId: 78d170aaabde044188fe687cfebdca15
     - name: RogueGoblin_Frame_71
       frameIndex: 71
       cellRect:
@@ -2683,7 +2683,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 2959b9b759f0b4bfab7cc097b47ff05a
+      spriteId: 882e398f9f1b6447e85930a96b4df2f9
     - name: RogueGoblin_Frame_72
       frameIndex: 72
       cellRect:
@@ -2691,7 +2691,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 2140a20720bc1433698b7c70016eb4a6
+      spriteId: b7c3e9693c7894867b258ba0bad2366c
     - name: RogueGoblin_Frame_73
       frameIndex: 73
       cellRect:
@@ -2699,7 +2699,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: e430d9f7e34634056a7f41ef9546542a
+      spriteId: 0a175a53286f846a1aa426bea6f00177
     - name: RogueGoblin_Frame_74
       frameIndex: 74
       cellRect:
@@ -2707,7 +2707,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 5b3b042299f544ebe80d1a30ba2298b3
+      spriteId: 9a52b968ce9ec4a71a5a548cfcff7ae4
     - name: RogueGoblin_Frame_75
       frameIndex: 75
       cellRect:
@@ -2715,7 +2715,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 13b9d124782f54300a29e10a4d13e40b
+      spriteId: 5d68e01e715c541faa8ccc87bcf5f90c
     - name: RogueGoblin_Frame_76
       frameIndex: 76
       cellRect:
@@ -2723,7 +2723,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 9c13eab28562e4e2fb171c3b909ab80f
+      spriteId: 72546537714e5434db214c4b8e0123f9
     - name: RogueGoblin_Frame_77
       frameIndex: 77
       cellRect:
@@ -2731,7 +2731,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: c5142a6ef450b404ba53ce23b68b75a1
+      spriteId: 475f173d7aa694541aa84383c24e4451
     - name: RogueGoblin_Frame_78
       frameIndex: 78
       cellRect:
@@ -2739,7 +2739,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 69455422e17f94b6b8f977614e238186
+      spriteId: be67a693acd7e4983b26dd27c4cd1b64
     - name: RogueGoblin_Frame_79
       frameIndex: 79
       cellRect:
@@ -2747,7 +2747,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: a39c6b630306e419d9fcf0f106fc8d88
+      spriteId: da2cfcfe7bde943b9ab663c957b3ed91
     - name: RogueGoblin_Frame_80
       frameIndex: 80
       cellRect:
@@ -2755,7 +2755,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: f81babe5086b447d5b347ee9609924e2
+      spriteId: a2ee4d72626ef4a83b5e6108b8929c78
     - name: RogueGoblin_Frame_81
       frameIndex: 81
       cellRect:
@@ -2763,7 +2763,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 3f8c10c855ccf4af8a168b32910805b5
+      spriteId: 8b132843f75a64efa98e1197c2b46441
     - name: RogueGoblin_Frame_82
       frameIndex: 82
       cellRect:
@@ -2771,7 +2771,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 0708ab4b7956b493b80003c773dd2ed0
+      spriteId: eefd8049b9a154e35907b356c9ec78a6
     - name: RogueGoblin_Frame_83
       frameIndex: 83
       cellRect:
@@ -2779,7 +2779,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 92e2f8c7f307b4a528bc914693fd91d3
+      spriteId: bfa56c0f9632c40ada7019dfb56ced9b
     - name: RogueGoblin_Frame_84
       frameIndex: 84
       cellRect:
@@ -2787,7 +2787,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 0043247c784774c248a1b6d35092c42d
+      spriteId: 9ece0ed45d989441ab972c945c8caa58
     - name: RogueGoblin_Frame_85
       frameIndex: 85
       cellRect:
@@ -2795,7 +2795,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 71f3226c659554f57a8eeb3fe060332e
+      spriteId: b348177f35e8b430b82315133549a522
     - name: RogueGoblin_Frame_86
       frameIndex: 86
       cellRect:
@@ -2803,7 +2803,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 6aba6617c645743d881ffbbfb406ac30
+      spriteId: 5fbdceb07fc0c4f1e80ef16e2a17db44
     - name: RogueGoblin_Frame_87
       frameIndex: 87
       cellRect:
@@ -2811,7 +2811,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 555b5137b09bd45c9ba8216b0dc481ca
+      spriteId: 884afbaedc68d40618a111a226b6c33c
     - name: RogueGoblin_Frame_88
       frameIndex: 88
       cellRect:
@@ -2819,7 +2819,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 3d07c5cd693f544818dc5605b8bd3860
+      spriteId: cb8a68c6c20ec483885ef3a90436fa41
     - name: RogueGoblin_Frame_89
       frameIndex: 89
       cellRect:
@@ -2827,7 +2827,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 6f448ebd8a29345d2a23a84e7716d8b2
+      spriteId: 38070e4c6a1e043cb92aba5a92471581
     - name: RogueGoblin_Frame_90
       frameIndex: 90
       cellRect:
@@ -2835,7 +2835,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 55c8bdc88a0e7493b9171b15125728a4
+      spriteId: c2c49b146f3874cba841e1ba1e1d99b9
     - name: RogueGoblin_Frame_91
       frameIndex: 91
       cellRect:
@@ -2843,7 +2843,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 10f0031f1b84c4ddda15f67971bb3d79
+      spriteId: 43c0b77530a5c471db79b0ecea280733
     - name: RogueGoblin_Frame_92
       frameIndex: 92
       cellRect:
@@ -2851,7 +2851,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 7df5205a9d18e4433a6e2c801daf09ae
+      spriteId: cadabcd1f91844864a5afd03a578972f
     - name: RogueGoblin_Frame_93
       frameIndex: 93
       cellRect:
@@ -2859,7 +2859,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 398eeb40fbc7942cdbcc8e981eee5e8e
+      spriteId: 31ef744a9dcc3470796fccb0e20f24af
     - name: RogueGoblin_Frame_94
       frameIndex: 94
       cellRect:
@@ -2867,7 +2867,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: ad86483895a594401939dd54e6e70a1f
+      spriteId: 2f1ad19471b7940e98ce23929d59bb7a
     - name: RogueGoblin_Frame_95
       frameIndex: 95
       cellRect:
@@ -2875,7 +2875,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 3053ce4b3f20341b89121250beb0a804
+      spriteId: 0c2694ba4c30d48bdae0fe8cbcaca559
     - name: RogueGoblin_Frame_96
       frameIndex: 96
       cellRect:
@@ -2883,7 +2883,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 1a5236e6ed13b4f4c8c525603816c521
+      spriteId: b40be8de945a14089977a9ffd47d2cae
     - name: RogueGoblin_Frame_97
       frameIndex: 97
       cellRect:
@@ -2891,7 +2891,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 31d9e7f5e988243e2b180bfe8527903b
+      spriteId: a1ecf67f2d98c4c5fa5ea23864850c0f
     - name: RogueGoblin_Frame_98
       frameIndex: 98
       cellRect:
@@ -2899,7 +2899,7 @@ ScriptedImporter:
         y: 0
         width: 192
         height: 252
-      spriteId: 4cb9493e5e9bb43d794259a58a471e5d
+      spriteId: a62f56b98d02d470380c8fd3cc55b226
     linkedCells: []
     parentIndex: -1
   platformSettings: []
