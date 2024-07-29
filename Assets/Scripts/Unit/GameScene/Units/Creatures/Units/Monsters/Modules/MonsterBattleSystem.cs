@@ -11,20 +11,20 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
     {
         protected float timer;
 
-        public MonsterBattleSystem(Transform targetTransform, MonsterBattleStat stat) : base(targetTransform, stat)
+        public MonsterBattleSystem(Transform targetTransform, MonsterBattleStat battleStat) : base(targetTransform, battleStat)
         {
         }
 
         public override void Attack(RaycastHit2D col)
         {
-            _canAttackCool = false;
-            timer = _stat.GetCoolTime();
+            canAttackCool = false;
+            timer = BattleStat.GetCoolTime();
 
             if (col.collider.gameObject.TryGetComponent<ICreatureServiceProvider>(out var target))
             {
 #if UNITY_EDITOR
-                target.HeathSystem.TakeDamage(_stat.GetAttack());
-                Debug.Log($"몬스터가 {col.collider.gameObject.name}에게 {_stat.GetAttack()} 피해를 입혔습니다.");
+                target.HeathSystem.TakeDamage(BattleStat.GetAttack());
+                Debug.Log($"몬스터가 {col.collider.gameObject.name}에게 {BattleStat.GetAttack()} 피해를 입혔습니다.");
 #else
                 var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
 #endif
@@ -42,10 +42,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 
         public override void Update()
         {
-            if (!_canAttackCool)
+            if (!canAttackCool)
             {
                 timer -= Time.deltaTime;
-                if (timer < 0) _canAttackCool = true;
+                if (timer < 0) canAttackCool = true;
             }
         }
     }
@@ -72,9 +72,19 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
             return _attack();
         }
 
+        //TODO : 채이환 - 이환님 이 부분 하려면 MonsterData 안에 SkillManager가 존재해야 해요. CharacterBattleSystem 수정해뒀어요. 이 부분 참고하셔서 작업해주세요.
         public int GetSkillIndex(string skillName)
         {
-            // TODO : 인호님 이거 고쳐주세요.
+            return 0;
+        }
+
+        public float GetSkillRange(string skillName)
+        {
+            return 0;
+        }
+
+        public int GetSkillValue(string skillName)
+        {
             return 0;
         }
     }

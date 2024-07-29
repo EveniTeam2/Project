@@ -6,17 +6,17 @@ namespace Unit.GameScene.Units.Creatures.Module
 {
     public abstract class BattleSystem : ICreatureBattle
     {
-        protected bool _canAttackCool = true;
-        protected IBattleStat _stat;
-        protected Transform _targetTransform;
+        protected bool canAttackCool = true;
+        protected IBattleStat BattleStat;
+        private readonly Transform _targetTransform;
 
-        public BattleSystem(Transform targetTransform, IBattleStat stat)
+        protected BattleSystem(Transform targetTransform, IBattleStat battleStat)
         {
             _targetTransform = targetTransform;
-            _stat = stat;
+            BattleStat = battleStat;
         }
 
-        public bool CanAttackCool => _canAttackCool;
+        public bool CanAttackCool => canAttackCool;
 
         public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee)
         {
@@ -69,12 +69,12 @@ namespace Unit.GameScene.Units.Creatures.Module
 
         internal void SpawnInit(IBattleStat stat)
         {
-            _stat = stat;
+            BattleStat = stat;
         }
 
         internal IBattleStat GetBattleStat()
         {
-            return _stat;
+            return BattleStat;
         }
     }
 
@@ -82,7 +82,9 @@ namespace Unit.GameScene.Units.Creatures.Module
     {
         float GetCoolTime();
         int GetAttack();
-        // TODO : 인호님 이거 고쳐주세요.
+        
         int GetSkillIndex(string skillName);
+        float GetSkillRange(string skillName);
+        int GetSkillValue(string skillName);
     }
 }
