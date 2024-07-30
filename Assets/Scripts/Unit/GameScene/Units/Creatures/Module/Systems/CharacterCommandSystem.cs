@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 
 namespace Unit.GameScene.Units.Creatures.Module.Systems
 {
@@ -29,11 +29,12 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems
             _skillCommands = blockInfo;
             _commands = commands;
             _onCommandDequeue = onCommandDequeue;
-
-            Initialize();
+            _isReadyForCommand = true;
+            
+            InitializeCommand();
         }
         
-        private void Initialize()
+        private void InitializeCommand()
         {
             if (_commands == null) _commands = new Queue<CommandPacket>();
             else _commands.Clear();
@@ -46,8 +47,6 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems
             SetReadyForInvokingCommand(false);
 
             var command = _commands.Dequeue();
-            _commandAction = new CommandAction(_skillCommands.GetValueOrDefault(command.BlockType));
-            
             
             if (!ActivateCommand(command.BlockType, command.ComboCount))
             {
@@ -62,17 +61,19 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems
         /// </summary>
         private bool ActivateCommand(BlockType blockType, int count)
         {
-            var command = _skillCommands[blockType];
+            _commandAction.Initialize(_skillCommands.GetValueOrDefault(blockType));
 
-            if (command == null) return false;
+            if (_commandAction == null) return false;
             
-            command.Execute(count);
+            _commandAction.Execute(count);
+            
             return true;
         }
         
         public void ActivateSkillEffects()
         {
-            _commandAction?.ActivateCommandAction();
+            _commandAction.ActivateCommandAction();
+            _commandAction.Clear();
         }
 
         private bool GetReadyForCommand()

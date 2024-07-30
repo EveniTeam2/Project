@@ -4,7 +4,7 @@ using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.Interfaces;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

@@ -10,8 +10,8 @@ using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Animations;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.Creatures.Module.Systems;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
@@ -168,21 +168,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public void SetInteger(int parameter, int value, Action action)
         {
             AnimatorSystem.SetInteger(parameter, value, action);
-        }
-
-        public int GetSkillIndex(string skillName)
-        {
-            return SkillSystem.GetSkillIndex(skillName);
-        }
-
-        public int GetSkillValue(string skillName)
-        {
-            return SkillSystem.GetSkillValue(skillName);
-        }
-
-        public float GetSkillRange(string skillName)
-        {
-            return SkillSystem.GetSkillRange(skillName);
         }
 
         public void HealMySelf(int value)

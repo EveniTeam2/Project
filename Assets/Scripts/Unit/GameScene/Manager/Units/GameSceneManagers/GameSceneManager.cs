@@ -8,9 +8,9 @@ using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units;
@@ -98,7 +98,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
 
             var skillCsvData = CsvParser.ParseCharacterSkillData(extraSetting.skillTextAsset);
-            var skills = new CharacterSkillFactory(characterDataSo).CreateSkill();
+            var skills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
 
             var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
 

@@ -53,7 +53,7 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules
                     continue;
                 }
 
-                if (!Enum.TryParse<SkillType>(values[3], out var skillType))
+                if (!Enum.TryParse<SkillEffectType>(values[3], out var skillType))
                 {
                     Debug.LogError($"Failed to parse SkillType for line: {line}");
                     continue;

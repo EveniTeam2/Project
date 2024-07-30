@@ -6,5 +6,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
     public class CharacterSkillData
     {
         public Sprite SkillIcon;
+        public SkillEffectType SkillEffectType;
     }
 }

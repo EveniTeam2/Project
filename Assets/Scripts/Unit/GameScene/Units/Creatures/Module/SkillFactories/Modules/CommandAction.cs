@@ -1,18 +1,23 @@
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Interfaces;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 
 namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules
 {
     public class CommandAction
     {
-        private readonly ISkillCommand _skillCommand;
+        private ISkillCommand _skillCommand;
 
-        public CommandAction(ISkillCommand skillCommand)
+        public void Initialize(ISkillCommand skillCommand)
         {
             _skillCommand = skillCommand;
         }
 
-        public void ActivateCommand(int comboCount)
+        public void Clear()
+        {
+            _skillCommand = null;
+        }
+
+        public void Execute(int comboCount)
         {
             _skillCommand.Execute(comboCount);
         }

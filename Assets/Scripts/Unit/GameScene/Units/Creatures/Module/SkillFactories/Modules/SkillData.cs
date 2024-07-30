@@ -7,7 +7,7 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules
         public string SkillId { get; set; }
         public CharacterClassType CharacterType { get; set; }
         public int SkillIndex { get; set; }
-        public SkillType SkillType { get; set; }
+        public SkillEffectType SkillEffectType { get; set; }
         public string SkillTypeEnum { get; set; }
         public string SkillName { get; set; }
         public string SkillDescription { get; set; }
@@ -15,12 +15,12 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules
         public int SkillEffectValue { get; set; }
         public int SkillLevel { get; set; }
         
-        public SkillData(string skillId, CharacterClassType characterType, int skillIndex, SkillType skillType, string skillTypeEnum, string skillName, string skillDescription, float skillRange, int skillEffectValue, int skillLevel)
+        public SkillData(string skillId, CharacterClassType characterType, int skillIndex, SkillEffectType skillEffectType, string skillTypeEnum, string skillName, string skillDescription, float skillRange, int skillEffectValue, int skillLevel)
         {
             SkillId = skillId;
             CharacterType = characterType;
             SkillIndex = skillIndex;
-            SkillType = skillType;
+            SkillEffectType = skillEffectType;
             SkillTypeEnum = skillTypeEnum;
             SkillName = skillName;
             SkillDescription = skillDescription;

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Centaurs.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
@@ -41,7 +41,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public CharacterSkill GetDefaultSkill()
         {
-            return _skillData.Where(skillData => $"{skillData.SkillType}" == $"{BlockType.Default}").Select(skillData => _skills[skillData.SkillTypeEnum]).FirstOrDefault();
+            return _skillData.Where(skillData => $"{skillData.SkillEffectType}" == $"{BlockType.Default}").Select(skillData => _skills[skillData.SkillTypeEnum]).FirstOrDefault();
         }
         
         public int GetSkillValue(string skillName)

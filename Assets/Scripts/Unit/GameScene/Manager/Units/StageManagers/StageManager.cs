@@ -7,7 +7,7 @@ using Unit.GameScene.Manager.Units.StageManagers.Modules;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
