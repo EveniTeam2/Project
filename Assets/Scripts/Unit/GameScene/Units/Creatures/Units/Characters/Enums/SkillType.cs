@@ -1,6 +1,6 @@
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Enums
 {
-    public enum SkillEffectType
+    public enum SkillType
     {
         Attack,
         Heal,
@@ -8,16 +8,16 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Enums
         BuffShield,
     }
 
+    public enum SkillRangeType
+    {
+        Melee,
+        Range
+    }
+
     public enum SkillExtraEffectType
     {
         None,
         Stun,
         Bleeding
-    }
-
-    public enum SkillRange
-    {
-        Melee,
-        Range
     }
 }

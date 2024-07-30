@@ -69,7 +69,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         {
             _attack = () => creatureStat.Current.Damage;
             _cool = () => creatureStat.Current.CoolTime;
-            _skillRange = (skillName) => characterData.SkillSystem.GetSkillRange(skillName);
+            _skillRange = (skillName) => characterData.SkillSystem.GetSkillRange1(skillName);
             _skillIndex = (skillName) => characterData.SkillSystem.GetSkillIndex(skillName);
             _skillValue = (skillName) => characterData.SkillSystem.GetSkillValue(skillName);
         }

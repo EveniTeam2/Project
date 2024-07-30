@@ -4,9 +4,8 @@ using System.Linq;
 using ScriptableObjects.Scripts.Creature.Data.KnightData;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Units.KnightSkills;
+using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Units;
 
 namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills
 {
@@ -28,10 +27,18 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
                 var targetSkillName = knightSkillData.skillName;
                 var csvData = skillCsvData.Where(data => data.SkillIndex == (int) targetSkillName).ToList();
 
-                switch (csvData[0].SkillTypeEnum)
+                switch (csvData[0].SkillType)
                 {
-                    
+                    case SkillType.Attack:
+                        break;
+                    case SkillType.Heal:
+                        break;
+                    case SkillType.BuffDamage:
+                        break;
+                    case SkillType.BuffShield:
+                        break;
                 }
+                
                 switch (targetSkillName)
                 {
                     case KnightSkillType.LightAttack:

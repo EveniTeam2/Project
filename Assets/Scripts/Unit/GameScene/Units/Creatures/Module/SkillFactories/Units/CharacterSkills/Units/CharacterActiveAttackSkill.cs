@@ -10,7 +10,7 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
 
         public override void ActivateSkillEffects()
         {
-            AttackEnemy(GetSkillEffectValue() * ComboCount, GetSkillRange());
+            AttackEnemy(GetSkillValue() * ComboCount, GetSkillRange1());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
     public abstract class CharacterSkill : ISkillCommand
     {
         public CharacterClassType CharacterClassType { get; private set; }
-        public SkillEffectType SkillEffectType { get; private set; }
+        public SkillType SkillType { get; private set; }
         public string SkillName { get; protected set; }
         public int SkillIndex { get; protected set; }
         public int SkillLevel { get; private set; } = 1;
@@ -30,7 +30,7 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
             _csvData = csvData;
 
             CharacterClassType = _csvData[0].CharacterType;
-            SkillEffectType = _csvData[0].SkillEffectType;
+            SkillType = _csvData[0].SkillType;
             SkillName = _csvData[0].SkillName;
             SkillIndex = _csvData[0].SkillIndex;
         }
@@ -53,8 +53,8 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
         {
             _skillController = skillController;
         }
-
-        protected virtual void ActivateSkill()
+        
+        private void ActivateSkill()
         {
             ChangeState(StateType.Skill);
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, SkillIndex, null);
@@ -69,8 +69,8 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
             ChangeState(StateType.Idle);
             SetReadyForInvokingCommand(true);
         }
-        
-        protected void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
+
+        private void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
         {
             _skillController.SetBoolOnAnimator(targetParameter, value, action);
         }
@@ -80,12 +80,12 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
             _skillController.SetReadyForInvokingCommand(isReady);
         }
 
-        protected void ChangeState(StateType targetState)
+        private void ChangeState(StateType targetState)
         {
             _skillController.TryChangeState(targetState);
         }
 
-        protected void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
+        private void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
         {
             _skillController.SetFloatOnAnimator(targetParameter, value, action);
         }
@@ -99,15 +99,10 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSk
         {
             _skillController.HealMySelf(value);
         }
-
-        protected int GetSkillEffectValue()
-        {
-            return (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillEffectValue).FirstOrDefault();
-        }
         
-        protected float GetSkillRange()
-        {
-            return (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange).FirstOrDefault();
-        }
+        public int GetSkillIndex() => SkillIndex;
+        public int GetSkillValue() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillValue).FirstOrDefault();
+        public float GetSkillRange1() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange1).FirstOrDefault();
+        public float GetSkillRange2() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange2).FirstOrDefault();
     }
 }
