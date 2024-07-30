@@ -22,14 +22,20 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public event Action OnAttack;
 
         [SerializeField] private MonsterStateMachineDTO stateData;
-        
+
         private SpriteRenderer _spriteRenderer;
         private CreatureStat<MonsterStat> CreatureStats;
-        
+
         private MonsterBattleStat _battleStat;
         private MonsterBattleSystem _battleSystem;
         private MonsterHealthSystem _healthSystem;
         private MonsterMovementSystem _movementSystem;
+
+        public override HealthSystem BaseHealthSystem => _healthSystem;
+
+        public override BattleSystem BaseBattleSystem => _battleSystem;
+
+        public override MovementSystem BaseMovementSystem => _movementSystem;
 
         private void Update()
         {
@@ -47,11 +53,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             var target = transform;
-            
+
             AnimatorSystem = GetComponent<AnimatorSystem>();
             AnimatorSystem.Initialize(animationParameter);
             AnimatorSystem.OnAttack += OnAttack;
-            
+
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
             CreatureStats = new CreatureStat<MonsterStat>(stat);
@@ -61,7 +67,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _movementSystem = new MonsterMovementSystem(target, new MonsterMovementStat(CreatureStats), groundYPosition);
 
             FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, target);
-            
+
             Mods = new LinkedList<ModifyStatData>();
 
             _healthSystem.RegisterOnDamageEvent(CheckAndTransitToHit);
@@ -100,10 +106,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         protected override void ModifyStat(EStatType statType, int value)
         {
             var cur = CreatureStats.Current;
+
             switch (statType)
             {
-                case EStatType.None:
-                    break;
                 case EStatType.Health:
                     cur.Health += value;
                     break;
@@ -113,6 +118,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
                 case EStatType.Speed:
                     cur.Speed += value;
                     break;
+                case EStatType.CoolTime:
+                    cur.CoolTime += value;
+                    break;
+                default:
+                    return;
             }
 
             CreatureStats.SetCurrent(cur);
@@ -135,7 +145,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         }
 
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies)
-        { 
+        {
             return _battleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
         }
 
@@ -168,7 +178,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             return _battleSystem.GetBattleStat();
         }
-        
+
         public void Attack(RaycastHit2D target)
         {
             _battleSystem.Attack(target);

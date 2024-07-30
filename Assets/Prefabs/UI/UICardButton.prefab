@@ -315,6 +315,7 @@ MonoBehaviour:
   description:
     text: {fileID: 2506300131908974824}
     fontSize: 36
+  icon: {fileID: 6000205376827210666}
 --- !u!114 &6089857238358951953
 MonoBehaviour:
   m_ObjectHideFlags: 0

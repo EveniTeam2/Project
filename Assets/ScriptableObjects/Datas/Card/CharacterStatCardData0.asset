@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: "\uCCB4\uB825 \uC99D\uAC00 \uBAA9\uAC78\uC774"
   description: "\uCCB4\uB825\uC744 \uC99D\uAC00 \uC2DC\uCF1C\uC900\uB2E4."
-  image: {fileID: 21300000, guid: 067f823c489b24b8a97f480333105efd, type: 3}
+  image: {fileID: 21300000, guid: 401425c3ce9164b8a943b9d740655c96, type: 3}
   rarity: 0
   maxLevel: 5
   statCardDataPairs:
-  - statType: 1
+  - statType: 2
     value: 0a000000140000001e0000002800000032000000

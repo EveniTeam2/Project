@@ -10,6 +10,7 @@ namespace Core.UI
         [SerializeField] protected Button btn;
         [SerializeField] protected TextPair title;
         [SerializeField] private TextPair description;
+        [SerializeField] protected Image icon;
         public event Action<Card> OnCardClick;
         private Card card;
         public override UICardButton InitUI()
@@ -28,7 +29,6 @@ namespace Core.UI
         {
             CallActOnClose();
             gameObject.SetActive(false);
-            OnCardClick = null;
             return this;
         }
 
@@ -45,11 +45,22 @@ namespace Core.UI
 
         internal UICardButton DrawCard(Card card)
         {
+            OnCardClick = null;
+            btn.onClick.RemoveAllListeners();
+
             this.card = card;
             title.text.text = card.Title;
             description.text.text = card.Description;
+            icon.sprite = card.Image;
+
+            btn.onClick.AddListener(CardClicked);
             DrawUI();
             return this;
+        }
+
+        private void CardClicked()
+        {
+            OnCardClick?.Invoke(card);
         }
     }
 }

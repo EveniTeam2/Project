@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Module.Animations;
+using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
 
@@ -22,6 +23,10 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         ///     애니메이터를 반환합니다.
         /// </summary>
         protected AnimatorSystem AnimatorSystem;
+
+        public abstract HealthSystem BaseHealthSystem { get; }
+        public abstract BattleSystem BaseBattleSystem{ get; }
+        public abstract MovementSystem BaseMovementSystem { get; }
 
         /// <summary>
         ///     영구적으로 현재 스탯을 변경합니다.
@@ -108,9 +113,18 @@ namespace Unit.GameScene.Units.Creatures.Abstract
     /// </summary>
     public enum EStatType
     {
-        None = 0,
-        Health = 1,
-        Attack = 2,
-        Speed = 3
+        None,
+        CurrentHealth,
+        MaxHP,
+        CurrentExp,
+        MaxExp,
+        CurrentShield,
+        MaxShield,
+        Damage,
+        Speed,
+        CardTrigger,
+        CoolTime,
+        Health,
+        Attack,
     }
 }
