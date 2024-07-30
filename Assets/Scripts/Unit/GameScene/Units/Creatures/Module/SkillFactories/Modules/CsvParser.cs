@@ -38,22 +38,20 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules
                     Debug.LogError($"Incorrect number of values in line: {line}");
                     continue;
                 }
-
-                var skillId = values[0];
                 
-                if (!Enum.TryParse<CharacterClassType>(values[1], out var characterType))
+                if (!Enum.TryParse<CharacterClassType>(values[0], out var characterType))
                 {
                     Debug.LogError($"Failed to parse CharacterClassType for line: {line}");
                     continue;
                 }
 
-                if (!int.TryParse(values[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out var skillIndex))
+                if (!int.TryParse(values[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out var skillIndex))
                 {
                     Debug.LogError($"Failed to parse SkillIndex for line: {line}");
                     continue;
                 }
 
-                if (!Enum.TryParse<SkillType>(values[3], out var skillType))
+                if (!Enum.TryParse<SkillType>(values[2], out var skillType))
                 {
                     Debug.LogError($"Failed to parse SkillType for line: {line}");
                     continue;
@@ -88,7 +86,7 @@ namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules
                     continue;
                 }
 
-                var skillData = new SkillData(skillId, characterType, skillIndex, skillType, skillNameEnum, skillName, skillDescription, skillRange, skillEffectValue, skillLevel);
+                var skillData = new SkillData(characterType, skillIndex, skillType, skillNameEnum, skillName, skillDescription, skillRange, skillEffectValue, skillLevel);
                 
                 parsingResult.Add(skillData);
             }

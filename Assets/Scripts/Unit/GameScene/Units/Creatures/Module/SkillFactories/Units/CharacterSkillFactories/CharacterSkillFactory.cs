@@ -4,6 +4,7 @@ using ScriptableObjects.Scripts.Creature.Data;
 using ScriptableObjects.Scripts.Creature.Data.KnightData;
 using ScriptableObjects.Scripts.Creature.Data.WizardData;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkillFactories;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 

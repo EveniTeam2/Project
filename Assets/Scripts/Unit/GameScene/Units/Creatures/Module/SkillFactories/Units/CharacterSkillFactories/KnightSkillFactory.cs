@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ScriptableObjects.Scripts.Creature.Data.KnightData;
@@ -7,7 +6,7 @@ using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
 
-namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills
+namespace Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkillFactories
 {
     public class KnightSkillFactory : SkillFactory
     {

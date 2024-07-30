@@ -102,7 +102,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
             var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
 
-            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, skills, skillCsvData);
+            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, skills);
             var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
             _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
         }
