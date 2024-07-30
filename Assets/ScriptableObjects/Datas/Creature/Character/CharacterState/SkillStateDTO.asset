@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db555cbbb1c16a47aa06a2d5053882a, type: 3}
   m_Name: SkillStateDTO
   m_EditorClassIdentifier: 
-  baseStateInfoDTO:
+  characterBaseStateInfoDto:
     stateType: 2
     stateParameter: 6
-    defaultExitState: 1

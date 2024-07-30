@@ -4,9 +4,9 @@ using ScriptableObjects.Scripts.Blocks;
 using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
 using Unit.GameScene.Units.Creatures;
+using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
 using UnityEngine;
 using UnityEngine.Serialization;
 

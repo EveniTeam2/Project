@@ -2,7 +2,7 @@ using System;
 using ScriptableObjects.Scripts.Blocks;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Blocks.Units.MatchBlock.Interfaces
+namespace Unit.GameScene.Units.Blocks.Interfaces
 {
     /// <summary>
     ///     블록 인터페이스

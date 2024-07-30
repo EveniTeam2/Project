@@ -1,5 +1,6 @@
 ﻿using System;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {

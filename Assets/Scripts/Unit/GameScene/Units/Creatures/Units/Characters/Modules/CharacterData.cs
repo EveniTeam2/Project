@@ -1,25 +1,26 @@
 using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     public class CharacterData
     {
         public CharacterDataSo CharacterDataSo { get; }
-        public SkillManager SkillManager { get; }
-        public StatManager StatManager { get; }
+        public CharacterSkillSystem SkillSystem { get; }
+        public CharacterStatSystem StatSystem { get; }
 
-        public CharacterData(CharacterDataSo characterDataSo, StatManager statManager, SkillManager skillManager)
+        public CharacterData(CharacterDataSo characterDataSo, CharacterStatSystem statSystem, CharacterSkillSystem skillSystem)
         {
             CharacterDataSo = characterDataSo;
-            StatManager = statManager;
-            SkillManager = skillManager;
+            StatSystem = statSystem;
+            SkillSystem = skillSystem;
         }
 
-        public void RegisterCharacterServiceProvider(ICharacterServiceProvider creatureServiceProvider)
+        public void RegisterCharacterServiceProvider(ISkillController skillController)
         {
-            SkillManager.RegisterCharacterServiceProvider(creatureServiceProvider);
+            SkillSystem.RegisterCharacterServiceProvider(skillController);
         }
     }
 }

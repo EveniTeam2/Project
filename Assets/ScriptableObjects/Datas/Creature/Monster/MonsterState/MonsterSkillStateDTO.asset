@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c466a4b887516449136376ba1cd866, type: 3}
   m_Name: MonsterSkillStateDTO
   m_EditorClassIdentifier: 
-  monsterBaseStateInfoDTO:
+  monsterBaseStateInfoDto:
     stateType: 2
     stateParameter: 6
-    _defaultExitState: 0
-  skillInfoDTO:
-    skillParameter: 3
+    defaultExitState: 0
+  skillInfoDto:
+    skillParameter: 6
     skillValue: 0
     targetLayer:
       serializedVersion: 2
       m_Bits: 64
-    direction: {x: -1, y: 0}
+    direction: {x: -2, y: 0}
     distance: 2
     skillAct: {fileID: 11400000, guid: 9003b25f2a0ef6f49b246a4cce510e61, type: 2}

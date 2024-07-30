@@ -1,38 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TempInput : MonoBehaviour
+namespace Temp.TestScripts
 {
-    public KeyCode exit;
-    public float waitTime;
-    public int limitCount;
-
-    private int count;
-    private float passed;
-
-    private void Awake()
+    public class TempInput : MonoBehaviour
     {
-        count = 0;
-    }
+        public KeyCode exit;
+        public float waitTime;
+        public int limitCount;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(exit))
+        private int count;
+        private float passed;
+
+        private void Awake()
         {
-            passed = 0;
-            if (count > limitCount)
-                Application.Quit();
-            else
-                ++count;
-        }
-        else
-        {
-            if (passed > waitTime)
-                count = 0;
-            else
-                passed += Time.deltaTime;
+            count = 0;
         }
 
+        void Update()
+        {
+            if (Input.GetKeyDown(exit))
+            {
+                passed = 0;
+                if (count > limitCount)
+                    Application.Quit();
+                else
+                    ++count;
+            }
+            else
+            {
+                if (passed > waitTime)
+                    count = 0;
+                else
+                    passed += Time.deltaTime;
+            }
+
+        }
     }
 }

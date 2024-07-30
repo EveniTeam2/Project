@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59f0e3e99164724a92b0ba06fc0cbae, type: 3}
   m_Name: DeathStateDTO
   m_EditorClassIdentifier: 
-  baseStateInfoDTO:
+  characterBaseStateInfoDto:
     stateType: 3
     stateParameter: 5
-  deathStateInfoDTO:
+  deathStateInfoDto:
     fadeTime: 1

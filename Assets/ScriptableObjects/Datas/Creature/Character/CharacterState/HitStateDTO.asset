@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff06dba26e77e0043ab1cfc85431d7d3, type: 3}
   m_Name: HitStateDTO
   m_EditorClassIdentifier: 
-  baseStateInfoDTO:
+  characterBaseStateInfoDto:
     stateType: 4
     stateParameter: 4
-    defaultExitState: 0
-    animationTime: 2
-    canTransitTime: 2
+  hitStateInfoDto:
+    defaultStateType: 4

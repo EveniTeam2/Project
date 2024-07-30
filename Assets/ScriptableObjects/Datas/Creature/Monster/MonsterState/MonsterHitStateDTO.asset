@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cd872ecbce8bd4b96758198f86cc05, type: 3}
   m_Name: MonsterHitStateDTO
   m_EditorClassIdentifier: 
-  monsterBaseStateInfoDTO:
+  monsterBaseStateInfoDto:
     stateType: 4
     stateParameter: 4
-    _defaultExitState: 0
+    defaultExitState: 0

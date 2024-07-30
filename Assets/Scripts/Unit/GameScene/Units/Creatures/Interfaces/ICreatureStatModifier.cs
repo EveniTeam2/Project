@@ -1,6 +1,6 @@
-using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
 using Unit.GameScene.Units.Creatures.Module;
-using Unit.GameScene.Units.Creatures.Units.FSM;
+using Unit.GameScene.Units.Creatures.Module.Animations;
+using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Interfaces
@@ -12,34 +12,37 @@ namespace Unit.GameScene.Units.Creatures.Interfaces
         public ICreatureHealth HeathSystem { get; }
         public ICreatureMovement MovementSystem { get; }
         public StateMachine StateSystem { get; }
-        AnimatorEventReceiver AnimatorSystem { get; }
+        AnimatorSystem AnimatorSystem { get; }
     }
 
-    public interface ICharacterServiceProvider
+    public interface ICharacterServiceProvider : ICreatureServiceProvider
     {
-        public ICreatureServiceProvider creatureServiceProvider { get; }
-        public ICharacterBattle BattleSystem { get; }
-        public ICharacterHealth HeathSystem { get; }
-        public ICharacterMovement MovementSystem { get; }
-        public bool GetReadyForCommand();
-        public void SetReadyForCommand(bool value);
+        // public ICharacterCommand CommandSystem { get; }
+        // public ICharacterBattle BattleSystem { get; }
+        // public ICharacterHealth HeathSystem { get; }
+        // public ICharacterMovement MovementSystem { get; }
     }
 
 
     public interface ICreatureStatModifier
     {
-        public void PermanentModifyStat(EStatType statType, int value);
-        public void TempModifyStat(EStatType statType, int value, float duration);
-        public void ClearModifiedStat();
+        // public void PermanentModifyStat(EStatType statType, int value);
+        // public void TempModifyStat(EStatType statType, int value, float duration);
+        // public void ClearModifiedStat();
     }
 
     public interface ICreatureBattle
     {
-        public bool CheckCollider(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee);
-        public bool CheckCollider(LayerMask targetLayer, Vector2 startPosition, Vector2 direction, float distance, out RaycastHit2D[] collidee);
+        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee);
+        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 startPosition, Vector2 direction, float distance, out RaycastHit2D[] collidee);
         public void Attack(RaycastHit2D col);
         public void Attack(RaycastHit2D col, IBattleEffect effect);
         public void Attack(int damage, float range);
+    }
+
+    public interface ICharacterCommand
+    {
+        
     }
     
     public interface ICharacterBattle : ICreatureBattle

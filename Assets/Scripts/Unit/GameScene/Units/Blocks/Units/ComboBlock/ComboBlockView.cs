@@ -2,8 +2,8 @@ using System;
 using ScriptableObjects.Scripts.Blocks;
 using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
+using Unit.GameScene.Units.Blocks.Enums;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using UnityEngine;
 using UnityEngine.Serialization;
 

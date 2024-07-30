@@ -63,7 +63,7 @@ namespace Unit.GameScene.Manager.Units
                         var returnPool = pool;
                         monCreate.Initialize(_data.monsterStats[index], ground, _animationParameter);
                         monCreate.gameObject.SetActive(false);
-                        monCreate.RegistEventDeath(returnPool.Release);
+                        monCreate.RegisterEventDeath(returnPool.Release);
                     },
                     monGet => { monGet.ClearModifiedStat(); },
                     monRelease => { monRelease.gameObject.SetActive(false); },

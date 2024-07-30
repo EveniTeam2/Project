@@ -1,6 +1,7 @@
 ﻿using System;
 using Unit.GameScene.Manager.Interfaces;
 using Unit.GameScene.Units.Creatures;
+using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 
 namespace Unit.GameScene.Manager.Units.StageManagers

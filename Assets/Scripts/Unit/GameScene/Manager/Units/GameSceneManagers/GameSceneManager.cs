@@ -7,14 +7,15 @@ using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
-using Unit.GameScene.Units.BoardPanels.Units.ComboBlockPanels.Units;
-using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Units;
+using Unit.GameScene.Units.Blocks.Enums;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Units.CharacterSkills;
+using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units;
+using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units;
 using UnityEngine;
+using CharacterStatSystem = Unit.GameScene.Units.Creatures.Units.Characters.Modules.CharacterStatSystem;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
 {
@@ -101,8 +102,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
             var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
 
-            var skillInfo = new SkillManager(extraSetting.characterClassType, skills, skillCsvData);
-            var statInfo = new StatManager(extraSetting.characterClassType, characterCsvData);
+            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, skills, skillCsvData);
+            var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
             _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
         }
         
@@ -112,7 +113,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
             for (var i = 0; i < extraSetting.blockInfos.Count; i++)
             {
-                _blockInfo.Add((BlockType)i, i == 0 ? _characterData.SkillManager.GetDefaultSkill() : null);
+                _blockInfo.Add((BlockType)i, i == 0 ? _characterData.SkillSystem.GetDefaultSkill() : null);
             }
         }
 
@@ -165,7 +166,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateAndInitializeStage()
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
-            _stageManager.Initialize(_characterData, extraSetting.playerSpawnPosition, extraSetting, defaultSetting, _camera, _blockInfo);
+            _stageManager.Initialize(_characterData, extraSetting.playerSpawnPosition, extraSetting, _camera, _blockInfo);
 
             _stageManager.RegisterHandleSendCommand(_matchBoardController);
             _stageManager.OnCommandDequeue += _comboBoardController.HandleDestroyComboBlock;
@@ -175,7 +176,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             ui.InitUI();
             _cardManager = new CardManager(ui, stage, cardGachaPairDatas.GetCardGachaPairs());
-            stage.Character.OnLevelUP += DrawCard;
+            stage.Character.OnLevelUp += DrawCard;
         }
 
         private void DrawCard()
