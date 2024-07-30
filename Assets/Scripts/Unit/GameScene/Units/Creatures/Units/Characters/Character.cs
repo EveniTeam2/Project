@@ -13,6 +13,7 @@ using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
 using Unit.GameScene.Units.Creatures.Module.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.FSMs.Modules;
@@ -39,6 +40,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public CharacterMovementSystem MovementSystem;
         public CharacterSkillSystem SkillSystem;
         public CharacterStatSystem StatSystem;
+
+        public override HealthSystem BaseHealthSystem => HealthSystem;
+
+        public override BattleSystem BaseBattleSystem => BattleSystem;
+
+        public override MovementSystem BaseMovementSystem => MovementSystem;
 
         public void HandleReceiveCommand(CommandPacket command)
         {
@@ -88,6 +95,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             if (stateType is StateType.Idle or StateType.Run)
             {
                 FsmSystem.TryChangeState(StateType.Hit);
+                MovementSystem.SetImpact(new Vector2(.3f, .2f), 1);
             }
         }
 
@@ -124,24 +132,50 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         protected override void ModifyStat(EStatType statType, int value)
         {
-            // TODO : 채이환
             var cur = _creatureStats.Current;
-            
+            int debug;
             switch (statType)
             {
-                case EStatType.None:
-                    break;
-                case EStatType.Health:
+                case EStatType.CurrentHealth:
                     cur.CurrentHp += value;
+                    debug = cur.CurrentHp;
                     break;
-                case EStatType.Attack:
+                case EStatType.MaxHP:
+                    cur.MaxHp += value;
+                    debug = cur.MaxHp;
+                    break;
+                case EStatType.CurrentExp:
+                    cur.CurrentExp += value;
+                    debug = cur.CurrentExp;
+                    break;
+                case EStatType.MaxExp:
+                    cur.MaxExp += value;
+                    debug = cur.MaxExp;
+                    break;
+                case EStatType.CurrentShield:
+                    cur.CurrentShield += value;
+                    debug = cur.CurrentShield;
+                    break;
+                case EStatType.MaxShield:
+                    cur.MaxShield += value;
+                    debug = cur.MaxShield;
+                    break;
+                case EStatType.Damage:
                     cur.Damage += value;
+                    debug = cur.Damage;
                     break;
                 case EStatType.Speed:
                     cur.Speed += value;
+                    debug = cur.Speed;
                     break;
+                case EStatType.CoolTime:
+                    cur.CoolTime += value;
+                    debug = cur.CoolTime;
+                    break;
+                default:
+                    return;
             }
-
+            Debug.Log($"Character {statType} change {debug}({value})");
             _creatureStats.SetCurrent(cur);
         }
 
@@ -188,11 +222,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public void HealMySelf(int value)
         {
             // TODO : 힐
+            HealthSystem.TakeHeal(value);
         }
 
-        public void AttackEnemy(int value, float range)
+        public void AttackEnemy(int value, float range, Vector2 direction)
         {
-            BattleSystem.Attack(value, range);
+            BattleSystem.Attack(value, range, 1 << LayerMask.NameToLayer("Monster"), direction);
         }
 
         public void SetReadyForInvokingCommand(bool isReady)
@@ -213,6 +248,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public void TryChangeState(StateType targetState)
         {
             FsmSystem.TryChangeState(targetState);
+        }
+
+        public void AttackEnemy(int value, float range)
+        {
+            throw new NotImplementedException();
         }
     }
 }

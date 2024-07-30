@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 230b9febb9e5e554f94ebe15487a18b3, type: 3}
-  m_Name: CardGachaPairDatas
+  m_Name: DefaultGachaPairDatas
   m_EditorClassIdentifier: 
   datas:
-  - Card: {fileID: 11400000, guid: 88a8f14564bd5a64490678e7c03f73fd, type: 2}
+  - Card: {fileID: 11400000, guid: 49c12d266cc946e4b87943b5cc2565b1, type: 2}
     Weight: 1
-  - Card: {fileID: 11400000, guid: b8f904b19fa43ed46911cc565b242fb2, type: 2}
+  - Card: {fileID: 11400000, guid: 7bca04517a9dcc646abf470e022b58c9, type: 2}
     Weight: 1
-  - Card: {fileID: 11400000, guid: 199c1c2ae852b7c4b9b352c14f0651ec, type: 2}
-    Weight: 1
-  - Card: {fileID: 11400000, guid: 2ec5b80b3a57fa147a7c62e2fe39ec8c, type: 2}
+  - Card: {fileID: 11400000, guid: 5bb5ae1908918a34b8e52732ca189057, type: 2}
     Weight: 1

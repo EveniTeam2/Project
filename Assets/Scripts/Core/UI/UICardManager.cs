@@ -39,6 +39,7 @@ namespace Core.UI
         {
             CallActOnClose();
             buttonPool.ReleaseAll();
+            gameObject.SetActive(false);
             return this;
         }
 

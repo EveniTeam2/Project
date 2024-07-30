@@ -1,8 +1,4 @@
-﻿using System;
-using Unit.GameScene.Manager.Interfaces;
-using Unit.GameScene.Units.Creatures;
-using Unit.GameScene.Units.Creatures.Abstract;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+﻿using Unit.GameScene.Manager.Interfaces;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
@@ -27,15 +23,8 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         public override void LevelUp()
         {
-            ++levelStartFrom1;
             base.LevelUp();
         }
     }
 
-    [Serializable]
-    public struct StatCardDataPair
-    {
-        public EStatType statType;
-        public int[] value;
-    }
 }
