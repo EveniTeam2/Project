@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5eef1c1709b6d43b659770bd5d58bb, type: 3}
   m_Name: MonsterIdleStateDTO
   m_EditorClassIdentifier: 
-  monsterBaseStateInfoDTO:
+  monsterBaseStateInfoDto:
     stateType: 0
     stateParameter: 0
-    _defaultExitState: 0
-  mosnterIdleStateInfo:
+    defaultExitState: 0
+  monsterIdleStateInfo:
     targetLayer:
       serializedVersion: 2
       m_Bits: 64

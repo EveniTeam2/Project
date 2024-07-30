@@ -1,7 +1,8 @@
-using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
 using System;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Module.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 
         public override void Attack(RaycastHit2D col)
         {
-            canAttackCool = false;
+            IsReadyForAttack = false;
             timer = BattleStat.GetCoolTime();
 
             if (col.collider.gameObject.TryGetComponent<ICreatureServiceProvider>(out var target))
@@ -42,10 +43,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 
         public override void Update()
         {
-            if (!canAttackCool)
+            if (!IsReadyForAttack)
             {
                 timer -= Time.deltaTime;
-                if (timer < 0) canAttackCool = true;
+                if (timer < 0) IsReadyForAttack = true;
             }
         }
     }

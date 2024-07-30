@@ -12,12 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dc8361fb82a894bb8d3165967b0b2c, type: 3}
   m_Name: RunStateDTO
   m_EditorClassIdentifier: 
-  baseStateInfoDTO:
+  characterBaseStateInfoDto:
     stateType: 1
     stateParameter: 1
-    defaultExitState: 1
-    animationTime: 2
-    canTransitTime: 2
   runStateInfoDTO:
     targetLayer:
       serializedVersion: 2

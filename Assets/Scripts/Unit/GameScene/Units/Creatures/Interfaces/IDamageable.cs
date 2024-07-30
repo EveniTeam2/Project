@@ -1,4 +1,5 @@
 using System;
+using Unit.GameScene.Units.Creatures.Abstract;
 
 namespace Unit.GameScene.Units.Creatures.Interfaces
 {

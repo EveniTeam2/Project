@@ -2,18 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unit.GameScene.Manager.Interfaces;
-using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
-using Unit.GameScene.Units.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Module;
+using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Monsters;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Units.StagePanels.Backgrounds;
+using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Panels.StagePanels.Backgrounds;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
@@ -40,7 +40,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         Coroutine _stageScoreCoroutine;
 
-        public void Initialize(CharacterData characterData, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, SceneDefaultSetting defaultSetting, Camera cam, Dictionary<BlockType, CharacterSkill> blockInfo)
+        public void Initialize(CharacterData characterData, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, Camera cam, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             _stageScore = new StageScore();
             ChangeAnimationParameterToHash();
@@ -48,7 +48,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             InitializeCharacter(characterData, playerSpawnPosition, blockInfo);
             InitializeMonster(extraSetting, playerSpawnPosition, _stageScore);
             InitializeCamera(cam, extraSetting.cameraSpawnPosition);
-            InitializeMap(extraSetting.mapPrefab);
+            InitializeMap(extraSetting.mapPrefab, playerSpawnPosition);
             
             StartCoroutine(StageScoreUpdate(_stageScore));
             
@@ -95,7 +95,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 OnSendCommand += _character.HandleReceiveCommand;
                 _character.OnCommandDequeue += HandleCommandDequeue;
             }
-            (_character as ICreatureServiceProvider).StateSystem.RegistOnDeathState(PlayerIsDead);
+            _character.FsmSystem.RegisterOnDeathState(PlayerIsDead);
         }
 
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)
@@ -112,10 +112,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         ///     맵을 인스턴스화하고 초기화합니다.
         /// </summary>
         /// <param name="mapPrefab"></param>
-        private void InitializeMap(GameObject mapPrefab)
+        /// <param name="playerSpawnPosition"></param>
+        private void InitializeMap(GameObject mapPrefab, Vector3 playerSpawnPosition)
         {
             var backgroundController = Instantiate(mapPrefab);
-            // _backgroundController.transform.SetParent(_camera.transform);
+            backgroundController.transform.position = new Vector3(playerSpawnPosition.x, playerSpawnPosition.y - 1, backgroundController.transform.position.z);
             backgroundController.GetComponent<BackgroundController>().Initialize(_character);
         }
 
@@ -135,11 +136,5 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 Debug.Log($"{targetEnum} => {Animator.StringToHash($"{targetEnum}")} 파싱");
             }
         }
-    }
-
-    public enum ECharacterEventType {
-        Death,
-        Damage,
-
     }
 }

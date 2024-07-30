@@ -1,22 +1,25 @@
-﻿using Unit.GameScene.Units.Creatures.Module;
+﻿using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
     public class MonsterSkillAttack : IMonsterSkillAct
     {
-        SkillAttackInfo _skillAttackInfo;
-        private BattleSystem _battleSystem;
+        private SkillAttackInfo _skillAttackInfo;
+        private readonly IMonsterFsmController _fsmController;
 
-        public MonsterSkillAttack(SkillAttackInfo skillAttackInfo, BattleSystem battleSystem)
+        public MonsterSkillAttack(SkillAttackInfo skillAttackInfo, IMonsterFsmController fsmController)
         {
             _skillAttackInfo = skillAttackInfo;
-            _battleSystem = battleSystem;
+            _fsmController = fsmController;
         }
 
         public void Act(IBattleStat stat, RaycastHit2D target)
         {
-            _battleSystem.Attack(target);
+            _fsmController.Attack(target);
         }
     }
 }

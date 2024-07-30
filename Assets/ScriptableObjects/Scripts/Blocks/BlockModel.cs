@@ -1,6 +1,6 @@
 using System;
 using TMPro;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums;
+using Unit.GameScene.Units.Blocks.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 

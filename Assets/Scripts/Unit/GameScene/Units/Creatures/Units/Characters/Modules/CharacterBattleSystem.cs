@@ -1,9 +1,10 @@
-using Assets.Scripts.Unit.GameScene.Units.Creatures.Units;
 using System;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
+using Unit.GameScene.Units.Creatures.Module.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Monsters;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
@@ -62,15 +63,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         private readonly Func<string, int> _skillIndex;
         private readonly Func<string, int> _skillValue;
 
-        private StatManager _statManager;
+        private CharacterStatSystem _characterStatSystem;
         
         public CharacterBattleStat(CreatureStat<CharacterStat> creatureStat, CharacterData characterData)
         {
             _attack = () => creatureStat.Current.Damage;
             _cool = () => creatureStat.Current.CoolTime;
-            _skillRange = (skillName) => characterData.SkillManager.GetSkillRange(skillName);
-            _skillIndex = (skillName) => characterData.SkillManager.GetSkillIndex(skillName);
-            _skillValue = (skillName) => characterData.SkillManager.GetSkillValue(skillName);
+            _skillRange = (skillName) => characterData.SkillSystem.GetSkillRange(skillName);
+            _skillIndex = (skillName) => characterData.SkillSystem.GetSkillIndex(skillName);
+            _skillValue = (skillName) => characterData.SkillSystem.GetSkillValue(skillName);
         }
 
         public int GetAttack()

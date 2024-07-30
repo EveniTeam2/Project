@@ -1,6 +1,6 @@
 using System;
 
-namespace Unit.GameScene.Units.Blocks.Units.MatchBlock.Enums
+namespace Unit.GameScene.Units.Blocks.Enums
 {
     [Serializable]
     public enum BlockType

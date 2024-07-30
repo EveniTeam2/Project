@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9f3ef9ecbc9d344b19ed7f2fbfae83, type: 3}
   m_Name: IdleStateDTO
   m_EditorClassIdentifier: 
-  baseStateInfoDTO:
+  characterBaseStateInfoDto:
     stateType: 0
     stateParameter: 0
-    defaultExitState: 0
-    animationTime: 2
-    canTransitTime: 2
-  idleInfoDTO:
+  idleInfoDto:
     targetLayer:
       serializedVersion: 2
       m_Bits: 128

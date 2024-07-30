@@ -1,10 +1,9 @@
 using ScriptableObjects.Scripts.Creature.Data.KnightData;
+using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Abstract;
-using Unit.GameScene.Units.Creatures.Units.SkillFactories.Interfaces;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Skills.Units

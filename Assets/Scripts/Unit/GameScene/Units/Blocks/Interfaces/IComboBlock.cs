@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Units.Blocks.Units.ComboBlock.Interfaces
+namespace Unit.GameScene.Units.Blocks.Interfaces
 {
     public interface IComboBlock
     {

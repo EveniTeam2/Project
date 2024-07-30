@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad26689cffd42694b8cee64f63923f5a, type: 3}
   m_Name: MonsterDeathStateDTO
   m_EditorClassIdentifier: 
-  monsterBaseStateInfoDTO:
+  monsterBaseStateInfoDto:
     stateType: 3
     stateParameter: 5
-    _defaultExitState: 0
+    defaultExitState: 0
   deathStateInfoDTO:
     fadeTime: 1

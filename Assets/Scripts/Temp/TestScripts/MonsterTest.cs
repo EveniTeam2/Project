@@ -1,10 +1,10 @@
 using System;
 using Unit.GameScene.Manager.Interfaces;
-using Unit.GameScene.Manager.Modules;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
+using Unit.GameScene.Module;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.StagePanels.Backgrounds;
+using Unit.GameScene.Units.Panels.StagePanels.Backgrounds;
 using UnityEngine;
 
 namespace Temp.TestScripts {
