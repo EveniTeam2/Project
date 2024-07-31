@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
 {
-    public class MonsterSkillAttack : IMonsterSkillAct
+    public class MonsterSkillMeleeAttack : IMonsterSkillAct
     {
         private SkillAttackInfo _skillAttackInfo;
         private readonly IMonsterFsmController _fsmController;
 
-        public MonsterSkillAttack(SkillAttackInfo skillAttackInfo, IMonsterFsmController fsmController)
+        public MonsterSkillMeleeAttack(SkillAttackInfo skillAttackInfo, IMonsterFsmController fsmController)
         {
             _skillAttackInfo = skillAttackInfo;
             _fsmController = fsmController;

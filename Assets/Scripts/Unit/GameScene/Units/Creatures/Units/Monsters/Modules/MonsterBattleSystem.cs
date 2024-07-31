@@ -1,7 +1,5 @@
-using System;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Module.Systems;
 using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using UnityEngine;
 
@@ -57,29 +55,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         internal void SpawnInit(MonsterBattleStat monsterBattleStat)
         {
             BattleStat = monsterBattleStat;
-        }
-    }
-
-
-    public class MonsterBattleStat
-    {
-        private readonly Func<int> _attack;
-        private readonly Func<float> _coolTime;
-
-        public MonsterBattleStat(CreatureStat<MonsterStat> creatureStat)
-        {
-            _attack = () => creatureStat.Current.Attack;
-            _coolTime = () => creatureStat.Current.CoolTime;
-        }
-
-        public float GetCoolTime()
-        {
-            return _coolTime();
-        }
-
-        public int GetAttack()
-        {
-            return _attack();
         }
     }
 }
