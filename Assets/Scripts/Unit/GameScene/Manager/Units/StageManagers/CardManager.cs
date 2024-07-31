@@ -10,13 +10,14 @@ namespace Unit.GameScene.Manager.Units.StageManagers
     public class CardManager
     {
         private Dictionary<string, CardGachaPair> cardGachaPool;
+        private Dictionary<string, CardGachaPair> defaultGachaPool;
         private int totalWeight;
         private readonly UICardManager ui;
         private readonly StageManager stage;
 
-        public CardManager(UICardManager ui, StageManager stage, params CardGachaPair[] cardGachas)
+        public CardManager(UICardManager ui, StageManager stage, CardGachaPair[] defaultCardPool, params CardGachaPair[] cardGachas)
         {
-            cardGachaPool = new Dictionary<string, CardGachaPair>();
+            cardGachaPool = new Dictionary<string, CardGachaPair>(cardGachas.Length);
             foreach (var cardGachaPair in cardGachas)
             {
                 this.cardGachaPool.Add(cardGachaPair.Card.Title, cardGachaPair);
@@ -25,26 +26,53 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
             this.ui = ui;
             this.stage = stage;
+
+            defaultGachaPool = new Dictionary<string, CardGachaPair>(defaultCardPool.Length);
+            foreach (var card in defaultCardPool)
+                defaultGachaPool.Add(card.Card.Title, card);
         }
 
         public Card[] GetCards(int count)
         {
-            List<Card> gacha = new List<Card>();
+            LinkedList<CardGachaPair> gacha = new LinkedList<CardGachaPair>();
+            foreach (var cardGachaPair in cardGachaPool.Values)
+                gacha.AddLast(cardGachaPair);
 
-            for (int i = 0; i < count; ++i)
+            List<Card> hand = new List<Card>();
+
+            for (int i = 0; i < count && gacha.Count > 0; ++i)
             {
                 int rand = UnityEngine.Random.Range(0, totalWeight + 1);
-                gacha.Add(GetCardGacha(rand));
+                var cardGachaPair = GetCardGacha(gacha, rand);
+                gacha.Remove(cardGachaPair);
+                hand.Add(cardGachaPair.Card);
             }
 
-            ui.DrawCardButton(gacha.ToArray(), SelectCard);
+            if (hand.Count < count)
+            {
+                LinkedList<CardGachaPair> gachaPool = new LinkedList<CardGachaPair>();
+                foreach (var defaultPool in defaultGachaPool.Values)
+                    gachaPool.AddLast(defaultPool);
 
-            return gacha.ToArray();
+                int targetCount = count - hand.Count;
+                for (int i = 0; i < targetCount && gachaPool.Count > 0; ++i)
+                {
+                    int rand = UnityEngine.Random.Range(0, totalWeight + 1);
+                    var cardGachaPair = GetCardGachaFromDefault(gachaPool, rand);
+                    gachaPool.Remove(cardGachaPair);
+                    hand.Add(cardGachaPair.Card);
+                }
+            }
+
+            ui.DrawCardButton(hand.ToArray(), SelectCard);
+
+            return hand.ToArray();
         }
 
         private void SelectCard(Card card)
         {
             card.Apply(stage);
+            ui.CloseUI();
         }
 
         public void RemoveCardsFromPool(params string[] titles)
@@ -82,19 +110,32 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             card.Card.OnLevelUP += CheckLevelToRemove;
         }
 
-        private Card GetCardGacha(int randValue)
+        private CardGachaPair GetCardGacha(LinkedList<CardGachaPair> gachaPool, int randValue)
         {
             int weight = 0;
-            var pairs = cardGachaPool.Values.ToArray();
-            foreach (var gacha in pairs)
+            foreach (var gacha in gachaPool)
             {
                 weight += gacha.Weight;
                 if (weight > randValue)
                 {
-                    return gacha.Card;
+                    return gacha;
                 }
             }
-            return pairs[pairs.Length-1].Card;
+            return gachaPool.Last.Value;
+        }
+
+        private CardGachaPair GetCardGachaFromDefault(LinkedList<CardGachaPair> gachaPool, int randValue)
+        {
+            int weight = 0;
+            foreach (var gacha in gachaPool)
+            {
+                weight += gacha.Weight;
+                if (weight > randValue)
+                {
+                    return gacha;
+                }
+            }
+            return gachaPool.Last.Value;
         }
 
         private void RemoveCardFromPool(string title)

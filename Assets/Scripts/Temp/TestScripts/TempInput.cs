@@ -1,3 +1,5 @@
+using Unit.GameScene.Manager.Units.GameSceneManagers;
+using Unit.GameScene.Manager.Units.StageManagers;
 using UnityEngine;
 
 namespace Temp.TestScripts
@@ -11,9 +13,14 @@ namespace Temp.TestScripts
         private int count;
         private float passed;
 
+        public KeyCode levelup;
+        public int cardCount;
+        public GameSceneManager gameSceneManager;
+
         private void Awake()
         {
             count = 0;
+            gameSceneManager = gameObject.GetComponent<GameSceneManager>();
         }
 
         void Update()
@@ -25,6 +32,10 @@ namespace Temp.TestScripts
                     Application.Quit();
                 else
                     ++count;
+            }
+            else if (Input.GetKeyDown(levelup))
+            {
+                gameSceneManager.CardManager.GetCards(cardCount);
             }
             else
             {

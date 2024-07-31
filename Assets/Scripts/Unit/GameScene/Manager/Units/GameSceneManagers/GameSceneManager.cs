@@ -46,6 +46,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         [Header("카드 정보"), SerializeField]
         private CardGachaPairDatas cardGachaPairDatas;
+        [SerializeField] private CardGachaPairDatas defaultCardGachaPairDatas;
         [SerializeField]
         private UICardManager uiCardManagerPrefab;
 
@@ -68,6 +69,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private Dictionary<BlockType, CharacterSkill> _blockInfo;
 
+        public CardManager CardManager => _cardManager;
+
         /// <summary>
         ///     게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
         /// </summary>
@@ -82,7 +85,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             InstantiateAndInitializeMatchBoard();
             InstantiateAndInitializeStage();
 
-            InstantiateAndInitializeCard(Instantiate<UICardManager>(uiCardManagerPrefab), _stageManager);
+            InstantiateAndInitializeCard(uiCardManagerPrefab, _stageManager);
         }
 
         // /// <summary>
@@ -172,10 +175,12 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _stageManager.OnCommandDequeue += _comboBoardController.HandleDestroyComboBlock;
         }
 
-        private void InstantiateAndInitializeCard(UICardManager ui, StageManager stage)
+        private void InstantiateAndInitializeCard(UICardManager prefab, StageManager stage)
         {
+            var ui = Instantiate(prefab);
+            ui.gameObject.SetActive(false);
             ui.InitUI();
-            _cardManager = new CardManager(ui, stage, cardGachaPairDatas.GetCardGachaPairs());
+            _cardManager = new CardManager(ui, stage, defaultCardGachaPairDatas.GetCardGachaPairs(), cardGachaPairDatas.GetCardGachaPairs());
             stage.Character.OnLevelUp += DrawCard;
         }
 

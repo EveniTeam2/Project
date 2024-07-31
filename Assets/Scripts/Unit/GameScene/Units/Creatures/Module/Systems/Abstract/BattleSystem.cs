@@ -58,9 +58,13 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.Abstract
 
         public abstract void Attack(RaycastHit2D col);
         public abstract void Attack(RaycastHit2D col, IBattleEffect effect);
-        public void Attack(int damage, float range)
+        public void Attack(int damage, float range, LayerMask targetLayer, Vector2 direction)
         {
-            //TODO : 채이환
+            if (CheckEnemyInRange(targetLayer, direction, range, out var targets))
+            {
+                foreach (var target in targets)
+                    Attack(target, new BattleEffect(damage));
+            }
         }
 
         public abstract void Update();
@@ -74,15 +78,10 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.Abstract
         {
             return BattleStat;
         }
-    }
 
-    public interface IBattleStat
-    {
-        float GetCoolTime();
-        int GetAttack();
-        
-        int GetSkillIndex(string skillName);
-        float GetSkillRange(string skillName);
-        int GetSkillValue(string skillName);
+        public void Attack(int damage, float range)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

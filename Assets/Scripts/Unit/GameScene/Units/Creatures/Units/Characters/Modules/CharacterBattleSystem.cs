@@ -1,4 +1,5 @@
 using System;
+using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
@@ -21,7 +22,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
                 target.HeathSystem.TakeDamage(BattleStat.GetAttack());
                 Debug.Log($"플레이어가 {col.collider.gameObject.name}에게 {BattleStat.GetAttack()} 피해를 입혔습니다.");
 #else
-                var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
+                target.HeathSystem.TakeDamage(BattleStat.GetAttack());
 #endif
             }
             else
@@ -32,7 +33,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public override void Attack(RaycastHit2D col, IBattleEffect effect)
         {
-            //TODO : 채이환
+            if (col.collider.gameObject.TryGetComponent<Creature>(out var helath))
+            {
+                effect.Attack(helath);
+            }
         }
 
         public int GetSkillIndex(string skillName)
@@ -64,7 +68,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         private readonly Func<string, int> _skillValue;
 
         private CharacterStatSystem _characterStatSystem;
-        
+
         public CharacterBattleStat(CreatureStat<CharacterStat> creatureStat, CharacterData characterData)
         {
             _attack = () => creatureStat.Current.Damage;
@@ -93,7 +97,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         {
             return _skillValue(skillName);
         }
-        
+
         public float GetSkillRange(string skillName)
         {
             return _skillRange(skillName);
