@@ -12,7 +12,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 {
     public class CharacterBattleSystem : BattleSystem, ICharacterBattle
     {
-        public CharacterBattleSystem(Transform targetTransform, IBattleStat battleStat) : base(targetTransform, battleStat) { }
+        private readonly CharacterBattleStat BattleStat;
+
+        public CharacterBattleSystem(Transform targetTransform, CharacterBattleStat battleStat) : base(targetTransform) {
+            this.BattleStat = battleStat;
+        }
 
         public override void Attack(RaycastHit2D col)
         {
@@ -59,7 +63,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
         }
     }
 
-    public class CharacterBattleStat : IBattleStat
+    public class CharacterBattleStat
     {
         private readonly Func<int> _attack;
         private readonly Func<float> _cool;

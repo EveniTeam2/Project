@@ -2,6 +2,7 @@
 using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO
@@ -17,7 +18,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
             _fsmController = fsmController;
         }
 
-        public void Act(IBattleStat stat, RaycastHit2D target)
+        public void Act(MonsterBattleStat stat, RaycastHit2D target)
         {
             _fsmController.Attack(target);
         }

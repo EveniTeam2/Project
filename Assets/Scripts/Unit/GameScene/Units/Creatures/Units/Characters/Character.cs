@@ -25,15 +25,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
     {
         public event Action OnLevelUp;
         public event Action OnCommandDequeue;
-        
+
         [SerializeField] protected CharacterClassType characterClassType;
         [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
 
         private readonly Queue<CommandPacket> _commandQueue = new();
-        
+
         private CharacterData _characterData;
         private CreatureStat<CharacterStat> _creatureStats;
-        
+
         public CharacterCommandSystem CommandSystem;
         public CharacterBattleSystem BattleSystem;
         public CharacterHealthSystem HealthSystem;
@@ -67,16 +67,16 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             HealthSystem = new CharacterHealthSystem(new CharacterHealthStat(_creatureStats));
             MovementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_creatureStats), groundYPosition);
             CommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue, OnCommandDequeue);
-            
+
             FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem, animationParameter);
             Mods = new LinkedList<ModifyStatData>();
-            
+
             AnimatorSystem.OnAttack += CommandSystem.ActivateSkillEffects;
-            
+
             _characterData.RegisterCharacterServiceProvider(this);
             HealthSystem.RegisterOnDamageEvent(CheckAndTransitToHit);
         }
-        
+
         private CharacterStat GetCharacterStat(int currentLevel)
         {
             return new CharacterStat(
@@ -91,7 +91,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         private void CheckAndTransitToHit()
         {
             var stateType = FsmSystem.GetCurrentStateType();
-            
+
             if (stateType is StateType.Idle or StateType.Run)
             {
                 FsmSystem.TryChangeState(StateType.Hit);
@@ -106,7 +106,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             BattleSystem?.Update();
             CommandSystem?.Update();
         }
-        
+
         protected void FixedUpdate()
         {
             FsmSystem?.FixedUpdate();
@@ -225,11 +225,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             HealthSystem.TakeHeal(value);
         }
 
-        public void AttackEnemy(int value, float range, Vector2 direction)
-        {
-            BattleSystem.Attack(value, range, 1 << LayerMask.NameToLayer("Monster"), direction);
-        }
-
         public void SetReadyForInvokingCommand(bool isReady)
         {
             CommandSystem.SetReadyForInvokingCommand(isReady);
@@ -252,7 +247,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         public void AttackEnemy(int value, float range)
         {
-            throw new NotImplementedException();
+            BattleSystem.Attack(value, range);
         }
     }
 }

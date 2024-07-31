@@ -6,6 +6,7 @@ using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
 
 namespace Unit.GameScene.Units.FSMs.Units.Monster.States
@@ -13,7 +14,7 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
     public class MonsterSkillState : MonsterBaseState
     {
         private readonly MonsterSkillStateInfo _skillInfo;
-        private readonly IBattleStat _stat;
+        private readonly MonsterBattleStat _stat;
 
         public MonsterSkillState(MonsterBaseStateInfo monsterBaseStateInfo, MonsterSkillStateInfo skillInfo, Func<StateType, bool> tryChangeState, IMonsterFsmController fsmController)
             : base(monsterBaseStateInfo, tryChangeState, fsmController)

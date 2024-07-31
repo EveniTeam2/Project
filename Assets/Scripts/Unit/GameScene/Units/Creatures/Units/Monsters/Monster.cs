@@ -174,14 +174,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             return _battleSystem.IsReadyForAttack;
         }
 
-        public IBattleStat GetBattleStat()
-        {
-            return _battleSystem.GetBattleStat();
-        }
-
         public void Attack(RaycastHit2D target)
         {
             _battleSystem.Attack(target);
+        }
+
+        public MonsterBattleStat GetBattleStat()
+        {
+            return _battleStat;
         }
     }
 }

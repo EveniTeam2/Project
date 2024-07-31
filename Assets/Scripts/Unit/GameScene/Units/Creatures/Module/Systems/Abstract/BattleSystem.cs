@@ -6,14 +6,11 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.Abstract
     public abstract class BattleSystem : ICreatureBattle
     {
         public bool IsReadyForAttack { get; protected set; } = true;
-        
-        protected IBattleStat BattleStat;
         private readonly Transform _targetTransform;
 
-        protected BattleSystem(Transform targetTransform, IBattleStat battleStat)
+        protected BattleSystem(Transform targetTransform)
         {
             _targetTransform = targetTransform;
-            BattleStat = battleStat;
         }
 
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collidee)
@@ -58,30 +55,16 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.Abstract
 
         public abstract void Attack(RaycastHit2D col);
         public abstract void Attack(RaycastHit2D col, IBattleEffect effect);
-        public void Attack(int damage, float range, LayerMask targetLayer, Vector2 direction)
+
+        public abstract void Update();
+
+        public void Attack(int damage, float range)
         {
-            if (CheckEnemyInRange(targetLayer, direction, range, out var targets))
+            if (CheckEnemyInRange(1 << LayerMask.NameToLayer("Monster"), Vector2.right, range, out var targets))
             {
                 foreach (var target in targets)
                     Attack(target, new BattleEffect(damage));
             }
-        }
-
-        public abstract void Update();
-
-        internal void SpawnInit(IBattleStat stat)
-        {
-            BattleStat = stat;
-        }
-
-        internal IBattleStat GetBattleStat()
-        {
-            return BattleStat;
-        }
-
-        public void Attack(int damage, float range)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,19 +1,20 @@
 using System;
+using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Systems;
 using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
-using Unit.GameScene.Units.Creatures.Units.Characters;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 {
     public class MonsterBattleSystem : BattleSystem
     {
+        private MonsterBattleStat BattleStat;
         protected float timer;
 
-        public MonsterBattleSystem(Transform targetTransform, MonsterBattleStat battleStat) : base(targetTransform, battleStat)
+        public MonsterBattleSystem(Transform targetTransform, MonsterBattleStat battleStat) : base(targetTransform)
         {
+            this.BattleStat = battleStat;
         }
 
         public override void Attack(RaycastHit2D col)
@@ -38,7 +39,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 
         public override void Attack(RaycastHit2D col, IBattleEffect effect)
         {
-            throw new NotImplementedException();
+            if (col.collider.gameObject.TryGetComponent<Creature>(out var target))
+            {
+                effect.Attack(target);
+            }
         }
 
         public override void Update()
@@ -49,10 +53,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
                 if (timer < 0) IsReadyForAttack = true;
             }
         }
+
+        internal void SpawnInit(MonsterBattleStat monsterBattleStat)
+        {
+            BattleStat = monsterBattleStat;
+        }
     }
 
 
-    public class MonsterBattleStat : IBattleStat
+    public class MonsterBattleStat
     {
         private readonly Func<int> _attack;
         private readonly Func<float> _coolTime;
@@ -71,22 +80,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
         public int GetAttack()
         {
             return _attack();
-        }
-
-        //TODO : 채이환 - 이환님 이 부분 하려면 MonsterData 안에 SkillManager가 존재해야 해요. CharacterBattleSystem 수정해뒀어요. 이 부분 참고하셔서 작업해주세요.
-        public int GetSkillIndex(string skillName)
-        {
-            return 0;
-        }
-
-        public float GetSkillRange(string skillName)
-        {
-            return 0;
-        }
-
-        public int GetSkillValue(string skillName)
-        {
-            return 0;
         }
     }
 }

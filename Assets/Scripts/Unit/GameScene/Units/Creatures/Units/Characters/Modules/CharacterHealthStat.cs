@@ -11,8 +11,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules
 
         public CharacterHealthStat(CreatureStat<CharacterStat> creatureStat)
         {
-            //TODO : 채이환
-            _getHealth = () => creatureStat.Current.MaxHp;
+            _getHealth = () => creatureStat.Current.CurrentHp;
             _setHealth = value =>
             {
                 var current = creatureStat.Current;

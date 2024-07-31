@@ -1,6 +1,7 @@
 ﻿using System;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
@@ -10,10 +11,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
     }
     public class MonsterEventPublisher
     {
-        public event Action<IBattleStat> _onAnimationAttackEvent;
+        public event Action<MonsterBattleStat> _onAnimationAttackEvent;
         public event Action _onAnimationEndEvent;
 
-        internal void CallAttackEvent(IBattleStat stat)
+        internal void CallAttackEvent(MonsterBattleStat stat)
         {
             _onAnimationAttackEvent?.Invoke(stat);
         }
@@ -23,12 +24,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _onAnimationEndEvent?.Invoke();
         }
 
-        public void RegistOnAttackEvent(Action<IBattleStat> subscirbe)
+        public void RegistOnAttackEvent(Action<MonsterBattleStat> subscirbe)
         {
             _onAnimationAttackEvent += subscirbe;
         }
 
-        public void UnregistOnAttackEvent(Action<IBattleStat> subscirbe)
+        public void UnregistOnAttackEvent(Action<MonsterBattleStat> subscirbe)
         {
             _onAnimationAttackEvent -= subscirbe;
         }
