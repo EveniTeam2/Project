@@ -2,6 +2,7 @@
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
 
@@ -13,13 +14,13 @@ namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
         [Header("첫번째 state가 캐릭터의 처음 상태")]
         [SerializeField] private List<MonsterBaseStateDto> states;
 
-        public StateMachine Build(Transform targetTransform, IMonsterFsmController fsmController, Dictionary<AnimationParameterEnums, int> animationParameter)
+        public StateMachine Build(Transform targetTransform, IMonsterFsmController fsmController, Dictionary<AnimationParameterEnums, int> animationParameter, MonsterStatSystem monsterStatSystem)
         {
             var stateMachine = new StateMachine();
             
             foreach (var stateData in states.ToArray())
             {
-                var state = stateData.BuildState(targetTransform, stateMachine, animationParameter, fsmController);
+                var state = stateData.BuildState(targetTransform, stateMachine, animationParameter, fsmController, monsterStatSystem);
                 stateMachine.TryAddState(state.GetStateType(), state);
             }
 
