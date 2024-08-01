@@ -30,7 +30,7 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
                 if (line == null) continue;
                 var values = line.Split(',');
 
-                if (values.Length != 13)
+                if (values.Length != 14)
                 {
                     Debug.LogError($"Incorrect number of values in line: {line}");
                     continue;
@@ -98,8 +98,14 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
                     Debug.LogError($"Failed to parse skillRangeType for line: {line}");
                     continue;
                 }
+                
+                if (!float.TryParse(values[8], out var skillDuration))
+                {
+                    Debug.LogError($"Failed to parse skillDuration for line: {line}");
+                    continue;
+                }
 
-                var skillData = new SkillData(characterType, skillIndex, skillName, skillDescription, skillLevel, skillValue, skillRange1, skillRange2, skillType, isSingleTarget, skillRangeType, skillExtraEffectType);
+                var skillData = new SkillData(characterType, skillIndex, skillName, skillDescription, skillLevel, skillValue, skillRange1, skillRange2, skillType, isSingleTarget, skillRangeType, skillExtraEffectType, skillDuration);
                 
                 parsingResult.Add(skillData);
             }

@@ -15,6 +15,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         public StateMachine FsmSystem;
         protected AnimatorSystem AnimatorSystem;
 
+        protected abstract void UpdateHealthBarUI(int currentHp, int maxHp);
         protected abstract void RegisterEventHandler();
         protected abstract void HandleOnHit();
         protected abstract void HandleOnDeath();

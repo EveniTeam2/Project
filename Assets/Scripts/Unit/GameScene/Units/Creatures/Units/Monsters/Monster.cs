@@ -15,13 +15,16 @@ using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
     public class Monster : Creature, IMonsterFsmController, ITakeDamage
     {
         [SerializeField] private MonsterStateMachineDTO stateData;
-
+        [SerializeField] private RectTransform monsterHpUI;
+        
         private MonsterData _monsterData;
         private SpriteRenderer _spriteRenderer;
         
@@ -54,11 +57,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         
         public void ResetMonster()
         {
-            _monsterStatsSystem.InitializeStat();
             FsmSystem.TryChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
 
             RegisterEventHandler();
+            
+            _monsterStatsSystem.InitializeStat();
         }
         
         private void Update()
@@ -78,11 +82,25 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
             _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
+            _monsterStatsSystem.RegisterHandleOnUpdateHpUI(UpdateHealthBarUI);
         }
         
         public void RegisterOnAttackEventHandler(Action onAttack)
         {
             AnimatorSystem.OnAttack += onAttack;
+        }
+
+        protected override void UpdateHealthBarUI(int currentHp, int maxHp)
+        {
+            Debug.Log($"currentHp {currentHp} / maxHp {maxHp}");
+            // 계산된 체력 비율
+            float healthRatio = (float)currentHp / maxHp;
+    
+            // 새로운 localScale 값 계산
+            var newScale = new Vector3(healthRatio, monsterHpUI.localScale.y, monsterHpUI.localScale.z);
+    
+            // 체력 바의 스케일을 업데이트
+            monsterHpUI.localScale = newScale;
         }
 
         public void UnregisterOnAttackEventHandler(Action onAttack)

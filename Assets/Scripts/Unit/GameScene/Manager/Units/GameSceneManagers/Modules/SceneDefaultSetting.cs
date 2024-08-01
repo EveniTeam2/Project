@@ -14,5 +14,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
         [Header("MatchBoardController Prefabs"), Space(5)] public GameObject matchBoardControllerPrefab;
         [Header("ComboBoardController Prefabs"), Space(5)] public GameObject comboBoardControllerPrefab;
         [Header("StageManager Prefabs"), Space(5)] public GameObject stageManagerPrefab;
+        [Header("PlayerHpPanel"), Space(5)] public RectTransform playerHpPanel;
     }
 }

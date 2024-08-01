@@ -15,7 +15,7 @@ MonoBehaviour:
   monsterBaseStateInfoDto:
     stateType: 0
     stateParameter: 0
-    defaultExitState: 1
+    defaultExitState: 0
   monsterIdleStateInfo:
     targetLayer:
       serializedVersion: 2

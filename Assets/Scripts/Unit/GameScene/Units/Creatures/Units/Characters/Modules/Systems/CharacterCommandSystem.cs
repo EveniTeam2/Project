@@ -49,12 +49,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
 
             var command = _commands.Dequeue();
             
-            if (!ActivateCommand(command.BlockType, command.ComboCount))
+            if (ActivateCommand(command.BlockType, command.ComboCount))
             {
                 SetReadyForInvokingCommand(true);
             }
-            
-            OnCommandDequeue?.Invoke();
         }
         
         /// <summary>
@@ -68,6 +66,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             
             _commandAction.Initialize(command);
             _commandAction.Execute(count);
+            OnCommandDequeue?.Invoke();
             
             return true;
         }

@@ -30,11 +30,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             {
                 _entireStatInfo.Add(statData.CharacterLevel, statData);
             }
-
-            InitializeStat();
         }
 
-        public sealed override void InitializeStat()
+        public override void InitializeStat()
         {
             CurrentLevel = _entireStatInfo[0].CharacterLevel;
             MaxLevel = _entireStatInfo.Count;
@@ -47,6 +45,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             Damage = _entireStatInfo[0].CharacterDamage;
             Speed = _entireStatInfo[0].CharacterSpeed;
             CardTrigger = _entireStatInfo[0].CardTrigger;
+            
+            OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
         }
 
         public override void HandleUpdateStat(StatType type, float value)
