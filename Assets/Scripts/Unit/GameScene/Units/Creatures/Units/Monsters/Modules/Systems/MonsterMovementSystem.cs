@@ -24,7 +24,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
                 return;
             }
             delayOrder = null;
-            TargetSpeed = isRun ? GetSpeed() : 0; // 몬스터는 왼쪽으로 이동
+            TargetSpeed = isRun ? -GetSpeed() : 0; // 몬스터는 왼쪽으로 이동
         }
 
         public override void SetBackward(bool isBack)
