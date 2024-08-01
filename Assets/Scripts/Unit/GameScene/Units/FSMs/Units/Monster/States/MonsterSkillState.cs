@@ -3,11 +3,12 @@ using ScriptableObjects.Scripts.Creature.DTO;
 using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
+using UnityEngine;
 
 namespace Unit.GameScene.Units.FSMs.Units.Monster.States
 {
@@ -27,23 +28,24 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         {
             base.Enter();
             
+            FsmController.RegisterOnAttackEventHandler(OnAttack);
             FsmController.SetBool(MonsterBaseStateInfo.StateParameter, true, ChangeToDefaultState);
             FsmController.SetInteger(_skillInfo.SkillParameter, _skillInfo.SkillValue, null);
-            FsmController.OnAttack += OnAttack;
         }
 
         public override void Exit()
         {
             base.Exit();
+            
+            FsmController.UnregisterOnAttackEventHandler(OnAttack);
             FsmController.SetBool(MonsterBaseStateInfo.StateParameter, false, null);
-            FsmController.OnAttack -= OnAttack;
         }
 
         private void OnAttack()
         {
-            if (!FsmController.CheckEnemyInRange(_skillInfo.TargetLayer, _skillInfo.Direction, _skillInfo.Distance, out var targets)) return;
+            if (!FsmController.CheckEnemyInRange(_skillInfo.TargetLayer, _skillInfo.Direction, _skillInfo.Distance, out RaycastHit2D[] targets)) return;
             
-            foreach (var target in targets)
+            foreach (RaycastHit2D target in targets)
             {
                 _skillInfo.SkillAct.Act(_stat, target);   
             }

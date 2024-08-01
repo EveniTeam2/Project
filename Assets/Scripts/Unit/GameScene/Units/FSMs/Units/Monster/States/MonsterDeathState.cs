@@ -3,7 +3,7 @@ using ScriptableObjects.Scripts.Creature.DTO;
 using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
 using UnityEngine;
 
@@ -31,14 +31,14 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         public override void Exit()
         {
             base.Exit();
-            var color = _spriteRenderer.color;
+            Color color = _spriteRenderer.color;
             _spriteRenderer.color = new Color(color.r, color.g, color.b, 0);
         }
 
         public override void Update()
         {
             base.Update();
-            var color = _spriteRenderer.color;
+            Color color = _spriteRenderer.color;
 
             if (!(color.a * color.a > 0)) return;
             

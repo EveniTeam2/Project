@@ -8,12 +8,13 @@ using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.Units.ComboBlock;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
 using Unit.GameScene.Units.Panels.BoardPanels.Interfaces;
 using Unit.GameScene.Units.Panels.BoardPanels.Modules;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Interfaces;
+using Unit.GameScene.Units.SkillFactories.Modules;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units

@@ -16,4 +16,4 @@ MonoBehaviour:
     stateType: 4
     stateParameter: 4
   hitStateInfoDto:
-    defaultStateType: 4
+    defaultStateType: 0

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Core.Utils;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Monsters;
 using UnityEngine;
@@ -11,16 +12,17 @@ namespace Unit.GameScene.Manager.Units
 {
     public class MonsterSpawnManager
     {
-        protected readonly StageMonsterSpawnData _data;
-        private readonly Transform playerPosition;
+        private readonly StageMonsterSpawnData _data;
+        private readonly Transform _playerPosition;
         private readonly float _ground;
+        private readonly LinkedList<StageMonsterGroup> _spawnGroup;
+        private readonly Queue<StageMonsterGroup> _waitGroup;
+        private readonly Dictionary<AnimationParameterEnums, int> _animationParameter;
+        private readonly float _offsetTime = 0;
+        
         private Dictionary<int, CustomPool<Monster>> _monsterPool;
-        private LinkedList<StageMonsterGroup> _spawnGroup;
-        private Queue<StageMonsterGroup> _waitGroup;
-        private Dictionary<AnimationParameterEnums, int> _animationParameter;
         private bool _onSpawn;
-        readonly float _offsetTime = 0;
-        float _spawnTime = 0;
+        private float _spawnTime = 0;
 
         public LinkedList<Monster> Monsters
         {
@@ -42,7 +44,7 @@ namespace Unit.GameScene.Manager.Units
             Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             _data = data.GetStageData(score);
-            this.playerPosition = playerPosition;
+            this._playerPosition = playerPosition;
             _ground = ground;
             _spawnGroup = new LinkedList<StageMonsterGroup>();
             _waitGroup = new Queue<StageMonsterGroup>();
@@ -65,7 +67,7 @@ namespace Unit.GameScene.Manager.Units
                         monCreate.gameObject.SetActive(false);
                         monCreate.RegisterEventDeath(returnPool.Release);
                     },
-                    monGet => { monGet.ClearModifiedStat(); },
+                    null,
                     monRelease => { monRelease.gameObject.SetActive(false); },
                     monDestroy => { },
                     5, true));
@@ -152,10 +154,10 @@ namespace Unit.GameScene.Manager.Units
                     Debug.Assert(_data.monsterStats.Length > group.monsterStatIndex[i],
                         $"{_data.monsterStats.Length}|{group.monsterStatIndex[i]} 문제 발생!!");
                     var monster = pool.Get();
-                    monster.transform.position = _data.monsterSpawnOffset + playerPosition.position +
+                    monster.transform.position = _data.monsterSpawnOffset + _playerPosition.position +
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
-                    monster.SpawnInit(_data.monsterStats[group.monsterStatIndex[i]]);
+                    monster.ResetMonster();
                 }
         }
 

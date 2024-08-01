@@ -3,8 +3,9 @@ using ScriptableObjects.Scripts.Creature.DTO;
 using ScriptableObjects.Scripts.Creature.DTO.CharacterDTOs;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
+using UnityEngine;
 
 namespace Unit.GameScene.Units.FSMs.Units.Character.States
 {

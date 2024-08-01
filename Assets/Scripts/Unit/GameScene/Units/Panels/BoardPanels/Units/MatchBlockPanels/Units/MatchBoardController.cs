@@ -8,11 +8,12 @@ using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
 using Unit.GameScene.Units.Panels.BoardPanels.Interfaces;
 using Unit.GameScene.Units.Panels.BoardPanels.Modules;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
@@ -571,5 +572,15 @@ namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
         }
 
         #endregion
+
+        public void RegisterHandleOnSendCommand(Action<CommandPacket> action)
+        {
+            OnSendCommand += action;
+        }
+
+        public void RegisterHandleOnIncreaseDragCount(Action<int> action)
+        {
+            OnIncreaseDragCount += action;
+        }
     }
 }

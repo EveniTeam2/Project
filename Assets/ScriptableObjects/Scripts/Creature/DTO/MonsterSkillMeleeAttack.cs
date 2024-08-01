@@ -1,5 +1,5 @@
 ﻿using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
@@ -20,8 +20,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 
         public void Act(MonsterBattleStat stat, RaycastHit2D target)
         {
-            // BattleSystem 의 Attack(target, BattleEffect)로 변경할 예정
-            _fsmController.Attack(target);
+            _fsmController.AttackEnemy(target);
         }
     }
 }

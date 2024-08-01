@@ -1,7 +1,7 @@
 ﻿using System;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
 using UnityEngine;
@@ -31,7 +31,6 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         /// </summary>
         public virtual void Enter()
         {
-            Debug.Log($"{MonsterBaseStateInfo.StateType} Enter");
             OnEnter?.Invoke();
         }
 
@@ -40,7 +39,6 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         /// </summary>
         public virtual void Exit()
         {
-            Debug.Log($"{MonsterBaseStateInfo.StateType} Out");
             OnExit?.Invoke();
         }
 

@@ -4,7 +4,7 @@ using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.Interfaces;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -41,7 +41,7 @@ namespace Unit.GameScene.Units.Blocks.Units.MatchBlock
                     blockIcon.gameObject.SetActive(true);     
                 }
                 
-                blockIcon.sprite = skill.Icon;
+                blockIcon.sprite = skill.SkillIcon;
             }
 
             _canvas = canvas;

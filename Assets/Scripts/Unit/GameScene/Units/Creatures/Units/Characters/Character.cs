@@ -7,24 +7,22 @@ using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Animations;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Abstract;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
-using Unit.GameScene.Units.Creatures.Module.Systems;
-using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
 using Unit.GameScene.Units.FSMs.Modules;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
-    public class Character : Creature, ICharacterFsmController, ISkillController
+    public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeDamage
     {
-        public event Action OnLevelUp;
-        public event Action OnCommandDequeue;
+        public event Action OnPlayerLevelUp;
 
         [SerializeField] protected CharacterClassType characterClassType;
         [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
@@ -32,161 +30,101 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         private readonly Queue<CommandPacket> _commandQueue = new();
 
         private CharacterData _characterData;
-        private CreatureStat<CharacterStat> _creatureStats;
 
-        public CharacterCommandSystem CommandSystem;
-        public CharacterBattleSystem BattleSystem;
-        public CharacterHealthSystem HealthSystem;
-        public CharacterMovementSystem MovementSystem;
-        public CharacterSkillSystem SkillSystem;
-        public CharacterStatSystem StatSystem;
+        private CharacterCommandSystem _characterCommandSystem;
+        private CharacterSkillSystem _characterSkillSystem;
 
-        public override HealthSystem BaseHealthSystem => HealthSystem;
+        private CharacterBattleSystem _characterBattleSystem;
+        private CharacterHealthSystem _characterHealthSystem;
+        private CharacterMovementSystem _characterMovementSystem;
+        private CharacterStatSystem _characterStatSystem;
 
-        public override BattleSystem BaseBattleSystem => BattleSystem;
+        private RectTransform _playerHpUI;
 
-        public override MovementSystem BaseMovementSystem => MovementSystem;
+        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _characterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
 
-        public void HandleReceiveCommand(CommandPacket command)
-        {
-            _commandQueue.Enqueue(command);
-        }
-
-        public void Initialize(CharacterData characterData, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter, Dictionary<BlockType, CharacterSkill> blockInfo)
+        public void Initialize(CharacterData characterData, float groundYPosition, RectTransform playerHpUI, Dictionary<AnimationParameterEnums, int> animationParameter, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             var characterTransform = transform;
             _characterData = characterData;
             characterClassType = _characterData.CharacterDataSo.classType;
+            _playerHpUI = playerHpUI;
+            
             AnimatorSystem = GetComponent<AnimatorSystem>();
             AnimatorSystem.Initialize(animationParameter);
-            _creatureStats = new CreatureStat<CharacterStat>(GetCharacterStat(1));
+            _characterStatSystem = characterData.StatSystem;
+            _characterSkillSystem = characterData.SkillSystem;
+            _characterBattleSystem = new CharacterBattleSystem(_characterStatSystem, characterTransform);
+            _characterHealthSystem = new CharacterHealthSystem(_characterStatSystem);
+            _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
+            _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
 
-            StatSystem = characterData.StatSystem;
-            SkillSystem = characterData.SkillSystem;
-            BattleSystem = new CharacterBattleSystem(gameObject.transform, new CharacterBattleStat(_creatureStats, _characterData));
-            HealthSystem = new CharacterHealthSystem(new CharacterHealthStat(_creatureStats));
-            MovementSystem = new CharacterMovementSystem(characterTransform, new CharacterMovementStat(_creatureStats), groundYPosition);
-            CommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue, OnCommandDequeue);
-
+            
             FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem, animationParameter);
-            Mods = new LinkedList<ModifyStatData>();
 
-            AnimatorSystem.OnAttack += CommandSystem.ActivateSkillEffects;
+            RegisterEventHandler();
 
             _characterData.RegisterCharacterServiceProvider(this);
-            HealthSystem.RegisterOnDamageEvent(CheckAndTransitToHit);
-        }
-
-        private CharacterStat GetCharacterStat(int currentLevel)
-        {
-            return new CharacterStat(
-                _characterData.StatSystem.GetMaxHp(currentLevel),
-                _characterData.StatSystem.GetMaxShield(currentLevel),
-                _characterData.StatSystem.GetDamage(currentLevel),
-                _characterData.StatSystem.GetSpeed(currentLevel),
-                _characterData.StatSystem.GetCardTrigger(currentLevel),
-                _characterData.StatSystem.GetMaxExp(currentLevel));
-        }
-
-        private void CheckAndTransitToHit()
-        {
-            var stateType = FsmSystem.GetCurrentStateType();
-
-            if (stateType is StateType.Idle or StateType.Run)
-            {
-                FsmSystem.TryChangeState(StateType.Hit);
-                MovementSystem.SetImpact(new Vector2(.3f, .2f), 1);
-            }
+            _characterStatSystem.InitializeStat();
         }
 
         protected void Update()
         {
             FsmSystem?.Update();
-            MovementSystem?.Update();
-            BattleSystem?.Update();
-            CommandSystem?.Update();
+            _characterMovementSystem?.Update();
+            _characterCommandSystem?.Update();
         }
 
         protected void FixedUpdate()
         {
             FsmSystem?.FixedUpdate();
-            MovementSystem?.FixedUpdate();
+            _characterMovementSystem?.FixedUpdate();
         }
 
-        public override void PermanentModifyStat(EStatType statType, int value)
+        protected override void RegisterEventHandler()
         {
-            Mods.AddLast(new ModifyStatData(statType, value));
-            ModifyStat(statType, value);
+            OnUpdateStat += _characterStatSystem.HandleUpdateStat;
+            AnimatorSystem.OnAttack += _characterCommandSystem.ActivateSkillEffects;
+            
+            _characterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
+            _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
+            _characterStatSystem.RegisterHandleOnUpdateHpUI(UpdateHealthBarUI);
         }
 
-        public override void TempModifyStat(EStatType statType, int value, float duration)
+        protected override void HandleOnHit()
         {
-            StartCoroutine(TempModifyStatCoroutine(statType, value, duration));
-        }
+            var stateType = FsmSystem.GetCurrentStateType();
 
-        public override void ClearModifiedStat()
-        {
-            Mods.Clear();
-            _creatureStats.SetCurrent(_creatureStats.Origin);
-        }
-
-        protected override void ModifyStat(EStatType statType, int value)
-        {
-            var cur = _creatureStats.Current;
-            int debug;
-            switch (statType)
+            if (stateType is StateType.Skill or StateType.Hit)
             {
-                case EStatType.CurrentHealth:
-                    cur.CurrentHp += value;
-                    debug = cur.CurrentHp;
-                    break;
-                case EStatType.MaxHP:
-                    cur.MaxHp += value;
-                    debug = cur.MaxHp;
-                    break;
-                case EStatType.CurrentExp:
-                    cur.CurrentExp += value;
-                    debug = cur.CurrentExp;
-                    break;
-                case EStatType.MaxExp:
-                    cur.MaxExp += value;
-                    debug = cur.MaxExp;
-                    break;
-                case EStatType.CurrentShield:
-                    cur.CurrentShield += value;
-                    debug = cur.CurrentShield;
-                    break;
-                case EStatType.MaxShield:
-                    cur.MaxShield += value;
-                    debug = cur.MaxShield;
-                    break;
-                case EStatType.Damage:
-                    cur.Damage += value;
-                    debug = cur.Damage;
-                    break;
-                case EStatType.Speed:
-                    cur.Speed += value;
-                    debug = cur.Speed;
-                    break;
-                case EStatType.CoolTime:
-                    cur.CoolTime += value;
-                    debug = cur.CoolTime;
-                    break;
-                default:
-                    return;
+                return;
             }
-            Debug.Log($"Character {statType} change {debug}({value})");
-            _creatureStats.SetCurrent(cur);
+
+            FsmSystem.TryChangeState(StateType.Hit);
+            _characterMovementSystem.SetImpact(1);
         }
 
-        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies)
+        protected override void HandleOnDeath()
         {
-            return BattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
+            FsmSystem.TryChangeState(StateType.Die);
+        }
+        
+        protected override void UpdateHealthBarUI(int currentHp, int maxHp)
+        {
+            Debug.Log($"currentHp {currentHp} / maxHp {maxHp}");
+            // 계산된 체력 비율
+            float healthRatio = (float)currentHp / maxHp;
+    
+            // 새로운 localScale 값 계산
+            var newScale = new Vector3(healthRatio, _playerHpUI.localScale.y, _playerHpUI.localScale.z);
+    
+            // 체력 바의 스케일을 업데이트
+            _playerHpUI.localScale = newScale;
         }
 
         public void ToggleMovement(bool setRunning)
         {
-            MovementSystem.SetRun(setRunning);
+            _characterMovementSystem.SetRun(setRunning);
         }
 
         public void SetBool(int parameter, bool value, Action action)
@@ -204,30 +142,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             AnimatorSystem.SetInteger(parameter, value, action);
         }
 
-        public int GetSkillIndex(string skillName)
-        {
-            return SkillSystem.GetSkillIndex(skillName);
-        }
-
-        public int GetSkillValue(string skillName)
-        {
-            return SkillSystem.GetSkillValue(skillName);
-        }
-
-        public float GetSkillRange(string skillName)
-        {
-            return SkillSystem.GetSkillRange(skillName);
-        }
-
         public void HealMySelf(int value)
         {
-            // TODO : 힐
-            HealthSystem.TakeHeal(value);
+            _characterHealthSystem.TakeHeal(value);
         }
 
         public void SetReadyForInvokingCommand(bool isReady)
         {
-            CommandSystem.SetReadyForInvokingCommand(isReady);
+            _characterCommandSystem.SetReadyForInvokingCommand(isReady);
         }
 
         public void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
@@ -247,7 +169,27 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         public void AttackEnemy(int value, float range)
         {
-            BattleSystem.Attack(value, range);
+            _characterBattleSystem.AttackEnemy(value, range);
+        }
+
+        public void Summon()
+        {
+            // TODO : 소환 스킬이 추가되면 고쳐야함
+        }
+
+        public void HandleReceiveCommand(CommandPacket command)
+        {
+            _commandQueue.Enqueue(command);
+        }
+
+        public void TakeDamage(int value)
+        {
+            _characterStatSystem.HandleUpdateStat(StatType.CurrentHp, value * -1);
+        }
+
+        public void RegisterHandleOnCommandDequeue(Action registerHandleOnCommandDequeue)
+        {
+            _characterCommandSystem.OnCommandDequeue += registerHandleOnCommandDequeue;
         }
     }
 }

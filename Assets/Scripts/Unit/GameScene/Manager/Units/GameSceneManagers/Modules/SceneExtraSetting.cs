@@ -7,6 +7,7 @@ using Unit.GameScene.Units.Creatures;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
 using UnityEngine;
 using UnityEngine.Serialization;
 
