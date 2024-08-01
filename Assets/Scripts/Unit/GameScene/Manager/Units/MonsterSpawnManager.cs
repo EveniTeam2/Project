@@ -156,8 +156,9 @@ namespace Unit.GameScene.Manager.Units
                     var monster = pool.Get();
                     monster.transform.position = _data.monsterSpawnOffset + _playerPosition.position +
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
-                    monster.gameObject.SetActive(true);
                     monster.ResetMonster();
+                    monster.gameObject.SetActive(true);
+                    monster.FsmSystem.TryChangeState(StateType.Idle);
                 }
         }
 

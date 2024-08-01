@@ -17,19 +17,25 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
 
         public override void SetRun(bool isRun)
         {
-            if (ImpactDuration > 0)
-                return;
-
             WantToMove = isRun;
-            TargetSpeed = isRun ? GetSpeed() : 0; // 몬스터는 왼쪽으로 이동
+            if (ImpactDuration > 0)
+            {
+                delayOrder = (new MovementOrder(SetRun, isRun));
+                return;
+            }
+            delayOrder = null;
+            TargetSpeed = isRun ? -GetSpeed() : 0; // 몬스터는 왼쪽으로 이동
         }
 
         public override void SetBackward(bool isBack)
         {
-            if (ImpactDuration > 0)
-                return;
-
             WantToMove = isBack;
+            if (ImpactDuration > 0)
+            {
+                delayOrder = (new MovementOrder(SetBackward, isBack));
+                return;
+            }
+            delayOrder = null;
             TargetSpeed = isBack ? GetSpeed() : 0; // 몬스터는 오른쪽으로 이동
         }
     }

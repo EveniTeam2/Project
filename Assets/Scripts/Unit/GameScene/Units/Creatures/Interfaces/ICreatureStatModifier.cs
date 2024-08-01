@@ -8,29 +8,5 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Interfaces
 {
-    public interface ICreatureServiceProvider
-    {
-        public ICreatureStatModifier StatModifier { get; }
-        public ICreatureBattle BattleSystem { get; }
-        public ICreatureHealth HeathSystem { get; }
-        public ICreatureMovement MovementSystem { get; }
-        public StateMachine StateSystem { get; }
-        AnimatorSystem AnimatorSystem { get; }
-    }
 
-    public interface ICharacterServiceProvider : ICreatureServiceProvider
-    {
-        // public ICharacterCommand CommandSystem { get; }
-        // public ICharacterBattle BattleSystem { get; }
-        // public ICharacterHealth HeathSystem { get; }
-        // public ICharacterMovement MovementSystem { get; }
-    }
-
-
-    public interface ICreatureStatModifier
-    {
-        // public void PermanentModifyStat(EStatType statType, int value);
-        // public void TempModifyStat(EStatType statType, int value, float duration);
-        // public void ClearModifiedStat();
-    }
 }
