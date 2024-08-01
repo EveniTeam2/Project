@@ -54,30 +54,37 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             switch (type)
             {
                 case StatType.CurrentExp:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentExp}");
                     UpdateCurrentExpValue((int) value);
                     Debug.Log($"Character Stat {type.ToString()} {value} => {CurrentExp}로 변동");
                     break;
                 case StatType.CurrentHp:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentHp}");
                     UpdateCurrentHealthValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} => {CurrentHp}로 변동");
+                    Debug.Log($"Character Stat {type.ToString()} {value} 수치 수정 => {CurrentHp} 변동");
                     break;
                 case StatType.CurrentShield:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentShield}");
                     UpdateCurrentShieldValue((int) value);
                     Debug.Log($"Character Stat {type.ToString()} {value} => {CurrentShield}로 변동");
                     break;
                 case StatType.MaxShield:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {MaxShield}");
                     UpdateMaxShieldValue((int) value);
                     Debug.Log($"Character Stat {type.ToString()} {value} => {MaxShield}로 변동");
                     break;
                 case StatType.Damage:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {Damage}");
                     UpdateDamageValue((int) value);
                     Debug.Log($"Character Stat {type.ToString()} {value} => {Damage}로 변동");
                     break;
                 case StatType.Speed:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {Speed}");
                     UpdateSpeedValue((int) value);
                     Debug.Log($"Character Stat {type.ToString()} {value} =>  {Speed}로 변동");
                     break;
                 case StatType.CardTrigger:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {CardTrigger}");
                     UpdateCardTriggerValue((int)value);
                     Debug.Log($"Character Stat {type.ToString()} {value} =>  {CardTrigger}로 변동");
                     break;

@@ -6,6 +6,7 @@ using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
+using UnityEngine;
 
 namespace Unit.GameScene.Units.FSMs.Units.Monster.States
 {
@@ -34,7 +35,7 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
 
         protected virtual void CheckTargetAndRun()
         {
-            if (!FsmController.CheckEnemyInRange(_monsterIdleStateInfo.TargetLayer, _monsterIdleStateInfo.Direction, _monsterIdleStateInfo.Distance, out var targets))
+            if (!FsmController.CheckEnemyInRange(_monsterIdleStateInfo.TargetLayer, _monsterIdleStateInfo.Direction, _monsterIdleStateInfo.Distance, out RaycastHit2D[] targets))
             {
                 OnFixedUpdate -= CheckTargetAndRun;
                 TryChangeState.Invoke(StateType.Run);

@@ -132,7 +132,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
         public void TakeDamage(int value)
         {
-            _monsterStatsSystem.HandleUpdateStat(StatType.CurrentHp, value);
+            _monsterStatsSystem.HandleUpdateStat(StatType.CurrentHp, value * -1);
         }
     }
 }

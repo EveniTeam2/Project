@@ -11,9 +11,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
     /// <summary>
     ///     사용자 입력을 처리하는 클래스입니다.
     /// </summary>
-    public class CharacterCommandSystem : ICharacterCommand
+    public class CharacterCommandSystem : ICommandDequeue
     {
-        private readonly Action _onCommandDequeue;
+        public event Action OnCommandDequeue;
         private readonly Dictionary<BlockType, CharacterSkill> _skillCommands;
         
         private CommandAction _commandAction; 
@@ -24,11 +24,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
         /// <summary>
         ///     입력을 처리하는 클래스입니다.
         /// </summary>
-        public CharacterCommandSystem(Dictionary<BlockType, CharacterSkill> blockInfo, Queue<CommandPacket> commands, Action onCommandDequeue)
+        public CharacterCommandSystem(Dictionary<BlockType, CharacterSkill> blockInfo, Queue<CommandPacket> commands)
         {
             _skillCommands = blockInfo;
             _commands = commands;
-            _onCommandDequeue = onCommandDequeue;
             _isReadyForCommand = true;
             
             InitializeCommand();
@@ -55,7 +54,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
                 SetReadyForInvokingCommand(true);
             }
             
-            _onCommandDequeue?.Invoke();
+            OnCommandDequeue?.Invoke();
         }
         
         /// <summary>

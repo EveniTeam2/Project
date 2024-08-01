@@ -6,6 +6,7 @@ using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
+using UnityEngine;
 
 namespace Unit.GameScene.Units.FSMs.Units.Monster.States
 {
@@ -38,9 +39,9 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
 
         private void OnAttack()
         {
-            if (!FsmController.CheckEnemyInRange(_skillInfo.TargetLayer, _skillInfo.Direction, _skillInfo.Distance, out var targets)) return;
+            if (!FsmController.CheckEnemyInRange(_skillInfo.TargetLayer, _skillInfo.Direction, _skillInfo.Distance, out RaycastHit2D[] targets)) return;
             
-            foreach (var target in targets)
+            foreach (RaycastHit2D target in targets)
             {
                 _skillInfo.SkillAct.Act(target);   
             }

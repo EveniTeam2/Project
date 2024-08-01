@@ -13,6 +13,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
         
         public MonsterStatSystem(MonsterStat stat)
         {
+            _monsterStat = stat;
+            
             InitializeStat();
         }
 

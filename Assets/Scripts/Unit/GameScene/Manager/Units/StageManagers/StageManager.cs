@@ -8,6 +8,7 @@ using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
+using Unit.GameScene.Units.Creatures.Interfaces.Commands;
 using Unit.GameScene.Units.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
@@ -32,12 +33,12 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         
         public float PlayTime => Time.time - _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
-        
-        protected StageScore _stageScore;
-        protected Character _character;
-        protected MonsterSpawnManager _monsterManager;
-        protected float _startTime;
-        protected Vector3 _zeroPosition;
+
+        private StageScore _stageScore;
+        private Character _character;
+        private MonsterSpawnManager _monsterManager;
+        private float _startTime;
+        private Vector3 _zeroPosition;
         private Dictionary<AnimationParameterEnums, int> _animationParameters;
 
         Coroutine _stageScoreCoroutine;
@@ -69,11 +70,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             }
         }
 
-        public void RegisterHandleSendCommand(ISendCommand data)
+        public void RegisterHandleOnSendCommand(ISendCommand data)
         {
             data.OnSendCommand += OnSendCommand;
         }
-        
+
         private void HandleCommandDequeue()
         {
             OnCommandDequeue?.Invoke();
@@ -95,9 +96,9 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             {
                 _character.Initialize(characterData, playerSpawnPosition.y, _animationParameters, blockInfo);
                 OnSendCommand += _character.HandleReceiveCommand;
-                _character.OnCommandDequeue += HandleCommandDequeue;
             }
             _character.FsmSystem.RegisterOnDeathState(PlayerIsDead);
+            _character.RegisterHandleOnCommandDequeue(HandleCommandDequeue);
         }
 
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)

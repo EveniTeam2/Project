@@ -106,14 +106,12 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             _currentYSpd += _gravity * Time.fixedDeltaTime;
         }
 
-        public virtual void SetImpact(UnityEngine.Vector2 impact, float duration)
+        public void SetImpact(UnityEngine.Vector2 impact, float duration)
         {
-            _currentSpd += impact.x;
+            _currentSpd -= impact.x;
             _currentYSpd += impact.y;
             _targetSpd = 0;
             _impactDuration = duration;
         }
-
-        // public abstract void SpawnInit(IMovementStat movementStat);
     }
 }

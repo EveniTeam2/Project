@@ -23,7 +23,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
     public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeDamage
     {
         public event Action OnLevelUp;
-        public event Action OnCommandDequeue;
 
         [SerializeField] protected CharacterClassType characterClassType;
         [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
@@ -55,7 +54,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterBattleSystem = new CharacterBattleSystem(characterTransform, _characterStatSystem);
             _characterHealthSystem = new CharacterHealthSystem(_characterStatSystem);
             _characterMovementSystem = new CharacterMovementSystem(characterTransform, _characterStatSystem, groundYPosition);
-            _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue, OnCommandDequeue);
+            _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
 
             FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem,
                 animationParameter);
@@ -90,11 +89,13 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         {
             var stateType = FsmSystem.GetCurrentStateType();
 
-            if (stateType is StateType.Idle or StateType.Run)
+            if (stateType is StateType.Skill or StateType.Hit)
             {
-                FsmSystem.TryChangeState(StateType.Hit);
-                _characterMovementSystem.SetImpact(new Vector2(.3f, .2f), 1);
+                return;
             }
+
+            FsmSystem.TryChangeState(StateType.Hit);
+            _characterMovementSystem.SetImpact(new Vector2(0.3f, 0.2f), 1);
         }
 
         protected override void HandleOnDeath()
@@ -147,6 +148,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             FsmSystem.TryChangeState(targetState);
         }
 
+        public StateType GetCurrentState()
+        {
+            return FsmSystem.GetCurrentStateType();
+        }
+
         public void AttackEnemy(int value, float range)
         {
             _characterBattleSystem.AttackEnemy(value, range);
@@ -164,7 +170,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         public void TakeDamage(int value)
         {
-            _characterStatSystem.HandleUpdateStat(StatType.CurrentHp, value);
+            _characterStatSystem.HandleUpdateStat(StatType.CurrentHp, value * -1);
+        }
+
+        public void RegisterHandleOnCommandDequeue(Action registerHandleOnCommandDequeue)
+        {
+            _characterCommandSystem.OnCommandDequeue += registerHandleOnCommandDequeue;
         }
     }
 }

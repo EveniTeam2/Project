@@ -24,18 +24,20 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             var position = _myPosition.position;
             var rayPos = new Vector3(position.x, position.y + 1, position.z);
             var hits = Physics2D.RaycastAll(rayPos, direction, distance, targetLayer);
+            
             collider = hits;
+            
             if (collider.Length > 0)
             {
 #if UNITY_EDITOR
-                Debug.DrawRay(rayPos, distance * direction, Color.red, 0.1f);
+                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y - 1, rayPos.z), distance * direction, Color.red, 0.5f);
 #endif
                 return true;
             }
             else
             {
 #if UNITY_EDITOR
-                Debug.DrawRay(rayPos, distance * direction, Color.green, 0.1f);
+                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y + 1, rayPos.z), distance * direction, Color.green, 0.5f);
 #endif
                 return false;
             }

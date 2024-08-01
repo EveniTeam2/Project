@@ -172,8 +172,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
             _stageManager.Initialize(_characterData, extraSetting.playerSpawnPosition, extraSetting, _camera, _blockInfo);
-
-            _stageManager.RegisterHandleSendCommand(_matchBoardController);
+            
+            _stageManager.RegisterHandleOnSendCommand(_matchBoardController);
             _stageManager.OnCommandDequeue += _comboBoardController.HandleDestroyComboBlock;
         }
 

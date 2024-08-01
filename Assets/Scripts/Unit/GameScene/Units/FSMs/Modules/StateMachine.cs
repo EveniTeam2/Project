@@ -21,7 +21,7 @@ namespace Unit.GameScene.Units.FSMs.Modules
         /// </summary>
         public bool TryAddState(StateType stateType, IState state)
         {
-            var result = _states.TryAdd(stateType, state);
+            bool result = _states.TryAdd(stateType, state);
 
             if (_states.Count == 1)
             {
@@ -77,7 +77,7 @@ namespace Unit.GameScene.Units.FSMs.Modules
 
         public void RegisterOnSkillState(Action onEnter, Action onExit, Action onUpdate, Action onFixedUpdate)
         {
-            var skill = _states[StateType.Skill];
+            IState skill = _states[StateType.Skill];
             skill.OnEnter += onEnter;
             skill.OnExit += onExit;
             skill.OnUpdate += onUpdate;
