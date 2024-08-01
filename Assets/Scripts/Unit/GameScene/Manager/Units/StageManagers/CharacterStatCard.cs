@@ -16,7 +16,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         {
             foreach (var pair in data)
             {
-                stage.Character.PermanentModifyStat(pair.statType, pair.value[LevelStartFrom1 - 1]);
+                stage.Character.OnUpdateStat?.Invoke(pair.statType, pair.value[LevelStartFrom1 - 1]);
             }
             LevelUp();
         }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Unit.GameScene.Units.Creatures.Units.Characters.Units.Knight.Modules;
-using Unit.GameScene.Units.Creatures.Units.Characters.Units.Wizard.Modules;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Data;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Data.WizardData

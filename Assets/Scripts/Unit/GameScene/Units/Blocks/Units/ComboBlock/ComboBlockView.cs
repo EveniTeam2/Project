@@ -3,7 +3,7 @@ using ScriptableObjects.Scripts.Blocks;
 using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -30,7 +30,7 @@ namespace Unit.GameScene.Units.Blocks.Units.ComboBlock
                     blockIcon.gameObject.SetActive(true);     
                 }
                 
-                blockIcon.sprite = skill.Icon;
+                blockIcon.sprite = skill.SkillIcon;
             }
             
             comboCountText.text = $"x {comboCount}";

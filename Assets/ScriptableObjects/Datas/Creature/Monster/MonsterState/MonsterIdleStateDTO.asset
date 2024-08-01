@@ -15,10 +15,10 @@ MonoBehaviour:
   monsterBaseStateInfoDto:
     stateType: 0
     stateParameter: 0
-    defaultExitState: 0
+    defaultExitState: 1
   monsterIdleStateInfo:
     targetLayer:
       serializedVersion: 2
       m_Bits: 64
     direction: {x: -1, y: 0}
-    distance: 2
+    distance: 5

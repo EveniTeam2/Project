@@ -8,14 +8,16 @@ using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Modules;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
+using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units;
+using Unit.GameScene.Units.SkillFactories.Modules;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
-using CharacterStatSystem = Unit.GameScene.Units.Creatures.Units.Characters.Modules.CharacterStatSystem;
+using CharacterStatSystem = Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems.CharacterStatSystem;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
 {

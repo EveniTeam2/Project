@@ -5,137 +5,98 @@ using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Animations;
-using Unit.GameScene.Units.Creatures.Module.Systems;
-using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Datas;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
-    public class Monster : Creature, IMonsterFsmController
+    public class Monster : Creature, IMonsterFsmController, ITakeDamage
     {
-        public event Action OnAttack;
-
         [SerializeField] private MonsterStateMachineDTO stateData;
 
+        private MonsterData _monsterData;
         private SpriteRenderer _spriteRenderer;
-        private CreatureStat<MonsterStat> CreatureStats;
-
-        private MonsterBattleStat _battleStat;
-        private MonsterBattleSystem _battleSystem;
-        private MonsterHealthSystem _healthSystem;
-        private MonsterMovementSystem _movementSystem;
-
-        public override HealthSystem BaseHealthSystem => _healthSystem;
-
-        public override BattleSystem BaseBattleSystem => _battleSystem;
-
-        public override MovementSystem BaseMovementSystem => _movementSystem;
-
-        private void Update()
-        {
-            FsmSystem?.Update();
-            _movementSystem?.Update();
-            _battleSystem?.Update();
-        }
-
-        private void FixedUpdate()
-        {
-            FsmSystem?.FixedUpdate();
-            _movementSystem?.FixedUpdate();
-        }
-
+        
+        private MonsterBattleSystem _monsterBattleSystem;
+        private MonsterHealthSystem _monsterHealthSystem;
+        private MonsterMovementSystem _monsterMovementSystem;
+        private MonsterStatSystem _monsterStatsSystem;
+        
+        public int GetDamage() => _monsterStatsSystem.Damage;
+        public bool IsReadyForAttack() => _monsterBattleSystem.IsReadyForAttack;
+        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _monsterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
+        
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             var target = transform;
 
             AnimatorSystem = GetComponent<AnimatorSystem>();
             AnimatorSystem.Initialize(animationParameter);
-            AnimatorSystem.OnAttack += OnAttack;
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
-            CreatureStats = new CreatureStat<MonsterStat>(stat);
-            _battleStat = new MonsterBattleStat(CreatureStats);
-            _battleSystem = new MonsterBattleSystem(target, _battleStat);
-            _healthSystem = new MonsterHealthSystem(new MonsterHealthStat(CreatureStats));
-            _movementSystem = new MonsterMovementSystem(target, new MonsterMovementStat(CreatureStats), groundYPosition);
+            // TODO : MonsterStatData 캐릭터처럼 구조 수정
+            _monsterStatsSystem = new MonsterStatSystem(stat);
+            _monsterBattleSystem = new MonsterBattleSystem(target, _monsterStatsSystem);
+            _monsterHealthSystem = new MonsterHealthSystem(_monsterStatsSystem);
+            _monsterMovementSystem = new MonsterMovementSystem(target, _monsterStatsSystem, groundYPosition);
 
             FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, target);
-
-            Mods = new LinkedList<ModifyStatData>();
-
-            _healthSystem.RegisterOnDamageEvent(CheckAndTransitToHit);
-            _healthSystem.RegisterOnDeathEvent(Die);
+            
+            RegisterEventHandler();
+        }
+        
+        private void Update()
+        {
+            FsmSystem?.Update();
+            _monsterMovementSystem?.Update();
+            _monsterBattleSystem?.Update();
+        }
+        
+        private void FixedUpdate()
+        {
+            FsmSystem?.FixedUpdate();
+            _monsterMovementSystem?.FixedUpdate();
         }
 
-        private void CheckAndTransitToHit()
+        protected override void RegisterEventHandler()
+        {
+            _monsterStatsSystem.OnDeath += HandleOnDeath;
+        }
+        
+        public void RegisterOnAttackEventHandler(Action onAttack)
+        {
+            AnimatorSystem.OnAttack += onAttack;
+        }
+
+        public void UnregisterOnAttackEventHandler(Action onAttack)
+        {
+            AnimatorSystem.OnAttack -= onAttack;
+        }
+
+        protected override void HandleOnHit()
         {
             FsmSystem.TryChangeState(StateType.Hit);
-            _movementSystem.SetImpact(new Vector2(.3f, .2f), 1);
+            _monsterMovementSystem.SetImpact(new Vector2(.3f, .2f), 1);
         }
 
-        private void Die()
+        protected override void HandleOnDeath()
         {
             FsmSystem.TryChangeState(StateType.Die);
         }
 
-        public override void PermanentModifyStat(EStatType statType, int value)
+        public void InitializeMutableValue(MonsterStat monsterStat)
         {
-            Mods.AddLast(new ModifyStatData(statType, value));
-            ModifyStat(statType, value);
-        }
-
-        public override void TempModifyStat(EStatType statType, int value, float duration)
-        {
-            StartCoroutine(TempModifyStatCoroutine(statType, value, duration));
-        }
-
-        public override void ClearModifiedStat()
-        {
-            Mods.Clear();
-            CreatureStats.SetCurrent(CreatureStats.Origin);
-            StopAllCoroutines();
-        }
-
-        protected override void ModifyStat(EStatType statType, int value)
-        {
-            var cur = CreatureStats.Current;
-
-            switch (statType)
-            {
-                case EStatType.Health:
-                    cur.Health += value;
-                    break;
-                case EStatType.Attack:
-                    cur.Attack += value;
-                    break;
-                case EStatType.Speed:
-                    cur.Speed += value;
-                    break;
-                case EStatType.CoolTime:
-                    cur.CoolTime += value;
-                    break;
-                default:
-                    return;
-            }
-
-            CreatureStats.SetCurrent(cur);
-        }
-
-        public void SpawnInit(MonsterStat monsterStat)
-        {
-            CreatureStats = new CreatureStat<MonsterStat>(monsterStat);
-            _battleSystem.SpawnInit(new MonsterBattleStat(CreatureStats));
-            _healthSystem.SpawnInit(new MonsterHealthStat(CreatureStats));
-            _movementSystem.SpawnInit(new MonsterMovementStat(CreatureStats));
+            _monsterStatsSystem = new MonsterStatSystem(monsterStat);
             FsmSystem.TryChangeState(StateType.Run);
-            ClearModifiedStat();
             _spriteRenderer.color = Color.white;
         }
 
@@ -143,45 +104,35 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             FsmSystem.RegisterOnDeathState(() => release.Invoke(this));
         }
-
-        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies)
-        {
-            return _battleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
-        }
-
+        
         public void ToggleMovement(bool setRunning)
         {
-            _movementSystem.SetRun(setRunning);
+            _monsterMovementSystem.SetRun(setRunning);
         }
 
         public void SetBool(int parameter, bool value, Action action)
         {
-            AnimatorSystem.SetBool(parameter, value, null);
+            AnimatorSystem.SetBool(parameter, value, action);
         }
 
         public void SetTrigger(int parameter, Action action)
         {
-            AnimatorSystem.SetTrigger(parameter, null);
+            AnimatorSystem.SetTrigger(parameter, action);
         }
 
         public void SetInteger(int parameter, int value, Action action)
         {
-            AnimatorSystem.SetInteger(parameter, value, null);
+            AnimatorSystem.SetInteger(parameter, value, action);
         }
 
-        public bool IsReadyForAttack()
+        public void AttackEnemy(RaycastHit2D target)
         {
-            return _battleSystem.IsReadyForAttack;
+            _monsterBattleSystem.AttackEnemy(GetDamage(), target);
         }
 
-        public IBattleStat GetBattleStat()
+        public void TakeDamage(int value)
         {
-            return _battleSystem.GetBattleStat();
-        }
-
-        public void Attack(RaycastHit2D target)
-        {
-            _battleSystem.Attack(target);
+            _monsterStatsSystem.HandleUpdateStat(StatType.CurrentHp, value);
         }
     }
 }

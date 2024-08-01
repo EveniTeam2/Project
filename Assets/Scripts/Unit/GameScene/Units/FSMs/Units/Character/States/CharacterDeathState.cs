@@ -4,7 +4,7 @@ using ScriptableObjects.Scripts.Creature.DTO.CharacterDTOs;
 using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillController;
+using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 
 namespace Unit.GameScene.Units.FSMs.Units.Character.States

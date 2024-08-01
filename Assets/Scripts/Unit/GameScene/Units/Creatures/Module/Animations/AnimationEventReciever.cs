@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module.Animations
@@ -39,11 +42,13 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
         {
             foreach (var animationClip in animationClips)
             {
+#if UNITY_EDITOR
                 if (TryGetAnimationEvents(animationClip, out var animationEvents))
                 {
                     CheckAnimationEventCorrectly(animationClip, animationEvents);
                 }
                 else
+#endif
                 {
                     var animationStartEvent = new AnimationEvent
                     {
@@ -56,7 +61,7 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
 
                     var animationEndEvent = new AnimationEvent
                     {
-                        time = animationClip.length-0.1f,
+                        time = animationClip.length - 0.1f,
                         functionName = "AnimationEndHandler",
                         stringParameter = animationClip.name
                     };
@@ -99,7 +104,7 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
 
         public AnimatorStateInfo GetNextAnimatorStateInfo(int layer)
         {
-            return  _animator.GetNextAnimatorStateInfo(layer);
+            return _animator.GetNextAnimatorStateInfo(layer);
         }
         
         public void SetTrigger(int param, Action action)
@@ -170,14 +175,12 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
             while (true)
             {
                 yield return new WaitForEndOfFrame();
-                
-                if (!_isPlayingAnimator)
-                {
-                    // 다음 애니메이션 클립이 재생되는지 1프레임 더 기다림
-                    yield return new WaitForEndOfFrame();
+
+                if (_isPlayingAnimator) continue;
+                // 다음 애니메이션 클립이 재생되는지 1프레임 더 기다림
+                yield return new WaitForEndOfFrame();
                     
-                    if (!_isPlayingAnimator) break;
-                }
+                if (!_isPlayingAnimator) break;
             }
             
             onFinished?.Invoke();
@@ -223,10 +226,11 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
 
         public void ActivateSkillEffects()
         {
-            OnAttack?.Invoke();
+            OnAttack.Invoke();
         }
 
-        private bool TryGetAnimationEvents(AnimationClip animationClip, out AnimationEvent[] animationEvents)
+#if UNITY_EDITOR
+        private static bool TryGetAnimationEvents(AnimationClip animationClip, out AnimationEvent[] animationEvents)
         {
             if (animationClip == null)
             {
@@ -251,13 +255,19 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
 
         private void CheckAnimationEventCorrectly(AnimationClip clip, AnimationEvent[] animationEvents)
         {
-            bool[] isCheck = new bool[2];
-            for (int i = 0; i < animationEvents.Length; ++i)
+            var isCheck = new bool[2];
+            
+            foreach (var t in animationEvents)
             {
-                if (animationEvents[i].functionName == "AnimationStartHandler")
-                    isCheck[0] = true;
-                else if (animationEvents[i].functionName == "AnimationEndHandler")
-                    isCheck[1] = true;
+                switch (t.functionName)
+                {
+                    case "AnimationStartHandler":
+                        isCheck[0] = true;
+                        break;
+                    case "AnimationEndHandler":
+                        isCheck[1] = true;
+                        break;
+                }
             }
 
             if (!isCheck[0])
@@ -266,9 +276,8 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
                 AddEvent(clip, clip.length, "AnimationEndHandler");
         }
 
-        private void AddEvent(AnimationClip clip, float position, string functionName)
+        private static void AddEvent(AnimationClip clip, float position, string functionName)
         {
-
             var animationStartEvent = new AnimationEvent
             {
                 time = position - 0.1f,
@@ -278,5 +287,6 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
 
             clip.AddEvent(animationStartEvent);
         }
+#endif
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.Units.MatchBlock;
-using Unit.GameScene.Units.Creatures.Module.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.Panels.BoardPanels.Interfaces;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
