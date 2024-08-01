@@ -155,7 +155,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         public void AttackEnemy(int value, float range)
         {
-            _characterBattleSystem.AttackEnemy(value, range);
+            _characterBattleSystem.AttackEnemy(value, range * 10);
         }
 
         public void Summon()
