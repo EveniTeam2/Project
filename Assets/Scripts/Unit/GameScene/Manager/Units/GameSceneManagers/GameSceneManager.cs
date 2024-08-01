@@ -129,8 +129,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         
         private void InitializeBlockData()
         {
-            _blockInfo = new Dictionary<BlockType, CharacterSkill>();
-
             for (var i = 0; i < extraSetting.blockInfos.Count; i++)
             {
                 _blockInfo.Add((BlockType)i, i == 0 ? _characterData.SkillSystem.GetDefaultSkill() : null);

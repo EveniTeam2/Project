@@ -82,7 +82,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
             _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
-            _monsterStatsSystem.RegisterHandleOnUpdateHpUI(HandleOnUpdateHpUI);
+            _monsterStatsSystem.RegisterHandleOnUpdateHpUI(UpdateHealthBarUI);
         }
         
         public void RegisterOnAttackEventHandler(Action onAttack)
@@ -90,12 +90,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             AnimatorSystem.OnAttack += onAttack;
         }
 
-        private void HandleOnUpdateHpUI(int currentHp, int maxHp)
+        protected override void UpdateHealthBarUI(int currentHp, int maxHp)
         {
-            var value = 1 / ((float)currentHp / maxHp);
-            var newSize = new Vector2(value, monsterHpUI.sizeDelta.y);
-            
-            monsterHpUI.sizeDelta = newSize;
+            Debug.Log($"currentHp {currentHp} / maxHp {maxHp}");
+            // 계산된 체력 비율
+            float healthRatio = (float)currentHp / maxHp;
+    
+            // 새로운 localScale 값 계산
+            var newScale = new Vector3(healthRatio, monsterHpUI.localScale.y, monsterHpUI.localScale.z);
+    
+            // 체력 바의 스케일을 업데이트
+            monsterHpUI.localScale = newScale;
         }
 
         public void UnregisterOnAttackEventHandler(Action onAttack)

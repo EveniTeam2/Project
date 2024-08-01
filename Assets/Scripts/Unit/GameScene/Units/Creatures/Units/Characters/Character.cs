@@ -109,12 +109,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             FsmSystem.TryChangeState(StateType.Die);
         }
         
-        private void UpdateHealthBarUI(int currentHp, int maxHp)
+        protected override void UpdateHealthBarUI(int currentHp, int maxHp)
         {
-            var value = 1 / ((float)currentHp / maxHp);
-            var newSize = new Vector2(value, _playerHpUI.sizeDelta.y);
-            
-            _playerHpUI.sizeDelta = newSize;
+            Debug.Log($"currentHp {currentHp} / maxHp {maxHp}");
+            // 계산된 체력 비율
+            float healthRatio = (float)currentHp / maxHp;
+    
+            // 새로운 localScale 값 계산
+            var newScale = new Vector3(healthRatio, _playerHpUI.localScale.y, _playerHpUI.localScale.z);
+    
+            // 체력 바의 스케일을 업데이트
+            _playerHpUI.localScale = newScale;
         }
 
         public void ToggleMovement(bool setRunning)
