@@ -23,11 +23,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
     public class Monster : Creature, IMonsterFsmController, ITakeDamage
     {
         [SerializeField] private MonsterStateMachineDTO stateData;
+        [SerializeField] private RectTransform monsterHpPanel;
         [SerializeField] private RectTransform monsterHpUI;
         
         private MonsterData _monsterData;
         private SpriteRenderer _spriteRenderer;
         
+        protected override Collider2D CreatureCollider { get; set; }
+        protected override RectTransform CreatureHpUI { get; set; }
+
         private MonsterBattleSystem _monsterBattleSystem;
         private MonsterHealthSystem _monsterHealthSystem;
         private MonsterMovementSystem _monsterMovementSystem;
@@ -40,10 +44,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             var monsterTransform = transform;
-
+            CreatureHpUI = monsterHpUI;
+            
             AnimatorSystem = GetComponent<AnimatorSystem>();
             AnimatorSystem.Initialize(animationParameter);
-
+            
+            CreatureCollider = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
             // TODO : MonsterStatData 캐릭터처럼 구조 수정
@@ -59,8 +65,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             FsmSystem.TryChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
-
             RegisterEventHandler();
+            SetActiveHealthBarUI(true);
             
             _monsterStatsSystem.InitializeStat();
         }
@@ -82,25 +88,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
             _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
-            _monsterStatsSystem.RegisterHandleOnUpdateHpUI(UpdateHealthBarUI);
+            _monsterStatsSystem.RegisterHandleOnUpdateHpUI(HandleOnUpdateHealthBarUI);
         }
         
         public void RegisterOnAttackEventHandler(Action onAttack)
         {
             AnimatorSystem.OnAttack += onAttack;
-        }
-
-        protected override void UpdateHealthBarUI(int currentHp, int maxHp)
-        {
-            Debug.Log($"currentHp {currentHp} / maxHp {maxHp}");
-            // 계산된 체력 비율
-            float healthRatio = (float)currentHp / maxHp;
-    
-            // 새로운 localScale 값 계산
-            var newScale = new Vector3(healthRatio, monsterHpUI.localScale.y, monsterHpUI.localScale.z);
-    
-            // 체력 바의 스케일을 업데이트
-            monsterHpUI.localScale = newScale;
         }
 
         public void UnregisterOnAttackEventHandler(Action onAttack)
@@ -116,13 +109,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
         protected override void HandleOnDeath()
         {
-            Debug.Log("몬스터 사망!");
+            SetActiveHealthBarUI(false);
+            SetActiveCollider(false);
+            
             FsmSystem.TryChangeState(StateType.Die);
         }
 
         internal void RegisterEventDeath(Action<Monster> release)
         {
-            FsmSystem.RegisterOnDeathState(() => release.Invoke(this));
+            FsmSystem.RegisterHandleOnDeathState(() => release.Invoke(this));
         }
         
         public void ToggleMovement(bool setRunning)
@@ -153,6 +148,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void TakeDamage(int value)
         {
             _monsterStatsSystem.HandleUpdateStat(StatType.CurrentHp, value * -1);
+        }
+        
+        private void SetActiveHealthBarUI(bool active)
+        {
+            monsterHpPanel.gameObject.SetActive(active);
         }
     }
 }

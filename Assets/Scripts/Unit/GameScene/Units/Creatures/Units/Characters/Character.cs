@@ -22,6 +22,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
     public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeDamage
     {
+        public event Action OnPlayerDeath;
         public event Action OnPlayerLevelUp;
 
         [SerializeField] protected CharacterClassType characterClassType;
@@ -39,7 +40,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         private CharacterMovementSystem _characterMovementSystem;
         private CharacterStatSystem _characterStatSystem;
 
-        private RectTransform _playerHpUI;
+        protected override Collider2D CreatureCollider { get; set; }
+        protected override RectTransform CreatureHpUI { get; set; }
+        
 
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _characterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
 
@@ -48,7 +51,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             var characterTransform = transform;
             _characterData = characterData;
             characterClassType = _characterData.CharacterDataSo.classType;
-            _playerHpUI = playerHpUI;
+            CreatureHpUI = playerHpUI;
             
             AnimatorSystem = GetComponent<AnimatorSystem>();
             AnimatorSystem.Initialize(animationParameter);
@@ -58,7 +61,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterHealthSystem = new CharacterHealthSystem(_characterStatSystem);
             _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
-
             
             FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem, animationParameter);
 
@@ -72,54 +74,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         {
             FsmSystem?.Update();
             _characterMovementSystem?.Update();
-            _characterCommandSystem?.Update();
+
+            if (FsmSystem?.GetCurrentStateType() is StateType.Idle or StateType.Run)
+            {
+                _characterCommandSystem?.Update();
+            }
         }
 
         protected void FixedUpdate()
         {
             FsmSystem?.FixedUpdate();
             _characterMovementSystem?.FixedUpdate();
-        }
-
-        protected override void RegisterEventHandler()
-        {
-            OnUpdateStat += _characterStatSystem.HandleUpdateStat;
-            AnimatorSystem.OnAttack += _characterCommandSystem.ActivateSkillEffects;
-            
-            _characterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
-            _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
-            _characterStatSystem.RegisterHandleOnUpdateHpUI(UpdateHealthBarUI);
-        }
-
-        protected override void HandleOnHit()
-        {
-            var stateType = FsmSystem.GetCurrentStateType();
-
-            if (stateType is StateType.Skill or StateType.Hit)
-            {
-                return;
-            }
-
-            FsmSystem.TryChangeState(StateType.Hit);
-            _characterMovementSystem.SetImpact(1);
-        }
-
-        protected override void HandleOnDeath()
-        {
-            FsmSystem.TryChangeState(StateType.Die);
-        }
-        
-        protected override void UpdateHealthBarUI(int currentHp, int maxHp)
-        {
-            Debug.Log($"currentHp {currentHp} / maxHp {maxHp}");
-            // 계산된 체력 비율
-            float healthRatio = (float)currentHp / maxHp;
-    
-            // 새로운 localScale 값 계산
-            var newScale = new Vector3(healthRatio, _playerHpUI.localScale.y, _playerHpUI.localScale.z);
-    
-            // 체력 바의 스케일을 업데이트
-            _playerHpUI.localScale = newScale;
         }
 
         public void ToggleMovement(bool setRunning)
@@ -169,15 +134,52 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         public void AttackEnemy(int value, float range)
         {
-            _characterBattleSystem.AttackEnemy(value, range);
+            // TODO : Range 더 늘려야 할 것 같음
+            _characterBattleSystem.AttackEnemy(value, range * 10);
         }
 
         public void Summon()
         {
             // TODO : 소환 스킬이 추가되면 고쳐야함
         }
+        
+        protected override void RegisterEventHandler()
+        {
+            OnUpdateStat += _characterStatSystem.HandleUpdateStat;
+            AnimatorSystem.OnAttack += _characterCommandSystem.ActivateSkillEffects;
+            
+            _characterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
+            _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
+            _characterStatSystem.RegisterHandleOnUpdateHpUI(HandleOnUpdateHealthBarUI);
+            
+            FsmSystem.RegisterHandleOnDeathState(HandleOnGameOver);
+        }
 
-        public void HandleReceiveCommand(CommandPacket command)
+        protected override void HandleOnHit()
+        {
+            var stateType = FsmSystem.GetCurrentStateType();
+
+            if (stateType is StateType.Skill or StateType.Hit)
+            {
+                return;
+            }
+
+            FsmSystem.TryChangeState(StateType.Hit);
+            _characterMovementSystem.SetImpact(1);
+        }
+        
+        private void HandleOnGameOver()
+        {
+            OnPlayerDeath.Invoke();
+        }
+        
+        protected override void HandleOnDeath()
+        {
+            SetActiveCollider(false);
+            FsmSystem.TryChangeState(StateType.Die);
+        }
+
+        public void HandleOnSendCommand(CommandPacket command)
         {
             _commandQueue.Enqueue(command);
         }
@@ -187,9 +189,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterStatSystem.HandleUpdateStat(StatType.CurrentHp, value * -1);
         }
 
-        public void RegisterHandleOnCommandDequeue(Action registerHandleOnCommandDequeue)
+        public void RegisterHandleOnCommandDequeue(Action action)
         {
-            _characterCommandSystem.OnCommandDequeue += registerHandleOnCommandDequeue;
+            _characterCommandSystem.OnCommandDequeue += action;
+        }
+
+        public void RegisterHandleOnPlayerDeath(Action action)
+        {
+            OnPlayerDeath += action;
         }
     }
 }

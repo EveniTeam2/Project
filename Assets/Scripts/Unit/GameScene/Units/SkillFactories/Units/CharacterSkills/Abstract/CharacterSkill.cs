@@ -97,6 +97,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         private void ActivateSkill()
         {
             ChangeState(StateType.Skill);
+            
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, SkillIndex, null);
             SetBoolOnAnimator(AnimationParameterEnums.Skill, true, HandleOnAnimationFinished);
         }
@@ -105,9 +106,9 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         {
             SetBoolOnAnimator(AnimationParameterEnums.Skill, false, null);
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, -1, null);
+            SetReadyForInvokingCommand(true);
             
             ChangeState(StateType.Idle);
-            SetReadyForInvokingCommand(true);
         }
 
         private void SetReadyForInvokingCommand(bool isReady)

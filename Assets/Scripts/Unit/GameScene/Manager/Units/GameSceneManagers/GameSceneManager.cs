@@ -28,9 +28,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
     /// </summary>
     public class GameSceneManager : MonoBehaviour
     {
-        // TODO : 이후에 BoardManager와 StageManager 내부의 CharacterManager와 MonsterManager가 해당 액션을 구독하도록 수정
-        private event Action<bool> OnGameOver;
-
         #region Inspector
 
         [Header("==== Scene 추가 세팅 ===="), SerializeField]
@@ -82,7 +79,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         /// </summary>
         private void Awake()
         {
-            InitializeCharacterData();
+            ChangeAnimationParameterToHash();
+            
+            InitializeAndInstantiateCharacter();
             InitializeBlockData();
             
             InstantiateAndInitializeCamera();
@@ -102,31 +101,36 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         //     StartCoroutine(Timer(extraSetting.limitTime));
         // }
         
-        private void InitializeCharacterData()
+        private void InitializeAndInstantiateCharacter()
         {
-            ChangeAnimationParameterToHash();
-            
-            var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
+            CreateCharacterData();
+            InstantiateCharacter();
+        }
 
+        private void CreateCharacterData()
+        {
+            var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
             var skillCsvData = CsvParser.ParseCharacterSkillData(extraSetting.skillTextAsset);
             var skills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
-
             var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
             
             var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, skills);
             var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
-            _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
             
+            _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
+        }
+
+        private void InstantiateCharacter()
+        {
             var character = Instantiate(_characterData.CharacterDataSo.creature, extraSetting.playerSpawnPosition, Quaternion.identity);
             
             if (character.TryGetComponent(out _character))
             {
                 _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, _animationParameters, _blockInfo);
+                _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
             }
-            
-            _character.FsmSystem.RegisterOnDeathState(GameOver);
         }
-        
+
         private void InitializeBlockData()
         {
             for (var i = 0; i < extraSetting.blockInfos.Count; i++)
@@ -178,7 +182,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
             _matchBoardController.RegisterHandleOnIncreaseDragCount(IncreaseDragCount);
             _matchBoardController.RegisterHandleOnSendCommand(_comboBoardController.HandleInstantiateComboBlock);
-            _matchBoardController.RegisterHandleOnSendCommand(_character.HandleReceiveCommand);
+            _matchBoardController.RegisterHandleOnSendCommand(_character.HandleOnSendCommand);
         }
 
         /// <summary>
@@ -246,9 +250,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             }
         }
 
-        private void GameOver()
+        private void HandleOnPlayerDeath()
         {
-            Debug.Log("!!!!!!!!!!!!게임 오버!!!!!!!!!!!!");
+            Debug.Log("넥서스를 파괴하면숴ㅓㅓㅓㅓㅓ 쥐쥐~~~!~!~!~!~!~!~!");
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
     public abstract class StatSystem
     {
         protected Action<int, int> OnUpdateHealthBarUI;
+        
         private event Action OnHit;
         private event Action OnDeath;
 
@@ -24,7 +25,6 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             if (value < 0)
             {
                 OnHit.Invoke();
-                OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
             }
             
             var tempHealth = CurrentHp + value;
@@ -42,6 +42,8 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             {
                 CurrentHp += value;
             }
+            
+            OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
         }
 
         protected void UpdateCurrentShieldValue(int value)
@@ -79,12 +81,10 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             if (tempDamage < 0)
             {
                 Damage = 0;
-                return;
             }
             else
             {
                 Damage += value;
-                return;
             }
         }
 
