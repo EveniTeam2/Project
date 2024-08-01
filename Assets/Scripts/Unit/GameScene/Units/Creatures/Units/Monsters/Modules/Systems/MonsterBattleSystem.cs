@@ -12,9 +12,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
         
         private float _attackCoolTimer;
 
-        public MonsterBattleSystem(Transform targetTransform, MonsterStatSystem monsterStatSystem) : base(targetTransform)
+        public MonsterBattleSystem(MonsterStatSystem monsterStatSystem, Transform targetTransform)
+            : base(targetTransform)
         {
-            TargetLayerMask = LayerMask.NameToLayer("Player");
+            TargetLayerMask = 1 << 6;
             TargetDirection = Vector3.left;
             _monsterStatSystem = monsterStatSystem;
         }

@@ -31,7 +31,6 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         /// </summary>
         public virtual void Enter()
         {
-            Debug.Log($"{MonsterBaseStateInfo.StateType} Enter");
             OnEnter?.Invoke();
         }
 
@@ -40,7 +39,6 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         /// </summary>
         public virtual void Exit()
         {
-            Debug.Log($"{MonsterBaseStateInfo.StateType} Out");
             OnExit?.Invoke();
         }
 

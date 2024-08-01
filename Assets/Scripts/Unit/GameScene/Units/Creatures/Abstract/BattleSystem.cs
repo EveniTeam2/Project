@@ -8,21 +8,20 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         protected LayerMask TargetLayerMask;
         protected Vector3 TargetDirection;
         
-        private readonly Transform _myPosition;
+        private readonly Transform _targetTransform;
         
         protected abstract void SendDamage(RaycastHit2D target, int damage);
 
-        protected BattleSystem(Transform myPosition)
+        protected BattleSystem(Transform targetTransform)
         {
-            _myPosition = myPosition;
+            _targetTransform = targetTransform;
         }
 
         public abstract void Update();
         
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collider)
         {
-            var position = _myPosition.position;
-            var rayPos = new Vector3(position.x, position.y + 1, position.z);
+            var rayPos = new Vector3(_targetTransform.position.x, _targetTransform.position.y + 1, _targetTransform.position.z);
             var hits = Physics2D.RaycastAll(rayPos, direction, distance, targetLayer);
             
             collider = hits;
@@ -30,14 +29,14 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             if (collider.Length > 0)
             {
 #if UNITY_EDITOR
-                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y - 1, rayPos.z), distance * direction, Color.red, 0.5f);
+                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y, rayPos.z), distance * direction, Color.red, 0.5f);
 #endif
                 return true;
             }
             else
             {
 #if UNITY_EDITOR
-                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y + 1, rayPos.z), distance * direction, Color.green, 0.5f);
+                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y, rayPos.z), distance * direction, Color.green, 0.5f);
 #endif
                 return false;
             }

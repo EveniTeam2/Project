@@ -51,9 +51,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             
             _characterStatSystem = characterData.StatSystem;
             _characterSkillSystem = characterData.SkillSystem;
-            _characterBattleSystem = new CharacterBattleSystem(characterTransform, _characterStatSystem);
+            _characterBattleSystem = new CharacterBattleSystem(_characterStatSystem, characterTransform);
             _characterHealthSystem = new CharacterHealthSystem(_characterStatSystem);
-            _characterMovementSystem = new CharacterMovementSystem(characterTransform, _characterStatSystem, groundYPosition);
+            _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
 
             FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem,
@@ -81,8 +81,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         {
             OnUpdateStat += _characterStatSystem.HandleUpdateStat;
             AnimatorSystem.OnAttack += _characterCommandSystem.ActivateSkillEffects;
-            _characterStatSystem.OnDeath += HandleOnDeath;
-            _characterStatSystem.OnHit += HandleOnHit;
+            
+            _characterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
+            _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
         }
 
         protected override void HandleOnHit()
@@ -101,6 +102,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         protected override void HandleOnDeath()
         {
             // TODO : 캐릭터 죽었을 때 애니메이션 실행 혹은 FSM 전환
+            Debug.Log("캐릭터 사망!");
+            // FsmSystem.TryChangeState(StateType.Die);
         }
 
         public void ToggleMovement(bool setRunning)

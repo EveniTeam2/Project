@@ -1,22 +1,21 @@
-using System;
 using Unit.GameScene.Units.Creatures.Abstract;
-using Unit.GameScene.Units.Creatures.Interfaces.Movements;
 using UnityEngine;
-using Vector2 = System.Numerics.Vector2;
 
 namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
 {
-    public class CharacterMovementSystem : MovementSystem, ICharacterMovement
+    public class CharacterMovementSystem : MovementSystem
     {
         private readonly CharacterStatSystem _characterStatSystem;
-        // 속도 부스트
-        protected float _boostSpeed;
-        protected float _boostTimer;
 
-        public CharacterMovementSystem(Transform characterTransform, CharacterStatSystem characterStatSystem, float ground)
+        public CharacterMovementSystem(CharacterStatSystem characterStatSystem, Transform characterTransform, float ground)
             : base(characterTransform, ground)
         {
             _characterStatSystem = characterStatSystem;
+        }
+
+        protected override int GetSpeed()
+        {
+            return _characterStatSystem.Speed;
         }
 
         public override void SetRun(bool isRun)
@@ -25,31 +24,22 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
                 return;
 
             _wantToMove = isRun;
-            _targetSpd = isRun ? _characterStatSystem.Speed : 0;
+            _targetSpeed = isRun ? GetSpeed() / 2 : 0;
         }
 
         public override void SetBackward(bool isBack)
         {
-            _wantToMove = isBack;
-            if (_wantToMove)
-                _targetSpd = -1 * _characterStatSystem.Speed;
-            else
-                _targetSpd = 0;
-        }
+            if (_impactDuration > 0)
+                return;
 
-        public void SetImpact(Vector2 impact, float duration)
-        {
-            throw new NotImplementedException();
+            _wantToMove = isBack;
+            _targetSpeed = isBack ? -GetSpeed() : 0;
         }
 
         public void SetSpeedBoost(float boost, float duration)
         {
-            // TODO
-        }
-
-        private void SpeedBoost()
-        {
-            // TODO
+            _boostSpeed = boost;
+            _boostTimer = duration;
         }
     }
 }

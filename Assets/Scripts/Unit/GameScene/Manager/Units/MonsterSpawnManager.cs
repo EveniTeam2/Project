@@ -157,7 +157,7 @@ namespace Unit.GameScene.Manager.Units
                     monster.transform.position = _data.monsterSpawnOffset + _playerPosition.position +
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.gameObject.SetActive(true);
-                    monster.InitializeMutableValue(_data.monsterStats[group.monsterStatIndex[i]]);
+                    monster.ResetMonster();
                 }
         }
 

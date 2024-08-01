@@ -5,8 +5,8 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 {
     public abstract class StatSystem
     {
-        public event Action OnHit;
-        public event Action OnDeath;
+        private event Action OnHit;
+        private event Action OnDeath;
 
         public int CurrentHp { get; protected set; }
         public int MaxHp { get; protected set; }
@@ -105,6 +105,16 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             {
                 MaxShield += value;
             }
+        }
+
+        public void RegisterHandleOnHit(Action action)
+        {
+            OnHit += action;
+        }
+
+        public void RegisterHandleOnDeath(Action action)
+        {
+            OnDeath += action;
         }
     }
 }

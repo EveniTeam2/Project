@@ -34,7 +34,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             InitializeStat();
         }
 
-        public override void InitializeStat()
+        public sealed override void InitializeStat()
         {
             CurrentLevel = _entireStatInfo[0].CharacterLevel;
             MaxLevel = _entireStatInfo.Count;
@@ -54,9 +54,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             switch (type)
             {
                 case StatType.CurrentExp:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentExp}");
+                    Debug.Log($"캐릭터 Stat {type.ToString()} 현재 {CurrentExp}");
                     UpdateCurrentExpValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} => {CurrentExp}로 변동");
+                    Debug.Log($"캐릭터 Stat {type.ToString()} {value} => {CurrentExp}로 변동");
                     break;
                 case StatType.CurrentHp:
                     Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentHp}");

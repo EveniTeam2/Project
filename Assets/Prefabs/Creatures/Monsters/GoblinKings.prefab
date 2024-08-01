@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6970286536030674080
 SpriteRenderer:
@@ -152,7 +152,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &350301380735278074
 MonoBehaviour:
@@ -183,5 +183,5 @@ MonoBehaviour:
   - {fileID: 7400000, guid: a9263f50b0951490b8fc75889168e624, type: 2}
   - {fileID: 7400000, guid: 84329e4f69d104d7d9a4eaadf5b380c6, type: 2}
   - {fileID: 7400000, guid: 401ce18e42c5a448395121c3afd7569f, type: 2}
-  - {fileID: 7400000, guid: e331a769ac5274b66b7474367464be59, type: 2}
-  - {fileID: 7400000, guid: 2e6309793fa234079849ff8ffb36bf06, type: 2}
+  - {fileID: 7400000, guid: 0b911314fdf71461aae6525a78f69001, type: 2}
+  - {fileID: 7400000, guid: d9097cc52a2324619bdb9f7151fd8d9f, type: 2}

@@ -1,117 +1,168 @@
 using System;
 using Unit.GameScene.Units.Creatures.Interfaces.Movements;
 using UnityEngine;
-using Vector2 = System.Numerics.Vector2;
 
 namespace Unit.GameScene.Units.Creatures.Abstract
 {
     public abstract class MovementSystem : ICreatureMovement
     {
-        // Y movement 관련
-        protected const float _gravity = -20f;
+        // 상수
+        protected const float Gravity = -20f;
+
+        // Transform 및 위치 관련
         protected readonly Transform _targetTransform;
-
-        // X movement 관련
-        protected float _currentSpd;
-
-        // 점프 관련
-        protected float _currentYSpd;
-
-        // 속도 댐핑 변수
-        protected float _dampTime = 0.3f;
-        protected float _dampVel;
         protected float _groundYPosition;
 
-        // 임팩트
-        protected float _impactDuration;
-        protected float _targetSpd;
+        // 이동 관련
+        protected float _currentSpeed;
+        protected float _targetSpeed;
+        protected float _dampVelocity;
+        protected float _dampTime = 0.3f;
+
+        // 원래 속도 저장
+        private float _originalSpeed;
+
+        // 점프 관련
+        protected float _currentYSpeed;
         protected bool _wantToJump;
         protected bool _wantToMove;
-        
-        // 움직임 판단
-        public bool IsInAir => _targetTransform.position.y > _groundYPosition;
-        public bool IsMoving => _currentSpd * _currentSpd > 0;
 
-        public abstract void SetRun(bool isRun);
+        // 충격(넉백) 관련
+        protected float _impactDuration;
+
+        // 속도 부스트 관련
+        protected float _boostSpeed;
+        protected float _boostTimer;
+
+        // 이동 상태 확인을 위한 속성
+        public bool IsInAir => _targetTransform.position.y > _groundYPosition;
+        public bool IsMoving => Mathf.Abs(_currentSpeed) > 0.0001f;
+
+        protected MovementSystem(Transform targetTransform, float groundYPosition)
+        {
+            _targetTransform = targetTransform ?? throw new ArgumentNullException(nameof(targetTransform));
+            _groundYPosition = groundYPosition;
+        }
+
+        public virtual void Update()
+        {
+            ApplyImpact();
+            ApplySpeedBoost();
+            UpdatePosition();
+        }
+
+        public void FixedUpdate()
+        {
+            if (IsMoving || _wantToMove)
+            {
+                _currentSpeed = CalculateSpeed(_currentSpeed, _targetSpeed);
+            }
+
+            UpdateVerticalSpeed();
+        }
+
+        // 하위 클래스에서 구현할 추상 메서드
+        protected abstract int GetSpeed();
+        public abstract void SetRun(bool isRunning);
         public abstract void SetBackward(bool isBackward);
 
-        protected MovementSystem(Transform targetTransform, float ground)
-        {
-            _targetTransform = targetTransform;
-            _groundYPosition = ground;
-        }
-        
+        // 이동 시스템을 제어하는 공용 메서드
         public virtual void SetGroundPosition(float groundYPosition)
         {
             _groundYPosition = groundYPosition;
         }
 
-        public void SetImpact(Vector2 impact, float duration)
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual void Jump(float power)
         {
-            if (_impactDuration > 0)
-                return;
-
-            _wantToJump = true;
-            _currentYSpd = power;
+            if (_impactDuration <= 0)
+            {
+                _wantToJump = true;
+                _currentYSpeed = power;
+            }
         }
 
-        public void Update()
+        public void SetImpact(Vector2 impact, float duration)
+        {
+            // 현재 속도를 저장하고 충격을 가합니다.
+            _originalSpeed = _targetSpeed;
+            _currentSpeed -= impact.x;
+            _currentYSpeed += impact.y;
+            _targetSpeed = 0;
+            _impactDuration = duration;
+        }
+
+        private void ApplyImpact()
         {
             _impactDuration -= Time.deltaTime;
-            UnityEngine.Vector2 pos = _targetTransform.position;
+            
+            if (_impactDuration <= 0 && !IsMoving)
+            {
+                RestoreOriginalSpeed();
+            }
+        }
 
-            // 달리기
+        private void RestoreOriginalSpeed()
+        {
+            // 원래 속도로 복구
+            _targetSpeed = _originalSpeed;
+            _originalSpeed = 0;
+        }
+
+        private void ApplySpeedBoost()
+        {
+            if (_boostTimer > 0)
+            {
+                _boostTimer -= Time.deltaTime;
+                _currentSpeed += _boostSpeed;
+            }
+            else
+            {
+                _boostSpeed = 0;
+            }
+        }
+
+        private void UpdatePosition()
+        {
+            var position = (Vector2)_targetTransform.position;
+
+            // 수평 이동 처리
             if (IsMoving || _wantToMove)
             {
-                _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
-                pos.x += _currentSpd * Time.deltaTime;
+                _currentSpeed = CalculateSpeed(_currentSpeed, _targetSpeed);
+                position.x += _currentSpeed * Time.deltaTime;
             }
 
-            // 점프
+            // 수직 이동 처리 (점프)
             if (IsInAir || _wantToJump)
             {
-                pos.y += _currentYSpd * Time.deltaTime;
-                if (pos.y < _groundYPosition)
-                    pos.y = _groundYPosition;
-                _wantToJump = false;
+                position.y += _currentYSpeed * Time.deltaTime;
+                if (position.y < _groundYPosition)
+                {
+                    position.y = _groundYPosition;
+                    _wantToJump = false;
+                }
             }
 
-            _targetTransform.position = pos;
+            _targetTransform.position = position;
         }
 
-        public void FixedUpdate()
+        private float CalculateSpeed(float currentSpeed, float targetSpeed)
         {
-            if (IsMoving || _wantToMove) _currentSpd = CalculateSpeed(_currentSpd, _targetSpd);
-
-            JumpFixedUpdate();
-        }
-
-        protected virtual float CalculateSpeed(float currentSpd, float targetSpd)
-        {
-            var value = currentSpd - targetSpd;
-            if (value * value > 0.0001f)
-                currentSpd = Mathf.SmoothDamp(currentSpd, targetSpd, ref _dampVel, _dampTime);
+            float difference = currentSpeed - targetSpeed;
+            if (Mathf.Abs(difference) > 0.0001f)
+            {
+                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref _dampVelocity, _dampTime);
+            }
             else
-                currentSpd = targetSpd;
-            return currentSpd;
+            {
+                currentSpeed = targetSpeed;
+            }
+            return currentSpeed;
         }
 
-        protected void JumpFixedUpdate()
+        private void UpdateVerticalSpeed()
         {
-            _currentYSpd += _gravity * Time.fixedDeltaTime;
-        }
-
-        public void SetImpact(UnityEngine.Vector2 impact, float duration)
-        {
-            _currentSpd -= impact.x;
-            _currentYSpd += impact.y;
-            _targetSpd = 0;
-            _impactDuration = duration;
+            _currentYSpeed += Gravity * Time.fixedDeltaTime;
         }
     }
 }

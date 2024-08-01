@@ -36,7 +36,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
-            var target = transform;
+            var monsterTransform = transform;
 
             AnimatorSystem = GetComponent<AnimatorSystem>();
             AnimatorSystem.Initialize(animationParameter);
@@ -45,12 +45,19 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
             // TODO : MonsterStatData 캐릭터처럼 구조 수정
             _monsterStatsSystem = new MonsterStatSystem(stat);
-            _monsterBattleSystem = new MonsterBattleSystem(target, _monsterStatsSystem);
+            _monsterBattleSystem = new MonsterBattleSystem(_monsterStatsSystem, monsterTransform);
             _monsterHealthSystem = new MonsterHealthSystem(_monsterStatsSystem);
-            _monsterMovementSystem = new MonsterMovementSystem(target, _monsterStatsSystem, groundYPosition);
+            _monsterMovementSystem = new MonsterMovementSystem(_monsterStatsSystem, monsterTransform, groundYPosition);
 
-            FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, target);
-            
+            FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, monsterTransform);
+        }
+        
+        public void ResetMonster()
+        {
+            _monsterStatsSystem.InitializeStat();
+            FsmSystem.TryChangeState(StateType.Run);
+            _spriteRenderer.color = Color.white;
+
             RegisterEventHandler();
         }
         
@@ -69,7 +76,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
         protected override void RegisterEventHandler()
         {
-            _monsterStatsSystem.OnDeath += HandleOnDeath;
+            _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
+            _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
         }
         
         public void RegisterOnAttackEventHandler(Action onAttack)
@@ -90,14 +98,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
         protected override void HandleOnDeath()
         {
+            Debug.Log("몬스터 사망!");
             FsmSystem.TryChangeState(StateType.Die);
-        }
-
-        public void InitializeMutableValue(MonsterStat monsterStat)
-        {
-            _monsterStatsSystem = new MonsterStatSystem(monsterStat);
-            FsmSystem.TryChangeState(StateType.Run);
-            _spriteRenderer.color = Color.white;
         }
 
         internal void RegisterEventDeath(Action<Monster> release)

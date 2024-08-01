@@ -9,10 +9,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
     {
         private readonly CharacterStatSystem _characterStatSystem;
         
-        public CharacterBattleSystem(Transform targetTransform, CharacterStatSystem characterStatSystem)
+        public CharacterBattleSystem(CharacterStatSystem characterStatSystem, Transform targetTransform)
             : base(targetTransform)
         {
-            TargetLayerMask = LayerMask.NameToLayer("Monster");
+            TargetLayerMask = 1 << 7;
             TargetDirection = Vector3.right;
             _characterStatSystem = characterStatSystem;
         }
