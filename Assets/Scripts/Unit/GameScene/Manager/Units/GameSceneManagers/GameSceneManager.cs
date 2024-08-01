@@ -183,7 +183,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             ui.gameObject.SetActive(false);
             ui.InitUI();
             _cardManager = new CardManager(ui, stage, defaultCardGachaPairDatas.GetCardGachaPairs(), cardGachaPairDatas.GetCardGachaPairs());
-            stage.Character.OnLevelUp += DrawCard;
+            stage.Character.OnPlayerLevelUp += DrawCard;
         }
 
         private void DrawCard()

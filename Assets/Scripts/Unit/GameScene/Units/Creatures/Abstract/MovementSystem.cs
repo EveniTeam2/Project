@@ -1,42 +1,40 @@
 using System;
 using Unit.GameScene.Units.Creatures.Interfaces.Movements;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Unit.GameScene.Units.Creatures.Abstract
 {
     public abstract class MovementSystem : ICreatureMovement
     {
         // 상수
-        protected const float Gravity = -20f;
+        private const float Gravity = -20f;
 
         // Transform 및 위치 관련
-        protected readonly Transform _targetTransform;
-        protected float _groundYPosition;
+        private readonly Transform _targetTransform;
+        private float _groundYPosition;
 
         // 이동 관련
-        protected float _currentSpeed;
-        protected float _targetSpeed;
-        protected float _dampVelocity;
-        protected float _dampTime = 0.3f;
-
-        // 원래 속도 저장
-        private float _originalSpeed;
+        private float _currentSpeed;
+        protected float TargetSpeed;
+        private float _dampVelocity;
+        private const float DampTime = 0.3f;
 
         // 점프 관련
-        protected float _currentYSpeed;
-        protected bool _wantToJump;
-        protected bool _wantToMove;
+        private float _currentYSpeed;
+        private bool _wantToJump;
+        protected bool WantToMove;
 
         // 충격(넉백) 관련
-        protected float _impactDuration;
+        protected float ImpactDuration;
 
         // 속도 부스트 관련
-        protected float _boostSpeed;
-        protected float _boostTimer;
+        protected float BoostSpeed;
+        protected float BoostTimer;
 
         // 이동 상태 확인을 위한 속성
-        public bool IsInAir => _targetTransform.position.y > _groundYPosition;
-        public bool IsMoving => Mathf.Abs(_currentSpeed) > 0.0001f;
+        private bool IsInAir => _targetTransform.position.y > _groundYPosition;
+        private bool IsMoving => Mathf.Abs(_currentSpeed) > 0.0001f;
 
         protected MovementSystem(Transform targetTransform, float groundYPosition)
         {
@@ -44,7 +42,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             _groundYPosition = groundYPosition;
         }
 
-        public virtual void Update()
+        public void Update()
         {
             ApplyImpact();
             ApplySpeedBoost();
@@ -53,9 +51,9 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 
         public void FixedUpdate()
         {
-            if (IsMoving || _wantToMove)
+            if (IsMoving || WantToMove)
             {
-                _currentSpeed = CalculateSpeed(_currentSpeed, _targetSpeed);
+                _currentSpeed = CalculateSpeed(_currentSpeed, TargetSpeed);
             }
 
             UpdateVerticalSpeed();
@@ -74,50 +72,53 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 
         public virtual void Jump(float power)
         {
-            if (_impactDuration <= 0)
+            if (ImpactDuration <= 0)
             {
                 _wantToJump = true;
                 _currentYSpeed = power;
             }
         }
 
-        public void SetImpact(Vector2 impact, float duration)
+        // TODO : 채이환 - [Bug]
+        // 캐릭터가 히트한 이후, 적과 거리가 멀어서 RunState로 진입했을 때, 캐릭터가 움직이지 않습니다. RunState 진입은 확인했고, WantToRun 인자 true로 바꾸는 것까지 확인했습니다.
+        public void SetImpact(float duration)
         {
-            // 현재 속도를 저장하고 충격을 가합니다.
-            _originalSpeed = _targetSpeed;
+            var impact = GetRandomImpactValue();
             _currentSpeed -= impact.x;
             _currentYSpeed += impact.y;
-            _targetSpeed = 0;
-            _impactDuration = duration;
+            TargetSpeed = 0;
+            ImpactDuration = duration;
+        }
+
+        private Vector2 GetRandomImpactValue()
+        {
+            var impactX = Random.Range(1.0f, 1.5f);
+            // TODO : 히트 시 넉백 효과로 공중으로 날린다고 하면 이 부분도 수정해야 함
+            var impactY = 0;
+            
+            return new Vector2(impactX, impactY);
         }
 
         private void ApplyImpact()
         {
-            _impactDuration -= Time.deltaTime;
-            
-            if (_impactDuration <= 0 && !IsMoving)
-            {
-                RestoreOriginalSpeed();
-            }
-        }
+            ImpactDuration -= Time.deltaTime;
 
-        private void RestoreOriginalSpeed()
-        {
-            // 원래 속도로 복구
-            _targetSpeed = _originalSpeed;
-            _originalSpeed = 0;
+            if (!(ImpactDuration <= 0) || IsMoving)    return;
+
+            ImpactDuration = 0;
+            TargetSpeed = GetSpeed();
         }
 
         private void ApplySpeedBoost()
         {
-            if (_boostTimer > 0)
+            if (BoostTimer > 0)
             {
-                _boostTimer -= Time.deltaTime;
-                _currentSpeed += _boostSpeed;
+                BoostTimer -= Time.deltaTime;
+                _currentSpeed += BoostSpeed;
             }
             else
             {
-                _boostSpeed = 0;
+                BoostSpeed = 0;
             }
         }
 
@@ -126,9 +127,9 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             var position = (Vector2)_targetTransform.position;
 
             // 수평 이동 처리
-            if (IsMoving || _wantToMove)
+            if (IsMoving || WantToMove)
             {
-                _currentSpeed = CalculateSpeed(_currentSpeed, _targetSpeed);
+                _currentSpeed = CalculateSpeed(_currentSpeed, TargetSpeed);
                 position.x += _currentSpeed * Time.deltaTime;
             }
 
@@ -148,10 +149,10 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 
         private float CalculateSpeed(float currentSpeed, float targetSpeed)
         {
-            float difference = currentSpeed - targetSpeed;
+            float difference = targetSpeed - currentSpeed;
             if (Mathf.Abs(difference) > 0.0001f)
             {
-                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref _dampVelocity, _dampTime);
+                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref _dampVelocity, DampTime);
             }
             else
             {

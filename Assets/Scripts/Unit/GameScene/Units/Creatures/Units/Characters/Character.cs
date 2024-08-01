@@ -22,7 +22,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 {
     public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeDamage
     {
-        public event Action OnLevelUp;
+        public event Action OnPlayerLevelUp;
+        public event Action OnPlayerDeath;
 
         [SerializeField] protected CharacterClassType characterClassType;
         [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
@@ -86,6 +87,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
         }
 
+        public void RegisterHandleOnPlayerDeath(Action action)
+        {
+            OnPlayerDeath += action;
+        }
+
         protected override void HandleOnHit()
         {
             var stateType = FsmSystem.GetCurrentStateType();
@@ -96,14 +102,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             }
 
             FsmSystem.TryChangeState(StateType.Hit);
-            _characterMovementSystem.SetImpact(new Vector2(0.3f, 0.2f), 1);
+            _characterMovementSystem.SetImpact(1);
         }
 
         protected override void HandleOnDeath()
         {
             // TODO : 캐릭터 죽었을 때 애니메이션 실행 혹은 FSM 전환
             Debug.Log("캐릭터 사망!");
-            // FsmSystem.TryChangeState(StateType.Die);
+            FsmSystem.TryChangeState(StateType.Die);
+            OnPlayerDeath.Invoke();
         }
 
         public void ToggleMovement(bool setRunning)
@@ -151,14 +158,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             FsmSystem.TryChangeState(targetState);
         }
 
-        public StateType GetCurrentState()
-        {
-            return FsmSystem.GetCurrentStateType();
-        }
-
         public void AttackEnemy(int value, float range)
         {
-            _characterBattleSystem.AttackEnemy(value, range * 10);
+            _characterBattleSystem.AttackEnemy(value, range);
         }
 
         public void Summon()
