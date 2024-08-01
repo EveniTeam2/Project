@@ -1,12 +1,8 @@
 ﻿using System;
-using ScriptableObjects.Scripts.Creature.DTO;
 using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Module.Animations;
-using Unit.GameScene.Units.Creatures.Module.Systems.Abstract;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
+using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
 using UnityEngine;
 
@@ -15,13 +11,13 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
     public class MonsterSkillState : MonsterBaseState
     {
         private readonly MonsterSkillStateInfo _skillInfo;
-        private readonly MonsterBattleStat _stat;
+        private readonly MonsterStatSystem _stat;
 
-        public MonsterSkillState(MonsterBaseStateInfo monsterBaseStateInfo, MonsterSkillStateInfo skillInfo, Func<StateType, bool> tryChangeState, IMonsterFsmController fsmController)
+        public MonsterSkillState(MonsterBaseStateInfo monsterBaseStateInfo, MonsterSkillStateInfo skillInfo, Func<StateType, bool> tryChangeState, IMonsterFsmController fsmController, MonsterStatSystem stat)
             : base(monsterBaseStateInfo, tryChangeState, fsmController)
         {
             _skillInfo = skillInfo;
-            _stat = fsmController.GetBattleStat();
+            _stat = stat;
         }
 
         public override void Enter()

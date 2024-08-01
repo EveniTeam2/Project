@@ -52,7 +52,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _monsterHealthSystem = new MonsterHealthSystem(_monsterStatsSystem);
             _monsterMovementSystem = new MonsterMovementSystem(_monsterStatsSystem, monsterTransform, groundYPosition);
 
-            FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, monsterTransform);
+            FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, monsterTransform, _monsterStatsSystem);
         }
         
         public void ResetMonster()
