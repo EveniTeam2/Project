@@ -80,6 +80,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             OnCommandDequeue?.Invoke();
         }
         
+        private void HandleOnPlayerDeath()
+        {
+            OnPlayerDeath?.Invoke();
+        }
+        
         private void InitializeCharacter(CharacterData characterData, Vector3 playerSpawnPosition, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             // Core.Utils.AddressableLoader.DeployAsset(settings.characterRef, settings.playerPosition, Quaternion.identity, null, (obj) => {
@@ -99,6 +104,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             }
             _character.FsmSystem.RegisterOnDeathState(PlayerIsDead);
             _character.RegisterHandleOnCommandDequeue(HandleCommandDequeue);
+            _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
         }
 
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)

@@ -17,20 +17,20 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
 
         public override void SetRun(bool isRun)
         {
-            if (_impactDuration > 0)
+            if (ImpactDuration > 0)
                 return;
 
-            _wantToMove = isRun;
-            _targetSpeed = isRun ? -GetSpeed() : 0;
+            WantToMove = isRun;
+            TargetSpeed = isRun ? -GetSpeed() : 0; // 몬스터는 왼쪽으로 이동
         }
 
         public override void SetBackward(bool isBack)
         {
-            if (_impactDuration > 0)
+            if (ImpactDuration > 0)
                 return;
 
-            _wantToMove = isBack;
-            _targetSpeed = isBack ? GetSpeed() : 0;
+            WantToMove = isBack;
+            TargetSpeed = isBack ? GetSpeed() : 0; // 몬스터는 오른쪽으로 이동
         }
     }
 }

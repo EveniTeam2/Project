@@ -93,7 +93,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         protected override void HandleOnHit()
         {
             FsmSystem.TryChangeState(StateType.Hit);
-            _monsterMovementSystem.SetImpact(new Vector2(.3f, .2f), 1);
+            _monsterMovementSystem.SetImpact(1);
         }
 
         protected override void HandleOnDeath()
