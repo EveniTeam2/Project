@@ -8,6 +8,8 @@ using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
+using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
@@ -48,7 +50,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         [Header("카드 정보"), SerializeField]
         private CardGachaPairDatas cardGachaPairDatas;
-        [SerializeField] private CardGachaPairDatas defaultCardGachaPairDatas;
+        [SerializeField]
+        private CardGachaPairDatas defaultCardGachaPairDatas;
         [SerializeField]
         private UICardManager uiCardManagerPrefab;
 
@@ -60,16 +63,17 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private RectTransform _matchBlockPanel;
         
         private CharacterData _characterData;
-        
         private ComboBoardController _comboBoardController;
         private MatchBoardController _matchBoardController;
         private StageManager _stageManager;
         private CardManager _cardManager;
         private Camera _camera;
         private Canvas _canvas;
+        private Character _character;
         private CanvasController _canvasController;
 
-        private Dictionary<BlockType, CharacterSkill> _blockInfo;
+        private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
+        private Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
 
         public CardManager CardManager => _cardManager;
 
@@ -100,16 +104,27 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         
         private void InitializeCharacterData()
         {
+            ChangeAnimationParameterToHash();
+            
             var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
 
             var skillCsvData = CsvParser.ParseCharacterSkillData(extraSetting.skillTextAsset);
             var skills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
 
             var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
-
+            
             var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, skills);
             var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
             _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
+            
+            var character = Instantiate(_characterData.CharacterDataSo.creature, extraSetting.playerSpawnPosition, Quaternion.identity);
+            
+            if (character.TryGetComponent(out _character))
+            {
+                _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, _animationParameters, _blockInfo);
+            }
+            
+            _character.FsmSystem.RegisterOnDeathState(GameOver);
         }
         
         private void InitializeBlockData()
@@ -151,6 +166,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             _comboBoardController = Instantiate(defaultSetting.comboBoardControllerPrefab).GetComponent<ComboBoardController>();
             _comboBoardController.Initialize(extraSetting.blockInfos, _comboBlockPanel, _comboBlockEnter, _comboBlockExit, _characterData, _blockInfo);
+            
+            _character.RegisterHandleOnCommandDequeue(_comboBoardController.HandleDestroyComboBlock);
         }
 
         /// <summary>
@@ -160,9 +177,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             _matchBoardController = Instantiate(defaultSetting.matchBoardControllerPrefab).GetComponent<MatchBoardController>();
             _matchBoardController.Initialize(extraSetting.blockInfos, _matchBlockPanel, _canvas, _characterData, _blockInfo);
-            
-            _matchBoardController.OnIncreaseDragCount += IncreaseDragCount;
-            _matchBoardController.OnSendCommand += _comboBoardController.HandleInstantiateComboBlock;
+
+            _matchBoardController.RegisterHandleOnIncreaseDragCount(IncreaseDragCount);
+            _matchBoardController.RegisterHandleOnSendCommand(_comboBoardController.HandleInstantiateComboBlock);
+            _matchBoardController.RegisterHandleOnSendCommand(_character.HandleReceiveCommand);
         }
 
         /// <summary>
@@ -171,10 +189,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateAndInitializeStage()
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
-            _stageManager.Initialize(_characterData, extraSetting.playerSpawnPosition, extraSetting, _camera, _blockInfo);
-            
-            _stageManager.RegisterHandleOnSendCommand(_matchBoardController);
-            _stageManager.OnCommandDequeue += _comboBoardController.HandleDestroyComboBlock;
+            _stageManager.Initialize(_character, extraSetting.playerSpawnPosition, _animationParameters, extraSetting, _camera);
         }
 
         private void InstantiateAndInitializeCard(UICardManager prefab, StageManager stage)
@@ -218,6 +233,24 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             }
 
             isGameOver = true;
+        }
+        
+        private void ChangeAnimationParameterToHash()
+        {
+            _animationParameters = new Dictionary<AnimationParameterEnums, int>();
+
+            for (var i = 0; i < Enum.GetValues(typeof(AnimationParameterEnums)).Length; i++)
+            {
+                var targetEnum = (AnimationParameterEnums) i;
+                
+                _animationParameters.Add(targetEnum, Animator.StringToHash($"{targetEnum}"));
+                Debug.Log($"{targetEnum} => {Animator.StringToHash($"{targetEnum}")} 파싱");
+            }
+        }
+
+        private void GameOver()
+        {
+            Debug.Log("!!!!!!!!!!!!게임 오버!!!!!!!!!!!!");
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
     public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeDamage
     {
         public event Action OnPlayerLevelUp;
-        public event Action OnPlayerDeath;
 
         [SerializeField] protected CharacterClassType characterClassType;
         [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
@@ -40,16 +39,19 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         private CharacterMovementSystem _characterMovementSystem;
         private CharacterStatSystem _characterStatSystem;
 
+        private RectTransform _playerHpUI;
+
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _characterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
 
-        public void Initialize(CharacterData characterData, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter, Dictionary<BlockType, CharacterSkill> blockInfo)
+        public void Initialize(CharacterData characterData, float groundYPosition, RectTransform playerHpUI, Dictionary<AnimationParameterEnums, int> animationParameter, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             var characterTransform = transform;
             _characterData = characterData;
             characterClassType = _characterData.CharacterDataSo.classType;
+            _playerHpUI = playerHpUI;
+            
             AnimatorSystem = GetComponent<AnimatorSystem>();
             AnimatorSystem.Initialize(animationParameter);
-            
             _characterStatSystem = characterData.StatSystem;
             _characterSkillSystem = characterData.SkillSystem;
             _characterBattleSystem = new CharacterBattleSystem(_characterStatSystem, characterTransform);
@@ -57,12 +59,13 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
 
-            FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem,
-                animationParameter);
+            
+            FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem, animationParameter);
 
             RegisterEventHandler();
 
             _characterData.RegisterCharacterServiceProvider(this);
+            _characterStatSystem.InitializeStat();
         }
 
         protected void Update()
@@ -85,11 +88,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             
             _characterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
             _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
-        }
-
-        public void RegisterHandleOnPlayerDeath(Action action)
-        {
-            OnPlayerDeath += action;
+            _characterStatSystem.RegisterHandleOnUpdateHpUI(UpdateHealthBarUI);
         }
 
         protected override void HandleOnHit()
@@ -107,10 +106,15 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         protected override void HandleOnDeath()
         {
-            // TODO : 캐릭터 죽었을 때 애니메이션 실행 혹은 FSM 전환
-            Debug.Log("캐릭터 사망!");
             FsmSystem.TryChangeState(StateType.Die);
-            OnPlayerDeath.Invoke();
+        }
+        
+        private void UpdateHealthBarUI(int currentHp, int maxHp)
+        {
+            var value = 1 / ((float)currentHp / maxHp);
+            var newSize = new Vector2(value, _playerHpUI.sizeDelta.y);
+            
+            _playerHpUI.sizeDelta = newSize;
         }
 
         public void ToggleMovement(bool setRunning)

@@ -16,8 +16,12 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
         public bool IsSingleTarget { get; }
         public SkillRangeType SkillRangeType { get; }
         public SkillExtraEffectType SkillExtraEffectType { get; }
+        public float SkillDuration { get; }
         
-        public SkillData(CharacterClassType characterType, int skillIndex, string skillName, string skillDescription, int skillLevel, int skillValue, float skillRange1,  float skillRange2,  SkillType skillType, int isSingleTarget, SkillRangeType skillRangeType, SkillExtraEffectType skillExtraEffectType) 
+        public SkillData(CharacterClassType characterType, int skillIndex, string skillName, string skillDescription,
+            int skillLevel, int skillValue, float skillRange1, float skillRange2, SkillType skillType,
+            int isSingleTarget, SkillRangeType skillRangeType, SkillExtraEffectType skillExtraEffectType,
+            float skillDuration) 
         {
             CharacterType = characterType;
             SkillIndex = skillIndex;
@@ -31,6 +35,7 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
             IsSingleTarget = isSingleTarget == 0;
             SkillRangeType = skillRangeType;
             SkillExtraEffectType = skillExtraEffectType;
+            SkillDuration = skillDuration;
         }
     }
 }

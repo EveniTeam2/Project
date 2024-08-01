@@ -15,13 +15,16 @@ using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
     public class Monster : Creature, IMonsterFsmController, ITakeDamage
     {
         [SerializeField] private MonsterStateMachineDTO stateData;
-
+        [SerializeField] private RectTransform monsterHpUI;
+        
         private MonsterData _monsterData;
         private SpriteRenderer _spriteRenderer;
         
@@ -54,11 +57,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         
         public void ResetMonster()
         {
-            _monsterStatsSystem.InitializeStat();
             FsmSystem.TryChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
 
             RegisterEventHandler();
+            
+            _monsterStatsSystem.InitializeStat();
         }
         
         private void Update()
@@ -78,11 +82,20 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
             _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
+            _monsterStatsSystem.RegisterHandleOnUpdateHpUI(HandleOnUpdateHpUI);
         }
         
         public void RegisterOnAttackEventHandler(Action onAttack)
         {
             AnimatorSystem.OnAttack += onAttack;
+        }
+
+        private void HandleOnUpdateHpUI(int currentHp, int maxHp)
+        {
+            var value = 1 / ((float)currentHp / maxHp);
+            var newSize = new Vector2(value, monsterHpUI.sizeDelta.y);
+            
+            monsterHpUI.sizeDelta = newSize;
         }
 
         public void UnregisterOnAttackEventHandler(Action onAttack)

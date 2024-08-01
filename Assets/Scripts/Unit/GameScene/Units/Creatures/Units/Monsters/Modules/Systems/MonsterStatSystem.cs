@@ -3,22 +3,21 @@ using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
 {
     public class MonsterStatSystem : StatSystem
     {
-        private MonsterStat _monsterStat;
+        private readonly MonsterStat _monsterStat;
         public float AttackCoolTime { get; private set; }
         
         public MonsterStatSystem(MonsterStat stat)
         {
             _monsterStat = stat;
-            
-            InitializeStat();
         }
 
-        public sealed override void InitializeStat()
+        public override void InitializeStat()
         {
             CurrentHp = _monsterStat.health;
             MaxHp = _monsterStat.health;
@@ -27,6 +26,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
             Damage = _monsterStat.damage;
             Speed = _monsterStat.speed;
             AttackCoolTime = _monsterStat.attackCoolTime;
+
+            OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
         }
 
         public override void HandleUpdateStat(StatType type, float value)

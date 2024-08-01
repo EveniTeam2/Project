@@ -21,12 +21,8 @@ using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers
 {
-    public class StageManager : MonoBehaviour, IStage, ISendCommand
+    public class StageManager : MonoBehaviour, IStage
     {
-        public event Action OnCommandDequeue;
-        public event Action<CommandPacket> OnSendCommand;
-        public event Action OnPlayerDeath;
-        
         public StageScore StageScore { get => _stageScore; }
         public Character Character => _character;
         public LinkedList<Monster> Monsters => _monsterManager.Monsters;
@@ -43,12 +39,12 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         Coroutine _stageScoreCoroutine;
 
-        public void Initialize(CharacterData characterData, Vector3 playerSpawnPosition, SceneExtraSetting extraSetting, Camera cam, Dictionary<BlockType, CharacterSkill> blockInfo)
+        public void Initialize(Character character, Vector3 playerSpawnPosition, Dictionary<AnimationParameterEnums, int> animationParameters, SceneExtraSetting extraSetting, Camera cam)
         {
             _stageScore = new StageScore();
-            ChangeAnimationParameterToHash();
+            _animationParameters = animationParameters;
+            _character = character;
             
-            InitializeCharacter(characterData, playerSpawnPosition, blockInfo);
             InitializeMonster(extraSetting, playerSpawnPosition, _stageScore);
             InitializeCamera(cam, extraSetting.cameraSpawnPosition);
             InitializeMap(extraSetting.mapPrefab, playerSpawnPosition);
@@ -56,6 +52,9 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             StartCoroutine(StageScoreUpdate(_stageScore));
             
             _monsterManager.Start();
+            
+            _zeroPosition = playerSpawnPosition;
+            _startTime = Time.time;
         }
 
         private void Update()
@@ -69,50 +68,13 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 yield return null;
             }
         }
-
-        public void RegisterHandleOnSendCommand(ISendCommand data)
-        {
-            data.OnSendCommand += OnSendCommand;
-        }
-
-        private void HandleCommandDequeue()
-        {
-            OnCommandDequeue?.Invoke();
-        }
         
-        private void HandleOnPlayerDeath()
-        {
-            OnPlayerDeath?.Invoke();
-        }
-        
-        private void InitializeCharacter(CharacterData characterData, Vector3 playerSpawnPosition, Dictionary<BlockType, CharacterSkill> blockInfo)
-        {
-            // Core.Utils.AddressableLoader.DeployAsset(settings.characterRef, settings.playerPosition, Quaternion.identity, null, (obj) => {
-            //     if (obj.TryGetComponent(out _character))
-            //         _character.Initialize(settings.characterStat, _backgroundDisplay);
-            // });
-            
-            var character = Instantiate(characterData.CharacterDataSo.creature, playerSpawnPosition, Quaternion.identity);
-            
-            _zeroPosition = playerSpawnPosition;
-            _startTime = Time.time;
-            
-            if (character.TryGetComponent(out _character))
-            {
-                _character.Initialize(characterData, playerSpawnPosition.y, _animationParameters, blockInfo);
-                OnSendCommand += _character.HandleReceiveCommand;
-            }
-            _character.FsmSystem.RegisterOnDeathState(PlayerIsDead);
-            _character.RegisterHandleOnCommandDequeue(HandleCommandDequeue);
-            _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
-        }
-
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)
         {
             _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameters);
         }
 
-        protected virtual void InitializeCamera(Camera cam, Vector3 cameraSpawnPosition)
+        protected void InitializeCamera(Camera cam, Vector3 cameraSpawnPosition)
         {
             cam.GetComponent<CameraController>().Initialize(_character.transform, cameraSpawnPosition);
         }
@@ -127,23 +89,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             var backgroundController = Instantiate(mapPrefab);
             backgroundController.transform.position = new Vector3(playerSpawnPosition.x, playerSpawnPosition.y - 1, backgroundController.transform.position.z);
             backgroundController.GetComponent<BackgroundController>().Initialize(_character);
-        }
-
-        private void PlayerIsDead() {
-            OnPlayerDeath?.Invoke();
-        }
-        
-        private void ChangeAnimationParameterToHash()
-        {
-            _animationParameters = new Dictionary<AnimationParameterEnums, int>();
-
-            for (var i = 0; i < Enum.GetValues(typeof(AnimationParameterEnums)).Length; i++)
-            {
-                var targetEnum = (AnimationParameterEnums) i;
-                
-                _animationParameters.Add(targetEnum, Animator.StringToHash($"{targetEnum}"));
-                Debug.Log($"{targetEnum} => {Animator.StringToHash($"{targetEnum}")} 파싱");
-            }
         }
     }
 }

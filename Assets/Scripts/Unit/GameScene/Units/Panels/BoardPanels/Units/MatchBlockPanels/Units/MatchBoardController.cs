@@ -572,5 +572,15 @@ namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
         }
 
         #endregion
+
+        public void RegisterHandleOnSendCommand(Action<CommandPacket> action)
+        {
+            OnSendCommand += action;
+        }
+
+        public void RegisterHandleOnIncreaseDragCount(Action<int> action)
+        {
+            OnIncreaseDragCount += action;
+        }
     }
 }

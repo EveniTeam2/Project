@@ -1,5 +1,4 @@
-﻿,,,,,,,,,,,,,
-식별번호,캐릭터 타입,스킬 인덱스,스킬명 (한글),스킬 효과,스킬 레벨,스킬 수치,스킬 기본 범위,스킬 추가 범위,스킬 타입,단일 / 범위 여부,스킬 범위 타입,스킬 추가 효과,스킬 지속시간 
+﻿식별번호,캐릭터 타입,스킬 인덱스,스킬명 (한글),스킬 효과,스킬 레벨,스킬 수치,스킬 기본 범위,스킬 추가 범위,스킬 타입,단일 / 범위 여부,스킬 범위 타입,스킬 추가 효과,스킬 지속시간 
 SkillId,characterType,skillIndex,skillName,skillDescription,SkillLevel,skillValue,SkillRange1,SkillRange 2,SkillType,IsSingleTarget,SkillRangeType,SkillExtraEffectType,SkillDuration
 S0001,0,0,내려치기,검을 아래로 내려칩니다.,1,5,1,1,0,0,0,0,0
 S0002,0,0,내려치기,검을 아래로 내려칩니다.,2,10,1,1,0,0,0,0,0
