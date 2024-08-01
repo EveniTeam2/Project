@@ -22,11 +22,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules
 
             if (col.collider.gameObject.TryGetComponent<ICreatureServiceProvider>(out var target))
             {
-#if UNITY_EDITOR
                 target.HeathSystem.TakeDamage(BattleStat.GetAttack());
+#if UNITY_EDITOR
                 Debug.Log($"몬스터가 {col.collider.gameObject.name}에게 {BattleStat.GetAttack()} 피해를 입혔습니다.");
-#else
-                var dmg = target.GetServiceProvider().TakeDamage(_stat.GetAttack());
 #endif
             }
             else

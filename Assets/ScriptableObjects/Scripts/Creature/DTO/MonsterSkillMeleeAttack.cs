@@ -20,6 +20,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 
         public void Act(MonsterBattleStat stat, RaycastHit2D target)
         {
+            // BattleSystem 의 Attack(target, BattleEffect)로 변경할 예정
             _fsmController.Attack(target);
         }
     }

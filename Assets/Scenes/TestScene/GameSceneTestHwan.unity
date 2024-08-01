@@ -404,7 +404,7 @@ MonoBehaviour:
   isGameOver: 0
   currentTime: 0
   cardGachaPairDatas: {fileID: 11400000, guid: 76fb47cbddafdac47848e3a8cd2a7116, type: 2}
-  defaultCardGachaPairDatas: {fileID: 11400000, guid: e1947d8bed6eeb942b051475cf75fbe0, type: 2}
+  defaultCardGachaPairDatas: {fileID: 0}
   uiCardManagerPrefab: {fileID: 6680058419042962073, guid: ad8886fc5454b9a46b2f2a4c8a3214fc, type: 3}
 --- !u!114 &745679374
 MonoBehaviour:
@@ -418,12 +418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3196e1d3909f5468f961826af936cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exit: 27
-  waitTime: 2
-  limitCount: 2
-  levelup: 32
-  cardCount: 4
-  gameSceneManager: {fileID: 745679373}
+  exit: 0
+  waitTime: 0
+  limitCount: 0
+  levelup: 0
+  cardCount: 0
+  gameSceneManager: {fileID: 0}
 --- !u!1 &820143611
 GameObject:
   m_ObjectHideFlags: 0
