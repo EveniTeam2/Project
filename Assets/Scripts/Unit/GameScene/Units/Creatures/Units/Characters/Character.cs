@@ -28,9 +28,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         [SerializeField] protected CharacterClassType characterClassType;
         [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
-        
+
         protected override Collider2D CreatureCollider { get; set; }
         protected override RectTransform CreatureHpPanelUI { get; set; }
+        protected override AnimatorSystem AnimatorSystem { get; set; }
         
         private readonly Queue<CommandPacket> _commandQueue = new();
 
@@ -46,7 +47,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
 
         private RectTransform _characterExpPanelUI;
         private TextMeshProUGUI _characterLevelPanelUI;
-        private Dictionary<AnimationParameterEnums, int> _animationParameters;
 
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _characterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
 
@@ -62,7 +62,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             CreatureHpPanelUI = characterHpPanelUI;
             _characterExpPanelUI = characterExpPanelUI;
             _characterLevelPanelUI = characterLevelPanelUI;
-            _animationParameters = animationParameters;
+            AnimationParameters = animationParameters;
             
             _characterStatSystem = characterData.StatSystem;
             _characterSkillSystem = characterData.SkillSystem;
@@ -71,10 +71,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
 
-            AnimatorSystem.Initialize(_animationParameters);
-            AnimatorSystem.SetBool(_animationParameters[AnimationParameterEnums.IsDead], false, null);
+            AnimatorSystem.Initialize(AnimationParameters);
+            AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
             
-            FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem, _animationParameters);
+            FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem, AnimationParameters);
 
             RegisterEventHandler();
 
@@ -108,21 +108,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterMovementSystem.SetRun(setRunning);
         }
 
-        public void SetBool(int parameter, bool value, Action action)
-        {
-            AnimatorSystem.SetBool(parameter, value, action);
-        }
-
-        public void SetTrigger(int parameter, Action action)
-        {
-            AnimatorSystem.SetTrigger(parameter, action);
-        }
-
-        public void SetFloat(int parameter, int value, Action action)
-        {
-            AnimatorSystem.SetFloat(parameter, value, action);
-        }
-
         public void HealMySelf(int value)
         {
             _characterHealthSystem.TakeHeal(value);
@@ -131,16 +116,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
         public void SetReadyForInvokingCommand(bool isReady)
         {
             _characterCommandSystem.SetReadyForInvokingCommand(isReady);
-        }
-
-        public void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
-        {
-            AnimatorSystem.SetBool(targetParameter, value, action);
-        }
-
-        public void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
-        {
-            AnimatorSystem.SetFloat(targetParameter, value, action);
         }
 
         public void TryChangeState(StateType targetState)
@@ -166,11 +141,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value * -1);
         }
 
-        public void RegisterHandleOnCommandDequeue(Action action)
-        {
-            _characterCommandSystem.OnCommandDequeue += action;
-        }
-
         protected override void RegisterEventHandler()
         {
             OnUpdateStat += _characterStatSystem.HandleOnUpdateStat;
@@ -183,6 +153,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             _characterStatSystem.RegisterHandleOnUpdateLevelPanelUI(HandleOnUpdateLevelPanelUI);
 
             FsmSystem.RegisterHandleOnDeathState(HandleOnGameOver);
+        }
+        
+        public void RegisterHandleOnCommandDequeue(Action action)
+        {
+            _characterCommandSystem.OnCommandDequeue += action;
         }
 
         public void RegisterHandleOnPlayerDeath(Action action)
@@ -209,6 +184,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters
             SetActiveCollider(false);
             // TODO : 채이환 - [Bug] FSM DieState로 전환되어 Die 파라미터가 트리거된 이후 간헐적으로 Idle 파라미터가 True로 바뀌고 있습니다. 수정해주세요. 
             FsmSystem.TryChangeState(StateType.Die);
+        }
+        
+        public void RegisterOnHandleOnTriggerCard(Action action)
+        {
+            _characterStatSystem.RegisterHandleOnTriggerCard(action);
         }
 
         public void HandleOnSendCommand(CommandPacket command)

@@ -13,14 +13,16 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         public Action<StatType, float> OnUpdateStat;
         
         public StateMachine FsmSystem;
-        protected AnimatorSystem AnimatorSystem;
         
+        protected abstract AnimatorSystem AnimatorSystem { get; set; }
         protected abstract Collider2D CreatureCollider { get; set; }
         protected abstract RectTransform CreatureHpPanelUI { get; set; }
         
         protected abstract void RegisterEventHandler();
         protected abstract void HandleOnHit();
         protected abstract void HandleOnDeath();
+
+        protected Dictionary<AnimationParameterEnums, int> AnimationParameters;
         
         protected void HandleOnUpdateHpPanel(int currentHp, int maxHp)
         {
@@ -41,6 +43,31 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             {
                 CreatureCollider.enabled = active;
             }
+        }
+        
+        public void SetBool(int parameter, bool value, Action action)
+        {
+            AnimatorSystem.SetBool(parameter, value, action);
+        }
+
+        public void SetTrigger(int parameter, Action action)
+        {
+            AnimatorSystem.SetTrigger(parameter, action);
+        }
+
+        public void SetFloat(int parameter, int value, Action action)
+        {
+            AnimatorSystem.SetFloat(parameter, value, action);
+        }
+        
+        public void SetBoolOnAnimator(AnimationParameterEnums targetParameter, bool value, Action action)
+        {
+            AnimatorSystem.SetBool(targetParameter, value, action);
+        }
+
+        public void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
+        {
+            AnimatorSystem.SetFloat(targetParameter, value, action);
         }
     }
 }

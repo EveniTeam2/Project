@@ -5,7 +5,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 {
     public abstract class StatSystem
     {
-        protected Action<int, int> OnUpdateHpPanelUI;
+        protected Action<int, int> OnUpdateHp;
         
         private event Action OnHit;
         private event Action OnDeath;
@@ -43,7 +43,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
                 CurrentHp += value;
             }
             
-            OnUpdateHpPanelUI.Invoke(CurrentHp, MaxHp);
+            OnUpdateHp.Invoke(CurrentHp, MaxHp);
         }
 
         protected void UpdateCurrentShieldValue(int value)
@@ -124,7 +124,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 
         public void RegisterHandleOnUpdateHpPanelUI(Action<int, int> action)
         {
-            OnUpdateHpPanelUI += action;
+            OnUpdateHp += action;
         }
     }
 }

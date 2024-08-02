@@ -32,6 +32,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         
         protected override Collider2D CreatureCollider { get; set; }
         protected override RectTransform CreatureHpPanelUI { get; set; }
+        protected override AnimatorSystem AnimatorSystem { get; set; }
 
         private MonsterBattleSystem _monsterBattleSystem;
         private MonsterHealthSystem _monsterHealthSystem;
@@ -42,10 +43,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public bool IsReadyForAttack() => _monsterBattleSystem.IsReadyForAttack;
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _monsterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
         
-        public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
+        public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameters)
         {
             var monsterTransform = transform;
             CreatureHpPanelUI = monsterHpUI;
+            AnimationParameters = animationParameters;
             
             AnimatorSystem = GetComponent<AnimatorSystem>();
             CreatureCollider = GetComponent<Collider2D>();
@@ -57,12 +59,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _monsterHealthSystem = new MonsterHealthSystem(_monsterStatsSystem);
             _monsterMovementSystem = new MonsterMovementSystem(_monsterStatsSystem, monsterTransform, groundYPosition);
 
-            AnimatorSystem.Initialize(animationParameter);
-            FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, monsterTransform, _monsterStatsSystem);
+            AnimatorSystem.Initialize(AnimationParameters);
+            
+            FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, AnimationParameters, monsterTransform, _monsterStatsSystem);
         }
         
         public void ResetMonster()
         {
+            AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
             FsmSystem.TryChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
             CreatureCollider.enabled = true;
@@ -111,9 +115,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
 
         protected override void HandleOnDeath()
         {
+            AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], true, null);
             SetActiveHealthBarUI(false);
             SetActiveCollider(false);
             
+            // TODO : 채이환 - [Bug] 몬스터가 풀에 릴리즈 되고 이후 다시 스폰되면 죽었을 때 사망 애니메이션이 스킵되고 바로 릴리즈 되는 것 같습니다.
             FsmSystem.TryChangeState(StateType.Die);
         }
 
@@ -125,21 +131,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void ToggleMovement(bool setRunning)
         {
             _monsterMovementSystem.SetRun(setRunning);
-        }
-
-        public void SetBool(int parameter, bool value, Action action)
-        {
-            AnimatorSystem.SetBool(parameter, value, action);
-        }
-
-        public void SetTrigger(int parameter, Action action)
-        {
-            AnimatorSystem.SetTrigger(parameter, action);
-        }
-
-        public void SetFloat(int parameter, int value, Action action)
-        {
-            AnimatorSystem.SetFloat(parameter, value, action);
         }
 
         public void AttackEnemy(RaycastHit2D target)

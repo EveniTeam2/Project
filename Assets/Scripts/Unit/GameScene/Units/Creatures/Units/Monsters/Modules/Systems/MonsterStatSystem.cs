@@ -29,7 +29,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
             Speed = _monsterStat.speed;
             AttackCoolTime = _monsterStat.attackCoolTime;
 
-            OnUpdateHpPanelUI.Invoke(CurrentHp, MaxHp);
+            OnUpdateHp.Invoke(CurrentHp, MaxHp);
         }
 
         public override void HandleOnUpdateStat(StatType type, float value)
@@ -70,8 +70,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
-            
-            Debug.Log($"Monster Stat {type.ToString()} {value}로 변동");
         }
 
         private void InvokeOnIncreasePlayerExp()

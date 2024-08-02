@@ -236,6 +236,11 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
 
         public void ActivateSkillEffects()
         {
+            if (OnAttack == null)
+            {
+                Debug.LogError("OnAttack이 비었습니다요");
+            }
+            
             OnAttack.Invoke();
         }
 

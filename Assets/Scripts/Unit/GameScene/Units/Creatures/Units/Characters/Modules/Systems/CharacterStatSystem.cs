@@ -13,7 +13,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
     {
         public Action<int> OnIncreasePlayerExp;
         private event Action<int, int> OnUpdateExpPanelUI;
-        private event Action<int> OnUpdateLevelPanelUI;
+        private event Action<int> OnIncreasePlayerLevel;
         public event Action OnTriggerCard;
         
         private readonly Dictionary<int, CharacterStatData> _entireStatInfo;
@@ -40,17 +40,19 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             MaxLevel = _entireStatInfo.Count;
             CurrentExp = 0;
             MaxExp = _entireStatInfo[0].CharacterMaxExp;
-            CurrentHp = _entireStatInfo[0].CharacterMaxHp;
-            MaxHp = _entireStatInfo[0].CharacterMaxHp;
+            
+            // TODO : 테스트 목적으로 100배 시켜둔 것 이후 삭제 해야 합니다.
+            CurrentHp = _entireStatInfo[0].CharacterMaxHp * 100;
+            MaxHp = _entireStatInfo[0].CharacterMaxHp * 100;
             CurrentShield = _entireStatInfo[0].CharacterMaxShield;
             MaxShield = _entireStatInfo[0].CharacterMaxShield;
             Damage = _entireStatInfo[0].CharacterDamage;
             Speed = _entireStatInfo[0].CharacterSpeed;
             CardTrigger = _entireStatInfo[0].CardTrigger;
             
-            OnUpdateHpPanelUI.Invoke(CurrentHp, MaxHp);
+            OnUpdateHp.Invoke(CurrentHp, MaxHp);
             OnUpdateExpPanelUI.Invoke(CurrentExp, MaxExp);
-            OnUpdateLevelPanelUI.Invoke(CurrentLevel);
+            OnIncreasePlayerLevel.Invoke(CurrentLevel);
             
             OnIncreasePlayerExp += HandleOnIncreaseExp;
         }
@@ -89,11 +91,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
                     UpdateSpeedValue((int) value);
                     Debug.Log($"Character Stat {type.ToString()} {value} =>  {Speed}로 변동");
                     break;
-                case StatType.CardTrigger:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {CardTrigger}");
-                    UpdateCardTriggerValue((int)value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} =>  {CardTrigger}로 변동");
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -120,7 +117,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
                 }
                 
                 UpdateEntireStat(CurrentLevel);
-                OnUpdateLevelPanelUI.Invoke(CurrentLevel);
+                OnIncreasePlayerLevel.Invoke(CurrentLevel);
             }
             
             OnUpdateExpPanelUI.Invoke(CurrentExp, MaxExp);
@@ -137,17 +134,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             MaxShield += nextStat.CharacterMaxShield - previousStat.CharacterMaxShield;
             Damage += nextStat.CharacterDamage - previousStat.CharacterDamage;
             Speed += nextStat.CharacterSpeed - previousStat.CharacterSpeed;
+            CardTrigger = nextStat.CardTrigger;
 
-
-            UpdateCardTriggerValue(nextStat.CardTrigger);
-        }
-        
-        private void UpdateCardTriggerValue(int value)
-        {
-            // TODO : 카드를 계속 뽑도록 할 것인가?
-            CardTrigger += value;
-            OnTriggerCard?.Invoke();
-            CardTrigger--;
+            if (CardTrigger == 1)
+            {
+                OnTriggerCard.Invoke();
+            }
         }
         
         private void HandleOnIncreaseExp(int value)
@@ -162,7 +154,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
 
         public void RegisterHandleOnUpdateLevelPanelUI(Action<int> action)
         {
-            OnUpdateLevelPanelUI += action;
+            OnIncreasePlayerLevel += action;
+        }
+
+        public void RegisterHandleOnTriggerCard(Action action)
+        {
+            OnTriggerCard += action;
         }
     }
 }

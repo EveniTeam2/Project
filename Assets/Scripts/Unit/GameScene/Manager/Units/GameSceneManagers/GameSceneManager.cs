@@ -128,7 +128,14 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             {
                 _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, defaultSetting.playerExpPanel, defaultSetting.playerLevelPanel, _animationParameters, _blockInfo);
                 _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
+                _character.RegisterOnHandleOnTriggerCard(HandleOnTriggerCard);
             }
+        }
+
+        private void HandleOnTriggerCard()
+        {
+            //TODO : 레벨 업이 되면 해당 메서드가 호출됌.
+            Debug.Log("카드 드로우!!!");
         }
 
         private void InitializeBlockData()
