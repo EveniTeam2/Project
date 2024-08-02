@@ -41,9 +41,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             CurrentExp = 0;
             MaxExp = _entireStatInfo[0].CharacterMaxExp;
             
-            // TODO : 테스트 목적으로 100배 시켜둔 것 이후 삭제 해야 합니다.
-            CurrentHp = _entireStatInfo[0].CharacterMaxHp * 100;
-            MaxHp = _entireStatInfo[0].CharacterMaxHp * 100;
+            CurrentHp = _entireStatInfo[0].CharacterMaxHp;
+            MaxHp = _entireStatInfo[0].CharacterMaxHp;
             CurrentShield = _entireStatInfo[0].CharacterMaxShield;
             MaxShield = _entireStatInfo[0].CharacterMaxShield;
             Damage = _entireStatInfo[0].CharacterDamage;

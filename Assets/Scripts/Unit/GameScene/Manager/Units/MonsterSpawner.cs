@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Unit.GameScene.Manager.Units
 {
-    public class MonsterSpawnManager
+    public class MonsterSpawner
     {
         private readonly StageMonsterSpawnData _data;
         private readonly Transform _playerPosition;
@@ -40,7 +40,7 @@ namespace Unit.GameScene.Manager.Units
             }
         }
 
-        public MonsterSpawnManager(Transform playerPosition, MonsterSpawnData data, float ground, StageScore score,
+        public MonsterSpawner(Transform playerPosition, MonsterSpawnData data, float ground, StageScore score,
             Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             _data = data.GetStageData(score);

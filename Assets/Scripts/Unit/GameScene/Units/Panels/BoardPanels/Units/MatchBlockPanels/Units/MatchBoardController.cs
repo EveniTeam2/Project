@@ -87,6 +87,16 @@ namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
         /// <param name="blockInfo"></param>
         public void Initialize(List<BlockModel> blockModels, RectTransform matchBlockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
+            StartCoroutine(MatchBoardControllerInitializer(blockModels, matchBlockPanel, canvas, characterData, blockInfo));
+        }
+
+        private IEnumerator MatchBoardControllerInitializer(List<BlockModel> blockModels, RectTransform matchBlockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        {
+            while (matchBlockPanel.rect.width == 0)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            
             InitializeValues(blockModels, matchBlockPanel, canvas, characterData, blockInfo);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
@@ -125,12 +135,12 @@ namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
         {
             // panelWidth 구하기
             var localScale = (float) Math.Round(_blockPanel.localScale.x);
-            var panelSize = (float)(int)Math.Round(_blockPanel.rect.width * localScale);
+            var panelSize = (float)(int)Math.Round(_blockPanel.rect.height * localScale);
             
             if (panelSize <= 0) return;
             
             // 블록 간격 계산
-            _blockGap = (float) Math.Truncate(panelSize / (width - 1));
+            _blockGap = (float) Math.Truncate(panelSize / (height - 1));
             _blockPositions = new List<Tuple<float, float>>();
             
             _halfPanelWidth = panelSize / 2;

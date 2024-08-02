@@ -19,6 +19,7 @@ using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
+using UnityEngine.Serialization;
 using CharacterStatSystem = Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems.CharacterStatSystem;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
@@ -36,21 +37,12 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         [Header("==== Scene 기본 세팅 ===="), SerializeField]
         private SceneDefaultSetting defaultSetting;
 
-        [Header("드래그 횟수"), SerializeField]
-        private int dragCount;
-        
-        [Header("게임 오버"), SerializeField]
-        private bool isGameOver;
-        
-        [Header("현재 진행 시간"), SerializeField]
-        private float currentTime;
-
-        [Header("카드 정보"), SerializeField]
-        private CardGachaPairDatas cardGachaPairDatas;
-        [SerializeField]
-        private CardGachaPairDatas defaultCardGachaPairDatas;
-        [SerializeField]
-        private UICardManager uiCardManagerPrefab;
+        [Header("드래그 횟수"), SerializeField] private int dragCount;
+        [Header("게임 오버"), SerializeField] private bool isGameOver;
+        [Header("현재 진행 시간"), SerializeField] private float currentTime;
+        [Header("카드 정보"), SerializeField] private CardGachaPairDatas cardGachaPairDatas;
+        [SerializeField] private CardGachaPairDatas defaultCardGachaPairDatas;
+        [SerializeField] private UICardPanel uiCardPanelPrefab;
 
         #endregion
 
@@ -90,7 +82,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             InstantiateAndInitializeMatchBoard();
             InstantiateAndInitializeStage();
 
-            InstantiateAndInitializeCard(uiCardManagerPrefab, _stageManager);
+            InstantiateAndInitializeCard(uiCardPanelPrefab, _stageManager);
         }
 
         // /// <summary>
@@ -128,14 +120,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             {
                 _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, defaultSetting.playerExpPanel, defaultSetting.playerLevelPanel, _animationParameters, _blockInfo);
                 _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
-                _character.RegisterOnHandleOnTriggerCard(HandleOnTriggerCard);
             }
-        }
-
-        private void HandleOnTriggerCard()
-        {
-            //TODO : 레벨 업이 되면 해당 메서드가 호출됌.
-            Debug.Log("카드 드로우!!!");
         }
 
         private void InitializeBlockData()
@@ -201,18 +186,20 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _stageManager.Initialize(_character, extraSetting.playerSpawnPosition, _animationParameters, extraSetting, _camera);
         }
 
-        private void InstantiateAndInitializeCard(UICardManager prefab, StageManager stage)
+        private void InstantiateAndInitializeCard(UICardPanel prefab, StageManager stage)
         {
             var ui = Instantiate(prefab);
             ui.gameObject.SetActive(false);
             ui.InitUI();
             _cardManager = new CardManager(ui, stage, defaultCardGachaPairDatas.GetCardGachaPairs(), cardGachaPairDatas.GetCardGachaPairs());
-            stage.Character.OnPlayerLevelUp += DrawCard;
+            
+            _character.RegisterOnHandleOnTriggerCard(_cardManager.HandleOnTriggerCard);
         }
-
-        private void DrawCard()
+        
+        private void HandleOnTriggerCard()
         {
-            var cards = _cardManager.GetCards(3);
+            //TODO : 레벨 업이 되면 해당 메서드가 호출됌.
+            Debug.Log("카드 드로우!!!");
         }
 
         /// <summary>

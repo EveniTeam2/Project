@@ -32,7 +32,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         private StageScore _stageScore;
         private Character _character;
-        private MonsterSpawnManager _monsterManager;
+        private MonsterSpawner _monsterManager;
         private float _startTime;
         private Vector3 _zeroPosition;
         private Dictionary<AnimationParameterEnums, int> _animationParameters;
@@ -71,7 +71,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         
         private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)
         {
-            _monsterManager = new MonsterSpawnManager(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameters);
+            _monsterManager = new MonsterSpawner(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameters);
         }
 
         protected void InitializeCamera(Camera cam, Vector3 cameraSpawnPosition)

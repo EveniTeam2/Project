@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5897305165748632098}
   - component: {fileID: 6680058419042962073}
   m_Layer: 0
-  m_Name: UICardManager
+  m_Name: CardPanelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

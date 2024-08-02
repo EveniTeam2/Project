@@ -7,11 +7,12 @@ using UnityEngine.UI;
 
 namespace Core.UI
 {
-    public class UICardManager : UIBase<UICardManager>
+    public class UICardPanel : UIBase<UICardPanel>
     {
         [SerializeField] private TextPair[] text;
         [SerializeField] private RectTransform buttonRoot;
         [SerializeField] private UICardButton prefab;
+        
         private CustomPool<UICardButton> buttonPool;
 
         private void DestroyButton(UICardButton button)
@@ -35,7 +36,7 @@ namespace Core.UI
             button.gameObject.SetActive(false);
         }
 
-        public override UICardManager CloseUI()
+        public override UICardPanel CloseUI()
         {
             CallActOnClose();
             buttonPool.ReleaseAll();
@@ -43,7 +44,7 @@ namespace Core.UI
             return this;
         }
 
-        public UICardManager DrawCardButton(Card[] cards, Action<Card> onClick)
+        public UICardPanel DrawCardButton(Card[] cards, Action<Card> onClick)
         {
             foreach (var card in cards)
             {
@@ -53,14 +54,14 @@ namespace Core.UI
             return this;
         }
 
-        public override UICardManager DrawUI()
+        public override UICardPanel DrawUI()
         {
             CallActOnDraw();
             gameObject.SetActive(true);
             return this;
         }
 
-        public override UICardManager InitUI()
+        public override UICardPanel InitUI()
         {
             buttonPool = new CustomPool<UICardButton>(prefab, buttonRoot, CreateButton, GetButton, ReleaseButton, DestroyButton, 5, false);
             return this;
@@ -79,7 +80,7 @@ namespace Core.UI
             
         }
 
-        public override UICardManager UpdateUI()
+        public override UICardPanel UpdateUI()
         {
             return this;
         }
