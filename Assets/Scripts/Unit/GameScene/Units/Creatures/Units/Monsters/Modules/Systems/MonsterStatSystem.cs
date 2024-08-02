@@ -9,6 +9,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
 {
     public class MonsterStatSystem : StatSystem
     {
+        private event Action<int> OnIncreasePlayerExp;
+        
         private readonly MonsterStat _monsterStat;
         public float AttackCoolTime { get; private set; }
         
@@ -27,16 +29,17 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
             Speed = _monsterStat.speed;
             AttackCoolTime = _monsterStat.attackCoolTime;
 
-            OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
+            OnUpdateHpPanelUI.Invoke(CurrentHp, MaxHp);
         }
 
-        public override void HandleUpdateStat(StatType type, float value)
+        public override void HandleOnUpdateStat(StatType type, float value)
         {
             switch (type)
             {
                 case StatType.CurrentHp:
                     Debug.Log($"몬스터 Stat {type.ToString()} 현재 {CurrentHp}");
                     UpdateCurrentHealthValue((int) value);
+                    InvokeOnIncreasePlayerExp();
                     Debug.Log($"몬스터 Stat {type.ToString()} {value} => {CurrentHp}로 변동");
                     break;
                 case StatType.CurrentShield:
@@ -71,6 +74,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
             Debug.Log($"Monster Stat {type.ToString()} {value}로 변동");
         }
 
+        private void InvokeOnIncreasePlayerExp()
+        {
+            if (CurrentHp <= 0 ) OnIncreasePlayerExp.Invoke(_monsterStat.returnExp);
+            OnIncreasePlayerExp = null;
+        }
+
         private void UpdateAttackCoolTimeValue(float value)
         {
             var tempAttackCoolTime = AttackCoolTime + value;
@@ -83,6 +92,11 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
             {
                 AttackCoolTime += value;
             }
+        }
+
+        public void RegisterHandleOnIncreasePlayerExp(Action<int> action)
+        {
+            OnIncreasePlayerExp = action;
         }
     }
 }

@@ -106,6 +106,16 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
         {
             return _animator.GetNextAnimatorStateInfo(layer);
         }
+
+        public bool GetBool(int param)
+        {
+            return _animator.GetBool(param);
+        }
+
+        public bool GetBool(AnimationParameterEnums para)
+        {
+            return _animator.GetBool(_animationParameter[para]);
+        }
         
         public void SetTrigger(int param, Action action)
         {
@@ -147,9 +157,9 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
             _animator.SetFloat(_animationParameter[para], value, action);
         }
         
-        public void SetInteger(string param, int value, Action action)
+        public void SetInteger(AnimationParameterEnums para, int value, Action action)
         {
-            _animator.SetInteger(param, value, action);
+            _animator.SetInteger(_animationParameter[para], value, action);
         }
         
         public void SetInteger(int param, int value, Action action)

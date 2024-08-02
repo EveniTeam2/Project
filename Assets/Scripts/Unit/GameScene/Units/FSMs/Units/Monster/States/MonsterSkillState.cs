@@ -26,7 +26,7 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
             
             FsmController.RegisterOnAttackEventHandler(OnAttack);
             FsmController.SetBool(MonsterBaseStateInfo.StateParameter, true, ChangeToDefaultState);
-            FsmController.SetInteger(_skillInfo.SkillParameter, _skillInfo.SkillValue, null);
+            FsmController.SetFloat(_skillInfo.SkillParameter, _skillInfo.SkillValue, null);
         }
 
         public override void Exit()

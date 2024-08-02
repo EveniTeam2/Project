@@ -126,7 +126,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             
             if (character.TryGetComponent(out _character))
             {
-                _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, _animationParameters, _blockInfo);
+                _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, defaultSetting.playerExpPanel, defaultSetting.playerLevelPanel, _animationParameters, _blockInfo);
                 _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
             }
         }

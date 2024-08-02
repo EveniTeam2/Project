@@ -8,6 +8,7 @@ using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Animations;
+using Unit.GameScene.Units.Creatures.Units.Characters;
 using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
 using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Datas;
@@ -20,7 +21,7 @@ using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units.Monsters
 {
-    public class Monster : Creature, IMonsterFsmController, ITakeDamage
+    public class Monster : Creature, IMonsterFsmController, ITakePlayerDamage
     {
         [SerializeField] private MonsterStateMachineDTO stateData;
         [SerializeField] private RectTransform monsterHpPanel;
@@ -30,7 +31,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         private SpriteRenderer _spriteRenderer;
         
         protected override Collider2D CreatureCollider { get; set; }
-        protected override RectTransform CreatureHpUI { get; set; }
+        protected override RectTransform CreatureHpPanelUI { get; set; }
 
         private MonsterBattleSystem _monsterBattleSystem;
         private MonsterHealthSystem _monsterHealthSystem;
@@ -44,11 +45,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             var monsterTransform = transform;
-            CreatureHpUI = monsterHpUI;
+            CreatureHpPanelUI = monsterHpUI;
             
             AnimatorSystem = GetComponent<AnimatorSystem>();
-            AnimatorSystem.Initialize(animationParameter);
-            
             CreatureCollider = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -58,6 +57,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _monsterHealthSystem = new MonsterHealthSystem(_monsterStatsSystem);
             _monsterMovementSystem = new MonsterMovementSystem(_monsterStatsSystem, monsterTransform, groundYPosition);
 
+            AnimatorSystem.Initialize(animationParameter);
             FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, animationParameter, monsterTransform, _monsterStatsSystem);
         }
         
@@ -65,6 +65,8 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             FsmSystem.TryChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
+            CreatureCollider.enabled = true;
+            
             RegisterEventHandler();
             SetActiveHealthBarUI(true);
             
@@ -88,7 +90,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
         {
             _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
             _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
-            _monsterStatsSystem.RegisterHandleOnUpdateHpUI(HandleOnUpdateHealthBarUI);
+            _monsterStatsSystem.RegisterHandleOnUpdateHpPanelUI(HandleOnUpdateHpPanel);
         }
         
         public void RegisterOnAttackEventHandler(Action onAttack)
@@ -135,9 +137,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             AnimatorSystem.SetTrigger(parameter, action);
         }
 
-        public void SetInteger(int parameter, int value, Action action)
+        public void SetFloat(int parameter, int value, Action action)
         {
-            AnimatorSystem.SetInteger(parameter, value, action);
+            AnimatorSystem.SetFloat(parameter, value, action);
         }
 
         public void AttackEnemy(RaycastHit2D target)
@@ -145,9 +147,10 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters
             _monsterBattleSystem.AttackEnemy(GetDamage(), target);
         }
 
-        public void TakeDamage(int value)
+        public void TakeDamage(int value, Action<int> onIncreaseExp)
         {
-            _monsterStatsSystem.HandleUpdateStat(StatType.CurrentHp, value * -1);
+            _monsterStatsSystem.RegisterHandleOnIncreasePlayerExp(onIncreaseExp);
+            _monsterStatsSystem.HandleOnUpdateStat(StatType.CurrentHp, value * -1);
         }
         
         private void SetActiveHealthBarUI(bool active)

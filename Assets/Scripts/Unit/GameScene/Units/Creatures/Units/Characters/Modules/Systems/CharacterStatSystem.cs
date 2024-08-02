@@ -11,7 +11,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
 {
     public class CharacterStatSystem : StatSystem
     {
-        public Action<int> OnIncreaseExp;
+        public Action<int> OnIncreasePlayerExp;
+        private event Action<int, int> OnUpdateExpPanelUI;
+        private event Action<int> OnUpdateLevelPanelUI;
         public event Action OnTriggerCard;
         
         private readonly Dictionary<int, CharacterStatData> _entireStatInfo;
@@ -46,10 +48,14 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             Speed = _entireStatInfo[0].CharacterSpeed;
             CardTrigger = _entireStatInfo[0].CardTrigger;
             
-            OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
+            OnUpdateHpPanelUI.Invoke(CurrentHp, MaxHp);
+            OnUpdateExpPanelUI.Invoke(CurrentExp, MaxExp);
+            OnUpdateLevelPanelUI.Invoke(CurrentLevel);
+            
+            OnIncreasePlayerExp += HandleOnIncreaseExp;
         }
 
-        public override void HandleUpdateStat(StatType type, float value)
+        public override void HandleOnUpdateStat(StatType type, float value)
         {
             switch (type)
             {
@@ -102,14 +108,22 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             if (CurrentExp >= MaxExp)
             {
                 CurrentExp -= MaxExp;
+                
+                if (CurrentLevel + 1 <= MaxLevel)
+                {
+                    CurrentLevel++;
+                }
+                else
+                {
+                    CurrentLevel = MaxLevel;
+                    CurrentExp = MaxExp;
+                }
+                
+                UpdateEntireStat(CurrentLevel);
+                OnUpdateLevelPanelUI.Invoke(CurrentLevel);
             }
-
-            if (CurrentLevel + 1 <= MaxLevel)
-            {
-                CurrentLevel++;   
-            }
-
-            UpdateEntireStat(CurrentLevel);
+            
+            OnUpdateExpPanelUI.Invoke(CurrentExp, MaxExp);
         }
 
         private void UpdateEntireStat(int level)
@@ -134,6 +148,21 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
             CardTrigger += value;
             OnTriggerCard?.Invoke();
             CardTrigger--;
+        }
+        
+        private void HandleOnIncreaseExp(int value)
+        {
+            HandleOnUpdateStat(StatType.CurrentExp, value);
+        }
+
+        public void RegisterHandleOnUpdateExpPanelUI(Action<int, int> action)
+        {
+            OnUpdateExpPanelUI += action;
+        }
+
+        public void RegisterHandleOnUpdateLevelPanelUI(Action<int> action)
+        {
+            OnUpdateLevelPanelUI += action;
         }
     }
 }

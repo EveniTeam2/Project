@@ -14,12 +14,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
 
         public override void TakeHeal(int value)
         {
-            _monsterStatSystem.HandleUpdateStat(StatType.CurrentHp, value);
+            _monsterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value);
         }
 
         public override void TakeDamage(int value)
         {
-            _monsterStatSystem.HandleUpdateStat(StatType.CurrentHp, value);
+            _monsterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value);
         }
     }
 }

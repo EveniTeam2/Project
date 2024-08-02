@@ -9,5 +9,6 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats
         public int health;
         public int speed;
         public float attackCoolTime;
+        public int returnExp;
     }
 }

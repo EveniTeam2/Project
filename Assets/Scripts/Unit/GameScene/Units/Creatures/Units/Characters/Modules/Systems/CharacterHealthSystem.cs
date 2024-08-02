@@ -15,12 +15,12 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
 
         public override void TakeDamage(int value)
         {
-            _characterStatSystem.HandleUpdateStat(StatType.CurrentHp, -value);
+            _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, -value);
         }
 
         public override void TakeHeal(int value)
         {
-            _characterStatSystem.HandleUpdateStat(StatType.CurrentHp, value);
+            _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value);
         }
         
         public bool IsInvincible()

@@ -5,7 +5,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 {
     public abstract class StatSystem
     {
-        protected Action<int, int> OnUpdateHealthBarUI;
+        protected Action<int, int> OnUpdateHpPanelUI;
         
         private event Action OnHit;
         private event Action OnDeath;
@@ -18,7 +18,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         public int Speed { get; protected set; }
 
         public abstract void InitializeStat();
-        public abstract void HandleUpdateStat(StatType type, float value);
+        public abstract void HandleOnUpdateStat(StatType type, float value);
 
         protected void UpdateCurrentHealthValue(int value)
         {
@@ -33,7 +33,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             {
                 CurrentHp = MaxHp;
             }
-            else if (tempHealth < 0)
+            else if (tempHealth <= 0)
             {
                 CurrentHp = 0;
                 OnDeath.Invoke();
@@ -43,7 +43,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
                 CurrentHp += value;
             }
             
-            OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
+            OnUpdateHpPanelUI.Invoke(CurrentHp, MaxHp);
         }
 
         protected void UpdateCurrentShieldValue(int value)
@@ -122,9 +122,9 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             OnDeath += action;
         }
 
-        public void RegisterHandleOnUpdateHpUI(Action<int, int> action)
+        public void RegisterHandleOnUpdateHpPanelUI(Action<int, int> action)
         {
-            OnUpdateHealthBarUI += action;
+            OnUpdateHpPanelUI += action;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
             IsReadyForAttack = false;
             _attackCoolTimer = _monsterStatSystem.AttackCoolTime;
 
-            if (target.collider.gameObject.TryGetComponent<ITakeDamage>(out var targetObject))
+            if (target.collider.gameObject.TryGetComponent<ITakeMonsterDamage>(out var targetObject))
             {
                 targetObject.TakeDamage(damage);
 #if UNITY_EDITOR

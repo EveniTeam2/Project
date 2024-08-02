@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationClips:
   - {fileID: 7400000, guid: 2e6309793fa234079849ff8ffb36bf06, type: 2}
+  - {fileID: 7400000, guid: e331a769ac5274b66b7474367464be59, type: 2}
   - {fileID: 7400000, guid: a26635234fe274c8bbd4fef4691c03bc, type: 2}
   - {fileID: 7400000, guid: a4bbce6d86cc54b618084e2b73d62166, type: 2}
   - {fileID: 7400000, guid: 77e016da92b244f0ab5022466966f663, type: 2}

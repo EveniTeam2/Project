@@ -21,9 +21,9 @@ namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
         {
             var finalDamage = damage * _characterStatSystem.Damage;
             
-            if (target.collider.gameObject.TryGetComponent<ITakeDamage>(out var targetObject))
+            if (target.collider.gameObject.TryGetComponent<ITakePlayerDamage>(out var targetObject))
             {
-                targetObject.TakeDamage(finalDamage);
+                targetObject.TakeDamage(finalDamage, _characterStatSystem.OnIncreasePlayerExp);
 #if UNITY_EDITOR
                 Debug.Log($"플레이어가 {target.collider.gameObject.name}에게 {finalDamage} 피해를 입혔습니다.");
 #endif
