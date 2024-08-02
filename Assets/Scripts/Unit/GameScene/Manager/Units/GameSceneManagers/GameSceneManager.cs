@@ -15,6 +15,7 @@ using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
 using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units;
 using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units;
+using Unit.GameScene.Units.Panels.Controllers;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
@@ -54,6 +55,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private CharacterData _characterData;
         private ComboBoardController _comboBoardController;
         private MatchBoardController _matchBoardController;
+        private CardController _cardController;
         private StageManager _stageManager;
         private CardManager _cardManager;
         private Camera _camera;
@@ -184,6 +186,11 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             _stageManager = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<StageManager>();
             _stageManager.Initialize(_character, extraSetting.playerSpawnPosition, _animationParameters, extraSetting, _camera);
+        }
+
+        private void InstantiateAndInitializeCard()
+        {
+            _cardController = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<CardController>();
         }
 
         private void InstantiateAndInitializeCard(UICardPanel prefab, StageManager stage)

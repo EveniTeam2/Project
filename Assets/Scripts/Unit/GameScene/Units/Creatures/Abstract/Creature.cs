@@ -8,9 +8,14 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Abstract
 {
-    public abstract class Creature : MonoBehaviour
+    public interface IUpdateStat
     {
-        public Action<StatType, float> OnUpdateStat;
+        public Action<StatType, float> OnUpdateStat { get; set; }
+    }
+    
+    public abstract class Creature : MonoBehaviour, IUpdateStat
+    {
+        public Action<StatType, float> OnUpdateStat { get; set; }
         
         public StateMachine FsmSystem;
         
