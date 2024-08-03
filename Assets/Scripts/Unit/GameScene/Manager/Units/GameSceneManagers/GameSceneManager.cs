@@ -48,9 +48,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         #endregion
 
         private RectTransform _comboBlockPanel;
-        private RectTransform _comboBlockEnter;
-        private RectTransform _comboBlockExit;
         private RectTransform _matchBlockPanel;
+        private RectTransform _cardPanel;
         
         private CharacterData _characterData;
         private ComboBoardController _comboBoardController;
@@ -63,7 +62,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private Camera _camera;
         private Canvas _canvas;
         private Character _character;
-        private CanvasController _canvasController;
 
         private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
         private Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
@@ -107,9 +105,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void CreateCharacterData()
         {
             var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
-            var skillCsvData = CsvParser.ParseCharacterSkillData(extraSetting.skillTextAsset);
+            var skillCsvData = CsvParser.ParseCharacterSkillData(defaultSetting.characterSkillCsv);
             characterSkills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
-            var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
+            var characterCsvData = CsvParser.ParseCharacterStatData(defaultSetting.characterDataCsv);
             
             var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, characterSkills);
             var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
@@ -144,7 +142,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateAndInitializeCanvas()
         {
             _canvas = defaultSetting.canvas.GetComponent<Canvas>();
-            _canvasController = _canvas.GetComponent<CanvasController>();
+            
             if (_canvas.renderMode != RenderMode.ScreenSpaceCamera)
             {
                 _canvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -155,16 +153,14 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                 _canvas.worldCamera = _camera;
             }
             
-            _matchBlockPanel = _canvasController.MatchBlockPanel;
-            _comboBlockPanel = _canvasController.ComboBlockPanel;
-            _comboBlockEnter = _canvasController.ComboBlockEnter;
-            _comboBlockExit = _canvasController.ComboBlockExit;
+            _matchBlockPanel = defaultSetting.matchBlockSpawnPanel;
+            _comboBlockPanel = defaultSetting.comboBlockSpawnPanel;
         }
         
         private void InstantiateAndInitializeComboBoard()
         {
             _comboBoardController = Instantiate(defaultSetting.comboBoardControllerPrefab).GetComponent<ComboBoardController>();
-            _comboBoardController.Initialize(extraSetting.blockInfos, _comboBlockPanel, _comboBlockEnter, _comboBlockExit, _characterData, _blockInfo);
+            _comboBoardController.Initialize(extraSetting.blockInfos, _comboBlockPanel, _characterData, _blockInfo);
             
             _character.RegisterHandleOnCommandDequeue(_comboBoardController.HandleDestroyComboBlock);
         }

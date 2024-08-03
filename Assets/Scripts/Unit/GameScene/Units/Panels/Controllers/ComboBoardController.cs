@@ -38,8 +38,8 @@ namespace Unit.GameScene.Units.Panels.Controllers
         
         private List<BlockModel> _blockInfos;
         private RectTransform _comboBlockPanel;
-        private RectTransform _comboBlockEnter;
-        private RectTransform _comboBlockExit;
+        private float _comboBlockEnterPosX;
+        private float _comboBlockExitPosX;
         private List<float> _blockPositions;
         private Vector2 _blockSize;
         private Dictionary<float, ComboBlockView> _blocks;
@@ -51,19 +51,19 @@ namespace Unit.GameScene.Units.Panels.Controllers
         private readonly SemaphoreSlim _semaphore = new(1, 1);
         private readonly Queue<Func<Task>> _actions = new();
 
-        public void Initialize(List<BlockModel> blockModels, RectTransform blockPanel, RectTransform blockEnter, RectTransform blockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        public void Initialize(List<BlockModel> blockModels, RectTransform blockPanel, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            StartCoroutine(ComboBoardControllerInitializer(blockModels, blockPanel, blockEnter, blockExit, characterData, blockInfo));
+            StartCoroutine(ComboBoardControllerInitializer(blockModels, blockPanel, characterData, blockInfo));
         }
 
-        private IEnumerator ComboBoardControllerInitializer(List<BlockModel> blockModels, RectTransform blockPanel, RectTransform blockEnter, RectTransform blockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        private IEnumerator ComboBoardControllerInitializer(List<BlockModel> blockModels, RectTransform blockPanel, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             while (blockPanel.rect.width == 0)
             {
                 yield return new WaitForEndOfFrame();
             }
             
-            InitializeValues(blockModels, blockPanel, blockEnter, blockExit, characterData, blockInfo);
+            InitializeValues(blockModels, blockPanel, characterData, blockInfo);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
         }
@@ -87,12 +87,10 @@ namespace Unit.GameScene.Units.Panels.Controllers
             }
         }
 
-        private void InitializeValues(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        private void InitializeValues(List<BlockModel> blockInfos, RectTransform comboBlockPanel, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             _blockInfos = blockInfos;
             _comboBlockPanel = comboBlockPanel;
-            _comboBlockEnter = comboBlockEnter;
-            _comboBlockExit = comboBlockExit;
             
             _characterData = characterData;
             
@@ -105,6 +103,9 @@ namespace Unit.GameScene.Units.Panels.Controllers
             var rect = _comboBlockPanel.rect;
             var localScaleY = _comboBlockPanel.localScale.y;
             var panelHeight = rect.height;
+            
+            _comboBlockEnterPosX = rect.max.x + 100;
+            _comboBlockExitPosX = rect.min.x - 100;
             
             _blockSize = new Vector2(panelHeight * localScaleY, panelHeight * localScaleY);
             _blockPositions = new List<float>();
@@ -148,9 +149,8 @@ namespace Unit.GameScene.Units.Panels.Controllers
                 {
                     blockModel = blockInfo;
                 }
-
-                var positionX = _comboBlockEnter.localPosition.x;
-                var spawnPosition = new Vector3(positionX, 0, 0);
+                
+                var spawnPosition = new Vector3(_comboBlockEnterPosX, 0, 0);
                 var rectTransform = block.GetComponent<RectTransform>();
                 rectTransform.SetParent(_comboBlockPanel);
                 rectTransform.sizeDelta = _blockSize;
@@ -217,7 +217,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
         {
             var duration = dropDurationPerUnit * 100;
             var currentBlockStartPos = block.GetComponent<RectTransform>().anchoredPosition;
-            var exitPosition = new Vector3(_comboBlockExit.localPosition.x, 0, 0);
+            var exitPosition = new Vector3(_comboBlockExitPosX, 0, 0);
             var distance = Vector3.Distance(currentBlockStartPos, exitPosition);
             var elapsedTime = 0f;
 
