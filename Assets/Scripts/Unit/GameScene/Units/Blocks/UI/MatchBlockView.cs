@@ -1,15 +1,12 @@
 using System;
-using ScriptableObjects.Scripts.Blocks;
-using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-namespace Unit.GameScene.Units.Blocks.Units.MatchBlock
+namespace Unit.GameScene.Units.Blocks.UI
 {
     /// <summary>
     ///     게임 내 블록을 나타내며, 드래그하여 다른 블록과 위치를 교환할 수 있습니다.

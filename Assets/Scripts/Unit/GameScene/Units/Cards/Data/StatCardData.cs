@@ -1,10 +1,7 @@
-using System;
-using Unit.GameScene.Units.CardFactories.Modules;
-using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Cards.Units
+namespace Unit.GameScene.Units.Cards.Data
 {
     public class StatCardData : CardData
     {

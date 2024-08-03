@@ -1,23 +1,23 @@
+using ScriptableObjects.Scripts.Blocks;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.Blocks.Units.ComboBlock;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
-using Unit.GameScene.Units.Panels.BoardPanels.Interfaces;
-using Unit.GameScene.Units.Panels.BoardPanels.Modules;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Interfaces;
+using Unit.GameScene.Units.Blocks.Modules;
+using Unit.GameScene.Units.Blocks.UI;
+using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
+using Unit.GameScene.Units.Panels.Interfaces;
+using Unit.GameScene.Units.Panels.Modules.BoardModules;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units
+namespace Unit.GameScene.Units.Panels.Controllers
 {
     public class ComboBoardController : MonoBehaviour
     {
@@ -51,6 +51,23 @@ namespace Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units
         private readonly SemaphoreSlim _semaphore = new(1, 1);
         private readonly Queue<Func<Task>> _actions = new();
 
+        public void Initialize(List<BlockModel> blockModels, RectTransform blockPanel, RectTransform blockEnter, RectTransform blockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        {
+            StartCoroutine(ComboBoardControllerInitializer(blockModels, blockPanel, blockEnter, blockExit, characterData, blockInfo));
+        }
+
+        private IEnumerator ComboBoardControllerInitializer(List<BlockModel> blockModels, RectTransform blockPanel, RectTransform blockEnter, RectTransform blockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        {
+            while (blockPanel.rect.width == 0)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            
+            InitializeValues(blockModels, blockPanel, blockEnter, blockExit, characterData, blockInfo);
+            CalculateBlockSpawnPositions();
+            RegisterDependencies();
+        }
+
         private void Update()
         {
             if (_actions.Count > 0 && !_isProcessing)
@@ -68,13 +85,6 @@ namespace Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units
             {
                 HandleDestroyComboBlock();
             }
-        }
-
-        public void Initialize(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
-        {
-            InitializeValues(blockInfos, comboBlockPanel, comboBlockEnter, comboBlockExit, characterData, blockInfo);
-            CalculateBlockSpawnPositions();
-            RegisterDependencies();
         }
 
         private void InitializeValues(List<BlockModel> blockInfos, RectTransform comboBlockPanel, RectTransform comboBlockEnter, RectTransform comboBlockExit, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)

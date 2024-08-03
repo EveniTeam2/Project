@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.CardFactories.Modules;
 using Unit.GameScene.Units.Cards.Abstract;
+using Unit.GameScene.Units.Cards.Data;
 using Unit.GameScene.Units.SkillFactories.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 

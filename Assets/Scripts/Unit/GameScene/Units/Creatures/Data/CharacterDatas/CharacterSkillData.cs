@@ -1,7 +1,7 @@
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Enums;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas
+namespace Unit.GameScene.Units.Creatures.Data.CharacterDatas
 {
     public class CharacterSkillData
     {

@@ -9,13 +9,8 @@ using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.Commands;
-using Unit.GameScene.Units.Creatures.Units.Characters;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
-using Unit.GameScene.Units.Creatures.Units.Monsters;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
-using Unit.GameScene.Units.Panels.StagePanels.Backgrounds;
+using Unit.GameScene.Units.Creatures.Units;
+using Unit.GameScene.Units.Panels.Modules.StageModules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
@@ -25,14 +20,14 @@ namespace Unit.GameScene.Manager.Units.StageManagers
     {
         public StageScore StageScore { get => _stageScore; }
         public Character Character => _character;
-        public LinkedList<Monster> Monsters => _monsterManager.Monsters;
+        public LinkedList<Monster> Monsters => _monsterSpawner.Monsters;
         
         public float PlayTime => Time.time - _startTime;
         public float Distance => _character.transform.position.x - _zeroPosition.x;
 
         private StageScore _stageScore;
         private Character _character;
-        private MonsterSpawner _monsterManager;
+        private MonsterSpawner _monsterSpawner;
         private float _startTime;
         private Vector3 _zeroPosition;
         private Dictionary<AnimationParameterEnums, int> _animationParameters;
@@ -45,13 +40,13 @@ namespace Unit.GameScene.Manager.Units.StageManagers
             _animationParameters = animationParameters;
             _character = character;
             
-            InitializeMonster(extraSetting, playerSpawnPosition, _stageScore);
+            _monsterSpawner = new MonsterSpawner(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, _stageScore, _animationParameters);
             InitializeCamera(cam, extraSetting.cameraSpawnPosition);
             InitializeMap(extraSetting.mapPrefab, playerSpawnPosition);
             
             StartCoroutine(StageScoreUpdate(_stageScore));
             
-            _monsterManager.Start();
+            _monsterSpawner.Start();
             
             _zeroPosition = playerSpawnPosition;
             _startTime = Time.time;
@@ -59,7 +54,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers
 
         private void Update()
         {
-            _monsterManager.Update();
+            _monsterSpawner.Update();
         }
 
         private IEnumerator StageScoreUpdate(StageScore score) {
@@ -67,11 +62,6 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 score.SetStageScore(PlayTime, Distance);
                 yield return null;
             }
-        }
-        
-        private void InitializeMonster(SceneExtraSetting extraSetting, Vector3 playerSpawnPosition, StageScore stageScore)
-        {
-            _monsterManager = new MonsterSpawner(_character.transform, extraSetting.monsterSpawnData, playerSpawnPosition.y, stageScore, _animationParameters);
         }
 
         protected void InitializeCamera(Camera cam, Vector3 cameraSpawnPosition)

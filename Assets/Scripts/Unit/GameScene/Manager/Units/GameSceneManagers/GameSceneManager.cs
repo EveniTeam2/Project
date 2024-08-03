@@ -8,20 +8,20 @@ using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
+using Unit.GameScene.Units.CardFactories.Units;
+using Unit.GameScene.Units.Cards.Data;
+using Unit.GameScene.Units.Cards.Units;
+using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units;
+using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
+using Unit.GameScene.Units.Creatures.Units;
 using Unit.GameScene.Units.Panels.Controllers;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 using UnityEngine.Serialization;
-using CharacterStatSystem = Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems.CharacterStatSystem;
+using CharacterStatSystem = Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems.CharacterStatSystem;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
 {
@@ -34,7 +34,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         [Header("==== Scene 추가 세팅 ===="), SerializeField]
         private SceneExtraSetting extraSetting;
-
+        
         [Header("==== Scene 기본 세팅 ===="), SerializeField]
         private SceneDefaultSetting defaultSetting;
 
@@ -56,8 +56,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private ComboBoardController _comboBoardController;
         private MatchBoardController _matchBoardController;
         private CardController _cardController;
+        
         private StageManager _stageManager;
         private CardManager _cardManager;
+        
         private Camera _camera;
         private Canvas _canvas;
         private Character _character;
@@ -65,6 +67,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
         private Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
+        private Dictionary<string, CharacterSkill> characterSkills;
 
         public CardManager CardManager => _cardManager;
 
@@ -84,7 +87,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             InstantiateAndInitializeMatchBoard();
             InstantiateAndInitializeStage();
 
-            InstantiateAndInitializeCard(uiCardPanelPrefab, _stageManager);
+            InstantiateAndInitializeCard();
         }
 
         // /// <summary>
@@ -105,10 +108,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
             var skillCsvData = CsvParser.ParseCharacterSkillData(extraSetting.skillTextAsset);
-            var skills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
+            characterSkills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
             var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
             
-            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, skills);
+            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, characterSkills);
             var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
             
             _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
@@ -190,6 +193,19 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void InstantiateAndInitializeCard()
         {
+            CreateCardData();
+            InstantiateCard();
+        }
+
+        private void CreateCardData()
+        {
+            var statCardCsvData = new List<StatCardData>();
+            var skillCardData = characterSkills;
+            var cardFactory = new CardFactory(statCardCsvData, skillCardData);
+        }
+
+        private void InstantiateCard()
+        {
             _cardController = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<CardController>();
         }
 
@@ -253,6 +269,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void HandleOnPlayerDeath()
         {
+            // TODO : 캐릭터가 죽었을 때, 게임 멈추고 팝업 띄우기
             Debug.Log("넥서스를 파괴하면숴ㅓㅓㅓㅓㅓ 쥐쥐~~~!~!~!~!~!~!~!");
         }
     }

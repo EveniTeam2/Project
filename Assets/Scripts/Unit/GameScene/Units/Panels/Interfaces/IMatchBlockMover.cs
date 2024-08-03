@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using Unit.GameScene.Units.Blocks.Abstract;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces
+namespace Unit.GameScene.Units.Panels.Interfaces
 {
     /// <summary>
     ///     블록 이동 처리 인터페이스

@@ -1,25 +1,17 @@
+using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using System;
 using System.Collections.Generic;
-using ScriptableObjects.Scripts.Creature.DTO;
-using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Abstract;
+using Unit.GameScene.Units.Creatures.Data.MonsterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Animations;
-using Unit.GameScene.Units.Creatures.Units.Characters;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Datas;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
-namespace Unit.GameScene.Units.Creatures.Units.Monsters
+namespace Unit.GameScene.Units.Creatures.Units
 {
     public class Monster : Creature, IMonsterFsmController, ITakePlayerDamage
     {

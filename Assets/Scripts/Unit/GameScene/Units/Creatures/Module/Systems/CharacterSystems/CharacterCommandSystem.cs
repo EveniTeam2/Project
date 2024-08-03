@@ -6,7 +6,7 @@ using Unit.GameScene.Units.Creatures.Interfaces.Commands;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
     /// <summary>
     ///     사용자 입력을 처리하는 클래스입니다.

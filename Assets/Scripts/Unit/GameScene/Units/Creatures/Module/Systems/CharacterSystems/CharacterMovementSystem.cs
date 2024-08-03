@@ -1,8 +1,7 @@
-using System;
 using Unit.GameScene.Units.Creatures.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
     public class CharacterMovementSystem : MovementSystem
     {

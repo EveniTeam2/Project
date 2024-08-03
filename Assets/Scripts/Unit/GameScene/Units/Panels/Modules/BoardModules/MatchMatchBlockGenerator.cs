@@ -1,15 +1,14 @@
+using ScriptableObjects.Scripts.Blocks;
 using System;
 using System.Collections.Generic;
-using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock;
-using Unit.GameScene.Units.Panels.BoardPanels.Interfaces;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Blocks.UI;
+using Unit.GameScene.Units.Panels.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
+namespace Unit.GameScene.Units.Panels.Modules.BoardModules
 {
     /// <summary>
     ///     블록을 생성하는 클래스입니다.

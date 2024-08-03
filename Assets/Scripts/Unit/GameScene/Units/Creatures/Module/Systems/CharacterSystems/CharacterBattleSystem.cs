@@ -3,7 +3,7 @@ using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.Battles;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
     public class CharacterBattleSystem : BattleSystem, ICharacterBattle
     {

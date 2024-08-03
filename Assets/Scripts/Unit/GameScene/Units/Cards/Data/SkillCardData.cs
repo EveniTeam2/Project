@@ -1,10 +1,7 @@
-using System;
-using Unit.GameScene.Units.CardFactories.Modules;
-using Unit.GameScene.Units.SkillFactories.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Cards.Units
+namespace Unit.GameScene.Units.Cards.Data
 {
     public class SkillCardData : CardData
     {

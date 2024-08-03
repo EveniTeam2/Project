@@ -1,25 +1,21 @@
+using ScriptableObjects.Scripts.Creature.DTO.CharacterDTOs;
 using System;
 using System.Collections.Generic;
-using ScriptableObjects.Scripts.Creature.DTO;
-using ScriptableObjects.Scripts.Creature.DTO.CharacterDTOs;
 using TMPro;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Abstract;
+using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Module;
 using Unit.GameScene.Units.Creatures.Module.Animations;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
 using Unit.GameScene.Units.FSMs.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters
+namespace Unit.GameScene.Units.Creatures.Units
 {
     public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeMonsterDamage
     {

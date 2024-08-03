@@ -1,14 +1,12 @@
-using System.Collections.Generic;
 using Core.Utils;
-using Unit.GameScene.Manager.Units.StageManagers;
+using System.Collections.Generic;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Monsters;
+using Unit.GameScene.Units.Creatures.Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Unit.GameScene.Manager.Units
+namespace Unit.GameScene.Units.Panels.Modules.StageModules
 {
     public class MonsterSpawner
     {

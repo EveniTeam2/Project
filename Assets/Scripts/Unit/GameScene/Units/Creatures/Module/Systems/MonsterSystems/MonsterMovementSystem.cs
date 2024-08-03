@@ -1,7 +1,7 @@
 using Unit.GameScene.Units.Creatures.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
 {
     public class MonsterMovementSystem : MovementSystem
     {

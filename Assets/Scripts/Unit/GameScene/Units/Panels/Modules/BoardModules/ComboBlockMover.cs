@@ -1,6 +1,6 @@
-using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Interfaces;
+using Unit.GameScene.Units.Panels.Interfaces;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units
+namespace Unit.GameScene.Units.Panels.Modules.BoardModules
 {
     public class ComboBlockMover : IComboBlockMover
     {

@@ -1,6 +1,6 @@
 using System;
-using Unit.GameScene.Units.CardFactories.Modules;
 using Unit.GameScene.Units.Cards.Abstract;
+using Unit.GameScene.Units.Cards.Data;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
 

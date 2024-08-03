@@ -1,22 +1,21 @@
+using ScriptableObjects.Scripts.Blocks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using ScriptableObjects.Scripts.Blocks;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
-using Unit.GameScene.Units.Panels.BoardPanels.Interfaces;
-using Unit.GameScene.Units.Panels.BoardPanels.Modules;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Blocks.Modules;
+using Unit.GameScene.Units.Blocks.UI;
+using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
+using Unit.GameScene.Units.Panels.Interfaces;
+using Unit.GameScene.Units.Panels.Modules.BoardModules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
+namespace Unit.GameScene.Units.Panels.Controllers
 {
     /// <summary>
     ///     보드 상태를 관리하며, 블록 교환, 매칭 및 보드 갱신을 처리합니다.
@@ -81,23 +80,23 @@ namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
         ///     보드를 초기화하고, 블록을 생성합니다.
         /// </summary>
         /// <param name="blockModels">생성할 블록 정보</param>
-        /// <param name="matchBlockPanel">블록 생성 위치</param>
+        /// <param name="blockPanel">블록 생성 위치</param>
         /// <param name="canvas">캔버스</param>
         /// <param name="characterData"></param>
         /// <param name="blockInfo"></param>
-        public void Initialize(List<BlockModel> blockModels, RectTransform matchBlockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        public void Initialize(List<BlockModel> blockModels, RectTransform blockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            StartCoroutine(MatchBoardControllerInitializer(blockModels, matchBlockPanel, canvas, characterData, blockInfo));
+            StartCoroutine(MatchBoardControllerInitializer(blockModels, blockPanel, canvas, characterData, blockInfo));
         }
 
-        private IEnumerator MatchBoardControllerInitializer(List<BlockModel> blockModels, RectTransform matchBlockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
+        private IEnumerator MatchBoardControllerInitializer(List<BlockModel> blockModels, RectTransform blockPanel, Canvas canvas, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            while (matchBlockPanel.rect.width == 0)
+            while (blockPanel.rect.width == 0)
             {
                 yield return new WaitForEndOfFrame();
             }
             
-            InitializeValues(blockModels, matchBlockPanel, canvas, characterData, blockInfo);
+            InitializeValues(blockModels, blockPanel, canvas, characterData, blockInfo);
             CalculateBlockSpawnPositions();
             RegisterDependencies();
             GenerateAllRandomBlocks();

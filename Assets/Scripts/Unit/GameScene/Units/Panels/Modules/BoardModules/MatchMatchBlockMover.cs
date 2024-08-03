@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using Unit.GameScene.Units.Blocks.Abstract;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Panels.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
+namespace Unit.GameScene.Units.Panels.Modules.BoardModules
 {
     /// <summary>
     ///     블록의 이동을 처리하는 클래스입니다.

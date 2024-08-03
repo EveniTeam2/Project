@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Panels.StagePanels.Backgrounds
+namespace Unit.GameScene.Units.Panels.Modules.StageModules
 {
     public class CameraController : MonoBehaviour
     {

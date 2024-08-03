@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.SkillFactories.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using UnityEngine;

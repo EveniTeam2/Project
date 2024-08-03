@@ -1,9 +1,9 @@
+using ScriptableObjects.Scripts.Blocks;
 using System;
 using System.Collections.Generic;
-using ScriptableObjects.Scripts.Blocks;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock;
+using Unit.GameScene.Units.Blocks.UI;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces
+namespace Unit.GameScene.Units.Panels.Interfaces
 {
     /// <summary>
     ///     블록 생성기 인터페이스

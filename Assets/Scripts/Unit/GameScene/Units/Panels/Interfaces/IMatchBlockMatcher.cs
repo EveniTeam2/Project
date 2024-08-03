@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock;
+using Unit.GameScene.Units.Blocks.UI;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces
+namespace Unit.GameScene.Units.Panels.Interfaces
 {
     /// <summary>
     ///     블록 매치 검사 인터페이스

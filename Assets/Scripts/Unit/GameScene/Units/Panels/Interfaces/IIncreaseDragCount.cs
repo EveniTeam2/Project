@@ -1,6 +1,6 @@
 using System;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces
+namespace Unit.GameScene.Units.Panels.Interfaces
 {
     public interface IIncreaseDragCount
     {

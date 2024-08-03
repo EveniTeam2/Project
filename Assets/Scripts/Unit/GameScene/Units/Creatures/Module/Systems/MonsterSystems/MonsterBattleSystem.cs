@@ -2,7 +2,7 @@ using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
 {
     public class MonsterBattleSystem : BattleSystem
     {

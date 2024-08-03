@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Unit.GameScene.Units.Blocks.Units.MatchBlock;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Interfaces;
+using Unit.GameScene.Units.Blocks.UI;
+using Unit.GameScene.Units.Panels.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units
+namespace Unit.GameScene.Units.Panels.Modules.BoardModules
 {
     /// <summary>
     ///     블록의 매칭을 검사하는 클래스입니다.

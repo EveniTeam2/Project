@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unit.GameScene.Units.Creatures.Abstract;
+using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
     public class CharacterStatSystem : StatSystem
     {

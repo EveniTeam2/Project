@@ -1,8 +1,8 @@
 using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas
+namespace Unit.GameScene.Units.Creatures.Data.CharacterDatas
 {
     public class CharacterData
     {

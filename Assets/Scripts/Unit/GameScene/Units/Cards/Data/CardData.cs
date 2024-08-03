@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unit.GameScene.Units.CardFactories.Modules
+namespace Unit.GameScene.Units.Cards.Data
 {
     public class CardData
     {

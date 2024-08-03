@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Datas
+namespace Unit.GameScene.Units.Creatures.Data.MonsterDatas
 {
     public class MonsterData
     {

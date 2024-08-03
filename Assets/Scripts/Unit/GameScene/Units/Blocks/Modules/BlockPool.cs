@@ -1,9 +1,9 @@
 using Core.Utils;
 using Unit.GameScene.Units.Blocks.Abstract;
-using Unit.GameScene.Units.Panels.BoardPanels.Interfaces;
+using Unit.GameScene.Units.Panels.Interfaces;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.Panels.BoardPanels.Modules
+namespace Unit.GameScene.Units.Blocks.Modules
 {
     /// <summary>
     ///     블록 풀링을 관리하는 클래스입니다.

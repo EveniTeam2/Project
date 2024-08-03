@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

@@ -1,4 +1,4 @@
-using Unit.GameScene.Units.CardFactories.Modules;
+using Unit.GameScene.Units.Cards.Data;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Cards.Abstract

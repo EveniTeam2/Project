@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Interfaces.Movements;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

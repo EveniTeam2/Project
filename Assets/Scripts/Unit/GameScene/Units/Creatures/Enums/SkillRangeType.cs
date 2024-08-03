@@ -1,4 +1,4 @@
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Enums
+namespace Unit.GameScene.Units.Creatures.Enums
 {
     public enum SkillRangeType
     {

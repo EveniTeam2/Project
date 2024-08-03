@@ -1,7 +1,7 @@
 using System;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Enums;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas
+namespace Unit.GameScene.Units.Creatures.Data.CharacterDatas
 {
     [Serializable]
     public struct CharacterStatData

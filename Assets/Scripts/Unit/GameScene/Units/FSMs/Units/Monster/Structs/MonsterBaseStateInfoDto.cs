@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 
 namespace Unit.GameScene.Units.FSMs.Units.Monster.Structs
 {

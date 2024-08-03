@@ -1,13 +1,10 @@
-using System;
-using ScriptableObjects.Scripts.Blocks;
 using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Unit.GameScene.Units.Blocks.Units.ComboBlock
+namespace Unit.GameScene.Units.Blocks.UI
 {
     public class ComboBlockView : BlockView
     {

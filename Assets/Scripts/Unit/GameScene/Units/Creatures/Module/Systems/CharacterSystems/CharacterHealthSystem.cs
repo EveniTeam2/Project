@@ -2,7 +2,7 @@ using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.Healths;
 
-namespace Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
     public class CharacterHealthSystem : HealthSystem, ICharacterHealth
     {

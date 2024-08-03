@@ -1,11 +1,9 @@
 using System;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems
+namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
 {
     public class MonsterStatSystem : StatSystem
     {

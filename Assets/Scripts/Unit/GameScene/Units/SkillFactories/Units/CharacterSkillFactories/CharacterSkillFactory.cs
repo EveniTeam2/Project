@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.Data;
 using ScriptableObjects.Scripts.Creature.Data.KnightData;
 using ScriptableObjects.Scripts.Creature.Data.WizardData;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats
+namespace Unit.GameScene.Units.Creatures.Enums
 {
     [Serializable]
     public struct MonsterStat
