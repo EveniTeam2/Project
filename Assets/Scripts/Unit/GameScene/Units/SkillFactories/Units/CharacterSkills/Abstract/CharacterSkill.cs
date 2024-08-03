@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
 using Unit.GameScene.Units.SkillFactories.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using UnityEngine;
@@ -12,6 +11,8 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
 {
     public class CharacterSkill : ISkillCommand
     {
+        public Action OnIncreaseSkillLevel { get; set; }
+        
         public CharacterClassType CharacterClassType { get; private set; }
         public SkillType SkillType { get; private set; }
         public string SkillName { get; private set; }
@@ -25,7 +26,8 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         
         private ICharacterSkillController _characterSkillController;
         private List<SkillData> _csvData;
-        
+        private Action _increaseLevel;
+
         public int GetSkillIndex() => SkillIndex;
         public int GetSkillValue() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillValue).FirstOrDefault();
         public float GetSkillRange1() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange1).FirstOrDefault();
@@ -60,6 +62,13 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
             SkillName = initialData.SkillName;
             SkillDescription = initialData.SkillDescription;
             SkillIndex = initialData.SkillIndex;
+
+            OnIncreaseSkillLevel += HandleOnIncreaseSkillLevel;
+        }
+
+        private void HandleOnIncreaseSkillLevel()
+        {
+            SkillLevel++;
         }
 
         public void Execute(int combo)
@@ -67,11 +76,6 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
             ComboCount = combo;
             
             ActivateSkill();
-        }
-        
-        public void IncreaseLevel()
-        {
-            SkillLevel++;
         }
 
         public void RegisterCharacterServiceProvider(ICharacterSkillController characterSkillController)
@@ -97,6 +101,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         private void ActivateSkill()
         {
             ChangeState(StateType.Skill);
+            
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, SkillIndex, null);
             SetBoolOnAnimator(AnimationParameterEnums.Skill, true, HandleOnAnimationFinished);
         }
@@ -105,9 +110,9 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         {
             SetBoolOnAnimator(AnimationParameterEnums.Skill, false, null);
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, -1, null);
+            SetReadyForInvokingCommand(true);
             
             ChangeState(StateType.Idle);
-            SetReadyForInvokingCommand(true);
         }
 
         private void SetReadyForInvokingCommand(bool isReady)

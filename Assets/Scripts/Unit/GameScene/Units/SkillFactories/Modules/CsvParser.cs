@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
+using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
+using Unit.GameScene.Units.Creatures.Enums;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.SkillFactories.Modules

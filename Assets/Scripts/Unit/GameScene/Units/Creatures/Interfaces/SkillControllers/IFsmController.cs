@@ -10,6 +10,6 @@ namespace Unit.GameScene.Units.Creatures.Interfaces.SkillControllers
         
         void SetBool(int parameter, bool value, Action action);
         void SetTrigger(int parameter, Action action);
-        void SetInteger(int parameter, int value, Action action);
+        void SetFloat(int parameter, int value, Action action);
     }
 }

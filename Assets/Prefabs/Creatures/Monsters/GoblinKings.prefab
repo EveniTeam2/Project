@@ -499,6 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateData: {fileID: 11400000, guid: 67ff79dbd7be6594b95a5ab0b862948a, type: 2}
   monsterHpUI: {fileID: 3219782570340034037}
+  monsterHpPanel: {fileID: 3846480356081742345}
 --- !u!114 &-8753938970053872447
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
     stateParameter: 6
     defaultExitState: 0
   skillInfoDto:
-    skillParameter: 6
+    skillParameter: 3
     skillValue: 0
     targetLayer:
       serializedVersion: 2

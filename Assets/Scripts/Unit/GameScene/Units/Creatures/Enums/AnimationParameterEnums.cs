@@ -11,6 +11,7 @@ namespace Unit.GameScene.Units.Creatures.Enums
         SkillIndex,
         Hit,
         Die,
-        Skill
+        Skill,
+        IsDead
     }
 }

@@ -12,15 +12,15 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         private Dictionary<string, CardGachaPair> cardGachaPool;
         private Dictionary<string, CardGachaPair> defaultGachaPool;
         private int totalWeight;
-        private readonly UICardManager ui;
+        private readonly UICardPanel ui;
         private readonly StageManager stage;
 
-        public CardManager(UICardManager ui, StageManager stage, CardGachaPair[] defaultCardPool, params CardGachaPair[] cardGachas)
+        public CardManager(UICardPanel ui, StageManager stage, CardGachaPair[] defaultCardPool, params CardGachaPair[] cardGachas)
         {
             cardGachaPool = new Dictionary<string, CardGachaPair>(cardGachas.Length);
             foreach (var cardGachaPair in cardGachas)
             {
-                this.cardGachaPool.Add(cardGachaPair.Card.Title, cardGachaPair);
+                cardGachaPool.Add(cardGachaPair.Card.Title, cardGachaPair);
                 cardGachaPair.Card.OnLevelUP += CheckLevelToRemove;
             }
             totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
@@ -82,6 +82,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
                 RemoveCardFromPool(card);
             }
             totalWeight = cardGachaPool.Values.Sum(card => card.Weight);
+        }
+
+        private void DrawCard()
+        {
+            var cards = GetCards(3);
         }
 
         public void AddCardsToPool(params CardGachaPair[] cards)
@@ -151,6 +156,11 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         {
             if (card.MaxLevel <= level)
                 RemoveCardFromPool(card.Title);
+        }
+
+        public void HandleOnTriggerCard()
+        {
+            throw new NotImplementedException();
         }
     }
 
