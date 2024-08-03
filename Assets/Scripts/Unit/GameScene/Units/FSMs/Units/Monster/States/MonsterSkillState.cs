@@ -2,7 +2,7 @@
 using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using Unit.GameScene.Units.FSMs.Units.Monster.Structs;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
             
             FsmController.RegisterOnAttackEventHandler(OnAttack);
             FsmController.SetBool(MonsterBaseStateInfo.StateParameter, true, ChangeToDefaultState);
-            FsmController.SetInteger(_skillInfo.SkillParameter, _skillInfo.SkillValue, null);
+            FsmController.SetFloat(_skillInfo.SkillParameter, _skillInfo.SkillValue, null);
         }
 
         public override void Exit()

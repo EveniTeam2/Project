@@ -19,6 +19,7 @@ MonoBehaviour:
     health: 5
     speed: 5
     attackCoolTime: 1
+    returnExp: 15
   monsterSpawnOffset: {x: 10, y: 0, z: 0}
   monsterSpawnTimeOffset: 5
   monsterGroup:

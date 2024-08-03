@@ -10,10 +10,10 @@ namespace Unit.GameScene.Manager.Units.StageManagers
         public CardGachaPairData[] datas;
         public CardGachaPair[] GetCardGachaPairs()
         {
-            List<CardGachaPair> result = new List<CardGachaPair>();
+            List<CardGachaPair> result = new();
             foreach (var data in datas)
             {
-                CardGachaPair pair = new CardGachaPair(data.Card.GetCard(), data.Weight);
+                CardGachaPair pair = new(data.Card.GetCard(), data.Weight);
                 result.Add(pair);
             }
             return result.ToArray();
