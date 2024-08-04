@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: "\uACE8\uB4DC"
   description: "\uB3C8\uC774\uB2E4."
-  image: {fileID: 21300000, guid: bb7ac735bc80d7c499b42db78434e530, type: 3}
+  image: {fileID: 21300000, guid: 52371c2a799cb634699e38a9e2f11231, type: 3}
   rarity: 0
   maxLevel: 10
   rewards: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
