@@ -21,19 +21,17 @@ namespace Unit.GameScene.Units.Panels.Controllers
 {
     public class ComboBoardController : MonoBehaviour
     {
-        [Header("보드 Pooling 사이즈 (단위 : 칸)")]
-        [SerializeField] private int poolSize;
+        [Header("보드 Pooling 사이즈 (단위 : 칸)"), SerializeField]
+        private int poolSize;
         
-        [Header("블록 사이 간격 (단위 : Unit)")]
-        [SerializeField] private int blockGap;
+        [Header("블록 사이 간격 (단위 : Unit)"), SerializeField]
+        private int blockGap;
         
-        [Header("블록 이동 속도 (단위 : Unit / Second)")] [SerializeField] [Range(0, 100f)]
+        [Header("블록 이동 속도 (단위 : Unit / Second)"), SerializeField, Range(0, 100f)]
         private float dropDurationPerUnit;
         
-        [Header("매치 블록 풀링 관련 설정")] [SerializeField]
+        [Header("매치 블록 풀링 관련 설정"), SerializeField]
         private BlockView comboBlockViewPrefab;
-        
-        private IComboBlockMover _blockMover;
         private IBlockPool _blockPool;
         
         private List<BlockModel> _blockInfos;
@@ -65,7 +63,6 @@ namespace Unit.GameScene.Units.Panels.Controllers
             
             InitializeValues(blockModels, blockPanel, characterData, blockInfo);
             CalculateBlockSpawnPositions();
-            RegisterDependencies();
         }
 
         private void Update()
@@ -95,6 +92,8 @@ namespace Unit.GameScene.Units.Panels.Controllers
             _characterData = characterData;
             
             _blocks = new Dictionary<float, ComboBlockView>();
+            _blockPool = new BlockPool(comboBlockViewPrefab, _comboBlockPanel, poolSize, true);
+            
             _blockInfo = blockInfo;
         }
         
@@ -119,13 +118,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
                 Debug.Log($"콤보 패널 블록 좌표 {x} {0}");
             }
         }
-
-        private void RegisterDependencies()
-        {
-            _blockPool = new BlockPool(comboBlockViewPrefab, _comboBlockPanel, poolSize, true);
-            _blockMover = new ComboBlockMover();
-        }
-
+        
         public void HandleInstantiateComboBlock(CommandPacket commandPacket)
         {
             _actions.Enqueue(() => InstantiateComboBlocks(commandPacket.BlockType, commandPacket.ComboCount));

@@ -8,22 +8,28 @@ namespace Unit.GameScene.Units.Cards.Abstract
 {
     public class CardView : MonoBehaviour, IPointerClickHandler
     {
-        private event Action OnClickCard;
+        private event Action<int> OnClickCard;
         
         [SerializeField] private Image cardIcon;
+        [SerializeField] private TextMeshProUGUI cardName;
         [SerializeField] private TextMeshProUGUI cardDescription;
 
-        public void Initialize(Sprite icon, string description, Action action)
+        private int _index;
+
+        public void Initialize(Sprite icon, string name, string description, int index,
+            Action<int> action)
         {
             cardIcon.sprite = icon;
+            cardName.text = name;
             cardDescription.text = description;
+            _index = index;
 
             OnClickCard += action;
         }
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnClickCard.Invoke();
+            OnClickCard.Invoke(_index);
         }
     }
 }
