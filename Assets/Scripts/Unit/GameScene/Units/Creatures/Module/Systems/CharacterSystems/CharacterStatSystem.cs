@@ -69,6 +69,11 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
                     UpdateCurrentHealthValue((int) value);
                     Debug.Log($"Character Stat {type.ToString()} {value} 수치 수정 => {CurrentHp} 변동");
                     break;
+                case StatType.MaxHp:
+                    Debug.Log($"Character Stat {type.ToString()} 현재 {MaxHp}");
+                    UpdateMaxHealthValue((int) value);
+                    Debug.Log($"Character Stat {type.ToString()} {value} 수치 수정 => {MaxHp} 변동");
+                    break;
                 case StatType.CurrentShield:
                     Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentShield}");
                     UpdateCurrentShieldValue((int) value);
@@ -91,6 +96,32 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        private void UpdateMaxHealthValue(int value)
+        {
+            if (value < 0)
+            {
+                if (MaxHp - value <= 1)
+                {
+                    MaxHp = 1;
+                    CurrentHp = 1;
+                }
+                else
+                {
+                    MaxHp -= value;
+
+                    if (CurrentHp > MaxHp)
+                    {
+                        UpdateCurrentHealthValue(CurrentHp - MaxHp);
+                    }
+                }
+            }
+            else
+            {
+                MaxHp += value;
+                UpdateCurrentHealthValue(value);
             }
         }
 

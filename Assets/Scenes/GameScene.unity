@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &241121090
 RectTransform:
   m_ObjectHideFlags: 0
@@ -151,7 +151,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1565677513}
   - {fileID: 2011443633}
   m_Father: {fileID: 4514140224007454864}
   m_RootOrder: -1
@@ -744,7 +743,7 @@ MonoBehaviour:
     cameraSpawnPosition: {x: 2, y: 0, z: 0}
     playerSpawnPosition: {x: 0, y: 2, z: 0}
     characterClassType: 0
-    characterData:
+    characterDataSos:
     - {fileID: 11400000, guid: 5cb02db772c824e328f47458ef4e5fd3, type: 2}
     monsterSpawnData: {fileID: 11400000, guid: 70cf15452822e884889fa283c49507f0, type: 2}
     blockInfos:
@@ -752,6 +751,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 37bb92f742f5e4fc9ae78e3f7a59dca7, type: 2}
     - {fileID: 11400000, guid: 5cdb60feb37174253bfb9c160591fabc, type: 2}
     - {fileID: 11400000, guid: 337992260c29e47ffab1c8250927a854, type: 2}
+    statCardSos: {fileID: 11400000, guid: c11f516aead674cca89fe8f253d72fd0, type: 2}
     mapPrefab: {fileID: 2670853504050698328, guid: 5636eb3c08b9a4be19e21009b910de70, type: 3}
   defaultSetting:
     canvas: {fileID: 2507619777691445654}
@@ -762,7 +762,7 @@ MonoBehaviour:
     cardPanel: {fileID: 2011443633}
     cardSpawnPanel: {fileID: 301638326}
     characterDataCsv: {fileID: 4900000, guid: f7ccfd65941b44144860a7cfbb229de5, type: 3}
-    characterSkillCsv: {fileID: 4900000, guid: 7ae49635549ab49cfb72f71d16c56a38, type: 3}
+    characterSkillCsv: {fileID: 4900000, guid: 0d85556b32fbf7c4c8d87a92924c81b3, type: 3}
     cardCsv: {fileID: 4900000, guid: 2ec9a8583d7da430382c8911b951e824, type: 3}
     monsterDataCsv: {fileID: 4900000, guid: ca28aa098e2f24b47aed898361c64393, type: 3}
     monsterSkillCsv: {fileID: 4900000, guid: 92894f15d8722a24e8ca6624d507e326, type: 3}
@@ -776,9 +776,6 @@ MonoBehaviour:
   dragCount: 0
   isGameOver: 0
   currentTime: 0
-  cardGachaPairDatas: {fileID: 11400000, guid: 76fb47cbddafdac47848e3a8cd2a7116, type: 2}
-  defaultCardGachaPairDatas: {fileID: 11400000, guid: e1947d8bed6eeb942b051475cf75fbe0, type: 2}
-  uiCardPanelPrefab: {fileID: 6680058419042962073, guid: ad8886fc5454b9a46b2f2a4c8a3214fc, type: 3}
 --- !u!1 &831306709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1406,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 241121090}
+  m_Father: {fileID: 2011443633}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1546,7 +1543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2011443633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1559,6 +1556,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1565677513}
   - {fileID: 406147247}
   m_Father: {fileID: 241121090}
   m_RootOrder: -1
@@ -1568,6 +1566,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2048290737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048290738}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048290738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048290737}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 33.23114, y: 0.09310939, z: 894.8866}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2062569278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,7 +1936,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3521993826314554934}
-  - component: {fileID: 3521993826314554935}
   - component: {fileID: 3521993826314554936}
   m_Layer: 5
   m_Name: DefaultPanel
@@ -1938,21 +1966,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3521993826314554935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3093652586846175428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConformX: 1
-  ConformY: 1
-  Logging: 0
 --- !u!114 &3521993826314554936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2114,6 +2127,7 @@ GameObject:
   - component: {fileID: 2507619777691445654}
   - component: {fileID: 2034328730009010026}
   - component: {fileID: 2250075247314894809}
+  - component: {fileID: 6692120730927555745}
   m_Layer: 5
   m_Name: GameSceneCanvas
   m_TagString: Untagged
@@ -2121,6 +2135,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6692120730927555745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6692120730927555744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConformX: 1
+  ConformY: 1
+  Logging: 0
 --- !u!81 &6806503970774092970
 AudioListener:
   m_ObjectHideFlags: 0

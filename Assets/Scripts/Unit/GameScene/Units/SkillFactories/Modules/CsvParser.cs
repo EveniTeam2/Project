@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using Unit.GameScene.Units.Cards.Data;
+using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
 using UnityEngine;
@@ -10,11 +12,11 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
 {
     public static class CsvParser
     {
-        public static List<SkillData> ParseCharacterSkillData(TextAsset skillCsv)
+        public static List<SkillData> ParseCharacterSkillData(TextAsset csv)
         {
             var parsingResult = new List<SkillData>();
             
-            var reader = new StringReader(skillCsv.text);
+            var reader = new StringReader(csv.text);
             var headerCount = 2;
 
             while (reader.Peek() != -1)
@@ -113,11 +115,11 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
             return parsingResult;
         }
 
-        public static List<CharacterStatData> ParseCharacterStatData(TextAsset statCsv)
+        public static List<CharacterStatData> ParseCharacterStatData(TextAsset csv)
         {
             var parsingResult = new List<CharacterStatData>();
             
-            var reader = new StringReader(statCsv.text);
+            var reader = new StringReader(csv.text);
             var headerCount = 2;
 
             while (reader.Peek() != -1)
@@ -190,6 +192,79 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
                 var statData = new CharacterStatData(characterType, characterLevel, characterMaxExp, characterMaxHp, characterMaxShield, characterDamage, characterSpeed, cardTrigger);
                 
                 parsingResult.Add(statData);
+            }
+
+            return parsingResult;
+        }
+
+        public static List<StatCardData> ParseStatCardData(TextAsset csv)
+        {
+            var parsingResult = new List<StatCardData>();
+            
+            var reader = new StringReader(csv.text);
+            var headerCount = 2;
+
+            while (reader.Peek() != -1)
+            {
+                var line = reader.ReadLine();
+
+                if (headerCount > 0)
+                {
+                    headerCount--;
+                    continue;
+                }
+
+                if (line == null) continue;
+                var values = line.Split(',');
+
+                if (values.Length != 9)
+                {
+                    Debug.LogError($"Incorrect number of values in line: {line}");
+                    continue;
+                }
+                
+                if (!int.TryParse(values[1], out var cardIndex))
+                {
+                    Debug.LogError($"Failed to parse cardIndex for line: {line}");
+                    continue;
+                }
+                
+                if (!Enum.TryParse<CardType>(values[2], out var cardType))
+                {
+                    Debug.LogError($"Failed to parse cardType for line: {line}");
+                    continue;
+                }
+                
+                if (!int.TryParse(values[3], out var cardLevel))
+                {
+                    Debug.LogError($"Failed to parse cardLevel for line: {line}");
+                    continue;
+                }
+
+                var cardName = values[4];
+                var cardDescription = values[5];
+                
+                if (!Enum.TryParse<StatType>(values[6], out var cardEffectType))
+                {
+                    Debug.LogError($"Failed to parse cardEffectTarget for line: {line}");
+                    continue;
+                }
+                
+                if (!int.TryParse(values[7], out var cardEffectValue))
+                {
+                    Debug.LogError($"Failed to parse cardLevel for line: {line}");
+                    continue;
+                }
+                
+                if (!int.TryParse(values[8], out var cardDuration))
+                {
+                    Debug.LogError($"Failed to parse cardLevel for line: {line}");
+                    continue;
+                }
+                
+                var cardData = new StatCardData(cardIndex, cardType, cardName, cardDescription, cardLevel , cardEffectType, cardEffectValue, cardDuration);
+                
+                parsingResult.Add(cardData);
             }
 
             return parsingResult;

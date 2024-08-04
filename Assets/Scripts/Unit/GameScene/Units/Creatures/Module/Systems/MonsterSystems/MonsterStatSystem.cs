@@ -37,7 +37,6 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
                 case StatType.CurrentHp:
                     Debug.Log($"몬스터 Stat {type.ToString()} 현재 {CurrentHp}");
                     UpdateCurrentHealthValue((int) value);
-                    InvokeOnIncreasePlayerExp();
                     Debug.Log($"몬스터 Stat {type.ToString()} {value} => {CurrentHp}로 변동");
                     break;
                 case StatType.CurrentShield:
@@ -90,9 +89,9 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
             }
         }
 
-        public void RegisterHandleOnIncreasePlayerExp(Action<int> action)
+        public int ReturnExp()
         {
-            OnIncreasePlayerExp = action;
+            return CurrentHp <= 0 ? _monsterStat.returnExp : 0;
         }
     }
 }

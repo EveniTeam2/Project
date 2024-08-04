@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
+using Unit.GameScene.Units.Cards.Interfaces;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
@@ -17,7 +18,7 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Units
 {
-    public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeMonsterDamage
+    public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeMonsterDamage, IUpdateCreatureStat
     {
         public event Action OnPlayerDeath;
         public event Action OnPlayerLevelUp;
@@ -136,7 +137,12 @@ namespace Unit.GameScene.Units.Creatures.Units
             
             _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value * -1);
         }
-
+        
+        public void UpdateCreatureStat(StatType statType, float value)
+        {
+            _characterStatSystem.HandleOnUpdateStat(statType, value);
+        }
+        
         protected override void RegisterEventHandler()
         {
             OnUpdateStat += _characterStatSystem.HandleOnUpdateStat;

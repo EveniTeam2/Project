@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unit.GameScene.Units.Cards.Interfaces;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.FSMs.Modules;
@@ -8,12 +9,7 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Abstract
 {
-    public interface IUpdateStat
-    {
-        public Action<StatType, float> OnUpdateStat { get; set; }
-    }
-    
-    public abstract class Creature : MonoBehaviour, IUpdateStat
+    public abstract class Creature : MonoBehaviour
     {
         public Action<StatType, float> OnUpdateStat { get; set; }
         
