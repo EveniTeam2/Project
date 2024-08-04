@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Core.UI;
 using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.CardFactories.Units;
+using Unit.GameScene.Units.Cards.Abstract;
 using Unit.GameScene.Units.Cards.Data;
+using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Units;
 using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
@@ -38,12 +39,14 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         [Header("==== Scene 기본 세팅 ===="), SerializeField]
         private SceneDefaultSetting defaultSetting;
 
-        [Header("드래그 횟수"), SerializeField] private int dragCount;
-        [Header("게임 오버"), SerializeField] private bool isGameOver;
-        [Header("현재 진행 시간"), SerializeField] private float currentTime;
-        [Header("카드 정보"), SerializeField] private CardGachaPairDatas cardGachaPairDatas;
-        [SerializeField] private CardGachaPairDatas defaultCardGachaPairDatas;
-        [SerializeField] private UICardPanel uiCardPanelPrefab;
+        [Header("드래그 횟수"), SerializeField]
+        private int dragCount;
+        
+        [Header("게임 오버"), SerializeField]
+        private bool isGameOver;
+        
+        [Header("현재 진행 시간"), SerializeField]
+        private float currentTime;
 
         #endregion
 
@@ -57,7 +60,6 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private CardController _cardController;
         
         private StageManager _stageManager;
-        private CardManager _cardManager;
         
         private Camera _camera;
         private Canvas _canvas;
@@ -66,8 +68,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
         private Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
         private Dictionary<string, CharacterSkill> characterSkills;
-
-        public CardManager CardManager => _cardManager;
+        private HashSet<Card> _cardInfos = new();
 
         /// <summary>
         ///     게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
@@ -104,7 +105,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void CreateCharacterData()
         {
-            var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
+            var characterDataSo = extraSetting.characterDataSos.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
             var skillCsvData = CsvParser.ParseCharacterSkillData(defaultSetting.characterSkillCsv);
             characterSkills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
             var characterCsvData = CsvParser.ParseCharacterStatData(defaultSetting.characterDataCsv);
@@ -118,12 +119,14 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateCharacter()
         {
             var character = Instantiate(_characterData.CharacterDataSo.creature, extraSetting.playerSpawnPosition, Quaternion.identity);
-            
-            if (character.TryGetComponent(out _character))
+
+            if (!character.TryGetComponent(out _character))
             {
-                _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, defaultSetting.playerExpPanel, defaultSetting.playerLevelPanel, _animationParameters, _blockInfo);
-                _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
+                return;
             }
+
+            _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, defaultSetting.playerExpPanel, defaultSetting.playerLevelPanel, _animationParameters, _blockInfo);
+            _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
         }
 
         private void InitializeBlockData()
@@ -195,30 +198,17 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void CreateCardData()
         {
-            var statCardCsvData = new List<StatCardData>();
+            var statCardData = CsvParser.ParseStatCardData(defaultSetting.cardCsv);
             var skillCardData = characterSkills;
-            var cardFactory = new CardFactory(statCardCsvData, skillCardData);
+            _cardInfos = new CardFactory(statCardData, extraSetting.statCardSos, skillCardData, _character).CreateCard();
         }
 
         private void InstantiateCard()
         {
-            _cardController = Instantiate(defaultSetting.stageManagerPrefab).GetComponent<CardController>();
-        }
-
-        private void InstantiateAndInitializeCard(UICardPanel prefab, StageManager stage)
-        {
-            var ui = Instantiate(prefab);
-            ui.gameObject.SetActive(false);
-            ui.InitUI();
-            _cardManager = new CardManager(ui, stage, defaultCardGachaPairDatas.GetCardGachaPairs(), cardGachaPairDatas.GetCardGachaPairs());
+            _cardController = Instantiate(defaultSetting.cardControllerPrefab).GetComponent<CardController>();
+            _cardController.Initialize(defaultSetting.cardPanel, defaultSetting.cardSpawnPanel, _cardInfos);
             
-            _character.RegisterOnHandleOnTriggerCard(_cardManager.HandleOnTriggerCard);
-        }
-        
-        private void HandleOnTriggerCard()
-        {
-            //TODO : 레벨 업이 되면 해당 메서드가 호출됌.
-            Debug.Log("카드 드로우!!!");
+            _character.RegisterOnHandleOnTriggerCard(_cardController.HandleOnTriggerCard);
         }
 
         /// <summary>
@@ -261,6 +251,11 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                 _animationParameters.Add(targetEnum, Animator.StringToHash($"{targetEnum}"));
                 Debug.Log($"{targetEnum} => {Animator.StringToHash($"{targetEnum}")} 파싱");
             }
+        }
+
+        private void UpdatePopUpPanelBlurBackground()
+        {
+            
         }
 
         private void HandleOnPlayerDeath()

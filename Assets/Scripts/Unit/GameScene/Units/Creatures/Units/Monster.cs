@@ -129,11 +129,15 @@ namespace Unit.GameScene.Units.Creatures.Units
         {
             _monsterBattleSystem.AttackEnemy(GetDamage(), target);
         }
-
-        public void TakeDamage(int value, Action<int> onIncreaseExp)
+        
+        public Func<int, int> TakeDamage()
         {
-            _monsterStatsSystem.RegisterHandleOnIncreasePlayerExp(onIncreaseExp);
-            _monsterStatsSystem.HandleOnUpdateStat(StatType.CurrentHp, value * -1);
+            return damage =>
+            {
+                _monsterStatsSystem.HandleOnUpdateStat(StatType.CurrentHp, damage * -1);
+
+                return _monsterStatsSystem.ReturnExp();
+            };
         }
         
         private void SetActiveHealthBarUI(bool active)
