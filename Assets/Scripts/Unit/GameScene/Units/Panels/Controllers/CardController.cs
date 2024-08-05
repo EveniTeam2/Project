@@ -91,7 +91,8 @@ namespace Unit.GameScene.Units.Panels.Controllers
                 _cardViews.Add(cardView);
                 _targetCards.Add(targetCard);
                 
-                cardView.Initialize(targetCard.CardIcon, targetCard.CardName, targetCard.CardDescription, i, index => _cardClickHandler.HandleOnClickCard(index, ref _isCardClicked));
+                //TODO : CardView의 Initialize => 타겟 카드의 CurrentLevel과 MaxLevel 가지고 와야 함
+                cardView.Initialize(targetCard.CardIcon, targetCard.CardName, targetCard.CardDescription, i, 0, 0, index => _cardClickHandler.HandleOnClickCard(index, ref _isCardClicked));
             }
         }
 
