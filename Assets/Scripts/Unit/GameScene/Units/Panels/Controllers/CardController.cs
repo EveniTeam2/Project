@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Cards.Abstract;
-using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Modules;
 using Unit.GameScene.Units.Panels.Interfaces;
+using Unit.GameScene.Units.Panels.Modules.CardModules;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums;
 using UnityEngine;
 using Random = System.Random;
 
@@ -18,38 +22,43 @@ namespace Unit.GameScene.Units.Panels.Controllers
 
         [Header("카드 생성 개수"), SerializeField]
         private int poolSize;
-        
+
         [Header("카드 풀링 관련 설정"), SerializeField]
         private CardView cardViewPrefab;
         private ICardPool _cardPool;
-        
-        private readonly List<Card> targetCards = new ();
-        private readonly List<CardView> _cardViews = new ();
-        
-        private bool cardTriggerIsRunning;
-        private bool isCardClicked;
-        
-        public void Initialize(RectTransform carPanel, RectTransform cardSpawnPanel, HashSet<Card> cardInfo)
+        private List<Card> _targetCards;
+        private List<CardView> _cardViews;
+        private Dictionary<BlockType, CharacterSkill> _blockInfo;
+
+        private bool _cardTriggerIsRunning;
+        private bool _isCardClicked;
+
+        private CardClickHandler _cardClickHandler;
+
+        public void Initialize(RectTransform cardPanel, RectTransform cardSpawnPanel, HashSet<Card> cardInfo, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            _cardPanel = carPanel;
+            _cardPanel = cardPanel;
             _cardInfo = cardInfo;
             _cardSpawnPanel = cardSpawnPanel;
             _cardTrigger = 0;
-            cardTriggerIsRunning = false;
-            isCardClicked = false;
+            _cardTriggerIsRunning = false;
+            _isCardClicked = false;
+            _blockInfo = blockInfo;
+            _targetCards = new List<Card>();
+            _cardViews = new List<CardView>();
 
             _cardPool = new CardPool(cardViewPrefab, cardSpawnPanel, poolSize, true);
+            _cardClickHandler = new CardClickHandler(_cardInfo, _blockInfo, _cardPool, _targetCards, _cardViews, SetActiveCardPanel, UpdateCardTriggerRunner);
         }
 
         private void Update()
         {
-            //TODO : 테스트 목적, 이후에 지워야 함
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 HandleOnTriggerCard();
             }
-            
-            if (_cardTrigger > 0 && cardTriggerIsRunning == false)
+
+            if (_cardTrigger > 0 && !_cardTriggerIsRunning)
             {
                 DrawCard();
             }
@@ -58,57 +67,34 @@ namespace Unit.GameScene.Units.Panels.Controllers
         private void DrawCard()
         {
             UpdateCardTriggerRunner(true);
-            
-            _cardTrigger--;
-            
             GetCard();
             SetActiveCardPanel(true);
-            
             Debug.Log("카드 드로우!!!");
         }
-        
+
         private void GetCard()
         {
+            _cardTrigger--;
+            Debug.Log($"현재 트리거 카운트 : {_cardTrigger}");
+            
             var random = new Random();
             var cardList = _cardInfo.ToList();
-            var count = poolSize <= cardList.Count ? poolSize : cardList.Count;
-            
+            var count = Math.Min(poolSize, cardList.Count);
+
             for (var i = 0; i < count; i++)
             {
                 var cardView = _cardPool.Get();
                 int randomIndex = random.Next(cardList.Count);
                 var targetCard = cardList[randomIndex];
+                cardList.RemoveAt(randomIndex);
                 
-                cardView.Initialize(targetCard.CardIcon, targetCard.CardName, targetCard.CardDescription, i, HandleOnClickCard);
                 _cardViews.Add(cardView);
-                targetCards.Add(targetCard);
+                _targetCards.Add(targetCard);
+                
+                cardView.Initialize(targetCard.CardIcon, targetCard.CardName, targetCard.CardDescription, i, index => _cardClickHandler.HandleOnClickCard(index, ref _isCardClicked));
             }
         }
 
-        private void HandleOnClickCard(int index)
-        {
-            if (isCardClicked) return;
-            isCardClicked = true;
-
-            var targetCard = targetCards[index];
-            
-            if (targetCard.ActivateCardEffect())
-            {
-                _cardInfo.Remove(targetCards[index]);
-            }
-
-            foreach (var cardView in _cardViews)
-            {
-                _cardPool.Release(cardView);
-            }
-            
-            isCardClicked = false;
-            targetCards.Clear();
-
-            SetActiveCardPanel(false);
-            UpdateCardTriggerRunner(false);
-        }
-        
         public void HandleOnTriggerCard()
         {
             _cardTrigger++;
@@ -116,30 +102,18 @@ namespace Unit.GameScene.Units.Panels.Controllers
 
         private void SetActiveCardPanel(bool value)
         {
-            switch (value)
-            {
-                case true:
-                    if (!_cardPanel.gameObject.activeInHierarchy) _cardPanel.gameObject.SetActive(true);
-                    break;
-                case false:
-                    if (_cardPanel.gameObject.activeInHierarchy) _cardPanel.gameObject.SetActive(false);
-                    break;
-            }
+            _cardPanel.gameObject.SetActive(value);
         }
 
         private void UpdateCardTriggerRunner(bool value)
         {
-            switch (value)
-            {
-                case true:
-                    Time.timeScale = 0;
-                    cardTriggerIsRunning = true;
-                    break;
-                case false:
-                    Time.timeScale = 1;
-                    cardTriggerIsRunning = false;
-                    break;
-            }
+            Time.timeScale = value ? 0 : 1;
+            _cardTriggerIsRunning = value;
+        }
+
+        public void RegisterHandleOnRegisterCharacterSkill(Func<CharacterSkill, SkillRegisterType> func)
+        {
+            _cardClickHandler.RegisterHandleOnRegisterCharacterSkill(func);
         }
     }
 }

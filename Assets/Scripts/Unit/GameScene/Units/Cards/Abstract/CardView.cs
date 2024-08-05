@@ -29,6 +29,7 @@ namespace Unit.GameScene.Units.Cards.Abstract
         
         public void OnPointerClick(PointerEventData eventData)
         {
+            Debug.Log($"{_index + 1}번째 카드 클릭!");
             OnClickCard.Invoke(_index);
         }
     }

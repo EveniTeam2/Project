@@ -33,6 +33,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         public float GetSkillRange1() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange1).FirstOrDefault();
         public float GetSkillRange2() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange2).FirstOrDefault();
         public string GetSkillDescription() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillDescription).FirstOrDefault();
+        public string GetNextLevelSkillDescription() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel + 1 select data.SkillDescription).FirstOrDefault();
         
         public void Initialize(Sprite skillIcon, List<SkillData> csvData)
         {
@@ -47,7 +48,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
             SkillIndex = initialData.SkillIndex;
             SkillMaxLevel = csvData.Count;
 
-            SkillLevel = 1;
+            SkillLevel = SkillIndex == 0 ? 1 : 0;
 
             OnIncreaseSkillLevel += HandleOnIncreaseSkillLevel;
         }

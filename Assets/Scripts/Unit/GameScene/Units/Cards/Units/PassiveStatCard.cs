@@ -1,5 +1,6 @@
 using System;
 using Unit.GameScene.Units.Cards.Data;
+using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Interfaces;
 using Unit.GameScene.Units.Creatures.Enums;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace Unit.GameScene.Units.Cards.Units
         
         public PassiveStatCard(Sprite cardIcon, StatCardData cardData, IUpdateCreatureStat character)
         {
+            CardTargetType = CardTargetType.Stat;
+            
             CardIcon = cardIcon;
 
             _statCardData = cardData;

@@ -16,19 +16,7 @@ namespace Unit.GameScene.Units.Blocks.UI
 
             blockBackground.sprite = background;
             
-            if (skill == null && blockIcon.gameObject.activeInHierarchy)
-            {
-                blockIcon.gameObject.SetActive(false);
-            }
-            else if (skill != null)
-            {
-                if (!blockIcon.gameObject.activeInHierarchy)
-                {
-                    blockIcon.gameObject.SetActive(true);     
-                }
-                
-                blockIcon.sprite = skill.SkillIcon;
-            }
+            UpdateIcon(skill);
             
             comboCountText.text = $"x {comboCount}";
         }

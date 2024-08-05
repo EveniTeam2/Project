@@ -7,7 +7,8 @@ namespace Unit.GameScene.Units.Cards.Abstract
 {
     public abstract class Card
     {
-        public CardType CardType { get; protected set; }
+        public CardTargetType CardTargetType { get; protected set; }
+        public CardLevelType CardLevelType { get; protected set; }
         public string CardName { get; protected set; }
         public string CardDescription { get; protected set; }
         public Sprite CardIcon { get; protected set; }

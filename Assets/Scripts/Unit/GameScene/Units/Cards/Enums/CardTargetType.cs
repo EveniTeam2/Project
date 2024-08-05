@@ -1,8 +1,8 @@
 namespace Unit.GameScene.Units.Cards.Enums
 {
-    public enum CardType
+    public enum CardTargetType
     {
-        Passive,
-        Active
+        Skill,
+        Stat
     }
 }
