@@ -7,10 +7,12 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
     public class CharacterHealthSystem : HealthSystem, ICharacterHealth
     {
         private readonly CharacterStatSystem _characterStatSystem;
-        
-        public CharacterHealthSystem(CharacterStatSystem characterStatSystem) : base()
+        private readonly CharacterMovementSystem _movementSystem;
+
+        public CharacterHealthSystem(CharacterStatSystem characterStatSystem, CharacterMovementSystem movementSystem)
         {
             _characterStatSystem = characterStatSystem;
+            this._movementSystem = movementSystem;
         }
 
         public override void TakeDamage(int value)
@@ -22,10 +24,11 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
         {
             _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value);
         }
-        
-        public bool IsInvincible()
+
+        public override void TakeDamageImpact(int value, float duration = 0.5f)
         {
-            throw new System.NotImplementedException();
+            TakeDamage(value);
+            _movementSystem.SetImpact(duration);
         }
     }
 }

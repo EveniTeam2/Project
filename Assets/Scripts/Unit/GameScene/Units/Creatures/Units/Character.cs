@@ -64,8 +64,8 @@ namespace Unit.GameScene.Units.Creatures.Units
             _characterStatSystem = characterData.StatSystem;
             _characterSkillSystem = characterData.SkillSystem;
             _characterBattleSystem = new CharacterBattleSystem(_characterStatSystem, characterTransform);
-            _characterHealthSystem = new CharacterHealthSystem(_characterStatSystem);
             _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
+            _characterHealthSystem = new CharacterHealthSystem(_characterStatSystem, _characterMovementSystem);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
 
             AnimatorSystem.Initialize(AnimationParameters);
@@ -177,7 +177,6 @@ namespace Unit.GameScene.Units.Creatures.Units
             }
 
             FsmSystem.TryChangeState(StateType.Hit);
-            _characterMovementSystem.SetImpact(1);
         }
 
         protected override void HandleOnDeath()
