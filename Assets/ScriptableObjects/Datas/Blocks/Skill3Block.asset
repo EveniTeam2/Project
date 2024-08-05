@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Skill3Block
   m_EditorClassIdentifier: 
   type: 3
-  background: {fileID: 21300000, guid: 5b3a1c4f2d2e1f846a6e76cd2c5aa23b, type: 3}
-  text: "\uACF5\uBC9E"
+  background: {fileID: 21300000, guid: 09d6c28c20c02c749a164a1257e7969c, type: 3}
