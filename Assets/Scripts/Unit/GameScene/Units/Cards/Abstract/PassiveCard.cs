@@ -7,7 +7,7 @@ namespace Unit.GameScene.Units.Cards.Units
     {
         protected PassiveCard()
         {
-            CardType = CardType.Passive;
+            CardLevelType = CardLevelType.Passive;
         }
     }
 }

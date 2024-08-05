@@ -35,10 +35,10 @@ namespace Unit.GameScene.Units.CardFactories.Units
             {
                 var csvData = _statCardData.Where(data => data.CardIndex == i).ToList();
 
-                Card product = csvData[0].CardType switch
+                Card product = csvData[0].CardLevelType switch
                 {
-                    CardType.Passive => new PassiveStatCard(statCardSprites[0], csvData[0], _character),
-                    CardType.Active => new ActiveStatCard(statCardSprites[0], csvData, _character),
+                    CardLevelType.Passive => new PassiveStatCard(statCardSprites[0], csvData[0], _character),
+                    CardLevelType.Active => new ActiveStatCard(statCardSprites[0], csvData, _character),
                     _ => throw new ArgumentOutOfRangeException()
                 };
 
