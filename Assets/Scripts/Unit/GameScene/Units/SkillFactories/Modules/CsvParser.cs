@@ -229,7 +229,7 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
                     continue;
                 }
                 
-                if (!Enum.TryParse<CardType>(values[2], out var cardType))
+                if (!Enum.TryParse<CardLevelType>(values[2], out var cardType))
                 {
                     Debug.LogError($"Failed to parse cardType for line: {line}");
                     continue;

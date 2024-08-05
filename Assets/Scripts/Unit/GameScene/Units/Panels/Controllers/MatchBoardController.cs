@@ -591,5 +591,13 @@ namespace Unit.GameScene.Units.Panels.Controllers
         {
             OnIncreaseDragCount += action;
         }
+
+        public void RegisterHandleOnUpdateCharacterSkillOnBlock(BlockType type)
+        {
+            foreach (KeyValuePair<Tuple<float, float>, MatchBlockView> blockView in _blockViews.Where(blockView => blockView.Value.Type == type))
+            {
+                blockView.Value.UpdateIcon(_blockInfo[type]);
+            }
+        }
     }
 }

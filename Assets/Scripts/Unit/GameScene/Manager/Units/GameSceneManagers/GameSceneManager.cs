@@ -20,6 +20,7 @@ using Unit.GameScene.Units.Panels.Controllers;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums;
 using UnityEngine;
 using UnityEngine.Serialization;
 using CharacterStatSystem = Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems.CharacterStatSystem;
@@ -31,6 +32,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
     /// </summary>
     public class GameSceneManager : MonoBehaviour
     {
+        private event Action<BlockType> _onUpdateCharacterSkillOnBlock;
+        
         #region Inspector
 
         [Header("==== Scene 추가 세팅 ===="), SerializeField]
@@ -166,6 +169,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _comboBoardController.Initialize(extraSetting.blockInfos, _comboBlockPanel, _characterData, _blockInfo);
             
             _character.RegisterHandleOnCommandDequeue(_comboBoardController.HandleDestroyComboBlock);
+            
+            RegisterOnnUpdateCharacterSkillOnBlock(_comboBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
         }
 
         /// <summary>
@@ -179,6 +184,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _matchBoardController.RegisterHandleOnIncreaseDragCount(IncreaseDragCount);
             _matchBoardController.RegisterHandleOnSendCommand(_comboBoardController.HandleInstantiateComboBlock);
             _matchBoardController.RegisterHandleOnSendCommand(_character.HandleOnSendCommand);
+
+            RegisterOnnUpdateCharacterSkillOnBlock(_matchBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
         }
 
         /// <summary>
@@ -206,8 +213,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateCard()
         {
             _cardController = Instantiate(defaultSetting.cardControllerPrefab).GetComponent<CardController>();
-            _cardController.Initialize(defaultSetting.cardPanel, defaultSetting.cardSpawnPanel, _cardInfos);
-            
+            _cardController.Initialize(defaultSetting.cardPanel, defaultSetting.cardSpawnPanel, _cardInfos, _blockInfo);
+            _cardController.RegisterHandleOnRegisterCharacterSkill(HandleOnRegisterCharacterSkill());
             _character.RegisterOnHandleOnTriggerCard(_cardController.HandleOnTriggerCard);
         }
 
@@ -253,15 +260,48 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             }
         }
 
-        private void UpdatePopUpPanelBlurBackground()
+        private Func<CharacterSkill, SkillRegisterType> HandleOnRegisterCharacterSkill()
         {
-            
+            return characterSkill =>
+            {
+                SkillRegisterType result = SkillRegisterType.Full;
+                var blockTypeLength = Enum.GetValues(typeof(BlockType)).Length - 1;
+                
+                // _blockInfo에서 characterSkill이 이미 있는지 체크
+                for (var i = 0; i < blockTypeLength ; i++)
+                {
+                    if (_blockInfo[(BlockType)i] == characterSkill)
+                    {
+                        return SkillRegisterType.IsExisted;
+                    }
+                }
+
+                // _blockInfo에서 null 슬롯을 찾아서 skill을 집어넣음
+                for (var i = 0; i < blockTypeLength ; i++)
+                {
+                    var blockType = (BlockType)i;
+                    if (_blockInfo[blockType] != null) continue;
+                    
+                    _blockInfo[blockType] = characterSkill;
+                    _onUpdateCharacterSkillOnBlock.Invoke(blockType);
+                    result = SkillRegisterType.Success;
+                    break;
+                }
+
+                // 최종적으로 null 슬롯이 없는 경우 Full 반환
+                return result;
+            };
         }
 
         private void HandleOnPlayerDeath()
         {
             // TODO : 캐릭터가 죽었을 때, 게임 멈추고 팝업 띄우기
             Debug.Log("넥서스를 파괴하면숴ㅓㅓㅓㅓㅓ 쥐쥐~~~!~!~!~!~!~!~!");
+        }
+
+        private void RegisterOnnUpdateCharacterSkillOnBlock(Action<BlockType> action)
+        {
+            _onUpdateCharacterSkillOnBlock += action;
         }
     }
 }

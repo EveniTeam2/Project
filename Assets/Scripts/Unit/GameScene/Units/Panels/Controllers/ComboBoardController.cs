@@ -40,7 +40,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
         private float _comboBlockExitPosX;
         private List<float> _blockPositions;
         private Vector2 _blockSize;
-        private Dictionary<float, ComboBlockView> _blocks;
+        private Dictionary<float, ComboBlockView> _blockViews;
         private Dictionary<BlockType, CharacterSkill> _blockInfo;
         private bool _isProcessing;
         private CharacterData _characterData;
@@ -91,7 +91,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
             
             _characterData = characterData;
             
-            _blocks = new Dictionary<float, ComboBlockView>();
+            _blockViews = new Dictionary<float, ComboBlockView>();
             _blockPool = new BlockPool(comboBlockViewPrefab, _comboBlockPanel, poolSize, true);
             
             _blockInfo = blockInfo;
@@ -152,7 +152,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
                         
                 block.Initialize(blockModel.type, comboCount, _blockInfo[blockModel.type], blockModel.background);
 
-                foreach (var blockPosition in _blockPositions.Where(blockPosition => _blocks.TryAdd(blockPosition, block)))
+                foreach (var blockPosition in _blockPositions.Where(blockPosition => _blockViews.TryAdd(blockPosition, block)))
                 {
                     await MoveBlock(block, blockPosition);
                     break;
@@ -169,10 +169,10 @@ namespace Unit.GameScene.Units.Panels.Controllers
             await _semaphore.WaitAsync();
             try
             {
-                if (_blocks.Count > 0)
+                if (_blockViews.Count > 0)
                 {
                     var firstPosition = _blockPositions.First();
-                    if (_blocks.Remove(firstPosition, out var block))
+                    if (_blockViews.Remove(firstPosition, out var block))
                     {
                         await RemoveBlock(block);
                     }
@@ -229,11 +229,19 @@ namespace Unit.GameScene.Units.Panels.Controllers
                 var currentPosition = _blockPositions[i];
                 var previousPosition = _blockPositions[i - 1];
                 
-                if (_blocks.Remove(currentPosition, out var nextBlock))
+                if (_blockViews.Remove(currentPosition, out var nextBlock))
                 {
-                    _blocks.Add(previousPosition, nextBlock);
+                    _blockViews.Add(previousPosition, nextBlock);
                     await MoveBlock(nextBlock, previousPosition);
                 }
+            }
+        }
+        
+        public void RegisterHandleOnUpdateCharacterSkillOnBlock(BlockType type)
+        {
+            foreach (KeyValuePair<float, ComboBlockView> blockView in _blockViews.Where(blockView => blockView.Value.Type == type))
+            {
+                blockView.Value.UpdateIcon(_blockInfo[type]);
             }
         }
     }

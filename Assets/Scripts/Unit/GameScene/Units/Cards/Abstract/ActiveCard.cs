@@ -11,7 +11,7 @@ namespace Unit.GameScene.Units.Cards.Units
         
         protected ActiveCard()
         {
-            CardType = CardType.Active;
+            CardLevelType = CardLevelType.Active;
             CardCurrentLevel = 1;
         }
 

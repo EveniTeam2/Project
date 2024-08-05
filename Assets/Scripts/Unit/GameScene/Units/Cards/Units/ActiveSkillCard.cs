@@ -1,32 +1,41 @@
+using Unit.GameScene.Units.Cards.Enums;
+using Unit.GameScene.Units.Cards.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 
 namespace Unit.GameScene.Units.Cards.Units
 {
-    public class ActiveSkillCard : ActiveCard
+    public class ActiveSkillCard : ActiveCard, IRegisterSkillOnBlock
     {
-        private readonly CharacterSkill _characterSkill;
+        public CharacterSkill CharacterSkill { get; private set; }
 
         public ActiveSkillCard(CharacterSkill characterSkill)
         {
-            _characterSkill = characterSkill;
+            CardTargetType = CardTargetType.Skill;
+            
+            CharacterSkill = characterSkill;
 
-            CardIcon = _characterSkill.SkillIcon;
-            CardMaxLevel = _characterSkill.SkillMaxLevel;
+            CardIcon = CharacterSkill.SkillIcon;
+            CardMaxLevel = CharacterSkill.SkillMaxLevel;
             
             UpdateCardData();
         }
 
         protected override void UpdateCardData()
         {
-            CardName = _characterSkill.SkillName;
-            CardDescription = _characterSkill.GetSkillDescription();
+            CardName = CharacterSkill.SkillName;
+            CardDescription = CharacterSkill.GetNextLevelSkillDescription();
         }
         
         public override bool ActivateCardEffect()
         {
-            _characterSkill.InvokeOnIncreaseSkillLevelAction();
+            CharacterSkill.InvokeOnIncreaseSkillLevelAction();
             
             return IncreaseCardLevel();
+        }
+
+        public int GetSkillIndex()
+        {
+            return CharacterSkill.SkillIndex;
         }
     }
 }
