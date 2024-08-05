@@ -22,8 +22,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories
             
             foreach (var knightSkillData in _knightDataSo.skillData)
             {
-                var targetSkillName = knightSkillData.skillName;
-                var csvData = skillCsvData.Where(data => data.SkillIndex == (int) targetSkillName).ToList();
+                var csvData = skillCsvData.Where(data => data.SkillIndex == (int) knightSkillData.knightSkillType).ToList();
                 
                 if (csvData.Count == 0) continue;
 
@@ -31,7 +30,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories
 
                 skillProduct.Initialize(knightSkillData.SkillIcon, csvData);
 
-                skills.TryAdd($"{targetSkillName}", skillProduct);
+                skills.TryAdd($"{knightSkillData.knightSkillType}", skillProduct);
             }
 
             return skills;

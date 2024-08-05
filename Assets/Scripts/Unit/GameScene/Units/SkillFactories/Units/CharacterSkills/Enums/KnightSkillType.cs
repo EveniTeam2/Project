@@ -6,11 +6,11 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums
     public enum KnightSkillType
     {
         LightAttack,
+        LightCut,
         HolySlash,
         FrontHeavyAttack,
         UpLightAttack,
         AirHeavyAttack,
-        LightCut,
         SwordBuff,
         ShieldBuff,
         SaintHeal,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.Data;
 using ScriptableObjects.Scripts.Creature.Data.KnightData;
 using ScriptableObjects.Scripts.Creature.Data.WizardData;
+using System.Linq;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
@@ -22,11 +23,13 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories
 
         public override Dictionary<string, CharacterSkill> CreateSkill(List<SkillData> skillCsvData)
         {
-            return _characterClassType switch
+            var csvData = skillCsvData.Where(data => data.CharacterType == _characterClassType).ToList();
+            
+;           return _characterClassType switch
             {
-                CharacterClassType.Knight => new KnightSkillFactory((KnightDataSo)_characterDataSo).CreateSkill(skillCsvData),
-                CharacterClassType.Wizard => new WitchSkillFactory((WizardDataSo)_characterDataSo).CreateSkill(skillCsvData),
-                CharacterClassType.Centaurs => new CentaursSkillFactory(null).CreateSkill(skillCsvData),
+                CharacterClassType.Knight => new KnightSkillFactory((KnightDataSo)_characterDataSo).CreateSkill(csvData),
+                CharacterClassType.Wizard => new WitchSkillFactory((WizardDataSo)_characterDataSo).CreateSkill(csvData),
+                CharacterClassType.Centaurs => new CentaursSkillFactory(null).CreateSkill(csvData),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
