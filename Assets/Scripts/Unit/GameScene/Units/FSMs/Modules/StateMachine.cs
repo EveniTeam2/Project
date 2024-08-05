@@ -89,7 +89,7 @@ namespace Unit.GameScene.Units.FSMs.Modules
             return CurrentState.GetStateType();
         }
 
-        internal void RegisterOnDeathState(Action death)
+        internal void RegisterHandleOnDeathState(Action death)
         {
             Debug.Log("Register on Death");
             _states[StateType.Die].OnExit += death;

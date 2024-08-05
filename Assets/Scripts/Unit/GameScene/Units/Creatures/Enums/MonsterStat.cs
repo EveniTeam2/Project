@@ -1,0 +1,14 @@
+using System;
+
+namespace Unit.GameScene.Units.Creatures.Enums
+{
+    [Serializable]
+    public struct MonsterStat
+    {
+        public int damage;
+        public int health;
+        public int speed;
+        public float attackCoolTime;
+        public int returnExp;
+    }
+}

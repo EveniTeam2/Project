@@ -1,5 +1,4 @@
-﻿using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
+﻿using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO

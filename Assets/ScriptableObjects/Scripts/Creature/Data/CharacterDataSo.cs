@@ -1,4 +1,4 @@
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
+using Unit.GameScene.Units.Creatures.Enums;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.Data

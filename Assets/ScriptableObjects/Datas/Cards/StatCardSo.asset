@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdaf9e4a18a4d58ad5391e86be1e1c0, type: 3}
+  m_Name: StatCardSo
+  m_EditorClassIdentifier: 
+  statSprite:
+  - {fileID: -297953035, guid: f7faf581464ab5642b5421029c372a36, type: 3}
+  - {fileID: 1229708613, guid: f7faf581464ab5642b5421029c372a36, type: 3}
+  - {fileID: 1048073560, guid: f7faf581464ab5642b5421029c372a36, type: 3}
+  - {fileID: -2104926337, guid: f7faf581464ab5642b5421029c372a36, type: 3}

@@ -2,24 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Core.UI;
 using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
 using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
+using Unit.GameScene.Units.CardFactories.Units;
+using Unit.GameScene.Units.Cards.Abstract;
+using Unit.GameScene.Units.Cards.Data;
+using Unit.GameScene.Units.Cards.Enums;
+using Unit.GameScene.Units.Cards.Units;
+using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Units.Characters;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Datas;
-using Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.ComboBlockPanels.Units;
-using Unit.GameScene.Units.Panels.BoardPanels.Units.MatchBlockPanels.Units;
+using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
+using Unit.GameScene.Units.Creatures.Units;
+using Unit.GameScene.Units.Panels.Controllers;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums;
 using UnityEngine;
-using CharacterStatSystem = Unit.GameScene.Units.Creatures.Units.Characters.Modules.Systems.CharacterStatSystem;
+using UnityEngine.Serialization;
+using CharacterStatSystem = Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems.CharacterStatSystem;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
 {
@@ -28,14 +32,13 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
     /// </summary>
     public class GameSceneManager : MonoBehaviour
     {
-        // TODO : 이후에 BoardManager와 StageManager 내부의 CharacterManager와 MonsterManager가 해당 액션을 구독하도록 수정
-        private event Action<bool> OnGameOver;
-
+        private event Action<BlockType> _onUpdateCharacterSkillOnBlock;
+        
         #region Inspector
 
         [Header("==== Scene 추가 세팅 ===="), SerializeField]
         private SceneExtraSetting extraSetting;
-
+        
         [Header("==== Scene 기본 세팅 ===="), SerializeField]
         private SceneDefaultSetting defaultSetting;
 
@@ -48,41 +51,36 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         [Header("현재 진행 시간"), SerializeField]
         private float currentTime;
 
-        [Header("카드 정보"), SerializeField]
-        private CardGachaPairDatas cardGachaPairDatas;
-        [SerializeField]
-        private CardGachaPairDatas defaultCardGachaPairDatas;
-        [SerializeField]
-        private UICardManager uiCardManagerPrefab;
-
         #endregion
 
         private RectTransform _comboBlockPanel;
-        private RectTransform _comboBlockEnter;
-        private RectTransform _comboBlockExit;
         private RectTransform _matchBlockPanel;
+        private RectTransform _cardPanel;
         
         private CharacterData _characterData;
         private ComboBoardController _comboBoardController;
         private MatchBoardController _matchBoardController;
+        private CardController _cardController;
+        
         private StageManager _stageManager;
-        private CardManager _cardManager;
+        
         private Camera _camera;
         private Canvas _canvas;
         private Character _character;
-        private CanvasController _canvasController;
 
         private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
         private Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
-
-        public CardManager CardManager => _cardManager;
+        private Dictionary<string, CharacterSkill> characterSkills;
+        private HashSet<Card> _cardInfos = new();
 
         /// <summary>
         ///     게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
         /// </summary>
         private void Awake()
         {
-            InitializeCharacterData();
+            ChangeAnimationParameterToHash();
+            
+            InitializeAndInstantiateCharacter();
             InitializeBlockData();
             
             InstantiateAndInitializeCamera();
@@ -91,7 +89,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             InstantiateAndInitializeMatchBoard();
             InstantiateAndInitializeStage();
 
-            InstantiateAndInitializeCard(uiCardManagerPrefab, _stageManager);
+            InstantiateAndInitializeCard();
         }
 
         // /// <summary>
@@ -102,31 +100,38 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         //     StartCoroutine(Timer(extraSetting.limitTime));
         // }
         
-        private void InitializeCharacterData()
+        private void InitializeAndInstantiateCharacter()
         {
-            ChangeAnimationParameterToHash();
-            
-            var characterDataSo = extraSetting.characterData.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
-
-            var skillCsvData = CsvParser.ParseCharacterSkillData(extraSetting.skillTextAsset);
-            var skills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
-
-            var characterCsvData = CsvParser.ParseCharacterStatData(extraSetting.characterTextAsset);
-            
-            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, skills);
-            var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
-            _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
-            
-            var character = Instantiate(_characterData.CharacterDataSo.creature, extraSetting.playerSpawnPosition, Quaternion.identity);
-            
-            if (character.TryGetComponent(out _character))
-            {
-                _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, _animationParameters, _blockInfo);
-            }
-            
-            _character.FsmSystem.RegisterOnDeathState(GameOver);
+            CreateCharacterData();
+            InstantiateCharacter();
         }
-        
+
+        private void CreateCharacterData()
+        {
+            var characterDataSo = extraSetting.characterDataSos.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
+            var skillCsvData = CsvParser.ParseCharacterSkillData(defaultSetting.characterSkillCsv);
+            characterSkills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
+            var characterCsvData = CsvParser.ParseCharacterStatData(defaultSetting.characterDataCsv);
+            
+            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, characterSkills);
+            var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
+            
+            _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
+        }
+
+        private void InstantiateCharacter()
+        {
+            var character = Instantiate(_characterData.CharacterDataSo.creature, extraSetting.playerSpawnPosition, Quaternion.identity);
+
+            if (!character.TryGetComponent(out _character))
+            {
+                return;
+            }
+
+            _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, defaultSetting.playerExpPanel, defaultSetting.playerLevelPanel, _animationParameters, _blockInfo);
+            _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
+        }
+
         private void InitializeBlockData()
         {
             for (var i = 0; i < extraSetting.blockInfos.Count; i++)
@@ -143,7 +148,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateAndInitializeCanvas()
         {
             _canvas = defaultSetting.canvas.GetComponent<Canvas>();
-            _canvasController = _canvas.GetComponent<CanvasController>();
+            
             if (_canvas.renderMode != RenderMode.ScreenSpaceCamera)
             {
                 _canvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -154,18 +159,18 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                 _canvas.worldCamera = _camera;
             }
             
-            _matchBlockPanel = _canvasController.MatchBlockPanel;
-            _comboBlockPanel = _canvasController.ComboBlockPanel;
-            _comboBlockEnter = _canvasController.ComboBlockEnter;
-            _comboBlockExit = _canvasController.ComboBlockExit;
+            _matchBlockPanel = defaultSetting.matchBlockSpawnPanel;
+            _comboBlockPanel = defaultSetting.comboBlockSpawnPanel;
         }
         
         private void InstantiateAndInitializeComboBoard()
         {
             _comboBoardController = Instantiate(defaultSetting.comboBoardControllerPrefab).GetComponent<ComboBoardController>();
-            _comboBoardController.Initialize(extraSetting.blockInfos, _comboBlockPanel, _comboBlockEnter, _comboBlockExit, _characterData, _blockInfo);
+            _comboBoardController.Initialize(extraSetting.blockInfos, _comboBlockPanel, _characterData, _blockInfo);
             
             _character.RegisterHandleOnCommandDequeue(_comboBoardController.HandleDestroyComboBlock);
+            
+            RegisterOnnUpdateCharacterSkillOnBlock(_comboBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
         }
 
         /// <summary>
@@ -178,7 +183,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
             _matchBoardController.RegisterHandleOnIncreaseDragCount(IncreaseDragCount);
             _matchBoardController.RegisterHandleOnSendCommand(_comboBoardController.HandleInstantiateComboBlock);
-            _matchBoardController.RegisterHandleOnSendCommand(_character.HandleReceiveCommand);
+            _matchBoardController.RegisterHandleOnSendCommand(_character.HandleOnSendCommand);
+
+            RegisterOnnUpdateCharacterSkillOnBlock(_matchBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
         }
 
         /// <summary>
@@ -190,18 +197,25 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _stageManager.Initialize(_character, extraSetting.playerSpawnPosition, _animationParameters, extraSetting, _camera);
         }
 
-        private void InstantiateAndInitializeCard(UICardManager prefab, StageManager stage)
+        private void InstantiateAndInitializeCard()
         {
-            var ui = Instantiate(prefab);
-            ui.gameObject.SetActive(false);
-            ui.InitUI();
-            _cardManager = new CardManager(ui, stage, defaultCardGachaPairDatas.GetCardGachaPairs(), cardGachaPairDatas.GetCardGachaPairs());
-            stage.Character.OnPlayerLevelUp += DrawCard;
+            CreateCardData();
+            InstantiateCard();
         }
 
-        private void DrawCard()
+        private void CreateCardData()
         {
-            var cards = _cardManager.GetCards(3);
+            var statCardData = CsvParser.ParseStatCardData(defaultSetting.cardCsv);
+            var skillCardData = characterSkills;
+            _cardInfos = new CardFactory(statCardData, extraSetting.statCardSos, skillCardData, _character).CreateCard();
+        }
+
+        private void InstantiateCard()
+        {
+            _cardController = Instantiate(defaultSetting.cardControllerPrefab).GetComponent<CardController>();
+            _cardController.Initialize(defaultSetting.cardPanel, defaultSetting.cardSpawnPanel, _cardInfos, _blockInfo);
+            _cardController.RegisterHandleOnRegisterCharacterSkill(HandleOnRegisterCharacterSkill());
+            _character.RegisterOnHandleOnTriggerCard(_cardController.HandleOnTriggerCard);
         }
 
         /// <summary>
@@ -246,9 +260,48 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             }
         }
 
-        private void GameOver()
+        private Func<CharacterSkill, SkillRegisterType> HandleOnRegisterCharacterSkill()
         {
-            Debug.Log("!!!!!!!!!!!!게임 오버!!!!!!!!!!!!");
+            return characterSkill =>
+            {
+                SkillRegisterType result = SkillRegisterType.Full;
+                var blockTypeLength = Enum.GetValues(typeof(BlockType)).Length - 1;
+                
+                // _blockInfo에서 characterSkill이 이미 있는지 체크
+                for (var i = 0; i < blockTypeLength ; i++)
+                {
+                    if (_blockInfo[(BlockType)i] == characterSkill)
+                    {
+                        return SkillRegisterType.IsExisted;
+                    }
+                }
+
+                // _blockInfo에서 null 슬롯을 찾아서 skill을 집어넣음
+                for (var i = 0; i < blockTypeLength ; i++)
+                {
+                    var blockType = (BlockType)i;
+                    if (_blockInfo[blockType] != null) continue;
+                    
+                    _blockInfo[blockType] = characterSkill;
+                    _onUpdateCharacterSkillOnBlock.Invoke(blockType);
+                    result = SkillRegisterType.Success;
+                    break;
+                }
+
+                // 최종적으로 null 슬롯이 없는 경우 Full 반환
+                return result;
+            };
+        }
+
+        private void HandleOnPlayerDeath()
+        {
+            // TODO : 캐릭터가 죽었을 때, 게임 멈추고 팝업 띄우기
+            Debug.Log("넥서스를 파괴하면숴ㅓㅓㅓㅓㅓ 쥐쥐~~~!~!~!~!~!~!~!");
+        }
+
+        private void RegisterOnnUpdateCharacterSkillOnBlock(Action<BlockType> action)
+        {
+            _onUpdateCharacterSkillOnBlock += action;
         }
     }
 }

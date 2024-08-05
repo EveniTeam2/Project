@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Units.Characters.Enums;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
 

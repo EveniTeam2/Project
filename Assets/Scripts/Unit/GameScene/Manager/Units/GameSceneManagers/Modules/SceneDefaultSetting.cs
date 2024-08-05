@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unit.GameScene.Module;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,11 +10,35 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
     [Serializable]
     public class SceneDefaultSetting
     {
-        [Header("Canvas Ref"), Space(5)] public Canvas canvas;
-        [Header("Camera Ref"), Space(5)] public Camera mainCamera;
-        [Header("MatchBoardController Prefabs"), Space(5)] public GameObject matchBoardControllerPrefab;
-        [Header("ComboBoardController Prefabs"), Space(5)] public GameObject comboBoardControllerPrefab;
-        [Header("StageManager Prefabs"), Space(5)] public GameObject stageManagerPrefab;
-        [Header("PlayerHpPanel"), Space(5)] public RectTransform playerHpPanel;
+        [Header("----- Canvas & Camera -----")]
+        public Canvas canvas;
+        public Camera mainCamera;
+        
+        [Header("----- DefaultUI -----")]
+        public RectTransform comboBlockSpawnPanel;
+        public RectTransform matchBlockSpawnPanel;
+
+        [Header("----- PopUpUI -----")]
+        public RectTransform blurPanel;
+        public RectTransform cardPanel;
+        public RectTransform cardSpawnPanel;
+        
+        [Header("----- CsvData -----")]
+        public TextAsset characterDataCsv;
+        public TextAsset characterSkillCsv;
+        public TextAsset cardCsv;
+        public TextAsset monsterDataCsv;
+        public TextAsset monsterSkillCsv;
+        
+        [Header("----- PlayerUI -----")]
+        public GameObject matchBoardControllerPrefab;
+        public GameObject comboBoardControllerPrefab;
+        public GameObject cardControllerPrefab;
+        public GameObject stageManagerPrefab;
+        
+        [Header("----- PlayerUI -----")]
+        public RectTransform playerHpPanel;
+        public RectTransform playerExpPanel;
+        public TextMeshProUGUI playerLevelPanel;
     }
 }

@@ -1,8 +1,6 @@
 ﻿using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Stats;
-using Unit.GameScene.Units.Creatures.Units.Monsters.Modules.Systems;
+using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO

@@ -5,7 +5,8 @@ namespace Unit.GameScene.Units.Creatures.Abstract
 {
     public abstract class StatSystem
     {
-        protected Action<int, int> OnUpdateHealthBarUI;
+        protected Action<int, int> OnUpdateHp;
+        
         private event Action OnHit;
         private event Action OnDeath;
 
@@ -17,14 +18,13 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         public int Speed { get; protected set; }
 
         public abstract void InitializeStat();
-        public abstract void HandleUpdateStat(StatType type, float value);
+        public abstract void HandleOnUpdateStat(StatType type, float value);
 
         protected void UpdateCurrentHealthValue(int value)
         {
             if (value < 0)
             {
                 OnHit.Invoke();
-                OnUpdateHealthBarUI.Invoke(CurrentHp, MaxHp);
             }
             
             var tempHealth = CurrentHp + value;
@@ -33,7 +33,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             {
                 CurrentHp = MaxHp;
             }
-            else if (tempHealth < 0)
+            else if (tempHealth <= 0)
             {
                 CurrentHp = 0;
                 OnDeath.Invoke();
@@ -42,6 +42,8 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             {
                 CurrentHp += value;
             }
+            
+            OnUpdateHp.Invoke(CurrentHp, MaxHp);
         }
 
         protected void UpdateCurrentShieldValue(int value)
@@ -79,12 +81,10 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             if (tempDamage < 0)
             {
                 Damage = 0;
-                return;
             }
             else
             {
                 Damage += value;
-                return;
             }
         }
 
@@ -122,9 +122,9 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             OnDeath += action;
         }
 
-        public void RegisterHandleOnUpdateHpUI(Action<int, int> action)
+        public void RegisterHandleOnUpdateHpPanelUI(Action<int, int> action)
         {
-            OnUpdateHealthBarUI += action;
+            OnUpdateHp += action;
         }
     }
 }
