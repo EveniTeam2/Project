@@ -834,6 +834,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattlePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 5898634372590583626, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898634372590583626, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898634372590583626, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898634372590583626, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898634372590583626, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898634372590583626, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6008152539734363787, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -916,6 +940,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6008152539734363787, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8197678581177733452, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_text
+      value: Lv 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8197678581177733452, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b5085e659bfaad46a9ae4ef65b754fe, type: 2}
+    - target: {fileID: 8197678581177733452, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7619108142735909536, guid: 2b5085e659bfaad46a9ae4ef65b754fe, type: 2}
+    - target: {fileID: 8197678581177733452, guid: b4cc2ad87ec574cda85447c2c9d640d6, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
