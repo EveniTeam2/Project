@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StatCardSo
   m_EditorClassIdentifier: 
   statSprite:
-  - {fileID: -297953035, guid: f7faf581464ab5642b5421029c372a36, type: 3}
-  - {fileID: 1229708613, guid: f7faf581464ab5642b5421029c372a36, type: 3}
-  - {fileID: 1048073560, guid: f7faf581464ab5642b5421029c372a36, type: 3}
-  - {fileID: -2104926337, guid: f7faf581464ab5642b5421029c372a36, type: 3}
+  - {fileID: 998108029, guid: e695963ef34484ac8bae48759f0ab31d, type: 3}
+  - {fileID: 1904853091, guid: 40e99a2a1beb34a06b057e5ddcd5e53a, type: 3}
+  - {fileID: 1268358787, guid: e695963ef34484ac8bae48759f0ab31d, type: 3}
+  - {fileID: -1484016196, guid: e695963ef34484ac8bae48759f0ab31d, type: 3}
