@@ -37,8 +37,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
         public GameObject stageManagerPrefab;
         
         [Header("----- PlayerUI -----")]
-        public RectTransform playerHpPanel;
-        public RectTransform playerExpPanel;
-        public TextMeshProUGUI playerLevelPanel;
+        public RectTransform playerHpHandler;
+        public RectTransform playerExpHandler;
+        public TextMeshProUGUI playerLevelHandler;
     }
 }

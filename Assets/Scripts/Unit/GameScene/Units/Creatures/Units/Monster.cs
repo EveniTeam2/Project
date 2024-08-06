@@ -10,26 +10,29 @@ using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units
 {
     public class Monster : Creature, IMonsterFsmController, ITakePlayerDamage
     {
         [SerializeField] private MonsterStateMachineDTO stateData;
-        [SerializeField] private RectTransform monsterHpPanel;
-        [SerializeField] private RectTransform monsterHpUI;
-        
-        private MonsterData _monsterData;
-        private SpriteRenderer _spriteRenderer;
+        [SerializeField] private RectTransform monsterHpPanelUI;
+        [SerializeField] private RectTransform monsterHpHandler;
         
         protected override Collider2D CreatureCollider { get; set; }
-        protected override RectTransform CreatureHpPanelUI { get; set; }
         protected override AnimatorSystem AnimatorSystem { get; set; }
+        protected override RectTransform CreatureHpHandler { get; set; }
+        protected override RectMask2D CreatureHpHandlerMask { get; set; }
 
         private MonsterBattleSystem _monsterBattleSystem;
         private MonsterHealthSystem _monsterHealthSystem;
         private MonsterMovementSystem _monsterMovementSystem;
         private MonsterStatSystem _monsterStatsSystem;
+        
+        private MonsterData _monsterData;
+        private SpriteRenderer _spriteRenderer;
         
         public int GetDamage() => _monsterStatsSystem.Damage;
         public bool IsReadyForAttack() => _monsterBattleSystem.IsReadyForAttack;
@@ -38,8 +41,10 @@ namespace Unit.GameScene.Units.Creatures.Units
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameters)
         {
             var monsterTransform = transform;
-            CreatureHpPanelUI = monsterHpUI;
             AnimationParameters = animationParameters;
+            
+            CreatureHpHandler = monsterHpHandler;
+            CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
             
             AnimatorSystem = GetComponent<AnimatorSystem>();
             CreatureCollider = GetComponent<Collider2D>();
@@ -133,6 +138,7 @@ namespace Unit.GameScene.Units.Creatures.Units
         {
             return damage =>
             {
+                _monsterMovementSystem.SetImpact();
                 _monsterStatsSystem.HandleOnUpdateStat(StatType.CurrentHp, damage * -1);
 
                 return _monsterStatsSystem.ReturnExp();
@@ -141,7 +147,7 @@ namespace Unit.GameScene.Units.Creatures.Units
         
         private void SetActiveHealthBarUI(bool active)
         {
-            monsterHpPanel.gameObject.SetActive(active);
+            monsterHpPanelUI.gameObject.SetActive(active);
         }
     }
 }
