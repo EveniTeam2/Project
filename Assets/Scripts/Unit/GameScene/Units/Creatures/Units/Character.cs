@@ -15,6 +15,7 @@ using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
 using Unit.GameScene.Units.FSMs.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units
 {
@@ -26,12 +27,15 @@ namespace Unit.GameScene.Units.Creatures.Units
         [SerializeField] protected CharacterClassType characterClassType;
         [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
 
-        protected override Collider2D CreatureCollider { get; set; }
-        protected override RectTransform CreatureHpPanelUI { get; set; }
         protected override AnimatorSystem AnimatorSystem { get; set; }
+        protected override Collider2D CreatureCollider { get; set; }
+        protected override RectTransform CreatureHpHandler { get; set; }
+        protected override RectMask2D CreatureHpHandlerMask { get; set; }
         
-        private readonly Queue<CommandPacket> _commandQueue = new();
-
+        private RectTransform _creatureExpHandler;
+        private RectMask2D _creatureExpHandlerMask;
+        private TextMeshProUGUI _characterLevelHandler;
+        
         private CharacterData _characterData;
 
         private CharacterCommandSystem _characterCommandSystem;
@@ -41,13 +45,12 @@ namespace Unit.GameScene.Units.Creatures.Units
         private CharacterHealthSystem _characterHealthSystem;
         private CharacterMovementSystem _characterMovementSystem;
         private CharacterStatSystem _characterStatSystem;
-
-        private RectTransform _characterExpPanelUI;
-        private TextMeshProUGUI _characterLevelPanelUI;
+        
+        private readonly Queue<CommandPacket> _commandQueue = new();
 
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _characterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
 
-        public void Initialize(CharacterData characterData, float groundYPosition, RectTransform characterHpPanelUI, RectTransform characterExpPanelUI, TextMeshProUGUI characterLevelPanelUI, Dictionary<AnimationParameterEnums, int> animationParameters, Dictionary<BlockType, CharacterSkill> blockInfo)
+        public void Initialize(CharacterData characterData, float groundYPosition, RectTransform characterHpHandler, RectTransform characterExpHandler, TextMeshProUGUI characterLevelHandler, Dictionary<AnimationParameterEnums, int> animationParameters, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             var characterTransform = transform;
             
@@ -56,9 +59,13 @@ namespace Unit.GameScene.Units.Creatures.Units
             
             _characterData = characterData;
             characterClassType = _characterData.CharacterDataSo.classType;
-            CreatureHpPanelUI = characterHpPanelUI;
-            _characterExpPanelUI = characterExpPanelUI;
-            _characterLevelPanelUI = characterLevelPanelUI;
+            
+            CreatureHpHandler = characterHpHandler;
+            CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
+            _creatureExpHandler = characterExpHandler;
+            _creatureExpHandlerMask = characterExpHandler.GetComponent<RectMask2D>();
+            
+            _characterLevelHandler = characterLevelHandler;
             AnimationParameters = animationParameters;
             
             _characterStatSystem = characterData.StatSystem;
@@ -134,6 +141,7 @@ namespace Unit.GameScene.Units.Creatures.Units
         {
             if (AnimatorSystem.GetBool(AnimationParameterEnums.IsDead)) return;
             
+            _characterMovementSystem.SetImpact();
             _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value * -1);
         }
         
@@ -203,20 +211,19 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         private void HandleOnUpdateExpPanelUI(int currentExp, int maxExp)
         {
-            Debug.Log($"currentExp {currentExp} / maxExp {maxExp}");
+            Debug.Log($"currentHp {currentExp} / maxHp {maxExp}");
+            
             // 계산된 체력 비율
             float expRatio = (float)currentExp / maxExp;
     
-            // 새로운 localScale 값 계산
-            var newScale = new Vector3(expRatio, CreatureHpPanelUI.localScale.y, CreatureHpPanelUI.localScale.z);
-    
-            // 체력 바의 스케일을 업데이트
-            _characterExpPanelUI.localScale = newScale;
+            // Right 패딩을 조절하여 체력 바의 길이 조절
+            float rightPadding = _creatureExpHandler.rect.width * (1 - expRatio);
+            _creatureExpHandlerMask.padding = new Vector4(0, 0, rightPadding, 0);
         }
 
         private void HandleOnUpdateLevelPanelUI(int currentLevel)
         {
-            _characterLevelPanelUI.text = "Lv." + $"{currentLevel + 1}";
+            _characterLevelHandler.text = "Lv." + $"{currentLevel + 1}";
         }
     }
 }

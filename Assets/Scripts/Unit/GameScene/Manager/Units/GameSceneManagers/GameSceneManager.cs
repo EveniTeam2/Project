@@ -32,7 +32,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
     /// </summary>
     public class GameSceneManager : MonoBehaviour
     {
-        private event Action<BlockType> _onUpdateCharacterSkillOnBlock;
+        private event Action<BlockType> UpdateCharacterSkillOnBlock;
         
         #region Inspector
 
@@ -69,8 +69,8 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private Character _character;
 
         private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
-        private Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
-        private Dictionary<string, CharacterSkill> characterSkills;
+        private readonly Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
+        private Dictionary<string, CharacterSkill> _characterSkills;
         private HashSet<Card> _cardInfos = new();
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             var characterDataSo = extraSetting.characterDataSos.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
             var skillCsvData = CsvParser.ParseCharacterSkillData(defaultSetting.characterSkillCsv);
-            characterSkills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
+            _characterSkills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
             var characterCsvData = CsvParser.ParseCharacterStatData(defaultSetting.characterDataCsv);
             
-            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, characterSkills);
+            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, _characterSkills);
             var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
             
             _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
@@ -128,7 +128,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                 return;
             }
 
-            _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpPanel, defaultSetting.playerExpPanel, defaultSetting.playerLevelPanel, _animationParameters, _blockInfo);
+            _character.Initialize(_characterData, extraSetting.playerSpawnPosition.y, defaultSetting.playerHpHandler, defaultSetting.playerExpHandler, defaultSetting.playerLevelHandler, _animationParameters, _blockInfo);
             _character.RegisterHandleOnPlayerDeath(HandleOnPlayerDeath);
         }
 
@@ -206,7 +206,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void CreateCardData()
         {
             var statCardData = CsvParser.ParseStatCardData(defaultSetting.cardCsv);
-            var skillCardData = characterSkills;
+            var skillCardData = _characterSkills;
             _cardInfos = new CardFactory(statCardData, extraSetting.statCardSos, skillCardData, _character).CreateCard();
         }
 
@@ -283,7 +283,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                     if (_blockInfo[blockType] != null) continue;
                     
                     _blockInfo[blockType] = characterSkill;
-                    _onUpdateCharacterSkillOnBlock.Invoke(blockType);
+                    UpdateCharacterSkillOnBlock.Invoke(blockType);
                     result = SkillRegisterType.Success;
                     break;
                 }
@@ -301,7 +301,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void RegisterOnnUpdateCharacterSkillOnBlock(Action<BlockType> action)
         {
-            _onUpdateCharacterSkillOnBlock += action;
+            UpdateCharacterSkillOnBlock += action;
         }
     }
 }
