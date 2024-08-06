@@ -126,7 +126,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public void AttackEnemy(RaycastHit2D target)
         {
-            _monsterBattleSystem.AttackEnemy(GetDamage(), target);
+            _monsterBattleSystem.MonsterAttackEnemy(GetDamage(), target);
         }
         
         public Func<int, int> TakeDamage()
