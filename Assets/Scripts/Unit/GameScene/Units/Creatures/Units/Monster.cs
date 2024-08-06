@@ -54,6 +54,7 @@ namespace Unit.GameScene.Units.Creatures.Units
             AnimatorSystem.Initialize(AnimationParameters);
             
             FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, AnimationParameters, monsterTransform, _monsterStatsSystem);
+            RegisterEventHandler();
         }
         
         public void ResetMonster()
@@ -63,7 +64,7 @@ namespace Unit.GameScene.Units.Creatures.Units
             _spriteRenderer.color = Color.white;
             CreatureCollider.enabled = true;
             
-            RegisterEventHandler();
+            //RegisterEventHandler();
             SetActiveHealthBarUI(true);
             
             _monsterStatsSystem.InitializeStat();
