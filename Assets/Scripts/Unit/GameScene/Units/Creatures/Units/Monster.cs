@@ -48,8 +48,8 @@ namespace Unit.GameScene.Units.Creatures.Units
             // TODO : MonsterStatData 캐릭터처럼 구조 수정
             _monsterStatsSystem = new MonsterStatSystem(stat);
             _monsterBattleSystem = new MonsterBattleSystem(_monsterStatsSystem, monsterTransform);
-            _monsterHealthSystem = new MonsterHealthSystem(_monsterStatsSystem);
             _monsterMovementSystem = new MonsterMovementSystem(_monsterStatsSystem, monsterTransform, groundYPosition);
+            _monsterHealthSystem = new MonsterHealthSystem(_monsterStatsSystem, _monsterMovementSystem);
 
             AnimatorSystem.Initialize(AnimationParameters);
             
@@ -102,7 +102,6 @@ namespace Unit.GameScene.Units.Creatures.Units
         protected override void HandleOnHit()
         {
             FsmSystem.TryChangeState(StateType.Hit);
-            _monsterMovementSystem.SetImpact(1);
         }
 
         protected override void HandleOnDeath()
