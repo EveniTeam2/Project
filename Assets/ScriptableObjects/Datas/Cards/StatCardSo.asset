@@ -15,5 +15,5 @@ MonoBehaviour:
   statSprite:
   - {fileID: 998108029, guid: e695963ef34484ac8bae48759f0ab31d, type: 3}
   - {fileID: 1904853091, guid: 40e99a2a1beb34a06b057e5ddcd5e53a, type: 3}
-  - {fileID: 741472924, guid: 40e99a2a1beb34a06b057e5ddcd5e53a, type: 3}
-  - {fileID: -808880176, guid: 40e99a2a1beb34a06b057e5ddcd5e53a, type: 3}
+  - {fileID: 1268358787, guid: e695963ef34484ac8bae48759f0ab31d, type: 3}
+  - {fileID: -1484016196, guid: e695963ef34484ac8bae48759f0ab31d, type: 3}
