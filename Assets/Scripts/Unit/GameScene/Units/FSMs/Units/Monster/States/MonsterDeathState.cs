@@ -25,7 +25,8 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         public override void Enter()
         {
             base.Enter();
-            FsmController.SetTrigger(MonsterBaseStateInfo.StateParameter, ChangeToDefaultState);
+            FsmController.SetTrigger(MonsterBaseStateInfo.StateParameter, Exit);
+            _dampVel = 0f;
         }
 
         public override void Exit()

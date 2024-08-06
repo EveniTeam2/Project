@@ -134,7 +134,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public void AttackEnemy(int value, float range)
         {
-            _characterBattleSystem.AttackEnemy(value, range);
+            _characterBattleSystem.PlayerAttackEnemy(value, range);
         }
 
         public void TakeDamage(int value)
