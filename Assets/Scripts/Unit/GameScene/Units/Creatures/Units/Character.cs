@@ -127,8 +127,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public void AttackEnemy(int value, float range)
         {
-            // TODO : Range 더 늘려야 할 것 같음
-            _characterBattleSystem.AttackEnemy(value, range * 10);
+            _characterBattleSystem.AttackEnemy(value, range);
         }
 
         public void TakeDamage(int value)

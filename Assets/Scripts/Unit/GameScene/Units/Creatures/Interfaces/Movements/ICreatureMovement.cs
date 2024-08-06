@@ -8,6 +8,6 @@ namespace Unit.GameScene.Units.Creatures.Interfaces.Movements
         public void SetBackward(bool isBackward);
         public void SetJump(float power);
         public void SetGroundPosition(float groundYPosition);
-        public void SetImpact(float duration);
+        public void SetImpact();
     }
 }

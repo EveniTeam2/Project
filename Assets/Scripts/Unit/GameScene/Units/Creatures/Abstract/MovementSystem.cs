@@ -85,13 +85,13 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         // TODO : 채이환 - [Fix] HitAnimation 시간만큼 임팩트 duration을 줬으면 좋겠습니다.
         // 현재 Hit가 끝났는데도 Impact가 동작 중이라 Hit -> Idle -> Run State로 진입해서 애니메이션은 Run인데 뒤로 밀리고 있는 경우가 있습니다.
         // 수정하면 TODO는 삭제해주세요.
-        public void SetImpact(float duration)
+        public void SetImpact()
         {
             var impact = GetRandomImpactValue();
             _currentSpeed -= impact.x;
             _currentYSpeed += impact.y;
             TargetSpeed = 0;
-            ImpactDuration = duration;
+            ImpactDuration = 0.5f;
             _currentDampTime = 1f;
 
             OnUpdate += ApplyImpact;

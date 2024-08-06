@@ -17,18 +17,13 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 
         public override void TakeDamage(int value)
         {
+            _movementSystem.SetImpact();
             _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, -value);
         }
 
         public override void TakeHeal(int value)
         {
             _characterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value);
-        }
-
-        public override void TakeDamageImpact(int value, float duration = 0.5f)
-        {
-            TakeDamage(value);
-            _movementSystem.SetImpact(duration);
         }
     }
 }

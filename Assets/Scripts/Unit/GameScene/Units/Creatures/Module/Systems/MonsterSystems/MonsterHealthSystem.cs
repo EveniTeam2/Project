@@ -11,7 +11,7 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
         public MonsterHealthSystem(MonsterStatSystem monsterStatSystem, MonsterMovementSystem movementSystem)
         {
             _monsterStatSystem = monsterStatSystem;
-            this._movementSystem = movementSystem;
+            _movementSystem = movementSystem;
         }
 
         public override void TakeHeal(int value)
@@ -21,13 +21,8 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
 
         public override void TakeDamage(int value)
         {
+            _movementSystem.SetImpact();
             _monsterStatSystem.HandleOnUpdateStat(StatType.CurrentHp, value);
-        }
-
-        public override void TakeDamageImpact(int value, float duration = 0.5f)
-        {
-            TakeDamage(value);
-            _movementSystem.SetImpact(duration);
         }
     }
 }
