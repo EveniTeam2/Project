@@ -2,7 +2,14 @@ namespace Unit.GameScene.Units.Creatures.Enums
 {
     public enum MonsterClassType
     {
-        Goblin,
+        Crab,
+        Golem,
+        ReinforcedGolem,
+        Rat,
+        SpikedSlime,
+        FighterGoblin,
+        FemaleGoblin,
+        RogueGoblin,
         GoblinKing
     }
 }
