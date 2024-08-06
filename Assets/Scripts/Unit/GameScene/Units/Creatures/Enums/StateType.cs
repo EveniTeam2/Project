@@ -6,6 +6,7 @@ namespace Unit.GameScene.Units.Creatures.Enums
         Run,
         Skill,
         Die,
-        Hit
+        Hit,
+        None = 999,
     }
 }

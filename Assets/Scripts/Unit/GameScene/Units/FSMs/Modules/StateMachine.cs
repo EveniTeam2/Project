@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces;
+using Unit.GameScene.Units.FSMs.Units.Monster.States;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.FSMs.Modules
@@ -11,10 +12,16 @@ namespace Unit.GameScene.Units.FSMs.Modules
     /// </summary>
     public class StateMachine
     {
-        private readonly Dictionary<StateType, IState> _states = new();
-        
+        private readonly Dictionary<StateType, IState> _states;
+
         protected IState CurrentState { get; private set; }
         protected IState PrevState { get; private set; }
+
+        public StateMachine()
+        {
+            _states = new Dictionary<StateType, IState>();
+            TryAddState(StateType.None, new NoneState());
+        }
 
         /// <summary>
         ///     상태를 추가합니다.
@@ -37,16 +44,28 @@ namespace Unit.GameScene.Units.FSMs.Modules
             return _states.Remove(stateType);
         }
 
+        public bool TryStartState(StateType stateType)
+        {
+            if (_states.TryGetValue(stateType, out var targetState))
+            {
+                CurrentState = _states[stateType];
+                CurrentState.Enter();
+                return true;
+            }
+            return false;
+        }
+
         public bool TryChangeState(StateType stateType)
         {
-            if (!_states.TryGetValue(stateType, out _))
-                return false;
-
-            CurrentState.Exit();
-            PrevState = CurrentState;
-            CurrentState = _states[stateType];
-            CurrentState.Enter();
-            return true;
+            if (_states.TryGetValue(stateType, out var targetState))
+            {
+                CurrentState.Exit();
+                PrevState = CurrentState;
+                CurrentState = _states[stateType];
+                CurrentState.Enter();
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
