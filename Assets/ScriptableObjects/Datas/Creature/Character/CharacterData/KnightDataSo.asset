@@ -15,21 +15,21 @@ MonoBehaviour:
   creature: {fileID: 1214194880391127291, guid: fd6b6a30dc4a346f491560373d18725c, type: 3}
   classType: 0
   skillData:
-  - SkillIcon: {fileID: 21300000, guid: ab052c1a1916a7a4cae18789861ed41a, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 394718030ccc894419f0e563e89969d4, type: 2}
     knightSkillType: 0
-  - SkillIcon: {fileID: 21300000, guid: 20b19f9b2a8f789469c442874e7009cf, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: be7468c3387216f41ae4d1c23fb1ade5, type: 2}
     knightSkillType: 1
-  - SkillIcon: {fileID: 21300000, guid: e77978dd91ac95b428e7f2db20b4754d, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 98bbdb95a57bd1d4f9e27edb41d0c16b, type: 2}
     knightSkillType: 2
-  - SkillIcon: {fileID: 21300000, guid: 526e37b81437c0144badf580df75d90e, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 8b3b182a6bfc85640ad43ae09e5e642d, type: 2}
     knightSkillType: 3
-  - SkillIcon: {fileID: 21300000, guid: df90f16e97d0dd54c8b5231c919ec9d6, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 914e9fe99563ede429ed1a7a5b0ef36f, type: 2}
     knightSkillType: 4
-  - SkillIcon: {fileID: 21300000, guid: c1393d5100330ae46b31cab7ea9f9188, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 93370412def150549b1a9ea295ed7b10, type: 2}
     knightSkillType: 5
-  - SkillIcon: {fileID: 21300000, guid: 272c83c8fe485d349a769b1a137989de, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 96eb12b9a83791d46a2654a8721e61f1, type: 2}
     knightSkillType: 6
-  - SkillIcon: {fileID: 21300000, guid: 71b0086bc77a96e4589d887834539aba, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 17a07373aee5a5a46a7f84cf7570854e, type: 2}
     knightSkillType: 7
-  - SkillIcon: {fileID: 21300000, guid: 20a63113f2923fa44bcc5241a1c9857c, type: 3}
+  - SkillIcon: {fileID: 21300000, guid: 9d7f824cfd4d2964cb7f48c67af07428, type: 2}
     knightSkillType: 8
