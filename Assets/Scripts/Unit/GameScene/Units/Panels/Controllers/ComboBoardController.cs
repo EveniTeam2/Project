@@ -106,7 +106,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
             _comboBlockEnterPosX = rect.max.x + 100;
             _comboBlockExitPosX = rect.min.x - 100;
             
-            _blockSize = new Vector2(panelHeight * localScaleY, panelHeight * localScaleY);
+            _blockSize = new Vector2(rect.height * localScaleY, rect.height * localScaleY);
             _blockPositions = new List<float>();
             
             var x = rect.xMin + _blockSize.x / 2;

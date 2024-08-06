@@ -20,7 +20,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         protected float TargetSpeed = 0;
         private float _dampVelocity;
         private float _currentDampTime = 0.3f;
-        private const float _originDampTime = 0.3f;
+        private const float OriginDampTime = 0.3f;
 
         // 점프 관련
         private float _currentYSpeed = 0;
@@ -35,7 +35,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         private bool IsInAir => _targetTransform.position.y > _groundYPosition;
         private bool IsMoving => Mathf.Abs(_currentSpeed) > 0.0001f;
 
-        protected MovementOrder delayOrder;
+        protected MovementOrder DelayOrder;
 
         protected event Action OnUpdate;
         protected event Action OnFixedUpdate;
@@ -114,8 +114,8 @@ namespace Unit.GameScene.Units.Creatures.Abstract
                 return;
 
             ImpactDuration = 0;
-            _currentDampTime = _originDampTime;
-            delayOrder?.Execute();
+            _currentDampTime = OriginDampTime;
+            DelayOrder?.Execute();
             OnUpdate -= ApplyImpact;
         }
 
