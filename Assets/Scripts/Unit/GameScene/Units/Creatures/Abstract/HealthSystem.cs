@@ -6,6 +6,5 @@ namespace Unit.GameScene.Units.Creatures.Abstract
     {
         public abstract void TakeHeal(int value);
         public abstract void TakeDamage(int value);
-        public abstract void TakeDamageImpact(int value, float duration);
     }
 }

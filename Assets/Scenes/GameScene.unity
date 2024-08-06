@@ -371,6 +371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoardPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 2702586239484807356, guid: ed1add46f6d8b4bc18b901f107c676a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4410179707913068712, guid: ed1add46f6d8b4bc18b901f107c676a1, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -478,6 +482,22 @@ PrefabInstance:
     - target: {fileID: 6375512303908754382, guid: ed1add46f6d8b4bc18b901f107c676a1, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026935238119252188, guid: ed1add46f6d8b4bc18b901f107c676a1, type: 3}
+      propertyPath: m_Color.a
+      value: 0.43137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026935238119252188, guid: ed1add46f6d8b4bc18b901f107c676a1, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026935238119252188, guid: ed1add46f6d8b4bc18b901f107c676a1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026935238119252188, guid: ed1add46f6d8b4bc18b901f107c676a1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
