@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
@@ -16,14 +16,16 @@ namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
         public Vector2 direction;
         public float distance;
         public MonsterSkillActDTO skillAct;
-
+        public MonsterSkillDeciderDTO skillDecider;
         public MonsterSkillStateInfo GetInfo(
             Transform transform,
             StateMachine stateMachine,
             Dictionary<AnimationParameterEnums, int> animationParameterEnums,
             IMonsterFsmController fsmController)
         {
-            return new MonsterSkillStateInfo(animationParameterEnums[skillParameter], skillValue, targetLayer, direction, distance, skillAct.GetSkillAct(transform, fsmController, stateMachine, animationParameterEnums));
+            var skill = skillAct.GetSkillAct(transform, fsmController, stateMachine, animationParameterEnums);
+            var decide = skillDecider.GetSkillDecider(skill, transform, stateMachine, animationParameterEnums, fsmController);
+            return new MonsterSkillStateInfo(animationParameterEnums[skillParameter], skillValue, targetLayer, direction, distance, skill, decide);
         }
     }
 }

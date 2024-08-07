@@ -17,11 +17,30 @@ MonoBehaviour:
     stateParameter: 6
     defaultExitState: 0
   skillInfoDto:
-    skillParameter: 3
+  - skillParameter: 3
     skillValue: 0
     targetLayer:
       serializedVersion: 2
       m_Bits: 64
     direction: {x: -1, y: 0}
-    distance: 5
-    skillAct: {fileID: 11400000, guid: 9003b25f2a0ef6f49b246a4cce510e61, type: 2}
+    distance: 2
+    skillAct: {fileID: 0}
+    skillDecider: {fileID: 0}
+  - skillParameter: 3
+    skillValue: 1
+    targetLayer:
+      serializedVersion: 2
+      m_Bits: 64
+    direction: {x: -1, y: 0}
+    distance: 2
+    skillAct: {fileID: 0}
+    skillDecider: {fileID: 0}
+  - skillParameter: 3
+    skillValue: 2
+    targetLayer:
+      serializedVersion: 2
+      m_Bits: 64
+    direction: {x: -1, y: 0}
+    distance: 2
+    skillAct: {fileID: 0}
+    skillDecider: {fileID: 0}
