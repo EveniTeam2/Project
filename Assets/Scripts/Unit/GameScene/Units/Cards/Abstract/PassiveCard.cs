@@ -1,7 +1,6 @@
-using Unit.GameScene.Units.Cards.Abstract;
 using Unit.GameScene.Units.Cards.Enums;
 
-namespace Unit.GameScene.Units.Cards.Units
+namespace Unit.GameScene.Units.Cards.Abstract
 {
     public abstract class PassiveCard : Card
     {

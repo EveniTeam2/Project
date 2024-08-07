@@ -6,7 +6,7 @@ using ScriptableObjects.Scripts.Creature.Data.WizardData;
 using System.Linq;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.SkillFactories.Modules;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories
 {

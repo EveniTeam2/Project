@@ -19,10 +19,9 @@ using Unit.GameScene.Units.Creatures.Units;
 using Unit.GameScene.Units.Panels.Controllers;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
-using UnityEngine.Serialization;
 using CharacterStatSystem = Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems.CharacterStatSystem;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
@@ -32,7 +31,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
     /// </summary>
     public class GameSceneManager : MonoBehaviour
     {
-        private event Action<BlockType> UpdateCharacterSkillOnBlock;
+        private event Action<BlockType> OnUpdateCharacterSkillOnBlock;
         
         #region Inspector
 
@@ -69,9 +68,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private Character _character;
 
         private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
-        private readonly Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
         private Dictionary<string, CharacterSkill> _characterSkills;
         private HashSet<Card> _cardInfos = new();
+        
+        private readonly Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
 
         /// <summary>
         ///     게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
@@ -170,7 +170,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             
             _character.RegisterHandleOnCommandDequeue(_comboBoardController.HandleDestroyComboBlock);
             
-            RegisterOnnUpdateCharacterSkillOnBlock(_comboBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
+            RegisterOnUpdateCharacterSkillOnBlock(_comboBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             _matchBoardController.RegisterHandleOnSendCommand(_comboBoardController.HandleInstantiateComboBlock);
             _matchBoardController.RegisterHandleOnSendCommand(_character.HandleOnSendCommand);
 
-            RegisterOnnUpdateCharacterSkillOnBlock(_matchBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
+            RegisterOnUpdateCharacterSkillOnBlock(_matchBoardController.RegisterHandleOnUpdateCharacterSkillOnBlock);
         }
 
         /// <summary>
@@ -214,7 +214,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             _cardController = Instantiate(defaultSetting.cardControllerPrefab).GetComponent<CardController>();
             _cardController.Initialize(defaultSetting.cardPanel, defaultSetting.cardSpawnPanel, _cardInfos, _blockInfo);
-            _cardController.RegisterHandleOnRegisterCharacterSkill(HandleOnRegisterCharacterSkill());
+
+            // CardController에 OnUpdateCharacterSkillOnBlock 이벤트 등록
+            _cardController.RegisterHandleOnRegisterCharacterSkill(OnUpdateCharacterSkillOnBlock);
             _character.RegisterOnHandleOnTriggerCard(_cardController.HandleOnTriggerCard);
         }
 
@@ -246,51 +248,17 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
             isGameOver = true;
         }
-        
+        // Enum 타입에 대한 해시값을 미리 계산해서 저장합니다.
         private void ChangeAnimationParameterToHash()
         {
             _animationParameters = new Dictionary<AnimationParameterEnums, int>();
 
             for (var i = 0; i < Enum.GetValues(typeof(AnimationParameterEnums)).Length; i++)
             {
-                var targetEnum = (AnimationParameterEnums) i;
-                
+                var targetEnum = (AnimationParameterEnums)i;
                 _animationParameters.Add(targetEnum, Animator.StringToHash($"{targetEnum}"));
                 Debug.Log($"{targetEnum} => {Animator.StringToHash($"{targetEnum}")} 파싱");
             }
-        }
-
-        private Func<CharacterSkill, SkillRegisterType> HandleOnRegisterCharacterSkill()
-        {
-            return characterSkill =>
-            {
-                SkillRegisterType result = SkillRegisterType.Full;
-                var blockTypeLength = Enum.GetValues(typeof(BlockType)).Length - 1;
-                
-                // _blockInfo에서 characterSkill이 이미 있는지 체크
-                for (var i = 0; i < blockTypeLength ; i++)
-                {
-                    if (_blockInfo[(BlockType)i] == characterSkill)
-                    {
-                        return SkillRegisterType.IsExisted;
-                    }
-                }
-
-                // _blockInfo에서 null 슬롯을 찾아서 skill을 집어넣음
-                for (var i = 0; i < blockTypeLength ; i++)
-                {
-                    var blockType = (BlockType)i;
-                    if (_blockInfo[blockType] != null) continue;
-                    
-                    _blockInfo[blockType] = characterSkill;
-                    UpdateCharacterSkillOnBlock.Invoke(blockType);
-                    result = SkillRegisterType.Success;
-                    break;
-                }
-
-                // 최종적으로 null 슬롯이 없는 경우 Full 반환
-                return result;
-            };
         }
 
         private void HandleOnPlayerDeath()
@@ -299,9 +267,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
             Debug.Log("넥서스를 파괴하면숴ㅓㅓㅓㅓㅓ 쥐쥐~~~!~!~!~!~!~!~!");
         }
 
-        private void RegisterOnnUpdateCharacterSkillOnBlock(Action<BlockType> action)
+        private void RegisterOnUpdateCharacterSkillOnBlock(Action<BlockType> action)
         {
-            UpdateCharacterSkillOnBlock += action;
+            OnUpdateCharacterSkillOnBlock += action;
         }
     }
 }

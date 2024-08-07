@@ -9,7 +9,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums
         LightCut,
         UpLightAttack,
         FrontHeavyAttack,
-        AirAttack,
+        AirComboAttack,
         AirHeavyAttack,
         HolySlash,
         SwordBuff,

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Blocks.UI;
 using Unit.GameScene.Units.Panels.Interfaces;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

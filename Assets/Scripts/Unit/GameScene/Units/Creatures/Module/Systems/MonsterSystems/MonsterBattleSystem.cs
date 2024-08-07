@@ -1,5 +1,6 @@
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Interfaces;
+using Unit.GameScene.Units.Creatures.Interfaces.Battles;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
@@ -38,7 +39,7 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
             }
         }
 
-        public override void Update()
+        public void Update()
         {
             if (IsReadyForAttack) return;
             
