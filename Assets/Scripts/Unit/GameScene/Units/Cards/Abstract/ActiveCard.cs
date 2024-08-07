@@ -17,13 +17,12 @@ namespace Unit.GameScene.Units.Cards.Abstract
         protected bool IncreaseCardLevel()
         {
             CardCurrentLevel++;
-            
-            if (CardCurrentLevel + 1 >= CardMaxLevel)
+
+            if (CardCurrentLevel + 1 > CardMaxLevel)
             {
-                CardCurrentLevel = CardMaxLevel;
                 return false;
             }
-
+            
             UpdateCardData();
 
             return true;

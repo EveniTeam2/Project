@@ -64,8 +64,10 @@ namespace Unit.GameScene.Units.Panels.Controllers
             _cardStarViews = new List<StarView>();
 
             _cardPool = new CardPool(cardViewPrefab, cardSpawnPanel, cardPoolSize, true);
+            
+            // CardClickHandler 초기화 시 _cardInfo의 참조를 전달
             _cardClickHandler = new CardClickHandler(
-                _cardInfo,
+                _cardInfo, // 참조 전달
                 _blockInfo,
                 _cardPool,
                 _targetCards,
@@ -105,6 +107,8 @@ namespace Unit.GameScene.Units.Panels.Controllers
             var cardList = _cardInfo.ToList();
             var count = Math.Min(cardPoolSize, cardList.Count);
 
+            _targetCards.Clear();
+            
             for (var i = 0; i < count; i++)
             {
                 var cardView = _cardPool.Get();
@@ -162,9 +166,9 @@ namespace Unit.GameScene.Units.Panels.Controllers
             _cardTriggerIsRunning = value;
         }
 
-        public void RegisterHandleOnRegisterCharacterSkill(Func<CharacterSkill, SkillRegisterType> func)
+        public void RegisterHandleOnRegisterCharacterSkill(Action<BlockType> onUpdateCharacterSkillOnBlock)
         {
-            _cardClickHandler.RegisterHandleOnRegisterCharacterSkill(func);
+            _cardClickHandler.RegisterHandleOnRegisterCharacterSkill(onUpdateCharacterSkillOnBlock);
         }
     }
 }

@@ -57,6 +57,9 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
             CardTrigger = initialStat.CardTrigger;
 
             OnUpdateHpPanelUI?.Invoke(CurrentHp, MaxHp);
+            OnUpdateExpPanelUI?.Invoke(CurrentExp, MaxExp);
+            OnUpdateLevelPanelUI?.Invoke(CurrentLevel);
+            
             OnIncreasePlayerExp += HandleOnIncreaseExp;
         }
 
