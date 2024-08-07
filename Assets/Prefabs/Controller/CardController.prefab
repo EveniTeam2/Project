@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3aaef7bb0f542debd326ac23a0b8024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 3
+  cardPoolSize: 3
+  cardStarPoolSize: 20
   cardViewPrefab: {fileID: 3508505346543382989, guid: f654700e7726a4f8b85a9e3bae817f39, type: 3}
+  cardStarViewPrefab: {fileID: 837550256821222761, guid: df60838acbce94a65bca32df57a5ba1d, type: 3}

@@ -7,7 +7,7 @@ using Unit.GameScene.Units.Cards.Data;
 using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Interfaces;
 using Unit.GameScene.Units.Cards.Units;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Units.CardFactories.Units
 {
@@ -37,8 +37,8 @@ namespace Unit.GameScene.Units.CardFactories.Units
 
                 Card product = csvData[0].CardLevelType switch
                 {
-                    CardLevelType.Passive => new PassiveStatCard(statCardSprites[0], csvData[0], _character),
-                    CardLevelType.Active => new ActiveStatCard(statCardSprites[0], csvData, _character),
+                    CardLevelType.Passive => new PassiveStatCard(statCardSprites[i], csvData[0], _character),
+                    CardLevelType.Active => new ActiveStatCard(statCardSprites[i], csvData, _character),
                     _ => throw new ArgumentOutOfRangeException()
                 };
 

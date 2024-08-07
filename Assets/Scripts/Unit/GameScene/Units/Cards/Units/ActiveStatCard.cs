@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unit.GameScene.Units.Cards.Abstract;
 using Unit.GameScene.Units.Cards.Data;
 using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Interfaces;
@@ -19,7 +20,7 @@ namespace Unit.GameScene.Units.Cards.Units
         public ActiveStatCard(Sprite cardIcon, List<StatCardData> cardData, IUpdateCreatureStat character)
         {
             CardTargetType = CardTargetType.Stat;
-            
+            CardCurrentLevel = 1;
             CardIcon = cardIcon;
             CardMaxLevel = cardData.Count;
             _statCardData = cardData;

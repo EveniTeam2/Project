@@ -14,7 +14,7 @@ using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Panels.Interfaces;
 using Unit.GameScene.Units.Panels.Modules.BoardModules;
 using Unit.GameScene.Units.SkillFactories.Modules;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Panels.Controllers
@@ -106,7 +106,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
             _comboBlockEnterPosX = rect.max.x + 100;
             _comboBlockExitPosX = rect.min.x - 100;
             
-            _blockSize = new Vector2(panelHeight * localScaleY, panelHeight * localScaleY);
+            _blockSize = new Vector2(rect.height * localScaleY, rect.height * localScaleY);
             _blockPositions = new List<float>();
             
             var x = rect.xMin + _blockSize.x / 2;

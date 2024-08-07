@@ -4,7 +4,7 @@ using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.Commands;
 using Unit.GameScene.Units.SkillFactories.Modules;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {

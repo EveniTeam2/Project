@@ -1,7 +1,7 @@
 using TMPro;
 using Unit.GameScene.Units.Blocks.Abstract;
 using Unit.GameScene.Units.Blocks.Enums;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Blocks.UI

@@ -20,10 +20,10 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
             WantToMove = isRun;
             if (ImpactDuration > 0)
             {
-                delayOrder = (new MovementOrder(SetRun, isRun));
+                DelayOrder = (new MovementOrder(SetRun, isRun));
                 return;
             }
-            delayOrder = null;
+            DelayOrder = null;
             TargetSpeed = isRun ? -GetSpeed() : 0; // 몬스터는 왼쪽으로 이동
         }
 
@@ -32,10 +32,10 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
             WantToMove = isBack;
             if (ImpactDuration > 0)
             {
-                delayOrder = (new MovementOrder(SetBackward, isBack));
+                DelayOrder = (new MovementOrder(SetBackward, isBack));
                 return;
             }
-            delayOrder = null;
+            DelayOrder = null;
             TargetSpeed = isBack ? GetSpeed() : 0; // 몬스터는 오른쪽으로 이동
         }
     }

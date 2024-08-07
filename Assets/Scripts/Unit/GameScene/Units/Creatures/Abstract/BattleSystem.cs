@@ -16,8 +16,6 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         {
             _targetTransform = targetTransform;
         }
-
-        public abstract void Update();
         
         public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collider)
         {

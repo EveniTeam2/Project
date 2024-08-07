@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DefaultBlock
   m_EditorClassIdentifier: 
   type: 0
-  background: {fileID: 21300000, guid: 696b567e8264e684eb09ed7781541d4e, type: 3}
+  background: {fileID: 21300000, guid: d4d464255adb8b3489f667a17e72b2a3, type: 3}

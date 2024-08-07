@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ScriptableObjects.Scripts.Creature.Data.WizardData;
 using Unit.GameScene.Units.SkillFactories.Modules;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories
 {

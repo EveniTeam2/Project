@@ -139,11 +139,11 @@ TextureImporter:
       name: 3. ManaBar_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 36
-        width: 14
-        height: 10
-      alignment: 0
+        x: 82
+        y: 41
+        width: 3
+        height: 8
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -160,11 +160,11 @@ TextureImporter:
       name: 3. ManaBar_1
       rect:
         serializedVersion: 2
-        x: 82
+        x: 122
         y: 41
-        width: 43
+        width: 3
         height: 8
-      alignment: 0
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -181,11 +181,11 @@ TextureImporter:
       name: 3. ManaBar_2
       rect:
         serializedVersion: 2
-        x: 6
-        y: 22
-        width: 14
-        height: 10
-      alignment: 0
+        x: 37
+        y: 44
+        width: 37
+        height: 2
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -202,11 +202,11 @@ TextureImporter:
       name: 3. ManaBar_3
       rect:
         serializedVersion: 2
-        x: 83
-        y: 28
-        width: 41
-        height: 6
-      alignment: 0
+        x: 102
+        y: 41
+        width: 15
+        height: 8
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -223,11 +223,11 @@ TextureImporter:
       name: 3. ManaBar_4
       rect:
         serializedVersion: 2
-        x: 37
-        y: 44
-        width: 37
-        height: 2
-      alignment: 0
+        x: 81
+        y: 17
+        width: 3
+        height: 8
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -244,11 +244,11 @@ TextureImporter:
       name: 3. ManaBar_5
       rect:
         serializedVersion: 2
-        x: 83
-        y: 19
-        width: 40
-        height: 4
-      alignment: 0
+        x: 121
+        y: 17
+        width: 3
+        height: 8
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -270,7 +270,7 @@ TextureImporter:
         width: 37
         height: 2
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -286,12 +286,12 @@ TextureImporter:
       name: 3. ManaBar_7
       rect:
         serializedVersion: 2
-        x: 37
-        y: 30
+        x: 84
+        y: 17
         width: 37
-        height: 2
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -307,11 +307,11 @@ TextureImporter:
       name: 3. ManaBar_8
       rect:
         serializedVersion: 2
-        x: 37
-        y: 9
-        width: 37
-        height: 2
-      alignment: 0
+        x: 117
+        y: 41
+        width: 5
+        height: 8
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -328,8 +328,29 @@ TextureImporter:
       name: 3. ManaBar_9
       rect:
         serializedVersion: 2
-        x: 82
-        y: 6
+        x: 85
+        y: 41
+        width: 17
+        height: 8
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fffab81c610d58e499cdfdfd2d4cee35
+      internalID: -2099701750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3. ManaBar_10
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 17
         width: 43
         height: 8
       alignment: 0
@@ -339,8 +360,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fffab81c610d58e499cdfdfd2d4cee35
-      internalID: -2099701750
+      spriteID: 9488d5b5197f3496ebb05ae4e6a0aebe
+      internalID: -1407895668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3. ManaBar_11
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 41
+        width: 43
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca8ba837cbed64112aa09ffcc6247e73
+      internalID: 1237289814
       vertices: []
       indices: 
       edges: []
@@ -358,6 +400,9 @@ TextureImporter:
     nameFileIdTable:
       3. ManaBar_0: -2004333845
       3. ManaBar_1: -580778325
+      3. ManaBar_10: -1407895668
+      3. ManaBar_11: 1237289814
+      3. ManaBar_12: 1400620070
       3. ManaBar_2: 626693826
       3. ManaBar_3: 1535119374
       3. ManaBar_4: 1031438032

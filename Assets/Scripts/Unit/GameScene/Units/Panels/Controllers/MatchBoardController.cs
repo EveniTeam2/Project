@@ -12,7 +12,7 @@ using Unit.GameScene.Units.Blocks.UI;
 using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Panels.Interfaces;
 using Unit.GameScene.Units.Panels.Modules.BoardModules;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Panels.Controllers
@@ -133,7 +133,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
         private void CalculateBlockSpawnPositions()
         {
             // panelWidth 구하기
-            var localScale = (float) Math.Round(_blockPanel.localScale.x);
+            var localScale = _blockPanel.localScale.x;
             var panelSize = (float)(int)Math.Round(_blockPanel.rect.height * localScale);
             
             if (panelSize <= 0) return;
