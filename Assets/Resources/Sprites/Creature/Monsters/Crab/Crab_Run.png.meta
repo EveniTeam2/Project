@@ -1,22 +1,25 @@
 fileFormatVersion: 2
-guid: dfce3acb0e540424e86667982645eae1
+guid: d846abb0336da004fbf063a0e91aeaea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1853771908182672309
-    second: Crab_Death_0
+      213: 2438307069932402953
+    second: Crab_Run_0
   - first:
-      213: 5753254860044985985
-    second: Crab_Death_1
+      213: 5241994141584075851
+    second: Crab_Run_1
   - first:
-      213: 4138280720040270785
-    second: Crab_Death_2
+      213: 7557213267795395730
+    second: Crab_Run_2
   - first:
-      213: -1043777715655027014
-    second: Crab_Death_3
+      213: 6353432577325987440
+    second: Crab_Run_3
   - first:
-      213: 8907390081005912611
-    second: Crab_Death_4
+      213: 6264126686478269255
+    second: Crab_Run_4
+  - first:
+      213: -2540641399431316647
+    second: Crab_Run_5
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -63,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -177,106 +180,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crab_Death_0
+      name: Crab_Run_0
       rect:
         serializedVersion: 2
         x: 0
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4c7c2e65441646e0800000000000000
-      internalID: -1853771908182672309
+      spriteID: 909f4a48c5b96d120800000000000000
+      internalID: 2438307069932402953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_Death_1
+      name: Crab_Run_1
       rect:
         serializedVersion: 2
         x: 64
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 186654b20daa7df40800000000000000
-      internalID: 5753254860044985985
+      spriteID: b4c2cc306ed4fb840800000000000000
+      internalID: 5241994141584075851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_Death_2
+      name: Crab_Run_2
       rect:
         serializedVersion: 2
         x: 128
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cb19daa3602e6930800000000000000
-      internalID: 4138280720040270785
+      spriteID: 29440de5d6d90e860800000000000000
+      internalID: 7557213267795395730
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_Death_3
+      name: Crab_Run_3
       rect:
         serializedVersion: 2
         x: 192
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab6d9e1a2b1c381f0800000000000000
-      internalID: -1043777715655027014
+      spriteID: 076f8e3644deb2850800000000000000
+      internalID: 6353432577325987440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_Death_4
+      name: Crab_Run_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3220236d5186d9b70800000000000000
-      internalID: 8907390081005912611
+      spriteID: 74bf4975806aee650800000000000000
+      internalID: 6264126686478269255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crab_Run_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95bbe3dab14ddbcd0800000000000000
+      internalID: -2540641399431316647
       vertices: []
       indices: 
       edges: []
@@ -292,11 +316,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Crab_Death_0: -1853771908182672309
-      Crab_Death_1: 5753254860044985985
-      Crab_Death_2: 4138280720040270785
-      Crab_Death_3: -1043777715655027014
-      Crab_Death_4: 8907390081005912611
+      Crab_Run_0: 2438307069932402953
+      Crab_Run_1: 5241994141584075851
+      Crab_Run_2: 7557213267795395730
+      Crab_Run_3: 6353432577325987440
+      Crab_Run_4: 6264126686478269255
+      Crab_Run_5: -2540641399431316647
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
