@@ -7,7 +7,7 @@ using Unit.GameScene.Units.SkillFactories.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using UnityEngine;
 
-namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
+namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units
 {
     public class CharacterSkill : ISkillCommand
     {
@@ -18,8 +18,9 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         public Sprite SkillIcon { get; private set; }
         public string SkillName { get; private set; }
         public int SkillIndex { get; private set; }
-        public int SkillLevel { get; private set; }
+        public int SkillCurrentLevel { get; private set; }
         public int SkillMaxLevel { get; private set; }
+        public bool IsRegisterOnBlock { get; internal set; }
 
         protected int MatchBlockCount;
         protected int ComboCount;
@@ -29,11 +30,13 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         private Action _increaseLevel;
         
         public int GetSkillIndex() => SkillIndex;
-        public int GetSkillValue() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillValue).FirstOrDefault();
-        public float GetSkillRange1() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange1).FirstOrDefault();
-        public float GetSkillRange2() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillRange2).FirstOrDefault();
-        public string GetSkillDescription() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel select data.SkillDescription).FirstOrDefault();
-        public string GetNextLevelSkillDescription() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillLevel + 1 select data.SkillDescription).FirstOrDefault();
+        public int GetSkillValue() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillCurrentLevel select data.SkillValue).FirstOrDefault();
+        public float GetSkillDuration() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillCurrentLevel select data.SkillDuration).FirstOrDefault();
+        public float GetSkillRange1() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillCurrentLevel select data.SkillRange1).FirstOrDefault();
+        public float GetSkillRange2() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillCurrentLevel select data.SkillRange2).FirstOrDefault();
+        public string GetSkillDescription() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillCurrentLevel select data.SkillDescription).FirstOrDefault();
+        public string GetNextLevelSkillDescription() => (from data in _csvData where data.SkillIndex == SkillIndex && data.SkillLevel == SkillCurrentLevel + 1 select data.SkillDescription).FirstOrDefault();
+        public int GetNextLevel() => SkillCurrentLevel + 1;
         
         public void Initialize(Sprite skillIcon, List<SkillData> csvData)
         {
@@ -48,7 +51,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
             SkillIndex = initialData.SkillIndex;
             SkillMaxLevel = csvData.Count;
 
-            SkillLevel = SkillIndex == 0 ? 1 : 0;
+            SkillCurrentLevel = SkillIndex == 0 ? 1 : 0;
 
             OnIncreaseSkillLevel += HandleOnIncreaseSkillLevel;
         }
@@ -58,21 +61,17 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
             switch (SkillType)
             {
                 case SkillType.Attack:
-                    AttackEnemy(GetSkillValue() * ComboCount, GetSkillRange1());
+                    _characterSkillController.AttackEnemy(GetSkillValue() * ComboCount, GetSkillRange1());
                     break;
                 case SkillType.Heal:
-                    HealMyself(GetSkillValue() * ComboCount);
+                    _characterSkillController.HealMySelf(GetSkillValue() * ComboCount);
                     break;
                 case SkillType.BuffDamage:
+                    _characterSkillController.AdjustBuffDamage(GetSkillValue(), GetSkillDuration());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private void HandleOnIncreaseSkillLevel()
-        {
-            SkillLevel++;
         }
 
         public void Execute(int combo)
@@ -91,21 +90,6 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         {
             _characterSkillController = characterSkillController;
         }
-
-        private void AttackEnemy(int value, float range)
-        {
-            _characterSkillController.AttackEnemy(value, range);
-        }
-
-        private void HealMyself(int value)
-        {
-            _characterSkillController.HealMySelf(value);
-        }
-
-        private void Summon()
-        {
-            _characterSkillController.Summon();
-        }
         
         private void ActivateSkill()
         {
@@ -117,8 +101,8 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         
         private void HandleOnAnimationFinished()
         {
-            SetBoolOnAnimator(AnimationParameterEnums.Skill, false, null);
             SetFloatOnAnimator(AnimationParameterEnums.SkillIndex, -1, null);
+            SetBoolOnAnimator(AnimationParameterEnums.Skill, false, null);
             SetReadyForInvokingCommand(true);
             
             ChangeState(StateType.Idle);
@@ -142,6 +126,11 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract
         private void SetFloatOnAnimator(AnimationParameterEnums targetParameter, int value, Action action)
         {
             _characterSkillController.SetFloatOnAnimator(targetParameter, value, action);
+        }
+        
+        private void HandleOnIncreaseSkillLevel()
+        {
+            SkillCurrentLevel++;
         }
     }
 }

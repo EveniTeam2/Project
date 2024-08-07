@@ -1,4 +1,5 @@
 using System;
+using Unit.GameScene.Units.Cards.Abstract;
 using Unit.GameScene.Units.Cards.Data;
 using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Interfaces;

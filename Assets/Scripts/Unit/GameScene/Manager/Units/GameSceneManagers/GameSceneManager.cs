@@ -19,10 +19,9 @@ using Unit.GameScene.Units.Creatures.Units;
 using Unit.GameScene.Units.Panels.Controllers;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
-using UnityEngine.Serialization;
 using CharacterStatSystem = Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems.CharacterStatSystem;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers
@@ -32,7 +31,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
     /// </summary>
     public class GameSceneManager : MonoBehaviour
     {
-        private event Action<BlockType> UpdateCharacterSkillOnBlock;
+        private event Action<BlockType> OnUpdateCharacterSkillOnBlock;
         
         #region Inspector
 
@@ -69,9 +68,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private Character _character;
 
         private Dictionary<AnimationParameterEnums, int> _animationParameters = new ();
-        private readonly Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
         private Dictionary<string, CharacterSkill> _characterSkills;
         private HashSet<Card> _cardInfos = new();
+        
+        private readonly Dictionary<BlockType, CharacterSkill> _blockInfo = new ();
 
         /// <summary>
         ///     게임 씬 매니저 초기화 메서드입니다. 맵, 보드, 스테이지를 초기화합니다.
@@ -283,8 +283,10 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
                     if (_blockInfo[blockType] != null) continue;
                     
                     _blockInfo[blockType] = characterSkill;
-                    UpdateCharacterSkillOnBlock.Invoke(blockType);
-                    result = SkillRegisterType.Success;
+                    characterSkill.IsRegisterOnBlock = true;
+                    OnUpdateCharacterSkillOnBlock.Invoke(blockType);
+                    
+                    result = i == blockTypeLength - 1 ? SkillRegisterType.Full : SkillRegisterType.Success;
                     break;
                 }
 
@@ -301,7 +303,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void RegisterOnnUpdateCharacterSkillOnBlock(Action<BlockType> action)
         {
-            UpdateCharacterSkillOnBlock += action;
+            OnUpdateCharacterSkillOnBlock += action;
         }
     }
 }

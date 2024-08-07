@@ -37,7 +37,5 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
                 Debug.LogWarning($"플레이어가 {target.collider.gameObject.name}의 컴포넌트를 가지고 올 수 없습니다.");
             }
         }
-        
-        public override void Update() { }
     }
 }

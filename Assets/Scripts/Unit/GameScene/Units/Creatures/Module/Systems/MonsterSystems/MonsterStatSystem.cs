@@ -7,18 +7,25 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
 {
     public class MonsterStatSystem : StatSystem
     {
-        private event Action<int> OnIncreasePlayerExp;
-        
         private readonly MonsterStat _monsterStat;
+
+        protected override MonoBehaviour MonoBehaviour { get; set; }
+        public override int CurrentHp { get; protected set; }
+        public override int MaxHp { get; protected set; }
+        public override int CurrentShield { get; protected set; }
+        public override int MaxShield { get; protected set; }
+        public override int Damage { get; protected set; }
+        public override int Speed { get; protected set; }
         public float AttackCoolTime { get; private set; }
-        
+
         public MonsterStatSystem(MonsterStat stat)
         {
             _monsterStat = stat;
         }
 
-        public override void InitializeStat()
+        public override void InitializeStat(MonoBehaviour monoBehaviour)
         {
+            MonoBehaviour = monoBehaviour;
             CurrentHp = _monsterStat.health;
             MaxHp = _monsterStat.health;
             CurrentShield = 0;
@@ -27,66 +34,39 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
             Speed = _monsterStat.speed;
             AttackCoolTime = _monsterStat.attackCoolTime;
 
-            OnUpdateHp.Invoke(CurrentHp, MaxHp);
+            OnUpdateHpPanelUI?.Invoke(CurrentHp, MaxHp);
         }
-
-        public override void HandleOnUpdateStat(StatType type, float value)
+        
+        protected override void HandleOnUpdateStat(StatType type, float value)
         {
             switch (type)
             {
                 case StatType.CurrentHp:
-                    Debug.Log($"몬스터 Stat {type.ToString()} 현재 {CurrentHp}");
-                    UpdateCurrentHealthValue((int) value);
-                    Debug.Log($"몬스터 Stat {type.ToString()} {value} => {CurrentHp}로 변동");
+                    UpdateCurrentHealthValue((int)value);
                     break;
                 case StatType.CurrentShield:
-                    Debug.Log($"몬스터 Stat {type.ToString()} 현재 {CurrentShield}");
-                    UpdateCurrentShieldValue((int) value);
-                    Debug.Log($"몬스터 Stat {type.ToString()} {value} => {CurrentShield}로 변동");
+                    UpdateCurrentShieldValue((int)value);
                     break;
                 case StatType.MaxShield:
-                    Debug.Log($"몬스터 Stat {type.ToString()} 현재 {MaxShield}");
-                    UpdateMaxShieldValue((int) value);
-                    Debug.Log($"몬스터 Stat {type.ToString()} {value} => {MaxShield}로 변동");
+                    UpdateMaxShieldValue((int)value);
                     break;
                 case StatType.Damage:
-                    Debug.Log($"몬스터 Stat {type.ToString()} 현재 {Damage}");
-                    UpdateDamageValue((int) value);
-                    Debug.Log($"몬스터 Stat {type.ToString()} {value} => {Damage}로 변동");
+                    UpdateDamageValue((int)value);
                     break;
                 case StatType.Speed:
-                    Debug.Log($"몬스터 Stat {type.ToString()} 현재 {Speed}");
-                    UpdateSpeedValue((int) value);
-                    Debug.Log($"몬스터 Stat {type.ToString()} {value} => {Speed}로 변동");
+                    UpdateSpeedValue((int)value);
                     break;
                 case StatType.AttackCoolTime:
-                    Debug.Log($"몬스터 Stat {type.ToString()} 현재 {AttackCoolTime}");
                     UpdateAttackCoolTimeValue(value);
-                    Debug.Log($"몬스터 Stat {type.ToString()} {value} => {AttackCoolTime}로 변동");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 
-        private void InvokeOnIncreasePlayerExp()
-        {
-            if (CurrentHp <= 0 ) OnIncreasePlayerExp.Invoke(_monsterStat.returnExp);
-            OnIncreasePlayerExp = null;
-        }
-
         private void UpdateAttackCoolTimeValue(float value)
         {
-            var tempAttackCoolTime = AttackCoolTime + value;
-
-            if (tempAttackCoolTime < 0)
-            {
-                AttackCoolTime = 0;
-            }
-            else
-            {
-                AttackCoolTime += value;
-            }
+            AttackCoolTime = Mathf.Max(AttackCoolTime + value, 0);
         }
 
         public int ReturnExp()

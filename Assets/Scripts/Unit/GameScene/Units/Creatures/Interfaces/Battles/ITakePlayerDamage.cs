@@ -1,9 +1,9 @@
 using System;
 
-namespace Unit.GameScene.Units.Creatures.Interfaces
+namespace Unit.GameScene.Units.Creatures.Interfaces.Battles
 {
     public interface ITakePlayerDamage
     {
-        public Func<int, int> TakeDamage();
+        Func<int, int> TakeDamage();
     }
 }

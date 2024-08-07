@@ -1091,7 +1091,7 @@ BlendTree:
     m_DirectBlendParameter: SkillIndex
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1435706454663353728, guid: ffeac53e493ef44cdb5f1d7876c104ba, type: 3}
+    m_Motion: {fileID: 7400000, guid: c88ef8eac3e194fb6b8cab8be2482009, type: 2}
     m_Threshold: 4
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1

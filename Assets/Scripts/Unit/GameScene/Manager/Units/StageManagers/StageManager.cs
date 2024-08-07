@@ -11,7 +11,6 @@ using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.Commands;
 using Unit.GameScene.Units.Creatures.Units;
 using Unit.GameScene.Units.Panels.Modules.StageModules;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using UnityEngine;
 
 namespace Unit.GameScene.Manager.Units.StageManagers

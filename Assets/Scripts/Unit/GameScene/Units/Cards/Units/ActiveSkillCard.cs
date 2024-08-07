@@ -1,6 +1,7 @@
+using Unit.GameScene.Units.Cards.Abstract;
 using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Interfaces;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Units.Cards.Units
 {
@@ -11,8 +12,8 @@ namespace Unit.GameScene.Units.Cards.Units
         public ActiveSkillCard(CharacterSkill characterSkill)
         {
             CardTargetType = CardTargetType.Skill;
-            
             CharacterSkill = characterSkill;
+            CardCurrentLevel = CharacterSkill.GetNextLevel();
 
             CardIcon = CharacterSkill.SkillIcon;
             CardMaxLevel = CharacterSkill.SkillMaxLevel;

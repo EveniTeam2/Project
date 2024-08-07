@@ -1,5 +1,5 @@
 using Unit.GameScene.Units.SkillFactories.Interfaces;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Units.SkillFactories.Modules
 {

@@ -5,8 +5,8 @@ using Unit.GameScene.Units.Cards.Abstract;
 using Unit.GameScene.Units.Cards.Enums;
 using Unit.GameScene.Units.Cards.Units;
 using Unit.GameScene.Units.Panels.Interfaces;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Abstract;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums;
+using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 
 namespace Unit.GameScene.Units.Panels.Modules.CardModules
 {
@@ -18,6 +18,7 @@ namespace Unit.GameScene.Units.Panels.Modules.CardModules
         private readonly ICardPool _cardPool;
         private readonly List<Card> _targetCards;
         private readonly List<CardView> _cardViews;
+        private readonly List<StarView> _cardStarViews;
         private readonly Action<bool> _setActiveCardPanel;
         private readonly Action<bool> _updateCardTriggerRunner;
         
@@ -29,6 +30,7 @@ namespace Unit.GameScene.Units.Panels.Modules.CardModules
             ICardPool cardPool,
             List<Card> targetCards,
             List<CardView> cardViews,
+            List<StarView> cardStarViews,
             Action<bool> setActiveCardPanel,
             Action<bool> updateCardTriggerRunner)
         {
@@ -37,6 +39,7 @@ namespace Unit.GameScene.Units.Panels.Modules.CardModules
             _cardPool = cardPool;
             _targetCards = targetCards;
             _cardViews = cardViews;
+            _cardStarViews = cardStarViews;
             _setActiveCardPanel = setActiveCardPanel;
             _updateCardTriggerRunner = updateCardTriggerRunner;
         }
@@ -76,6 +79,7 @@ namespace Unit.GameScene.Units.Panels.Modules.CardModules
             }
 
             ReleaseCardViews();
+            
             _targetCards.Clear();
             _setActiveCardPanel(false);
             _updateCardTriggerRunner(false);

@@ -11,12 +11,21 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
     public class CharacterStatSystem : StatSystem
     {
         public Action<int> OnIncreasePlayerExp;
-        private event Action<int, int> OnUpdateExpPanelUI;
-        private event Action<int> OnIncreasePlayerLevel;
-        public event Action OnTriggerCard;
         
+        public event Action<int, int> OnUpdateExpPanelUI;
+        public event Action<int> OnUpdateLevelPanelUI;
+        
+        public event Action OnTriggerCard;
+
         private readonly Dictionary<int, CharacterStatData> _entireStatInfo;
 
+        protected override MonoBehaviour MonoBehaviour { get; set; }
+        public override int CurrentHp { get; protected set; }
+        public override int MaxHp { get; protected set; }
+        public override int CurrentShield { get; protected set; }
+        public override int MaxShield { get; protected set; }
+        public override int Damage { get; protected set; }
+        public override int Speed { get; protected set; }
         public int CurrentLevel { get; private set; }
         public int MaxLevel { get; private set; }
         public int CurrentExp { get; private set; }
@@ -25,74 +34,56 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 
         public CharacterStatSystem(CharacterClassType characterClassType, List<CharacterStatData> statDataList)
         {
-            _entireStatInfo = new Dictionary<int, CharacterStatData>();
-            
-            foreach (var statData in statDataList.Where(statData => characterClassType == statData.CharacterType))
-            {
-                _entireStatInfo.Add(statData.CharacterLevel, statData);
-            }
+            _entireStatInfo = statDataList
+                .Where(statData => characterClassType == statData.CharacterType)
+                .ToDictionary(statData => statData.CharacterLevel);
         }
 
-        public override void InitializeStat()
+        public override void InitializeStat(MonoBehaviour monoBehaviour)
         {
-            CurrentLevel = _entireStatInfo[0].CharacterLevel;
+            var initialStat = _entireStatInfo[0];
+
+            MonoBehaviour = monoBehaviour;
+            CurrentLevel = initialStat.CharacterLevel;
             MaxLevel = _entireStatInfo.Count;
             CurrentExp = 0;
-            MaxExp = _entireStatInfo[0].CharacterMaxExp;
-            
-            CurrentHp = _entireStatInfo[0].CharacterMaxHp;
-            MaxHp = _entireStatInfo[0].CharacterMaxHp;
-            CurrentShield = _entireStatInfo[0].CharacterMaxShield;
-            MaxShield = _entireStatInfo[0].CharacterMaxShield;
-            Damage = _entireStatInfo[0].CharacterDamage;
-            Speed = _entireStatInfo[0].CharacterSpeed;
-            CardTrigger = _entireStatInfo[0].CardTrigger;
-            
-            OnUpdateHp.Invoke(CurrentHp, MaxHp);
-            OnUpdateExpPanelUI.Invoke(CurrentExp, MaxExp);
-            OnIncreasePlayerLevel.Invoke(CurrentLevel);
-            
+            MaxExp = initialStat.CharacterMaxExp;
+            CurrentHp = initialStat.CharacterMaxHp;
+            MaxHp = initialStat.CharacterMaxHp;
+            CurrentShield = initialStat.CharacterMaxShield;
+            MaxShield = initialStat.CharacterMaxShield;
+            Damage = initialStat.CharacterDamage;
+            Speed = initialStat.CharacterSpeed;
+            CardTrigger = initialStat.CardTrigger;
+
+            OnUpdateHpPanelUI?.Invoke(CurrentHp, MaxHp);
             OnIncreasePlayerExp += HandleOnIncreaseExp;
         }
 
-        public override void HandleOnUpdateStat(StatType type, float value)
+        protected override void HandleOnUpdateStat(StatType type, float value)
         {
             switch (type)
             {
                 case StatType.CurrentExp:
-                    Debug.Log($"캐릭터 Stat {type.ToString()} 현재 {CurrentExp}");
-                    UpdateCurrentExpValue((int) value);
-                    Debug.Log($"캐릭터 Stat {type.ToString()} {value} => {CurrentExp}로 변동");
+                    UpdateCurrentExpValue((int)value);
                     break;
                 case StatType.CurrentHp:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentHp}");
-                    UpdateCurrentHealthValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} 수치 수정 => {CurrentHp} 변동");
+                    UpdateCurrentHealthValue((int)value);
                     break;
                 case StatType.MaxHp:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {MaxHp}");
-                    UpdateMaxHealthValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} 수치 수정 => {MaxHp} 변동");
+                    UpdateMaxHealthValue((int)value);
                     break;
                 case StatType.CurrentShield:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {CurrentShield}");
-                    UpdateCurrentShieldValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} => {CurrentShield}로 변동");
+                    UpdateCurrentShieldValue((int)value);
                     break;
                 case StatType.MaxShield:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {MaxShield}");
-                    UpdateMaxShieldValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} => {MaxShield}로 변동");
+                    UpdateMaxShieldValue((int)value);
                     break;
                 case StatType.Damage:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {Damage}");
-                    UpdateDamageValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} => {Damage}로 변동");
+                    UpdateDamageValue((int)value);
                     break;
                 case StatType.Speed:
-                    Debug.Log($"Character Stat {type.ToString()} 현재 {Speed}");
-                    UpdateSpeedValue((int) value);
-                    Debug.Log($"Character Stat {type.ToString()} {value} =>  {Speed}로 변동");
+                    UpdateSpeedValue((int)value);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -101,63 +92,34 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 
         private void UpdateMaxHealthValue(int value)
         {
-            if (value < 0)
-            {
-                if (MaxHp - value <= 1)
-                {
-                    MaxHp = 1;
-                    CurrentHp = 1;
-                }
-                else
-                {
-                    MaxHp -= value;
-
-                    if (CurrentHp > MaxHp)
-                    {
-                        UpdateCurrentHealthValue(CurrentHp - MaxHp);
-                    }
-                }
-            }
-            else
-            {
-                MaxHp += value;
-                UpdateCurrentHealthValue(value);
-            }
+            MaxHp = Mathf.Max(MaxHp + value, 1);
+            CurrentHp = Mathf.Min(CurrentHp, MaxHp);
         }
 
         private void UpdateCurrentExpValue(int value)
         {
-            if (CurrentLevel == MaxExp && CurrentExp == MaxExp) return;
-            
+            if (CurrentLevel == MaxLevel && CurrentExp == MaxExp) return;
+
             CurrentExp += value;
 
             if (CurrentExp >= MaxExp)
             {
                 CurrentExp -= MaxExp;
-                
-                if (CurrentLevel + 1 <= MaxLevel)
-                {
-                    CurrentLevel++;
-                }
-                else
-                {
-                    CurrentLevel = MaxLevel;
-                    CurrentExp = MaxExp;
-                }
-                
+                CurrentLevel = Mathf.Min(CurrentLevel + 1, MaxLevel);
                 UpdateEntireStat(CurrentLevel);
-                OnIncreasePlayerLevel.Invoke(CurrentLevel);
+                OnUpdateLevelPanelUI?.Invoke(CurrentLevel);
             }
-            
-            OnUpdateExpPanelUI.Invoke(CurrentExp, MaxExp);
+
+            OnUpdateExpPanelUI?.Invoke(CurrentExp, MaxExp);
         }
 
         private void UpdateEntireStat(int level)
         {
+            if (!_entireStatInfo.ContainsKey(level)) return;
+
             var nextStat = _entireStatInfo[level];
-            
             var previousStat = _entireStatInfo[level - 1];
-                
+
             MaxExp += nextStat.CharacterMaxExp - previousStat.CharacterMaxExp;
             MaxHp += nextStat.CharacterMaxHp - previousStat.CharacterMaxHp;
             MaxShield += nextStat.CharacterMaxShield - previousStat.CharacterMaxShield;
@@ -167,10 +129,10 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 
             if (CardTrigger == 1)
             {
-                OnTriggerCard.Invoke();
+                OnTriggerCard?.Invoke();
             }
         }
-        
+
         private void HandleOnIncreaseExp(int value)
         {
             HandleOnUpdateStat(StatType.CurrentExp, value);
@@ -178,12 +140,12 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 
         public void RegisterHandleOnUpdateExpPanelUI(Action<int, int> action)
         {
-            OnUpdateExpPanelUI += action;
+            OnUpdateExpPanelUI = action;
         }
 
         public void RegisterHandleOnUpdateLevelPanelUI(Action<int> action)
         {
-            OnIncreasePlayerLevel += action;
+            OnUpdateLevelPanelUI = action;
         }
 
         public void RegisterHandleOnTriggerCard(Action action)

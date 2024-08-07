@@ -345,6 +345,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: 3. ManaBar_10
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 17
+        width: 43
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9488d5b5197f3496ebb05ae4e6a0aebe
+      internalID: -1407895668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3. ManaBar_11
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 41
+        width: 43
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca8ba837cbed64112aa09ffcc6247e73
+      internalID: 1237289814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -358,6 +400,9 @@ TextureImporter:
     nameFileIdTable:
       3. ManaBar_0: -2004333845
       3. ManaBar_1: -580778325
+      3. ManaBar_10: -1407895668
+      3. ManaBar_11: 1237289814
+      3. ManaBar_12: 1400620070
       3. ManaBar_2: 626693826
       3. ManaBar_3: 1535119374
       3. ManaBar_4: 1031438032

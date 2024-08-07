@@ -1,7 +1,7 @@
-namespace Unit.GameScene.Units.Creatures.Interfaces
+namespace Unit.GameScene.Units.Creatures.Interfaces.Battles
 {
     public interface ITakeMonsterDamage
     {
-        public void TakeDamage(int value);
+        void TakeDamage(int value);
     }
 }
