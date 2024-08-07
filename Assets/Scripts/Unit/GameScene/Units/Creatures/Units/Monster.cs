@@ -66,8 +66,8 @@ namespace Unit.GameScene.Units.Creatures.Units
             AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
             FsmSystem.TryChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
-            SetActiveCollider(true);
 
+            SetActiveCollider(true);
             RegisterEventHandler();
             SetActiveHealthBarUI(true);
 
@@ -130,7 +130,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public void AttackEnemy(RaycastHit2D target)
         {
-            _monsterBattleSystem.AttackEnemy(GetDamage(), target);
+            _monsterBattleSystem.MonsterAttackEnemy(GetDamage(), target);
         }
 
         public Func<int, int> TakeDamage()
