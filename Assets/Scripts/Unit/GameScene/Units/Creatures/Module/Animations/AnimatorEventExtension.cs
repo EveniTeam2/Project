@@ -5,11 +5,11 @@ namespace Unit.GameScene.Units.Creatures.Module.Animations
 {
    public static class AnimatorEventExtension
     {
-        private static AnimatorSystem AttachReceiver(ref Animator animator)
+        private static AnimationEventReceiver AttachReceiver(ref Animator animator)
         {
-            var receiver = animator.gameObject.GetComponent<AnimatorSystem>();
+            var receiver = animator.gameObject.GetComponent<AnimationEventReceiver>();
             
-            if (receiver == null) receiver = animator.gameObject.AddComponent<AnimatorSystem>();
+            if (receiver == null) receiver = animator.gameObject.AddComponent<AnimationEventReceiver>();
             
             return receiver;
         }

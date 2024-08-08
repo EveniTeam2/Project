@@ -1,9 +1,10 @@
+using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Interfaces.Battles;
 using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Abstract
 {
-    public abstract class BattleSystem : ICreatureBattle
+    public abstract class BattleSystem
     {
         protected LayerMask TargetLayerMask;
         protected Vector3 TargetDirection;
@@ -16,43 +17,35 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         {
             _targetTransform = targetTransform;
         }
-        
-        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float distance, out RaycastHit2D[] collider)
+
+        public bool CheckEnemyInRange(float distance, out RaycastHit2D[] collider)
         {
-            var rayPos = new Vector3(_targetTransform.position.x, _targetTransform.position.y + 1, _targetTransform.position.z);
-            var hits = Physics2D.RaycastAll(rayPos, direction, distance, targetLayer);
+            var rayPos = new Vector3(_targetTransform.position.x, _targetTransform.position.y, _targetTransform.position.z);
+            var hits = Physics2D.RaycastAll(rayPos, TargetDirection, distance, TargetLayerMask);
             
             collider = hits;
             
             if (collider.Length > 0)
             {
 #if UNITY_EDITOR
-                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y, rayPos.z), distance * direction, Color.red, 0.5f);
+                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y, rayPos.z), distance * TargetDirection, Color.red, 0.5f);
 #endif
                 return true;
             }
-            else
-            {
 #if UNITY_EDITOR
-                Debug.DrawRay(new Vector3(rayPos.x, rayPos.y, rayPos.z), distance * direction, Color.green, 0.5f);
+            Debug.DrawRay(new Vector3(rayPos.x, rayPos.y, rayPos.z), distance * TargetDirection, Color.green, 0.5f);
 #endif
-                return false;
-            }
+            return false;
         }
-        
-        public void PlayerAttackEnemy(int damage, float range)
+
+        public void AttackEnemy(int damage, float range)
         {
-            if (!CheckEnemyInRange(1 << LayerMask.NameToLayer("Monster"), Vector2.right, range, out var targets)) return;
-            
+            if (!CheckEnemyInRange(range, out var targets)) return;
+
             foreach (var target in targets)
             {
                 SendDamage(target, damage);
             }
-        }
-
-        public void MonsterAttackEnemy(int damage, RaycastHit2D target)
-        {
-            SendDamage(target, damage);
         }
     }
 }

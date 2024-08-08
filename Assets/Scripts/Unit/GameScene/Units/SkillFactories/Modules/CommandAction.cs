@@ -5,26 +5,26 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
 {
     public class CommandAction
     {
-        private ISkillCommand _skillCommand;
+        private ISkillCommandAction _skillCommandAction;
 
-        public void Initialize(ISkillCommand skillCommand)
+        public void Initialize(ISkillCommandAction skillCommandAction)
         {
-            _skillCommand = skillCommand;
+            _skillCommandAction = skillCommandAction;
         }
 
         public void Clear()
         {
-            _skillCommand = null;
+            _skillCommandAction = null;
         }
 
         public void Execute(int comboCount)
         {
-            _skillCommand.Execute(comboCount);
+            _skillCommandAction.Execute(comboCount);
         }
         
         public void ActivateCommandAction()
         {
-            if (_skillCommand is CharacterSkill characterSkill)
+            if (_skillCommandAction is CharacterSkill characterSkill)
             {
                 characterSkill.ActivateSkillEffects();
             }

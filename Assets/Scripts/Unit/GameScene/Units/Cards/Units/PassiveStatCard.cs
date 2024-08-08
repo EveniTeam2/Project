@@ -11,9 +11,9 @@ namespace Unit.GameScene.Units.Cards.Units
     public class PassiveStatCard : PassiveCard
     {
         private readonly StatCardData _statCardData;
-        private readonly IUpdateCreatureStat _character;
+        private readonly ICardController _character;
         
-        public PassiveStatCard(Sprite cardIcon, StatCardData cardData, IUpdateCreatureStat character)
+        public PassiveStatCard(Sprite cardIcon, StatCardData cardData, ICardController character)
         {
             CardTargetType = CardTargetType.Stat;
             

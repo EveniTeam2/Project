@@ -32,10 +32,10 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
         public int MaxExp { get; private set; }
         public int CardTrigger { get; private set; }
 
-        public CharacterStatSystem(CharacterClassType characterClassType, List<CharacterStatData> statDataList)
+        public CharacterStatSystem(CharacterType characterType, List<CharacterStatData> statDataList)
         {
             _entireStatInfo = statDataList
-                .Where(statData => characterClassType == statData.CharacterType)
+                .Where(statData => characterType == statData.CharacterType)
                 .ToDictionary(statData => statData.CharacterLevel);
         }
 

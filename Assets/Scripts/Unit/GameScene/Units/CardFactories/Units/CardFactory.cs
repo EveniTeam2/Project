@@ -16,9 +16,9 @@ namespace Unit.GameScene.Units.CardFactories.Units
         private readonly List<StatCardData> _statCardData;
         private readonly Dictionary<string, CharacterSkill> _skillData;
         private readonly StatCardSo _statCardSos;
-        private readonly IUpdateCreatureStat _character;
+        private readonly ICardController _character;
         
-        public CardFactory(List<StatCardData> statCardData, StatCardSo statCardSos, Dictionary<string, CharacterSkill> skillData, IUpdateCreatureStat character)
+        public CardFactory(List<StatCardData> statCardData, StatCardSo statCardSos, Dictionary<string, CharacterSkill> skillData, ICardController character)
         {
             _statCardData = statCardData;
             _statCardSos = statCardSos;

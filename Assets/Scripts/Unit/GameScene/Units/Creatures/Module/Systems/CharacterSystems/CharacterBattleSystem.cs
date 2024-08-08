@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
-    public class CharacterBattleSystem : BattleSystem, ICharacterBattle
+    public class CharacterBattleSystem : BattleSystem
     {
         private readonly CharacterStatSystem _characterStatSystem;
         

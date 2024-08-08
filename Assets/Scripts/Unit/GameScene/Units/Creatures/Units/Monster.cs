@@ -1,4 +1,3 @@
-using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
 using System;
 using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Abstract;
@@ -9,19 +8,17 @@ using Unit.GameScene.Units.Creatures.Interfaces.Battles;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
-using Unit.GameScene.Units.FSMs.Modules;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units
 {
-    public class Monster : Creature, IMonsterFsmController, ITakePlayerDamage
+    public class Monster : Creature, IMonsterSkillController
     {
-        [SerializeField] private MonsterStateMachineDTO stateData;
         [SerializeField] private RectTransform monsterHpPanelUI;
         [SerializeField] private RectTransform monsterHpHandler;
 
-        protected override AnimatorSystem AnimatorSystem { get; set; }
+        protected override AnimationEventReceiver AnimationEventReceiver { get; set; }
         protected override Collider2D CreatureCollider { get; set; }
         protected override RectTransform CreatureHpHandler { get; set; }
         protected override RectMask2D CreatureHpHandlerMask { get; set; }
@@ -34,17 +31,32 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public int GetDamage() => _monsterStatsSystem.Damage;
         public bool IsReadyForAttack() => _monsterBattleSystem.IsReadyForAttack;
-        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _monsterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
+
+        public void Attack(int value, float range)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Heal(int value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Buff(StatType statType, int value, float duration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckEnemyInRange(float range, out RaycastHit2D[] enemies) => _monsterBattleSystem.CheckEnemyInRange(range, out enemies);
 
         public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameters)
         {
             var monsterTransform = transform;
             AnimationParameters = animationParameters;
-
-            CreatureHpHandler = monsterHpHandler;
+            
             CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
 
-            AnimatorSystem = GetComponent<AnimatorSystem>();
+            AnimationEventReceiver = GetComponent<AnimationEventReceiver>();
             CreatureCollider = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -52,19 +64,27 @@ namespace Unit.GameScene.Units.Creatures.Units
             _monsterBattleSystem = new MonsterBattleSystem(_monsterStatsSystem, monsterTransform);
             _monsterMovementSystem = new MonsterMovementSystem(_monsterStatsSystem, monsterTransform, groundYPosition);
 
-            AnimatorSystem.Initialize(AnimationParameters);
-
-            FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, AnimationParameters, monsterTransform, _monsterStatsSystem);
+            AnimationEventReceiver.Initialize(AnimationParameters);
 
             RegisterEventHandler();
             SetActiveHealthBarUI(true);
+            
             _monsterStatsSystem.InitializeStat(this);
+        }
+        
+        private void RegisterEventHandler()
+        {
+            CreatureHpHandler = monsterHpHandler;
+            
+            _monsterStatsSystem.RegisterHandleOnUpdateHpPanelUI(UpdateHpBar);
+            _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
+            _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
         }
 
         public void ResetMonster()
         {
-            AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
-            FsmSystem.TryChangeState(StateType.Run);
+            AnimationEventReceiver.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
+            StateMachine.TryChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
 
             SetActiveCollider(true);
@@ -76,63 +96,56 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         private void Update()
         {
-            FsmSystem?.Update();
+            StateMachine?.Update();
             _monsterMovementSystem?.Update();
             _monsterBattleSystem?.Update();
         }
 
         private void FixedUpdate()
         {
-            FsmSystem?.FixedUpdate();
+            StateMachine?.FixedUpdate();
             _monsterMovementSystem?.FixedUpdate();
         }
-
-        protected override void RegisterEventHandler()
-        {
-            _monsterStatsSystem.RegisterHandleOnUpdateHpPanelUI(UpdateHpBar);
-            _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
-            _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
-        }
-
+        
         public void RegisterOnAttackEventHandler(Action onAttack)
         {
-            AnimatorSystem.OnAttack += onAttack;
+            AnimationEventReceiver.OnActivateSkillEffect += onAttack;
         }
 
         public void UnregisterOnAttackEventHandler(Action onAttack)
         {
-            AnimatorSystem.OnAttack -= onAttack;
+            AnimationEventReceiver.OnActivateSkillEffect -= onAttack;
         }
 
         protected override void HandleOnHit()
         {
-            FsmSystem.TryChangeState(StateType.Hit);
+            StateMachine.TryChangeState(StateType.Hit);
         }
 
         protected override void HandleOnDeath()
         {
-            AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], true, null);
+            AnimationEventReceiver.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], true, null);
             SetActiveHealthBarUI(false);
             SetActiveCollider(false);
 
-            FsmSystem.TryChangeState(StateType.Die);
+            StateMachine.TryChangeState(StateType.Die);
+        }
+
+        protected void AttackEnemy(int value, float range)
+        {
+            _monsterBattleSystem.AttackEnemy(value, range);
         }
 
         internal void RegisterEventDeath(Action<Monster> release)
         {
-            FsmSystem.RegisterHandleOnDeathState(() => release.Invoke(this));
+            StateMachine.RegisterHandleOnDeathState(() => release.Invoke(this));
         }
 
         public void ToggleMovement(bool setRunning)
         {
             _monsterMovementSystem.SetRun(setRunning);
         }
-
-        public void AttackEnemy(RaycastHit2D target)
-        {
-            _monsterBattleSystem.MonsterAttackEnemy(GetDamage(), target);
-        }
-
+        
         public Func<int, int> TakeDamage()
         {
             return damage =>

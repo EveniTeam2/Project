@@ -1,18 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces.Battles;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
+using ICharacterSkillController = Unit.GameScene.Units.Creatures.Interfaces.Battles.ICharacterSkillController;
 
 namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
-    public class CharacterSkillSystem
+    public class CharacterSkillSystem : SkillSystem
     {
-        private readonly CharacterClassType _type;
+        private readonly CharacterType _type;
         private readonly Dictionary<string, CharacterSkill> _skills;
 
-        public CharacterSkillSystem(CharacterClassType type, Dictionary<string, CharacterSkill> skills)
+        public CharacterSkillSystem(CharacterType type, Dictionary<string, CharacterSkill> skills)
         {
             _type = type;
             _skills = skills;

@@ -2,18 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces.Battles;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.SkillFactories.Interfaces;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using UnityEngine;
+using ICharacterSkillController = Unit.GameScene.Units.Creatures.Interfaces.Battles.ICharacterSkillController;
 
 namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units
 {
-    public class CharacterSkill : ISkillCommand
+    public class CharacterSkill : ISkillCommandAction
     {
         private event Action OnIncreaseSkillLevel;
         
-        public CharacterClassType CharacterClassType { get; private set; }
+        public CharacterType CharacterType { get; private set; }
         public SkillType SkillType { get; private set; }
         public Sprite SkillIcon { get; private set; }
         public string SkillName { get; private set; }
@@ -45,7 +47,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units
             var initialData = _csvData[0];
             
             SkillIcon = skillIcon;
-            CharacterClassType = initialData.CharacterType;
+            CharacterType = initialData.CharacterType;
             SkillType = initialData.SkillType;
             SkillName = initialData.SkillName;
             SkillIndex = initialData.SkillIndex;
@@ -61,13 +63,13 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units
             switch (SkillType)
             {
                 case SkillType.Attack:
-                    _characterSkillController.AttackEnemy(GetSkillValue() * ComboCount, GetSkillRange1());
+                    _characterSkillController.Attack(GetSkillValue() * ComboCount, GetSkillRange1());
                     break;
                 case SkillType.Heal:
-                    _characterSkillController.HealMySelf(GetSkillValue() * ComboCount);
+                    _characterSkillController.Heal(GetSkillValue() * ComboCount);
                     break;
                 case SkillType.BuffDamage:
-                    _characterSkillController.AdjustBuffDamage(GetSkillValue(), GetSkillDuration());
+                    _characterSkillController.Buff(StatType.Damage, GetSkillValue(), GetSkillDuration());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -112,7 +114,7 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units
         {
             _characterSkillController.SetReadyForInvokingCommand(isReady);
         }
-
+        
         private void ChangeState(StateType targetState)
         {
             _characterSkillController.TryChangeState(targetState);

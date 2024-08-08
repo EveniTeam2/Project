@@ -12,24 +12,24 @@ namespace Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories
 {
     public class CharacterSkillFactory : SkillFactory
     {
-        private readonly CharacterClassType _characterClassType;
+        private readonly CharacterType _characterType;
         private readonly CharacterDataSo _characterDataSo;
 
         public CharacterSkillFactory(CharacterDataSo characterDataSo)
         {
             _characterDataSo = characterDataSo;
-            _characterClassType = characterDataSo.classType;
+            _characterType = characterDataSo.type;
         }
 
         public override Dictionary<string, CharacterSkill> CreateSkill(List<SkillData> skillCsvData)
         {
-            var csvData = skillCsvData.Where(data => data.CharacterType == _characterClassType).ToList();
+            var csvData = skillCsvData.Where(data => data.CharacterType == _characterType).ToList();
             
-;           return _characterClassType switch
+;           return _characterType switch
             {
-                CharacterClassType.Knight => new KnightSkillFactory((KnightDataSo)_characterDataSo).CreateSkill(csvData),
-                CharacterClassType.Wizard => new WitchSkillFactory((WizardDataSo)_characterDataSo).CreateSkill(csvData),
-                CharacterClassType.Centaurs => new CentaursSkillFactory(null).CreateSkill(csvData),
+                CharacterType.Knight => new KnightSkillFactory((KnightDataSo)_characterDataSo).CreateSkill(csvData),
+                CharacterType.Wizard => new WitchSkillFactory((WizardDataSo)_characterDataSo).CreateSkill(csvData),
+                CharacterType.Centaurs => new CentaursSkillFactory(null).CreateSkill(csvData),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

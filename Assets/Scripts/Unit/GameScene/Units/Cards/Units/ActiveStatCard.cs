@@ -11,13 +11,13 @@ namespace Unit.GameScene.Units.Cards.Units
     public class ActiveStatCard : ActiveCard
     {
         private readonly List<StatCardData> _statCardData;
-        private readonly IUpdateCreatureStat _character;
+        private readonly ICardController _character;
         
         private StatType _statType;
         private float _effectValue;
         private float _duration;
         
-        public ActiveStatCard(Sprite cardIcon, List<StatCardData> cardData, IUpdateCreatureStat character)
+        public ActiveStatCard(Sprite cardIcon, List<StatCardData> cardData, ICardController character)
         {
             CardTargetType = CardTargetType.Stat;
             CardCurrentLevel = 1;

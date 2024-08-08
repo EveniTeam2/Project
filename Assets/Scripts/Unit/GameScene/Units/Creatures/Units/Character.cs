@@ -1,4 +1,3 @@
-using ScriptableObjects.Scripts.Creature.DTO.CharacterDTOs;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -8,26 +7,22 @@ using Unit.GameScene.Units.Cards.Interfaces;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Interfaces;
-using Unit.GameScene.Units.Creatures.Interfaces.Battles;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
-using Unit.GameScene.Units.FSMs.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
 using UnityEngine.UI;
+using ICharacterSkillController = Unit.GameScene.Units.Creatures.Interfaces.Battles.ICharacterSkillController;
 
 namespace Unit.GameScene.Units.Creatures.Units
 {
-    public class Character : Creature, ICharacterFsmController, ICharacterSkillController, ITakeMonsterDamage, IUpdateCreatureStat
+    public class Character : Creature, ICharacterSkillController, ICardController
     {
         public event Action OnPlayerDeath;
 
-        [SerializeField] protected CharacterClassType characterClassType;
-        [SerializeField] private CharacterStateMachineDto characterStateMachineDto;
+        [SerializeField] protected CharacterType characterType;
 
-        protected override AnimatorSystem AnimatorSystem { get; set; }
+        protected override AnimationEventReceiver AnimationEventReceiver { get; set; }
         protected override Collider2D CreatureCollider { get; set; }
         protected override RectTransform CreatureHpHandler { get; set; }
         protected override RectMask2D CreatureHpHandlerMask { get; set; }
@@ -40,58 +35,68 @@ namespace Unit.GameScene.Units.Creatures.Units
         
         private CharacterCommandSystem _characterCommandSystem;
         private CharacterBattleSystem _characterBattleSystem;
-        private CharacterHealthSystem _characterHealthSystem;
         private CharacterMovementSystem _characterMovementSystem;
         private CharacterStatSystem _characterStatSystem;
 
         private readonly Queue<CommandPacket> _commandQueue = new();
 
-        public bool CheckEnemyInRange(LayerMask targetLayer, Vector2 direction, float range, out RaycastHit2D[] enemies) => _characterBattleSystem.CheckEnemyInRange(targetLayer, direction, range, out enemies);
+        public bool CheckEnemyInRange(float range, out RaycastHit2D[] enemies) => _characterBattleSystem.CheckEnemyInRange(range, out enemies);
 
         public void Initialize(CharacterData characterData, float groundYPosition, RectTransform characterHpHandler, RectTransform characterExpHandler, TextMeshProUGUI characterLevelHandler, Dictionary<AnimationParameterEnums, int> animationParameters, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
             var characterTransform = transform;
 
             CreatureCollider = GetComponent<Collider2D>();
-            AnimatorSystem = GetComponent<AnimatorSystem>();
+            AnimationEventReceiver = GetComponent<AnimationEventReceiver>();
 
             _characterData = characterData;
-            characterClassType = _characterData.CharacterDataSo.classType;
-
-            CreatureHpHandler = characterHpHandler;
+            characterType = _characterData.CharacterDataSo.type;
+            
             CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
-            _creatureExpHandler = characterExpHandler;
             _creatureExpHandlerMask = characterExpHandler.GetComponent<RectMask2D>();
-
-            _characterLevelHandler = characterLevelHandler;
+            
             AnimationParameters = animationParameters;
 
             // 시스템 초기화
             _characterStatSystem = characterData.StatSystem;
             _characterBattleSystem = new CharacterBattleSystem(_characterStatSystem, characterTransform);
             _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
-            _characterHealthSystem = new CharacterHealthSystem(_characterMovementSystem, _characterStatSystem.RegisterHandleOnUpdatePermanentStat, _characterStatSystem.RegisterHandleOnUpdateTemporaryStat);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
 
-            AnimatorSystem.Initialize(AnimationParameters);
-            AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
+            AnimationEventReceiver.Initialize(AnimationParameters);
+            AnimationEventReceiver.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
 
-            FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimatorSystem, AnimationParameters);
+            // FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimationEventReceiver, AnimationParameters);
 
-            RegisterEventHandler();
+            RegisterEventHandler(characterHpHandler, characterExpHandler, characterLevelHandler);
 
             _characterData.RegisterCharacterServiceProvider(this);
             _characterStatSystem.InitializeStat(this);
         }
 
+        private void RegisterEventHandler(RectTransform characterHpHandler, RectTransform characterExpHandler, TextMeshProUGUI characterLevelHandler)
+        {
+            CreatureHpHandler = characterHpHandler;
+            _creatureExpHandler = characterExpHandler;
+            _characterLevelHandler = characterLevelHandler;
+            
+            AnimationEventReceiver.OnActivateSkillEffect += _characterCommandSystem.ActivateSkillEffects;
+
+            _characterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
+            _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
+            _characterStatSystem.RegisterHandleOnUpdateHpPanelUI(UpdateHpBar);
+            _characterStatSystem.RegisterHandleOnUpdateExpPanelUI(HandleOnUpdateExpPanelUI);
+            _characterStatSystem.RegisterHandleOnUpdateLevelPanelUI(HandleOnUpdateLevelPanelUI);
+        }
+
         private void Update()
         {
-            if (AnimatorSystem.GetBool(AnimationParameterEnums.IsDead)) return;
+            if (AnimationEventReceiver.GetBool(AnimationParameterEnums.IsDead)) return;
 
-            FsmSystem?.Update();
+            StateMachine?.Update();
             _characterMovementSystem?.Update();
 
-            if (FsmSystem?.GetCurrentStateType() is StateType.Idle or StateType.Run)
+            if (StateMachine?.GetCurrentStateType() is StateType.Idle or StateType.Run)
             {
                 _characterCommandSystem?.Update();
             }
@@ -99,9 +104,9 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         private void FixedUpdate()
         {
-            if (AnimatorSystem.GetBool(AnimationParameterEnums.IsDead)) return;
+            if (AnimationEventReceiver.GetBool(AnimationParameterEnums.IsDead)) return;
 
-            FsmSystem?.FixedUpdate();
+            StateMachine?.FixedUpdate();
             _characterMovementSystem?.FixedUpdate();
         }
 
@@ -112,7 +117,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public void HealMySelf(int value)
         {
-            _characterHealthSystem.TakeHeal(value);
+            _characterStatSystem.RegisterHandleOnUpdatePermanentStat(StatType.CurrentHp, value);
         }
 
         public void SetReadyForInvokingCommand(bool isReady)
@@ -122,7 +127,22 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public void TryChangeState(StateType targetState)
         {
-            FsmSystem.TryChangeState(targetState);
+            StateMachine.TryChangeState(targetState);
+        }
+
+        public void Attack(int value, float range)
+        {
+            _characterBattleSystem.AttackEnemy(value, range);
+        }
+
+        public void Heal(int value)
+        {
+            _characterStatSystem.RegisterHandleOnUpdatePermanentStat(StatType.CurrentHp, value);
+        }
+
+        public void Buff(StatType statType, int value, float duration)
+        {
+            _characterStatSystem.RegisterHandleOnUpdateTemporaryStat(StatType.CurrentHp, value, duration);
         }
 
         public void Summon()
@@ -130,19 +150,9 @@ namespace Unit.GameScene.Units.Creatures.Units
             // TODO: 소환 스킬이 추가되면 수정 필요
         }
 
-        public void AttackEnemy(int value, float range)
-        {
-            _characterBattleSystem.PlayerAttackEnemy(value, range);
-        }
-
-        public void AdjustBuffDamage(int value, float duration)
-        {
-            _characterStatSystem.RegisterHandleOnUpdateTemporaryStat(StatType.Damage, value, duration);
-        }
-
         public void TakeDamage(int value)
         {
-            if (AnimatorSystem.GetBool(AnimationParameterEnums.IsDead)) return;
+            if (AnimationEventReceiver.GetBool(AnimationParameterEnums.IsDead)) return;
 
             _characterMovementSystem.SetImpact();
             _characterStatSystem.RegisterHandleOnUpdatePermanentStat(StatType.CurrentHp, value * -1);
@@ -151,19 +161,6 @@ namespace Unit.GameScene.Units.Creatures.Units
         public void UpdateCreatureStat(StatType statType, float value)
         {
             _characterStatSystem.RegisterHandleOnUpdatePermanentStat(statType, value);
-        }
-
-        protected override void RegisterEventHandler()
-        {
-            AnimatorSystem.OnAttack += _characterCommandSystem.ActivateSkillEffects;
-
-            _characterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
-            _characterStatSystem.RegisterHandleOnHit(HandleOnHit);
-            _characterStatSystem.RegisterHandleOnUpdateHpPanelUI(UpdateHpBar);
-            _characterStatSystem.RegisterHandleOnUpdateExpPanelUI(HandleOnUpdateExpPanelUI);
-            _characterStatSystem.RegisterHandleOnUpdateLevelPanelUI(HandleOnUpdateLevelPanelUI);
-
-            FsmSystem.RegisterHandleOnDeathState(HandleOnGameOver);
         }
 
         public void RegisterHandleOnCommandDequeue(Action action)
@@ -183,22 +180,22 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         protected override void HandleOnHit()
         {
-            var stateType = FsmSystem.GetCurrentStateType();
+            var stateType = StateMachine.GetCurrentStateType();
 
             if (stateType is StateType.Skill or StateType.Hit or StateType.Die)
             {
                 return;
             }
 
-            FsmSystem.TryChangeState(StateType.Hit);
+            StateMachine.TryChangeState(StateType.Hit);
         }
 
         protected override void HandleOnDeath()
         {
-            AnimatorSystem.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], true, null);
+            AnimationEventReceiver.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], true, null);
             SetActiveCollider(false);
 
-            FsmSystem.TryChangeState(StateType.Die);
+            StateMachine.TryChangeState(StateType.Die);
         }
 
         public void HandleOnSendCommand(CommandPacket command)

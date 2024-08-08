@@ -1,6 +1,8 @@
 using ScriptableObjects.Scripts.Creature.Data;
+using Unit.GameScene.Units.Creatures.Interfaces.Battles;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
+using ICharacterSkillController = Unit.GameScene.Units.Creatures.Interfaces.Battles.ICharacterSkillController;
 
 namespace Unit.GameScene.Units.Creatures.Data.CharacterDatas
 {

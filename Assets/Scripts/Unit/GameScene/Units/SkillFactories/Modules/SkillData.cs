@@ -4,7 +4,7 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
 {
     public struct SkillData
     {
-        public CharacterClassType CharacterType { get; }
+        public CharacterType CharacterType { get; }
         public int SkillIndex { get; }
         public string SkillName { get; }
         public string SkillDescription { get; }
@@ -18,7 +18,7 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
         public SkillExtraEffectType SkillExtraEffectType { get; }
         public float SkillDuration { get; }
         
-        public SkillData(CharacterClassType characterType, int skillIndex, string skillName, string skillDescription,
+        public SkillData(CharacterType characterType, int skillIndex, string skillName, string skillDescription,
             int skillLevel, int skillValue, float skillRange1, float skillRange2, SkillType skillType,
             int isSingleTarget, SkillRangeType skillRangeType, SkillExtraEffectType skillExtraEffectType,
             float skillDuration) 

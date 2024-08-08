@@ -5,13 +5,9 @@ using System.Linq;
 using ScriptableObjects.Scripts.Creature.Data;
 using Unit.GameScene.Manager.Units.GameSceneManagers.Modules;
 using Unit.GameScene.Manager.Units.StageManagers;
-using Unit.GameScene.Module;
 using Unit.GameScene.Units.Blocks.Enums;
 using Unit.GameScene.Units.CardFactories.Units;
 using Unit.GameScene.Units.Cards.Abstract;
-using Unit.GameScene.Units.Cards.Data;
-using Unit.GameScene.Units.Cards.Enums;
-using Unit.GameScene.Units.Cards.Units;
 using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
@@ -19,7 +15,6 @@ using Unit.GameScene.Units.Creatures.Units;
 using Unit.GameScene.Units.Panels.Controllers;
 using Unit.GameScene.Units.SkillFactories.Modules;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkillFactories;
-using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Enums;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
 using CharacterStatSystem = Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems.CharacterStatSystem;
@@ -108,13 +103,13 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
 
         private void CreateCharacterData()
         {
-            var characterDataSo = extraSetting.characterDataSos.Cast<CharacterDataSo>().FirstOrDefault(data => data.classType == extraSetting.characterClassType);
+            var characterDataSo = extraSetting.characterDataSos.Cast<CharacterDataSo>().FirstOrDefault(data => data.type == extraSetting.characterType);
             var skillCsvData = CsvParser.ParseCharacterSkillData(defaultSetting.characterSkillCsv);
             _characterSkills = new CharacterSkillFactory(characterDataSo).CreateSkill(skillCsvData);
             var characterCsvData = CsvParser.ParseCharacterStatData(defaultSetting.characterDataCsv);
             
-            var skillInfo = new CharacterSkillSystem(extraSetting.characterClassType, _characterSkills);
-            var statInfo = new CharacterStatSystem(extraSetting.characterClassType, characterCsvData);
+            var skillInfo = new CharacterSkillSystem(extraSetting.characterType, _characterSkills);
+            var statInfo = new CharacterStatSystem(extraSetting.characterType, characterCsvData);
             
             _characterData = new CharacterData(characterDataSo, statInfo, skillInfo);
         }

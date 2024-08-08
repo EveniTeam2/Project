@@ -8,6 +8,5 @@ namespace Unit.GameScene.Units.Creatures.Interfaces.SkillControllers
         void RegisterOnAttackEventHandler(Action onAttack);
         void UnregisterOnAttackEventHandler(Action onAttack);
         bool IsReadyForAttack();
-        void AttackEnemy(RaycastHit2D target);
     }
 }

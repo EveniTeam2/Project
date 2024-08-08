@@ -23,9 +23,9 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
         [Header("---- Player Spawn Position ----"), Space(5)]
         public Vector3 playerSpawnPosition;
 
-        [Space(5), Header("---- Player Setting ----")]
+        [FormerlySerializedAs("characterClassType")] [Space(5), Header("---- Player Setting ----")]
         // TODO : 이전 씬에서 캐릭터를 선택하면 현재 씬에서 팩토리를 통해 스킬과 스탯을 생성하도록 해야 함
-        public CharacterClassType characterClassType;
+        public CharacterType characterType;
         public List<CreatureDataSo> characterDataSos;
         // public AssetReference characterRef;
 

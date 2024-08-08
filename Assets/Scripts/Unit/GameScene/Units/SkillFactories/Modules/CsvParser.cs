@@ -38,7 +38,7 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
                     continue;
                 }
                 
-                if (!Enum.TryParse<CharacterClassType>(values[1], out var characterType))
+                if (!Enum.TryParse<CharacterType>(values[1], out var characterType))
                 {
                     Debug.LogError($"Failed to parse CharacterClassType for line: {line}");
                     continue;
@@ -141,7 +141,7 @@ namespace Unit.GameScene.Units.SkillFactories.Modules
                     continue;
                 }
 
-                if (!Enum.TryParse<CharacterClassType>(values[1], out var characterType))
+                if (!Enum.TryParse<CharacterType>(values[1], out var characterType))
                 {
                     Debug.LogError($"Failed to parse CharacterClassType for line: {line}");
                     continue;

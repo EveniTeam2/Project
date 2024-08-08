@@ -156,7 +156,7 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.ResetMonster();
                     monster.gameObject.SetActive(true);
-                    monster.FsmSystem.TryChangeState(StateType.Idle);
+                    monster.StateMachine.TryChangeState(StateType.Idle);
                 }
         }
 
