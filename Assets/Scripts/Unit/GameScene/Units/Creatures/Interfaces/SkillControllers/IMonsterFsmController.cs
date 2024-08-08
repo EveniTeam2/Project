@@ -9,5 +9,7 @@ namespace Unit.GameScene.Units.Creatures.Interfaces.SkillControllers
         void UnregisterOnAttackEventHandler(Action onAttack);
         bool IsReadyForAttack();
         void AttackEnemy(RaycastHit2D target);
+        bool CheckPlayer(Vector2 startPos, Vector2 endPos, out RaycastHit2D[] target);
+        bool CheckPlayer(Vector2 direction, float distance, out RaycastHit2D[] target);
     }
 }

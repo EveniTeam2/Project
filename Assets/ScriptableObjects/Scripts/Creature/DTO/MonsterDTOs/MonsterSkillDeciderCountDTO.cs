@@ -16,4 +16,15 @@ namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
             return new MonsterSkillDeciderCount(targetSkill, count);
         }
     }
+
+    public class MosnterSkillDeciderDistanceDTO : MonsterSkillDeciderDTO
+    {
+        public int distance;
+        public Vector2 direction;
+
+        public override IMonsterSkillDecider GetSkillDecider(IMonsterSkillAct targetSkill, Transform transform, StateMachine stateMachine, Dictionary<AnimationParameterEnums, int> animationParameterEnums, IMonsterFsmController fsmController)
+        {
+            return new MonsterSkillDeciderDistance(fsmController, targetSkill, distance, 1 << LayerMask.NameToLayer("Player"), direction);
+        }
+    }
 }

@@ -25,18 +25,37 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         {
             base.Enter();
 
-            foreach (var skillInfo in _skillInfo)
+            if (!CheckSkillDecider())
             {
-                if (skillInfo.SkillDecider.CanExcute())
+                foreach (var skill in _skillInfo)
+                    skill.SkillDecider.ResetDecider();
+                if (!CheckSkillDecider())
                 {
-                    targetSkill = skillInfo;
-                    break;
+                    Debug.Log("Monster Skill State에서 사용가능한 스킬이 없습니다!");
+                    this.ChangeToDefaultState();
                 }
             }
-
             FsmController.RegisterOnAttackEventHandler(OnAttack);
             FsmController.SetBool(MonsterBaseStateInfo.StateParameter, true, ChangeToDefaultState);
             FsmController.SetFloat(targetSkill.SkillParameter, targetSkill.SkillValue, null);
+        }
+
+        private bool CheckSkillDecider()
+        {
+            for (int i = 0; i < _skillInfo.Length; ++i)
+            {
+                if (_skillInfo[i].SkillDecider.CanExcute())
+                {
+                    SetSkill(_skillInfo[i]);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void SetSkill(MonsterSkillStateInfo monsterSkillStateInfo)
+        {
+            targetSkill = monsterSkillStateInfo;
         }
 
         public override void Exit()

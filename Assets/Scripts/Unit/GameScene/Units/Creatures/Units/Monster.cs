@@ -148,5 +148,18 @@ namespace Unit.GameScene.Units.Creatures.Units
         {
             monsterHpPanelUI.gameObject.SetActive(active);
         }
+
+        bool IMonsterFsmController.CheckPlayer(Vector2 startPos, Vector2 endPos, out RaycastHit2D[] target)
+        {
+            Vector2 direction = endPos - startPos;
+            float distance = direction.magnitude;
+            direction.Normalize();
+            return _monsterBattleSystem.CheckEnemyInRange(1 << LayerMask.NameToLayer("Player"), direction, distance, out target);
+        }
+
+        bool IMonsterFsmController.CheckPlayer(Vector2 direction, float distance, out RaycastHit2D[] target)
+        {
+            return _monsterBattleSystem.CheckEnemyInRange(1 << LayerMask.NameToLayer("Player"), direction, distance, out target);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
+namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
 {
     public class MonsterSkillDeciderCount : IMonsterSkillDecider
     {
@@ -24,7 +24,7 @@
             return false;
         }
 
-        public void ResetDecider()
+        void IMonsterSkillDecider.ResetDecider()
         {
             current = 0;
         }

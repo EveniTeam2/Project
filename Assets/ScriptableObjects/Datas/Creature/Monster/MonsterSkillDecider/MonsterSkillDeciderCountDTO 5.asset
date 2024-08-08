@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3664c49ff94001e40bc8920c6221c925, type: 3}
   m_Name: MonsterSkillDeciderCountDTO 5
   m_EditorClassIdentifier: 
-  count: 0
+  count: 5
