@@ -56,7 +56,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
 
         private IEnumerator ComboBoardControllerInitializer(List<BlockModel> blockModels, RectTransform blockPanel, CharacterData characterData, Dictionary<BlockType, CharacterSkill> blockInfo)
         {
-            while (blockPanel.rect.width == 0)
+            while (blockPanel.rect.height <= 0)
             {
                 yield return new WaitForEndOfFrame();
             }
@@ -106,7 +106,7 @@ namespace Unit.GameScene.Units.Panels.Controllers
             _comboBlockEnterPosX = rect.max.x + 100;
             _comboBlockExitPosX = rect.min.x - 100;
             
-            _blockSize = new Vector2(rect.height * localScaleY, rect.height * localScaleY);
+            _blockSize = new Vector2(panelHeight * localScaleY, panelHeight * localScaleY);
             _blockPositions = new List<float>();
             
             var x = rect.xMin + _blockSize.x / 2;
