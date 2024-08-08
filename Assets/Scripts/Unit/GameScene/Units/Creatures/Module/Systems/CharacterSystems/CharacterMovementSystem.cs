@@ -5,7 +5,6 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems
 {
     public class CharacterMovementSystem : MovementSystem
     {
-        // TODO : 채이환 - 인코딩 UTF-8 통일해주세요.
         protected int BoostSpeed = 0;
         protected float BoostTimer = 0;
 

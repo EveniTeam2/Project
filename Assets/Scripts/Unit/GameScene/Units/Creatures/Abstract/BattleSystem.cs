@@ -40,9 +40,9 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             }
         }
         
-        public void AttackEnemy(int damage, float range)
+        public void PlayerAttackEnemy(int damage, float range)
         {
-            if (!CheckEnemyInRange(TargetLayerMask, TargetDirection, range, out var targets)) return;
+            if (!CheckEnemyInRange(1 << LayerMask.NameToLayer("Monster"), Vector2.right, range, out var targets)) return;
             
             foreach (var target in targets)
             {
@@ -50,7 +50,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
             }
         }
 
-        public void AttackEnemy(int damage, RaycastHit2D target)
+        public void MonsterAttackEnemy(int damage, RaycastHit2D target)
         {
             SendDamage(target, damage);
         }
