@@ -53,8 +53,6 @@ namespace Unit.GameScene.Units.Creatures.Units
         {
             var monsterTransform = transform;
             AnimationParameters = animationParameters;
-            
-            CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
 
             AnimationEventReceiver = GetComponent<AnimationEventReceiver>();
             CreatureCollider = GetComponent<Collider2D>();
@@ -68,6 +66,8 @@ namespace Unit.GameScene.Units.Creatures.Units
 
             RegisterEventHandler();
             SetActiveHealthBarUI(true);
+            
+            CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
             
             _monsterStatsSystem.InitializeStat(this);
         }
@@ -84,7 +84,7 @@ namespace Unit.GameScene.Units.Creatures.Units
         public void ResetMonster()
         {
             AnimationEventReceiver.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
-            StateMachine.TryChangeState(StateType.Run);
+            StateMachine.ChangeState(StateType.Run);
             _spriteRenderer.color = Color.white;
 
             SetActiveCollider(true);
@@ -103,7 +103,6 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         private void FixedUpdate()
         {
-            StateMachine?.FixedUpdate();
             _monsterMovementSystem?.FixedUpdate();
         }
         
@@ -119,7 +118,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         protected override void HandleOnHit()
         {
-            StateMachine.TryChangeState(StateType.Hit);
+            StateMachine.ChangeState(StateType.Hit);
         }
 
         protected override void HandleOnDeath()
@@ -128,7 +127,7 @@ namespace Unit.GameScene.Units.Creatures.Units
             SetActiveHealthBarUI(false);
             SetActiveCollider(false);
 
-            StateMachine.TryChangeState(StateType.Die);
+            StateMachine.ChangeState(StateType.Die);
         }
 
         protected void AttackEnemy(int value, float range)
@@ -136,10 +135,10 @@ namespace Unit.GameScene.Units.Creatures.Units
             _monsterBattleSystem.AttackEnemy(value, range);
         }
 
-        internal void RegisterEventDeath(Action<Monster> release)
-        {
-            StateMachine.RegisterHandleOnDeathState(() => release.Invoke(this));
-        }
+        // internal void RegisterEventDeath(Action<Monster> release)
+        // {
+        //     StateMachine.RegisterHandleOnDeathState(() => release.Invoke(this));
+        // }
 
         public void ToggleMovement(bool setRunning)
         {

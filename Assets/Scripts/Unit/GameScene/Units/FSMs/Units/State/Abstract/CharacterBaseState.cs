@@ -1,4 +1,6 @@
+using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
 using Unit.GameScene.Units.FSMs.Units.StataMachine.Units;
 
 namespace Unit.GameScene.Units.FSMs.Units.State.Abstract
@@ -7,9 +9,18 @@ namespace Unit.GameScene.Units.FSMs.Units.State.Abstract
     {
         private readonly CharacterStateMachine _characterStateMachine;
         
+        protected readonly CharacterStatSystem CharacterStatSystem;
+        protected readonly CharacterMovementSystem CharacterMovementSystem;
+        protected readonly CharacterBattleSystem CharacterBattleSystem;
+        protected readonly CharacterSkillSystem CharacterSkillSystem;
+        
         public CharacterBaseState(CharacterStateMachine characterStateMachine) : base(characterStateMachine)
         {
             _characterStateMachine = characterStateMachine;
+            CharacterStatSystem = _characterStateMachine.StatSystem as CharacterStatSystem;
+            CharacterMovementSystem = _characterStateMachine.MovementSystem as CharacterMovementSystem;
+            CharacterBattleSystem = _characterStateMachine.BattleSystem as CharacterBattleSystem;
+            CharacterSkillSystem = _characterStateMachine.SkillSystem as CharacterSkillSystem;
         }
 
         protected override void ChangeState(StateType stateType)

@@ -1,4 +1,6 @@
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces;
+using Unit.GameScene.Units.FSMs.Interfaces;
 using Unit.GameScene.Units.FSMs.Units.StataMachine.Units;
 using Unit.GameScene.Units.FSMs.Units.State.Abstract;
 
@@ -12,15 +14,7 @@ namespace Unit.GameScene.Units.FSMs.Units
 
         public override void Enter()
         {
-            SetTrigger(AnimationParameterEnums.Hit, null);
-        }
-        
-        public override void Update()
-        {
-        }
-
-        public override void Exit()
-        {
+            SetTrigger(AnimationParameterEnums.Hit, () => ChangeState(StateType.Idle));
         }
     }
 }

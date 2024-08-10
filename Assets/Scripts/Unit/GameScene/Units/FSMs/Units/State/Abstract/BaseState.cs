@@ -8,28 +8,17 @@ using UnityEngine;
 
 public abstract class BaseState : IState
 {
-    protected float DefaultAttackRange;
-    protected Vector3 _moveDirection;
-    protected readonly StatSystem _statSystem;
-    protected readonly MovementSystem _movementSystem;
-    protected readonly BattleSystem _battleSystem;
-    protected readonly SkillSystem _skillSystem;
+    protected readonly float DefaultAttackRange;
     
     private readonly StateMachine _stateMachine;
     private readonly AnimationEventReceiver _animationEventReceiver;
 
-    public BaseState(StateMachine stateMachine)
+    protected BaseState(StateMachine stateMachine)
     {
         DefaultAttackRange = stateMachine.DefaultAttackRange;
-        
-        _statSystem = stateMachine.StatSystem;
-        _movementSystem = stateMachine.MovementSystem;
-        _battleSystem = stateMachine.BattleSystem;
 
         _stateMachine = stateMachine;
         _animationEventReceiver = stateMachine.AnimationEventReceiver;
-        
-        _moveDirection = stateMachine.CreatureType == CreatureType.Character ? Vector3.right : Vector3.left;
     }
 
     public virtual void Enter(){}

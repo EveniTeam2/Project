@@ -17,9 +17,7 @@ namespace Unit.GameScene.Units.FSMs.Units
             _isReadyForAttack = false;
             SetBool(AnimationParameterEnums.Skill, true, () => ChangeState(StateType.Idle));
         }
-
-        public override void Update() { }
-
+        
         public override void Exit()
         {
             SetBool(AnimationParameterEnums.Skill, false, null);

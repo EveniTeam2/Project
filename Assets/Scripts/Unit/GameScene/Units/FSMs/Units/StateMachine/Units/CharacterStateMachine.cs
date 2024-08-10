@@ -1,6 +1,7 @@
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Module.Animations;
+using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
 using Unit.GameScene.Units.FSMs.Interfaces;
 
 namespace Unit.GameScene.Units.FSMs.Units.StataMachine.Units
@@ -13,14 +14,20 @@ namespace Unit.GameScene.Units.FSMs.Units.StataMachine.Units
         public IState CharacterDieState { get; private set; }
         public IState CharacterSkillState { get; private set; }
         
-        public CharacterStateMachine(CreatureType creatureType, float defaultAttackRange, AnimationEventReceiver animationEventReceiver, StatSystem statSystem, MovementSystem movementSystem, BattleSystem battleSystem) : base(creatureType, defaultAttackRange, animationEventReceiver, statSystem, movementSystem, battleSystem)
+        public CharacterStateMachine(float defaultAttackRange, AnimationEventReceiver animationEventReceiver, CharacterStatSystem characterStatSystem, CharacterMovementSystem characterMovementSystem, CharacterBattleSystem characterBattleSystem, CharacterSkillSystem characterSkillSystem)
+            : base(defaultAttackRange, animationEventReceiver, characterStatSystem, characterMovementSystem, characterBattleSystem, characterSkillSystem)
         {
-            StateInfos.AD
             CharacterIdleState = new CharacterIdleState(this);
             CharacterRunState = new CharacterRunState(this);
             CharacterHitState = new CharacterHitState(this);
             CharacterDieState = new CharacterDieState(this);
             CharacterSkillState = new CharacterSkillState(this);
+            
+            StateInfos.Add(StateType.Idle, CharacterIdleState);
+            StateInfos.Add(StateType.Run, CharacterRunState);
+            StateInfos.Add(StateType.Hit, CharacterHitState);
+            StateInfos.Add(StateType.Die, CharacterDieState);
+            StateInfos.Add(StateType.Skill, CharacterSkillState);
         }
     }
 }

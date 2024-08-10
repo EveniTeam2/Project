@@ -1,6 +1,8 @@
 using System;
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Module.Animations;
+using Unit.GameScene.Units.FSMs.Interfaces;
 using Unit.GameScene.Units.FSMs.Units.StataMachine.Units;
 using Unit.GameScene.Units.FSMs.Units.State.Abstract;
 

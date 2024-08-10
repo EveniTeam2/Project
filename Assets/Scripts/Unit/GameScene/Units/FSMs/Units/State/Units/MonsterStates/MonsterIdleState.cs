@@ -1,5 +1,7 @@
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Enums;
+using Unit.GameScene.Units.Creatures.Interfaces;
+using Unit.GameScene.Units.FSMs.Interfaces;
 using Unit.GameScene.Units.FSMs.Units.StataMachine.Units;
 using Unit.GameScene.Units.FSMs.Units.State.Abstract;
 using UnityEngine;
@@ -20,7 +22,14 @@ namespace Unit.GameScene.Units.FSMs.Units
 
         public override void Update()
         {
-            ChangeState(_battleSystem.CheckEnemyInRange(DefaultAttackRange, out RaycastHit2D[] _) ? StateType.Skill : StateType.Run);
+            if (!MonsterBattleSystem.CheckEnemyInRange(DefaultAttackRange, out RaycastHit2D[] _))
+            {
+                ChangeState(StateType.Run);
+            }
+            else if (MonsterBattleSystem.IsReadyForAttack)
+            {
+                ChangeState(StateType.Skill);
+            }
         }
 
         public override void Exit()

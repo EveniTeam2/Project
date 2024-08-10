@@ -19,7 +19,10 @@ namespace Unit.GameScene.Units.FSMs.Units
 
         public override void Update()
         {
-            ChangeState(_battleSystem.CheckEnemyInRange(DefaultAttackRange, out RaycastHit2D[] _) ? StateType.Skill : StateType.Run);
+            if (!CharacterBattleSystem.CheckEnemyInRange(DefaultAttackRange, out RaycastHit2D[] _))
+            {
+                ChangeState(StateType.Run);
+            }
         }
 
         public override void Exit()

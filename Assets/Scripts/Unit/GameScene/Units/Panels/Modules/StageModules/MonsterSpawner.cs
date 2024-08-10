@@ -63,7 +63,7 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
                         var returnPool = pool;
                         monCreate.Initialize(_data.monsterStats[index], ground, _animationParameter);
                         monCreate.gameObject.SetActive(false);
-                        monCreate.RegisterEventDeath(returnPool.Release);
+                        // monCreate.RegisterEventDeath(returnPool.Release);
                     },
                     null,
                     monRelease => { monRelease.gameObject.SetActive(false); },
@@ -156,7 +156,7 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
                                                  new Vector3(Random.Range(-1f, 1f), 0f);
                     monster.ResetMonster();
                     monster.gameObject.SetActive(true);
-                    monster.StateMachine.TryChangeState(StateType.Idle);
+                    monster.StateMachine.ChangeState(StateType.Idle);
                 }
         }
 

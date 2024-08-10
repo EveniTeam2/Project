@@ -12,15 +12,7 @@ namespace Unit.GameScene.Units.FSMs.Units
 
         public override void Enter()
         {
-            SetTrigger(AnimationParameterEnums.Hit, null);
-        }
-        
-        public override void Update()
-        {
-        }
-
-        public override void Exit()
-        {
+            SetTrigger(AnimationParameterEnums.Hit, () => ChangeState(StateType.Idle));
         }
     }
 }

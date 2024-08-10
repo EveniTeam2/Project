@@ -7,8 +7,6 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
 {
     public class MonsterStatSystem : StatSystem
     {
-        private readonly MonsterStat _monsterStat;
-
         protected override MonoBehaviour MonoBehaviour { get; set; }
         public override int CurrentHp { get; protected set; }
         public override int MaxHp { get; protected set; }
@@ -17,6 +15,8 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
         public override int Damage { get; protected set; }
         public override int Speed { get; protected set; }
         public float AttackCoolTime { get; private set; }
+        
+        private MonsterStat _monsterStat;
 
         public MonsterStatSystem(MonsterStat stat)
         {
@@ -36,7 +36,6 @@ namespace Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems
 
             OnUpdateHpPanelUI?.Invoke(CurrentHp, MaxHp);
         }
-        
         protected override void HandleOnUpdateStat(StatType type, float value)
         {
             switch (type)

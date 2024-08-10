@@ -9,6 +9,7 @@ using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.Systems.CharacterSystems;
+using Unit.GameScene.Units.FSMs.Units.StataMachine.Units;
 using Unit.GameScene.Units.SkillFactories.Units.CharacterSkills.Units;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +33,8 @@ namespace Unit.GameScene.Units.Creatures.Units
         private TextMeshProUGUI _characterLevelHandler;
 
         private CharacterData _characterData;
-        
+
+        private CharacterSkillSystem _characterSkillSystem;
         private CharacterCommandSystem _characterCommandSystem;
         private CharacterBattleSystem _characterBattleSystem;
         private CharacterMovementSystem _characterMovementSystem;
@@ -52,13 +54,11 @@ namespace Unit.GameScene.Units.Creatures.Units
             _characterData = characterData;
             characterType = _characterData.CharacterDataSo.type;
             
-            CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
-            _creatureExpHandlerMask = characterExpHandler.GetComponent<RectMask2D>();
-            
             AnimationParameters = animationParameters;
 
             // 시스템 초기화
             _characterStatSystem = characterData.StatSystem;
+            _characterSkillSystem = characterData.SkillSystem;
             _characterBattleSystem = new CharacterBattleSystem(_characterStatSystem, characterTransform);
             _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);
@@ -66,12 +66,16 @@ namespace Unit.GameScene.Units.Creatures.Units
             AnimationEventReceiver.Initialize(AnimationParameters);
             AnimationEventReceiver.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], false, null);
 
-            // FsmSystem = StateBuilder.BuildCharacterStateMachine(characterStateMachineDto, this, AnimationEventReceiver, AnimationParameters);
-
             RegisterEventHandler(characterHpHandler, characterExpHandler, characterLevelHandler);
+            
+            CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
+            _creatureExpHandlerMask = characterExpHandler.GetComponent<RectMask2D>();
 
             _characterData.RegisterCharacterServiceProvider(this);
             _characterStatSystem.InitializeStat(this);
+            
+            StateMachine = new CharacterStateMachine(_characterSkillSystem.GetDefaultSkill().GetSkillRange1(), AnimationEventReceiver, _characterStatSystem, _characterMovementSystem, _characterBattleSystem, _characterSkillSystem);
+            StateMachine.ChangeState(StateType.Run);
         }
 
         private void RegisterEventHandler(RectTransform characterHpHandler, RectTransform characterExpHandler, TextMeshProUGUI characterLevelHandler)
@@ -105,8 +109,7 @@ namespace Unit.GameScene.Units.Creatures.Units
         private void FixedUpdate()
         {
             if (AnimationEventReceiver.GetBool(AnimationParameterEnums.IsDead)) return;
-
-            StateMachine?.FixedUpdate();
+            
             _characterMovementSystem?.FixedUpdate();
         }
 
@@ -127,7 +130,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public void TryChangeState(StateType targetState)
         {
-            StateMachine.TryChangeState(targetState);
+            StateMachine.ChangeState(targetState);
         }
 
         public void Attack(int value, float range)
@@ -187,7 +190,7 @@ namespace Unit.GameScene.Units.Creatures.Units
                 return;
             }
 
-            StateMachine.TryChangeState(StateType.Hit);
+            StateMachine.ChangeState(StateType.Hit);
         }
 
         protected override void HandleOnDeath()
@@ -195,7 +198,7 @@ namespace Unit.GameScene.Units.Creatures.Units
             AnimationEventReceiver.SetBool(AnimationParameters[AnimationParameterEnums.IsDead], true, null);
             SetActiveCollider(false);
 
-            StateMachine.TryChangeState(StateType.Die);
+            StateMachine.ChangeState(StateType.Die);
         }
 
         public void HandleOnSendCommand(CommandPacket command)
