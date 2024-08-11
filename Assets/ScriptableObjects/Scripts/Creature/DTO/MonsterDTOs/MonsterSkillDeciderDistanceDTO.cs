@@ -6,17 +6,16 @@ using UnityEngine;
 
 namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
 {
-    [CreateAssetMenu(fileName = nameof(MonsterSkillDeciderCountDTO), menuName = "State/Monster/" + nameof(MonsterSkillDeciderDTO) + "/" + nameof(MonsterSkillDeciderCountDTO))]
-    public class MonsterSkillDeciderCountDTO : MonsterSkillDeciderDTO
+    [CreateAssetMenu(fileName = nameof(MonsterSkillDeciderDistanceDTO), menuName = "State/Monster/" + nameof(MonsterSkillDeciderDTO) + "/" + nameof(MonsterSkillDeciderDistanceDTO))]
+    public class MonsterSkillDeciderDistanceDTO : MonsterSkillDeciderDTO
     {
-        public int count;
+        public int distance;
+        public Vector2 direction;
+        public LayerMask targetLayer;
 
         public override IMonsterSkillDecider GetSkillDecider(IMonsterSkillAct targetSkill, Transform transform, StateMachine stateMachine, Dictionary<AnimationParameterEnums, int> animationParameterEnums, IMonsterFsmController fsmController)
         {
-            return new MonsterSkillDeciderCount(targetSkill, count);
+            return new MonsterSkillDeciderDistance(fsmController, targetSkill, distance, targetLayer, direction);
         }
     }
-
-
-
 }
