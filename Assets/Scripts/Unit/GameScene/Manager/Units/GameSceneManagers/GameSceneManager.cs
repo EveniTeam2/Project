@@ -145,7 +145,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         {
             for (var i = 0; i < extraSetting.blockInfos.Count; i++)
             {
-                _blockInfo.Add((BlockType)i, i == 0 ? _characterData.SkillSystem.GetDefaultSkill() : null);
+                _blockInfo.Add((BlockType)i, i == 0 ? _characterData.CharacterSkillSystem.GetDefaultSkill() : null);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers
         private void InstantiateAndInitializeStage()
         {
             _stageScore = new StageScore();
-            _monsterSpawner = new MonsterSpawner(_character.transform, extraSetting.monsterSpawnData, extraSetting.playerSpawnPosition.y, _stageScore, _animationParameters);
+            // _monsterSpawner = new MonsterSpawner(_character.transform, extraSetting.monsterSpawnData, extraSetting.playerSpawnPosition.y, _stageScore, _animationParameters);
 
             InitializeCamera(_camera, extraSetting.cameraSpawnPosition);
             InitializeMap(extraSetting.mapPrefab, extraSetting.playerSpawnPosition);

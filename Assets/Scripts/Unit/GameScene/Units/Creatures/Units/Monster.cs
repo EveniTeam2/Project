@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Data.MonsterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
-using Unit.GameScene.Units.Creatures.Interfaces;
 using Unit.GameScene.Units.Creatures.Interfaces.Battles;
-using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Animations;
 using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using UnityEngine;
@@ -15,6 +13,7 @@ namespace Unit.GameScene.Units.Creatures.Units
 {
     public class Monster : Creature, IMonsterSkillController
     {
+        [SerializeField] private MonsterType monsterType;
         [SerializeField] private RectTransform monsterHpPanelUI;
         [SerializeField] private RectTransform monsterHpHandler;
 
@@ -23,13 +22,15 @@ namespace Unit.GameScene.Units.Creatures.Units
         protected override RectTransform CreatureHpHandler { get; set; }
         protected override RectMask2D CreatureHpHandlerMask { get; set; }
 
+        private MonsterData _monsterData;
+        private MonsterStatSystem _monsterStatSystem;
+        private MonsterSkillSystem _monsterSkillSystem;
         private MonsterBattleSystem _monsterBattleSystem;
         private MonsterMovementSystem _monsterMovementSystem;
-        private MonsterStatSystem _monsterStatsSystem;
 
         private SpriteRenderer _spriteRenderer;
 
-        public int GetDamage() => _monsterStatsSystem.Damage;
+        public int GetDamage() => _monsterStatSystem.Damage;
         public bool IsReadyForAttack() => _monsterBattleSystem.IsReadyForAttack;
 
         public void Attack(int value, float range)
@@ -49,18 +50,24 @@ namespace Unit.GameScene.Units.Creatures.Units
 
         public bool CheckEnemyInRange(float range, out RaycastHit2D[] enemies) => _monsterBattleSystem.CheckEnemyInRange(range, out enemies);
 
-        public void Initialize(MonsterStat stat, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameters)
+        public void Initialize(MonsterData monsterData, float groundYPosition, Dictionary<AnimationParameterEnums, int> animationParameters)
         {
             var monsterTransform = transform;
-            AnimationParameters = animationParameters;
-
-            AnimationEventReceiver = GetComponent<AnimationEventReceiver>();
+            
             CreatureCollider = GetComponent<Collider2D>();
+            AnimationEventReceiver = GetComponent<AnimationEventReceiver>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            
+            AnimationParameters = animationParameters;
+            
 
-            _monsterStatsSystem = new MonsterStatSystem(stat);
-            _monsterBattleSystem = new MonsterBattleSystem(_monsterStatsSystem, monsterTransform);
-            _monsterMovementSystem = new MonsterMovementSystem(_monsterStatsSystem, monsterTransform, groundYPosition);
+            _monsterData = monsterData;
+            // monsterType = _monsterData.MonsterDataSo.type;
+            //
+            // _monsterStatSystem = _monsterData.StatSystem;
+            // _monsterSkillSystem = _monsterData.SkillSystem;
+            _monsterBattleSystem = new MonsterBattleSystem(_monsterStatSystem, monsterTransform);
+            _monsterMovementSystem = new MonsterMovementSystem(_monsterStatSystem, monsterTransform, groundYPosition);
 
             AnimationEventReceiver.Initialize(AnimationParameters);
 
@@ -69,16 +76,16 @@ namespace Unit.GameScene.Units.Creatures.Units
             
             CreatureHpHandlerMask = CreatureHpHandler.GetComponent<RectMask2D>();
             
-            _monsterStatsSystem.InitializeStat(this);
+            _monsterStatSystem.InitializeStat(this);
         }
         
         private void RegisterEventHandler()
         {
             CreatureHpHandler = monsterHpHandler;
             
-            _monsterStatsSystem.RegisterHandleOnUpdateHpPanelUI(UpdateHpBar);
-            _monsterStatsSystem.RegisterHandleOnDeath(HandleOnDeath);
-            _monsterStatsSystem.RegisterHandleOnHit(HandleOnHit);
+            _monsterStatSystem.RegisterHandleOnUpdateHpPanelUI(UpdateHpBar);
+            _monsterStatSystem.RegisterHandleOnDeath(HandleOnDeath);
+            _monsterStatSystem.RegisterHandleOnHit(HandleOnHit);
         }
 
         public void ResetMonster()
@@ -91,7 +98,7 @@ namespace Unit.GameScene.Units.Creatures.Units
             RegisterEventHandler();
             SetActiveHealthBarUI(true);
 
-            _monsterStatsSystem.InitializeStat(this);
+            _monsterStatSystem.InitializeStat(this);
         }
 
         private void Update()
@@ -150,9 +157,9 @@ namespace Unit.GameScene.Units.Creatures.Units
             return damage =>
             {
                 _monsterMovementSystem.SetImpact();
-                _monsterStatsSystem.RegisterHandleOnUpdatePermanentStat(StatType.CurrentHp, damage * -1);
+                _monsterStatSystem.RegisterHandleOnUpdatePermanentStat(StatType.CurrentHp, damage * -1);
 
-                return _monsterStatsSystem.ReturnExp();
+                return _monsterStatSystem.ReturnExp();
             };
         }
 

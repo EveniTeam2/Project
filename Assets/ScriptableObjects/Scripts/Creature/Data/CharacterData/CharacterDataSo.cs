@@ -6,7 +6,7 @@ namespace ScriptableObjects.Scripts.Creature.Data
 {
     public class CharacterDataSo : CreatureDataSo
     {
-        [FormerlySerializedAs("classType")] [Header("클래스 타입")]
+        [Header("클래스 타입")]
         public CharacterType type;
     }
 }

@@ -26,7 +26,7 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
         {
             get
             {
-                LinkedList<Monster> spawnedMonster = new LinkedList<Monster>();
+                LinkedList<Monster> spawnedMonster = new();
                 spawnedMonster.Clear();
                 foreach (var (key, pool) in _monsterPool)
                 {
@@ -42,13 +42,13 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
             Dictionary<AnimationParameterEnums, int> animationParameter)
         {
             _data = data.GetStageData(score);
-            this._playerPosition = playerPosition;
+            _playerPosition = playerPosition;
             _ground = ground;
             _spawnGroup = new LinkedList<StageMonsterGroup>();
             _waitGroup = new Queue<StageMonsterGroup>();
             _animationParameter = animationParameter;
             CreateMonsterPool(_data, ground);
-            this._offsetTime = data.monsterSpawnTimeOffset;
+            _offsetTime = data.monsterSpawnTimeOffset;
         }
 
         private void CreateMonsterPool(StageMonsterSpawnData data, float ground)
@@ -61,7 +61,7 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
                     (monCreate, pool) =>
                     {
                         var returnPool = pool;
-                        monCreate.Initialize(_data.monsterStats[index], ground, _animationParameter);
+                        // monCreate.Initialize(_data.monsterStats[index], ground, _animationParameter);
                         monCreate.gameObject.SetActive(false);
                         // monCreate.RegisterEventDeath(returnPool.Release);
                     },

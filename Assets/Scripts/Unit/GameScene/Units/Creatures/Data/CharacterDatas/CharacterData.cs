@@ -9,19 +9,19 @@ namespace Unit.GameScene.Units.Creatures.Data.CharacterDatas
     public class CharacterData
     {
         public CharacterDataSo CharacterDataSo { get; }
-        public CharacterSkillSystem SkillSystem { get; }
-        public CharacterStatSystem StatSystem { get; }
+        public CharacterStatSystem CharacterStatSystem { get; }
+        public CharacterSkillSystem CharacterSkillSystem { get; }
 
-        public CharacterData(CharacterDataSo characterDataSo, CharacterStatSystem statSystem, CharacterSkillSystem skillSystem)
+        public CharacterData(CharacterDataSo characterDataSo, CharacterStatSystem characterStatSystem, CharacterSkillSystem characterSkillSystem)
         {
             CharacterDataSo = characterDataSo;
-            StatSystem = statSystem;
-            SkillSystem = skillSystem;
+            CharacterStatSystem = characterStatSystem;
+            CharacterSkillSystem = characterSkillSystem;
         }
 
         public void RegisterCharacterServiceProvider(ICharacterSkillController characterSkillController)
         {
-            SkillSystem.RegisterCharacterServiceProvider(characterSkillController);
+            CharacterSkillSystem.RegisterCharacterServiceProvider(characterSkillController);
         }
     }
 }

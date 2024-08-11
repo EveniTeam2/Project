@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using ScriptableObjects.Scripts.Blocks;
 using ScriptableObjects.Scripts.Cards;
 using ScriptableObjects.Scripts.Creature.Data;
+using ScriptableObjects.Scripts.Creature.Data.MonsterData;
 using Unit.GameScene.Manager.Units.StageManagers.Modules;
-using Unit.GameScene.Units.Creatures.Abstract;
-using Unit.GameScene.Units.Creatures.Data.CharacterDatas;
 using Unit.GameScene.Units.Creatures.Enums;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
 {
@@ -23,23 +21,23 @@ namespace Unit.GameScene.Manager.Units.GameSceneManagers.Modules
         [Header("---- Player Spawn Position ----"), Space(5)]
         public Vector3 playerSpawnPosition;
 
-        [FormerlySerializedAs("characterClassType")] [Space(5), Header("---- Player Setting ----")]
+        [Header("---- Player Setting ----"), Space(5)]
         // TODO : 이전 씬에서 캐릭터를 선택하면 현재 씬에서 팩토리를 통해 스킬과 스탯을 생성하도록 해야 함
         public CharacterType characterType;
         public List<CreatureDataSo> characterDataSos;
         // public AssetReference characterRef;
 
-        [Space(5), Header("---- Monster Setting ----")]
-        public MonsterSpawnData monsterSpawnData;
+        [Header("---- Monster Setting ----"), Space(5)]
+        public List<MonsterDataSo> monsterDataSoLists;
         //public AssetReference[] monstersRef;
         
-        [Space(5), Header("---- Block Settings ----")]
+        [Header("---- Block Settings ----"), Space(5)]
         public List<BlockModel> blockInfos;
 
-        [Space(5), Header("---- StatCard Settings ----")]
+        [Header("---- StatCard Settings ----"), Space(5)]
         public StatCardSo statCardSos;
         
-        [Space(5), Header("---- Map Settings ----")]
+        [Header("---- Map Settings ----")]
         public GameObject mapPrefab;
     }
 }

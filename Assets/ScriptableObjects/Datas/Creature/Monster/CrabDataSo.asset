@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19654edf77a471ea2c8d06057c9f7f4, type: 3}
+  m_Name: CrabDataSo
+  m_EditorClassIdentifier: 
+  creature: {fileID: -919387498159533204, guid: 15d4d804b1ae1da4d8a5a382b0cfea74, type: 3}
+  type: 0

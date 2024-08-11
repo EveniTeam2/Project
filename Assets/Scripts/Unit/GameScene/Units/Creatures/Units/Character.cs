@@ -33,12 +33,11 @@ namespace Unit.GameScene.Units.Creatures.Units
         private TextMeshProUGUI _characterLevelHandler;
 
         private CharacterData _characterData;
-
+        private CharacterStatSystem _characterStatSystem;
         private CharacterSkillSystem _characterSkillSystem;
         private CharacterCommandSystem _characterCommandSystem;
         private CharacterBattleSystem _characterBattleSystem;
         private CharacterMovementSystem _characterMovementSystem;
-        private CharacterStatSystem _characterStatSystem;
 
         private readonly Queue<CommandPacket> _commandQueue = new();
 
@@ -50,15 +49,15 @@ namespace Unit.GameScene.Units.Creatures.Units
 
             CreatureCollider = GetComponent<Collider2D>();
             AnimationEventReceiver = GetComponent<AnimationEventReceiver>();
-
-            _characterData = characterData;
-            characterType = _characterData.CharacterDataSo.type;
             
             AnimationParameters = animationParameters;
+            
+            _characterData = characterData;
+            characterType = _characterData.CharacterDataSo.type;
 
             // 시스템 초기화
-            _characterStatSystem = characterData.StatSystem;
-            _characterSkillSystem = characterData.SkillSystem;
+            _characterStatSystem = _characterData.CharacterStatSystem;
+            _characterSkillSystem = _characterData.CharacterSkillSystem;
             _characterBattleSystem = new CharacterBattleSystem(_characterStatSystem, characterTransform);
             _characterMovementSystem = new CharacterMovementSystem(_characterStatSystem, characterTransform, groundYPosition);
             _characterCommandSystem = new CharacterCommandSystem(blockInfo, _commandQueue);

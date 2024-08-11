@@ -583,7 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a623f55c5c2ce4285386a392cdbc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateData: {fileID: 11400000, guid: 67ff79dbd7be6594b95a5ab0b862948a, type: 2}
+  monsterType: 8
   monsterHpPanelUI: {fileID: 2322097114784356921}
   monsterHpHandler: {fileID: 5183538190129550819}
 --- !u!114 &-8753938970053872447
