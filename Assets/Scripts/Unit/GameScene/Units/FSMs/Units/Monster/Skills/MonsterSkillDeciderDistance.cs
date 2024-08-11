@@ -1,6 +1,8 @@
+using System;
 using Unit.GameScene.Units.Creatures.Abstract;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
 {
@@ -24,25 +26,6 @@ namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
         bool IMonsterSkillDecider.CanExcute()
         {
             return monsterController.CheckEnemyInRange(targetLayer, direction, distance, out _);
-        }
-
-        void IMonsterSkillDecider.ResetDecider()
-        {
-            
-        }
-    }
-
-
-    public class MonsterSkillDeciderTimer : IMonsterSkillDecider
-    {
-        float timer;
-        float current;
-
-
-
-        bool IMonsterSkillDecider.CanExcute()
-        {
-            return current > timer;
         }
 
         void IMonsterSkillDecider.ResetDecider()

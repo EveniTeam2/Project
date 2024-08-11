@@ -13,18 +13,102 @@ MonoBehaviour:
   m_Name: MonsterSpawnData
   m_EditorClassIdentifier: 
   monstersRef:
+  - {fileID: 7745749428328640735, guid: 15d4d804b1ae1da4d8a5a382b0cfea74, type: 3}
+  - {fileID: 9169108201183232055, guid: 19a7bcef20b07cc41bc869510a60df13, type: 3}
+  - {fileID: 585987752704288141, guid: a61fd7f3fb0b5d742b3ef8d6b82755df, type: 3}
+  - {fileID: 2180453324448452970, guid: 499407cfbea119c4aa879c68a1934a2c, type: 3}
+  - {fileID: 6257336847816575888, guid: 83727d79694be1649b3c04e87c1900ea, type: 3}
+  - {fileID: 7002928916665041887, guid: c471d1c0dc93d4768bcbd01d2e6bcebc, type: 3}
+  - {fileID: 8624279017738781582, guid: c5b1079de14d408439b499a47dd70826, type: 3}
+  - {fileID: 7707144203729350016, guid: 3745ae3d1140b4e01865b318c3795fe9, type: 3}
   - {fileID: 350301380735278074, guid: 0c3c0e5be6d1f4696b0d134959515f53, type: 3}
   monsterStats:
-  - damage: 1
-    health: 5
-    speed: 5
+  - damage: 10
+    health: 30
+    speed: 1
     attackCoolTime: 1
-    returnExp: 15
-  monsterSpawnOffset: {x: 10, y: 0, z: 0}
-  monsterSpawnTimeOffset: 5
+    returnExp: 10
+  - damage: 20
+    health: 50
+    speed: 1
+    attackCoolTime: 1
+    returnExp: 30
+  - damage: 30
+    health: 80
+    speed: 1
+    attackCoolTime: 1
+    returnExp: 50
+  - damage: 40
+    health: 100
+    speed: 1
+    attackCoolTime: 1
+    returnExp: 70
+  - damage: 50
+    health: 120
+    speed: 1
+    attackCoolTime: 1
+    returnExp: 90
+  - damage: 60
+    health: 140
+    speed: 1
+    attackCoolTime: 1
+    returnExp: 120
+  - damage: 70
+    health: 160
+    speed: 2
+    attackCoolTime: 1
+    returnExp: 200
+  - damage: 80
+    health: 180
+    speed: 1
+    attackCoolTime: 1
+    returnExp: 300
+  - damage: 90
+    health: 200
+    speed: 2
+    attackCoolTime: 1
+    returnExp: 400
+  monsterSpawnOffset: {x: 15, y: 0, z: 0}
+  monsterSpawnTimeOffset: 3
   monsterGroup:
   - spawnDecider: {fileID: 11400000, guid: 7722e2688ef47684b9e0483cea55742e, type: 2}
     monsterSpawnGroups:
     - weight: 1
       monsterIndex: 00000000
       monsterStatIndex: 00000000
+    - weight: 1
+      monsterIndex: 01000000
+      monsterStatIndex: 00000000
+  - spawnDecider: {fileID: 11400000, guid: 11f3ece343c48c04fb03c9490aeb9bea, type: 2}
+    monsterSpawnGroups:
+    - weight: 1
+      monsterIndex: 0000000001000000
+      monsterStatIndex: 0100000001000000
+    - weight: 1
+      monsterIndex: 02000000
+      monsterStatIndex: 02000000
+  - spawnDecider: {fileID: 11400000, guid: 9cecae2a8a62e1e4d896dd5d6285572a, type: 2}
+    monsterSpawnGroups:
+    - weight: 1
+      monsterIndex: 000000000100000002000000
+      monsterStatIndex: 020000000200000002000000
+    - weight: 1
+      monsterIndex: 0200000003000000
+      monsterStatIndex: 0300000003000000
+    - weight: 1
+      monsterIndex: 04000000
+      monsterStatIndex: 04000000
+  - spawnDecider: {fileID: 11400000, guid: 8dbeb3bbb92ffa745b69cfafd047ea02, type: 2}
+    monsterSpawnGroups:
+    - weight: 5
+      monsterIndex: 05000000
+      monsterStatIndex: 05000000
+    - weight: 5
+      monsterIndex: 06000000
+      monsterStatIndex: 06000000
+    - weight: 3
+      monsterIndex: 07000000
+      monsterStatIndex: 07000000
+    - weight: 1
+      monsterIndex: 08000000
+      monsterStatIndex: 08000000

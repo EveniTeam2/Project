@@ -451,7 +451,7 @@ Transform:
   m_Children:
   - {fileID: 7702501370299782264}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6970286536030674080
 SpriteRenderer:
@@ -601,7 +601,6 @@ MonoBehaviour:
   animationClips:
   - {fileID: 7400000, guid: a9263f50b0951490b8fc75889168e624, type: 2}
   - {fileID: 7400000, guid: 84329e4f69d104d7d9a4eaadf5b380c6, type: 2}
-  - {fileID: 7400000, guid: 401ce18e42c5a448395121c3afd7569f, type: 2}
   - {fileID: 7400000, guid: 0b911314fdf71461aae6525a78f69001, type: 2}
   - {fileID: 7400000, guid: d9097cc52a2324619bdb9f7151fd8d9f, type: 2}
 --- !u!1 &7503987459176983476

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Unit.GameScene.Units.Creatures.Abstract
 {
-    public abstract class StatSystem : MonoBehaviour
+    public abstract class StatSystem
     {
         protected Action<int, int> OnUpdateHpPanelUI;
         
@@ -84,7 +84,7 @@ namespace Unit.GameScene.Units.Creatures.Abstract
         
         public void RegisterHandleOnUpdateTemporaryStat(StatType type, float value, float duration)
         {
-            StartCoroutine(BuffTimer(type, value, duration));
+            MonoBehaviour.StartCoroutine(BuffTimer(type, value, duration));
         }
 
         private IEnumerator BuffTimer(StatType type, float value, float duration)

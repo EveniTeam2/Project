@@ -9,16 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a03099ff60d2c64cacd2b56bcee2b58, type: 3}
-  m_Name: MonsterRunStateDTO
+  m_Script: {fileID: 11500000, guid: d5c466a4b887516449136376ba1cd866, type: 3}
+  m_Name: MonsterCrabSkillStateDTO
   m_EditorClassIdentifier: 
   monsterBaseStateInfoDto:
-    stateType: 1
-    stateParameter: 1
+    stateType: 2
+    stateParameter: 6
     defaultExitState: 0
-  monsterRunStateInfoDTO:
+  skillInfoDto:
+  - skillParameter: 3
+    skillValue: 0
     targetLayer:
       serializedVersion: 2
       m_Bits: 64
     direction: {x: -1, y: 0}
-    distance: 5
+    distance: 1
+    skillAct: {fileID: 11400000, guid: 9003b25f2a0ef6f49b246a4cce510e61, type: 2}
+    skillDecider: {fileID: 11400000, guid: 664fb58b78a43d643ac47fe73369f42c, type: 2}

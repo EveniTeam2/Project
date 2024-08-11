@@ -26,6 +26,8 @@ namespace Unit.GameScene.Units.Creatures.Units
         protected override RectTransform CreatureHpHandler { get; set; }
         protected override RectMask2D CreatureHpHandlerMask { get; set; }
 
+        public IEventPublisher UpdateEvent => ManualUpdate;
+
         private MonsterBattleSystem _monsterBattleSystem;
         private MonsterMovementSystem _monsterMovementSystem;
         private MonsterStatSystem _monsterStatsSystem;
