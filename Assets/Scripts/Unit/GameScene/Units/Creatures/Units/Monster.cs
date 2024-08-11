@@ -15,33 +15,6 @@ using UnityEngine.UI;
 
 namespace Unit.GameScene.Units.Creatures.Units
 {
-    public interface IEventSubscriber
-    {
-        public void OnEvent();
-    }
-
-    public interface IEventPublisher
-    {
-        public void RegisterEvent(IEventSubscriber eventSubscriber);
-        public void UnregisterEvent(IEventSubscriber eventSubscriber);
-    }
-
-    public class ManualUpdater : IEventPublisher
-    {
-        private event Action UpdateEvent;
-        public void Update()
-        {
-            UpdateEvent?.Invoke();
-        }
-        public void RegisterEvent(IEventSubscriber eventSubscriber)
-        {
-            UpdateEvent += eventSubscriber.OnEvent;
-        }
-        public void UnregisterEvent(IEventSubscriber eventSubscriber)
-        {
-            UpdateEvent -= eventSubscriber.OnEvent;
-        }
-    }
     public class Monster : Creature, IMonsterFsmController, ITakePlayerDamage
     {
         [SerializeField] private MonsterStateMachineDTO stateData;

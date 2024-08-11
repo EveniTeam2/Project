@@ -31,4 +31,23 @@ namespace ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs
             
         }
     }
+
+
+    public class MonsterSkillDeciderTimer : IMonsterSkillDecider
+    {
+        float timer;
+        float current;
+
+
+
+        bool IMonsterSkillDecider.CanExcute()
+        {
+            return current > timer;
+        }
+
+        void IMonsterSkillDecider.ResetDecider()
+        {
+
+        }
+    }
 }
