@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5c466a4b887516449136376ba1cd866, type: 3}
-  m_Name: MonsterReinforcedGolemGoblinSkillStateDTO
+  m_Name: MonsterRatSkillStateDTO
   m_EditorClassIdentifier: 
   monsterBaseStateInfoDto:
     stateType: 2

@@ -30,7 +30,7 @@ namespace Unit.GameScene.Units.FSMs.Modules
         {
             bool result = _states.TryAdd(stateType, state);
 
-            if (_states.Count == 1)
+            if (_states.Count == 2)
             {
                 CurrentState = state;
                 CurrentState.Enter();

@@ -57,11 +57,12 @@ namespace Unit.GameScene.Units.Creatures.Units
 
             AnimatorSystem.Initialize(AnimationParameters);
 
+            ManualUpdate = new ManualUpdater();
+            _monsterStatsSystem.InitializeStat(this);
             FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, AnimationParameters, monsterTransform, _monsterStatsSystem);
 
             RegisterEventHandler();
             SetActiveHealthBarUI(true);
-            _monsterStatsSystem.InitializeStat(this);
         }
 
         public void ResetMonster()
