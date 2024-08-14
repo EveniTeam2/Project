@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ScriptableObjects.Scripts.Creature.DTO;
 using ScriptableObjects.Scripts.Creature.DTO.CharacterDTOs;
 using Unit.GameScene.Units.Creatures.Enums;

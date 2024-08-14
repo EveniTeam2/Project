@@ -25,7 +25,7 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
         public override void Enter()
         {
             base.Enter();
-            FsmController.SetTrigger(MonsterBaseStateInfo.StateParameter, Exit);
+            FsmController.SetTrigger(MonsterBaseStateInfo.StateParameter, OnDeathEnd);
             _dampVel = 0f;
         }
 
@@ -34,6 +34,11 @@ namespace Unit.GameScene.Units.FSMs.Units.Monster.States
             base.Exit();
             Color color = _spriteRenderer.color;
             _spriteRenderer.color = new Color(color.r, color.g, color.b, 0);
+        }
+
+        private void OnDeathEnd()
+        {
+            this.TryChangeState.Invoke(StateType.None);
         }
 
         public override void Update()

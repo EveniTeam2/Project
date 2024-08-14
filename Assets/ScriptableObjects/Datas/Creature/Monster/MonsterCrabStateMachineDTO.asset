@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d201fa875cd85e4a9d0b965bdac487b, type: 3}
+  m_Name: MonsterCrabStateMachineDTO
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 11400000, guid: 7dff1ec3f7c66b147b1dee518d96322d, type: 2}
+  - {fileID: 11400000, guid: 174d5a6e6192e254aa27455d4941f435, type: 2}
+  - {fileID: 11400000, guid: 9e5f9ddd6c13ffb4c9224f8b03721bc1, type: 2}
+  - {fileID: 11400000, guid: 5caec5faa736b22478ba4f0a044dd52b, type: 2}
+  - {fileID: 11400000, guid: 0c23ae765e998ff4cb9b419136131605, type: 2}

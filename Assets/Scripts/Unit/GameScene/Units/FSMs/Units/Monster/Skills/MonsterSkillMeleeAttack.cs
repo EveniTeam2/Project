@@ -1,4 +1,5 @@
-﻿using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
+using ScriptableObjects.Scripts.Creature.DTO.MonsterDTOs;
+using System;
 using Unit.GameScene.Units.Creatures.Interfaces.SkillControllers;
 using Unit.GameScene.Units.Creatures.Module.Systems.MonsterSystems;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
     {
         private SkillAttackInfo _skillAttackInfo;
         private readonly IMonsterFsmController _fsmController;
+        public event Action OnExcute;
 
         public MonsterSkillMeleeAttack(SkillAttackInfo skillAttackInfo, IMonsterFsmController fsmController)
         {
@@ -18,6 +20,7 @@ namespace ScriptableObjects.Scripts.Creature.DTO
 
         public void Act(MonsterStatSystem stat, RaycastHit2D target)
         {
+            OnExcute?.Invoke();
             _fsmController.AttackEnemy(target);
         }
     }

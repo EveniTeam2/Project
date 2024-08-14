@@ -1,26 +1,31 @@
 using UnityEngine;
 
-namespace Unit.GameScene.Manager.Units.StageManagers.Modules {
+namespace Unit.GameScene.Manager.Units.StageManagers.Modules
+{
     [CreateAssetMenu(fileName = nameof(RandomDistanceSpawnDecider),
         menuName = "SO/" + nameof(RandomDistanceSpawnDecider))]
-    public class RandomDistanceSpawnDecider : SpawnDecider {
+    public class RandomDistanceSpawnDecider : SpawnDecider
+    {
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
         [SerializeField] private float intervalDistance = 1f;
 
-        public override IMonsterSpawnDecider GetMonsterSpawnDecider(StageScore score) {
-            return new RandomDistanceMonsterSpawnDecider(minDistance, maxDistance, intervalDistance, score); 
+        public override IMonsterSpawnDecider GetMonsterSpawnDecider(StageScore score)
+        {
+            return new RandomDistanceMonsterSpawnDecider(minDistance, maxDistance, intervalDistance, score);
         }
     }
 
-    public class RandomDistanceMonsterSpawnDecider : IMonsterSpawnDecider {
+    public class RandomDistanceMonsterSpawnDecider : IMonsterSpawnDecider
+    {
         private float minDistance;
         private float maxDistance;
         private float intervalDistance = 1f;
         private readonly StageScore score;
         private int count;
 
-        public RandomDistanceMonsterSpawnDecider(float minDistance, float maxDistance, float intervalDistance, StageScore score) {
+        public RandomDistanceMonsterSpawnDecider(float minDistance, float maxDistance, float intervalDistance, StageScore score)
+        {
             this.minDistance = minDistance;
             this.maxDistance = maxDistance;
             this.intervalDistance = intervalDistance;
@@ -28,16 +33,25 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules {
             this.count = 0;
         }
 
-        public void Initialize() {
+        public void Initialize()
+        {
             count = 0;
         }
 
-        public bool CanExecute() {
+        public (bool, bool) CanExecute()
+        {
             var decision = score.Distance;
-            if (decision > minDistance && decision < maxDistance) {
-                return true;
+            if (decision > minDistance && decision < maxDistance)
+            {
+                if (decision / intervalDistance > count)
+                {
+                    ++count;
+                    return (true, true);
+                }
+                else
+                    return (true, false);
             }
-            return false;
+            return (false, false);
         }
 
         //public bool Execute(StageMonsterGroup group) {

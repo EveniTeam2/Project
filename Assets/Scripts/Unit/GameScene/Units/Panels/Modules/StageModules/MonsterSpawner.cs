@@ -106,9 +106,14 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
             CheckWaitList();
             var group = _spawnGroup.First;
             while (group != null)
-                if (group.Value.spawnDecider.CanExecute())
+            {
+                var res = group.Value.spawnDecider.CanExecute();
+                if (res.Item1)
                 {
-                    RandomSpawnMonster(group.Value);
+                    if (res.Item2)
+                    {
+                        RandomSpawnMonster(group.Value);
+                    }
                     group = group.Next;
                 }
                 else
@@ -116,7 +121,8 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
                     var deleteGroup = group;
                     group = group.Next;
                     _spawnGroup.Remove(deleteGroup);
-                }
+                } 
+            }
         }
 
         private void RandomSpawnMonster(StageMonsterGroup value)
@@ -137,11 +143,14 @@ namespace Unit.GameScene.Units.Panels.Modules.StageModules
         private void CheckWaitList()
         {
             if (_waitGroup.Count > 0)
-                if (_waitGroup.Peek().spawnDecider.CanExecute())
+            {
+                var res = _waitGroup.Peek().spawnDecider.CanExecute();
+                if (res.Item1)
                 {
                     var group = _waitGroup.Dequeue();
                     _spawnGroup.AddLast(group);
-                }
+                } 
+            }
         }
 
         private void SpawnMonster(SpawnGroup group)

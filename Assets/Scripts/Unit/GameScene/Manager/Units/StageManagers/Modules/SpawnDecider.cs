@@ -8,7 +8,7 @@ namespace Unit.GameScene.Manager.Units.StageManagers.Modules {
 
     public interface IMonsterSpawnDecider {
         public void Initialize();
-        public bool CanExecute();
+        public (bool,bool) CanExecute();
         //public bool Execute(StageMonsterGroup group);
     }
 }

@@ -26,11 +26,14 @@ namespace Unit.GameScene.Units.Creatures.Units
         protected override RectTransform CreatureHpHandler { get; set; }
         protected override RectMask2D CreatureHpHandlerMask { get; set; }
 
+        public IEventPublisher UpdateEvent => ManualUpdate;
+
         private MonsterBattleSystem _monsterBattleSystem;
         private MonsterMovementSystem _monsterMovementSystem;
         private MonsterStatSystem _monsterStatsSystem;
 
         private SpriteRenderer _spriteRenderer;
+        private ManualUpdater ManualUpdate;
 
         public int GetDamage() => _monsterStatsSystem.Damage;
         public bool IsReadyForAttack() => _monsterBattleSystem.IsReadyForAttack;
@@ -54,11 +57,12 @@ namespace Unit.GameScene.Units.Creatures.Units
 
             AnimatorSystem.Initialize(AnimationParameters);
 
+            ManualUpdate = new ManualUpdater();
+            _monsterStatsSystem.InitializeStat(this);
             FsmSystem = StateBuilder.BuildMonsterStateMachine(stateData, this, AnimationParameters, monsterTransform, _monsterStatsSystem);
 
             RegisterEventHandler();
             SetActiveHealthBarUI(true);
-            _monsterStatsSystem.InitializeStat(this);
         }
 
         public void ResetMonster()
@@ -79,6 +83,7 @@ namespace Unit.GameScene.Units.Creatures.Units
             FsmSystem?.Update();
             _monsterMovementSystem?.Update();
             _monsterBattleSystem?.Update();
+            ManualUpdate.Update();
         }
 
         private void FixedUpdate()
@@ -147,6 +152,19 @@ namespace Unit.GameScene.Units.Creatures.Units
         private void SetActiveHealthBarUI(bool active)
         {
             monsterHpPanelUI.gameObject.SetActive(active);
+        }
+
+        bool IMonsterFsmController.CheckPlayer(Vector2 startPos, Vector2 endPos, out RaycastHit2D[] target)
+        {
+            Vector2 direction = endPos - startPos;
+            float distance = direction.magnitude;
+            direction.Normalize();
+            return _monsterBattleSystem.CheckEnemyInRange(1 << LayerMask.NameToLayer("Player"), direction, distance, out target);
+        }
+
+        bool IMonsterFsmController.CheckPlayer(Vector2 direction, float distance, out RaycastHit2D[] target)
+        {
+            return _monsterBattleSystem.CheckEnemyInRange(1 << LayerMask.NameToLayer("Player"), direction, distance, out target);
         }
     }
 }
